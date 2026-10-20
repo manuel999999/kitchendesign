@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_Stoll_Premium_MetallicLatte^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 1de5fb5b6d2696e4197466fd3720e438, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_Stoll_Premium_MetallicLatte.prefab
+      editorOnlyCachedAsset: {fileID: 5962818419088953754, guid: 2cac5f539a4d7cc80983c15397d67e57, type: 3}

@@ -1,0 +1,313 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2318169131261551027
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Id
+      value: CabinetSection_Cookware_Challenger_BBQButlerRh
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Thumbnail
+      value: 
+      objectReference: {fileID: 21300000, guid: 965629a1de10d0d4a84832b6275bc234, type: 3}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash
+      value: 1f8a9094a6bea9c32b301c98b4a75819
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_BrandCatalogName
+      value: Challenger
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_SectionModelPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_EditorOnlyVisualInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 28eea7ab43a12df4ea036129c4906992, type: 2}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[0]
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[1]
+      value: 138
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[2]
+      value: 144
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[3]
+      value: 148
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[4]
+      value: 166
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[5]
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[6]
+      value: 169
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[7]
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[8]
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[9]
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[10]
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[11]
+      value: 152
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[12]
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[13]
+      value: 167
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[14]
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[15]
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_SectionLegVisualPrefab
+      value: 
+      objectReference: {fileID: 11400000, guid: 691543c81e962314c9e551d8d477f757, type: 2}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_RuntimePrefabCategory.m_EnumNames
+      value: CabinetSection
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_CabinetSectionFootingType.m_EnumNames
+      value: OnLegs
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ProductCategoriesAllowedInSection.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_SectionOccupiableCuboidPaddingInInches.bottom
+      value: 29.027342
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ProductCategoriesAllowedInSection.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ProductCategoriesAllowedInSectionSpecific.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ProductCategoriesAllowedInSectionSpecific.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ProductCategoriesAllowedInSectionSpecificStable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ProductCategoriesAllowedInSectionSpecificStable.Array.data[0].m_EnumNames
+      value: Cookware
+      objectReference: {fileID: 0}
+    - target: {fileID: 361315666845989281, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.22859983
+      objectReference: {fileID: 0}
+    - target: {fileID: 361315666845989281, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.78809446
+      objectReference: {fileID: 0}
+    - target: {fileID: 361315666845989281, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.71210015
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914594647558979101, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Name
+      value: ProductVisual_CabinetSection_Cookware_Challenger_BBQButlerRh
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599542811992605379, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Size.x
+      value: 0.22860023
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599542811992605379, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Size.y
+      value: 0.78809446
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599542811992605379, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Size.z
+      value: 0.71210015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599542811992605379, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Center.x
+      value: 0.11429988
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599542811992605379, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Center.y
+      value: 0.39404723
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599542811992605379, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Center.z
+      value: 0.35605007
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622084887702782168, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.576653
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622084887702782168, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.88404405
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622084887702782168, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.89111614
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4934341337744455661, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3054944867187167700}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+--- !u!4 &7228708166795941470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4934341337744455661, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+  m_PrefabInstance: {fileID: 2318169131261551027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3310112013839332927
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7228708166795941470}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+      propertyPath: m_Name
+      value: CabinetSection_Cookware_Challenger_BBQButlerRh
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+--- !u!4 &3054944867187167700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 178d5b854abc2c44a9faa22ba6db030c, type: 3}
+  m_PrefabInstance: {fileID: 3310112013839332927}
+  m_PrefabAsset: {fileID: 0}

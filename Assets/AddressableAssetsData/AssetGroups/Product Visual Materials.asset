@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Product Visual Materials
+  m_EditorClassIdentifier: 
+  m_GroupName: Product Visual Materials
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f3310702e52740246a7399b85522d58d
+  m_SerializeEntries:
+  - m_GUID: 610d6572cc3a9554194bf2eec4b74da2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Primo_BlackWavy_flattened.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78d61e08299116d469bea87d9921b27f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BealeStreet.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85ce46436c516ec4d80bf2caafbcc4e2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_Roughness.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4693c733577f431db40455ae97c8d15
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_SteelMesh.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5cf8cc28f0ca0b46a78498ad8f6fda7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_Albedo.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2b8a02f1a2dc6b489eb3e2b9bb8c868
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_Normal.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc5eb7daed13f934e9b6780600b52250
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_Metalness.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b1d16f632759bd44a984f9254da67692, type: 2}
+    - {fileID: 11400000, guid: 789ee79fe1f0111428e7314e7eb97f23, type: 2}

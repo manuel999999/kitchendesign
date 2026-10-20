@@ -1,0 +1,523 @@
+{
+  "islandType": "L-Shaped",
+  "islandDimensions": "11' 5\" L x 36\" H x 46\" D\n6' 3\" L x 36\" H x 28\" D",
+  "cabinetFinish": "",
+  "counterTopFinish": "",
+  "deckFinish": "",
+  "paverFinish": "",
+  "modelSaveData": [
+    
+  ],
+  "counterTopHeight": "1 1/4\"",
+  "top_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 18,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 35,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "entries": [
+        {
+          "inches": 36,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 3,
+      "entries": [
+        {
+          "inches": 20.2,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 4,
+      "entries": [
+        {
+          "inches": 18,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 5,
+      "entries": [
+        {
+          "inches": 18,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 6,
+      "entries": [
+        {
+          "inches": 42,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 7,
+      "entries": [
+        {
+          "inches": 14.999999,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "front_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 18,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 35,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "entries": [
+        {
+          "inches": 36,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 3,
+      "entries": [
+        {
+          "inches": 20.2,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 4,
+      "entries": [
+        {
+          "inches": 18,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 5,
+      "entries": [
+        {
+          "inches": 18,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 6,
+      "entries": [
+        {
+          "inches": 42,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 7,
+      "entries": [
+        {
+          "inches": 14.999999,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "cabinet_list": [
+    302,
+    331,
+    283,
+    241,
+    434,
+    292,
+    236,
+    261
+  ],
+  "manual_price_sheet_entries": [
+    
+  ],
+  "kitchen_layout_style": "L",
+  "kitchen_building_method": "Catalog",
+  "countertop_type": "Default",
+  "toe_kick_type": "None",
+  "cabinets": [
+    {
+      "cabinet_type": "EndLeft",
+      "normalized_anchor_to_previous_section": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LLeft",
+      "cabinet_id": "3ODBC-183528",
+      "size_in_meters_x": 0.4572,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.2032,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": "Product_Backing_LLeft",
+      "cabinet_id": "Challenger_RefrigerationPanel - FSP-2831",
+      "size_in_meters_x": 0.889,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LLeft",
+      "cabinet_id": "OSB-363528",
+      "size_in_meters_x": 0.9144,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "StraightOnLeftOfCorner",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LLeft",
+      "cabinet_id": "OBBC-483528-RH",
+      "size_in_meters_x": 0.51308,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Corner",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0.7112,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LRight",
+      "cabinet_id": "OSDDB-183528 - LH",
+      "size_in_meters_x": 0.4572,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LRight",
+      "cabinet_id": "OGGB-183528LH",
+      "size_in_meters_x": 0.4572,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LRight",
+      "cabinet_id": "ODDGGB-423528",
+      "size_in_meters_x": 1.0668,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LRight",
+      "cabinet_id": "OWBC-153528",
+      "size_in_meters_x": 0.380999982,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "EndRight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    }
+  ],
+  "cabinet_spans": [
+    {
+      "index": 0,
+      "backing_product_id": null
+    },
+    {
+      "index": 1,
+      "backing_product_id": null
+    }
+  ],
+  "base_cabinet_depth_in_meters": 0.7112,
+  "countertop_thickness_in_meters": 0.03175,
+  "islandEnum": 0,
+  "backplashLeftActive": false,
+  "backsplashUpperActive": false,
+  "backsplashRightActive": false,
+  "barTopLeftActive": false,
+  "barTopUpperActive": false,
+  "barTopRightActive": false,
+  "leftLength": false,
+  "upperLength": false,
+  "rightLength": false,
+  "cabinetDepthLeft": 0,
+  "cabinetDepthUpper": 0,
+  "cabinetDepthRight": 0,
+  "cabinetDepthInitial": 0,
+  "brand_catalog": "Challenger",
+  "door_style_name": "Pan"
+}

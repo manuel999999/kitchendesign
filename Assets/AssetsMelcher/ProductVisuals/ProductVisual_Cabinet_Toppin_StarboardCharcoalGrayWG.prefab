@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &669577717744875422
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_FinishTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: f2c08333c9f4846d68197551d986730a, type: 3}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_FinishMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: bfb0984e85d29425cbe68381122551a8, type: 2}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_EditorOnlyVisualInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ace32473d84343f4b1656d28d0a5c8a, type: 2}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_PreviousFinishMaterialGuid
+      value: bfb0984e85d29425cbe68381122551a8
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914594647558979101, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Name
+      value: ProductVisual_Cabinet_Toppin_StarboardCharcoalGrayWG
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}

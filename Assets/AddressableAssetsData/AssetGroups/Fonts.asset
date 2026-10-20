@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Fonts
+  m_EditorClassIdentifier: 
+  m_GroupName: Fonts
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fb6844c5065bb6242ab9d04e8172d476
+  m_SerializeEntries:
+  - m_GUID: 023b59ad32e079b4e9f049330213698b
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Medium.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a34b117484d07e4291bc73b3775c9d0
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Regular_Outlined.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d1e6f710f06d244b8fae1062d48b81e
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Light.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ebdb8d7d31e97a43bab6e51cfb7aca4
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-SemiBold.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1438fbfa9bf10684e95b546f8d4b7b52
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Medium.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ed5e25dadddaf04c9e5e3f6c39d946f
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-LightItalic.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27d002335fbd0a84596acb55c681489c
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-SemiBoldItalic.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d2b2e345366c9347bec1eda3cab811e
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Bold.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b2cca0808f73b74cbfa0e1add047771
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Regular.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5064de07e74b68c48b42db77ed89ac73
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-ExtraBold.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5272ee4fb5d81964fbdf4f5f24f05543
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Regular_MeasureWithinProductVisual.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a9fcd133a936ae4881ba66aada396ae
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Light.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5bd8f479284bff34a9bfe84bfc7a88ad
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Regular.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6df0714b67d30f94cbed237c02c7d4e1
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Bold.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e8ff8ca3b19d934eb1b0198c8d7fe91
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Regular.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 713d206c30b5b414aa65a3d216b6923c
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Light.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7310c4d0eff929d4c82c2589721d51d0
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Regular.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79fc95342a668e2458387faaa7d8e151
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-ExtraBold_Outlined.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c16bd5c4c7274143b251d11fc73b0f7
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Regular_DesignScreenshot.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b38ea59988632746a57d18ee5b45af9
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Regular-Fallback.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a44744484bc41724b9e40b416ebfa4bd
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Italic.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af4fbd518c38ce34e8a2d358b6370512
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-ExtraBold.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b39a65258394b2e4d9087108956e6053
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-MediumItalic.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1c403efeece14d42a1f2219dc4de0ad
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-BoldItalic.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c53942a17ee15209aa56b37d52aec930
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-Regular_ToolbarProductButton.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d29a82c3e51a9c944bf35a32c4620deb
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-SemiBold.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d63829a5c8cac90a8968125d6e065934
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-SemiBold_ToolbarProductButton.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de9a98fccd789ba4f82024b2023c97bd
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-Bold.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1a03a6bb59ad364d844ab27acb4d0a4
+    m_Address: Assets/AssetsMelcher/Fonts/Signika/Signika-SemiBold.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb7696eff75ab254fbbc71a8f60d65a6
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efe8277d23c118746a7c2c6ebb985b5f
+    m_Address: Assets/AssetsMelcher/Fonts/OpenSans/OpenSans-ExtraBold_DesignScreenshot.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dc775655638cd0d4f8ccbf131a89de46, type: 2}
+    - {fileID: 11400000, guid: a4a6e13bbaf4aa847bda1285ffae4a5d, type: 2}

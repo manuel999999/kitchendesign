@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_Danver_PearlNightBlue^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 9947477ef429ba04b8661124bc964187, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_Danver_PearlNightBlue.prefab
+      editorOnlyCachedAsset: {fileID: 2997826404590424526, guid: 9b2a8ed906f82554cb1961bfa6cff83e, type: 3}

@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1216172994390375750
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Id
+      value: Flooring_TechoBloc_Industria_BeigeCream
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Thumbnail
+      value: 
+      objectReference: {fileID: 21300000, guid: 535aa34b97ec2e14b93c7040b2afb617, type: 3}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash
+      value: ed24e83310e588763b45222c73608b32
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_FlooringType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_FinishTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 703aeb7cb7cc6244298760da8a39e0ef, type: 3}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_FinishMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: d870d047f5f9cfd4aa116dbe12e294e8, type: 2}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_EditorOnlyVisualInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: f12f1e397cd6f51479864e12072b2206, type: 2}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[0]
+      value: 237
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[1]
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[2]
+      value: 232
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[3]
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[4]
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[5]
+      value: 229
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[6]
+      value: 136
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[7]
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[8]
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[9]
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[10]
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[11]
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[12]
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[13]
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[14]
+      value: 139
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_ApprovedHash.bytes[15]
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_PreviousFinishMaterialGuid
+      value: d870d047f5f9cfd4aa116dbe12e294e8
+      objectReference: {fileID: 0}
+    - target: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_RuntimePrefabCategory.m_EnumNames
+      value: Flooring
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 577599301082187571, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914594647558979101, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+      propertyPath: m_Name
+      value: ProductVisual_Flooring_TechoBloc_Industria_BeigeCream
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}

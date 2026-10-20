@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_Challenger_TexturedGreyGlimmer^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 0cc223e206ee9f740af712b12641e414, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_Challenger_TexturedGreyGlimmer.prefab
+      editorOnlyCachedAsset: {fileID: 3071215365340047423, guid: 5ecaa90d49a7e474aac81fa4bdba82a9, type: 3}

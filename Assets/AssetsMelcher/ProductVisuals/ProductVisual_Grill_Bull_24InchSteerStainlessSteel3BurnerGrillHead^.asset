@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Grill_Bull_24InchSteerStainlessSteel3BurnerGrillHead^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 72eea207e5af16840afdba54c0c40ec1, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Grill_Bull_24InchSteerStainlessSteel3BurnerGrillHead.prefab
+      editorOnlyCachedAsset: {fileID: 1930164550534586964, guid: 95cc7d7a31820894db805f9ce64f5e91, type: 3}

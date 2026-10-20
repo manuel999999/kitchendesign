@@ -1,0 +1,12 @@
+Weaver is a Unity plugin which allows you to avoid using magic strings to reference assets, animations, layers, navigation areas, scenes, and shaders. This makes your code more efficient and robust to improve development productivity as well as runtime performance.
+
+- Documentation: https://kybernetik.com.au/weaver
+- Forum: https://forum.unity.com/threads/592459
+- Email: mailto:mail@kybernetik.com.au?subject=Weaver
+
+The Weaver Window can be opened via Window -> General -> Weaver.
+
+To Uninstall Weaver, simply delete:
+- Assets/Plugins/Weaver
+- Assets/Procedural Assets
+This can also be done via the 'Miscellaneous' panel in the Weaver Window.

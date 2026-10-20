@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Countertop_Caesarstone_PorcelainImpermia^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 005ee052569a7744a91503dd0f21e204, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Countertop_Caesarstone_PorcelainImpermia.prefab
+      editorOnlyCachedAsset: {fileID: 5093199347923604637, guid: c24a58954dc0dc94ba15f95a58ce8535, type: 3}

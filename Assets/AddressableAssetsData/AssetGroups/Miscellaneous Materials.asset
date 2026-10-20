@@ -1,0 +1,190 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Miscellaneous Materials
+  m_EditorClassIdentifier: 
+  m_GroupName: Miscellaneous Materials
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 084be829b2b7b0949ad040e84523ab27
+  m_SerializeEntries:
+  - m_GUID: 103dc60ba35daa6ffa70ef5a9ff4ea02
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_CutOutStencil.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17351dc16427b0e8586d023edf2fb43d
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_ProFit_SelectionHighlightPrimary.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d3bb589ac1dd544fa8438c672b1b666
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_CabinetColumnShadow.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 232a33559c2224d46b7fd974a96f65e7
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_CabinetColumnShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f48acb5683051e45b56ed37607a31c2
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_Flooring_Default_Gemini.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 436cdf50d0c2cca459510bd40a86ab4c
+    m_Address: Assets/AssetsMelcher/Materials/MeasureLine_DesignScreenshot.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 454e3a3d90cc95949b01c537aa1cb385
+    m_Address: Assets/AssetsMelcher/Materials/SizeReference.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a5e022d9878d98e281f3ffd94c8375a
+    m_Address: Assets/AssetsMelcher/Materials/DashedLine.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5098c0195676e7c48a53ecdb70552bda
+    m_Address: Assets/AssetsMelcher/Materials/OccupiableShelfCuboidVisualization.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62525a2f907d86a4ebc63b247199f5ba
+    m_Address: Assets/AssetsMelcher/Materials/MeasurementScreenshot_Countertop.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62e0a1c1f196426478f2a6aa5ad9e90a
+    m_Address: Assets/AssetsMelcher/Materials/MeasureLine_RealtimeDesign_Gemini.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7150ae749d9de87ed80f79214ed7f5dc
+    m_Address: Assets/AssetsMelcher/Materials/DesignSceneSkybox_ProFit.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c09f60046e1f2b4ab2d3234f8ed3b58
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_NewVenture_SelectionHighlightSecondary.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7df6ed38a72192348b2344784ac1bc5c
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_Stoll_SelectionHighlightSecondary.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 872ecd717711d6942bf92f0397144b8d
+    m_Address: Assets/AssetsMelcher/Materials/MeasurementScreenshotSkybox.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a08bb9733a76078aba8ed820c3ea3f2
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_ShadowCaster.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9497113dcd878b349a6a49b9e9f831cb
+    m_Address: Assets/AssetsMelcher/Materials/GreyedOutUiImage.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a8f5f5c58b4e5e6b8e7034d5bf24087
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_Flooring_Default.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a79a83319a97a9d4482110871e45a5d7
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_NewVenture_SelectionHighlightPrimary.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a84963c76d3bd7b9baa85a540b3a5025
+    m_Address: Assets/AssetsMelcher/Materials/OccupantOccupiedCuboidVisualization.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8f8dc52225828470a6153173f545910
+    m_Address: Assets/AssetsMelcher/Materials/ProductVisualSizeReference.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad3999f0c1b23364e948a84dcc0324c9
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_ProFit_SelectionHighlightSecondary.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1d64559610dd944eb404dfadbd1291b
+    m_Address: Assets/AssetsMelcher/Materials/DesignSceneSkybox_Gemini.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc16412b53b2e9b4a9d6fc92d97ca74e
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_Stoll_SelectionHighlightPrimary.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c55271a47657f1940b9a9579541fd183
+    m_Address: Assets/AssetsMelcher/Materials/MeasureLine_RealtimeDesign_Stoll.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6bfc7d753566cea0a3cad1fc427cd41
+    m_Address: Assets/AssetsMelcher/Materials/DashedLine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3780f3a641d4d71abd133286dd82171
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_CabinetCutOutShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d91ab4bcd800d3b419aa8cc5d5c525af
+    m_Address: Assets/AssetsMelcher/Materials/MeasurementScreenshot_CutOut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df892acf776b1e947be84d9c779d37a7
+    m_Address: Assets/AssetsMelcher/Materials/OccupiableCabinetCuboidVisualization.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0c58f6aeaaf8874ca3d849d63a73ba4
+    m_Address: Assets/AssetsMelcher/Materials/MeasurementScreenshot_Cabinet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1d9c89ce95065df1abc083fc126ac29
+    m_Address: Assets/AssetsMelcher/Materials/Kitchen_Default.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f405dd82a916e444c91d6a8e1b346595
+    m_Address: Assets/AssetsMelcher/Materials/MeasureLine_RealtimeDesign_ProFit.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd291d46c3d218f0dbe555b751f82e46
+    m_Address: Assets/AssetsMelcher/Materials/MeasurementScreenshot_CabinetBackingForTopDown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d66f81b1af4ac654d9dcde29cae2ac92, type: 2}
+    - {fileID: 11400000, guid: e0b7a3d3e706caa42860b373a5daf6df, type: 2}

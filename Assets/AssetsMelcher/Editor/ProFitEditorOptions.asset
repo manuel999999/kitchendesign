@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab70f8a15251e5fdaec21d03da0cb79, type: 3}
+  m_Name: ProFitEditorOptions
+  m_EditorClassIdentifier: 
+  m_DefaultKitchenMaterial: {fileID: 2100000, guid: e1d9c89ce95065df1abc083fc126ac29, type: 2}
+  m_DefaultProductMaterial: {fileID: 2100000, guid: f16a741848dc8c1aeb17399093e32fc1, type: 2}
+  m_ProductCabinetMaterialIdentifier: {fileID: 2100000, guid: e1d9c89ce95065df1abc083fc126ac29, type: 2}
+  m_ProductModelsFolder:
+    m_Guid: 07f7619c7a5bba363bfcdc482b54efad
+    m_DataRelativePath: AssetsMelcher/ProductModels
+  m_CabinetSectionModelsFolder:
+    m_Guid: 520d0e04fd00b39498c8fb1500ff0177
+    m_DataRelativePath: AssetsMelcher/CabinetSectionModels
+  m_CabinetSectionLegModelsFolder:
+    m_Guid: 011ccdf4e0706424db2698092e833c0c
+    m_DataRelativePath: AssetsMelcher/CabinetSectionLegModels
+  m_FinishesFolder:
+    m_Guid: 7d572718ee2f0955ab94b2229e3f4b48
+    m_DataRelativePath: AssetsMelcher\Finishes
+  m_ProductVisualsFolder:
+    m_Guid: 7f47f74667c289b2595368fad7c95397
+    m_DataRelativePath: AssetsMelcher\ProductVisuals

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_CalacattaCressa3DPanel6x24_LPNLMCALCRE624-3DH^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 9eab3c9880da6c4488c45a5c6a3a102b, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_CalacattaCressa3DPanel6x24_LPNLMCALCRE624-3DH.prefab
+      editorOnlyCachedAsset: {fileID: 6184637271519123335, guid: e786f1a62f40c694c9dbb9a98dbd1a12, type: 3}

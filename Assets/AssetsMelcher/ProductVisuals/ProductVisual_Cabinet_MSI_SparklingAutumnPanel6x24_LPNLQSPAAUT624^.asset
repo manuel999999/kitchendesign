@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_SparklingAutumnPanel6x24_LPNLQSPAAUT624^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: fcae6929ca3b8fd489aa8bc6a41237fd, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_SparklingAutumnPanel6x24_LPNLQSPAAUT624.prefab
+      editorOnlyCachedAsset: {fileID: 7638674123417788122, guid: 10de38a63ddd27e4f8766bec00c1c3cc, type: 3}

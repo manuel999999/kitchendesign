@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db924ac090ed926fd81cff7b88b74f5e, type: 3}
+  m_Name: SplashVideo
+  m_EditorClassIdentifier: 
+  m_Value: Assets/StreamingAssets/MelcherSplash_Landscape.mp4
+  m_Guid: 3ec5087a53a7e3346be36aa5a4c68070

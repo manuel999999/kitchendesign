@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d3e4cbf350a9f4d9728a63cded9a1f, type: 3}
+  m_Name: Gemini_LShape_Challenger_BlindLeft
+  m_EditorClassIdentifier: 
+  m_BrandCatalog: {fileID: 11400000, guid: 99c8e5782860f9c41aa8a10fbcf1b774, type: 2}
+  m_KitchenStyle:
+    m_EnumNames: L
+  m_PreviewSprite: {fileID: 21300000, guid: 8be1cfb2061583d45b044c8e3f6dcc7b, type: 3}
+  m_SaveData: {fileID: 4900000, guid: 36b31903e105def479f22c67f63c1f3d, type: 3}
+  m_DisplayName: Blind Left

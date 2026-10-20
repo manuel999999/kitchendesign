@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_NPT_PorcelainChamonixBianco^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: cedce4e42b29c95409e0ae3a7135aced, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_NPT_PorcelainChamonixBianco.prefab
+      editorOnlyCachedAsset: {fileID: 1368761175344171550, guid: bf3f436d72fa0c94596a7703eb2fecaa, type: 3}

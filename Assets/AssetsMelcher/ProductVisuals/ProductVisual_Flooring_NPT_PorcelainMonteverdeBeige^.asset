@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_NPT_PorcelainMonteverdeBeige^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: dfd8c659e4a5b3b4ba329b6c1d462538, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_NPT_PorcelainMonteverdeBeige.prefab
+      editorOnlyCachedAsset: {fileID: 7976179034382399597, guid: 5b74f505ac206bd46801176c7f97a501, type: 3}

@@ -4,7 +4,8 @@
     "references": [
         "KitchenDesign.Events",
         "KitchenDesign.Shared",
-        "Doge"
+        "Doge",
+        "Unity.Cinemachine"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

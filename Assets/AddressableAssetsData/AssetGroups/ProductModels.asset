@@ -1,0 +1,733 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ProductModels
+  m_EditorClassIdentifier: 
+  m_GroupName: ProductModels
+  m_GUID: d6dd60032a58aae47a75932977297d55
+  m_SerializeEntries:
+  - m_GUID: 00d90d6bcd999c1449b1e6bea08d90e9
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_PremiumOutdoorRated49cuftStainlessSteelFridgeSeriesII.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01a7e5d199e5f7143808b9844d31308b
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_LargeSinkAndFaucet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 041368fb5b096ad37b92875bf6dbf697
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_42InchEagleOneSuperPremiumGasGrillWithBlackGlassInfraredRotisBurnerAndSearZoneLN.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0570e103ff10e652f9eea93c98d3ed22
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_36InchWoodFiredPelletGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05a82ec2106731188a7c33c2820b4fd9
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_24InchTwinEaglesOutdoorRefrigeratorWithLock.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07843d30d5c7de240b6a2e8e304db65e
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_25InchStainlessSteelDoubleDoorWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08fe9b63fe2a2b446aa59c83ecf887d3
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_24InchTwinEaglesBeerKegDispenserBuiltInDualTap.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 090e5a40fd9f9c842925bdfd45e0c51a
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_PowerBurnerLP.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a8f61c079c487d44862c7ebb4ffa115
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_KegeratorDoubleTapTower.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d239cb4c66a6574397a28b5a5dfcde0
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_24InchSteerDropInGrillLP3Burner45000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0df36d90fb9608242bdd286e425e3442
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchAngusStainlessSteelDropInGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1082e154026cc74cc9671fbea75e2350
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_TwinEagles_24InchTwinEaglesOutdoorSinkwithSSCoverFaucetNotIncluded.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1226412f863d672e2ae56fe8f81f73f6
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_24InchTwinEaglesGriddlePlateStorageDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12616066891cb3b4cb03a1ce83b7c4d3
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_StainlessSteel30InchBarCenterWithSink.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 127dae3fbea0ef64aa3c2493dcf53dd3
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_KegeratorWithSingleTap.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12db89805ff8ed34db3eb70331e7ca4f
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_Bull_30InchCommercialStyleGriddleHeadforOutdoorKitchen.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12e6cd3a48e839395b36871a993caca3
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_30InchTwinEagles2DrawerDoorCombo.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 131ce5ea0e6ab61428ebcff924f55f5f
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_Slim10GallonTrashDrawerWithTrashCanNew.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14b91586faf08fc47a70502a44a440bd
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelSingleUtensilDrawerWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 177d1c8dd7b783c44b3de26bd986c1e1
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_TwinEagles_30InchTwinEaglesBreakfastClubLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18dd1b7dde2bd0c44b1032e91ba45250
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_PremiumOutdoorRefrigeratorSeries2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19bb95c54d69224a2b70c7068c3a6252
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_TwinEagles_30InchTwinEaglesWarmingDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19f708271ce08ac86ab2b185b5b09761
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_36InchTwinEaglesDryStorage.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20658be01d944624ea80da8d01ad9b94
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_LargeSingleStainlessSteelDrawerWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21bdba629cd2b0c44b95bdc3b0635184
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_36InchOutdoorGasGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 223936e351aeada62aea1e658f69a868
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_24InchTwinEaglesSingleAccessDoorSoftClosing.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22605d775fed42c4484c07d43231dc43
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelWarmingDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23bfeb8f3db730a498272ec47efe8585
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchStainlessSteel3DrawerDoorComboWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23dffd489cd500c45875c813697e91c6
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_24InchBlackhornCeramicKamadoGrillHead.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24e1ab70fbe26ef40b1e0a892f76b12a
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_BroilKing_BroilKingS100RangeBurnerLP.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2702498fbce76c849bfd0d9393f345bf
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_15InchPremiumStainlessSteelDualMountSink.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28d06defac73c7a47bbcc9b7eaef8eb8
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_Bull_30InchCommercialStyleGriddleHeadforOutdoorKitchenWithInsulatedJacket.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 292946976afeb854abea9fc4d2afc67f
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_SingleStainlessSteelSideBurnerDropIn.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2994ced638aac0a41b4a6ee106598ee9
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_TwinEagles_30InchTwinEaglesTeppanyakiGrillLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c6beff11cc0fdd4595f419ac4fe8db4
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_SlideInDoubleSideBurner.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f284776bd6566baa8c13aa2699ee54f
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_36InchTwinEaglesPelletStorageDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 320302a8b2f73b649b2694dd4564612f
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_OutdoorRatedCommercialIceMaker15InchStainlessSteel62lbs.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 33f8de7f34a87cefdb7308a8787600e8
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_42InchTwinEaglesGasGrillWithInfraredRotisserieAndSearZoneLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3542267f6fda45e43b0732c51a0cc6e4
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_25InchDoubleDoorsStainlessSteel.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 365ff051310f857da9e08ec5f166951d
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_54InchEagleOneSuperPremiumGasGrillWithBlackGlassInfraredRotisBurnerAndSearZoneLN.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37feb8c5c74021643a6953810ac2629f
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_Bull_BullExtraLargeGasPizzaOvenAndChimney.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3aa4c9ccaf58360bb980271607ab9725
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_24InchTwinEaglesBeerKegDispenserBuiltIn.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d44c611fca603c4cb034dafb59d1941
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_SingleStainlessSteelSideburnerDropInLP.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e03e0893951854419d696640141a24c
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchAngusDropInGrillWlightLP4Burner75000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41aef94cfd1ffe84f80c1b1477718a77
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30DualLinedVentedDoubleDoorNew.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 435023986388b8631a5dd0e167269af3
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_30InchOutdoorGasGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44f7f36824d880b44ba79288a1a7ef8a
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchLonestarStainlessSteelGasGrillHead4BurnerWithInsulatedJacket.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a72427ed06707c4f9f0a83315e55844
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_TwinEagles_18InchGriddlePlateAttachmentForPowerBurner.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d6bbf94c4c791348863e2ac340db722
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_StainlessSteel30InchBarCenterWSink.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d9686059b149344e90ada6882149a1a
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelSingleDoor.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4fe5de64ce64b4816bff6c2fee886b1e
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_FireMagic_DoubleSinkandMixerFaucet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50a9a32e44e1e07bca0f4f3aea3a5107
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_42InchOutdoorGasGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 525d7e7726e4c5242829bbf6c8df7804
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_38InchDoubleDoorsStainlessSteel.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 565ed634038038248821306901811955
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_30InchStainlessSteelOutdoorKitchenSinkWithAccessories.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5733ae577a0e4ef41bc2540daea9715a
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_PremiumDoubleDrawerRefrigerator.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59b7d03817540a344be2d509e5391f38
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_SingleVentedVerticalDoorNew.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a01c39b322c3054d9b890ef3aba7453
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_VerticalAccessDoorLeftHinge.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c90ce772e571ce4bb9dd25ae522aade
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_24InchPremiumStainlessSteelDualMountSink.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 621a519bada6e5146893fe1ec725bca0
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_SlideInProSingleSideburnerLPNew.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63e5308bb13b3e341a5de9d67cc6ffda
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_42InchTwinEaglesGasGrillWithInfraredRotisserie.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6588c7873b8d1da4d8831b37d5507967
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchStainlessSteelDoorPropaneDrawerComboWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 658904822a9dbc04d892c8494c143e34
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_LargeSingleDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7010ff50dc53d44419241563ddcd7fb8
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_38InchBrahma5BurnerStainlessSteelBuiltInGasGrillWithInsulatedJacket.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 709d047243f1b6548a79317591ce16f4
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_46InchDiabloStainlessSteelBuiltInGasBarbecueGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7123289748a98854cb4f4ea307551983
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchStainlessSteelDoubleDoorWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7282d1c9ed68a85b19e40a93283f3683
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_TwinEagles_24InchTwinEaglesPowerBurnerHeavyDutyGratesLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74529a5f059cc5b4bac8f8407ffba760
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_PullOutGasTankDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 789aca8e6de19c043afd1dbf9f13fb2f
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchDoubleDoorsStainlessSteel.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78f072a79e94fc57eadecc715c2367b7
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_30InchTwinEaglesDoubleAccessDoorsSoftClosing.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a8de49577e0f8f4e8e48fa170030d7d
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_OutdoorProIceMaker62lbs.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c393e4bd487f4747b987af1d140111c
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_38InchBrahmaDropInGrillWlightLP5Burner90000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7db67bd038de7254d88366bd2df32a9e
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_BullOutdoorRatedKegerator66cuft.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e8a192348cece34fbf93db6894bd7ea
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelPropaneDrawerWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e9b450cb361e6b4a9ddfe5039815734
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_KegeratorDoubleTapWithBullLogoPulls.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f6f0f400bd025993b7a6c79a26cee97
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_18InchTwinEaglesSingleAccessDoorsSoftClosing.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8184c3cae2fd99e4a978fae396f3ba7e
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchStainlessSteelVentedDoubleDoorWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8558fbdf459e6178f80badb53295ab7a
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_36InchTwinEaglesGasGrillwithInfraredRotisserieAndSearZoneLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88ff254a553256915ae0ea24e1d61409
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_24InchTwinEaglesSingleStorageDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89317f43a0cad6848bb113b7ffaf5412
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_DualLinedStainlessSteelVentedVerticalDoorWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8962eb3e2fa552445bdd69191e46ddc3
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_SlimStainlessSteel10GallonTrashDrawerWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a2d4914736f8f9488da3978b0b06173
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchAngusStainlessSteelDropInGrillWithInsulatedJacket.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b7b74f1c9ecdd044a319338af946391
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_PremiumOutdoorRated49cuftRefrigeratorWithGlassDoor.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d28c7e588457e243b9622dd13391b98
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_StainlessSteelIceChest.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8df54ca740449524eb56eac24f30764a
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_VerticalAccessDoorRightHinge.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9306fbfc73001dff9922046362996f26
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_36InchTwinEagles2DrawerDoorCombo.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96b4e611d7596ba48b8bbaf71ad4fb5f
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_DoubleSlideInSideburnerLP.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a168d5e2b618a74a85b86478627427b
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_BisonPremiumCharcoalGrillHead.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b8ba4d48bb771cadae7af793b07220b
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_TwinEagles_30InchTwinEaglesBreakfastClubLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ba2fdc53120a8c4bb500c6fde620d5c
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_42InchTwinEagles2DrawerDoorCombo.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cd9e26a11c92469e9812981ee9249d6
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_36InchTwinEaglesPelletGrillAndSmokerWithRotisserie.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d1daa738c3e8534291c9c8ea0e34d0a
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelTripleDrawerSystemWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e38c7659a1ebd121ab58b619bfc150c
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_36InchTwinEaglesDoubleAccessDoorsSoftClosing.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e87bc16a5b46fd459cc2870e6bb6aba
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchOutlawDropInGrillLP4Burner60000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0bb35fc4c87f5143a952af0de8fb42c
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30DoorPropaneDrawerCombo.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a478d9e3a002eb54d8ba6a1a89c95af6
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_TripleDrawers21StainlessSteelNew.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a740302ad1c2f546a83700d04951a6eb
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_18InchTwinEaglesDoubleTallTrashDrawer2TrashCansIncl.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab5379bb3b29f5bac93c9d7b6222aada
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_54InchTwinEaglesGasGrillWithInfraredRotisserieAndSearZoneLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab632c1f8f145e448acd8519ea49922c
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchLonestarSelectDropInGrillLP4Burner60000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b115f693ed7d0e631bde136482f1b1c8
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_30InchTwinEaglesSingleStorageDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b15f9c648bf32f18abac38587f106585
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_54InchOutdoorGasGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2f73a378bc97af4ea8e0e7bcd1794e8
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_VerticalStainlessSteelAccessDoorLeftSwingWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b95b26b8e2d659c4482437f97297f8ec
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_ContemporaryRefrigerator45cu.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb2afbadee98d36458fc64ea443c3a81
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_BisonPremiumDropInCharcoalGrill.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf7bbf84b5cc969429024f67aa34d1c7
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchDoorDrawerComboW2Drawers.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c065ff06a9a597c73b7606a8cdfd3cec
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_42InchTwinEaglesDoubleAccessDoorsSoftClosing.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0b8d6417a900cf32a7bd0a69f3c114f
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_13InchTwinEaglesDoubleStorageDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c47d87ed5f5e68741ae404d5e6e80808
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_StandardStainlessSteelSinkAndFaucet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c499bb0212a758245be5d270e19c918e
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelDoubleDrawerWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7c15b1297bc5e7068840ee8f1082c51
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_TwinEagles_13InchTwinEaglesDoubleSideBurnersLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8d42bad40b5ac743a37ccf13a850bc3
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchOutlawStainlessSteel4BurnerGasGrillHeadWithInsulatedJacket.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c930c5c818eaee3b9bdab54b0cebf2ec
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_15InchTwinEaglesPaperTowelHolderWithTowelBarAndCompartment.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc57560bf9dafe106bbef9e238e9cc75
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_15InchTwinEaglesIceMaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc8e29fa78d3f08f9b2c5b18bfb72fd7
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_TwinEagles_18InchTwinEaglesOutdoorBar.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc91c75ac10d5cfbb8a4d7d0c3ec0353
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_30InchTwinEaglesCoolerDrawerCoolerIncluded.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccfea6b463f6ac34682a9e63581d8371
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_SidekickCartSideBurnerLP.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7d939be8fd90ed46a7715ba852e37d6
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_StainlessSteelHorizontalDoorWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9913d2e93bf1ba42b4d4379a8874326
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_38InchStainlessSteelDoubleDoorWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc37726173ba3064abbb9c4bfb4f1938
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_46InchDiabloDropInGrillLP6Burner105000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df68ef7375ed7bea786c4cc90de95df9
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_36InchTwinEaglesTallDryStorage.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfb98d1b02607b39c91c493f1a3ff116
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_TwinEagles_30InchTwinEaglesOutdoorBar.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e11957f3330396f4c9938e11d72aa336
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchLonestarStainlessSteelGasGrillHead4Burner.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6f65b6bd9a4cec4ab9f75542cfe614c
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_Bull_WarmingDrawerStainlessSteel.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7995b8ab6df86fbdb7f72bf287a3285
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_TwinEagles_30InchTwinEaglesTeppanyakiGrillLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7c7dc72bfa6f624fbf01566a096d48c
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_Bull_DualFuelCountertopPizzaOven.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea0ca2af6dd6c13f9b5b7415de6f79e5
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_TwinEagles_19InchTwinEaglesDoubleStorageDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb0bd9c34471f0b4b9b538d9813648e4
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_30InchReversibleStainlessSteelDoorDrawerComboWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec11234baa5a6140d8175d48cfabdf49
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_TwinEagles_42InchTwinEaglesWarmingDrawerCombo.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecb2e9c72fd3e70d6b7cfb12b035a8eb
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_24InchTwinEaglesOutdoorCoolerDropIn.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0315c7e26b70a540a4b98520af608a8
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Jupiter_32PRO4BurnerBuiltInGasGrillwithInsulatedJacket.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0795801528218244a4660c40ccf3b4e
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_DoubleDrawerStainlessSteel.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f09d24746f3bccd438897c216c5600ef
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_DoublePullOutTrashRecycleDrawerWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0fca55e7ad9fb349b6b6fed45d92d73
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_Reversible38InchDoorDrawerComboWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2307c07b187311e0a95bd609a63925b
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_TwinEagles_30InchTwinEaglesGasGrillwithInfraredRotisserieAndSearZoneLPNG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f289f33c9a0a5fa4bab956bc360a0b72
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_30InchOutlawStainlessSteel4BurnerGasGrillHead.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4ad6a99f1bcd0e4882a76d6f828158e
+    m_Address: Assets/AssetsMelcher/ProductModels/Cookware_Bull_30InchCommercialGriddleDropInLP4Burner600000Btus.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4bfc608a9bdf204199c067607c03635
+    m_Address: Assets/AssetsMelcher/ProductModels/Grill_Bull_24InchSteerStainlessSteel3BurnerGrillHead.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4fd7c33865e77217a41c2dc28412d12
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_TwinEagles_24InchTwinEaglesOutdoorRefrigeratorTwoDrawerRefrigerator.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f60bcdc1175e4b6499bc253619c753c8
+    m_Address: Assets/AssetsMelcher/ProductModels/Fridge_Bull_StandardRefrigerator.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f72bafb9d1317564f83235bb9c13f848
+    m_Address: Assets/AssetsMelcher/ProductModels/Storage_Bull_VerticalStainlessSteelAccessDoorRightSwingWithReveal.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8424214a639da8458ccd176347009a3
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_21InchPowerBurner.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fad7bfdab79c51f45b0c205111229ac2
+    m_Address: Assets/AssetsMelcher/ProductModels/Sink_Bull_18InchPremiumStainlessSteelDualMountSink.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcfcf30c5aab73c44834b35f51711d55
+    m_Address: Assets/AssetsMelcher/ProductModels/Burner_Bull_SingleSlideInProSideBurnerWithCover.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ada1c1f5772964c46b1a0ee3bfdbcc2f, type: 2}
+    - {fileID: 11400000, guid: 46762613d410a8f469a4c053e12da267, type: 2}

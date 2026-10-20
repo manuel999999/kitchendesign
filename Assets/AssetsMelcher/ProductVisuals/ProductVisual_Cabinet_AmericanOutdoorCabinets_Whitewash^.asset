@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_AmericanOutdoorCabinets_Whitewash^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: c9d668dfa526a4c9bb960855934584b2, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_AmericanOutdoorCabinets_Whitewash.prefab
+      editorOnlyCachedAsset: {fileID: 862596325838937889, guid: eeda63cc955ca43f3a665905082bbf94, type: 3}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_CabinetSection_Door_Challenger_36InchSinkBase@Shaker^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 32593c8b7b9b440ae8755d8ad416ba58, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_CabinetSection_Door_Challenger_36InchSinkBase@Shaker.prefab
+      editorOnlyCachedAsset: {fileID: 2029118268906079257, guid: 90f28aee3645848d9a668a614e7ac566, type: 3}

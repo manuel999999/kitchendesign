@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccefac9714fbac46b1b596d340a58de, type: 3}
+  m_Name: AppOptions_Stoll
+  m_EditorClassIdentifier: 
+  m_AppDisplayName: Stoll Kitchen Designer
+  m_FileSystemName: Stoll
+  m_VersionSuffix: s
+  m_AppSkin: {fileID: 11400000, guid: 6f949e6ad9bb1e445ab99bf67919a2cf, type: 2}
+  m_UserFilter: 2
+  m_DefaultManufacturerId: 30
+  m_TestDefaultManufacturerId: 30
+  m_AllowOneDayTrial: 1
+  m_AllowBuildingMethods: 0
+  m_AllowDealerMarkupPercentChanges: 1
+  m_DisallowedKitchenStyles:
+  - m_EnumNames: DiagonalL
+  m_DefaultBuildingMethod:
+    m_EnumNames: Sections
+  m_HomeScreenImage: {fileID: 21300000, guid: d07a05c37b2778342be91e5885770851, type: 3}
+  m_DesignerSceneLoadingImage: {fileID: 0}
+  m_ProductionServerDomain: app.profitoutdoorliving.com
+  m_TestServerDomain: profit.melcher.ca
+  m_SubscriptionUrlForDealerAccount: https://3doutdoorkitchendesign.chargebee.com/hosted_pages/checkout?subscription_items[item_price_id][0]=Stoll-Industries&subscription_items[quantity][0]=1&layout=in_app
+  m_SubscriptionUrlForTrialAccount: https://3doutdoorkitchendesign.chargebee.com/hosted_pages/checkout?subscription_items[item_price_id][0]=1DAYPASS-USD-Daily&utm_source=cb-app-copy
+  m_CabinetDataAvailability:
+    m_EnumNames: ClientOnly
+  m_ManufacturerDatabase: {fileID: 11400000, guid: 7c9e389cb42e32023acb7e2b19d81fdc, type: 2}
+  m_ProductGroupDatabase: {fileID: 11400000, guid: aeccfa4761a9b09459188bf488978895, type: 2}
+  m_BrandCatalogLogoDatabase: {fileID: 0}
+  m_TestManufacturerDatabase: {fileID: 11400000, guid: 79dc5fe50c708d644bf2a0c46a5db984, type: 2}
+  m_TestProductGroupDatabase: {fileID: 11400000, guid: f56ca919f3c9a364aa7e61cd769a4002, type: 2}
+  m_TestBrandCatalogLogoDatabase: {fileID: 0}
+  m_RemappedProductIdDatabase: {fileID: 11400000, guid: 32af2df05e4022b4cb8b7d09277ffee5, type: 2}
+  m_AppIdentifier: com.geminikitchendesigner.stoll3dkitchendesigner
+  m_AppIcon: {fileID: 2800000, guid: 725a4c6bad1c149bc990beb0cf594f51, type: 3}
+  m_AndroidProjectSettings:
+    adaptiveIconBackground: {fileID: 0}
+    adapativeIconForeground: {fileID: 0}
+  m_SimulateWhiteLabel: 0
+  m_SimulatedWhiteLabelDomain: profit.melcher.ca
+  m_SimulatedWhiteLabelDistributorUrlParameter: eYM6A2wBTTkRbBXeSXeZKg.RE9BQ2NNWVJXUlVmNHVqOQ.JMVdvpQthpBFk2fGn1yT80MkKSBqxYN6NS9d9ZLFZVw
+  m_SimulatedPreferredUnits: 0

@@ -1,0 +1,335 @@
+{
+  "islandType": "U-Shaped",
+  "islandDimensions": "4' 6\" L x 35\" H x 30\" D\n7' 6\" L x 35\" H x 30\" D\n4' 6\" L x 35\" H x 30\" D",
+  "cabinetFinish": "",
+  "counterTopFinish": "",
+  "deckFinish": "",
+  "paverFinish": "",
+  "modelSaveData": [
+    
+  ],
+  "counterTopHeight": "1 1/4\"",
+  "top_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 29.9999981,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 42,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "entries": [
+        {
+          "inches": 29.9999981,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "front_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 29.9999981,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 42,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "entries": [
+        {
+          "inches": 29.9999981,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "cabinet_list": [
+    1384,
+    1381,
+    1384,
+    1456
+  ],
+  "manual_price_sheet_entries": [
+    
+  ],
+  "countertop_area": "37.25 ft\ufffd",
+  "price_changes": [
+    
+  ],
+  "kitchen_layout_style": "U",
+  "kitchen_building_method": "Catalog",
+  "countertop_type": "Default",
+  "toe_kick_type": "None",
+  "cabinets": [
+    {
+      "cabinet_type": "EndLeft",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.90169996,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.90169996,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_ULeft",
+      "cabinet_server_id": 1384,
+      "cabinet_id": "BC-SA-30",
+      "size_in_meters_x": 0.761999965,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Corner",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "cabinet_server_id": 1456,
+      "cabinet_id": "BC-SA-30",
+      "size_in_meters_x": 0.6096,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.90169996,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.90169996,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_UMiddle",
+      "cabinet_server_id": 1381,
+      "cabinet_id": "BC-WA-42",
+      "size_in_meters_x": 1.0668,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Corner",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "cabinet_server_id": 1456,
+      "cabinet_id": "BC-SA-30",
+      "size_in_meters_x": 0.6096,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.90169996,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.90169996,
+        "z": 1.27
+      },
+      "backing_sprite": null,
+      "cabinet_server_id": 1384,
+      "cabinet_id": "BC-SA-30",
+      "size_in_meters_x": 0.761999965,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "EndRight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    }
+  ],
+  "cabinet_spans": [
+    {
+      "index": 0,
+      "backing_product_id": null,
+      "depth_in_meters": 0.6096
+    },
+    {
+      "index": 1,
+      "backing_product_id": null,
+      "depth_in_meters": 0.6096
+    },
+    {
+      "index": 2,
+      "backing_product_id": null,
+      "depth_in_meters": 0.6096
+    }
+  ],
+  "base_cabinet_depth_in_meters": 0.6096,
+  "countertop_thickness_in_meters": 0.03175,
+  "extra_features": [
+    
+  ],
+  "islandEnum": 0,
+  "backplashLeftActive": false,
+  "backsplashUpperActive": false,
+  "backsplashRightActive": false,
+  "barTopLeftActive": false,
+  "barTopUpperActive": false,
+  "barTopRightActive": false,
+  "leftLength": false,
+  "upperLength": false,
+  "rightLength": false,
+  "cabinetDepthLeft": 0,
+  "cabinetDepthUpper": 0,
+  "cabinetDepthRight": 0,
+  "cabinetDepthInitial": 0,
+  "brand_catalog": "Toppin",
+  "brand_catalog_id": 15,
+  "door_style_name": "Slab",
+  "door_handle_style_name": ""
+}

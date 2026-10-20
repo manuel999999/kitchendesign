@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_CabinetSection_Grill_Challenger_36InchGasGrillSideBurnerBase@Pan^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 34db57ad0a0889e419504f9de2928ee0, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_CabinetSection_Grill_Challenger_36InchGasGrillSideBurnerBase@Pan.prefab
+      editorOnlyCachedAsset: {fileID: 7570612169553257784, guid: 5d384bdb6da1b1546b2b42329d8289f0, type: 3}

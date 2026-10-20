@@ -1,0 +1,285 @@
+{
+  "islandType": "L-Shaped",
+  "islandDimensions": "5' 9\" L x 35\" H x 30\" D\n4' 7\" L x 35\" H x 33\" D",
+  "cabinetFinish": "",
+  "counterTopFinish": "",
+  "deckFinish": "",
+  "paverFinish": "",
+  "modelSaveData": [
+    {
+      "productID": "BIG32RBNSS-1",
+      "productPosition": {
+        "x": 0.0603250265,
+        "y": 0,
+        "z": 0
+      },
+      "cabinetSide": 0
+    }
+  ],
+  "counterTopHeight": "1 1/4\"",
+  "top_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 29.9999981,
+          "product_id": "BIG32RBNSS-1"
+        },
+        {
+          "inches": 2.375001,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 33,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "entries": [
+        {
+          "inches": 24,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "front_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 34.75,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 33,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "entries": [
+        {
+          "inches": 24,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "cabinet_list": [
+    632,
+    571,
+    563
+  ],
+  "manual_price_sheet_entries": [
+    {
+      "product_id": "IM-CEP-CN",
+      "name": "OASIS\u2122 End Panel",
+      "price": 99
+    },
+    {
+      "product_id": "IM-CEP-CN",
+      "name": "OASIS\u2122 End Panel",
+      "price": 99
+    }
+  ],
+  "countertop_area": "24 ft\u00b2",
+  "price_changes": [
+    
+  ],
+  "kitchen_layout_style": "L",
+  "kitchen_building_method": "Catalog",
+  "countertop_type": "Default",
+  "toe_kick_type": "Inset",
+  "cabinets": [
+    {
+      "cabinet_type": "EndLeft",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0.034925,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.90169996,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.90169996,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_LLeft",
+      "cabinet_server_id": 632,
+      "cabinet_id": "BIG32RBNSS",
+      "size_in_meters_x": 0.88265
+    },
+    {
+      "cabinet_type": "Corner",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.90169996,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.90169996,
+        "z": 1.27
+      },
+      "backing_sprite": null,
+      "cabinet_server_id": 571,
+      "cabinet_id": "Napoleon_CornerReturnBase33x30",
+      "size_in_meters_x": 0.6096,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.90169996,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.90169996,
+        "z": 1.27
+      },
+      "backing_sprite": null,
+      "cabinet_server_id": 563,
+      "cabinet_id": "IM-3DC-CN",
+      "size_in_meters_x": 0.6096,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "EndRight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0.034925,
+      "occupants": [
+        
+      ]
+    }
+  ],
+  "cabinet_spans": [
+    {
+      "index": 0,
+      "backing_product_id": null
+    },
+    {
+      "index": 1,
+      "backing_product_id": null
+    }
+  ],
+  "base_cabinet_depth_in_meters": 0.6096,
+  "countertop_thickness_in_meters": 0.03175,
+  "extra_features": [
+    
+  ],
+  "islandEnum": 0,
+  "backplashLeftActive": false,
+  "backsplashUpperActive": false,
+  "backsplashRightActive": false,
+  "barTopLeftActive": false,
+  "barTopUpperActive": false,
+  "barTopRightActive": false,
+  "leftLength": false,
+  "upperLength": false,
+  "rightLength": false,
+  "cabinetDepthLeft": 0,
+  "cabinetDepthUpper": 0,
+  "cabinetDepthRight": 0,
+  "cabinetDepthInitial": 0,
+  "toe_kick_linear_distance": "16' 6 1/2\"",
+  "brand_catalog": "Napoleon",
+  "brand_catalog_id": 9,
+  "door_style_name": "Style1"
+}

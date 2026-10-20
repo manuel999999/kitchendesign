@@ -1,0 +1,20 @@
+{
+  "name": "ca.melcher.unity.core",
+  "version": "0.0.1",
+  "displayName": "Melcher Core",
+  "description": "Core functionality and systems that can be used across many projects",
+  "unity": "2022.1",
+  "unityRelease": "0f1",
+  "dependencies": {
+  },
+  "keywords": [
+    "Melcher",
+    "Core",
+    "Unity"
+  ],
+  "author": {
+    "name": "Melcher Studios",
+    "email": "",
+    "url": "https://www.melcher.ca"
+  }
+}

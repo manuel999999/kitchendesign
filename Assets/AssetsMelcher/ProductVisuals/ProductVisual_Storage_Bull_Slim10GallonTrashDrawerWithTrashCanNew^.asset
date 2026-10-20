@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Storage_Bull_Slim10GallonTrashDrawerWithTrashCanNew^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 5d4708c2b00eb4e498998ddf3d2d7478, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Storage_Bull_Slim10GallonTrashDrawerWithTrashCanNew.prefab
+      editorOnlyCachedAsset: {fileID: 5657894734197707027, guid: 7063340673c6d7c41931f249130820ef, type: 3}

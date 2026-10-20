@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403ac7fb5b9c5ff4c90feebfbc0bf738, type: 3}
+  m_Name: ProductIdDatabase_Pre-2025-02-24
+  m_EditorClassIdentifier: 
+  m_NextDatabase: {fileID: 0}
+  m_Entries:
+  - m_ProductId: 1645
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-4LTE3
+      - BLZ-4LTE3(LP/NG)
+    m_NewProductId: BLZ-4LTE3(LP/NG)
+    m_OldProductIds:
+      m_List:
+      - BLZ-4LTE3
+  - m_ProductId: 1646
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-5LTE3
+      - BLZ-5LTE3(LP/NG)
+    m_NewProductId: BLZ-5LTE3(LP/NG)
+    m_OldProductIds:
+      m_List:
+      - BLZ-5LTE3
+  - m_ProductId: 1570
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-26-PZOVN-LP
+      - BLZ-26-PZOVN-LP/NG
+    m_NewProductId: BLZ-26-PZOVN-LP/NG
+    m_OldProductIds:
+      m_List:
+      - BLZ-26-PZOVN-LP
+  - m_ProductId: 114
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-DRW2-R
+      - BLZ-DRW2-R-LT
+    m_NewProductId: BLZ-DRW2-R-LT
+    m_OldProductIds:
+      m_List:
+      - BLZ-DRW2-R
+  - m_ProductId: 115
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-DRW3-R
+      - BLZ-DRW3-R-LT
+    m_NewProductId: BLZ-DRW3-R-LT
+    m_OldProductIds:
+      m_List:
+      - BLZ-DRW3-R
+  - m_ProductId: 103
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-30W-3DRW
+      - BLZ-30W-3DRW-LT
+    m_NewProductId: BLZ-30W-3DRW-LT
+    m_OldProductIds:
+      m_List:
+      - BLZ-30W-3DRW
+  - m_ProductId: 116
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-TRLP-DRW
+      - ' BLZ-TRLP-DRW-H'
+    m_NewProductId: ' BLZ-TRLP-DRW-H'
+    m_OldProductIds:
+      m_List:
+      - BLZ-TRLP-DRW
+  - m_ProductId: 105
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-TREC-DRW
+      - BLZ-TREC-DRW-H
+    m_NewProductId: BLZ-TREC-DRW-H
+    m_OldProductIds:
+      m_List:
+      - BLZ-TREC-DRW
+  - m_ProductId: 107
+    m_KnownProductSkus:
+      m_List:
+      - LZ-SV 1420-R
+      - BLZ-SV-1420-R-SC
+    m_NewProductId: BLZ-SV-1420-R-SC
+    m_OldProductIds:
+      m_List:
+      - LZ-SV 1420-R
+  - m_ProductId: 108
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-single 2417-R
+      - BLZ-SINGLE-2417-R-SC
+    m_NewProductId: BLZ-SINGLE-2417-R-SC
+    m_OldProductIds:
+      m_List:
+      - BLZ-single 2417-R
+  - m_ProductId: 102
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-SH-2417-R
+      - ' BLZ-SH-2417-R-SC'
+    m_NewProductId: ' BLZ-SH-2417-R-SC'
+    m_OldProductIds:
+      m_List:
+      - BLZ-SH-2417-R
+  - m_ProductId: 109
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-AD25-R
+      - BLZ-AD25-R-SC
+    m_NewProductId: BLZ-AD25-R-SC
+    m_OldProductIds:
+      m_List:
+      - BLZ-AD25-R
+  - m_ProductId: 110
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-AD32-R
+      - BLZ-AD32-R-SC
+    m_NewProductId: BLZ-AD32-R-SC
+    m_OldProductIds:
+      m_List:
+      - BLZ-AD32-R
+  - m_ProductId: 111
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-AD40-R
+      - BLZ-AD40-R-SC
+    m_NewProductId: BLZ-AD40-R-SC
+    m_OldProductIds:
+      m_List:
+      - BLZ-AD40-R
+  - m_ProductId: 113
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-DDC-R
+      - BLZ-DDC-R-LTSC
+    m_NewProductId: BLZ-DDC-R-LTSC
+    m_OldProductIds:
+      m_List:
+      - BLZ-DDC-R
+  - m_ProductId: 112
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-DDC-39-R
+      - BLZ-DDC-R-39-LTSC
+    m_NewProductId: BLZ-DDC-R-39-LTSC
+    m_OldProductIds:
+      m_List:
+      - BLZ-DDC-39-R
+  - m_ProductId: 117
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-PTH-R
+      - BLZ-PTH-R-H
+    m_NewProductId: BLZ-PTH-R-H
+    m_OldProductIds:
+      m_List:
+      - BLZ-PTH-R
+  - m_ProductId: 106
+    m_KnownProductSkus:
+      m_List:
+      - BLZ-DRY-STG
+      - BLZ-DRY-STG2-SC
+    m_NewProductId: BLZ-DRY-STG2-SC
+    m_OldProductIds:
+      m_List:
+      - BLZ-DRY-STG

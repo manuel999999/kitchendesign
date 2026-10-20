@@ -1,0 +1,16 @@
+namespace #NAMESPACE#
+{
+    using UnityEngine;
+    using UnityEngine.Playables;
+
+    [System.Serializable]
+    public class #SCRIPTNAME# : PlayableAsset
+    {
+        public override Playable CreatePlayable(PlayableGraph graph, GameObject go)
+        {
+            return Playable.Create(graph);
+        }
+    }   // class #SCRIPTNAME#
+
+}   // namespace #NAMESPACE#
+

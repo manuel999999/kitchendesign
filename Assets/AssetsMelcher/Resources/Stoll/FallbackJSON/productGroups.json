@@ -1,0 +1,29 @@
+{
+  "status": 200,
+  "groups": [
+    {
+      "id": 2,
+      "name": "Brick"
+    },
+    {
+      "id": 1,
+      "name": "Countertops"
+    },
+    {
+      "id": 6,
+      "name": "Felix"
+    },
+    {
+      "id": 5,
+      "name": "Stoll Premium"
+    },
+    {
+      "id": 4,
+      "name": "Stoll Standard"
+    },
+    {
+      "id": 3,
+      "name": "Stucco"
+    }
+  ]
+}

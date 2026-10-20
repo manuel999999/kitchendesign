@@ -1,0 +1,133 @@
+{
+  "status": 200,
+  "cabinet_section_category": [
+    {
+      "id": 17,
+      "name": "Grill Bases"
+    },
+    {
+      "id": 35,
+      "name": "Burner Bases"
+    },
+    {
+      "id": 27,
+      "name": "Power Burner Base"
+    },
+    {
+      "id": 39,
+      "name": "Propane Base"
+    },
+    {
+      "id": 25,
+      "name": "Sink Base"
+    },
+    {
+      "id": 29,
+      "name": "Refrigerator Base"
+    },
+    {
+      "id": 26,
+      "name": "Trash Base"
+    },
+    {
+      "id": 23,
+      "name": "Corner Base"
+    },
+    {
+      "id": 18,
+      "name": "Insert Base"
+    },
+    {
+      "id": 28,
+      "name": "Specialty Base"
+    },
+    {
+      "id": 38,
+      "name": "45\u00ba Corner Base"
+    },
+    {
+      "id": 36,
+      "name": "Full Height Door Base"
+    },
+    {
+      "id": 22,
+      "name": "Door Base"
+    },
+    {
+      "id": 21,
+      "name": "Drawer Base"
+    },
+    {
+      "id": 20,
+      "name": "Drawer/Door Base"
+    },
+    {
+      "id": 52,
+      "name": "Deep Apron Grill Bases"
+    },
+    {
+      "id": 48,
+      "name": "Evo Base"
+    },
+    {
+      "id": 49,
+      "name": "Propane Pullout"
+    },
+    {
+      "id": 51,
+      "name": "Rollout Tray"
+    },
+    {
+      "id": 50,
+      "name": "Waste Pullout"
+    },
+    {
+      "id": 43,
+      "name": "Standard Base"
+    },
+    {
+      "id": 40,
+      "name": "Add Grill Heads with Base"
+    },
+    {
+      "id": 41,
+      "name": "Add Burners with Base"
+    },
+    {
+      "id": 42,
+      "name": "Full Height w/ Accessories"
+    },
+    {
+      "id": 37,
+      "name": "Fridge Backer"
+    },
+    {
+      "id": 44,
+      "name": "Refrigerator Cabinet"
+    },
+    {
+      "id": 46,
+      "name": "Refrigeration Space"
+    },
+    {
+      "id": 19,
+      "name": "Storage Base"
+    },
+    {
+      "id": 45,
+      "name": "Egg Cabinet"
+    },
+    {
+      "id": 24,
+      "name": "Open Shelf Base"
+    },
+    {
+      "id": 30,
+      "name": "Filler Base"
+    },
+    {
+      "id": 47,
+      "name": "Appliance End"
+    }
+  ]
+}

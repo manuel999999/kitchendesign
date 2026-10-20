@@ -1,0 +1,53 @@
+{
+  "status": 200,
+  "tags": [
+    {
+      "id": 13,
+      "name": "CabinetSection_Storage_WeatherStrong_Aos18InchSingleDoorBaseWith2ShelvesLh"
+    },
+    {
+      "id": 3,
+      "name": "Drop-In Sink"
+    },
+    {
+      "id": 6,
+      "name": "Napoleon BI 700 Series 18 inch and 12 inch Burners for Built-in 700 Series Dual Burners"
+    },
+    {
+      "id": 5,
+      "name": "Napoleon BIG32 & BI32 for Built-in 500 and 700 Series 32"
+    },
+    {
+      "id": 4,
+      "name": "Napoleon BIG38 for Built-in 700 Series 38"
+    },
+    {
+      "id": 10,
+      "name": "Napoleon BIG44 for Built-in 700 Series 44"
+    },
+    {
+      "id": 9,
+      "name": "Napoleon BIPRO500 & BIP500"
+    },
+    {
+      "id": 8,
+      "name": "Napoleon BIPRO665"
+    },
+    {
+      "id": 7,
+      "name": "Napoleon BIPRO825"
+    },
+    {
+      "id": 2,
+      "name": "Smoker"
+    },
+    {
+      "id": 11,
+      "name": "Surface Mounted Smoker"
+    },
+    {
+      "id": 1,
+      "name": "Undermount Sink"
+    }
+  ]
+}

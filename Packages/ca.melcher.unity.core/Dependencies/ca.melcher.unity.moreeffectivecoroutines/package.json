@@ -1,0 +1,21 @@
+{
+  "name": "ca.melcher.unity.moreeffectivecoroutines",
+  "version": "3.11.0",
+  "displayName": "Melcher More Effective Coroutines (Pro)",
+  "description": "Packaged version of More Effective Coroutines (Pro)",
+  "unity": "2020.1",
+  "unityRelease": "0f1",
+  "dependencies": {
+  },
+  "keywords": [
+    "Melcher",
+    "Unity",
+    "coroutine",
+    "timing"
+  ],
+  "author": {
+    "name": "Melcher Studios",
+    "email": "",
+    "url": "https://www.melcher.ca"
+  }
+}

@@ -1,0 +1,2 @@
+These fonts were pulled out of the Resources folder due to them otherwise being
+duplicated by Addressables.

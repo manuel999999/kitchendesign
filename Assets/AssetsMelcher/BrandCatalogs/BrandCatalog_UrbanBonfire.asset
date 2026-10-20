@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee15c45ecec60bd4dafc5319bb45983a, type: 3}
+  m_Name: BrandCatalog_UrbanBonfire
+  m_EditorClassIdentifier: 
+  m_CatalogName: UrbanBonfire
+  m_CatalogId: 0
+  m_Ruleset:
+    m_EnumNames: Unknown
+  m_CabinetManufacturerId: 0
+  m_DefaultCabinetSectionDoorStyleName: 
+  m_DefaultCabinetSectionDoorHandleStyleName: 
+  m_DefaultToeKickType:
+    m_EnumNames: None
+  m_BackingRiserMaterialMode:
+    m_EnumNames: KeepUnchanged
+  m_ShowToeKickButton: 1
+  m_HasDoorStyles: 1
+  m_HasDoorHandleStyles: 0
+  m_HasCabinetFinishes: 1
+  m_HasGrillsWithInsulatedJackets: 1
+  m_HasCookware: 1
+  m_HasSinksAndFridges: 1
+  m_HasBacksplashes: 1
+  m_HasHighBarTops: 1
+  m_HasLowBarTops: 1
+  m_HasGrills: 1
+  m_HasBurners: 1
+  m_DefaultCabinetFinishOverride: {fileID: 0}
+  m_CabinetSectionLegStyle: {fileID: 0}
+  m_HighBarTopOverridePrefab: {fileID: 0}
+  m_WhitelistedHighBarTopCountertopManufacturers:
+    m_List: 
+  m_StandardCabinetHeightInInches: 35
+  m_StandardCabinetDepthInInches: 28
+  m_CabinetCountertopOverhangInInches: 1
+  m_HighBarTopOverhangInInches: 10
+  m_LowBarTopLengthInInches: 15
+  m_FallbackDefaultCabinetSectionProductSku: 
+  m_FallbackDefaultCabinetSectionProductServerId: 0
+  m_CabinetVentPrefab: {fileID: 0}
+  m_CabinetVentDistanceFromEdgeInInches: 2
+  m_FridgeBackPanelInfos: []
+  m_FridgeEndPanelInfo:
+    m_ProductName: 
+    m_ProductId: 
+    m_PanelHeightInInches: 0
+    m_PriceSheetPrice:
+      m_Usd: 0
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 1.375
+  m_CabinetEndPanelInfo:
+    m_ProductName: 
+    m_ProductId: 
+    m_PanelHeightInInches: 0
+    m_PriceSheetPrice:
+      m_Usd: 0
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 0
+  m_KitchenTemplates:
+    m_List: []

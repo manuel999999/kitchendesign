@@ -1,0 +1,542 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0437cdef3d0194cbaae85bb622116247, type: 3}
+  m_Name: CabinetSectionDoorHandleStyle_BerlinGardens
+  m_EditorClassIdentifier: 
+  m_BrandCatalog: {fileID: 11400000, guid: 0d4ccb6d4348bd343a8d6de8d6073beb, type: 2}
+  m_BaseHandlePrice: 20
+  m_Mapping: {fileID: 4900000, guid: f509673ec2fe8489b97d79b34537be55, type: 3}
+  m_DefaultHandle:
+    id: 
+    prefab: {fileID: -8679921383154817045, guid: 9b23219e549da4418b5307bcbd217139, type: 3}
+    count: 2
+  m_Handles:
+  - id: CabinetSection_Door_BerlinGardens_12Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: 7bacc6bef32ea4d23833816560b1589a, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_15Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: 8f51b65574a62496cb903ce1fba9ee39, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_18Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: 72cdfe9a952bb48879b7071795d57352, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_21Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: ecd94658db2b74d82bdf10652a6e840a, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_24Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: df87aec2895764203ba06e5c4f3ab9c4, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_27Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: 225107836ea5f477d896f36dbd89fb01, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_30Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: 0b1e426c5249b42f6ba135eefeed6dc9, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_33Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: de7f9b719ee524c39b7c358e87c83167, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_36Base3Drawer
+    prefab: {fileID: -8679921383154817045, guid: 1e03087b59dfb48088997cb5184477e1, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_12Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: d9c38ffd21ef84e62b4c2c4464c05010, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_15Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 063f6f9e985ac4e84b7c6001f80a1678, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_18Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 54ccd5b86dae14909867591742a83a2c, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_21Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: ce56233f6a24e43edb394577febfe034, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_24Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 15229fd04f2e343eab58c01478477f1f, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_27Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 554f93594863d4976abe60e206045a18, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_30Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 0b155482b163d44f0a331a85be9aed08, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_33Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 5a92b977686c642a1beecfbbb199ec6c, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_36Base4Drawer
+    prefab: {fileID: -8679921383154817045, guid: 26ec0ef67c7df484696471995ecccaca, type: 3}
+    count: 4
+  - id: CabinetSection_Door_BerlinGardens_12Base1Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: 9b23219e549da4418b5307bcbd217139, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_12Base1Door1DrawerRh
+    prefab: {fileID: -8679921383154817045, guid: 667ca02e18cf24a0d99d55557b6a9eed, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_15Base1Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: d1615171389534ba79f00682940f0886, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_15Base1Door1DrawerRh
+    prefab: {fileID: -8679921383154817045, guid: e3aa08a1062ae45ccb0da0378d95c757, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_18Base1Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: 11bec0ee84ba84376ad957e534109254, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_18Base1Door1DrawerRh
+    prefab: {fileID: -8679921383154817045, guid: 931579c634b3c4c0cbd10a78b816c29a, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_21Base1Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: 8bb6ccf0544cf40a5a23d05422d99597, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_21Base1Door1DrawerRh
+    prefab: {fileID: -8679921383154817045, guid: 74817dc5ad6fc45bb95cfcb07da0269e, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_24Base2Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: 64a389b0eacf94248812664fe8b2a097, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_27Base2Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: b7cecf433f36c4d268ddca98a49a6748, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_30Base2Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: 112eb29dab2db4c36a341e865289dfc6, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_33Base2Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: daf38a8574c0f4cf0914866991e5cfa0, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_36Base2Door1Drawer
+    prefab: {fileID: -8679921383154817045, guid: 2f2f0ca28e7574e45b5d00700a1f8baa, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_9BaseFullHeight1Door
+    prefab: {fileID: -8679921383154817045, guid: a5012eb8996134e3a9d60db810d74cba, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_9BaseFullHeight1DoorRh
+    prefab: {fileID: -8679921383154817045, guid: 8cc93fda0d65940a3928b3af8e983386, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12BaseFullHeight1Door
+    prefab: {fileID: -8679921383154817045, guid: 0ea2f7d41caa44766bb3d02cc3e9c776, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12BaseFullHeight1DoorRh
+    prefab: {fileID: -8679921383154817045, guid: ed6c63e839a4141bba0e162ffefc3592, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_15BaseFullHeight1Door
+    prefab: {fileID: -8679921383154817045, guid: 934ffe25f87554f54a063d003ac9ada4, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_15BaseFullHeight1DoorRh
+    prefab: {fileID: -8679921383154817045, guid: 90694cf5d205f4a00b1052f790667974, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18BaseFullHeight1Door
+    prefab: {fileID: -8679921383154817045, guid: 901d4a866f84940d99764134f65dd920, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18BaseFullHeight1DoorRh
+    prefab: {fileID: -8679921383154817045, guid: 0f1facc47a6974107b676a2004d01c89, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21BaseFullHeight1Door
+    prefab: {fileID: -8679921383154817045, guid: 11920d44c90a7439f872bcf043fd565c, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21BaseFullHeight1DoorRh
+    prefab: {fileID: -8679921383154817045, guid: 65d717dd685534eedadae3b0019dba9f, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_24BaseFullHeight2Door
+    prefab: {fileID: -8679921383154817045, guid: 491c2e4fc3bc940f89e8f33cbee95a9c, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_27BaseFullHeight2Door
+    prefab: {fileID: -8679921383154817045, guid: 7fb4674149b75465eae79226f0b829b7, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_30BaseFullHeight2Door
+    prefab: {fileID: -8679921383154817045, guid: db730c2a556424d67bf103fead3e17d4, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_33BaseFullHeight2Door
+    prefab: {fileID: -8679921383154817045, guid: 55112efd5b2a342929c3086843bfafef, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_36BaseFullHeight2Door
+    prefab: {fileID: -8679921383154817045, guid: f6cccfed50d984c72a282083b8848da4, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_12Base1DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 9e765dda3a1cb4c5d97660a518190e04, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_15Base1DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 5dbeffedf9bab4baa9c1fcec94c49de8, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18Base1DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 51b131118f775446dbf7a2e22056f3c0, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21Base1DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 42e317a908375400eb3da38ea6f9120d, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12Base1DoorGrillRh
+    prefab: {fileID: -8679921383154817045, guid: 336506c27737b480e8a0cb78e146e2d5, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_15Base1DoorGrillRh
+    prefab: {fileID: -8679921383154817045, guid: 31a7407fca34d4dab9a6a17cafc81acb, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18Base1DoorGrillRh
+    prefab: {fileID: -8679921383154817045, guid: ecd8d29279d83418a8998995b296db43, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21Base1DoorGrillRh
+    prefab: {fileID: -8679921383154817045, guid: cdd089acda2ec474da760573dddb41aa, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_24Base2DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: c5ae190e95d2341909a02a93d191047f, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_27Base2DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 6ebc7253777ec4f1b9f6057bce174633, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_30Base2DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: ca5c7fce1e6384e818a165b880379ddb, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_33Base2DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: c32ae94594f9b4478b59fb6083034b7a, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_36Base2DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_39Base2DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_42Base3DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_45Base3DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_48Base3DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_51Base3DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 5a8d096a2c7d849abbcf8a79188e7b66, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_54Base3DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 87f6636c3c36a46b9ace8fd750c8acb8, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_57Base3DoorGrill
+    prefab: {fileID: -8679921383154817045, guid: 01a48d1337a84451f9ead2d020eb43b8, type: 3}
+    count: 3
+  - id: CabinetSection_Burner_BerlinGardens_18InchBlazeSideBurnerCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 51b131118f775446dbf7a2e22056f3c0, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_BerlinGardens_18InchFireMagicEchelonDsb32816
+    prefab: {fileID: -8679921383154817045, guid: 51b131118f775446dbf7a2e22056f3c0, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_BerlinGardens_21InchBlazeSideBurnerCabinetLh27D
+    prefab: {fileID: -8679921383154817045, guid: 42e317a908375400eb3da38ea6f9120d, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_BerlinGardens_21InchRcsSideBurnerCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 42e317a908375400eb3da38ea6f9120d, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_BerlinGardens_21InchWildfireSideBurnerCabinetLh27D
+    prefab: {fileID: -8679921383154817045, guid: 42e317a908375400eb3da38ea6f9120d, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_BerlinGardens_27InchLynxBySedonaDsbCabinet
+    prefab: {fileID: -8679921383154817045, guid: 6ebc7253777ec4f1b9f6057bce174633, type: 3}
+    count: 2
+  - id: CabinetSection_Burner_BerlinGardens_27InchNapoleonSideBurnerCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 6ebc7253777ec4f1b9f6057bce174633, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_33InchBlazePizzaOvenCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: c32ae94594f9b4478b59fb6083034b7a, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_36InchBlazeGriddleCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_36InchCoyoteGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_36InchLeGriddleCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_36InchSummersetGriddleCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_36InchWildfireGriddleCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Cookware_BerlinGardens_45InchBlazeGriddleCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+    count: 3
+  - id: CabinetSection_Cookware_BerlinGardens_48InchBlackstoneGriddleCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_33InchBroilmasterGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_36InchAogGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_36InchSaberGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_36InchSummersetGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchAlfrescoGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchBlazeGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchBroilmasterGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchNapoleonGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchNovoGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchSummersetGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_39InchTwinEagleGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_BerlinGardens_42InchAogGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchArtisanGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchBlazeGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchCoyoteGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchCoyotePelletGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchCrownVerityGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchDeltaHeatGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchFiremagicGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchFiremagicGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchSummersetGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_42InchWildfireGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_45InchAmericanMadeGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_45InchBlazeGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_45InchBullGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_45InchSummersetGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchAogGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchBroilmasterGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchCoyoteGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchDcsGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchDeltaHeatGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchFiremagicGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchFiremagicGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchJacksonGrillsCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchNapoleonGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchSedonaByLynxGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_48InchWildfireGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_51InchBullGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 5a8d096a2c7d849abbcf8a79188e7b66, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_51InchTwinEagleGrillCabinet30D
+    prefab: {fileID: -8679921383154817045, guid: 5a8d096a2c7d849abbcf8a79188e7b66, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_54InchSedonaByLynxGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 87f6636c3c36a46b9ace8fd750c8acb8, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_57InchCoyoteGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 01a48d1337a84451f9ead2d020eb43b8, type: 3}
+    count: 3
+  - id: CabinetSection_Grill_BerlinGardens_57InchDcsGrillCabinet27D
+    prefab: {fileID: -8679921383154817045, guid: 01a48d1337a84451f9ead2d020eb43b8, type: 3}
+    count: 3
+  - id: CabinetSection_Door_BerlinGardens_MediumBase2DoorKamadoGrill
+    prefab: {fileID: -8679921383154817045, guid: 5d1e6f6891d2b4477b826fc663b5110e, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_LargeBase2DoorKamadoGrill
+    prefab: {fileID: -8679921383154817045, guid: 850bdc5480ebe4d30ab5fc6f7a2744d7, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_ExtraLargeBase2DoorKamadoGrill
+    prefab: {fileID: -8679921383154817045, guid: 48680e24278454ad4b2f6ca66cc04204, type: 3}
+    count: 2
+  - id: CabinetSection_Door_BerlinGardens_09InchWithCnstrOrgKnfBlkCh24D
+    prefab: {fileID: -8679921383154817045, guid: 01c26a18b6e6c493aa475851beb53ca5, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_09InchWithCnstrOrgKnfBlkCh27D
+    prefab: {fileID: -8679921383154817045, guid: 01c26a18b6e6c493aa475851beb53ca5, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12InchWithCnstrOrgKnfBlkCh24D
+    prefab: {fileID: -8679921383154817045, guid: da5d2698299354430993295d524a203e, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12InchWithCnstrOrgKnfBlkCh27D
+    prefab: {fileID: -8679921383154817045, guid: da5d2698299354430993295d524a203e, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12InchWithCleaningOrg24D
+    prefab: {fileID: -8679921383154817045, guid: 220af493ec8234497a7788dec6c15297, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12InchWithCleaningOrg27d
+    prefab: {fileID: -8679921383154817045, guid: 220af493ec8234497a7788dec6c15297, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_09InchWithCnstr24D
+    prefab: {fileID: -8679921383154817045, guid: 285d6100fed8544b1b225431c995019a, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_09InchWithCnstr27D
+    prefab: {fileID: -8679921383154817045, guid: 285d6100fed8544b1b225431c995019a, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12InchWithCnstr24D
+    prefab: {fileID: -8679921383154817045, guid: 1481490911d2b48d38dc4a0b90bb9c2a, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_12InchWithCnstr27D
+    prefab: {fileID: -8679921383154817045, guid: 1481490911d2b48d38dc4a0b90bb9c2a, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18InchCutBdAndBmWasteUnitCh24D
+    prefab: {fileID: -8679921383154817045, guid: 8caa93b3dc546484592b60a4ac55b04e, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18InchCutBdAndBmWasteUnitCh27D
+    prefab: {fileID: -8679921383154817045, guid: 8caa93b3dc546484592b60a4ac55b04e, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21InchCutBdAndBmWasteUnitCh24D
+    prefab: {fileID: -8679921383154817045, guid: dbd44b534c4a04693851fa10a57b9ec4, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21InchCutBdAndBmWasteUnitCh27D
+    prefab: {fileID: -8679921383154817045, guid: dbd44b534c4a04693851fa10a57b9ec4, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18InchBmWaste24D
+    prefab: {fileID: -8679921383154817045, guid: 7eb6909ba851d4293bea392645f81d4d, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_18InchBmWaste27D
+    prefab: {fileID: -8679921383154817045, guid: 7eb6909ba851d4293bea392645f81d4d, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21InchBmWaste24D
+    prefab: {fileID: -8679921383154817045, guid: 502431f957a2046ad93bfd7c69383ce7, type: 3}
+    count: 1
+  - id: CabinetSection_Door_BerlinGardens_21InchBmWaste27D
+    prefab: {fileID: -8679921383154817045, guid: 502431f957a2046ad93bfd7c69383ce7, type: 3}
+    count: 1
+  m_Models:
+  - {fileID: -8679921383154817045, guid: a5012eb8996134e3a9d60db810d74cba, type: 3}
+  - {fileID: -8679921383154817045, guid: 8cc93fda0d65940a3928b3af8e983386, type: 3}
+  - {fileID: -8679921383154817045, guid: 285d6100fed8544b1b225431c995019a, type: 3}
+  - {fileID: -8679921383154817045, guid: 01c26a18b6e6c493aa475851beb53ca5, type: 3}
+  - {fileID: -8679921383154817045, guid: 9b23219e549da4418b5307bcbd217139, type: 3}
+  - {fileID: -8679921383154817045, guid: 667ca02e18cf24a0d99d55557b6a9eed, type: 3}
+  - {fileID: -8679921383154817045, guid: 9e765dda3a1cb4c5d97660a518190e04, type: 3}
+  - {fileID: -8679921383154817045, guid: 336506c27737b480e8a0cb78e146e2d5, type: 3}
+  - {fileID: -8679921383154817045, guid: 7bacc6bef32ea4d23833816560b1589a, type: 3}
+  - {fileID: -8679921383154817045, guid: d9c38ffd21ef84e62b4c2c4464c05010, type: 3}
+  - {fileID: -8679921383154817045, guid: 0ea2f7d41caa44766bb3d02cc3e9c776, type: 3}
+  - {fileID: -8679921383154817045, guid: ed6c63e839a4141bba0e162ffefc3592, type: 3}
+  - {fileID: -8679921383154817045, guid: 220af493ec8234497a7788dec6c15297, type: 3}
+  - {fileID: -8679921383154817045, guid: 1481490911d2b48d38dc4a0b90bb9c2a, type: 3}
+  - {fileID: -8679921383154817045, guid: da5d2698299354430993295d524a203e, type: 3}
+  - {fileID: -8679921383154817045, guid: d1615171389534ba79f00682940f0886, type: 3}
+  - {fileID: -8679921383154817045, guid: e3aa08a1062ae45ccb0da0378d95c757, type: 3}
+  - {fileID: -8679921383154817045, guid: 5dbeffedf9bab4baa9c1fcec94c49de8, type: 3}
+  - {fileID: -8679921383154817045, guid: 31a7407fca34d4dab9a6a17cafc81acb, type: 3}
+  - {fileID: -8679921383154817045, guid: 8f51b65574a62496cb903ce1fba9ee39, type: 3}
+  - {fileID: -8679921383154817045, guid: 063f6f9e985ac4e84b7c6001f80a1678, type: 3}
+  - {fileID: -8679921383154817045, guid: 934ffe25f87554f54a063d003ac9ada4, type: 3}
+  - {fileID: -8679921383154817045, guid: 90694cf5d205f4a00b1052f790667974, type: 3}
+  - {fileID: -8679921383154817045, guid: 11bec0ee84ba84376ad957e534109254, type: 3}
+  - {fileID: -8679921383154817045, guid: 931579c634b3c4c0cbd10a78b816c29a, type: 3}
+  - {fileID: -8679921383154817045, guid: 51b131118f775446dbf7a2e22056f3c0, type: 3}
+  - {fileID: -8679921383154817045, guid: ecd8d29279d83418a8998995b296db43, type: 3}
+  - {fileID: -8679921383154817045, guid: c62aad933b0254e70b13829ab954172d, type: 3}
+  - {fileID: -8679921383154817045, guid: ff7efc8bdd396443fa6d7e593a097907, type: 3}
+  - {fileID: -8679921383154817045, guid: 72cdfe9a952bb48879b7071795d57352, type: 3}
+  - {fileID: -8679921383154817045, guid: 54ccd5b86dae14909867591742a83a2c, type: 3}
+  - {fileID: -8679921383154817045, guid: 901d4a866f84940d99764134f65dd920, type: 3}
+  - {fileID: -8679921383154817045, guid: 0f1facc47a6974107b676a2004d01c89, type: 3}
+  - {fileID: -8679921383154817045, guid: 7eb6909ba851d4293bea392645f81d4d, type: 3}
+  - {fileID: -8679921383154817045, guid: 8caa93b3dc546484592b60a4ac55b04e, type: 3}
+  - {fileID: -8679921383154817045, guid: 8bb6ccf0544cf40a5a23d05422d99597, type: 3}
+  - {fileID: -8679921383154817045, guid: 74817dc5ad6fc45bb95cfcb07da0269e, type: 3}
+  - {fileID: -8679921383154817045, guid: 42e317a908375400eb3da38ea6f9120d, type: 3}
+  - {fileID: -8679921383154817045, guid: cdd089acda2ec474da760573dddb41aa, type: 3}
+  - {fileID: -8679921383154817045, guid: 05b63055183f141749426c96ba4fe8a8, type: 3}
+  - {fileID: -8679921383154817045, guid: a5fdcb049b2cb4977af8f5c56a163d74, type: 3}
+  - {fileID: -8679921383154817045, guid: ecd94658db2b74d82bdf10652a6e840a, type: 3}
+  - {fileID: -8679921383154817045, guid: ce56233f6a24e43edb394577febfe034, type: 3}
+  - {fileID: -8679921383154817045, guid: 11920d44c90a7439f872bcf043fd565c, type: 3}
+  - {fileID: -8679921383154817045, guid: 65d717dd685534eedadae3b0019dba9f, type: 3}
+  - {fileID: -8679921383154817045, guid: 502431f957a2046ad93bfd7c69383ce7, type: 3}
+  - {fileID: -8679921383154817045, guid: dbd44b534c4a04693851fa10a57b9ec4, type: 3}
+  - {fileID: -8679921383154817045, guid: 64a389b0eacf94248812664fe8b2a097, type: 3}
+  - {fileID: -8679921383154817045, guid: c5ae190e95d2341909a02a93d191047f, type: 3}
+  - {fileID: -8679921383154817045, guid: f4364ebaaf5874f68b23efafcb809921, type: 3}
+  - {fileID: -8679921383154817045, guid: df87aec2895764203ba06e5c4f3ab9c4, type: 3}
+  - {fileID: -8679921383154817045, guid: 15229fd04f2e343eab58c01478477f1f, type: 3}
+  - {fileID: -8679921383154817045, guid: 491c2e4fc3bc940f89e8f33cbee95a9c, type: 3}
+  - {fileID: -8679921383154817045, guid: b7cecf433f36c4d268ddca98a49a6748, type: 3}
+  - {fileID: -8679921383154817045, guid: 6ebc7253777ec4f1b9f6057bce174633, type: 3}
+  - {fileID: -8679921383154817045, guid: 1901427775d45454fa29aa60c7b4dde9, type: 3}
+  - {fileID: -8679921383154817045, guid: 225107836ea5f477d896f36dbd89fb01, type: 3}
+  - {fileID: -8679921383154817045, guid: 554f93594863d4976abe60e206045a18, type: 3}
+  - {fileID: -8679921383154817045, guid: 7fb4674149b75465eae79226f0b829b7, type: 3}
+  - {fileID: -8679921383154817045, guid: 112eb29dab2db4c36a341e865289dfc6, type: 3}
+  - {fileID: -8679921383154817045, guid: ca5c7fce1e6384e818a165b880379ddb, type: 3}
+  - {fileID: -8679921383154817045, guid: 147c97395c23242a48d562b2e0e1dadd, type: 3}
+  - {fileID: -8679921383154817045, guid: 0b1e426c5249b42f6ba135eefeed6dc9, type: 3}
+  - {fileID: -8679921383154817045, guid: 0b155482b163d44f0a331a85be9aed08, type: 3}
+  - {fileID: -8679921383154817045, guid: db730c2a556424d67bf103fead3e17d4, type: 3}
+  - {fileID: -8679921383154817045, guid: daf38a8574c0f4cf0914866991e5cfa0, type: 3}
+  - {fileID: -8679921383154817045, guid: c32ae94594f9b4478b59fb6083034b7a, type: 3}
+  - {fileID: -8679921383154817045, guid: 008816e72f6c34a53b2f32ff993554ed, type: 3}
+  - {fileID: -8679921383154817045, guid: de7f9b719ee524c39b7c358e87c83167, type: 3}
+  - {fileID: -8679921383154817045, guid: 5a92b977686c642a1beecfbbb199ec6c, type: 3}
+  - {fileID: -8679921383154817045, guid: 55112efd5b2a342929c3086843bfafef, type: 3}
+  - {fileID: -8679921383154817045, guid: 2f2f0ca28e7574e45b5d00700a1f8baa, type: 3}
+  - {fileID: -8679921383154817045, guid: ca1f4455688a446fd8e9300fce449cf6, type: 3}
+  - {fileID: -8679921383154817045, guid: 7c22f6a87890e452d8bade53d875c5f4, type: 3}
+  - {fileID: -8679921383154817045, guid: 1e03087b59dfb48088997cb5184477e1, type: 3}
+  - {fileID: -8679921383154817045, guid: 26ec0ef67c7df484696471995ecccaca, type: 3}
+  - {fileID: -8679921383154817045, guid: f6cccfed50d984c72a282083b8848da4, type: 3}
+  - {fileID: -8679921383154817045, guid: cede440588b544a4084cbb4a58c4562b, type: 3}
+  - {fileID: -8679921383154817045, guid: 1ebd2bac3b3aa467390b8ed83337f5a5, type: 3}
+  - {fileID: -8679921383154817045, guid: 6c128d484abde45629c3e4a8ef08c633, type: 3}
+  - {fileID: -8679921383154817045, guid: 21d51703587d549f69b4a1a7de4b249b, type: 3}
+  - {fileID: -8679921383154817045, guid: 5a8d096a2c7d849abbcf8a79188e7b66, type: 3}
+  - {fileID: -8679921383154817045, guid: 87f6636c3c36a46b9ace8fd750c8acb8, type: 3}
+  - {fileID: -8679921383154817045, guid: 01a48d1337a84451f9ead2d020eb43b8, type: 3}
+  - {fileID: -8679921383154817045, guid: 48680e24278454ad4b2f6ca66cc04204, type: 3}
+  - {fileID: -8679921383154817045, guid: 850bdc5480ebe4d30ab5fc6f7a2744d7, type: 3}
+  - {fileID: -8679921383154817045, guid: 5d1e6f6891d2b4477b826fc663b5110e, type: 3}

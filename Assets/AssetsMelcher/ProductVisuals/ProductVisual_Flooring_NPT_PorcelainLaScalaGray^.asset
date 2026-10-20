@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_NPT_PorcelainLaScalaGray^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: c62e9bbcaee966a4bb96d06c55b10398, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_NPT_PorcelainLaScalaGray.prefab
+      editorOnlyCachedAsset: {fileID: 2403621677196124800, guid: d31c422861b548d4390a4077f15c74d3, type: 3}

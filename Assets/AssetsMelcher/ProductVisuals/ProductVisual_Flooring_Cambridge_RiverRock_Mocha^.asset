@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_Cambridge_RiverRock_Mocha^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: da1f24234f7a6f54f89c84cbf5265916, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_Cambridge_RiverRock_Mocha.prefab
+      editorOnlyCachedAsset: {fileID: 4396456828816128387, guid: 10f161fd152e9a2458f65b5582f41223, type: 3}

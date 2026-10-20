@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_ArcticWhite3DHonedPanel6x24_LPNLMARCWHI624-3DH_a2^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: e2fb6d379d6aad4449de5c687d8791c5, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_ArcticWhite3DHonedPanel6x24_LPNLMARCWHI624-3DH_a2.prefab
+      editorOnlyCachedAsset: {fileID: 8728672834563274793, guid: ab11b2814e1ad19409b636ca02fb243a, type: 3}

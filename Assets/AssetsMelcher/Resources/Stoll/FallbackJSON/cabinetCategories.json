@@ -1,0 +1,81 @@
+{
+  "status": 200,
+  "cabinet_section_category": [
+    {
+      "id": 17,
+      "name": "Grill & Burner Base"
+    },
+    {
+      "id": 35,
+      "name": "Side Burner Base"
+    },
+    {
+      "id": 27,
+      "name": "Power Burner Base"
+    },
+    {
+      "id": 26,
+      "name": "Trash Base"
+    },
+    {
+      "id": 39,
+      "name": "Propane Cabinet Base"
+    },
+    {
+      "id": 36,
+      "name": "Full Height Door Base"
+    },
+    {
+      "id": 22,
+      "name": "Door Base"
+    },
+    {
+      "id": 21,
+      "name": "Drawer Base"
+    },
+    {
+      "id": 20,
+      "name": "Drawer/Door Base"
+    },
+    {
+      "id": 37,
+      "name": "Fridge Backer"
+    },
+    {
+      "id": 29,
+      "name": "Refrigerator Base"
+    },
+    {
+      "id": 25,
+      "name": "Sink Base"
+    },
+    {
+      "id": 23,
+      "name": "Corner Base Cabinet"
+    },
+    {
+      "id": 38,
+      "name": "45\u00ba Corner Base"
+    },
+    {
+      "id": 19,
+      "name": "Storage Cabinet"
+    },
+    {
+      "id": 28,
+      "name": "Specialty Base"
+    },
+    {
+      "id": 24,
+      "name": "Open Shelf Cabinet"
+    },
+    {
+      "id": 30,
+      "name": "Filler Base"
+    },
+    {
+      "id": 18,
+      "name": "Insert Cabinet"
+    }
+  ]
+}

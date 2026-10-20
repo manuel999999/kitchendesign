@@ -1,0 +1,338 @@
+{
+  "islandType": "Galley",
+  "islandDimensions": "3' 6\" L x 36\" H x 27\" D\n3' L x 36\" H x 27\" D",
+  "cabinetFinish": "",
+  "counterTopFinish": "",
+  "deckFinish": "",
+  "paverFinish": "",
+  "modelSaveData": [
+    
+  ],
+  "counterTopHeight": "3/4\"",
+  "top_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 42,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 36,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "front_measurements": [
+    {
+      "section": 0,
+      "entries": [
+        {
+          "inches": 42,
+          "product_id": ""
+        }
+      ]
+    },
+    {
+      "section": 1,
+      "entries": [
+        {
+          "inches": 36,
+          "product_id": ""
+        }
+      ]
+    }
+  ],
+  "cabinet_list": [
+    798,
+    967
+  ],
+  "manual_price_sheet_entries": [
+    {
+      "product_id": "HARDWARE",
+      "name": "Bentbar",
+      "price": 10
+    },
+    {
+      "product_id": "HARDWARE",
+      "name": "Bentbar",
+      "price": 10
+    },
+    {
+      "product_id": "HARDWARE",
+      "name": "Bentbar",
+      "price": 10
+    },
+    {
+      "product_id": "HARDWARE",
+      "name": "Bentbar",
+      "price": 10
+    },
+    {
+      "product_id": "HARDWARE",
+      "name": "Bentbar",
+      "price": 10
+    },
+    {
+      "product_id": "HARDWARE",
+      "name": "Bentbar",
+      "price": 10
+    }
+  ],
+  "countertop_area": "14.625 ft\ufffd",
+  "price_changes": [
+    
+  ],
+  "kitchen_layout_style": "Galley",
+  "kitchen_building_method": "Catalog",
+  "countertop_type": "Default",
+  "toe_kick_type": "None",
+  "cabinets": [
+    {
+      "cabinet_type": "EndLeft",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_GalleyLeft",
+      "cabinet_server_id": 798,
+      "cabinet_id": "GB422736",
+      "size_in_meters_x": 1.0668,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "EndRight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Space",
+      "normalized_anchor_to_previous_section": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.9144,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 1.2192,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "EndLeft",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "Straight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.0254,
+        "y": 0.9144,
+        "z": 0.0254
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 1.27
+      },
+      "backing_sprite": "Product_Backing_GalleyLeft",
+      "cabinet_server_id": 967,
+      "cabinet_id": "BDBC362736",
+      "size_in_meters_x": 0.9144,
+      "occupants": [
+        
+      ]
+    },
+    {
+      "cabinet_type": "EndRight",
+      "normalized_anchor_to_previous_section": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "local_euler_angles": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "min_size_in_meters": {
+        "x": 0.3048,
+        "y": 0.9144,
+        "z": 0.6096
+      },
+      "max_size_in_meters": {
+        "x": 6.09599972,
+        "y": 0.9144,
+        "z": 0.761999965
+      },
+      "backing_sprite": null,
+      "size_in_meters_x": 0,
+      "occupants": [
+        
+      ]
+    }
+  ],
+  "cabinet_spans": [
+    {
+      "index": 0,
+      "backing_product_id": null,
+      "depth_in_meters": 0.6858
+    },
+    {
+      "index": 1,
+      "backing_product_id": null,
+      "depth_in_meters": 0.6858
+    },
+    {
+      "index": 2,
+      "backing_product_id": null,
+      "depth_in_meters": 0.6858
+    }
+  ],
+  "base_cabinet_depth_in_meters": 0.6858,
+  "countertop_thickness_in_meters": 0.01905,
+  "extra_features": [
+    
+  ],
+  "islandEnum": 0,
+  "backplashLeftActive": false,
+  "backsplashUpperActive": false,
+  "backsplashRightActive": false,
+  "barTopLeftActive": false,
+  "barTopUpperActive": false,
+  "barTopRightActive": false,
+  "leftLength": false,
+  "upperLength": false,
+  "rightLength": false,
+  "cabinetDepthLeft": 0,
+  "cabinetDepthUpper": 0,
+  "cabinetDepthRight": 0,
+  "cabinetDepthInitial": 0,
+  "brand_catalog": "BerlinGardens",
+  "brand_catalog_id": 13,
+  "door_style_name": "Malta",
+  "door_handle_style_name": "Bentbar"
+}

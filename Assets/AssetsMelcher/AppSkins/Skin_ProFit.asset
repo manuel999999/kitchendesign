@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9aeb23259520b247ac6314f4e29c2c7, type: 3}
+  m_Name: Skin_ProFit
+  m_EditorClassIdentifier: 
+  m_MenuHeaderLogo: {fileID: 21300000, guid: 2aa8483fa913eb9218fa19dfd931b998, type: 3}
+  m_MenuHeaderLogoHeight: 151
+  m_PrimaryKitchenSelectionMaterial: {fileID: 2100000, guid: 17351dc16427b0e8586d023edf2fb43d, type: 2}
+  m_SecondaryKitchenSelectionMaterial: {fileID: 2100000, guid: ad3999f0c1b23364e948a84dcc0324c9, type: 2}
+  m_DesignerSceneSkyboxMaterial: {fileID: 2100000, guid: 7150ae749d9de87ed80f79214ed7f5dc, type: 2}
+  m_KitchenDefaultFlooringMaterial: {fileID: 2100000, guid: 9a8f5f5c58b4e5e6b8e7034d5bf24087, type: 2}
+  m_PrimaryColor: {fileID: 11400000, guid: 2faa864eb1ec93244ac987f84e4ebeac, type: 2}
+  m_SecondaryColor: {fileID: 11400000, guid: 25803071c90c30b40964aec5d017fe57, type: 2}
+  m_DangerColor: {fileID: 11400000, guid: 50816a78f0f7b91098653ad1b92a8530, type: 2}
+  m_DesignerMeasureLineColor: {fileID: 11400000, guid: 0f939bff87e3ef04d8bcfe424a50bf5a, type: 2}
+  m_ToggleOnColor: {fileID: 11400000, guid: 25803071c90c30b40964aec5d017fe57, type: 2}
+  m_ToggleOffColor: {fileID: 11400000, guid: 104aec2befb2f494183fdd28b5ff170d, type: 2}
+  m_ResizerWidgetForegroundColor: {fileID: 11400000, guid: 08ae4add0ab6c224296aa8088f1ec4b3, type: 2}
+  m_ResizerWidgetBackgroundColor: {fileID: 11400000, guid: 2faa864eb1ec93244ac987f84e4ebeac, type: 2}
+  m_BlackOnWhite: {fileID: 11400000, guid: 7a25e97032f935e2d81bfad9e5795238, type: 2}
+  m_PrimaryOnTransparent: {fileID: 11400000, guid: 5648e22fffff06945b90176fea137916, type: 2}
+  m_PrimaryOnWhite: {fileID: 11400000, guid: 04d079649d6bb23e0ac0cb7e01c0a616, type: 2}
+  m_WhiteOnDanger: {fileID: 11400000, guid: 84a6ba6191291ec8982c9d206f83243b, type: 2}
+  m_WhiteOnPrimary: {fileID: 11400000, guid: e49f9f96021e1b24db4fe1947c10b7f8, type: 2}
+  m_WhiteOnSecondary: {fileID: 11400000, guid: 693fe3fe4cb5af004bb1eabe074f6291, type: 2}
+  m_InputField: {fileID: 11400000, guid: 1cd10310a6b1a774fb396bf4fa93820f, type: 2}
+  m_MainMenuFooterButton: {fileID: 11400000, guid: 78634e9b69d7c8b42bbc1c86c44ace54, type: 2}
+  m_ToolbarButton: {fileID: 11400000, guid: b993f0a7600e46acfb9d3a8bbe0fca63, type: 2}
+  m_KitchenSetupToggle: {fileID: 11400000, guid: 95391435abb780042b548c7c58bfa994, type: 2}
+  m_DesignerZoomButton: {fileID: 11400000, guid: 9f25986945b789b4287cd8d22ff2e640, type: 2}
+  m_DesignerToolbarButtonBorder: {fileID: 11400000, guid: b357e7d5c7b96354988a2b153df03528, type: 2}
+  m_DesignerBrandCatalogToggle: {fileID: 11400000, guid: bce0eda083e81fb4ca79e40ddd1fe0d7, type: 2}
+  m_DesignerCabinetDetailImage: {fileID: 11400000, guid: 7bd4cb8568e195e48a46a824172ec9c9, type: 2}

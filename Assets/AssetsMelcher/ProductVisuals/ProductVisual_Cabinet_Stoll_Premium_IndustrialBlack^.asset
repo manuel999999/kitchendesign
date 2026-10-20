@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_Stoll_Premium_IndustrialBlack^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 3d6640105109adb4d8aeb4b44865dbe0, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_Stoll_Premium_IndustrialBlack.prefab
+      editorOnlyCachedAsset: {fileID: 5871918112063325753, guid: 8199af1bf21fbdd78902a7af37c976e7, type: 3}

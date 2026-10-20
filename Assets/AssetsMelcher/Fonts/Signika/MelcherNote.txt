@@ -1,0 +1,2 @@
+This font was chosen for its digit characters. The intent is to have a font
+with clear numbers to use for the measurement overlay

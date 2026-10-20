@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_AmericanOutdoorCabinets_Sanshade^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: fdae2c9a6134c45d180f6efe04d2d8e5, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_AmericanOutdoorCabinets_Sanshade.prefab
+      editorOnlyCachedAsset: {fileID: 7941108742619817226, guid: ddf21f33027c14f3f998bcdda743ff15, type: 3}

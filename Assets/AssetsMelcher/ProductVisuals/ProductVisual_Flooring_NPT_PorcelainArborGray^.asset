@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_NPT_PorcelainArborGray^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: dae6879a92ca7da498d8a1cfc93a6db6, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_NPT_PorcelainArborGray.prefab
+      editorOnlyCachedAsset: {fileID: 3503451217008089701, guid: b2a92eaf5ca7aaa479d048325b0a5b6b, type: 3}

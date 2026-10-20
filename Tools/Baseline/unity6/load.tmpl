@@ -1,0 +1,6 @@
+int ci, qi;
+if (!Melcher.ProFitGlobals.TryGetClientAndQuoteIndex(__CLIENT__, __QUOTE__, out ci, out qi)) return "not found";
+Melcher.ProFitGlobals.activeClientId = __CLIENT__;
+Melcher.ProFitGlobals.activeQuoteId = __QUOTE__;
+Melcher.MelcherSceneManager.LoadSceneAsync(Melcher.MelcherSceneRequest.FromName("DesignerScene"), Melcher.MelcherSceneLoadMode.Single);
+return "loading quote __QUOTE__";

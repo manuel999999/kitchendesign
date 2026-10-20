@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_WeatherStrongSelect_ReefBlue^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 3c2743c40e0fd461bb0b8a16ab963ad6, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_WeatherStrongSelect_ReefBlue.prefab
+      editorOnlyCachedAsset: {fileID: 2051059485030350509, guid: 3d9228fff29814acdb345d0fd569b14a, type: 3}

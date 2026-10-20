@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781073a0460c0098fae20c5df45907b1, type: 3}
+  m_Name: AppProfile
+  m_EditorClassIdentifier: 
+  m_AppOptions: {fileID: 11400000, guid: 5d1297a939d3edfb58e051ae4f760a8d, type: 2}
+  m_TargetServerType: 0
+  m_ScreenshotQuality: {fileID: 11400000, guid: 25ac17fa079bbeb9d9adb2dacb86175d, type: 2}
+  m_RuntimeQuality: {fileID: 11400000, guid: 26e7d10714a3f031b88e70c5a4956884, type: 2}
+  m_OccupantDefaultMaterial:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_StainlessSteelBrushed.mat
+      editorOnlyCachedAsset: {fileID: 2100000, guid: f16a741848dc8c1aeb17399093e32fc1, type: 2}
+  m_KitchenDefaultMaterial:
+    m_Data:
+      address: Assets/AssetsMelcher/Materials/Kitchen_Default.mat
+      editorOnlyCachedAsset: {fileID: 2100000, guid: e1d9c89ce95065df1abc083fc126ac29, type: 2}
+  m_PresetBrandCatalogs:
+    m_List:
+    - {fileID: 11400000, guid: 99c8e5782860f9c41aa8a10fbcf1b774, type: 2}
+    - {fileID: 11400000, guid: b6244a4714363124e94286fecd3f1cee, type: 2}
+    - {fileID: 11400000, guid: e2644f9e2dfaba64dbcc418b6d360782, type: 2}
+    - {fileID: 11400000, guid: 3c79fba2e0edf144f899ae7d1ca155c5, type: 2}
+    - {fileID: 11400000, guid: 7a4b1a0d2557f4f4b988a71b5a755bfa, type: 2}
+    - {fileID: 11400000, guid: 29de43943fea6a546ad3a2c9f7f1c802, type: 2}
+    - {fileID: 11400000, guid: b733603b665144200abeb82d718843b4, type: 2}
+    - {fileID: 11400000, guid: b2efa7bac460c41cbb5db9637d84c419, type: 2}
+    - {fileID: 11400000, guid: 0cdf4d9601a0f400fa33308c87f0bf78, type: 2}
+  m_ScreenshotScene: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+  m_FinishesFolder: {fileID: 102900000, guid: 7d572718ee2f0955ab94b2229e3f4b48, type: 3}
+  m_ProductModelFolder: {fileID: 102900000, guid: 07f7619c7a5bba363bfcdc482b54efad, type: 3}
+  m_CabinetSectionModelFolder: {fileID: 102900000, guid: 520d0e04fd00b39498c8fb1500ff0177, type: 3}
+  m_ProductVisualFolder: {fileID: 102900000, guid: 7f47f74667c289b2595368fad7c95397, type: 3}
+  m_TriplanarShader: {fileID: -6465566751694194690, guid: 866f5cbbb8f4b016cbb34d661813b114, type: 3}
+  m_LitShader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_SimpleLitShader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+  m_UnlitShader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}

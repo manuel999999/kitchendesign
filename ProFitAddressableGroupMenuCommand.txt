@@ -1,0 +1,7 @@
+[2026-10-20 17:17:34.013] :: Collecting assets used by the product visual database...   Done: 00h:00m:02.686s
+[2026-10-20 17:17:36.702] :: Updating product models...   Done: 00h:00m:00.325s
+[2026-10-20 17:17:37.027] :: Updating cabinet section models...   Done: 00h:00m:00.048s
+[2026-10-20 17:17:37.076] :: Updating product visual prefabs...   Done: 00h:00m:00.014s
+[2026-10-20 17:17:37.091] :: Updating finishes...   Done: 00h:00m:00.534s
+[2026-10-20 17:17:37.626] :: Updating product materials...   Done: 00h:00m:00.002s
+[2026-10-20 17:17:37.628] :: Completed everything in 00h:00m:03.615s

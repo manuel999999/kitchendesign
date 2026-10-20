@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313267739ced1f65292dbc518ffd5b2a, type: 3}
+  m_Name: FontAwesomeUnicodeDictionary
+  m_EditorClassIdentifier: 
+  m_Entries:
+  - name: house
+    unicode: \uf015
+  - name: user
+    unicode: \uf007
+  - name: file-pdf
+    unicode: \uf1c1
+  - name: angle-left
+    unicode: \uf104
+  - name: angle-right
+    unicode: \uf105
+  - name: eye
+    unicode: \uf06e
+  - name: eye-slash
+    unicode: \uf070
+  - name: clone
+    unicode: \uf24d
+  - name: spinner
+    unicode: \uf110
+  - name: exclamation
+    unicode: \u0021
+  - name: info
+    unicode: \uf129
+  - name: circle
+    unicode: \uf111
+  - name: list
+    unicode: \uf03a
+  - name: plus
+    unicode: \u002b
+  - name: left-right
+    unicode: \uf337
+  - name: location-pin
+    unicode: \uf041
+  - name: ban
+    unicode: \uf05e
+  - name: pen
+    unicode: \uf304
+  - name: right-from-bracket
+    unicode: \uf2f5
+  - name: rotate
+    unicode: \uf2f1
+  - name: right-long
+    unicode: \uf30b
+  - name: left-long
+    unicode: \uf30a
+  - name: trash
+    unicode: \uf1f8
+  - name: bars
+    unicode: \uf0c9
+  - name: magnifying-glass-plus
+    unicode: \uf00e
+  - name: magnifying-glass-minus
+    unicode: \uf010
+  - name: arrow-down-a-z
+    unicode: \uf15d
+  - name: arrow-up-a-z
+    unicode: \uf15e
+  - name: check
+    unicode: \uf00c
+  - name: rotate-left
+    unicode: \uf2ea
+  - name: up-right-from-square
+    unicode: \uf35d
+  - name: magnifying-glass
+    unicode: \uf002
+  - name: expand
+    unicode: \uf065
+  - name: xmark
+    unicode: \uf00d
+  - name: chevron-up
+    unicode: \uf077
+  - name: chevron-down
+    unicode: \uf078
+  - name: clipboard
+    unicode: \uf328
+  - name: link
+    unicode: \uf0c1
+  - name: i-cursor
+    unicode: \uf246
+  - name: circle-left
+    unicode: \uf359
+  - name: circle-right
+    unicode: \uf35a
+  - name: retweet
+    unicode: \uf079
+  - name: camera
+    unicode: \uf030
+  - name: gear
+    unicode: \uf013
+  - name: arrows-to-dot
+    unicode: \ue4be
+  m_Font:
+    m_Guid: d5adc65b4bb313a4b8baaaeb14aa1da8
+    m_DataRelativePath: AssetsMelcher/Resources/Fonts/FontAwesome/Font Awesome 6
+      Free-Solid-900.asset
+  m_LastBuildTime: 2026-07-17 9:36:17 AM
+--- !u!49 &6282382110999884008
+TextAsset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FontAwesomeUnicodeDictionary_TextAsset
+  m_Script: "\uF015\uF007\uF1C1\uF104\uF105\uF06E\uF070\uF24D\uF110!\uF129\uF111\uF03A+\uF337\uF041\uF05E\uF304\uF2F5\uF2F1\uF30B\uF30A\uF1F8\uF0C9\uF00E\uF010\uF15D\uF15E\uF00C\uF2EA\uF35D\uF002\uF065\uF00D\uF077\uF078\uF328\uF0C1\uF246\uF359\uF35A\uF079\uF030\uF013\uE4BE_\u2026"

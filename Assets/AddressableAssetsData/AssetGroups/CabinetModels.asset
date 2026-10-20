@@ -1,0 +1,633 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CabinetModels
+  m_EditorClassIdentifier: 
+  m_GroupName: CabinetModels
+  m_GUID: 30a95630377ae51448be8328a31e765d
+  m_SerializeEntries:
+  - m_GUID: 06cba1b05714ca74ea06c7ce77e7a440
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_InsideCornerBaseLh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0878c6af0e8f0a04da5e0d7914ebe256
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_12InchDoorBaseLh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 096361a5337b6bc4c85c530b99e68fa3
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_39InchGasGrillSideBurnerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b6290fc0dcfa40a7a9610e795fbec53
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Endura_FullHeight2Door00230@Oxford.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b6bf99e927779948be0a94b9e352af4
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_424D@Fluted.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ed45c164d49b43daa7b0b4f3b0b0f2c
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Endura_FullHeight2Door00230@Sedona.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 111363e47c9df40d48395f9124e14f72
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_36InchGasGrillSideBurnerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1134de7010004438b815443d789b575b
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_424D@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 119e9cc814eee1f459ae8a2a249d4a84
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_42InchGasGrillBaseDeepCut@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 178d5b854abc2c44a9faa22ba6db030c
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_BBQButlerRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18e9232288a2a9940aff28fa99098d35
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Insert_Danver_CornerBaseCabinetsBlindCornerBaseLh@Hampton.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2079eaac2151445f5b923807b0d5b433
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_424D@Beadboard.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2513d104978a0421da2a97a3f0c709e1
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_12InchDoorBaseLh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25bc78ce918632d4dbf397a40d745ef8
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_39InchGasGrillSideBurnerBase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26d00af5a9dc74a7da67a289dd2830c8
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_501DCCR@Simple.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27400ade6d6da4e8cb19f85bdf815fa8
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_501DCCR@Beadboard.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f9f7752b031a3b468209875009f2dd1
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Sink_Challenger_36InchSinkBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 307359ef53712964d8c905a1b6337b7a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Sink_Challenger_36InchSinkBase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3194448c23a26c644bea8fa227642f87
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Insert_Challenger_BlindBaseRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31aab7b9bb067724cb8f5645dd3e10b5
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_42InchGasGrillBaseDeepCut.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 33af2da0e2e50d74ba51ce8a17026368
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_24InchGasGrillSideBurnerBaseLh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34293ae26a99d9a4f8efcc1d351d7f2a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_BBQButlerRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36e8cb7fd38cc4f009ccb4910eab75de
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_36InchGasGrillSideBurnerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38b8e6b60e1b84082baf50abd6c7ae37
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_15InchSingleWasteBin@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 399857ae9c9684720a934e4210f13f1b
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_424D@Simple.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a0c58447586f4a93b1837c88b0d7102
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_36InchGrillBaseWithDoorAndDrawer@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 407d139a71ba448d89de5f0e18368ede
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_42InchGrillBaseWithDoorAndDrawer@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 414f10d6ffb6f45e1bbf1ff229030000
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Endura_FullHeight2Door00230@Club.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 469dcf481e6bbeb4c821bab0da166068
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_21Inch3DrawerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 48c9daf1612d14bac824f1902ad55472
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_424D@Slab.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a49d4807771f414f9b829a46d3b2041
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_InsideCornerBaseLh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b3678d150b88ea4ab1338548854cb83
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_36InchGrillBaseWithDoorAndDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e3696cf959394bf381739281129b69f
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_15Inch3DrawerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50226af2208f21844861e3ad4834a4db
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Burner_Challenger_PowerBurnerBase24Inch.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50f153bf1c17843c09ed6a0ff5d114ed
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_15Inch3DrawerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 518b24cfb7a2a5a4eba0fe4aa8c2e475
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_15InchSingleWasteBin@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 537d1aa17cac44e4696e844e12b75a6d
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_21Inch3DrawerBase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 551e5d5f255e2384e90833401c606432
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Burner_Napoleon_UnderGrillCabinetforBI70018and12InchBurners.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 555f6887833832f4f895f09399abc454
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_30InchCeramicGrillBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 588c2e7d0b1ae324da8fca17188100bc
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_24InchGasGrillSideBurnerBaseRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 595034d128aabf9448d6f6de4f7d8c0a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Insert_Challenger_BlindBaseRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5954d250d7775b948b5345e14de00c57
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_36InchGasGrillSideBurnerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5abff6a684197e542b604e227cedc00a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Danver_42InchGrillCabinetDoors.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b610e2597c694947839543adce6c9e4
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_PowerBurnerBase24Inch@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ccadb7d8d7edec42baf1d08987b4aa1
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_30InchCeramicGrillBase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 612875be90db442a099cc4c163467357
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_36InchGrillBaseWithDoorAndDrawer@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6439a48f3664f4b9992d6256f6a3fe8a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_12InchDoorBaseLh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66c368f6d40183646a6190d576d6b5a6
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_18InchGasGrillSideBurnerBaseRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 670f52d0f1b6945f3921c2bb81eef055
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Endura_FullHeight2Door00230@Regent.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69e93af2f1ccb4751ada02188cf17ed1
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_18InchGasGrillSideBurnerBaseRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6adafecb4ec8945f5918f1056d49c1b7
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_24InchGasGrillSideBurnerBaseRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b96fa16143d34b3e8a67d0679c93486
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_18InchGasGrillSideBurnerBaseRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d06b72b8eb7efc42b05c64d71e0b48c
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_24InchGasGrillSideBurnerBaseLh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e666abd6ffc8d548ad6b0a5cb92aea5
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Insert_Danver_CornerBaseCabinetsBlindCornerBaseLh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ed9117cda27967478108ceb007d989e
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_36InchGasGrillSideBurnerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f33db58b67704345b780345b4a938a9
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Sink_Endura_30InchFullHeightSinkBaseCabinet27d.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 722606fa8d93e468386de6d0d6ef3fb5
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_42InchGasGrillBaseDeepCut@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 741a16d32eb8a8d4da2ef69ec282ff73
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_InsideCornerBaseLh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7492a783d5a8513459f3b073a6cb497e
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Napoleon_CabinetwithReversableDoorRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 767bdd029acebf249af89bed6e0f5434
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Sink_Challenger_36InchSinkBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77f72df308bb0e2428e84c46c13cce7e
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_24InchGasGrillSideBurnerBaseRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83a9cf1a53083d448bafb909f77ab694
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_42InchGrillBaseWithDoorAndDrawer@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 854bd1b5ba7054240b9801639957fd55
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_21Inch3DrawerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86aa6b72e08594ed6be8a666571c0e9e
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_36InchSinkBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c5a88adac7ed15418ddea6e4b0a14ef
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Napoleon_TwoDrawerCabinet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d3608df9dc4e4e088cf5eb5fabb3c0a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_501DCCR@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 907a36f1ed1ae424187889d9bfa15c87
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Toppin_42InchWideApplianceCabinet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93bd576c545109f4ea1a96e91281eb89
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Toppin_50InchBlindCornerWithDoorRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93c1397a3fff7449581d8762a400807f
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_24InchGasGrillSideBurnerBaseRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93da2e6c2956b4974aca1b54d80ca422
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_42InchGasGrillBaseDeepCut@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 948826243c2aa424bb8160c966eee632
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Burner_Challenger_PowerBurnerBase24Inch@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 956f4976ce030b04a93ad191821a838d
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_18InchGasGrillSideBurnerBaseRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95e527d995cab41728235bc20b605df8
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_BlindBaseRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9963f680dfee7f34596e418b4fc0f8af
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_15Inch3DrawerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9dbf5f82534b2cb46bbbb8377e0029ab
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_15InchSingleWasteBin@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9eac248decbad614b899f5b77ff0e678
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_36InchGasGrillSideBurnerBase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a08bac973b3a249e1ab5cbba42c41c6c
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_42InchGrillBaseWithDoorAndDrawer@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a12c7f9791e1aa74db98d7c1f94c3e77
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_36InchGrillBaseWithDoorAndDrawer@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a32437da5c0cd60428af48b0a7fde139
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_42InchGrillBaseWithDoorAndDrawer@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3f906c39480cbc41ba21fd7e9ee4023
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_InsideCornerBaseLh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a49a5e43e38a84148be4cfc7defd61ad
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_24InchOpen3ShelfStorage.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a64bac9c95129a748954dc02467edcd2
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_42InchGrillBaseWithDoorAndDrawer.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9e4f867db8700543b06eb2abddabb6a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_24InchGasGrillSideBurnerBaseRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9f87d6709c3f6349be1d7af2382ef38
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Insert_Danver_CornerBaseCabinetsBlindCornerBaseLh@Keywest.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad5658888f69ac749b52b01db8ea0a3e
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_BBQButlerRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad5bfd542b8704e2cae0cf58933d40ab
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_PowerBurnerBase24Inch@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0198d57aad5ca54b9c3c0a1dc3b1aeb
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Napoleon_WasteDrawerCabinet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1af1d4a46145e24fa859835362111fc
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Danver_42InchGrillCabinetDoors@Keywest.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b214991c595a3489b8366911b093e825
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_21Inch3DrawerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3050675ab2274ae59feddcc74226e7a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_BlindBaseRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b43db911472dbe04c92b0684e6469fb2
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_18InchGasGrillSideBurnerBaseRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b727f2a363a504f4a9edbb36a2bf899e
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Napoleon_UnderGrillCabinetforBIPRO500andBIP500.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b86ac6508e8e142d5ac3f77eddda9848
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_24InchGasGrillSideBurnerBaseLh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b99fc5df519584cff83146eeaed00d2b
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Endura_FullHeight2Door00230@Moderno.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9b10943ba3814a93b08b065d24f3912
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_39InchGasGrillSideBurnerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be1f314ab43168c4cae54ced5a069cd6
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_36InchGrillBaseWithDoorAndDrawer@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0370ac1531d2f84eb4ecf00716330da
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Napoleon_ThreeDrawerCabinet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c11bfb1cc04b34b349283684913f4d06
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_39InchGasGrillSideBurnerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2fcbf4aefd304d488d4128a8c4e8d34
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_501DCCR@Slab.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3db14dbd67277b46a4992ccb0caa007
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_39InchGasGrillSideBurnerBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4a43b3665d95485fb178bbe7619518c
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_BBQButlerRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c54a1768bc7edb64d860eca80e3557bb
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_15Inch3DrawerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7a60d5f59c7f454499686c2b17272bc
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_15InchSingleWasteBin.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c84575b1c3cc39b4a849905679a51fb9
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_12InchDoorBaseLh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9fd77c9feb6aa046b4194cd9527f928
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Cookware_Challenger_30InchCeramicGrillBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb719573cb12b0d4cbb051f684c3079f
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Toppin_501DCCR@Fluted.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc5dd79783c53734384d486bf5e810ee
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_21Inch3DrawerBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf317cb60b231453abc1b94ecb931652
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_BBQButlerRh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0ac43deb9903473c8176be4cf6c519a
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_36InchSinkBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1edd31aa40d7734e85e1e8822486daa
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_42InchGasGrillBaseDeepCut@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8705f14bcf89824cb3c50f2e24b5861
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Danver_42InchGrillCabinetDoors@Hampton.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d89fd6801f669406db7773fa76a07e68
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_30InchCeramicGrillBase@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df642bc379b0540bd98468a70de686a5
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_InsideCornerBaseLh@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb735719d2cac7a4fab20c7142b9fd1f
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_15Inch3DrawerBase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb7b9e40c1de94af98862e88efee97c8
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_24InchGasGrillSideBurnerBaseLh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec1c70b6022276b44a80f2627798a04d
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Burner_Challenger_PowerBurnerBase24Inch@Pan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecc5728d08ec341fbbc8294fae838662
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_30InchCeramicGrillBase@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3a4d7a613f4b794bbe8e525c752d0fb
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Challenger_12InchDoorBaseLh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f44cfbd7174934249903ebb3685cdb05
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Door_Challenger_15InchSingleWasteBin@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f77cf50a1b99e934fa1f8c68aacb8469
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Insert_Challenger_BlindBaseRh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f810ea472baf8a044927f05eeafa7617
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Grill_Challenger_24InchGasGrillSideBurnerBaseLh@Shaker.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd1fa7446c55fdf42814c8d518286ea5
+    m_Address: Assets/AssetsMelcher/CabinetSectionModels/CabinetSection_Storage_Napoleon_PropaneTankCabinetRh.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3b8ad19ddb5e6ef468586ea2574a0843, type: 2}
+    - {fileID: 11400000, guid: 4769b28ede85b0446a3fc32cd46ea831, type: 2}

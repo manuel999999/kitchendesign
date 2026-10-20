@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d3e4cbf350a9f4d9728a63cded9a1f, type: 3}
+  m_Name: Gemini_LShape_Challenger_Classic
+  m_EditorClassIdentifier: 
+  m_DisplayName: Classic
+  m_PreviewImage: {fileID: 21300000, guid: fdf6c4a73783fd948bb9e319bf98d2cb, type: 3}
+  m_BrandCatalog: {fileID: 11400000, guid: 99c8e5782860f9c41aa8a10fbcf1b774, type: 2}
+  m_KitchenStyle:
+    m_EnumNames: L
+  m_SaveData: {fileID: 4900000, guid: 5ed9f28bb7fbd114b979ce3e5edae5de, type: 3}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_TIVA_BeechwoodGrain^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 58d96d030dceb2545aacaee7f1c2f050, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_TIVA_BeechwoodGrain.prefab
+      editorOnlyCachedAsset: {fileID: 5778287086177869874, guid: 208840cb3c30a1940b28cf14914f7fb3, type: 3}

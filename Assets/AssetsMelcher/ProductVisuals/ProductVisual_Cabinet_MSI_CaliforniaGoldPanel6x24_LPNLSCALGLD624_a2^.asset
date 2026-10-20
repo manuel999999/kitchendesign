@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_CaliforniaGoldPanel6x24_LPNLSCALGLD624_a2^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: b3f8a006a0dc1f249a0b5ee62d6802bf, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_CaliforniaGoldPanel6x24_LPNLSCALGLD624_a2.prefab
+      editorOnlyCachedAsset: {fileID: 3686461218106299815, guid: 1ad3d6b2cbbafd54e9c779cacdd9b93f, type: 3}

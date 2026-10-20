@@ -1,0 +1,2718 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ProductMaterials
+  m_EditorClassIdentifier: 
+  m_GroupName: ProductMaterials
+  m_GUID: bdd6c1751b38ec546a5b4d222b9b64b5
+  m_SerializeEntries:
+  - m_GUID: 00ba117f7025be44e98d02b9cf44fc0a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGGreen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0188c326b0727480fa0eb530ab70567a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Napoleon_Buttons.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01bfb3b791362214fadaa5dbdda1bb05
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0296db585ff93a94187f9f23e0f2eedb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Generic_RedEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 029baa4323417324b93505b36aa488b4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_LightGreen_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02e89c64ff69c4b03a5b1726907635bf
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Generic_BlackAluminum.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02f8201f58d83e24299ffffb3ff2abb1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Alfa_PizzeSilverBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 039b4a5e535e1445096468d936d8d0c2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_StainlessSteeelKnurled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03c14cac4b36a2247800b12a7d050d70
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Saber_Meter1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03f01c2d19e5d4c379aad602aa642f67
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXLimestone001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 049710a2710ee634ea13ac9eae2122cd
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04ab31bf737fc3f4e818ab392ef5b09d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kokomo004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06d178140e9ae744f9c8f381ec64c8c5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kokomo001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06e074d84964548218fb68d8a923e36e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Generic_GreyAluminum.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 078f95825926ff74f88e4100c887de7c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Matador.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07d174f145e35954a9fe8c74cf481cce
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_PGS_Decal_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 080a9dc50f7cf154096755502c171e77
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_FireMagic_BlueGradientEmissive001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08175a0ac5ed3d046b25fc5bb2487e9e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_WoodOakVeneer003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08b0ed3485ebf634da772214cc253ade
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_XO_Blue_GradientEmissive2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08b92a42474a2324099ef3b30f6b9cf8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_TrafficYellow_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08cd74f7f7c9eec4c9468d29db960065
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BlazeNew.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0962c9089186de14e8f396df6889c066
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Kokomo_WhiteAluminumBrushed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a57f87be08176b4994703ca7ea328ba
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Hestan002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b0fecc5eb63a1c4d888738525a05d9d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_CoyotePizzaOvenCopper.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b5b22c1a2970604fb871e1523831208
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_LeGriddle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b6990a7337870141bbd1351b00abf70
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Cookware_Invisacook_Invisacook2BurnerUnit.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b75328d1860c4236b96f332568e63fc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_WildfFire_Rear.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b95be9ad0237d2479ded17b52e12fb3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c45bd67b9420a041a01ff3afbff587b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Jackson_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c916e0bff6846c42b11564746791ca7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Artisan_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d29ec666032349a9be2f59e378984ad
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXCaliforniaPoppy001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d3b3e27af5c13a40ae6ae327270b1be
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Perlick.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0dad5ceba53054397b8543b5fef84bfb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e266b3c8d62e234c90b3a1e2f736990
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Meter 002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0eb2eaeecb1b31a43bd5ecf7f08296db
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Glass_Yellow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0eef0c82bc66ace48b4ef626c824b94d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_FireMagic_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f238de00ba2a0a41972fcc2f57dbd0a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Artisan_Blue_Gradient_Emissive002AlbedoEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f5086afca05a4f8bb7790ff4198f0a5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Saber.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 106547d731f15dd468e339098152ebb6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_KamadoJoe_ClassicJoeRedBumped.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 119ebef8335d14a5d8c23065b9ce3b79
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Cayote.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 121d7e6af4b844674b646646c89683fd
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Thor_003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1229d3802a09d498baed962cbfa7c070
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Artisan.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12cdbd3a85fe6470e9f76a08dae6c801
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Knob_3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13367da49d38944bca1f408c7f4562f5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Cayote_Screen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 148ea47866f813b4fb834ec0d3f82f47
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_MemphisBealeStreet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15c89163b65a24f7ab677db9f747b42d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXObsidian001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15e124d1321163444b322e2acb4e6e94
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 160dd234f4eb1224185e499a3fb80751
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Dometic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1629af2e9ca0042b2914c864b4c2c4a1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_DeltaHeat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1641f6bd8d180364cbb47e8b7725933a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Wolf.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 167b4112a49ef45e99ea958f39282c66
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blackstone_Decal_003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16b29d4e205f8194cb928deaf4975723
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Blaze_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 170cf3609c3c5a8458821b7bdf019069
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_SunFire.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 173fc5ec7ea61b648b83d16e9bb1c367
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AmericanMadegrills_EmissiveBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 174d035dfeaf1224dbef99ebe5061d47
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Obsidian001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17ad37386f87d1c4cab315d86817b90f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kokomo006.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 185da334d28ff45d2a564fb2e3372c82
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Jackson.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1945bf51cfc8f4a08b50a107f4789a5e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Knob_4.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ac14a14c918fa24fb7bfd64de0feff0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kokomo002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b1334879d0054d47b36b3b6f59b5813
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_Decal_003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ba2409d52569a641a5991d55bc5a1f7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Generic_RedSandblastedMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bbdd881b1ca980479b426a14b385e48
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_JetBlack_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cd93985e440ef14aa2445d9505eed02
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagle_Meter 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d5c80669db7ea34fa84b50bb476bc9a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_BackBurnerText02.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1dd672534d4ae0d43af922956124eaff
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_TrueFlame.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e0601ce0a52d8e49b0d716e8b9f2e5f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_FrontBurnerText01.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e26fbf3849ee1346a0fa87f36568fc5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Alfa_NanoLegnaWoodCopperBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1fd1f853a81d04578869f85f491a8212
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BroilMaster_Rotis.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 207d20ea6bff4d540a2e67ac0129d529
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_HestanMatadorRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20f6ecd6e1b40c94fb3d5c26c0dd531d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2139f3f4f775c9f42ab398dd23bac461
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_BigGreenEgg_GreenBumps.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 225cd9140259c09459ea2e34386ce221
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Wildfire.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 231199e7a540ef70e9f0b7338cfc591d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Grate.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 231686a858475c74aa5e00b58e423385
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Meter2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23b47bc61d45c4cec9bbff8b0fcc0de6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_CrownVerity.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2445010be2f59734bade2e3ea515f073
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_DeltaHeat_Triangle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2492d251229203a429b4c7631db6604b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_PGS_SandblastedMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24f441a181c904352b511e2278f08f1c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Napoleon_PowderedMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25925a622a1df4172ad1a112fa0bd837
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Thor_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2680f658e10fb6d4ea3a2fffc58a596a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AmericanMade 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26bb96fa632af43ffa44be038eee21f6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BroilMaster.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 270fd4af1fc65654f8adc1789fa8c784
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Grill_Jupiter 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2772bd566f194a24e9188b4398b32364
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_FireMagic_Burner.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27da7af0a30bb48658d8b9689d9451f5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BroilMaster_Burner.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27ec3093866ccff45b987cfc2bf1acb7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_WhiteNew.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28afb9404f38ae74cb6036bc3fe22cb9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Alfa_PizzeAntiqueRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2932a1599f7a67a4386936e707cbf606
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Limestone001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29b0ef6d8cba9934396e51ebfbac7fdf
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_FireMagic_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a320d455fbb05a4fae5f0616a403b96
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_HestanPrinceBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a34a8a3ac177564d949c0592f497c64
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_SunFire.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b856924e6f623e4ea04d040b269bf34
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_TexturedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2bedd1983c093fc438fae44eee201a46
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_MadeInItaly.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c195c00825bd924b85ee51f7545cdfc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_SedonaLynx_Thermometer.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2cd8104086399b54a8a1d09b8c98a343
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_MatteWhite001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e5ed2acc8c3f04409cc06923503707b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/product_visual_kokomo_Vents001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ead052a6cecde6418d6a195f1476676
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Logo 2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f3d736ba6584406284cac38aed7401f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Saber_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f8e82e6346ee43b7a81ce03a1502f17
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Bronze 2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3018b61d3b4519041a30973d02766ffc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Light_Red_Emmisive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 305813483720a0a419f87e88715471a5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Bronze.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 306404baff4f348c9ac3f27e31af1040
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_BlueStainless.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 315221b5b7167c443b3bd7f7e8aaf303
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Primo_Black.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 318341df6163a4ad0a0e8ff30178e23a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Thor_Meter_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31f54f62688d4bb47b5eb419efb2d760
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_KamadoJoe_ClassicJoeRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 328581f89b78c1143b637648a8456ff2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Blue_GradientEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 328ece22c1b94304db5e30cbcdc9f2a1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_PGS_Meter_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32dbcb88ae020d8448aa6e7f894ee4b6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Alfresco 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 331e2ada3d5749d49b5c2cf68364ffad
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_Decals_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 332ff6144b686ba4a96cf86b450aaa4d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_DeltaHeat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 335edb814d1d5514eb305070ad8ee833
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_CrownVerity_Meter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3402b24c7f681534caf445ab9e1ddf0f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Grill_TwinEagles_TwinEaglesPelletGrillAndSmokerWithRotisserie.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 342ba5fcc20be4e52a0c871fcbe7877a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_AOGNew.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 345fda91d6341405aa39002c28b26c1f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagle_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 347e3b5aad5ef2e4cabc942db05cecc4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_DCS.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 356e7b389e4dc41a2bbbf833f6642f89
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AOGNew.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36895bd8a3047ac42b7f8b0879119864
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Artisan_Decal_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36aae6d98939cb845890d6d0cfc7a656
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_CastIron.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36d1c9ad61622ea4a97c5a0739021e9f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_BoraBora.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36ed84f330be2b841b3ec37931bafc0b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_BSTRD_Graphite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37711380bb5d3184c8a926a96f07ad97
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagles_Triangle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37b0b18c1221ceb449d91695a66b4b8f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Lush.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 388bfa654b3a3224ba80ebda13c8b9f3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Bull_GalvanizedSteel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38df0c1752675834c96e2fb3afc38019
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Whistler_Decal_3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b3de033f294fee48a46888090bb736b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Whistler_White.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b4909d9172138c439010faf2ef5bf40
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_FrontText.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c271a39b26e1944c8a586e0d693a059
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kokomo003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ca97679c0aef3b469c1b519f1261452
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Froth.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d6bbd08dac754e438f1b1435fdfb6d9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Stealth.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dd4ae6fd125cdd468a01df0448218d3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blaze.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dfecbb7c0faa5d4dba6faa3c0390a30
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_BlackHighRough.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e2df16419ae9467f8b3a9cad899fde2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Saber_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e67be33f59eddc448dbef209b204ba0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_TrueFlame_GrillKnob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ec295a780e5645b6a86588cd436fd1c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_DCS.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f295d806227642f6b43032771acb3c3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Decal_002 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40342bb5e11ae02418d84da2924aebd2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Decals 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40509c16dd0a1024d929c30a0cf5879b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Knob_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4092f733f1bfd2d40a4cf3251ef42b86
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40eb45d343e1c4720ba022b6870193a4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Alfresco_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41557ac1c0d2a4f3fbda846c2f52377f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Kalamazoo_GratePunch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42cd985964982254189e0bfaa81c9f54
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Summerset_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42ed393b3fb6d4821bbc6447b380ca66
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Alfresco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43f8a7fb598a8446f88866a98de0d0bc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_LeGriddle3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 445cbf61002654c50930f53b7f31e83d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_WildFire.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44c67a42564d049e290a185c8a038dda
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_SedonaLynx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 450775b067d751e4b8ff3c4a8f7dab4b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Bull_CeramicBlueGray001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46c2bd068c865d14c9e018d5ec705b95
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_DCS_Decals 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4735edd42c8aaa04bb3bf190b2bb811a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGTurqoise.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47e1a0c6bbe7d4c138cc3b7f0ed42c91
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Napoleon.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4831495635eecfb4fa006cee9c1c15de
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_PGS_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 488d90497736195499c64aba365cd132
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Reef.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 496c68c53ef158a4090452909174371c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kokomo005.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 496d0de62462155429d74ccb992b0e63
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_BlackPlastic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a0161518f8aafa4d88cf64750a62361
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_EmissiveGradientPurple.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b5e60b86c6855748942de6cba95d381
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Jackson_Button.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ca922ebcc1d1bc4793812187f29603c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_WhiteAluminumBrushed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d6c6a9dfc9fee34c9761e8352c56bfc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_Decal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4de6c0e303bc443ae989582b40791cd0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Gozney2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e40ecf4684798f4fa82a6b569c2b907
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_StainlessKnurledFinish.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f47b38dec09541ae92e571e2f2a6bb0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_GozneyLedScreen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f80a8c8f80659449a428cde10ce9c26
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_DCS 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4fca63dfa9de94d689cf36341e892910
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Bull.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ff997d0316334387862154f24e1fcf2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_BronzeChallenger.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50816b844d877ba4d9ce1d7682315dc8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_PGS_Decal_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5255559bf69d34bfab1780ef769b6ff2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Thor_Decals_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52f6dc7392283d54b8eb853d60346bce
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Alfresco 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5344257234f1ac04f8cd28597c7ed6fe
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5370a7c7f5b07d548b8ac7d806e35b38
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Alfresco_Decal_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53e8e9cf2649ea54ebed01024c5ed5f5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Alfa_PizzeCopper.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5414b990d72386a42b3eeaedc1c8478b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Blaze_StainlessBrushed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54a10abfc78588e48876beed596741bc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5516bce15814d4d67be28be33968712d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AOG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 552b115dac74c3f43a9ce7ad0407ac00
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_CaliforniaPoppy001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56fb50e5b462b0a46a53e03b4b841bb9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_PacificFog.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 573d67d53fd806c46927283548dc1748
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_CanyonVents.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5752f48747679e74d9f5b667b8d28761
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Lynx_Meter 2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57631b3283a10214b80d5cf4fde6d0f2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_WildfFire_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57e94a6276bf4a2258b7bcd58e89486e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Aspire_Steeletto.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 582c630e5d5a9e54a8b0e2f16997e6a6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AOG 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 585fd79f434037f4c92b5a87a443a29a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_FireMagic_EmissiveBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58d56a5fe042ef5458a4a2f053f111ca
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Sierra001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58d9a63f88ea74e15b871cd52eb26260
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagles_Meter_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b2be66ea8db6f64d91f0497d9e659eb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c76599decf4944e88df470e7f3759fb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Blaze2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cae0e2b9071bc642a3aba4f639d3d76
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AmericanMadeGrills_Decal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dfb091603c400b49b50d37a60491348
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Evo002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dfb5322fed3ab54e89e348f9cf22552
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagles_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e71760cc0c0a4247b8ca467ef60d4a0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone_New.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ec7522c51f8f1d49a8fc6b48843bee8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_BigGreenEgg_Green.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f028897b3213d3c8951f613aa39bc1a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Chrome.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60591d1d482beae4d93409b2b6b2356d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_BackBurnerText01.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60c42e6f2eff248cd8412f4597b711b4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Cayote_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 614c2e15a7252d54a878234ad91337b1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_Knob01_Old.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62086b2aed2ea1c43b7957123ab6fde2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_TrueFlame_GrillHandle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62c3f8835f09cfe4cbe2dd96a0cb5523
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Coyote_CeramicBlackWNormal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6313bcf2ecf16874a82bee0ab0cfd9cf
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Logo 4.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 643bd631e708f45c4892cbc677f377e4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Gozney.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64755b2f37b544d03bbdc92fb9edb458
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Jackson.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6476235a8f52be34b93d6029547c1462
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_RedEmissive001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6558d5429f63806469da59dd43c43d43
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Decal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65840b0c5a80be54baf568dda7633bf5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65cdafb0423424e1788e0d49ea266dc3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_DeltaHeat 2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 664923a54b3faad4ea1e8a372740de66
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Coyote_CeramicBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 664b6c35e59876942a11cdd5bd03799e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Alfa_PizzeArdesiaGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67387c1c9e92b66408bb8cf3dc0345ce
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Alfa_PizzeFireYellow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68cee1d00959d483b8f717ba193662be
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBlackBrushed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6944f3e7b7d079b4dbaaaed6966ae2a9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Summerset_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a0b0e012f53a114c8e67b26e65a7720
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_PremierFlame_RedMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a7318deee132d04384fc986ad9f25f7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_CoyotePizzaOvenMatteBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a870b62f5be00340840d089d9898d51
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Hestan001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6aa62521ac216c44c9a031e0f8feae6a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Whistler_EmblemOnBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b82cb74a9fda4f7a9aced1eb5020afb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Napoleon_SandblastedMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b9a18582ead7fb4481b2e90975bf984
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Surf001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cd3e09e64c0f214c88a2c920966266c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_AmericanMade 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d0cfd455786af8408dc62e5c6f5a9e7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Coyote.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d7bf02e2fe74234fa79a1ad8ad422e7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Napoleon_MatteBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d9238472f4c0794ab06e37aa79e131e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Memphis.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ddab562657d34c49a1014f5b078da61
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_BGP_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e3959c50dc2a9449bb0257bfa3668a9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Glass_DarkBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e539c756019e514fb62e4047c6025d7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_WhiteAluminumBrushed2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e729cb742c828446beca79314692b58
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Alfresco_Meter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f3b0cfcf08e5624893894bea5b85503
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_BlazeLedScreen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f74248c4f5919d4d9a163c135b3f554
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_LightGold001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ff5289f84b39ff468037c2178d6da0b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Button 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70dac5936a2af014fbbe0916a64c7191
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AOG_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7156ff4b858a60643979430c772f780c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_XO_Blue_Emissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 719d9b1616dd74f8b8914c42fa666913
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_LeGriddle_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72904f897470de64898834a2078bf7d4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Evo001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 730f26b13ada9d94ebf8159bd63afb1c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_White.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 755376229eae84678b4bc61da9bb13ef
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_AmericanMade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7575515e068ed457781764b7c9aa0db6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_BroilMaster.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75feb5cfc59c5d540b432572be8b92b6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_BSTRD_AlphineGreen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76199051d1aa39b449cebeead488d296
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Kokomo_RedGradientEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 765b7f275cb2490669365dd4a9df1e4d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Gold.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76a41161a3234f44d81d90dd31200299
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Artisan_Logo_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76db8942dbb913042935ee09d97b9dd1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7712621724e5414498b622194a3a2e45
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Grove.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7933cf0feee06a849933c4b9eb24998e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_WildFire 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79eaf4c4715ff4349aa8ffc95b65edd9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kalamazoo_Wood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7abb2e8f5c93e4916beaa94b170d7196
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_RoseGold.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7adc168be0685094a91461628a67179f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_SignalGrey_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7aff6360be3ff2242b484c5e5f6c41d1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BSTRD_3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bc4b7b3e798a214383071a0797cea7f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AmericanMadeGrills_EmissiveGradientBlueButton.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cd0db0f9d0a0c14182c2705e043b392
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BSTRD_4.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cdd78fdd6c93e744b92dbe02e2bc50b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Primo_BlackBumped.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d51dc4850f0a4e8f8bc21c0dec5a2a9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone_Cabinet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e09f9105faf9ee42b3d862d71e9da3f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_MemphisEliteBuiltInITC3.0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e3c6d52c79c5404282d0c06c5de72e9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_ThermometerBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f44dc864429f544e9c292df822c2516
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Solaire_Logo_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80040b52f27844ae8b7ffeea06bc75c3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Artisan.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80373b613483641ee8c15ee647f23e00
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXGlacier001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8059d0a9fc8a06a4eb30270ce2efc262
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TagWood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80ee80156ad91c84bbe3dc20ef6810f3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_CarmineRed_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81585372366d0d248aec45a9a68d65fb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_PGS_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 817941d78599e4501afb17e1ccf95061
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_WildFire_Cabinet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 823aecbbaed9ed748870d1a7e75f78c8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_Button_Blue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82fd72e427b51854390583ebc6ff7587
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Lynx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8338bb35776f9e7498644a166026978c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagle_Decals.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8339e97ef31d6e749a3f654e60503142
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Generic_PurpleEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83ac2cd157d3a8f4f83942e74db6e905
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_UltramarineBlue_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 844b51d0675d42340a5b610ef58d79e4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_FireMagic_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 858cd12b62ca361469e4ccd775cea364
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Solaire_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85f2fc43e6b13474a9a3b42ef197b079
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86637ca7569a28a4a995ed0fff6bc514
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Summerset.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86be32c5385eae642a5b28899399391f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Whistler_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8739bb9d73a665249b2281a87e015660
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_SimpleBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87910cad887adfb4387b720963d220c9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8822142414f3c7b439f01e2ba91bb897
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_BlackPowderedMetal 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88a56e8c3b2e744439f82ee1376d440b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AOG_Logo2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8930a56fb605350408c1a8a18b506eb2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_SphereGradientEmissiveBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89359ade48da04f8990cf331533b23f1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Memphis_Screen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a6f99a109fc2af49a250f0944ccffd0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Generic_YellowEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c316ac6b493a8c43a1bc8182e6fb9ea
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_Decals.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c7bb7f8d07814d98a364b56fba724bc
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_DeltaHeat_Decal_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d8648f96313646dba5874dff8ffcc8a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e4dfb84860d9d07ea723845a58f86ad
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Black.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e90b5905b69a4dd79d8f7f3d9e7c6d8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Glass_Blue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8eeb83955d6b55043a0516fc372eff57
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TrueFlame.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f9e685f226b46c4fa8fb0749522ec1b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Generic_WhiteEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fc3d5e09fd014f3ebbcdfc3373aace4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_BlackstoneSandblastedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fd72921d09c645369497cb1e6b52c0c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_LeGriddle_Round.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90352bff187776944942e43afaf0911f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_DesertSage001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90458e98d61b5f9489246acead954bb0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_Meter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90cdb48796e33b44d8834402ffa1d31d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_ArtisanMeter001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 915feab776557bb4690f40176d6ea0fe
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Glacier001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91664da966273b044b0a595d454cd802
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Hestan003.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91bc2f2ac4960f3d882c2431357762f8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Wood_CuttingBoard.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9284f21f9a82d1b448d1694e5b161f80
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Glass_DarkGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92a728a75cf6f121790fb67139128108
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_SteelMesh.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93223b37c8a984c098c473178ef8a68a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 940439a22b549e74da70cb196000ca7b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_WoodOakVeneer.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 943083d306bf24e2da185dfa5a9570e1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Button.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 951850e4baa6bce4181d5c22b442d250
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Knob_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9519b9fc6515ae646ae4053ce5a97866
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_MemphisBealeStreet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9526dbc86cce743bca14227993398ba0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_BackBurnerText.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95299b98fdcb7044cbb29100cc8f6102
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AmericanMadeGrills_HybridText.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95d2568b2f46ba243a0c34013e7e9ece
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Saber_Meter2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9621a58beee932246b00e9e2ee348f43
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_Knob02.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 963244e7b82f06f498b3e036137f0f69
+    m_Address: Assets/AssetsMelcher/ProductMaterials/product_visual_kokomo_Vents002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9664657704a858b44919e317f5afc213
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Lynx 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 985f3d8d2f04f7644a927bf4df140505
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Napoleon.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 988484a426d9a4c5ea959d809fefba2a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_AOG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99a695ae711684cdc8bfde20948e422b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Cayote.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99ad180ae3524d4469969eccadfd9f38
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Whistler_Decal_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99c3c6345738f514d95b51748de4ffba
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Grill_TrueFlame_TrueFlame30InchGriddleGrillLpng.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a70741fa37ad47e7b612c3195ba20f6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone_New_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a79c4384d5fbdf42896cbbbc3c623d9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_XO_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c538e14942aafb4490a008c731df59f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Orion.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cb232615422b134a813bd5b5b25184d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_005.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cd9f1db77ac5b1439ef42b2d6faa1d0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Steeletto.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d2f18f634a19f04dbb7cea85789c8bd
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Grill_Jupiter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e5c36fda5d6a3c4b87d5841bb64902f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kalamazoo_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fd4e42e41d220c469dffa4f355ca86a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_EmissiveGradientBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/Materials/Kitchen_Default.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_Decals_001.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_Knob.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_Meter_001.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_ScreenMeter_001.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Grill_TwinEagles_TwinEaglesPelletGrillAndSmokerWithRotisserie.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_Decals.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_WoodOakVeneer002.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_Lynx_WoodOakVeneer.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Meter.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagles_Knob.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagles_Meter.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagles_Meter_2.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Generic_RedEmissive.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Glass.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Glass_DarkGrey.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_001.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_002.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_003.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_004.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_005.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_Black.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_Red.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Grill_Jupiter.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagle_001.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagles.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEaglesNew.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagles_Triangle.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_BlackstoneSandblastedBlack.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Black.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Chrome.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Grate.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Napoleon_Carbon.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_StainlessSteelBrushed.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_StainlessSteelPolished.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Metal_TrueFlame_GrillButtons.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_SimpleBlack.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Bull_CeramicBlueGray001.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Bull_GalvanizedSteel.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Coyote_DarkGreyAluminum.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Generic_BlackAluminum.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Generic_GreyAluminum.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_BlackPowderedMetal.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_Blue_GradientEmissive.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Napoleon_PowderedMetal.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductMaterials/Product_Visual_RubberRaw.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: Assets/AssetsMelcher/ProductVisuals/Product_Visual_LeGriddle_BlueEmissive1Albedo.mat
+    m_Address: 
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a265ff1ed1c399941b3376c2165fba76
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_RedPlastic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3bf204c1fc00f84aafc09ff3ce3ed94
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3f8bd01e75d9e3418c048eee668282c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Whistler_EmissiveGradientBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a52ba5e1657e46c4db1f7520bdb4e556
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_Emissive_Orange.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5ede899502d5664bb0e1c5686eb38d5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Blaze_DarkAluminum.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a622f6d2731a90a4dbc3538be1e40d1f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_BroilKing_Black.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a69f5d6e767e04c01839f085682e30e7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Novo_Cabinet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a78463e893ec9594fac471a5180dd0e5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_Red.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a849ba2054bd95d48a4dc50a914abbb8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Alfa.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8a1d9e56c43d344ca10beb122375abb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Napoleon_Carbon.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8c913c8f3e455d49ac170cbf61637b2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_DigitalThermometer.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8cb03aeb6b435042adf886a72c3daad
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Logo 3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9b2cca307f699547863a1904ef386bb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_TrueFlame_GrillButtons.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa809261eb09d0d4a9cab11ee970ae20
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_Decal_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aab7a246efcd90d458c28f16630aa8b1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Citra.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab1115a74650b63458ba7e244c005cde
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_LuminousOrange_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab307f681b311ef4cb7593ee7f6e9057
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_ScreenMeter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab4efb68db9be4daa8c07c00bc9ecf77
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Thor_Meter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: abcde2493ea4f6048aa60f9f5e51b704
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_PacificBlue001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac37e6fc8ac1a614ea65f3023a762782
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_JackDaniels.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac9e3e7dff0546546af4f6faf9e51411
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Burner_TrueFlame_TrueFlameDoubleSideBurnerLpng.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acb32c89cea3b4f32bfee64d498dfd6c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Memphis_Cabinet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae9b4f113eef4da4198ff63478eb793e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Kokomo_CeramicBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aee87acadd9b0814d8e4f599fe921df3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Lynx_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af776fff1d9ac0c458052dee6f94252b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_BGP_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afb50e968b9727f488185ae8e12ef62c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_CoyotePizzaOvenRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b02f24a145958435fb7e1e3294f0fb60
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Thor_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0de1f43d1496fb4eb4551b4cd9bb203
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AmericanMadeGrills_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1c8053965ffe4e2580ec2b75c1793ae
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Napoleon_KnobEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1e7589c4a9b54ced9ab990537ed3e0a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone 006.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2046ae49959dc945b07f8def3224a05
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_SunFire_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b29ca91f785f64ca7b483842ae77e156
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXDesertSage001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2f21d3e8962444adb41a513d98957e8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_Blackstone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b31c75528ce70304883ceca5a6865389
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3d9bd84d2f68514189085b87fc910fb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Lynx_WoodOakVeneer.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3effc93b531e42dd85cf1eb75eb6afb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Novo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8e936aa8383ac44a8b1051f4c95f9f5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_GreyPlastic001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b92192c8e6a8345bf8ba0d68f9b437ae
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Napoleon_New.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9698f0f02b6a43c79be90d4a9b8a9f7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Whistler002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9a93a9493af74b34bcf606c23094987
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_FireMagic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba140e77ac1602947ae129b1eb97b555
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_BSTRD_DesertSand.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbd236b70bba38e469dd07d9a1b72ab8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Solaire_Logo_AmericanFlag.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbfdfca8f790cc147885c16a5b1aedb7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Kalamazoo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc96664f93b39644ebac85e33e783cd9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Light_Red_Emmisive 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd1be3e39c503a14c8e7987a88c0ce00
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Alfresco_Decal_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd6f6272016e5c14f932a2c04b097738
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_AlumDetail.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bdca9a9fbab6e6f42acc5cefcc177f22
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Generic_BlueEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: becd4ed550d455f458612b9e29882bff
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bef8a5190cc13214783f1548a74598aa
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display__Template.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bef8c185661d0de4bb2b2e8914b0d783
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_ScreenBurner001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf6e9f456ab329d4f88ffa112fa52dc6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blackstone_Decal_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf7ff97e909c41149b691bc5d17b608c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Wolf_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfd74e4eb2f225f4cad430fe01f9266b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AOG_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0696503b664d440fb1c1c60e3c0a2a7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_GozneyDigital.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c06b6dd62a4af2d42b3f07c3242d957e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_Yellow_GradientEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c089d4a3df305e34e8afda571d94378c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0ad8ab2a2a6c3f4ea555f9a006cbc1b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Bull_Black.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0fa60a905d9636479c5f47d1c8de829
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_BSTRD_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c14548685ce164c4da5fad1734ed8da4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_MadeInItaly2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c162e39a56af041b8aa9672c2b729252
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXSurf001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c35a3498d975df74fb8ec5a7e8476c5a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Hestan_Meter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c39116aab5f7614458492321e33adf0e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_SignalWhite_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3a1e1860e8f82a44b9cd3cf48c15d6d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AmericanMadeGrills.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4330b9b3899e1a40bcfb3931dfd3e1e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_WoodOak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c50aca29b696ab64eaaffe89e8d3d47a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_Decal_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c53a77a56c4f27b43b7a35ef1ccb0623
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AMG_Meter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c590fb09c9ad0784d85d5b1e1afa5dd5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Primo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6107f9db199df841aa1987fc63042bd
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Burner_TrueFlame_TrueflamePowerBurnerLpng.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c66f5aed4aaed834093439284b6c4af5
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_OrangeGradientEmissive001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c690f1bf76a54df48820fcd0cb81e3da
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_SunFire_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6b47c56ee7134b7bb3c63b4a8a57942
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_RubberRaw.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6f847b86d70b4c2ca94b9ecced4051a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Alfresco 2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7645b2923f9b4d4494aaf6cca9cef66
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_AMG_Logo_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c85a5190ea843b049bcb7fdabbb78ab0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_RCS.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c873e55429d13524fb7d3cc474cdf975
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BSTRD_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c98a2b5a8b3e77e4a8f910fbd976912c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_CoyotePizzaOvenYellow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9932e8e54c2bd4479657e3cd8f3ca2c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_FireMagic_Decal_004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca2701318094443df8b1e19f5e3fd626
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Knob_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca462e03039a7a744be84d01f4f66330
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagles.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb5c9a0d139de4265b444f9d9c37f825
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_LeGriddle_Button.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb6c3ba8bf89442c0b43d4348a32be77
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_DCS_Cabinet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbdf01a62306ac248b130005736eb482
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEaglesNew.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccd4a0c69f39d524b86b2a040f514a28
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_LeGriddle2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccf9076604787184899a9465dea25102
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Debug_UsedToIdentifyAndCheckMaterialFaces.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd1276e49aaadfe459dfa9c2af1d233a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_TwinEagles_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf132e3c9ab72534ab0687e73de89973
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BroilKing.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf2e5bc14dff35742b597cc369283f33
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Hestan.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf34ca0e1b584e5469a734ecbd8faf7e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cfefaf4581647d44db61dd5205c1b886
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Meter 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d003614e139e34cc4b1fa1795acd1b74
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone 005.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d00b436ef40dc471eb81c33db870a427
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_FireMagic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1a2829d9aa5648d49468d6a6d7aad07
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXSierra001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d29655e851809144e8dcd9d85fcbaab1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Solaire_Emissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2c24dd5914b0c44e954df4dadc50b4c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_XO.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2fe10a5e8de40443a20536ff7ed23db
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Decal_002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3f7e132a9abb3444a4be5f3d193062e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AluminumBrushed_BlackstoneSandblastedBlack_NoShine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4444d1bd663dda4e9344554c790bdfa
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_Wood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d452ff654cdf91441926c5e3097a9d9f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone 004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d480a89451e21b8408af3c474f47f981
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Whistler_Decal_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d540108ce59a04941b693085ff23d71f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d61c838daaa41f8429b8837a649748a3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Copper.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6577374ae8f949c6a414f76edad3993
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_CrownVerity.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d737af6caa3904f99aec56b982b22709
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AmericanMade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d83a85f329f38e943b5539606cc0b1eb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_NOVO.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9ad4cb9ab27b2847882180894d0924f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Blackstone_0004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9ee41cb4d08b481db970d7895cb7c84
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Blackstone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da3a8dc52126f794aaae826173470bf0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_PGS_Decal_4.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da3c1cde1219b4a7e8582647e1779fc6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Coyote_Knob_Polished.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da628aa39f1217a40a7d700367b9b4a4
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Coyote_ButtonWithWhiteEmissive001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db348b12eb89942e9bdd7bd88e55f4f8
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blackstone_Knob.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db6a2bad3c90b0046b5d378126ab4a37
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Alfresco_Knob_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db84e00b89adf8d40b3edb6a6eb45ac2
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Decals.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db8ef1f34f506d344b20b95531f18131
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_TwinEagle_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc268a1d2a0deef4abbc2e67000e6031
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Lynx_BlackPowderedMetal001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dcee6dd8c514e1d4d9e71dc6b5887328
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Emissive_Alfresco_TealGradientEmissive001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd89d60795c824226acd8fb8cd76cad3
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Thor_004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de167c005fc0b4446b85b30debd6f2a9
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_PGS_Decal_3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de2080ca182748649a32fab64ec1151d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Wolf_RedPlastic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de8361c2e890d480fba183dddadb61b7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Napoleon_KnobNonEmissive.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: def0970c274dd458689a8b8c1220cb75
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_GozneySignature.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df8a4711bbded784f96b550347d9796e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_XO_3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfe1f7f080dd2a24fa63a60062801805
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Lynx_Meter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0de917bc44cd425ea38b242a861d45b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Cayote_Button.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1273462814077649a1954bc6379a6c7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_XO_Blue_GradientEmissive1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e15204027e2d936449d6e4a2703b3e32
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e158db65d77da5a46b09b047db026957
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Prince.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1e5d442908c64254a519ea5e4e9141e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_LYNXPacificBlue001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2b7f388849bdeb4887de79babe33ded
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Button.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e313453d6bbef284dbcfc39da8f2d54f
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_TinRoof.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e31da859105db46caab7835965d3a27d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Gozney.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3454287ad10144a09e17a161708b24b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Gozney2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e38e761a13b2d4b489455cbc91ab4dab
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_SedonaLynx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3b4f47a979844a07a73b641faec8fba
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Gozney_Buttons.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3eff713351388043ad9df23e3e0ee8a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Hestan_Sol.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4071a215387eb44290630a0ba09285a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Alturi_Knob_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4d7227099262b84ea12383db699e134
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_RaspberryRed_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e545cf26a376c9b4a961eac714f502f7
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_RefDisplay001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5c86282fbd67244aa561d4438741a30
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_PGS_3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e631ea3f06871d746a4ff8d94d0b229a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_PGS_BlackStainless.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6735d0a551134c71b1dccbfb094fcbd
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_StainlessSteelPolished.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e683a8ec1ed649f42b296bb77a3a7ab0
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e68b0c85b82ed984682938d26e0d5889
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_WoodOakVeneer004.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e73930d88844884468f64b9e75268407
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_FireMagic_ScreenMeter.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e753e33733e9ab94c8f90c711a2a0c28
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_CrownVerity_Decal_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e805d9c7c37841b498e017684bd942d6
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_CrownVerity_Knob_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eaf09cc81a66a2742a762fb838d31ceb
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Generic_YellowSandblastedMetal001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec76c6ecf34304acd890a91dac338d05
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Thermometer_Blackstone_02.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed594bc7027ec3646b017fac67576bee
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_AspireHestan_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eea7d1a3ca03e4df2ade9aa507871b0c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BlazeNew2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eeca304f6a391de4ab7e28a83145c29a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_BSTRD_GlossGraphite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eee8730c7cdb6ca4e9c38aab4e6e4f37
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_Knob01_New.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef30c11e148d0274c86d0442973c8134
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_RCS_Logo 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efe23a7054ecbc547b7822612d70b76d
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_NOVO_Alta.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f02401f05d39a5543adc24b73be8b184
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_MatteBlack_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f08354353566c4fd4a6f37614a7fc952
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_LeGriddle_USA.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f13eef0e6bd5907418884da85352d76e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_AOG_EmissiveGradientRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f16a741848dc8c1aeb17399093e32fc1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_StainlessSteelBrushed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1e16f0da4c174943b642ee380aae2fe
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_XO_MeterGauge.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f28bac1f992475f4ba4a5fed99f5e401
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_Grey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3428d3fa7bc19d40aa2368fe04904ea
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Grill_Recteq_RecteqESeriesBuiltIn1300.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f381a8366b1d8f84587d27a8f374875c
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_Logo 001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3c09b01e5a2ac5428f0a59717d94d9b
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_PremierFlame.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3d45b06c71ec024f9dd3d41109f6584
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_DCS_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4b80951c3258cf4abf0c4ee30ecd25e
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Blaze_StainlessBrushed 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f545e53d11f2d3347b063cca545f55ac
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_OrangeMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f593e5179bb5bd74092cc8609cb82c64
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Kokomo_WoodOakVeneer002.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7ec375faba9cff4f84bb9f1111ae4ca
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_XO_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f897bde5cc4353d458d13d05bf856027
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Coyote_DarkGreyAluminum.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f89802c0d909b74479defe71efe741de
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Lynx_BlackPowderedMetal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fafee8036c02de040892eb89c0dc2086
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_AOGYellow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc2729e025bb4d6079a9342af632f0af
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Glass.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc3d5830b44be8c429a99b6eb30b18c1
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc51917d116bbfb46b28afde9a22da48
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Visual_Alfresco_Lilac_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd263e0ecc2c00640a3ebcd5bcb61fbe
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Metal_HestanCitraOrange.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd38c49476065c546b576efb11f8ae98
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_Whistler_Black.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd6704403aec2e04687bfc5f5f019841
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Blaze_Logo 1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe82c2aaa6bc92947b4c31a803b12bcd
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Display_Bull_ScreenMeter_001.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff18694349ac4df479cad2b0511b264a
+    m_Address: Assets/AssetsMelcher/ProductMaterials/Product_Logo_BSTRD_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 62449b333048b4641bc9d5b71862d10b, type: 2}
+    - {fileID: 11400000, guid: cb728dac44bfe3e4bb41f9f70a6fe809, type: 2}

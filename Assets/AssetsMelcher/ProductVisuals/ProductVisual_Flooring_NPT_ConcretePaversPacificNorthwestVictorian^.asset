@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_NPT_ConcretePaversPacificNorthwestVictorian^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: b0d2ff26e9d5df54481d7e59924a41c5, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_NPT_ConcretePaversPacificNorthwestVictorian.prefab
+      editorOnlyCachedAsset: {fileID: 405395977169132486, guid: 6dc868c97441e1441865f41a5f141cd4, type: 3}

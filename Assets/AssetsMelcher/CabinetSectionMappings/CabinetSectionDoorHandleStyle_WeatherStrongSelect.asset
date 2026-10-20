@@ -1,0 +1,467 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0437cdef3d0194cbaae85bb622116247, type: 3}
+  m_Name: CabinetSectionDoorHandleStyle_WeatherStrongSelect
+  m_EditorClassIdentifier: 
+  m_BrandCatalog: {fileID: 11400000, guid: b0dce3fc9b0ca43f2a87419a87235a0c, type: 2}
+  m_BaseHandlePrice: 0
+  m_Mapping: {fileID: 4900000, guid: f4262ad78f405426d9a4931f4c45028b, type: 3}
+  m_DefaultHandle:
+    id: 
+    prefab: {fileID: -8679921383154817045, guid: c86f4115dc4d845baaeb9d1738f9cc49, type: 3}
+    count: 1
+  m_Handles:
+  - id: CabinetSection_Storage_WeatherStrong_12InchBase3Drawer27D
+    prefab: {fileID: -8679921383154817045, guid: c86f4115dc4d845baaeb9d1738f9cc49, type: 3}
+    count: 3
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseDoorDrawer27DLH
+    prefab: {fileID: -8679921383154817045, guid: 7b67b96871b6b4b5eaaaded9a89b762c, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseDoorDrawer27DRH
+    prefab: {fileID: -8679921383154817045, guid: 18991835a5f084634aa941d9618d0b62, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseDoorDrawer1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: ce2e79b129b044159bf1aec232a36a83, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseDoorDrawer1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 8018b641ff6cd43929344b52afa482a4, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseDoorDrawer2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 88c3cd9cc0f7a48638d70a24f73c2f30, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseDoorDrawer2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 9e1005ecfe0b9455b821ca0205b1edbd, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: b5b13a3eda98b4003ad8a3364c910259, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseFHDoor27DRH
+    prefab: {fileID: -8679921383154817045, guid: 5670c1cdac94242b58c51d08dd0886d6, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: e28304cc51d6b4032910ce2b1779129a, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseFHDoor1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 42b56e4c5f97c4b3f8b245c362d73354, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 5632f1e3fc06749f99a69ed75b6b7ff6, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_12InchBaseFHDoor2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 785c8ff530e4b41ff9bb1bdb76906e56, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_15InchBase3Drawer27D
+    prefab: {fileID: -8679921383154817045, guid: 99059744abacb400ca79037a8cfbe9f0, type: 3}
+    count: 3
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseDoorDrawer27DLH
+    prefab: {fileID: -8679921383154817045, guid: bbb68785b7a9042e8bdfc7c2db9b53b4, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseDoorDrawer27DRH
+    prefab: {fileID: -8679921383154817045, guid: 9c952af14f86f45a1bbb50b7468b42f0, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseDoorDrawer1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 8e7904c871f1744fd99668c50631d5f0, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseDoorDrawer1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 265b33dbca79a414c9fe269f596163d3, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseDoorDrawer2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 02390cb74a07e40a2be1c157613fe016, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseDoorDrawer2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 40d73c156bacd47eda5dd5502d15ed9f, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: c5f331c2b7ae14e1789eceedb7fec352, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseFHDoor27DRH
+    prefab: {fileID: -8679921383154817045, guid: 580567b7055a14f0faa1b990c153bd34, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: e6c1a4c77303241e7b64701084254371, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseFHDoor1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: fcc900f247421463cb722770ac5c377a, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 288d899a70e734b5fb75ca353987b6ec, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_15InchBaseFHDoor2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 72f6721f46ac849b389814285300e001, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBase3Drawer27D
+    prefab: {fileID: -8679921383154817045, guid: 96a98bf81d4564c24bdec8be43c7096a, type: 3}
+    count: 3
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseDoorDrawer27DLH
+    prefab: {fileID: -8679921383154817045, guid: a799fe7ad533a4163ad4e0faf90ff3ce, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseDoorDrawer27DRH
+    prefab: {fileID: -8679921383154817045, guid: 1e550d3cf63d946cda6cef5f3f299e2f, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseDoorDrawer1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: ec07933c3b302495b893a29f7c917667, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseDoorDrawer1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: c3818d81eef5c40f89a75c322a23b3d4, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseDoorDrawer2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 7cca73345fc3b4b05a6fb738b4f1182b, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseDoorDrawer2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 2ecc5d946626249eaadacc771e4f2bde, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: 3930a48695a594e9189af04ba6986c6e, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHDoor27DRH
+    prefab: {fileID: -8679921383154817045, guid: 378e2a0f789ad4c9fad4d70f84004454, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 26accd684934e4b32a09fb31b753786f, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHDoor1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: e811edbfe690f4973aa60f0d9c885d68, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 83291930195894ac5925410c26515689, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHDoor2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 967055927409c46ecb2639fcfb0ec513, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHPropanePO27DLH
+    prefab: {fileID: -8679921383154817045, guid: 680201c7a1a7947b59369beb2fa5a303, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHPropanePO27DRH
+    prefab: {fileID: -8679921383154817045, guid: 0b08ccf1155ad4b43a816291dc8670c2, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHTrashcanPO27DLH
+    prefab: {fileID: -8679921383154817045, guid: 1ece86c1ba3a846fb8f2260dd9e4faef, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_18InchBaseFHTrashcanPO27DRH
+    prefab: {fileID: -8679921383154817045, guid: bdddec290171143d2839b463115428c5, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_WeatherStrong_18InchSideBurnerBase27DLH
+    prefab: {fileID: -8679921383154817045, guid: bf1b1ab7838b043aab22662a0fd3852d, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_WeatherStrong_18InchSideBurnerBase27DRH
+    prefab: {fileID: -8679921383154817045, guid: 9e33e809ce21c4663b596ace946056df, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBase3Drawer27D
+    prefab: {fileID: -8679921383154817045, guid: e0361ed6a720946908ba497d71b00487, type: 3}
+    count: 3
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseDoorDrawer27DLH
+    prefab: {fileID: -8679921383154817045, guid: 1afd4d9d3336846c4b27046af71c8584, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseDoorDrawer27DRH
+    prefab: {fileID: -8679921383154817045, guid: 7e14d0648debb4425a9c2f88509de28e, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseDoorDrawer1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 85846f093832b45909b74f869a4cd2e2, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseDoorDrawer1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: f3cd0e5971f994c91bbbda469b2d017a, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseDoorDrawer2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 601c72318db7f4444b127e5b260e109b, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseDoorDrawer2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 863b5db08fc894632ae501a94aa958db, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: 609c596e90e054cd6a4fd81b5f2ed8a9, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHDoor27DRH
+    prefab: {fileID: -8679921383154817045, guid: d8897bfdf96764270ba1d610c5ffb733, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: d0b91cbc44620470bb76aaea2b9ac256, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHDoor1ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: 170af167724fd4ba5bad819130c74f2d, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 2235a883701c94bfcbc7ad23e56315a0, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHDoor2ROTray27DRH
+    prefab: {fileID: -8679921383154817045, guid: c41afd15066e34f35916b9e0ca49c0e8, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHPropanePO27DLH
+    prefab: {fileID: -8679921383154817045, guid: 1bb3160b9d1174d00b74e0ed4f21fd87, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHPropanePO27DRH
+    prefab: {fileID: -8679921383154817045, guid: ac06dae92633e4d458a8c7519fb6759c, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHTrashcanPO27DLH
+    prefab: {fileID: -8679921383154817045, guid: 63e57051a992e482084fbe425f2e9918, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_21InchBaseFHTrashcanPO27DRH
+    prefab: {fileID: -8679921383154817045, guid: feab4315580054ec9adc2921b38bb67b, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_WeatherStrong_21InchSideBurnerBase27DLH
+    prefab: {fileID: -8679921383154817045, guid: 2204aca0834b64e06bf2045e607f2631, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_WeatherStrong_21InchSideBurnerBase27DRH
+    prefab: {fileID: -8679921383154817045, guid: 0212a6edf2f374fdaa2bca268f2c4600, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_24InchBase3Drawer27D
+    prefab: {fileID: -8679921383154817045, guid: 43e8f03ab54704391a5a5c19ad3fed0e, type: 3}
+    count: 3
+  - id: CabinetSection_Storage_WeatherStrong_24InchBaseDoorDrawer27D
+    prefab: {fileID: -8679921383154817045, guid: a81ed7e35bd3741708a2e8ab0468cedf, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_24InchBaseDoorDrawer1ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: b65430478d36d4e2888db307893508a1, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_24InchBaseDoorDrawer2ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: fea9772b7539047b0890f4a5c3951c5e, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_24InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: 7c7e5e9e21ce94d2ca6b49621d69a90c, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_24InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 3d6c07f093bfc46e5a9a44c81e009a39, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_24InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: a84c44b9d2e5345a883dbe704cfe3bcf, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_WeatherStrong_24InchSideBurnerBase27DLH
+    prefab: {fileID: -8679921383154817045, guid: 5cbdeeb664ab040f181cf22a6d8c1f77, type: 3}
+    count: 1
+  - id: CabinetSection_Sink_WeatherStrong_24InchSinkBase27D
+    prefab: {fileID: -8679921383154817045, guid: afdc29dafdbaa4aea9c369e0a7c51b99, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_27InchBaseDoorDrawer27D
+    prefab: {fileID: -8679921383154817045, guid: 731e82db2f78b4e7699d998352cea5f2, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_27InchBaseDoorDrawer1ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: a93093857c5fa42c0a27421c9e23d154, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_27InchBaseDoorDrawer2ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: 8afef633aa803493a9f6b8c6784712e4, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_27InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: 5977f5a2ca8c544da93cec29c08a3387, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_27InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 3da62371e736c461cae01d3e4045d924, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_27InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 0767e937a93fd40d38666e8aebd671f9, type: 3}
+    count: 1
+  - id: CabinetSection_Sink_WeatherStrong_27InchSinkBase27D
+    prefab: {fileID: -8679921383154817045, guid: bf6db414bfffb438493a42eea6d7e7ae, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_30InchBase3Drawer27D
+    prefab: {fileID: -8679921383154817045, guid: 3ff6808e93c214e4fbed4ee031a47d59, type: 3}
+    count: 3
+  - id: CabinetSection_Storage_WeatherStrong_30InchBaseDoorDrawer27D
+    prefab: {fileID: -8679921383154817045, guid: 7ee704f097758409cbd9dff76faa9dc5, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_30InchBaseDoorDrawer1ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: 5b75f91d661d44d33b42de574ac7e90e, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_30InchBaseDoorDrawer2ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: d6742170732354744856fa36f9ae2f68, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_30InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: 2cecdebb6775b43559d07dd5329e6d4f, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_33InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: 7feaf779086a64a6fbd3cbb4c6d87c03, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_30InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: fc4370d9a327a4a348a23f59a37d7eee, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_33InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: e2095ec9c407b4558ad77e6d4eac5fa5, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_30InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: d9eb24ec6548b45ffac13485200b7f89, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_33InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 1c6b8d223e4f74bf1a3fba73ee9ce725, type: 3}
+    count: 1
+  - id: CabinetSection_Burner_WeatherStrong_30InchSideBurnerBase27DLH
+    prefab: {fileID: -8679921383154817045, guid: a55615af3887540faa1daa2f1b15d21b, type: 3}
+    count: 1
+  - id: CabinetSection_Sink_WeatherStrong_30InchSinkBase27D
+    prefab: {fileID: -8679921383154817045, guid: dde1eada639504790962d78917a3e8b2, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_33InchBaseDoorDrawer27D
+    prefab: {fileID: -8679921383154817045, guid: 74d59af7216064f009551b1b92362efb, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_33InchBaseDoorDrawer1ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: 184a304976f3c4661b56be95d01d8658, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_33InchBaseDoorDrawer2ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: 68c4b7c0e73bc4d5f95608cc3b00e7c3, type: 3}
+    count: 2
+  - id: CabinetSection_Sink_WeatherStrong_33InchSinkBase27D
+    prefab: {fileID: -8679921383154817045, guid: d23eead4b0c5545cdb9735be8dbb3edd, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_36InchBaseDoorDrawer27D
+    prefab: {fileID: -8679921383154817045, guid: 4475c8e3c06e64c3194ffc1252791a8c, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_36InchBaseDoorDrawer1ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: 30bdfe839288b42fca3b2ad6ba7fc3da, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_36InchBaseDoorDrawer2ROTray27D
+    prefab: {fileID: -8679921383154817045, guid: f30491a288fd0499db66edceca5bc82a, type: 3}
+    count: 2
+  - id: CabinetSection_Storage_WeatherStrong_36InchBaseFHDoor27DLH
+    prefab: {fileID: -8679921383154817045, guid: fcaa29c9132af44aea04805c2187139b, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_36InchBaseFHDoor1ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 36e6e72821c3047d7973daf6484d23b6, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_36InchBaseFHDoor2ROTray27DLH
+    prefab: {fileID: -8679921383154817045, guid: 5464163f18f5b4da89a7f5d015a1c5be, type: 3}
+    count: 1
+  - id: CabinetSection_Grill_WeatherStrong_36InchBuiltInGrillBase27D
+    prefab: {fileID: -8679921383154817045, guid: fe6e4f23066b5476cbd282dd1cc6fabf, type: 3}
+    count: 1
+  - id: CabinetSection_Sink_WeatherStrong_36InchSinkBase27D
+    prefab: {fileID: -8679921383154817045, guid: 301a8deb4a9f74d57acc4c861212f8f9, type: 3}
+    count: 1
+  - id: CabinetSection_Grill_WeatherStrong_42InchBuiltInGrillBase27D
+    prefab: {fileID: -8679921383154817045, guid: f9f30b43f10024ed29ec0016334680c9, type: 3}
+    count: 1
+  - id: CabinetSection_Grill_WeatherStrong_48InchBuiltInGrillBase27D
+    prefab: {fileID: -8679921383154817045, guid: 814de2b029a524c13b93edbb76642e51, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_39InchBaseBlindCorner27DLH
+    prefab: {fileID: -8679921383154817045, guid: eb56cb14c01c649d79250cec35fee3f3, type: 3}
+    count: 1
+  - id: CabinetSection_Storage_WeatherStrong_39InchBaseBlindCorner27DRH
+    prefab: {fileID: -8679921383154817045, guid: 6c9c810756f1c4553aea14d2ee8a0978, type: 3}
+    count: 1
+  - id: CabinetSection_Grill_WeatherStrong_42InchDeepApronGrillBase30D
+    prefab: {fileID: -8679921383154817045, guid: 13b128849527c4407a1fcde9fed798b0, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_WeatherStrong_48InchDeepApronGrillBase30D
+    prefab: {fileID: -8679921383154817045, guid: 846508c3b595c4bb68478306b19b72ee, type: 3}
+    count: 2
+  - id: CabinetSection_Grill_WeatherStrong_60InchDeepApronGrillBase30D
+    prefab: {fileID: -8679921383154817045, guid: b1b9c6825035e408f87e8fa39def7010, type: 3}
+    count: 2
+  m_Models:
+  - {fileID: -8679921383154817045, guid: c86f4115dc4d845baaeb9d1738f9cc49, type: 3}
+  - {fileID: -8679921383154817045, guid: ce2e79b129b044159bf1aec232a36a83, type: 3}
+  - {fileID: -8679921383154817045, guid: 8018b641ff6cd43929344b52afa482a4, type: 3}
+  - {fileID: -8679921383154817045, guid: 88c3cd9cc0f7a48638d70a24f73c2f30, type: 3}
+  - {fileID: -8679921383154817045, guid: 9e1005ecfe0b9455b821ca0205b1edbd, type: 3}
+  - {fileID: -8679921383154817045, guid: 7b67b96871b6b4b5eaaaded9a89b762c, type: 3}
+  - {fileID: -8679921383154817045, guid: 18991835a5f084634aa941d9618d0b62, type: 3}
+  - {fileID: -8679921383154817045, guid: e28304cc51d6b4032910ce2b1779129a, type: 3}
+  - {fileID: -8679921383154817045, guid: 42b56e4c5f97c4b3f8b245c362d73354, type: 3}
+  - {fileID: -8679921383154817045, guid: 5632f1e3fc06749f99a69ed75b6b7ff6, type: 3}
+  - {fileID: -8679921383154817045, guid: 785c8ff530e4b41ff9bb1bdb76906e56, type: 3}
+  - {fileID: -8679921383154817045, guid: b5b13a3eda98b4003ad8a3364c910259, type: 3}
+  - {fileID: -8679921383154817045, guid: 5670c1cdac94242b58c51d08dd0886d6, type: 3}
+  - {fileID: -8679921383154817045, guid: 99059744abacb400ca79037a8cfbe9f0, type: 3}
+  - {fileID: -8679921383154817045, guid: 8e7904c871f1744fd99668c50631d5f0, type: 3}
+  - {fileID: -8679921383154817045, guid: 265b33dbca79a414c9fe269f596163d3, type: 3}
+  - {fileID: -8679921383154817045, guid: 02390cb74a07e40a2be1c157613fe016, type: 3}
+  - {fileID: -8679921383154817045, guid: 40d73c156bacd47eda5dd5502d15ed9f, type: 3}
+  - {fileID: -8679921383154817045, guid: bbb68785b7a9042e8bdfc7c2db9b53b4, type: 3}
+  - {fileID: -8679921383154817045, guid: 9c952af14f86f45a1bbb50b7468b42f0, type: 3}
+  - {fileID: -8679921383154817045, guid: e6c1a4c77303241e7b64701084254371, type: 3}
+  - {fileID: -8679921383154817045, guid: fcc900f247421463cb722770ac5c377a, type: 3}
+  - {fileID: -8679921383154817045, guid: 288d899a70e734b5fb75ca353987b6ec, type: 3}
+  - {fileID: -8679921383154817045, guid: 72f6721f46ac849b389814285300e001, type: 3}
+  - {fileID: -8679921383154817045, guid: c5f331c2b7ae14e1789eceedb7fec352, type: 3}
+  - {fileID: -8679921383154817045, guid: 580567b7055a14f0faa1b990c153bd34, type: 3}
+  - {fileID: -8679921383154817045, guid: 96a98bf81d4564c24bdec8be43c7096a, type: 3}
+  - {fileID: -8679921383154817045, guid: ec07933c3b302495b893a29f7c917667, type: 3}
+  - {fileID: -8679921383154817045, guid: c3818d81eef5c40f89a75c322a23b3d4, type: 3}
+  - {fileID: -8679921383154817045, guid: 7cca73345fc3b4b05a6fb738b4f1182b, type: 3}
+  - {fileID: -8679921383154817045, guid: 2ecc5d946626249eaadacc771e4f2bde, type: 3}
+  - {fileID: -8679921383154817045, guid: a799fe7ad533a4163ad4e0faf90ff3ce, type: 3}
+  - {fileID: -8679921383154817045, guid: 1e550d3cf63d946cda6cef5f3f299e2f, type: 3}
+  - {fileID: -8679921383154817045, guid: 26accd684934e4b32a09fb31b753786f, type: 3}
+  - {fileID: -8679921383154817045, guid: e811edbfe690f4973aa60f0d9c885d68, type: 3}
+  - {fileID: -8679921383154817045, guid: 83291930195894ac5925410c26515689, type: 3}
+  - {fileID: -8679921383154817045, guid: 967055927409c46ecb2639fcfb0ec513, type: 3}
+  - {fileID: -8679921383154817045, guid: 3930a48695a594e9189af04ba6986c6e, type: 3}
+  - {fileID: -8679921383154817045, guid: 378e2a0f789ad4c9fad4d70f84004454, type: 3}
+  - {fileID: -8679921383154817045, guid: 680201c7a1a7947b59369beb2fa5a303, type: 3}
+  - {fileID: -8679921383154817045, guid: 0b08ccf1155ad4b43a816291dc8670c2, type: 3}
+  - {fileID: -8679921383154817045, guid: 1ece86c1ba3a846fb8f2260dd9e4faef, type: 3}
+  - {fileID: -8679921383154817045, guid: bdddec290171143d2839b463115428c5, type: 3}
+  - {fileID: -8679921383154817045, guid: bf1b1ab7838b043aab22662a0fd3852d, type: 3}
+  - {fileID: -8679921383154817045, guid: 9e33e809ce21c4663b596ace946056df, type: 3}
+  - {fileID: -8679921383154817045, guid: e0361ed6a720946908ba497d71b00487, type: 3}
+  - {fileID: -8679921383154817045, guid: 85846f093832b45909b74f869a4cd2e2, type: 3}
+  - {fileID: -8679921383154817045, guid: f3cd0e5971f994c91bbbda469b2d017a, type: 3}
+  - {fileID: -8679921383154817045, guid: 601c72318db7f4444b127e5b260e109b, type: 3}
+  - {fileID: -8679921383154817045, guid: 863b5db08fc894632ae501a94aa958db, type: 3}
+  - {fileID: -8679921383154817045, guid: 1afd4d9d3336846c4b27046af71c8584, type: 3}
+  - {fileID: -8679921383154817045, guid: 7e14d0648debb4425a9c2f88509de28e, type: 3}
+  - {fileID: -8679921383154817045, guid: d0b91cbc44620470bb76aaea2b9ac256, type: 3}
+  - {fileID: -8679921383154817045, guid: 170af167724fd4ba5bad819130c74f2d, type: 3}
+  - {fileID: -8679921383154817045, guid: 2235a883701c94bfcbc7ad23e56315a0, type: 3}
+  - {fileID: -8679921383154817045, guid: c41afd15066e34f35916b9e0ca49c0e8, type: 3}
+  - {fileID: -8679921383154817045, guid: 609c596e90e054cd6a4fd81b5f2ed8a9, type: 3}
+  - {fileID: -8679921383154817045, guid: d8897bfdf96764270ba1d610c5ffb733, type: 3}
+  - {fileID: -8679921383154817045, guid: 1bb3160b9d1174d00b74e0ed4f21fd87, type: 3}
+  - {fileID: -8679921383154817045, guid: ac06dae92633e4d458a8c7519fb6759c, type: 3}
+  - {fileID: -8679921383154817045, guid: 63e57051a992e482084fbe425f2e9918, type: 3}
+  - {fileID: -8679921383154817045, guid: feab4315580054ec9adc2921b38bb67b, type: 3}
+  - {fileID: -8679921383154817045, guid: 2204aca0834b64e06bf2045e607f2631, type: 3}
+  - {fileID: -8679921383154817045, guid: 0212a6edf2f374fdaa2bca268f2c4600, type: 3}
+  - {fileID: -8679921383154817045, guid: 43e8f03ab54704391a5a5c19ad3fed0e, type: 3}
+  - {fileID: -8679921383154817045, guid: b65430478d36d4e2888db307893508a1, type: 3}
+  - {fileID: -8679921383154817045, guid: fea9772b7539047b0890f4a5c3951c5e, type: 3}
+  - {fileID: -8679921383154817045, guid: a81ed7e35bd3741708a2e8ab0468cedf, type: 3}
+  - {fileID: -8679921383154817045, guid: 3d6c07f093bfc46e5a9a44c81e009a39, type: 3}
+  - {fileID: -8679921383154817045, guid: a84c44b9d2e5345a883dbe704cfe3bcf, type: 3}
+  - {fileID: -8679921383154817045, guid: 7c7e5e9e21ce94d2ca6b49621d69a90c, type: 3}
+  - {fileID: -8679921383154817045, guid: 5cbdeeb664ab040f181cf22a6d8c1f77, type: 3}
+  - {fileID: -8679921383154817045, guid: afdc29dafdbaa4aea9c369e0a7c51b99, type: 3}
+  - {fileID: -8679921383154817045, guid: a93093857c5fa42c0a27421c9e23d154, type: 3}
+  - {fileID: -8679921383154817045, guid: 8afef633aa803493a9f6b8c6784712e4, type: 3}
+  - {fileID: -8679921383154817045, guid: 731e82db2f78b4e7699d998352cea5f2, type: 3}
+  - {fileID: -8679921383154817045, guid: 3da62371e736c461cae01d3e4045d924, type: 3}
+  - {fileID: -8679921383154817045, guid: 0767e937a93fd40d38666e8aebd671f9, type: 3}
+  - {fileID: -8679921383154817045, guid: 5977f5a2ca8c544da93cec29c08a3387, type: 3}
+  - {fileID: -8679921383154817045, guid: bf6db414bfffb438493a42eea6d7e7ae, type: 3}
+  - {fileID: -8679921383154817045, guid: 3ff6808e93c214e4fbed4ee031a47d59, type: 3}
+  - {fileID: -8679921383154817045, guid: 5b75f91d661d44d33b42de574ac7e90e, type: 3}
+  - {fileID: -8679921383154817045, guid: d6742170732354744856fa36f9ae2f68, type: 3}
+  - {fileID: -8679921383154817045, guid: 7ee704f097758409cbd9dff76faa9dc5, type: 3}
+  - {fileID: -8679921383154817045, guid: fc4370d9a327a4a348a23f59a37d7eee, type: 3}
+  - {fileID: -8679921383154817045, guid: d9eb24ec6548b45ffac13485200b7f89, type: 3}
+  - {fileID: -8679921383154817045, guid: 2cecdebb6775b43559d07dd5329e6d4f, type: 3}
+  - {fileID: -8679921383154817045, guid: a55615af3887540faa1daa2f1b15d21b, type: 3}
+  - {fileID: -8679921383154817045, guid: dde1eada639504790962d78917a3e8b2, type: 3}
+  - {fileID: -8679921383154817045, guid: 184a304976f3c4661b56be95d01d8658, type: 3}
+  - {fileID: -8679921383154817045, guid: 68c4b7c0e73bc4d5f95608cc3b00e7c3, type: 3}
+  - {fileID: -8679921383154817045, guid: 74d59af7216064f009551b1b92362efb, type: 3}
+  - {fileID: -8679921383154817045, guid: e2095ec9c407b4558ad77e6d4eac5fa5, type: 3}
+  - {fileID: -8679921383154817045, guid: 1c6b8d223e4f74bf1a3fba73ee9ce725, type: 3}
+  - {fileID: -8679921383154817045, guid: 7feaf779086a64a6fbd3cbb4c6d87c03, type: 3}
+  - {fileID: -8679921383154817045, guid: d23eead4b0c5545cdb9735be8dbb3edd, type: 3}
+  - {fileID: -8679921383154817045, guid: 30bdfe839288b42fca3b2ad6ba7fc3da, type: 3}
+  - {fileID: -8679921383154817045, guid: f30491a288fd0499db66edceca5bc82a, type: 3}
+  - {fileID: -8679921383154817045, guid: 4475c8e3c06e64c3194ffc1252791a8c, type: 3}
+  - {fileID: -8679921383154817045, guid: 36e6e72821c3047d7973daf6484d23b6, type: 3}
+  - {fileID: -8679921383154817045, guid: 5464163f18f5b4da89a7f5d015a1c5be, type: 3}
+  - {fileID: -8679921383154817045, guid: fcaa29c9132af44aea04805c2187139b, type: 3}
+  - {fileID: -8679921383154817045, guid: fe6e4f23066b5476cbd282dd1cc6fabf, type: 3}
+  - {fileID: -8679921383154817045, guid: 301a8deb4a9f74d57acc4c861212f8f9, type: 3}
+  - {fileID: -8679921383154817045, guid: eb56cb14c01c649d79250cec35fee3f3, type: 3}
+  - {fileID: -8679921383154817045, guid: 6c9c810756f1c4553aea14d2ee8a0978, type: 3}
+  - {fileID: -8679921383154817045, guid: f9f30b43f10024ed29ec0016334680c9, type: 3}
+  - {fileID: -8679921383154817045, guid: 13b128849527c4407a1fcde9fed798b0, type: 3}
+  - {fileID: -8679921383154817045, guid: 814de2b029a524c13b93edbb76642e51, type: 3}
+  - {fileID: -8679921383154817045, guid: 846508c3b595c4bb68478306b19b72ee, type: 3}
+  - {fileID: -8679921383154817045, guid: b1b9c6825035e408f87e8fa39def7010, type: 3}

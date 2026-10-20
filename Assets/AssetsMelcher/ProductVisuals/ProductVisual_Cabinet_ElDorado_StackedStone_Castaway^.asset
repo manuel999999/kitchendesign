@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_ElDorado_StackedStone_Castaway^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 726b3b5ba40fb4f4cb90cd1753f5a3e2, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_ElDorado_StackedStone_Castaway.prefab
+      editorOnlyCachedAsset: {fileID: 7093449988889607723, guid: 9f68adcf6352c7e88ad640404b2c16a0, type: 3}

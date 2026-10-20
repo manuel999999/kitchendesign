@@ -1,0 +1,139 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Melcher;
+
+public static class K
+{
+    static double R(float v) { return System.Math.Round((double)v, 4); }
+    static List<object> V(Vector3 v) { return new List<object> { R(v.x), R(v.y), R(v.z) }; }
+    static Dictionary<string, object> C(Cuboid c)
+    {
+        Vector3 s = c.max - c.min;
+        return new Dictionary<string, object> {
+            { "min", V(c.min) }, { "max", V(c.max) }, { "size", V(s) },
+            { "size_in", new List<object> { R(s.x * 39.37008f), R(s.y * 39.37008f), R(s.z * 39.37008f) } } };
+    }
+    static Dictionary<string, object> B(Bounds b)
+    {
+        return new Dictionary<string, object> { { "min", V(b.min) }, { "max", V(b.max) }, { "size", V(b.size) } };
+    }
+    static Dictionary<string, object> T(Transform t)
+    {
+        return new Dictionary<string, object> { { "pos", V(t.position) }, { "euler", V(t.eulerAngles) }, { "scale", V(t.lossyScale) } };
+    }
+    static object RendererBounds(IEnumerable<Renderer> rs)
+    {
+        bool any = false; Bounds b = default;
+        foreach (var r in rs) { if (r == null || !r.enabled || !r.gameObject.activeInHierarchy) continue; if (!any) { b = r.bounds; any = true; } else b.Encapsulate(r.bounds); }
+        return any ? (object)B(b) : null;
+    }
+    static object DrawnBoundsIn(Transform space, IEnumerable<Renderer> rs)
+    {
+        bool any = false; Bounds b = default;
+        foreach (var r in rs)
+        {
+            if (r == null || !r.enabled || !r.gameObject.activeInHierarchy) continue;
+            var mf = r.GetComponent<MeshFilter>(); if (mf == null || mf.sharedMesh == null) continue;
+            Bounds mb = mf.sharedMesh.bounds;
+            for (int ci = 0; ci < 8; ci++)
+            {
+                Vector3 v = new Vector3((ci & 1) == 0 ? mb.min.x : mb.max.x, (ci & 2) == 0 ? mb.min.y : mb.max.y, (ci & 4) == 0 ? mb.min.z : mb.max.z);
+                Vector3 p = space.InverseTransformPoint(r.transform.TransformPoint(v));
+                if (!any) { b = new Bounds(p, Vector3.zero); any = true; } else b.Encapsulate(p);
+            }
+        }
+        return any ? (object)B(b) : null;
+    }
+
+    public static string Run()
+    {
+        string outDir = "__OUTDIR__";
+        var k = Kitchen.instance;
+        var layout = k.layout;
+        var root = new Dictionary<string, object>();
+        root["quote_id"] = __QUOTE__;
+        root["layout_object"] = layout.name;
+        root["ground"] = T(k.ground.transform);
+
+        var spans = new List<object>();
+        foreach (var span in layout.spans)
+        {
+            var s = new Dictionary<string, object>();
+            s["index"] = span.index;
+            Transform frame = span.orientationAlignedCabinet != null ? span.orientationAlignedCabinet.GetTransform() : null;
+            s["frame"] = frame != null ? (object)T(frame) : null;
+            s["outside"] = C(span.GetOutsideCuboidInSpanSpace(includeCountertop: false));
+            s["outside_with_countertop"] = C(span.GetOutsideCuboidInSpanSpace(includeCountertop: true));
+            s["cabinet_indices"] = span.cabinets.Select(e => (object)e.index).ToList();
+            var bk = span.backing;
+            if (bk != null)
+            {
+                var rs = bk.GetComponentsInChildren<Renderer>(false);
+                var bd = new Dictionary<string, object>();
+                bd["object"] = bk.name;
+                try { bd["sku"] = bk.info != null ? bk.info.sku : null; } catch (System.Exception ex) { bd["sku_error"] = ex.Message; }
+                try { bd["riser"] = C(bk.riserCuboid); } catch (System.Exception ex) { bd["riser_error"] = ex.Message; }
+                try { bd["countertop"] = C(bk.GetCountertopCuboidInSpanSpace(default)); } catch (System.Exception ex) { bd["countertop_error"] = ex.Message; }
+                try { bd["drawn_in_span_space"] = frame != null ? DrawnBoundsIn(frame, rs) : null; } catch (System.Exception ex) { bd["drawn_error"] = ex.Message; }
+                bd["render_bounds"] = RendererBounds(rs);
+                s["backing"] = bd;
+            }
+            spans.Add(s);
+        }
+        root["spans"] = spans;
+
+        var cabs = new List<object>();
+        foreach (var e in layout.EnumerateCabinets())
+        {
+            var c = e.element; if (c == null) continue;
+            var t = c.GetTransform();
+            cabs.Add(new Dictionary<string, object> {
+                { "index", e.index },
+                { "object", c.name },
+                { "type", c.cabinetType.ToString() },
+                { "visual", c.cabinetSectionVisual != null ? c.cabinetSectionVisual.name : null },
+                { "sku", c.cabinetSectionProductInfo != null ? c.cabinetSectionProductInfo.sku : null },
+                { "transform", T(t) },
+                { "size", C(c.resizerCuboid) },
+                { "layout_outside", C(layout.GetCabinetOutsideCuboid(c)) },
+                { "countertop", C(c.countertopCuboid) },
+                { "has_selected_end_panel", c.hasSelectedEndPanel },
+                { "end_panel_on_ground", c.isEndPanelOnGround },
+                { "active", t.gameObject.activeInHierarchy },
+                { "render_bounds", RendererBounds(t.GetComponentsInChildren<Renderer>(false)) } });
+        }
+        root["cabinets"] = cabs;
+
+        var occs = new List<object>();
+        foreach (var o in Object.FindObjectsOfType<Occupant>().OrderBy(o => o.transform.position.x).ThenBy(o => o.transform.position.z))
+        {
+            occs.Add(new Dictionary<string, object> {
+                { "sku", o.productInfo != null ? o.productInfo.sku : null },
+                { "visual", o.productVisual != null ? o.productVisual.name : null },
+                { "transform", T(o.transform) },
+                { "render_bounds", RendererBounds(o.GetComponentsInChildren<Renderer>(false)) } });
+        }
+        root["occupants"] = occs;
+
+        var cams = new List<object>();
+        foreach (var cam in Object.FindObjectsOfType<Camera>(true).OrderBy(x => x.name))
+        {
+            if (cam.name.StartsWith("EditorThumbnail")) continue;
+            var d = T(cam.transform); d["name"] = cam.name; d["fov"] = R(cam.fieldOfView); d["ortho"] = cam.orthographic; d["ortho_size"] = R(cam.orthographicSize); d["enabled"] = cam.isActiveAndEnabled;
+            cams.Add(d);
+        }
+        foreach (var vc in Object.FindObjectsOfType<Cinemachine.CinemachineVirtualCameraBase>(true).OrderBy(x => x.name))
+        {
+            var d = T(vc.transform); d["name"] = "vcam:" + vc.name; d["priority"] = vc.Priority; d["active"] = vc.isActiveAndEnabled;
+            cams.Add(d);
+        }
+        root["cameras"] = cams;
+        root["renderer_count"] = k.GetComponentsInChildren<Renderer>(false).Length;
+
+        System.IO.Directory.CreateDirectory(outDir);
+        System.IO.File.WriteAllText(System.IO.Path.Combine(outDir, "measured.json"), MiniJSON.Json.Serialize(root));
+        System.IO.File.WriteAllText(System.IO.Path.Combine(outDir, "resave.json"), MiniJSON.Json.Serialize(k.SaveToJson()));
+        return "spans=" + spans.Count + " cabinets=" + cabs.Count + " occupants=" + occs.Count + " cameras=" + cams.Count;
+    }
+}

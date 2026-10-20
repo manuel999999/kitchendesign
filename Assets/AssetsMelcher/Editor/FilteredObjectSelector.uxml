@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement style="align-items: stretch; flex-grow: 1;">
+        <ui:VisualElement style="flex-direction: row;">
+            <uie:ToolbarSearchField focusable="true" name="SearchField" style="justify-content: flex-start; flex-grow: 0; width: auto; flex-shrink: 1;" />
+            <uie:ToolbarToggle name="CustomFilterToggle" text="Apply Extra Filter" />
+        </ui:VisualElement>
+        <ui:ListView focusable="true" name="Table" style="flex-grow: 1; align-items: stretch; justify-content: space-between;" />
+        <ui:TextField picking-mode="Ignore" name="StatusField" readonly="true" multiline="true" style="white-space: normal;" />
+    </ui:VisualElement>
+</ui:UXML>

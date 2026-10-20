@@ -1,0 +1,28 @@
+{
+    "name": "ca.melcher.unity.core.tests",
+    "rootNamespace": "",
+    "references": [
+        "ca.melcher.unity.core"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.test-framework",
+            "expression": "",
+            "define": "ENABLE_TESTS"
+        }
+    ],
+    "noEngineReferences": false
+}

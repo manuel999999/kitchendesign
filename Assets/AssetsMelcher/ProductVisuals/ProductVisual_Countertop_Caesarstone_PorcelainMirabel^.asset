@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Countertop_Caesarstone_PorcelainMirabel^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 3bc033ba22b1a6645b4f0e0c9947fce4, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Countertop_Caesarstone_PorcelainMirabel.prefab
+      editorOnlyCachedAsset: {fileID: 697021719137479981, guid: a11c9b4663d9f404abdf8c152261c263, type: 3}

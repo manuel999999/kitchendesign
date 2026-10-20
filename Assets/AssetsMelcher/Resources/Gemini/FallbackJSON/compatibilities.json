@@ -1,0 +1,165 @@
+{
+  "status": 200,
+  "compatibilities": [
+    {
+      "id": 12,
+      "name": "CabinetSection_Sink_Challenger_30InchSinkBase",
+      "blacklisted": [
+        {
+          "id": 13,
+          "name": "CabinetSection_Storage_WeatherStrong_Aos18InchSingleDoorBaseWith2ShelvesLh"
+        }
+      ],
+      "whitelisted": [
+        
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Surface Mounted Smoker Cabinet",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 11,
+          "name": "Surface Mounted Smoker"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BIG38 for Built-in 700 Series 38",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 4,
+          "name": "Napoleon BIG38 for Built-in 700 Series 38"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BIG32 & BI32 for Built-in 500 and 700 Series 32",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 5,
+          "name": "Napoleon BIG32 & BI32 for Built-in 500 and 700 Series 32"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BI 700 Series 18 inch and 12 inch Burners for Built-in 700 Series Dual Burners",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 6,
+          "name": "Napoleon BI 700 Series 18 inch and 12 inch Burners for Built-in 700 Series Dual Burners"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BIPRO825",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 7,
+          "name": "Napoleon BIPRO825"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BIPRO665",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 8,
+          "name": "Napoleon BIPRO665"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BIPRO500 & BIP500",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 9,
+          "name": "Napoleon BIPRO500 & BIP500"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Napoleon OASIS\u2122 Under Grill Cabinet for BIG44",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 10,
+          "name": "Napoleon BIG44 for Built-in 700 Series 44"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Refrigeration Cabinet",
+      "blacklisted": [
+        {
+          "id": 1,
+          "name": "Undermount Sink"
+        },
+        {
+          "id": 3,
+          "name": "Drop-In Sink"
+        }
+      ],
+      "whitelisted": [
+        
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Grill Cabinet Without Smokers",
+      "blacklisted": [
+        {
+          "id": 2,
+          "name": "Smoker"
+        }
+      ],
+      "whitelisted": [
+        
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Challenger Apron (Farmhouse) Sink Base",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 1,
+          "name": "Undermount Sink"
+        }
+      ]
+    }
+  ]
+}

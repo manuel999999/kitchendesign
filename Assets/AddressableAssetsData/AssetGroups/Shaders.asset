@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Shaders
+  m_EditorClassIdentifier: 
+  m_GroupName: Shaders
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 834981ea87722e844ae703a602e8aff7
+  m_SerializeEntries:
+  - m_GUID: 866f5cbbb8f4b016cbb34d661813b114
+    m_Address: Assets/AssetsMelcher/Shaders/TriplanarGraph.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f53222875d58b7d3d8390d9c33202cf3
+    m_Address: Assets/AssetsMelcher/Shaders/PosterizeGraph.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4043c2a575c2ece7e955b6939914dd48
+    m_Address: Assets/AssetsMelcher/Shaders/CuboidVisualizationGraph.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7b40e829d08d434ba3abe2402a84318
+    m_Address: Assets/AssetsMelcher/Shaders/GreyedOutUiImageShader.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b30f4386cb64fd01ea3f09a0a121f526
+    m_Address: Assets/AssetsMelcher/Shaders/KitchenCutoutStencilShader.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2592aa55f1baa3a9bad299ea9fdc41d
+    m_Address: Assets/AssetsMelcher/Shaders/KitchenShadowCasterShader.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe393ace9b354375a9cb14cdbbc28be4
+    m_Address: Assets/AssetsThirdParty/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68e6db2ebdc24f95958faec2be5558d6
+    m_Address: Assets/AssetsThirdParty/TextMesh Pro/Shaders/TMP_SDF.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 304a7b65f137ed74a89eeaa72a1b9411, type: 2}
+    - {fileID: 11400000, guid: d2713b3f6c98cb44486c777751f88f1a, type: 2}

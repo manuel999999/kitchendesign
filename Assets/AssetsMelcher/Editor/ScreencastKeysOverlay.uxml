@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/AssetsMelcher/Editor/ScreencastKeysOverlay_InputEchoLabel.uss?fileID=7433441132597879392&amp;guid=8d26d2607fad0a74ab902328aba6784e&amp;type=3#ScreencastKeysOverlay_InputEchoLabel" />
+    <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="InputEcho" picking-mode="Ignore" class="ScreencastKeysOverlay_InputEchoLabel" />
+    <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="InputEcho" picking-mode="Ignore" class="ScreencastKeysOverlay_InputEchoLabel" />
+    <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="InputEcho" picking-mode="Ignore" class="ScreencastKeysOverlay_InputEchoLabel" style="font-size: 60px;" />
+</ui:UXML>

@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee15c45ecec60bd4dafc5319bb45983a, type: 3}
+  m_Name: BrandCatalog_Napoleon
+  m_EditorClassIdentifier: 
+  m_CatalogName: Napoleon
+  m_CatalogId: 9
+  m_Ruleset:
+    m_EnumNames: Napoleon
+  m_CabinetManufacturerId: 95
+  m_BrandCatalogLoadingImage: {fileID: 21300000, guid: 1c2acc4cb69a34271a670341619ea662, type: 3}
+  m_DefaultCabinetSectionDoorStyleName: Style1
+  m_DefaultCabinetSectionDoorHandleStyleName: 
+  m_DefaultToeKickType:
+    m_EnumNames: Inset
+  m_BackingRiserMaterialMode:
+    m_EnumNames: KeepUnchanged
+  m_ShowToeKickButton: 0
+  m_HasDoorStyles: 0
+  m_HasDoorHandleStyles: 0
+  m_HasCabinetFinishes: 0
+  m_HasEndPanelsOption: 0
+  m_HasBackPanelsOption: 0
+  m_HasGrillsWithInsulatedJackets: 0
+  m_HasBurnersWithInsulatedJackets: 0
+  m_HasCookware: 0
+  m_HasSinksAndFridges: 1
+  m_HasBacksplashes: 0
+  m_HasHighBarTops: 0
+  m_HasLowBarTops: 0
+  m_HasGrills: 0
+  m_HasBurners: 0
+  m_DefaultCabinetFinishOverride: {fileID: 2100000, guid: 6d7bf02e2fe74234fa79a1ad8ad422e7, type: 2}
+  m_CabinetSectionDoorStyle: {fileID: 0}
+  m_CabinetSectionDoorHandleStyle: {fileID: 0}
+  m_CabinetSectionLegStyle: {fileID: 11400000, guid: 71a388fdc03bbb442adcb7fb6e8ef68c, type: 2}
+  m_HighBarTopOverridePrefab: {fileID: 0}
+  m_WhitelistedHighBarTopCountertopManufacturers:
+    m_List: 
+  m_StandardCabinetHeightInInches: 35.5
+  m_StandardCabinetDepthInInches: 24
+  m_CabinetCountertopOverhangInInches: 1
+  m_HighBarTopOverhangInInches: 10
+  m_LowBarTopLengthInInches: 15
+  m_CabinetCountertopThicknessInInches: 0
+  m_FallbackDefaultCabinetSectionProductSku: BIG32RBNMK/IM-UGC32-CN-MK
+  m_FallbackDefaultCabinetSectionProductServerId: 1348
+  m_CabinetVentPrefab: {fileID: 0}
+  m_CabinetVentDistanceFromEdgeInInches: 2
+  m_FridgeBackPanelInfos:
+  - m_ProductName: "OASIS\u2122 Enclosure Kit for Fridge - Mid Run"
+    m_ProductId: IM-2DFMP-MK
+    m_PanelHeightInInches: 35.5
+    m_PriceSheetPrice:
+      m_Usd: 189
+      m_Cad: 199
+    m_SpecificPanelWidthInInches: 0
+  m_FridgeEndPanelInfo:
+    m_ProductName: "OASIS\u2122 Enclosure Kit for Fridge - End of Run"
+    m_ProductId: IM-2DFEP-MK
+    m_PanelHeightInInches: 35.5
+    m_PriceSheetPrice:
+      m_Usd: 309
+      m_Cad: 299
+    m_SpecificPanelWidthInInches: 2
+  m_CabinetEndPanelInfo:
+    m_ProductName: "OASIS\xAE End Panel"
+    m_ProductId: "IM-CEP-MK (OASIS\xAE\uFE0F End Panel)"
+    m_PanelHeightInInches: 35.5
+    m_PriceSheetPrice:
+      m_Usd: 109
+      m_Cad: 99
+    m_SpecificPanelWidthInInches: 2
+  m_CabinetRuntimeEndPanelInfo:
+    m_EndPanels: []
+    m_SpecificPanelWidthInInches: 0
+  m_CabinetRuntimeBackPanelInfo:
+    m_ProductName: 
+    m_ProductId: 
+    m_PanelHeightInInches: 0
+    m_PriceSheetPrice:
+      m_Usd: 0
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 0
+  m_KitchenTemplates:
+    m_List:
+    - {fileID: 11400000, guid: e7fd0c99674ea4f07aca4120853a5b87, type: 2}
+    - {fileID: 11400000, guid: b38e9e04a8f6c49d2b9564f1a8a6cc09, type: 2}

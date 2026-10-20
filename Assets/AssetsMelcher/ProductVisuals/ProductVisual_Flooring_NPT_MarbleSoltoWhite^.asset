@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_NPT_MarbleSoltoWhite^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 97c9a9b30bcd6784d8a83dd050cdbf2a, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_NPT_MarbleSoltoWhite.prefab
+      editorOnlyCachedAsset: {fileID: 1457280393953254654, guid: 3906ab6b2e7c30a4b95b8c67ac5d5077, type: 3}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_WhiteOak3DHonedPanel6x24_LPNLMWHIOAK624-3DH_a2^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 246896a45a6534e4ba2f11bd813eeef9, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_WhiteOak3DHonedPanel6x24_LPNLMWHIOAK624-3DH_a2.prefab
+      editorOnlyCachedAsset: {fileID: 7483566196974029001, guid: c2c95cbc0b58c844980438f85d2f0107, type: 3}

@@ -1,0 +1,390 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee15c45ecec60bd4dafc5319bb45983a, type: 3}
+  m_Name: BrandCatalog_BerlinGardens
+  m_EditorClassIdentifier: 
+  m_CatalogName: BerlinGardens
+  m_CatalogId: 13
+  m_Ruleset:
+    m_EnumNames: WeatherStrong
+  m_CabinetManufacturerId: 109
+  m_BrandCatalogLoadingImage: {fileID: 0}
+  m_DefaultCabinetSectionDoorStyleName: Malta
+  m_DefaultCabinetSectionDoorHandleStyleName: Bentbar
+  m_DefaultToeKickType:
+    m_EnumNames: None
+  m_BackingRiserMaterialMode:
+    m_EnumNames: KeepUnchanged
+  m_ShowToeKickButton: 1
+  m_HasDoorStyles: 1
+  m_HasDoorHandleStyles: 1
+  m_HasCabinetFinishes: 1
+  m_HasEndPanelsOption: 1
+  m_HasBackPanelsOption: 1
+  m_HasGrillsWithInsulatedJackets: 1
+  m_HasBurnersWithInsulatedJackets: 1
+  m_HasCookware: 1
+  m_HasSinksAndFridges: 1
+  m_HasBacksplashes: 0
+  m_HasHighBarTops: 0
+  m_HasLowBarTops: 1
+  m_HasGrills: 0
+  m_HasBurners: 0
+  m_DefaultCabinetFinishOverride: {fileID: 0}
+  m_CabinetSectionDoorStyle: {fileID: 11400000, guid: 7b072e2348e504c71adb79b1d891b694, type: 2}
+  m_CabinetSectionDoorHandleStyle: {fileID: 11400000, guid: 7832fa36e0b0248a89922b2d1e07a78c, type: 2}
+  m_CabinetSectionLegStyle: {fileID: 11400000, guid: 3f6dc9fabcec2c040a49f6638cc413d2, type: 2}
+  m_HighBarTopOverridePrefab: {fileID: 0}
+  m_WhitelistedHighBarTopCountertopManufacturers:
+    m_List: 
+  m_StandardCabinetHeightInInches: 36
+  m_StandardCabinetDepthInInches: 27
+  m_CabinetCountertopOverhangInInches: 1
+  m_HighBarTopOverhangInInches: 10
+  m_LowBarTopLengthInInches: 15
+  m_CabinetCountertopThicknessInInches: 0.75
+  m_FallbackDefaultCabinetSectionProductSku: GB422736
+  m_FallbackDefaultCabinetSectionProductServerId: 798
+  m_CabinetVentPrefab: {fileID: 0}
+  m_CabinetVentDistanceFromEdgeInInches: 2
+  m_ShowFractionInMeasurements: 1
+  m_EndPanelsTouchGround: 1
+  m_FridgeBackPanelInfos:
+  - m_ProductName: Base Refrigerator Cabinet
+    m_ProductId: BFFC 16.5
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 1036
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 15
+  - m_ProductName: Base Refrigerator Cabinet
+    m_ProductId: BFFC 19.5
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 1152
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 18
+  - m_ProductName: Base Refrigerator Cabinet
+    m_ProductId: BFFC 22.5
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 1268
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 21
+  - m_ProductName: Base Refrigerator Cabinet
+    m_ProductId: BFFC 25.5
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 1386
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 24
+  - m_ProductName: Base Refrigerator Cabinet
+    m_ProductId: BFFC 26
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 1404
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 24.5
+  - m_ProductName: Base Refrigerator Cabinet
+    m_ProductId: BFFC
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 0
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 0
+  m_FridgeEndPanelInfo:
+    m_ProductName: End Panel
+    m_ProductId: EP
+    m_PanelHeightInInches: 30
+    m_PriceSheetPrice:
+      m_Usd: 0
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 1.375
+  m_CabinetEndPanelInfo:
+    m_ProductName: 
+    m_ProductId: 
+    m_PanelHeightInInches: 0
+    m_PriceSheetPrice:
+      m_Usd: 0
+      m_Cad: 0
+    m_SpecificPanelWidthInInches: 0
+  m_CabinetRuntimeEndPanelInfo:
+    m_EndPanels:
+    - m_ProductName: End Panel 24"
+      m_ProductId: BIC24036
+      m_PriceSheetPrice:
+        m_Usd: 382
+        m_Cad: 382
+      m_TargetDepth: 24
+    - m_ProductName: End Panel 27"
+      m_ProductId: BIC27036
+      m_PriceSheetPrice:
+        m_Usd: 420
+        m_Cad: 420
+      m_TargetDepth: 27
+    - m_ProductName: End Panel 30"
+      m_ProductId: BIC30036
+      m_PriceSheetPrice:
+        m_Usd: 458
+        m_Cad: 458
+      m_TargetDepth: 30
+    m_SpecificPanelWidthInInches: 0.75
+  m_CabinetRuntimeBackPanelInfo:
+    m_FallbackBackPanel:
+      m_ProductName: Base Applied Back Panel
+      m_ProductId: BJC
+      m_PanelHeightInInches: 36
+      m_PriceSheetPrice:
+        m_Usd: 182
+        m_Cad: 182
+      m_SpecificPanelWidthInInches: 0
+    m_DefaultBackPanels:
+      m_Tag: default
+      m_CategoryId: 0
+      m_BackPanels:
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC9036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 182
+          m_Cad: 182
+        m_SpecificPanelWidthInInches: 9
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC12036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 222
+          m_Cad: 222
+        m_SpecificPanelWidthInInches: 12
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC15036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 260
+          m_Cad: 260
+        m_SpecificPanelWidthInInches: 15
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC18036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 300
+          m_Cad: 300
+        m_SpecificPanelWidthInInches: 18
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC21036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 338
+          m_Cad: 338
+        m_SpecificPanelWidthInInches: 21
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC24036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 378
+          m_Cad: 378
+        m_SpecificPanelWidthInInches: 24
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC27036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 416
+          m_Cad: 416
+        m_SpecificPanelWidthInInches: 27
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC30036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 456
+          m_Cad: 456
+        m_SpecificPanelWidthInInches: 30
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC33036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 494
+          m_Cad: 494
+        m_SpecificPanelWidthInInches: 33
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC45036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 534
+          m_Cad: 534
+        m_SpecificPanelWidthInInches: 45
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC36036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 572
+          m_Cad: 572
+        m_SpecificPanelWidthInInches: 36
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC39036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 612
+          m_Cad: 612
+        m_SpecificPanelWidthInInches: 39
+      - m_ProductName: Base Applied Back Panel
+        m_ProductId: BJC42036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 650
+          m_Cad: 650
+        m_SpecificPanelWidthInInches: 42
+    m_BackPanels:
+    - m_Tag: Grills
+      m_CategoryId: 17
+      m_BackPanels:
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC21036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 362
+          m_Cad: 362
+        m_SpecificPanelWidthInInches: 21
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC24036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 400
+          m_Cad: 400
+        m_SpecificPanelWidthInInches: 24
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC27036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 438
+          m_Cad: 438
+        m_SpecificPanelWidthInInches: 27
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC30036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 476
+          m_Cad: 476
+        m_SpecificPanelWidthInInches: 30
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC33036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 514
+          m_Cad: 514
+        m_SpecificPanelWidthInInches: 33
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC36036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 550
+          m_Cad: 550
+        m_SpecificPanelWidthInInches: 36
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC39036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 588
+          m_Cad: 588
+        m_SpecificPanelWidthInInches: 39
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC42036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 626
+          m_Cad: 626
+        m_SpecificPanelWidthInInches: 42
+      - m_ProductName: Base Grill Cabinet Applied Back
+        m_ProductId: BJGC45036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 664
+          m_Cad: 664
+        m_SpecificPanelWidthInInches: 45
+    - m_Tag: Propane
+      m_CategoryId: 39
+      m_BackPanels:
+      - m_ProductName: Base Applied Propane Back Panel
+        m_ProductId: BJEC18036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 320
+          m_Cad: 320
+        m_SpecificPanelWidthInInches: 18
+      - m_ProductName: Base Applied Propane Back Panel
+        m_ProductId: BJEC21036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 362
+          m_Cad: 362
+        m_SpecificPanelWidthInInches: 21
+    - m_Tag: Burner
+      m_CategoryId: 35
+      m_BackPanels:
+      - m_ProductName: Base Burner Cabinet Applied Back
+        m_ProductId: BJGC18036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 324
+          m_Cad: 324
+        m_SpecificPanelWidthInInches: 18
+      - m_ProductName: Base Burner Cabinet Applied Back
+        m_ProductId: BJGC21036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 362
+          m_Cad: 362
+        m_SpecificPanelWidthInInches: 21
+      - m_ProductName: Base Burner Cabinet Applied Back
+        m_ProductId: BJGC24036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 400
+          m_Cad: 400
+        m_SpecificPanelWidthInInches: 24
+      - m_ProductName: Base Burner Cabinet Applied Back
+        m_ProductId: BJGC27036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 438
+          m_Cad: 438
+        m_SpecificPanelWidthInInches: 27
+      - m_ProductName: Base Burner Cabinet Applied Back
+        m_ProductId: BJGC30036
+        m_PanelHeightInInches: 36
+        m_PriceSheetPrice:
+          m_Usd: 476
+          m_Cad: 476
+        m_SpecificPanelWidthInInches: 30
+    - m_Tag: Corner
+      m_CategoryId: 23
+      m_BackPanels:
+      - m_ProductName: Void Corner Applied Back Panel
+        m_ProductId: BHCBP27036
+        m_PanelHeightInInches: 35.5
+        m_PriceSheetPrice:
+          m_Usd: 448
+          m_Cad: 448
+        m_SpecificPanelWidthInInches: 33
+      - m_ProductName: Void Corner Applied Back Panel
+        m_ProductId: BHCBP24036
+        m_PanelHeightInInches: 35.5
+        m_PriceSheetPrice:
+          m_Usd: 412
+          m_Cad: 412
+        m_SpecificPanelWidthInInches: 30
+    m_PanelDepthInInches: 0.75
+  m_KitchenTemplates:
+    m_List:
+    - {fileID: 11400000, guid: 19e1346ba28714aca823452c352d2c25, type: 2}
+    - {fileID: 11400000, guid: 004e52db0c5c34da5a3c73b7021cd8e3, type: 2}
+    - {fileID: 11400000, guid: 6235e5827a9b64f60bb77f6338080ced, type: 2}
+    - {fileID: 11400000, guid: 97538dcd12dec458c8811cb0ce35327d, type: 2}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d3e4cbf350a9f4d9728a63cded9a1f, type: 3}
+  m_Name: Gemini_LShape_WeatherStrong_BlindLeft
+  m_EditorClassIdentifier: 
+  m_BrandCatalog: {fileID: 11400000, guid: e2644f9e2dfaba64dbcc418b6d360782, type: 2}
+  m_KitchenStyle:
+    m_EnumNames: L
+  m_PreviewSprite: {fileID: 21300000, guid: dbf9504870567471e950841df42b666d, type: 3}
+  m_SaveData: {fileID: 4900000, guid: a3ee94b406f5e4d009becc48f5326670, type: 3}
+  m_DisplayName: Blind Left

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Countertop_Caesarstone_PorcelainLibretta^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: fc8edb7421c54804aa96a2015bea26e6, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Countertop_Caesarstone_PorcelainLibretta.prefab
+      editorOnlyCachedAsset: {fileID: 6794310370621053978, guid: e0018698c142f1e4f9b37543698eff36, type: 3}

@@ -4,5 +4,21 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 0
+    path: Assets/AssetsMelcher/Scenes/SplashScene.unity
+    guid: 88ed9cc4ffda1b440ae17d3b52b3fd9c
+  - enabled: 1
+    path: Assets/AssetsMelcher/Scenes/PlatformSetupScene.unity
+    guid: 9eeee09b47a72fa4e920a0448272d316
+  - enabled: 1
+    path: Assets/AssetsMelcher/Scenes/MenuScene.unity
+    guid: 065c2d8348a114814803977e7b112474
+  - enabled: 1
+    path: Assets/AssetsMelcher/Scenes/DesignerScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/AssetsMelcher/Scenes/IntermediateDesignerToMenuScene.unity
+    guid: ccee1a810439bef458c5d422301a5dfc
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 154bed22654c3524283665f4a85dad82, type: 2}

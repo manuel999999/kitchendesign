@@ -1,0 +1,8 @@
+public static class K { public static string Run() {
+  int clientId = __CLIENT__, quoteId = __QUOTE__;
+  if (!Melcher.ProFitGlobals.TryGetClientAndQuoteIndex(clientId, quoteId, out int ci, out int qi)) return "not found";
+  Melcher.ProFitGlobals.activeClientId = clientId;
+  Melcher.ProFitGlobals.activeQuoteId = quoteId;
+  Melcher.MelcherSceneManager.LoadSceneAsync(Melcher.MelcherSceneRequest.FromName("DesignerScene"), Melcher.MelcherSceneLoadMode.Single);
+  return "loading " + Melcher.ProFitGlobals.userClients[ci].quotes[qi].saveName.Length + "-char name, quote " + quoteId;
+} }

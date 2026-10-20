@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: "ProductVisual_Flooring_Techobloc_BluRandomPaverSlabHD2SmoothCaff\xE8Crema2024REV^"
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: af3396a08387c4211814b9c6cda13767, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: "Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_Techobloc_BluRandomPaverSlabHD2SmoothCaffe\u0300Crema2024REV.prefab"
+      editorOnlyCachedAsset: {fileID: 2690801628715125115, guid: 0ed69dee6e90049be8abfb6bcaeee97d, type: 3}

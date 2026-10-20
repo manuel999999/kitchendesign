@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_SB-SS-WHITEOAKMULTISPLIT^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 671ef749657ca954f80034fafd50b9ef, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_SB-SS-WHITEOAKMULTISPLIT.prefab
+      editorOnlyCachedAsset: {fileID: 7229522134377432753, guid: e78c7ef1477011b46a7f02bc4b8702ef, type: 3}

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a9a4ce27b2d84c830361f4e66d912, type: 3}
+  m_Name: ButtonStyle_ProFit_WhiteOnSecondaryBackground
+  m_EditorClassIdentifier: 
+  m_NormalForegroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: 08ae4add0ab6c224296aa8088f1ec4b3, type: 2}
+  m_NormalBackgroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: 25803071c90c30b40964aec5d017fe57, type: 2}
+  m_HoveredForegroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: 08ae4add0ab6c224296aa8088f1ec4b3, type: 2}
+  m_HoveredBackgroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: cd03e4c065b59df87af8bd48d8cefb61, type: 2}
+  m_PressedForegroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: 104aec2befb2f494183fdd28b5ff170d, type: 2}
+  m_PressedBackgroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: 2faa864eb1ec93244ac987f84e4ebeac, type: 2}
+  m_NonInteractableForegroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: 104aec2befb2f494183fdd28b5ff170d, type: 2}
+  m_NonInteractableBackgroundColor:
+    m_DrawAppValue: 1
+    m_InlineValue: {r: 0, g: 0, b: 0, a: 0}
+    m_AppValue: {fileID: 11400000, guid: ff31b6fb8b7ee524ba59c74c445bfc50, type: 2}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da4c0dacb778f54780a23769343a5df, type: 3}
+  m_Name: ProductGroupDatabase
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 21300000, guid: fa1075505ea7a98a09f541944d9f2188, type: 3}
+  m_Entries:
+  - comment: Standard
+    id: 4
+    sprite: {fileID: 21300000, guid: c86d4491edc001b6989e7ff1099af039, type: 3}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 1
+  - comment: Premium
+    id: 5
+    sprite: {fileID: 21300000, guid: c86d4491edc001b6989e7ff1099af039, type: 3}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 1
+  - comment: Countertops
+    id: 1
+    sprite: {fileID: 21300000, guid: b0db01de23ccf6347aec925262e88ff1, type: 3}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0
+  - comment: Brick
+    id: 2
+    sprite: {fileID: 0}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0
+  - comment: Stucco
+    id: 3
+    sprite: {fileID: 0}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0

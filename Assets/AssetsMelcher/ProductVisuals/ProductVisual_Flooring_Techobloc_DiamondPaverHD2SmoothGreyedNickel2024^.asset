@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_Techobloc_DiamondPaverHD2SmoothGreyedNickel2024^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: ec67cebdbf8e340a08a02fb0fe745546, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_Techobloc_DiamondPaverHD2SmoothGreyedNickel2024.prefab
+      editorOnlyCachedAsset: {fileID: 288796078411318806, guid: 506f919d6e2fe4cc0b7a24cf7ce8ae12, type: 3}

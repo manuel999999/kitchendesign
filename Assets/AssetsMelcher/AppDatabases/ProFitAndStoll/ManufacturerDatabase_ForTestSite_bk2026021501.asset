@@ -1,0 +1,411 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da4c0dacb778f54780a23769343a5df, type: 3}
+  m_Name: ManufacturerDatabase_ForTestSite_bk2026021501
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 21300000, guid: fa1075505ea7a98a09f541944d9f2188, type: 3}
+  m_Entries:
+  - comment: Pro-Fit Outdoor Living
+    id: 26
+    sprite: {fileID: 21300000, guid: 466685b2df1816306b9db88eebeab055, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Pro-Fit Finishes
+    id: 68
+    sprite: {fileID: 21300000, guid: 466685b2df1816306b9db88eebeab055, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Stoll
+    id: 63
+    sprite: {fileID: 21300000, guid: c86d4491edc001b6989e7ff1099af039, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Alfa
+    id: 3
+    sprite: {fileID: 21300000, guid: 8afa1d5626c7b2767bd4bbedf7f23388, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Alfresco
+    id: 4
+    sprite: {fileID: 21300000, guid: c297fd48fbf041221ae03189bbd78e67, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: American Made Grills
+    id: 46
+    sprite: {fileID: 21300000, guid: ea7ac9507dab8e7479715dc48957879d, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Artisian
+    id: 65
+    sprite: {fileID: 21300000, guid: 0074a2041898dc840b51c88ab54ab5cc, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Asko
+    id: 41
+    sprite: {fileID: 21300000, guid: 2096447c02580da4a8f267847c43628e, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Aspire
+    id: 64
+    sprite: {fileID: 21300000, guid: c47d3369d6a1c201ba5fb7a65c7de9c4, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Azure
+    id: 42
+    sprite: {fileID: 21300000, guid: 3eadb5908d9765242913a0e8e9a3a4e2, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: BBQGuys
+    id: 45
+    sprite: {fileID: 21300000, guid: bb42ccd85ecc8dc489ac359ea82c08fe, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Blackstone
+    id: 77
+    sprite: {fileID: 21300000, guid: b8577464895c99f4b89e065c1ddb0df1, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Big Green Egg
+    id: 39
+    sprite: {fileID: 21300000, guid: eeec9d9c39714934291f6c999464f425, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Blaze
+    id: 5
+    sprite: {fileID: 21300000, guid: 35c71890b23ea6b81a09e0b8ed12e3eb, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Broil King
+    id: 60
+    sprite: {fileID: 21300000, guid: a5ae5403a981ffb4d8e294296a67bc60, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Broilmaster
+    id: 6
+    sprite: {fileID: 21300000, guid: ea1bf5cb5be60f06291748f9d638bf0d, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Bull
+    id: 7
+    sprite: {fileID: 21300000, guid: d1a8861934bde0271bc3abec02e2652c, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Bull EMEA
+    id: 87
+    sprite: {fileID: 21300000, guid: 03dee93da9e5d734f9636e93a808cf30, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: CalFlame
+    id: 8
+    sprite: {fileID: 21300000, guid: 51c6bb712697b631a869d2c014e997f7, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Challenger Designers
+    id: 71
+    sprite: {fileID: 21300000, guid: 34eb56ee22872614a8a2893632996e1b, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Coyote
+    id: 9
+    sprite: {fileID: 21300000, guid: f7e8e63b911568bf5a31d7b9ddd15482, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Danver
+    id: 82
+    sprite: {fileID: 21300000, guid: cc0f48bbedc777a44a3a9d54be55058a, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: DCS
+    id: 28
+    sprite: {fileID: 21300000, guid: 21597375050c8e37fa9c2ed6efd2df15, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Delta Heat
+    id: 1
+    sprite: {fileID: 21300000, guid: 0464834709195ffa393d788bb2666b8c, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Edgestar
+    id: 76
+    sprite: {fileID: 21300000, guid: dd1e1f6bc50cb9347b53b0537e286847, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Fire Magic
+    id: 12
+    sprite: {fileID: 21300000, guid: cd37f9fefa9f8562ab02dc55ba476655, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Hestan
+    id: 15
+    sprite: {fileID: 21300000, guid: 84ce3714840f700a288d7fc9b94225af, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Induction Hardware
+    id: 118
+    sprite: {fileID: 21300000, guid: dbf153bfb43964016aea5077fb258550, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Invisacook
+    id: 17
+    sprite: {fileID: 21300000, guid: 5368d942e57b78bb4ab56999132cb82f, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Kamado Joe
+    id: 40
+    sprite: {fileID: 21300000, guid: cdac2b28a1b77434cbe708b91e363e48, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Kokomo
+    id: 18
+    sprite: {fileID: 21300000, guid: b7e5fea3f33245cbaa202379730c40b3, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Gozney
+    id: 111
+    sprite: {fileID: 21300000, guid: f3897e51a5a214550bd3e326b9f587bf, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Le Griddle
+    id: 52
+    sprite: {fileID: 21300000, guid: d19f611b44088ce4b84196d030826f52, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Lion
+    id: 19
+    sprite: {fileID: 21300000, guid: aad585b7524c8066c9db821667cc03c7, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Lynx
+    id: 20
+    sprite: {fileID: 21300000, guid: 75b7c35c936a535ee9721d1cee0187b3, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Memphis
+    id: 38
+    sprite: {fileID: 21300000, guid: d7cc1ac3addc5fb448d393e7da19a952, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Napoleon
+    id: 48
+    sprite: {fileID: 21300000, guid: 1d55cb29ebbb5a44b9d54fee3ce50187, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Novo
+    id: 81
+    sprite: {fileID: 21300000, guid: 66957250913ea5b4280c7ea73deda03c, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Renaissance
+    id: 27
+    sprite: {fileID: 21300000, guid: d39888db81999e2ba96af140936896c0, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Perlick
+    id: 43
+    sprite: {fileID: 21300000, guid: 6dae25488fda7c445adbc3084a96ab14, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Premier Flame
+    id: 59
+    sprite: {fileID: 21300000, guid: 59200cc933739774ba08358afdf27ffc, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Primo
+    id: 44
+    sprite: {fileID: 21300000, guid: dfab5146118824b46b6cee766f1f90a5, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: ProFire
+    id: 80
+    sprite: {fileID: 21300000, guid: b74ada96e8ea8e54eb43e8fcd8176997, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Signature - ID 50
+    id: 50000
+    sprite: {fileID: 21300000, guid: b0db01de23ccf6347aec925262e88ff1, type: 3}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0
+  - comment: Summerset
+    id: 22
+    sprite: {fileID: 21300000, guid: 51238bd15fb54f55289635d1665f756e, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Summit Appliance
+    id: 53
+    sprite: {fileID: 21300000, guid: 7248e9f5b29f37c40a72b5de0781bed7, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: SunFire
+    id: 49
+    sprite: {fileID: 21300000, guid: 78a94b154884ee04bba62f9b688690e0, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Tereaux
+    id: 88
+    sprite: {fileID: 21300000, guid: 1c96e967e4fd55841ab78897dbc7b919, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: True Flame
+    id: 79
+    sprite: {fileID: 21300000, guid: e7483e0b08e31894ba251f2f1ec13945, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Turbo
+    id: 29
+    sprite: {fileID: 21300000, guid: b333a0e7b74507d7d8f09ebf5e9a5108, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Twin Eagles
+    id: 23
+    sprite: {fileID: 21300000, guid: cb3900d99d47031dfa9e0768ddc240ab, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Whistler
+    id: 78
+    sprite: {fileID: 21300000, guid: db545dd0c6896514f9a24c74d15b9085, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Wildfire
+    id: 51
+    sprite: {fileID: 21300000, guid: 37ed94a350a30ea4fab5a7404a11771b, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: XO
+    id: 25
+    sprite: {fileID: 21300000, guid: 5f40dcdbca1f4416097d7e6fb598a534, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Zephyr
+    id: 61
+    sprite: {fileID: 21300000, guid: 51058ea247e3801449027b89b101a673, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Brick
+    id: 57
+    sprite: {fileID: 0}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0
+  - comment: Countertops
+    id: 33
+    sprite: {fileID: 21300000, guid: b0db01de23ccf6347aec925262e88ff1, type: 3}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0
+  - comment: Stucco
+    id: 58
+    sprite: {fileID: 0}
+    showCommentOnButton: 1
+    useLocalCommentAsOverride: 0
+  - comment: ABC Stone
+    id: 2
+    sprite: {fileID: 21300000, guid: 4f9e180a484e801e8aea4f96d750cc02, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Caesarstone
+    id: 54
+    sprite: {fileID: 21300000, guid: 2b9699f9b964c02449fdd6505b9e14ea, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Earthworks Stone
+    id: 69
+    sprite: {fileID: 21300000, guid: ca029873c4c9ffdb18856d9e765b05fb, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: ElDorado Stone
+    id: 10
+    sprite: {fileID: 21300000, guid: 16b5ebd41fc04c31b9122f8b355fbe22, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Evolve Stone
+    id: 11
+    sprite: {fileID: 21300000, guid: ef69739044b16689c90e97eceb0828d9, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Gramaco Stone
+    id: 13
+    sprite: {fileID: 21300000, guid: 041c215f659ba7d10b6a8eb4d41ffeb4, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Great Lakes Stone
+    id: 14
+    sprite: {fileID: 21300000, guid: c5eeafa6cf9e2e8468455029ae0f5d16, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Imperial Marble & Granite Stone
+    id: 16
+    sprite: {fileID: 21300000, guid: b9fe359e5d74cc84eb9008860b52a84d, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Lapitec
+    id: 56
+    sprite: {fileID: 21300000, guid: 2fa8027611a48244b89aa2e120a7dd1a, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Moderno
+    id: 37
+    sprite: {fileID: 21300000, guid: f352fc08616f8204dabaca58ab6fd865, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: MSI
+    id: 62
+    sprite: {fileID: 21300000, guid: 8fb1b7ce29043a44a80f2029cb6ff94f, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Nicolock
+    id: 21
+    sprite: {fileID: 21300000, guid: d8723d2adee2b088ba90ca0ebe71e856, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: TIVA
+    id: 55
+    sprite: {fileID: 21300000, guid: 5ad4115262dfbcc49ac31221b70b946b, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Wolf Home Products
+    id: 24
+    sprite: {fileID: 21300000, guid: 89bba5e58fa87ff8cb9249f0ae650ba1, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Wolf Home Products - Flooring
+    id: 31
+    sprite: {fileID: 21300000, guid: 84e1feb3c392ff9418512b53347c73e9, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: BGP
+    id: 110
+    sprite: {fileID: 21300000, guid: 34747038fc81d4560878d3894db2bfba, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Crown Verity
+    id: 113
+    sprite: {fileID: 21300000, guid: a1a8747cd49ae4f4fb7684da2fc35d53, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Jackson Grills
+    id: 114
+    sprite: {fileID: 21300000, guid: 1c8c193f063a94efea24d798c4955d32, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Jupiter Grills
+    id: 116
+    sprite: {fileID: 21300000, guid: 0e91c546421a14041a4181038d4d41b9, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Saber
+    id: 117
+    sprite: {fileID: 21300000, guid: 1b764412aa69e46528d3243880509bd0, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Solair
+    id: 112
+    sprite: {fileID: 21300000, guid: 5601bb128507f4652a1f983e6e5f0229, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0

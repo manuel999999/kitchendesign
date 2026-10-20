@@ -1,0 +1,1 @@
+public static class K { public static string Run() { UnityEngine.Application.runInBackground = true; return "rib=" + UnityEngine.Application.runInBackground + " playing=" + UnityEngine.Application.isPlaying; } }

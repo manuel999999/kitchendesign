@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_CabinetSection_Door_Challenger_InsideCornerBaseLh@Pan^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: c7384e93e370347a59e7c46448730b7c, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_CabinetSection_Door_Challenger_InsideCornerBaseLh@Pan.prefab
+      editorOnlyCachedAsset: {fileID: 8826513694490275291, guid: 04666e784ec634c98b4b3bd179348b4e, type: 3}

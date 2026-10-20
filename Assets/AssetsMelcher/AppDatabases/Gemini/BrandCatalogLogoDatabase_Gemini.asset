@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da4c0dacb778f54780a23769343a5df, type: 3}
+  m_Name: BrandCatalogLogoDatabase_Gemini
+  m_EditorClassIdentifier: 
+  m_EditorFindComment: 
+  m_EditorFindId: 0
+  m_DefaultSprite: {fileID: 0}
+  m_Entries:
+  - comment: Challenger Designs
+    id: 4
+    sprite: {fileID: 21300000, guid: 036a78ba8a03e314f994649382e56421, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Challenger Designs by Empire
+    id: 8
+    sprite: {fileID: 21300000, guid: 65345fde764bd2f48b06b4ac8ae266d0, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Danver
+    id: 5
+    sprite: {fileID: 21300000, guid: a62f52e63baadf74b817273dde56c82e, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Napoleon
+    id: 9
+    sprite: {fileID: 21300000, guid: f15cad19a4b527140b5261754aa8fdc3, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: WeatherStrong
+    id: 7
+    sprite: {fileID: 21300000, guid: 093688c90292b0849b80815d0ec326c8, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Endura
+    id: 6
+    sprite: {fileID: 21300000, guid: b4db930b5b98a3e4290ad22ab13239ba, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: New Age Products
+    id: 12
+    sprite: {fileID: 21300000, guid: 3fcf74ffd084ddc4ab797b5909f71979, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Agora
+    id: 13
+    sprite: {fileID: 21300000, guid: 57ca9832407f7984cb1c30bdc0a052d6, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: American Outdoor Cabinets
+    id: 14
+    sprite: {fileID: 21300000, guid: e08899c93f9d94966b473abd109c7440, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Toppin
+    id: 15
+    sprite: {fileID: 21300000, guid: 224f353ce8c5b49419563d874c54ffc6, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: NatureKast
+    id: 16
+    sprite: {fileID: 21300000, guid: 56698a45db86da34f8faeb8b6b13f07b, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Generic Cabinets
+    id: 17
+    sprite: {fileID: 21300000, guid: 6395712fad3214a9faf34cf5175e5482, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Endura RTA
+    id: 19
+    sprite: {fileID: 21300000, guid: 83caac47e6c974a14b3ed96ae4773e48, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Endura RTA by AF
+    id: 20
+    sprite: {fileID: 21300000, guid: 83caac47e6c974a14b3ed96ae4773e48, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0
+  - comment: Weather Strong Select
+    id: 18
+    sprite: {fileID: 21300000, guid: 093688c90292b0849b80815d0ec326c8, type: 3}
+    showCommentOnButton: 0
+    useLocalCommentAsOverride: 0

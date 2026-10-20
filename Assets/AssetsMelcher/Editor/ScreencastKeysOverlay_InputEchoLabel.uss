@@ -1,0 +1,5 @@
+.ScreencastKeysOverlay_InputEchoLabel {
+    -unity-text-align: middle-right;
+    font-size: 32px;
+    -unity-font-style: bold;
+}

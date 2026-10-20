@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9803db63498642a4887fa0ff315107ce
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - m_DocumentAsset: {fileID: 9197481963319205126, guid: 49f4a1cf1b968d84ca21d9ccb083d6d3, type: 3}
+  - m_TableRowAsset: {fileID: 9197481963319205126, guid: e71cb239928c2ce48aae79f9336f0cfe, type: 3}
+  - m_RenderQuality: {fileID: 11400000, guid: 25ac17fa079bbeb9d9adb2dacb86175d, type: 2}
+  - m_NewProductVisualPrefab: {fileID: 113039082366694219, guid: 9b1061de4ff86e25898c7dabf0884795, type: 3}
+  - m_ScreenshotScene: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+  - m_Catalog: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

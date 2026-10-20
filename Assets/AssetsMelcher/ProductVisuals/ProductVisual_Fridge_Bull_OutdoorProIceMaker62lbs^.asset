@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Fridge_Bull_OutdoorProIceMaker62lbs^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 663553e0a73d0504993d90b9e302b2ff, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Fridge_Bull_OutdoorProIceMaker62lbs.prefab
+      editorOnlyCachedAsset: {fileID: 4792103225687662565, guid: 4846c36a818a8214ca62cc3a3fd0afb9, type: 3}

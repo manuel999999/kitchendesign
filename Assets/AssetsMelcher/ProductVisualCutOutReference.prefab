@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1083046595670421856
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.254
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.254
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.254
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.06876054
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.38099998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.14496052
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 454e3a3d90cc95949b01c537aa1cb385, type: 2}
+    - target: {fileID: 919132149155446097, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_Name
+      value: ProductVisualCutOutReference
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      propertyPath: m_TagString
+      value: EditorOnly
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 190714468978198517}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3307149429531531823}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9035548174078652940}
+  m_SourcePrefab: {fileID: 100100000, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+--- !u!1 &272090585344281649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+  m_PrefabInstance: {fileID: 1083046595670421856}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &190714468978198517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272090585344281649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f110702d1599cf582f05331c72df6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnableInSingleScene: 0
+--- !u!114 &3307149429531531823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272090585344281649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83152a34c294cb549a415300aa798ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OffsetInInches: {x: 0, y: 0, z: 0}
+  m_SizeInInches: {x: 10, y: 10, z: 10}
+  m_Scale: {x: 1, y: 1, z: 1}
+  m_ApplyOffset: 0
+  m_Transform: {fileID: 616281071366755979}
+--- !u!114 &9035548174078652940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272090585344281649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845f4109b43e0dc51ba1d24821bf8a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: 'This cube is used as a reference to vertex-snap the cut-out Begin or
+    Extent transforms when the product model does not have useful geo to snap to
+    (i.e., it is sized incorrectly or doesn''t have square corners)
+
+
+    This reference
+    helps ensure the model doesn''t over stretch to match the cut-out. This would
+    happen if the model''s cut-out geo doesn''t match the size provided by the client
+    the "render cut-out with product" option is enabled (i.e. the product has holes
+    or is inset into the cabinet). When the "render cut-out with product" option
+    is enabled, the model intentionally scales 1:1 to seal the cut-out area'
+--- !u!4 &616281071366755979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ccc11067d6427d0cf93e40045bddaa77, type: 3}
+  m_PrefabInstance: {fileID: 1083046595670421856}
+  m_PrefabAsset: {fileID: 0}

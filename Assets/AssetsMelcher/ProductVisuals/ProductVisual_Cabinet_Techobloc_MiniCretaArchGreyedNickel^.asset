@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_Techobloc_MiniCretaArchGreyedNickel^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 052454e8e87f74525a475dba77dcfccc, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_Techobloc_MiniCretaArchGreyedNickel.prefab
+      editorOnlyCachedAsset: {fileID: 3263351953146691815, guid: e7f1257e5ee7d44a4a97afa30aa19bfe, type: 3}

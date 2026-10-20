@@ -1,0 +1,3315 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FinishMaterials
+  m_EditorClassIdentifier: 
+  m_GroupName: FinishMaterials
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 70e6b6e333cbf5549ac6e62b8d163f38
+  m_SerializeEntries:
+  - m_GUID: 00378a54e92824e93af741b419bad168
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_ElmHorizontal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 005fcfc89baa647f38c04dcc2162cad5
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardWhiteWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00625cf4c66416b2584c6d5af05ef420
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_GeorgetownRun_DunePoint.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0069c8c73a24d6d4eb49c1bc3726a457
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMidwestDanvilleBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00aba404b0da04271af2055eaf680ec0
+    m_Address: "Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SmoothCaff\xE8Crema2024REV.mat"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01af69b95af98814a841bea29ac1cf2d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CasaBlend3DMultiFinishPanel6x24_LPNLTCASBLE624-MULTI_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01e2aeee190988548a0efefab351a52e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicWhiteSplitfacePanel6x24_LPNLMCOSWHI624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 024fd17c59bab1741aa4587ce360bbc0
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechnoBloc__Paver.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0275bccb595c84feeb9fbcc466a99d90
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Black.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03938c062c42446709a2ebbdd51cfa1d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NewTechWood_ArgentinianSilverGrayEuropeanStyleSidingfull.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03c2d5a5fdff04ec2b4ac8c76a008a5b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_SlateGraySwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 075bd5e704753e04aa4fa8e1bb923ff1
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversSouthwestToscana.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07fa3eb76c583449e9ba11a3cdab4cdd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_HickoryHorizontal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0826c69d6470cca6a86ae9da32ce02de
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_SandCastle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08529deaa9b8d46b9b2c94189e609cb9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_IndustriaHD2900x600PaverSmoothChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09d2e497cdf042e4eab55ba600545977
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_GreatLakes_SteelGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a0ded18b14274742afccdb60facb679
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_Industria600x600SlabHD2smoothCaffeCrema.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bbceebe091370d41a9eda2ead6ccb3e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NPT_CulturedStoneVeneerScabos.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bcdd3752136a44b38635f2e7cfa87a2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_MiniCretaArchChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bcf35667b2014943a1859f29c676481
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardNutmegWG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c8d30228a7147c4ca13a90010496841
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GoldRushPanel6x24_LPNLSGLDRUS624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d5d31acca63ef7959dcc7fc48e7379f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_SilverMist.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d78ed446cd868c4390bfa5dbb08d6a2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_CoastwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0dc0c9bffeb1f4d43915b8cee0bf471c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_CobaltBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e66246fbc0f0154abf4d878f494ab1d
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinBiancoGhiaccio.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e88643c7083e1a41a91104b88e624e0
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_WhiteOakMultiSplitfacePanel6x24_LPNLMWHIOAK624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f6b1c5a448d8315c909cdcfe6db2f67
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_AspireRust.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f9bde78dc312434cac58fdf77c6a64d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MountainBluestonePanel6x24_LPNLDMOUBLU624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0fa3e749075a866409fe760e2fc2beac
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainMonteverdeGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 108d3cc2049d4695597d64b9bb87e936
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_Rosewood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 108ff59b9e4154f9284ab9a21b633f11
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SmoothOnyxBlack9319.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 10dd6d2e2298a4d6481d4b7973a14867
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_RavenAsh.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 10f814be8bfa53b4cad2596e12a97815
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_MarquinaNoirSilkMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1190e4dde57e34ed4a8b58e3a79b2a13
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_PitchBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 128b0bdd9aa34f547ad36bc8badec023
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MarquinaNeroSpiltfacePanel6x24_LPNLMMARNER624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12c8a23471faef441a714bfca14a0e7a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick__Brick.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13995902aa745e4249880da03312737c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_SilverTeak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13d2fc003f3cac717b1d1be282bf6a34
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_Onyx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1441c7af4fafd7f42a00e0ffc7ffc2c3
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMidwestAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 144d552fe395e4adc904cce15feed854
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_WhitewashHorizontal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 149fcd93f8ea14001997936ee51fb778
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_CharredRum.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14eef7096a08e4f4a930bc05cbca09a2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_TexturedWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 153f99fc0d4cb4fc190b9b0291794959
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_MicaSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1553e6b5a0bab0c61b9f4bfc8ecbcfae
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_BurnishedCopper.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 159c9f90357614091aa9b6d1c3259b40
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_DolphiGraySwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 167ede65d7ef20205ad07e68e41cb3ed
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Stoll_Premium_BrushedStainless.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 170d54ea6cf304e428d07f603e551de2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversTexasLuedersGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 172a1e874e55e864abe8e02405920187
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_WalnutRustic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 177172f70930ef7499a07ec74adc4f42
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_ExcaliburCobble_RubyOnyx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18ad5106fdc81bc4899e47fda8104530
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SunsetSilverPanel6x24_LPNLQSUNSIL624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18cec9d7d0d64a4c4bd041c2edd38149
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_Castaway.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 191f798621b0946d68d9fea8aec32f59
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_CobaltLinen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1929dc860953845f987aff0f80d3e88d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_Industria600x600SlabHD2smoothSilverGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a20e45c6b678cc4fa9c75466d290abc
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_TajaPerlaMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1aae6d34e3f3fdc479baa09da25c47de
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_TanPlan.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b7ec7d17fb23354293c33dddec2c97a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_WhiteOakMultiSplitfacePanel6x24_LPNLMWHIOAK624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bbb8a11289ae084c838daf31d041aef
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Villagio_ShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bd7cd8e14a004f4ba85951d24b5484c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Whitewash.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bed36e7f1e32f945ba7c02e4067a1a9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bfa9c4beae2391478c510d700dc6317
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_Mocha.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bfc69e328d72be488d82ebdba0cc546
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_CalacattaIslaPolishedPorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1bfdacd3ad86ef941bef8559244b644a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainLibretta.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c2baa7c556f48eb3bffaf4205b7460c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_VintageVein.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c6e513abd2bae849bb0ab7abdeecd36
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Westmount_SmoothShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cb751f98a54cfa4989f031f971c6162
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineSilver.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cc2fb5bea56ff03d808ad3f4050d4d5
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_WeatheredIPE.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cf7cbbac834542b7ab43d6c45f9c11f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_RaffinatoSmoothGreyedNickel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cfd43585e4b662608c48c0606411389
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_NaturalIron.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d4a4c65030487ed0a52ae26152d3bdf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_BlackRiver.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d5c40afdfc0dd74aa8757a6f8d27a49
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_BessemerGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1dff5cb9e7af84d6c92fcb7db9e397c3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_ArcticSlate.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e6fb88b40a084509950863998a8f418
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_CharcoalGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ef0887690178d02bb1d9d168228c240
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_EarthworksStone_NaturalCraft_Indigo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ef6db821005f4949bf3cc62d70ec06a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_Boylan.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f5c52d70e74ad94d9f75ba63ca0f61b
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMountainToscana.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f71574a1f994413f9b06eb7a5c723a9
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_DuneSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1f83922dc37678d47bf10025837fee6c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Moderno_UrbanArgento.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 207a562f8b5b1d24088d50b04a1062ea
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleSoltoWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20999a1cbb68a32b58feacd2e96be760
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_DistrictView_KodiakMine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20d61b8e85efa40f5a0a52ec6bfb884d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_BarnwoodGraySwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 210ba9e79c6f1d21e8bd6985c3dc3f7d
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_IronRedGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21729bb87dedba54f853e3499bf286be
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainTravstoneGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22c99549523b0fb03b5bae9870f3d75a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_NationalTrue_KodiakMine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22ffabb778c35634d9cb07105383cad3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_MetallicBronzeMatte.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23ab56af08e7c47fdb6787f7d02d6acd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_NortheasternWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24553c7b13e1b4f55bf19242d6cf042d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_Nutmeg.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2494d47596b4a4a66bc69062aad56c18
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_MiniCretaArchSandlewood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24caa9dd53d902f46a3208af1bb0b714
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_BlendedBurgundy.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 253d609bd1720445a9fb4c2b4a3b609a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_DarkAshHorizontal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25c4d545708956140977fb6fde00a712
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll__Standard_Endura.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26028a03b0171e54eab27e42932817c4
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinNeroAntracite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 264a4dcadc90a084f8eca0df641aed1b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_TexturedRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2679057214b4a0796a881eb12bde8b82
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_Amberwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26e68450959b1bb4fa478916906149d0
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_ArabascatoVisioMatteBookmatchedPorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2727f5509c50f4255b6ce4b009ef8029
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardTuscan.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 275ca37b4db104e68845fda4ba681337
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_TanBrownGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27921a96f6b5b4be2b27a8b7d1891981
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardNutmeg.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 288e4268dc7137646ace2724186a12c1
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainChamonixBianco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28b32a0348b7a404da9ece0d87b7f330
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SlateChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29083cf0b96d94a36915a4a870a6519a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_PicketFence.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2910620b76cda3148b859219302fe8ab
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA__Wood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a270a7238870964da2266ecd072d0ec
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainTravstoneNoce.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2aec81f8449305e478e063c82f521562
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicGray3DWavePanel6x24_LPNLMCOSGRY624-3DW.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b30efbb718c10744a7ad12c2f2883a7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_EnduraBrushedGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b866f2109017f048b424b7a43511030
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Villagio_Sandlewood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2be545d000841b24db890640063d4170
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_TexturedOrange.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c37e31a58ab898498bb708e0402cb7e
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversPacificNorthwestDarkCharcoal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d1519a076b568f4c944a785770c9d09
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NPT_CulturedStoneVeneerIvory.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d270566d093f9b45811ed2b1161669d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SparklingAutumnPanel6x24_LPNLQSPAAUT624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d27fe99a4c614e3085ff3a2d417248a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Nutmeg.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d54ea15af7ff4f4cb39a5781096b574
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CasaBlend3DHonedPanel6x24_LPNLTCASBLE624-3DH_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d7cf8dab4bb80f47bcbb4da32089335
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainLaScalaBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d970b2016a8dac4789a7f9e25583523
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CaliforniaGoldPanel6x24_LPNLSCALGLD624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e4c0b45e7bd72d4080d650236f1af1c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop__Stone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ee5868565bf17648aeaa9349b2108d1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_LunaGray_LPNLMLUNGRY624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f575f0e4c9794cc0a6cbda7b5275543
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NewTechWood_BrazilianIpeEuropeanStyleSiding.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f7880e3fae91a9d38509cb825887ed5
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_BrushedWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 301088f62e52f9828a004c5ed873f44b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_Concrete.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3198c678c6994e746b06eb4b2cba2167
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_CementAshMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 325ac7fc5fddca707a3c552812375242
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_BronzedIron.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32838228c5d2081468c78bdedada8b24
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GrayOakSplitfacePanel6x24_LPNLMGRYOAK624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 337fab271af884e3b99fa474955488c2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardBlackABS.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 340baf5b8e726cf43b19eac5a430ed4a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong_ShorelineGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34b0fa8af8705f341905355b4018dd57
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineLightNoce.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34cc9691f069f4cbb8d92b0a00cf4be4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_DolphinGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34d08609df728d045996c7c9bf34df74
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainChamonixDarkGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34e299199876b0f45984804de6907e11
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_CopperVein.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36fca4f7cbe620bd296bc4fae94a7a0d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_AntiqueBronze.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 370e33f190f4d41afb3d4f183c2c63ac
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SmoothChamplainGrey9327.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3735647d634c6b1a785ed6f305880a8b
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_PennsylvaniaBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3767cb777ddc7ef4396f8eddeb94c86f
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_CharwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 378cf19a106312c4fa618eb8bf0edc32
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinTerraAvana.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 384608c25b725d5e3aff19b970a14f4d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_TexturedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3883714fd4f45564197be22ac9408e05
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainLaScalaGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38a64e943acb1025498782759c937bc2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_SouthBayBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38ac1a9039cb5d1469a859231bd947f6
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Eva_ChamplainGreyRev.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38c60e30c9d52ab4795560ef30bb7828
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_BlackSlate.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 394e98273a1dc5047a50e22b8a8fbbca
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainChamonixGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 397ae75f8d0031947afee440decb5c42
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Yucca.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a4673e727aff5ff9b1ef15dbd694f8c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_HarborGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3aaeeb7e4dd25669bad5c86e37bfa250
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_EarthworksStone_NaturalCraft_MojaveSunrise.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b850bcf8c7ee6ce7a8e958dc82bedec
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_SantaFe.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ba15e644ebcd37c78a7177548047d98
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_DistrictView_PhantomShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bd5a24b2919876dd8620df6954f8bac
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_BlackWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c534b744ea731047ab9205a01a882dc
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineIvory.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c73662d8d0e64634a3f66a04b9de6a1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_SilverVein.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3da4761c5f4ef4ae39cad36c1f8bc515
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_EvaChestnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3da77a26d9995be4ba9ac0eb006d029a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMountainVictorian.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dccda831e3bc4372b656d59b6bd26d9
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_MiniCretaArchChamplainGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e13cdf25ae97bf418c3f5520906bf6d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversFloridaNapoli.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e21962eb439f1744a6d01c6a4bdea54
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_Cambridge.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3eadc181f69ddb747b1ee3c540c00b1b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Sage.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fb931afef5bc7442bcc321ba9d27a85
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_AlaskaGrayPanel3DHonedPanel6x24_LPNLMALAGRY624-3DH.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 407f0ce991fa9de46bcea91564261f9e
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Moderno_FiorDiBosco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40bb226f9e2cfe9b68cb80c5981b2baa
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ProFit_Midnight.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40e18c1b7d2141a10a62c043c3704e0b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_GeorgetownRun_MorningAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41d45ca8f58e2464fb7ad462a2e2c7dc
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_CristalloPolished12mmSlabsPorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41d6a1650247d4e809b2c9b9f340a638
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NewTechWood_IcelandicSmokeEuropeanStyleSidingFull.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4233a191fde580d418d7f3564c9371af
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock__Stone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4235a652561ca41cea2194746a508883
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_HexaPaverHD2SmoothChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 425bb5a99a5bd9d429d058df2b87c623
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainMetallioBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42831208e77994375a45a210ef9e25ca
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Weatherwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42df431b68ea02d44ad612d83cc03c69
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainGothamBianco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4375bcdb9b10e4cf48bed3b6eaf97eb2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_AgedBarnboard.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43da154818149734ebc78efb0d39c2e0
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainArborNatural.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4444942d1959ffb499e9fedffba6f2d7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GlacialGreyMarblePanel6x24_LPNLMGLAGRY624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 444972fff00045243acd16d463763c58
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_BrownWave3DHonedPanel6x24_LPNLDBROWAV624-3DH.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44568a329b42bb7409a5f267a497b58b
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinBiancoGiulia.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44dd52a15941b99449675a2db6c6cead
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA__Wood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44dde57138f5ad442acf45eb8822d9db
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainDarma.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 455cbc54274295848b52496ef5fb8e54
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_AshGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 456cdf32d0b2430458696223cb23e05a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_AnthraciteMetallic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45b8d57b82840496787db0eeb5d57cc9
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_MiniCretaArchCaffeCrema.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45e72aeddde584943b3cffa589eb08ef
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 462861b8a09e09a48848729f4cc34953
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicGraySplitfacePanel6x24_LPNLMCOSGRY624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4665db3e4511042d1baf4991464c58f5
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Sanshade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46f7a25739fb01b44acfbc2251b2818b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 471e863d4b98c4ee6a8c92df26de3e88
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_SageSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47430d0e929e1b74c8d30f41175dedf8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve__Stone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47624cacdc040ac42991c84ccdf24447
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_QuartzMidday.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47e808ce41c04ee45a901f39c6490008
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado__Stone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 482474f96800847d686d8e161a9ac524
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomSlabPaverOverlaySmoothBeigeCream.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4914e822a586347ed8824423b6735642
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_EvaSlateChamplainGreyModular.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49585360b8cb0df4c94aa5817bfb7b4e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GrayOak3DHonedPanel6x24_LPNLMGRYOAK624-3DH_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49aab2f7fcfa0cd988956f0035e79c1c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_EarthworksStone_NaturalCraft_Graphite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a23ff352d9aad043b8df0ebbde7e200
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversTexasCrabOrchard.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a39829d9bdb5cd41b92b01acd57bc73
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleSkyBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a7a2b660378d4b1ba4bc8c474cf0df1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_RaffinatoSmoothShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a841abb9c56e6fa3be16c463f821464
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_CoffeeBrownGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4aa34b6235299414cb57c5f4e914b50d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_DiamondPaverHD2SmoothShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4af399dd037408b42a3418db9608201d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_WalnutGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b07bd202379db8f29a51261dd9f6917
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_LabradoriteGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b09e3ec0b5c3ef6d82c52bdf55cc63d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_AntiqueGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bd0286de511ff84d9a02319a4dd0ca7
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainWest57thBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4de153c7ea75a88aa9c4bb46937458c7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_EarthworksStone_NaturalCraft_DesertMesa.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e173b800fcb7794dac8d9f8696ce8cf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_BronzeHammered.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e96d24fc425e07aa9e488704fb8cbb3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_SandCastle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4eaf870630080284681f173543a1713c
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_AshwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f10248020cb74456be18671db09505d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_ToastedGinger.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f56e48ab269b45c88df01fb01a7727c
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_DiamondPaverHD2SmoothGreyedNickel2024.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4fa757308a3534049838d101cc0b5448
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversSouthwestDesert.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5158461fee52ec44c9e44d473f318b86
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainWest57thGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 518321a05f28c364ab943d3e7cf312c9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainChamonixBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52607127bb8e1b044950ea42af75ef51
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_RiverwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52625befcd252a04c847f969c61bfea6
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversPacificNorthwestRio.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52f556cd0d80c41a4b4e9b20bbc363b4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Seafoam.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5305e6d4d39c62446ac3c35a147b2888
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SierraBluePanel6x24_LPNLQSIEBLU624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 531ada6ac01eae51f946dad955352943
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_Rosewood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5346ebe140716324d8b5c01ed85fa180
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_PhiladelphiaPanel6x24_LPNLTPHI624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53586ebea75cc5e42ba2c6c03d33c84a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainLumena.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 538336343c6a2426081ecf036c667621
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_BrandonWallOnyxBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5400e934466674daba99a5468c136e8e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_Dune.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54738eb1994086740a999ebeee2ba587
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversFloridaTitanium.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 547a3a7804abd8d4d93f2dc269a401b4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_TuscanyScabasTravertinePanel_LPNLTSCA624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54a6a89de49ee8c43adb625ac9a822b7
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainSnowdrift.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54d896edaf9594fcfb800204edef39c0
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_BrandonWallShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54e91af4b3edc6f449c4270130ed5df9
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_EnduraBrushedWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 569d71b16c3ffa54aab89b73af4e726a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_ElmwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 572527673e9cc09ce88c2fa3173f54e1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_Amberwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57471e2ea08fe6e4c96ae73b01056922
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversPacificNorthwestToscana.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57eb7672e1fe8df4bb596704fd58eb1d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_EnduraBrushedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57ed35cf5b5a23d4f8e1d3cc0be5ae77
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_PearlNightBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5891c7607006b9b05b5c95751a02a9cb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_Onyx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58e21b431d16540dca672e6ae329b1a3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Mahogany.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5983db8559a744c1fbd8489b9f240b21
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NewTechWood_RomanAntiqueEuropeanStyleSiding.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5bc98251ed9934f44a881dde4fcc4860
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Challenger__.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c0d27a474d2b4c4cba07d134ef61890
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinBiancoGhiaccioLastra.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c3f4b0ed27394786a4c7ded630b44a7
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_HexaPaverHD2SmoothShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ca1bf6f884557443b8be12f87112c06
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_FogSpeckled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cb5b3ab35dcb7e4095dc43d390674b3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_MatteBlackSpeckled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cc621820c6793c459238a0849c3d3f4
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversSouthwestSierra.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cf7b2f1609a24bfb88990c2a5dccb9f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ProFit_BrazilianCherry.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dd77a07bda005d4e8eda31831b00135
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_StatuarioBariMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e19ed4e175b1bcfba53ab474867c523
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_ABCStone_FantasyBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ebbb185c1c90744fa030bf78bd7a4ce
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversFloridaHarvestBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f9035e11a4cad14ebc51e9541162737
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver__PowderCoat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fc6dfab110e00ee8be8342449597937
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Gramaco_FantasyBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fe7aca95f2d7228295517688883aa6e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_PotomacTrail_MorningAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60c0c259d3a74ff44a6c2a8b93f9b2ff
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversCaliforniaNevadaBella.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 612b99646d0cf97438d3cd2c255a5984
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_StainlessHamered.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6169ed726901648b5b244ea4fa2fbedf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_Dove.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 617a19921d2b1e486b2f85e71052dc76
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_NationalTrue_MorningAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61ad97c9e18cb4304bde6ed4998f4b8e
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_DiamondPaverHD2SmoothOnyx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61fbb91343154f64eb826d468ff5edd2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_KoryakRidge.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6215e0bcf83704446af683cea937ad81
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Challenger_SilverVein.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62825b129382f7b4e87dfda7548246a8
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinGrigioCemento.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6284e7a99dc35c94daf47fcddc3ed977
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinBiancoAssoluto.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6292d3a795d67294a81b530e9a781dcd
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Industria_FloraDaisyBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62bc0a2be63e6bd44a37fffbea7b844c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainImpermia.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62dac266a6a9cdd4b8ca04ec5ff21906
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger__.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 634ec68831a9fed45a28bfc4e50deaec
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_ExcaliburCobble_OnyxNatural.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63e984c3d41104ead85fe4e036d9d4f0
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardMochaBrownWG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6473f77b9897045908e94912199e2e60
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_Sage.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65862dcb7f7764ab89db4efdacdac17d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BorealisSlabHD2HazelnutBrandy.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 662775a5c0196eb43bf97209dc7a2082
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineCream.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6642e871ef8f7544a8cb90deaa40b475
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong_ShellWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6657e365c35fada4caa1cd260fad62a2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Featherly.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 668a5793c6b674d1688a6ce2799e8f5d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_WarmedTaupe.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6753922be6d1bbd4a96773a76fe57f24
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_CoastwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67aaf3338f9311a40ba74a0372153156
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_Asheville.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67ada3d58867b4a05a3727b7064e82d1
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_IndustriaHD2900x600PaverSmoothOnyxBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68204892c05409546a76f68cc68a5f22
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_StatuarioGold.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6824e34120961de41b9f0eec686ccb63
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NPT_CulturedStoneVeneerNoce.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 689a3408373b9b443933a696e454428e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong_SapphireBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68fc17bc0c97c41f9814aa1d0935b3c7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_DarkAsh.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 692ad3ebd79d1e644b2be4664455e2fe
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainSleet.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69616e9b2b48bdf8db4b5d7920120e25
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_PotomacTrail_PhantomShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a2c98fad3d76834fbf3b0a22a0bd994
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_TigerwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ab4f7fbfc9a5416b8c4c23e75b1367c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_CoastalSage.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bbb16d694eccb8498a03eb3fcca8fe4
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_IronwoodRustic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bf6a4a6adce5164683ce94ddc8dcc8a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Moderno_BlackMarquina.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bf78c6c5b610aa45938fd71e1b3e05d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraSand.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c758b84f6d461e4384724133603e337
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_QuartzPalmShade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cb37e5e15fb3587d8ba36427f891766
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_BlackGalaxyGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d0a1ae29345322448dc5c71c3b80984
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_QuartzClearskies.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d1d194c862c34e358cf64c9633e04be
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_RaffinatoSmoothBeigeCream.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d4b5c8c467805545b11e83fdfc263bf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_BeechwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6df1dabad94c38943b629ff4df6e27fe
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversCaliforniaNevadaVictorian.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e174157665e7b556ac840dbda7b2ec7
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_Cypress.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ec73d5ff6eb4194b9de2739b8c76908
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_Platinum.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f0e697f7bf2a5f4b90a88042db8a414
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NPT_CulturedStoneVeneerSilver.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f741a6bc271194179b88dde5196542f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_CapitalSky_PhantomShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f74c853c670c42e7b13fdcbf9d902ae
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_BrownWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f9a5f21b5e11eb419f26e7de6f44e40
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ArcticGoldenSplitfacePanel6x24_LPNLQARCGLD624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fb75b5c2103a403fa6f1fb36f3aaf4e
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_DiamondPaverHD2SmoothChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fe3db0f9b5184f27aa0e174a82f9767
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SmoothShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fe66cfc050e92e84885cafd4937a24c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_SilverLining.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fec3e1526b905c3dba7a58ae632f103
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_TitaniumGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ff75efec89b34823bd8675cc89af156
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_CharcoalGraySwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 701352b66de98e8489df4cb843947cce
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_SandstoneBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 704bc80ca0e93314b8bb63b50a04e795
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_AlaskaGrayMultiPanel6x24_LPNLMALAGRY624-MULTI_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7051da6d41115de48bad474b28f4b049
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ArcticWhiteMultFinishPanel6x24_LPNLMARCWHI624-MULTI.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 708aaecf054047362b943c9f1b2a0cfd
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_Travertina.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 710dd72be2be65c45b4c04155c9e3db4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf__Paneling.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 717d74dc8ef884e43abc5100cf9604fc
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_ClaySpeckled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72f561557eecc5945b22bac7cff33cc5
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_Graphite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73d1cb437cc460746bbee3c3cc0a7ecf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraConcrete.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 740049badc6715c459b8724b4ea29e22
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Challenger_TexturedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74052253140e3254bb863723fbe22234
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_TexturedYellow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 747e0a6e89fea184fbe2e95074eff852
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Westmount_SmoothMerlot.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 752c58c25ee27d6409b6c630a43fef21
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_LunaGray_LPNLMLUNGRY624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7716e9e257f88704b9ecc815ca162b81
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SB-SS-WHITEOAKMULTISPLIT.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77357d732bb334aacb2ab97e5be5ebbb
+    m_Address: "Assets/AssetsMelcher/Finishes/Flooring_Techobloc_HexaPaverHD2SmoothCaff\xE8Crema.mat"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 774e694fdc4aeaf47a14ea944474f355
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_TexturedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77baeb23a399146809b8f2073bce551b
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_DelicatusCremaGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78d4540d508402ba09c3ea3abf02822f
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_BlueBahiaGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79914e0e66ccec941a2eb667a3912517
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainArborBianco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79cabec54e9244abb915b4385b6eb019
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_Barnwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79e08074fb5ed492f966a73c0d6334cd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_DolphinGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7addc52e7b4f50c4e80a488bc8d71177
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversPacificNorthwestVictorian.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b2a1382a558f49fabe1de1d15763936
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BOREALIS6x24SlabKBWOODHazelnutBrandy0196.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bdb1a4804332e3429287d1c17e445ec
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_SandyShore.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c19255d044b04edeb8bb24be49e47d1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_SaltedSlate.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c31ba854071f0e4caf70db486d87107
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_BirchwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c7fee9c41f31ee49b51152e702ddb99
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_Hickory.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d2540b9726870d48a80a4d60b631139
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicBlackSplitfacePanel6x24_LPNLMCOSBLK624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d2aee7eb9c5786cfb484d91b2b765ca
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_ChesapeakeBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e44e4eabec31114eb726662712c98bc
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Thumper.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e62dc0942b7e79b797efd3611fbc350
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_Champagne.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e75fcdfe9ddf446f873f509d73e37b9
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Napoleon_StainlessSteel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ea73a3b2f11b10479091465afab9376
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainMonteverdeNoce.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f06c46f8c5fd4123befc399c256824f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_WhiteWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f395d78b7ef0499299d8689dfe673ff
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_SmokedMahogany.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f7d5d0adb5c1924988accd2760b366f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_AlaskaGrayMultiPanel6x24_LPNLMALAGRY624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7fc711728f4a76b42b08c24ce0bfcd67
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Adrenaline.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 806abdb53b11bdc4880a589c2c40503a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainWest57thBianco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8153ab8f1a117aa4a95e367310d287bb
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_BeechwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81c45075f2b356f42aba2c639f6ce28f
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainLaScalaNoce.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 820374c54d7f5b64eaf2eae3b045ffcb
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Industria_ChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8287678684389444e8c98c87852ccb2c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec__Satin.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82d46d2092c36a54b8a7da2e8e48fafb
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainArborGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 830eec87d0b2cff43a00656c20e1fbbd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_IronwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 839561a511584664a8ceff4a5b84e16e
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_KingwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 841973d50a77bb14bb4d4b502a096fc8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_RusticGoldPanel6x24_LPNLSRUSGLD624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 845f8edf2d15fe044b8a1065bfc9b6bb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_EbonyGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 847e3a1976bf3c895b38815aa514289c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_DeliriumGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85711a6e8c57ede418c49b59144530af
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_MidnightMatte.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 863bde36bae70f462be413481a6453fd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_DarkRundle_Northwest.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86b468e71f811e64994bf5869b9ccccd
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainArchetta.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86d6000730cb3b44799e4f063ff08a38
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GoldenHoneyPanel6x24_LPNLQGLDHON624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8763716b24762c337aacc9522909dfaf
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_CremaBordeauxGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 879cf11d3bc2f864594e1afa2de6a33d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_IronwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 885e6b400ad25454fa913ab67c8db174
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_Charcoal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 888a571d3a467f6eb86334eea03ace3e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_EarthworksStone_NaturalCraft_Bellhurst.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 888acd9abeb4a6140af5a650a1c7c9ff
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_RedWirecut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88df90edc17764fb5b3134f3013b3ff1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_Mica.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88fd2e2b560484f7085c44f0391f3710
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Teak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88ffca8bbdb1d3eb6b7233995ca95740
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_HarborGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 892c83793a01043878ae53606dc9dfdd
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_HexaPaverHD2SmoothOnyxBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 893b549ba5986a24a9afead89d46baa4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_SharkGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8944fdbed97bb2840b4abe37ef739801
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleFantasticRoyal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89af9e06335dae87297e8531d3c93de0
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_DistrictView_MorningAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a1ba795d668b6a4ea39b49bb0009c15
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Moderno_InfinityCalacattaMagnifico.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a42ce71972021742982a7f8f89853d8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SedonaGreyPanel6x24_LPNLQSEDGRY624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ae63c6394ff9ef4aafd31cc24d09869
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ArcticWhiteMultFinishPanel6x24_LPNLMARCWHI624-MULTI_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8af804f8f3af9488a95f33a06740ee32
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Everglade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b2659e5fa75a9d41a885b7514bd2c94
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainMonumental.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bae25a709d110de6869b89e6397e15a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_AntiqueRed.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bdda697c05814b6096427ef1135173f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ProFit_Charwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bf9bbbb2e8c54c29a29d330f02527cd
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_HexaPaverHD2SmoothGreyedNickel2024.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d2b3444c2f989940b7375efcd856a12
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainGothamBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8dae5ada19b51ab479dd66601a4baded
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversCaliforniaNevadaRio.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8dba048ec959095208aef7941f5019c5
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_Oceanic5.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f7ec3bed8a3f5fe0a39efb995a169fc
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_MetallicLatte.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 902f5e32b32205e4992e57933665b048
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MalibuHoney6x24_LPNLQMALHON624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90fac685f68ac5743aeb06cd1427a045
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_BostonianIronspot.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91530a31dcb6744cf9e0c70d13ef1525
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_RaffinatoSmoothCaffeCrema.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 919fba70a59e89f4fbee2a9b92c097f6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_Cypress.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 922c1d76cfb864555a3e7c65ad6c5066
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_BlackWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 925fed4ef5b2fe94ba94f03ad40269d9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMidwestFossilBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92655279ee9d19122b8b693812cfcea3
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_PeacockGreenGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9297ec9d27feace0195cf9002583dc64
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_Daybreak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9298cb9c48be9e74da7082602cf319e2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_BlackwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92f9bd959611c9c4aa482e9a8b200eb3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_Anthracite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93507d92b4903495c832cf74bd48b0c9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_EvaSlateShaleGreyModular.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95a2f4571cdd8729984db6bdadcaf2af
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Stoll_Standard_Graphite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 962f53a803992103498e3296fca2bf1a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_AntiqueSteel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96b56db6c43f50b4cae46a6182fa1875
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_BasaltinaNeraMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96f0b0a5d9ad745609599932ec8add74
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardIndigoWG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96f786ceaf71940468da3f8025734cca
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Khaki.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 970bf09ccbdba4d5bb043e71cda7a032
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NewTechWood_JapaneseCedarEuropeanStyleSidingFull.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 972e4d0a96d016b4aa9d27682516e797
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleAtlanticGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97f867e0e29a246faa7d98495fe99512
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardCharcoalGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9821f89301bda834e9db58753e6177cd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI__StackedStone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 986abc854dd2eea4abbe19edf5257027
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Moderno_SaharaNoir.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9872a03de1153879692f5f8ad84dba7e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_EarthworksStone__NaturalCraft.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99234c35554f27f48981596071729005
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Marble.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99a1389d0c7931128b6965474c57c081
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_Teakwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99aedb7336ab3495596de25171438cdd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_SusquehannaGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99d58c98c2a348747be52178d22fb430
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco__Stucco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ab57b60a879b7f239e299ce00670502
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_SatinGold.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9abc427127878c2478ac10558cf9b917
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_LimestoneQuarryBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b24e6009bab44878a04040c90cbd4ba
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Indigo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b875416cd80caa8b8287072cc212a9b
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_WestchesterBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c0cce03778819d4883f1c47967ea45c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SageGreenPanel6x24_LPNLQSAGGRN624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c86c1e6bd3c0e14cbf75f61fe944e8c
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainGothamNero.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c934b91b79f34242a2e7a1202ef956a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_CalacattaLuccaMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ca395d4a8fb1fb44b0c7b71be580ee5
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SilverTravertinePanel6x24_LPNLTSIL624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d0d7d901e276e0449bda3e758050285
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Squadra_ChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e4759b8d87fcfc49a174f9fc580df64
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainTrancenda.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e7805bc1bffcba44b29b2186c111d3f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraCloud.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f4c7030dbb5a43e2bf1fbee1cf92494
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_SymphonyBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f80724bd4f9cdb43bc453627f72f188
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_StatuarioBianco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0434d1b15e232e44b05fb5af3d62d03
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainMetallioBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0775558f9681d54582fd76c1dea24e6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_WalnutGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0a71cfb1760a4145b8d3757bdae54a2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_DurangoCreamSplitfacePanel6x24_LPNLTDURCRE624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0b22173b67d066489b46124554fe437
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_ChestnutGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0c5495fe9c85afa8870f66db14ba9f9
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_NationalTrue_PhantomShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0d29ae8b60dff70084a6afd9ebbb9ed
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_BluePearlGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a16fabc823bc6824c9019014ede0a6f1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_CharwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a212f308bf32242b093fdf649ee7e9ba
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SmoothChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a32bd2c588b5a4bcea093faac5923245
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_Nutmeg.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3a4b0a89ce8548e2a6494f9904f9287
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_Evergreen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4751e9e25c4be44390805d10aec78d8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraSage.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4e656ca54da05144a1cf5a3f94a818d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_RiverRock_OnyxNatural.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a506558fda0fed244945f9e2942c4984
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CasaBlend3DHonedPanel6x24_LPNLTCASBLE624-3DH.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5cffdf2394c2534e9518655637efc81
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversSouthwestBella.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7aac00f395a3964aa593235eeb602a9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMountainAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a892d571327433e42b2db585781db04a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Westmount_SmoothOnyxBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8cb06d4a28b6e84a8b8ff699c570976
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversPacificNorthwestAutumn.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a90163101503d06439e363a3ae76d0a4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_Camden.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a949558a4e878455cb359dc3d72c4786
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_MiniCretaArchGreyedNickel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9a8f06c943c54849aa4971f41ba008c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_Aspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9d67032e27aa8a4f98f66dbb0c08a2e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_Anthracite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa345ddd8c02f12b0870b280ea77f2eb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_White.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa92fa01cf2b745d684899ba565294fe
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_ClubBlackJackSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aab64f81030033843a62e9aca1547882
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_AshwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aad8588f147da6445809548f0b8f3cf1
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_BluestoneBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab201472a28cfe64c93063298a98bca3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Pueblo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab3e1c031b8f9504681712d910c897cf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_Whitewash.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac155059b20cee941ba871226622e921
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversCaliforniaNevadaToscana.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acf19e149e58b47df9f9acb23ededb91
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardMochaBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad6ff683f0964d3498d28af985fb838b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraCharcoal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: add68c87572d21348a7caf228fb6528e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_Elm.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae0e377cffe2375478a14c1ccd154013
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleIceWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae460101ffe8a8c4a863fa1b10981228
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainFume.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae5fdd18be7ff0d40960483e0279eeaa
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainSilverdrop.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aea2a4d5cd7c4dedc9e5888e13e1e5fb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_DriftwoodGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aef70b393554148a3bac26c9cbb8a63a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardDolphinGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af3a0486edaab43d38b1faddc08b6e88
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_BrandonWallChamplainGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af79b3090a5f6ab4db7a3b96f3f40d77
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_Coal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afdfe83fed71c44bc84d3398e9d51e56
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_AspenHorizontal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aff237fe16281c04e90004dbccfd610c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GlacialBlackPanel6x24_LPNLMGLABLK624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0116bb24ab454e9683c1cdd74080a61
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_FossilGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0176d016b668430a881891f16a12bf1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_WhiteOakSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b095d4d96d199c1fc90c52e35dca7814
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_Peconic6.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0ba2a32fc0b4db4bb56083aca134a52
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_TigerwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0f2a349503e2924dac4aa44c924a106
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_LPNLQCANCRE624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b13ca3c607c11615f824902fbf1cd328
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_DistrictView_DunePoint.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b17a5d4f50c0d49e1b4a5d226e985362
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardBasil.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b262d3b0b2d976048abb9dde755c3f07
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MayraWhiteLimestonePanel6x24_LPNLLMAYWHI624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b28d8d8f7b4280b47881b4426df7e753
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT__Concrete.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2def5cba90c76b4daa92e7f5875552a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Autumn.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b31b94c13aac36f4dab9423d2391ab94
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMountainCharcoal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b32202476a2d21a42b80a2bb9c6e98a1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_ElmwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b322738805420488cbf1e180c9448112
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardIndigo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b33246a55f1a5460e9065aa9b5d7a3fb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardSlateGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b342671d819062c4ca14dff0836f4d5a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainMirabel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4f13abc18be9cadb8b6fea1520aaaf9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_OceanicBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b579ff5e6168c6c42bfdb17d2ac348e6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_WhiteOak3DHonedPanel6x24_LPNLMWHIOAK624-3DH_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5991d2eb4f7ec24a8a65ad1f218a38d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_AmberFallsPanel6x24_LPNLQAMBFAL624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5c84077854fb054398bfad825504510
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_Truffle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5f14d5d37d6b2b41a572d84b8195a58
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_BlackwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5fe31fef2864bd92b97daa6a63b2042
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Stoll_Premium_DarkenedIron.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b62bbdeb86319bb4d871d2b43f3db73a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_Teak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b67db5ea0ce044bd48f08638cbe07833
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_BrownWalnutSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6b46114c4ae76d4fbd5f5f61363dbcb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_KingwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6d1c519d2d40f6478bf2a5c8c778973
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_RiverwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6e1d13552cb31c61b02d3c3252cf168
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_GeorgetownRun_PhantomShadow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7129fc3111be484bb4e9574f0216bb7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_StoneAge.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b736b26137f20471a9fedef36a14e08e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_OlyphantOak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b79db94e05d0d2e468692b672b9c160c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_NuBlackHammertone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7ecc9eece4ee4a41b761ab33cb77abf
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NewTechWood_PeruvianTeakEuropeanStyleSiding.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7ee209e386504cb9823f95ec4fbe49f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_CharcoalGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b876d7b6a542844c2836ec1ce1e6d148
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_WroughtIron.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b898e065abd911545bb7a9d7df178952
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_CanyonCreek.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba12d0336140fff4f8ecb8830b32c630
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Snow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba15ca373f654aef5b47c31239dcfb77
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_GeorgetownRun_KodiakMine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba34cd5664b81fa46b7dbcdda6a7dc97
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_RomanBeigePanel6x24_LPNLTROMBEI624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba5281da0c60e0d4c8f4b991966d2262
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_ExcaliburCobble_Onyx.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba853cc584a2f86469e7a5028d79801d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MarquinaNeroSplitfacePanel6x24_LPNLMMARNER624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: baab0d9977ccf4eed8e3bdbb87ff363c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_AutumnMoss.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb62be440721f413b904f9df3fa18a5e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardSlateGrayWG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb6ce7195a52413409877019e7954932
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens__Standard.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbb1b40ae4f8dc14eae90b1066c30ee1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GlacialGreyMarblePanel6x24_LPNLMGLAGRY624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc618a1b9db31a248aea48b548ff64de
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversFloridaAmaretto.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bca3b05882678b89692a560365932f2c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_PotomacTrail_KodiakMine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcf235e162b6c4b49b58167d5c9cef72
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraBronze.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd511a45576fb4d7c8f3fb9f86e38ffb
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_IndustriaHD2900x600PaverSmoothShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd7cb92246ed0664283a5d0411b1ee5f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_PearlDarkGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd85e7b73d015b7a5845c9ac2b540998
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_OilRubbedBronze.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd9bf20472fa4b5f594e46eb3191e1a4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_Charcoal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be22c0e4081c4a84bb13b44029d3e97a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainLocura.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bee4464285506f14f8d32fb6a592362b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll__Premium_Endura.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf7bbc394ce06924ba6865798a9f20c5
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversTexasFossilBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfb0984e85d29425cbe68381122551a8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardCharcoalGrayWG.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfbcceb77948c4763a7b03478cc97a35
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SlateChamplainGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfe8ddc58eafdf977a5f6faee3d81605
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Wolf_WeatheredIPE.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0671379293edbb48b2e3073d6dd053c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinArabescatoCorallo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c07036d112310ae64bc29f6ecfc596ed
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_CapitalSky_DunePoint.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0a391f0a015e1044aa495ec36344db6
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Squadra_OnyxBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0c5c20f2f00fe448aa535368f2014ae
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineScabos.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c19c12513e5cf3c49a5d88706bca0af3
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMidwestCotswoldMist.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c22441f9994f04ec28dbd564452ac33b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_ShorelineGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c299409125655ae4382c594d185c54cb
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinTerraEbano.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2d7ec07286974d8485de85a390d7aa1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_ReefBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c35ec3b869bd25b4a88bee1bed20dd26
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinTerraMoca.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c35ff49c27d30a6428007cd93e1dc7c0
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Iceberg.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c37eeb700828c444f86ecf5ead03b4c6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_IronwoodRustic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4502c63317594b9f8dc2609765f75a6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_WhiteOak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4a3f9c46d6464758bc83a3ed9565478
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_NutmegSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c54ea31ad7e22ba44ac07e275aac1455
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleBiancoTurco.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5bf2e9e2f1f8764f83fcfcef9b03d28
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversFloridaAdobe.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c61258a9de9b37e48b7de52196d9ba77
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ArcticWhite3DHonedPanel6x24_LPNLMARCWHI624-3DH_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c61260e553be9064bbda964c4188cf89
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainTravstoneBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c623b2dafbe964ec090d6d04eb969079
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluGrandeSlabHD2SlateSandlewood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c62839df608cc1844b739808b6f78a94
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_Crusader_TurfstoneNaturalGrass.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c682d5bf3e9ab5443b40dd4d3e3d2c8a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainCirca.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6d1008f960592633af9e28f050b130f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll__Standard.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6e39df90aed474469a47ee5b02a2e7b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_LPNLQAMBFAL624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7207e0a426c34c98a3ece772506a0a4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_LighthouseGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7f54789ea989444ea3abb50d549c592
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong_PitchBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8c00c242b4f0e89dbdc58a6e60f748d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_AntiqueBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8d948e092288364eb134ecd4234aff6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_WhiteSpeckled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c954b98ced6034ad3b8e97455d000ff6
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_NationalTrue_DunePoint.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9bfff263a4cea243b81c11a8fd7d4c3
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleTahoe.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9fc4e871a6e0e44596c36e72557c6dd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_WalnutRustic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca62c261ddf2b3046b04aff7a8b9e913
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_DarkAsh.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca69719411ce7334a89f36c4c9fd26ad
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicBlack3DWavePanel6x24_LPNLMCOSBLK624-3DW.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca79334de194c2e29b2a575f7c4c1c44
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ProFit__Wood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cac343349ddb47951a43dc034b8ede3c
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_GialloVeronaGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cada1dd40e6e2ca4883936a824fa0a5b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_SeashellWhite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cadc9aa7190c5094b94a4ea7ba6d46f1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens__Standard_Hammered.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: caf9904adddecc146a2cd71092e84838
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Challenger_CopperVein.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb7cedada44e2f349a7a6a700e104cb4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_PremiumBlackSlatePanel6x24_LPNLSPREBLK624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbc50671553ec4ec4803ec7d8d3e0221
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_BlackJack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd53308d771ef2546a25803fadf3e68a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_ExcaliburCobble_Ruby.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd8cadd47a9c32ed09f7d1a72e344396
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_HaleNavy.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdb53ab231b863f4c815c73692ff557c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_SpeckledWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce468a950fd9f4ae6b421075d555a134
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_SymphonyBLSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce62c9c21b82e3b459a48c50cc49526a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf__Wood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce931557f47af054c8cdb446b4fe8c50
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_Crusader_TurfstoneNaturalRock.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf1076a1d9dc648f6bff7f973cef5306
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardSeafoam.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf30858e1f214aa43a5e59165fd69323
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_RoyalWhiteSplitfacePanel6x24_LPNLQROYWHI624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cfa7d5fb5051b1944a3a06edbdb0274c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_BlackHammered.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d052515b8f7d440a69e95d5e5f0a96be
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_WoodGrain_TeakHorizontal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d09f665b65af6c3499d0c0653fb969f9
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversCaliforniaNevadaMontecito.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d14e820f630e5e84f9512bf7b8ec70ca
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMidwestBrittanyBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d17af594a25ac4e71b4ff7fdcff36280
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_DriftwoodGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d22ec733a41caf82e8628bf2dbd76b63
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_Alderwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d26bcad01196b3d3682896cf9f6749e0
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Stoll_Standard_Granite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3578a2bb38384dd5bf6ba966951e339
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_HarvestShale.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d487a3df674a5484c877a6e9b70c8fb0
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_EvaSandlewood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5bda3d7e97e033439c7182d4771964f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_MatteBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d615a6f37d08dc14e95e197ffd653024
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong_DarkAsh.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d650ed729dc80fe489bf2c1610bb24ee
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_PotomacTrail_DunePoint.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d66036946a5924a1f85d12f3fbba1c64
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_SlateGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d870d047f5f9cfd4aa116dbe12e294e8
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TechoBloc_Industria_BeigeCream.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d88cccddd018d4baa8afd6bb05996cdf
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_DiamondPaverHD2SmoothBeigeCream2024.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d933d88a281dc2444bac636988933b46
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversTexasDanvilleBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d975ba7decbdd8f4295f68621174ce27
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineCountryClassic.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da73c68cbf237e546ae4b299069fcc3a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_StatuarioSilver.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da91da8ee848c144d919367c5bfe901d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Brick_CapeCod.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da9756d1335c3b14583703b73756461b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CalacattaCressa3DPanel6x24_LPNLMCALCRE624-3DH.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: daa5b0e4c93ad484dbdb1ff581425ffb
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_DoveSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db8c88ffe0d174d46a8bcce2e21e2844
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_BrandonWallCaffeCrema.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db9c32dee06d8bd4d8fa404723f9528f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SilverCanyonPanel6x24_LPNLMSILCAN624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbab774cdec560345a0cd6cd47f08038
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CanyonCreekPanel6x24_LPNLQCANCRE624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbfee086cf3c3450598d1f27dc8fadd2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_HexaPaverHD2SmoothBeigeCream2024.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc71b66942aa7aeada9637c08bf94675
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_ChapelHill.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dca7b0516d735334e9187533530e015e
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge__Pavers.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dcba98ce6b44a484b8c261d54710cec8
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_LedgestoneSmooth_OnyxNatural.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dcfee2b2500b54a2790802d0db31246d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_BluffBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd31d5a9661f00c44b4810a5c1e63af7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_ChestnutGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd638d6be3211f74e858bb503fbb200e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_TIVA_BirchwoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd8035457ef5920479af525b3ec716cc
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_TIVA_EbonyGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddb170e3b5661514e859e1ccfee6b29f
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Challenger_SpeckledWalnut.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddcdfc8faa5b982719f5d5c5e52645fb
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_Teakwood.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de72150cc6c644458b3ccc18b78dc2b8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_DockBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dea80205e82a36346b853553eee8e689
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_RiverRock_Mocha.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dec37cc546fb64a6cb3afe958ffb7481
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_AmericanOutdoorCabinets_MochaBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfb5b02e7f73a074099c72bef6207e12
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinBiancoPolare.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfbc2300a159d38459ae162ec15a83d7
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainMonteverdeBeige.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dff8f7b04675e4c6b89caa430a12c4b3
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SlateShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0cee5eb7a0cf6642866f0bb7c4dd0fa
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GoldenHoneyPencilLedgerPanel6x24_LPNLQGLDHON624-PEN_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e11c8afc927b9c51699042ccf67e4f8e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_Nantucket.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e137d434dff0df8489014b7cf68ae38b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens__Standard_Speckled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e30ce1fe59c5c1b4fb7155d9418d2fee
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_PorcelainGothamGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e30ddc14c1b834146b8d462db0ed2094
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleVenice.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e34691b48018b3e4590130008deb623a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_CapitalSky_MorningAspen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e368d44a5fcc2a44bb70fd5acab70c23
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_IcelandGrayPanel6x24_LPNLTICEGRY624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e39fda06cb2303d4697706194e3f483a
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinBiancoCrema.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3bcaea0a7be04da7bd3b5b97fe9fa1c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_BrushedBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3e69d94c9f35934db7962446367f967
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NPT__CulturedStone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e559e8e55f9d86ac6954ded39ff32630
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll__Premium.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5701585c2d49c045b04e503cfdd57d1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens__WoodGrain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5f6e9f730a07bc48a91a436643ed95d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_Cappuccino.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e60159486dfef713fb45e7ded8413006
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ProFit_Blue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e633cbd89960a1a45a1f8a7797a7349a
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Cambridge_RiverRock_Coal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e659116348de8ae43a7cacf57d3afb8d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversSouthwestRio.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e66a2638a40e3b64cb8c35e60b547e3b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicWhiteSplitfacePanel6x24_LPNLMCOSWHI624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e681d79575de043e2a611395c3b16e68
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_RaffinatoSmoothOnyxBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6e4fe843b9f54768bff31fc7e948acd
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_HeatherstoneSwatch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7429f9a90b384e63b569ec477265ff2
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_SlateGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7aa60c3736afdf72b8d9d880a0e8b3d
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_NewCaledoniaGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e8c35ced6af516e47ad260c9c94fb249
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversTexasRio.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e910de76bf26a42d4af2e6da0e81ec35
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Toppin_StarboardSanshade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e95c6214e9c76f749b345cbb35db1914
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinGrigioPiombo.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea597711b089fdc4b9f13108e2b52c1d
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Challenger_TexturedGreyGlimmer.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea5c3e0f92fd641bc8e565876e95c5e4
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Endura_HearthStone.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eadae3fba44d146449f1b652723cfb05
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_Espresso.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb8b982776f421a4a9294557fac0b100
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Caesarstone_PorcelainStriata.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebbcee8213e3e0d4ea328cdd02446342
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_BerlinGardens_Standard_GraphiteSpeckled.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebdc84f1af06cf2d6b6d2c29ac5e6d2b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_BurnishedBronze.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebf2c41f09cbab641945431812075545
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_GoldenWhitePanel6x24_LPNLQGLDWHI624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec19e2b7b72bc40a2aee1f0567260d1f
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_IndustriaHD2900x600PaverSmoothBeigeCream.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eca0fa3e725abb24ba98419ac447db09
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleTundraGray.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed264d19325194d488c51a7fad15def7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ColoradoCream_LPNLMCOLCRE624-PEN.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ede6e0ae8440e4aaa809b722e0ba4392
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_BluRandomPaverSlabHD2SmoothGreyedNIckel20242.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: edf03529bb09048dcbda552dd844eef8
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_SapphireBlue.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef15198e5705d4b32a03dbc501c4db80
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Concrete_ConcreteFinish.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0517e8a621fa5a46bcabb5cd2855312
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_CarraraPolishedPorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f09bb6d27a813f64e9085d29c8599c52
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_IceOnyxBookMatched12mmPolished.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0aca609fde45544e831d2b768d96fd2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertineDarkNoce.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1e0564ddd8da0c439e22ff0b0e1d1ed
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CosmicWhite3DWavePanel6x24_LPNLMCOSWHI624-3DW.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f21cbaee74e024b6e8a1432331c169d2
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Techobloc_IndustriaHD2900x600PaverSmoothGreyedNickel.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f29b386ea7d043f4ca6c711aa384c8f6
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Lapitec_SatinVittoria.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2ddef97cd49cc547946ae93e7b01c6a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Sagebrush.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f36c1ed25bb60944884b578b05111e35
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ArcticWhitePanel6x24_LPNLQARCWHI624_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f39048692fdfa6a43ab21f56d176e7b0
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MayraWhiteLimestonePanel6x24_LPNLLMAYWHI624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f415f12e797da034baedc4439fbbb0e0
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_ConcretePaversMountainRio.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f47e9161aaa784468b742fb574d001a3
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_BrandonWallChestnutBrown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4b4e402300265c948da739ee968d50d
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_GraniteCityBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f56b8484d35852541af204edf378e1b1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stucco_Gravity.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f60c64a3ac0a444c8880b865fb9fa63e
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_MidnightTide.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6e2d3f932ae6bd4e8bcca67d39c2da7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CoalCanyonPanel6x24_LPNLQCOACAN624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f754a4ff7220163458df30fca575daed
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Danver_Champagne.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7e079038877d104b8586be82f525b83
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_CalacattaMarbellaPolishedPorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f82e93da88f7f1642bf080b2d747079e
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_MarbleWavyGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f88bbd30e8aed5847baae38c14fce36f
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_NPT_TravertinePhiladelphia.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8c69e146564fdf429a346d6fdf30c6f
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_Moderno_InfinityAtlantisGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8cb195e43d04c747b6bd1e4d88a3b47
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_ArabescatoCararaSplitface6x24_LPNLMARACAR624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f91cceb732db284fba449dc2ab7cfce8
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Nicolock_GraphitePearlBlend.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f92da6954b52ef70294a8babc75fd664
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_ElDorado_StackedStone_DryCreek.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f97cfa9eac2cc594eb821121e8ce4c8b
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_LPNLQCANCRE618COR_a2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa16818af96f14eaa999ecceb6ecd03c
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_NatureKast_Oak_NaturalBlonde.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: faf466153eed91c4e9908f4ef778c149
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_SilverCanyonPanel6x24_LPNLMSILCAN624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbb1f57a205cb4f3688c4189aebef27f
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Techobloc_MiniCretaArchShaleGrey.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbd9693a176c244d190de864e672ec13
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrongSelect_EmeraldGreen.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc3ad00fa359cba4097ec3886b261fee
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Standard_EnduraGraphite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc66cab3c9be47fa4b63869b38dc6bb1
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Evolve_CapitalSky_KodiakMine.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcda0189c3c01c4488fcbb5ef279e08a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_WeatherStrong_Teak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd3aa36d4cd9dbdee87c13ebe81a6811
+    m_Address: Assets/AssetsMelcher/Finishes/Flooring_Wolf_SilverTeak.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd896b975f21720478962f3413a07a34
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_MSI_PietraGrigioMattePorcelain.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe89b7c339ec889ba920543d943c2e51
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_Stoll_Premium_IndustrialBlack.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fea4a3abb70fc704480fc2c26a4d086a
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_CharcoalPencilLedgerPanel6x24_LPNLSCHA624-PEN.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff00eb7a40f06391582039dcbc98178d
+    m_Address: Assets/AssetsMelcher/Finishes/Countertop_IMGStone_UbatubaGranite.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff0791c46fcd5fc44890cb3ebcd574f7
+    m_Address: Assets/AssetsMelcher/Finishes/Cabinet_MSI_MalibuHoney6x24_LPNLQMALHON624.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6d60cf055538ecd4b9904da2b5d3e537, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d132465545d384740ab0ec53d1023bdc, type: 2}
+    - {fileID: 11400000, guid: 3936a4a6b4279bc4ca5a9acc3ec243fa, type: 2}

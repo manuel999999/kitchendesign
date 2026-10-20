@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Burner_TwinEagles_30InchTwinEaglesTeppanyakiGrillLPNG^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 4c3aca5f470f4714a89e8ed0822a79dc, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Burner_TwinEagles_30InchTwinEaglesTeppanyakiGrillLPNG.prefab
+      editorOnlyCachedAsset: {fileID: 2336009458740186608, guid: d6d6841c13c24fe7984a7e2fccfe9c9f, type: 3}

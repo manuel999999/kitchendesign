@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "tags": [
+    {
+      "id": 3,
+      "name": "Drop-In Sink"
+    },
+    {
+      "id": 2,
+      "name": "Smoker"
+    },
+    {
+      "id": 1,
+      "name": "Undermount Sink"
+    }
+  ]
+}

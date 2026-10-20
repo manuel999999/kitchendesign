@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_Cambridge_LedgestoneSmooth_BluestoneBlend^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 913cb23c2d273ed45807756d6e704a6f, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_Cambridge_LedgestoneSmooth_BluestoneBlend.prefab
+      editorOnlyCachedAsset: {fileID: 1310341380077292475, guid: 4b6d7fc092f3c514a8eaafca9b3bb16f, type: 3}

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccefac9714fbac46b1b596d340a58de, type: 3}
+  m_Name: AppOptions_Gemini
+  m_EditorClassIdentifier: 
+  m_AppDisplayName: Gemini 3D Kitchen Designer
+  m_FileSystemName: Gemini
+  m_VersionSuffix: g
+  m_AppSkin: {fileID: 11400000, guid: cda057fe48daee0579208851043fd1dd, type: 2}
+  m_UserFilter: 3
+  m_DefaultManufacturerId: 30
+  m_TestDefaultManufacturerId: 30
+  m_AllowOneDayTrial: 0
+  m_AllowBuildingMethods: 0
+  m_AllowDealerMarkupPercentChanges: 1
+  m_DisallowedKitchenStyles:
+  - m_EnumNames: DiagonalL
+  m_DefaultBuildingMethod:
+    m_EnumNames: Catalog
+  m_HomeScreenImage: {fileID: 21300000, guid: d5680bed2d7b56d4daa9345bb6e78b77, type: 3}
+  m_DesignerSceneLoadingImage: {fileID: 21300000, guid: d5a43da89c1a72c4a94fb6da867bee0e, type: 3}
+  m_ProductionServerDomain: app.geminikitchendesigner.com
+  m_TestServerDomain: profit.melcher.ca
+  m_SubscriptionUrlForDealerAccount: https://geminikitchendesigner.chargebee.com/hosted_pages/checkout?subscription_items[item_price_id][0]=Gemini-3D-Outdoor-Kitchen-Designer-USD-Monthly&utm_source=cb-app-copy
+  m_SubscriptionUrlForTrialAccount: https://www.geminikitchendesigner.com/
+  m_CabinetDataAvailability:
+    m_EnumNames: Server
+  m_ManufacturerDatabase: {fileID: 11400000, guid: 89cc289b094dbe943a40d3143156c613, type: 2}
+  m_ProductGroupDatabase: {fileID: 11400000, guid: 87d2ff655018c81468983aa288420d28, type: 2}
+  m_BrandCatalogLogoDatabase: {fileID: 11400000, guid: 650abc8f07106e241936098dfa20facb, type: 2}
+  m_TestManufacturerDatabase: {fileID: 0}
+  m_TestProductGroupDatabase: {fileID: 0}
+  m_TestBrandCatalogLogoDatabase: {fileID: 0}
+  m_RemappedProductIdDatabase: {fileID: 11400000, guid: 6222e93b36db53245b7dbaf1c1870051, type: 2}
+  m_AppIdentifier: ca.melcher.gemini.outdoorkitchendesigner
+  m_AppIcon: {fileID: 2800000, guid: 78205378c90845447824dddb3c3d53c2, type: 3}
+  m_AndroidProjectSettings:
+    adaptiveIconBackground: {fileID: 2800000, guid: 7ad9b8bb400e20449a86a9001e94d58f, type: 3}
+    adapativeIconForeground: {fileID: 2800000, guid: fbfcc5455eb80734999f14e130759c99, type: 3}
+  m_SimulateWhiteLabel: 0
+  m_SimulatedWhiteLabelDomain: profit.melcher.ca
+  m_SimulatedWhiteLabelDistributorUrlParameter: eYM6A2wBTTkRbBXeSXeZKg.RE9BQ2NNWVJXUlVmNHVqOQ.JMVdvpQthpBFk2fGn1yT80MkKSBqxYN6NS9d9ZLFZVw
+  m_SimulatedPreferredUnits: 1

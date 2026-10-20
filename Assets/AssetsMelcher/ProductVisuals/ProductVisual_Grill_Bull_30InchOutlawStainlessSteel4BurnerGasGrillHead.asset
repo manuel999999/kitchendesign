@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b5b78ba6a012c4080bae5b2b988412, type: 3}
+  m_Name: ProductVisual_Grill_Bull_30InchOutlawStainlessSteel4BurnerGasGrillHead
+  m_EditorClassIdentifier: 
+  m_Id: Grill_Bull_30InchOutlawStainlessSteel4BurnerGasGrillHead
+  m_Thumbnail: {fileID: 21300000, guid: 6437aa9a87c3542a299e54174abcbb95, type: 3}
+  m_RuntimePrefabCategory:
+    m_EnumNames: Grill
+  m_Anchor:
+    m_EnumNames: OnTopAtFront
+  m_InitialInsetFromEdgeInInches: 0
+  m_AllowAdjacentCutOutWhenFlush: 1
+  m_RequireManualSelection: 0
+  m_HidesBackCountertopEdge: 0
+  m_FitSectionToProductWidth: 0
+  m_IgnoreCabinetProductWhitelist: 0
+  m_UseCabinetMaterial: 0
+  m_IsDraggable: 1
+  m_AllowUpAndDownMovement: 0
+  m_RenderProductWithCutOut: 0
+  m_IsCountertopOven: 0
+  m_FlooringType:
+    m_EnumNames: Wood
+  m_SectionModelType:
+    m_EnumNames: Authored
+  m_SectionCabinetType:
+    m_EnumNames: Straight
+  m_SectionCountertopIndex: 0
+  m_SectionInsetToeKickIndex: -1
+  m_SectionProceduralInsetToeKickExtraInsetInInches2: {x: 0, y: 0}
+  m_SectionOccupiableCuboidPaddingInInches:
+    left: 0
+    right: 0
+    bottom: 0
+    top: 0
+    towardMaxZ: 0
+    towardMinZ: 0
+  m_CabinetLegHorizontalInsetFromCabinetEdgesOverrideInInches: {x: NaN, y: NaN}
+  m_CabinetSectionFootingType:
+    m_EnumNames: OnLegs
+  m_ExpectingCabinetDoors: 0
+  m_SectionAppearsInDetailSheet: 1
+  m_AuthoredSectionUsesCabinetCutOut: 1
+  m_SectionUsesCabinetVents: 1
+  m_SectionCanHaveToeKick: 1
+  m_SectionCanHaveFrontProducts: 1
+  m_SectionAlwaysHasPlunge: 0
+  m_SectionCutOutMode:
+    m_EnumNames: Normal
+  m_ProductCategoriesAllowedInSection: []
+  m_BrandCatalogName: 
+  m_SectionDoorStyleName: 
+  m_SectionDoorStyleDisplayName: 

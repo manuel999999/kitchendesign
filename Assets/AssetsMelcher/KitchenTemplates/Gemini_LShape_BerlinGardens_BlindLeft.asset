@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d3e4cbf350a9f4d9728a63cded9a1f, type: 3}
+  m_Name: Gemini_LShape_BerlinGardens_BlindLeft
+  m_EditorClassIdentifier: 
+  m_BrandCatalog: {fileID: 11400000, guid: 0d4ccb6d4348bd343a8d6de8d6073beb, type: 2}
+  m_KitchenStyle:
+    m_EnumNames: L
+  m_PreviewSprite: {fileID: 21300000, guid: f7d2c2ed7c6d14d9988df6e6475635fd, type: 3}
+  m_SaveData: {fileID: 4900000, guid: 120e8bf6b32fa4d74a5c36130c6eacc4, type: 3}
+  m_DisplayName: Blind Left

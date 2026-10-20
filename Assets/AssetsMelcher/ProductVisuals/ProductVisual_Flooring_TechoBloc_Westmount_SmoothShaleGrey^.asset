@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Flooring_TechoBloc_Westmount_SmoothShaleGrey^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 74cbfd035357d9647b501d33f235b267, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Flooring_TechoBloc_Westmount_SmoothShaleGrey.prefab
+      editorOnlyCachedAsset: {fileID: 4793604987666651569, guid: 7fdab5bb07fd9ff4faba92a67e3800cf, type: 3}

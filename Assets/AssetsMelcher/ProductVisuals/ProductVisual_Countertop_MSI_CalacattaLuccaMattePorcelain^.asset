@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Countertop_MSI_CalacattaLuccaMattePorcelain^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: d38a39e9e5ef5d94c8cc84c8c4afd76e, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Countertop_MSI_CalacattaLuccaMattePorcelain.prefab
+      editorOnlyCachedAsset: {fileID: 3598626703422056923, guid: 25ca3536c69840447b665a06bc7a12c2, type: 3}

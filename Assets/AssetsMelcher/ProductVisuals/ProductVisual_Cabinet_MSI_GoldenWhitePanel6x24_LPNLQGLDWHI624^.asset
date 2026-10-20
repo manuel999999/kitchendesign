@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Cabinet_MSI_GoldenWhitePanel6x24_LPNLQGLDWHI624^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 84378a24b6488d34fb551afaf5f58e7a, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_MSI_GoldenWhitePanel6x24_LPNLQGLDWHI624.prefab
+      editorOnlyCachedAsset: {fileID: 8784362400033650393, guid: d9acd34efbc47c340b74909f7875a2a7, type: 3}

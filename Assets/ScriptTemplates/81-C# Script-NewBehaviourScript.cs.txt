@@ -1,0 +1,10 @@
+namespace #NAMESPACE#
+{
+    using UnityEngine;
+
+    public class #SCRIPTNAME# : MelcherMonoBehaviour
+    {
+    }   // class #SCRIPTNAME#
+
+}   // namespace #NAMESPACE#
+

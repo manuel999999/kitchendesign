@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20bda3673d89f04ba4b1412a7f75fc8, type: 3}
+  m_Name: ProductVisual_Grill_Bull_30InchLonestarStainlessSteelGasGrillHead4Burner^
+  m_EditorClassIdentifier: 
+  m_Info: {fileID: 11400000, guid: 55a03d6943e0cfa43b45aecb8255a41b, type: 2}
+  m_ContentAddress:
+    m_Data:
+      address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Grill_Bull_30InchLonestarStainlessSteelGasGrillHead4Burner.prefab
+      editorOnlyCachedAsset: {fileID: 8127018602761955796, guid: 09129c2c9a5a3ba478ef858ffcfac08e, type: 3}

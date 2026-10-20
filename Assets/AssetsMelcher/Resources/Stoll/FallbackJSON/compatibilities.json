@@ -1,0 +1,48 @@
+{
+  "status": 200,
+  "compatibilities": [
+    {
+      "id": 3,
+      "name": "Refrigeration Cabinet",
+      "blacklisted": [
+        {
+          "id": 1,
+          "name": "Undermount Sink"
+        },
+        {
+          "id": 3,
+          "name": "Drop-In Sink"
+        }
+      ],
+      "whitelisted": [
+        
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Grill Cabinet Without Smokers",
+      "blacklisted": [
+        {
+          "id": 2,
+          "name": "Smoker"
+        }
+      ],
+      "whitelisted": [
+        
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Challenger Apron (Farmhouse) Sink Base",
+      "blacklisted": [
+        
+      ],
+      "whitelisted": [
+        {
+          "id": 1,
+          "name": "Undermount Sink"
+        }
+      ]
+    }
+  ]
+}

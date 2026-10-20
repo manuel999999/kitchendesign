@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement style="align-items: stretch; flex-grow: 1;">
+        <ui:VisualElement style="flex-direction: row; align-items: stretch; justify-content: space-around; min-height: 20px;">
+            <uie:ToolbarSearchField focusable="true" name="SearchField" style="width: auto; flex-shrink: 1;" />
+            <uie:ToolbarMenu tabindex="-1" display-tooltip-when-elided="true" text="Filter by status" name="SearchFilterMenu" style="flex-shrink: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TableHeaders" style="align-items: stretch; justify-content: flex-start; flex-direction: column; flex-shrink: 0; flex-grow: 0; min-height: 20px;" />
+        <ui:ListView focusable="true" name="Table" style="flex-grow: 1; align-items: stretch; justify-content: space-between;" />
+        <ui:VisualElement name="Footer" style="flex-shrink: 0; min-height: 20px;">
+            <ui:VisualElement style="flex-direction: row; flex-wrap: wrap;">
+                <ui:Button text="New Model Visual" display-tooltip-when-elided="true" name="AddOccupantEntry" tooltip="Add a new occupant entry. Occupants are products like BBQ&apos;s, sinks, etc." />
+                <ui:Button text="New Cabinet Visual" display-tooltip-when-elided="true" name="AddSectionEntry" tooltip="Add an entry for a new cabinet section. Cabinet sections are used in the New Venture app." />
+                <ui:Button text="New Finish Visual" display-tooltip-when-elided="true" name="AddFinishEntry" tooltip="Add an entry for a new finish. This can be a cabinet or countertop finish or a floor." />
+                <ui:Button text="Add Existing" display-tooltip-when-elided="true" name="AddExistingEntry" tooltip="Add a previously created Product Visual to the catalog." />
+                <ui:Button text="New Multiple Finish Visual" display-tooltip-when-elided="true" name="AddMultipleFinishEntry" tooltip="Add multiple entries for new finishes. These can be cabinet or countertop finishes or floors." />
+                <ui:Button text="New Multiple Model Visual" display-tooltip-when-elided="true" name="AddMultipleOccupantEntry" tooltip="Add multiple new occupant entry. Occupants are products like BBQ&apos;s, sinks, etc." />
+                <ui:Button text="New Multiple Cabinet Visual" display-tooltip-when-elided="true" name="AddMultipleSectionEntry" tooltip="Add multiple entry for a new cabinet section. Cabinet sections are used in the New Venture app." />
+                <ui:Button text="Add Existing Products" display-tooltip-when-elided="true" name="AddMultipleExistingProductEntry" tooltip="Add multiple previously created Product Visuals to the catalog. Lists every visual except cabinets, including finishes." />
+                <ui:Button text="Add Existing Cabinets" display-tooltip-when-elided="true" name="AddMultipleExistingCabinetEntry" tooltip="Add multiple previously created cabinet Product Visuals to the catalog. Lists visuals with _CabinetSection_ in their name." />
+            </ui:VisualElement>
+            <ui:VisualElement style="position: absolute; left: 1272px; right: 0; bottom: 0; min-width: 460px; flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 1;" />
+                <ui:Label tabindex="-1" text="Showing 0 items." display-tooltip-when-elided="true" name="StatusMessage" style="flex-shrink: 0; -unity-text-align: middle-left;" />
+                <ui:Button text="Approve Models" display-tooltip-when-elided="true" name="ApproveModels" tooltip="Approve the models of all products that are visible with the current filter settings." style="flex-shrink: 0;" />
+                <ui:Button text="Render Thumbnails" display-tooltip-when-elided="true" name="RenderThumbnails" tooltip="Render the thumbnails of all products that are visible with the current filter settings." style="flex-shrink: 0;" />
+                <uie:ToolbarMenu tabindex="-1" display-tooltip-when-elided="true" text="Tools" tooltip="Helper utilities." name="ToolsMenu" style="flex-shrink: 0;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d3e4cbf350a9f4d9728a63cded9a1f, type: 3}
+  m_Name: Gemini_LShape_Toppin_BlindRight
+  m_EditorClassIdentifier: 
+  m_BrandCatalog: {fileID: 11400000, guid: 820dce6c62e20af4bb4b20fd1b42ea5d, type: 2}
+  m_KitchenStyle:
+    m_EnumNames: L
+  m_PreviewSprite: {fileID: 21300000, guid: 0b9e0a05a9be64b4cbb96f98e820bc47, type: 3}
+  m_SaveData: {fileID: 4900000, guid: 617694a734a5e441d88a4bb69efa6fb6, type: 3}
+  m_DisplayName: Blind Right
