@@ -834,22 +834,10 @@ namespace Melcher
         {
             MelcherLog.Log(name + ": Set is nested: " + isNested);
 
-            string interiorLayerName = "CutOutInterior";
-            string stencilLayerName = "CutOutStencil";
+            int interiorLayer = LayerMask.NameToLayer(isNested ? "NestedCutOutInterior" : "CutOutInterior");
 
-            if (isNested)
-            {
-                interiorLayerName = "Nested" + interiorLayerName;
-                stencilLayerName = "Nested" + stencilLayerName;
-            }
-
-            int interiorLayer = LayerMask.NameToLayer(interiorLayerName);
-            int stencilLayer = LayerMask.NameToLayer(stencilLayerName);
-
-            bool isOnOrAtFront = m_ProductVisual.info.anchor.IsOnOrAtFront();
-
-            productVisualContentInstance.cabinetCutOut.SetRenderLayers(interiorLayer, stencilLayer, isOnOrAtFront);
-            productVisualContentInstance.countertopCutOut.SetRenderLayers(interiorLayer, stencilLayer, isOnOrAtFront);
+            productVisualContentInstance.cabinetCutOut.SetInteriorLayer(interiorLayer);
+            productVisualContentInstance.countertopCutOut.SetInteriorLayer(interiorLayer);
         }
 
         protected void NotifyOccupantListeners(Action<IOccupantListener> listenerAction)

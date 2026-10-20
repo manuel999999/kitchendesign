@@ -1093,8 +1093,7 @@ namespace Melcher
             //
             // The next issue is that the shelf countertop is visible within
             // all of its occupants cut-outs when viewed from the front. We
-            // must change the render layer of the shelf occupant's countertop
-            // cut-out and stretch its cabinet cut-out to mask this issue.
+            // must stretch its cabinet cut-out to mask this issue.
 
             Material shelfCountertopMaterial =
                 (screenshotAngle == ScreenshotAngle.Top) ?
@@ -1103,15 +1102,6 @@ namespace Melcher
 
             bool needsShelfStencilFix =
                 (screenshotAngle == ScreenshotAngle.Front) || (screenshotAngle == ScreenshotAngle.Back);
-
-            // When we're patching the shelf's countertop (so it renders nice
-            // in front & back screenshots), we want to temporarily move the
-            // shelf's countertop back to the nested cut-out layer. This will
-            // allow the cabinet interior to render over top of the shelf.
-            int occupantInShelfFrontStencilLayer =
-                needsShelfStencilFix ?
-                    LayerMask.NameToLayer("NestedCutOutStencil") :
-                    LayerMask.NameToLayer("CutOutStencil");
 
             foreach (ElementIndex<Cabinet> i in kitchen.layout.EnumerateCabinets())
             {
@@ -1135,10 +1125,6 @@ namespace Melcher
 
                     foreach (Occupant occupantInShelf in shelf.occupants)
                     {
-                        // Change the front-most stencil for the occupant's
-                        // countertop cut-out
-                        occupantInShelf.productVisualContentInstance.countertopCutOut.GetStencilFace(CabinetCutOut.CubeFace.ZMin).layer = occupantInShelfFrontStencilLayer;
-
                         float interiorHeightInMeters =
                             occupantInShelf.currentCutOutSizeInMeters.y;
 

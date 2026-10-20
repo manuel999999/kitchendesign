@@ -39,7 +39,7 @@ void AddCutOut(Melcher.CabinetCutOut c, int s, string label)
     for (int f = 0; f < 6; f++)
     {
         var face = (Melcher.CabinetCutOut.CubeFace)f;
-        bool window = c.GetStencilFace(face).activeSelf;
+        bool window = c.stencilRoot.GetChild(f).gameObject.activeSelf;
         bool shared = c.isCountertop ? face == Melcher.CabinetCutOut.CubeFace.YMin : (face == Melcher.CabinetCutOut.CubeFace.YMax && !c.GetInteriorFace(face).activeSelf);
         if (window || shared) open |= (KitchenDesign.Shared.Enums.CutoutFaces)(1 << f);
     }

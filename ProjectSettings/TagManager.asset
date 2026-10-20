@@ -11,14 +11,14 @@ TagManager:
   - EditorOnly
   - Water
   - UI
-  - CutOutStencil
+  - 
   - CutOutInterior
   - Product
   - Cabinet
   - ProductPointerRaycast
   - CinemachineMainCamera
   - CinemachinePdfBeautyCamera
-  - NestedCutOutStencil
+  - 
   - NestedCutOutInterior
   - NestedCabinet
   - ExcludeFromProductThumbnail

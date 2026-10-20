@@ -13,15 +13,8 @@ MonoBehaviour:
   m_Name: Miscellaneous Materials
   m_EditorClassIdentifier: 
   m_GroupName: Miscellaneous Materials
-  m_Data:
-    m_SerializedData: []
   m_GUID: 084be829b2b7b0949ad040e84523ab27
   m_SerializeEntries:
-  - m_GUID: 103dc60ba35daa6ffa70ef5a9ff4ea02
-    m_Address: Assets/AssetsMelcher/Materials/Kitchen_CutOutStencil.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 17351dc16427b0e8586d023edf2fb43d
     m_Address: Assets/AssetsMelcher/Materials/Kitchen_ProFit_SelectionHighlightPrimary.mat
     m_ReadOnly: 0
@@ -89,11 +82,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 872ecd717711d6942bf92f0397144b8d
     m_Address: Assets/AssetsMelcher/Materials/MeasurementScreenshotSkybox.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8a08bb9733a76078aba8ed820c3ea3f2
-    m_Address: Assets/AssetsMelcher/Materials/Kitchen_ShadowCaster.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -4,11 +4,6 @@ namespace Melcher
     using KitchenDesign.Shared.Enums;
     using UnityEngine;
 
-    /// <summary>
-    /// A cut out has a stencil which is used to mask the cabinet and an
-    /// interior that is rendered within the stencil to give the illusion of
-    /// a hollow cavity.
-    /// </summary>
     public class CabinetCutOut : MelcherMonoBehaviour
     {
         // =====================================================================
@@ -21,9 +16,6 @@ namespace Melcher
 
         public TransformHelper transformHelper => m_TransformHelper;
 
-        public ComponentsInChildrenEnumerator<MeshRenderer> stencils =>
-            new ComponentsInChildrenEnumerator<MeshRenderer>(m_StencilRoot);
-
         public ComponentsInChildrenEnumerator<MeshRenderer> interiors =>
             new ComponentsInChildrenEnumerator<MeshRenderer>(m_InteriorRoot);
 
@@ -31,37 +23,9 @@ namespace Melcher
         // Methods
         // =====================================================================
 
-        /// <summary>
-        ///     This function changes the render layers of the cut-out meshes.
-        ///     It is intended to be called after a product is added to or
-        ///     removed from a <see cref="CabinetShelf"/> as at that point its
-        ///     drawing behaviour needs to change.
-        ///     <br /><br />
-        ///
-        ///     By changing the render layer, we allow <see
-        ///     cref="KitchenForwardRenderPass"/> to selectively draw the
-        ///     non-nested cut-outs first and then only draw the nested
-        ///     cut-outs within those.
-        /// </summary>
-        /// <param name="interiorLayer"></param>
-        /// <param name="stencilLayer"></param>
-        /// <param name="isCutOutOnOrAtFront"></param>
-        public void SetRenderLayers(int interiorLayer, int stencilLayer, bool isCutOutOnOrAtFront)
+        public void SetInteriorLayer(int interiorLayer)
         {
             m_InteriorRoot.SetLayerRecursively(interiorLayer, includeSelf: true);
-
-            // Set the stencil cube's render layer but avoid changing the face
-            // that is on the outside of the cabinet.
-            foreach (CubeFace cubeFace in s_CubeFaces)
-            {
-                if ((cubeFace == CubeFace.ZMin && isCutOutOnOrAtFront) ||
-                    (cubeFace == CubeFace.ZMax && !isCutOutOnOrAtFront))
-                {
-                    continue;
-                }
-
-                GetCubeFace(m_StencilRoot, cubeFace).layer = stencilLayer;
-            }
         }
 
         /// <summary>
@@ -214,11 +178,6 @@ namespace Melcher
             return GetCubeFace(m_InteriorRoot, face);
         }
 
-        public GameObject GetStencilFace(CubeFace face)
-        {
-            return GetCubeFace(m_StencilRoot, face);
-        }
-
         private void Awake()
         {
             // Hide bottom of countertop cut-out so we can view into
@@ -241,13 +200,13 @@ namespace Melcher
         // Inspector-serialized fields
         // =====================================================================
 
-        [Tooltip("Stencils are the 'windows' that look into the cabinet. " +
-            "The cut-out's interiors are only visible through the windows.")]
+        [Tooltip("The window cube: its mesh bounds are the clip box, and " +
+            "its active faces are the box's open faces. It isn't drawn.")]
         [SerializeField] protected Transform m_StencilRoot = null;
 
         [Tooltip("The root of the interior faces within the cut-out. " +
-            "Interiors can catch shadows and are only rendered where " +
-            "stencils are visible.")]
+            "Interiors can catch shadows and show where the cabinet is " +
+            "clipped away.")]
         [SerializeField] protected Transform m_InteriorRoot = null;
 
         [Tooltip("Set this to true if the cut out is for the countertop " +
@@ -263,13 +222,6 @@ namespace Melcher
             "interior face is hidden so the shelf's nested countertop mesh " +
             "doesn't z-fight with the interior face.")]
         protected bool m_IsCabinetShelf = default;
-
-        [Tooltip("The draw order indicates the priority to use when " +
-            "ordering which cut-outs are rendered first. " +
-            "Groups are drawn far-to-near cut-out will " +
-            "be drawn with. All cut-outs with the same draw order are drawn " +
-            "first values are drawn first")]
-        [SerializeField] protected int m_DrawOrder = default;
 
         // =====================================================================
         // OnValidate-serialized fields

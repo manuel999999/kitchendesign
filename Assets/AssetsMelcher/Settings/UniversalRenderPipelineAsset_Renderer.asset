@@ -24,9 +24,8 @@ MonoBehaviour:
     probeSamplingDebugMesh: {fileID: 0}
     probeSamplingDebugTexture: {fileID: 0}
     probeVolumeBlendStatesCS: {fileID: 0}
-  m_RendererFeatures:
-  - {fileID: 4129839197986708717}
-  m_RendererFeatureMap: ed5c7ba7de225039l
+  m_RendererFeatures: []
+  m_RendererFeatureMap: 
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   postProcessData: {fileID: 0}
   m_AssetVersion: 3
@@ -55,37 +54,3 @@ MonoBehaviour:
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
   m_TileOnlyMode: 0
---- !u!114 &4129839197986708717
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c844d9e0a6df02a7882cc18898576c7, type: 3}
-  m_Name: KitchenRendererFeature
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  m_ShadowMaterial: {fileID: 2100000, guid: 8a08bb9733a76078aba8ed820c3ea3f2, type: 2}
-  m_RenderingLayerIndexStart: 8
-  m_CutOutStencilMaterial: {fileID: 2100000, guid: 103dc60ba35daa6ffa70ef5a9ff4ea02, type: 2}
-  m_CutOutStencilMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_NestedCutOutStencilMask:
-    serializedVersion: 2
-    m_Bits: 8192
-  m_CutOutInteriorMask:
-    serializedVersion: 2
-    m_Bits: 128
-  m_NestedCutOutInteriorMask:
-    serializedVersion: 2
-    m_Bits: 16384
-  m_CabinetMask:
-    serializedVersion: 2
-    m_Bits: 512
-  m_NestedCabinetMask:
-    serializedVersion: 2
-    m_Bits: 32768

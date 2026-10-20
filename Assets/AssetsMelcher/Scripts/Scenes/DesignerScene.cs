@@ -5,7 +5,6 @@ namespace Melcher
     using System.Linq;
     using UnityEngine;
     using UnityEngine.Events;
-    using UnityEngine.Rendering.Universal;
     using UnityEngine.SceneManagement;
 
     /// <summary>
@@ -122,14 +121,6 @@ namespace Melcher
             {
                 Screen.orientation = ScreenOrientation.LandscapeLeft;
             }
-
-            // // Would like to be able to get the RendererData from the camera
-            // UniversalAdditionalCameraData cameraData = Camera.main.GetComponent<UniversalAdditionalCameraData>();
-            // ScriptableRenderer scriptableRenderer = cameraData.scriptableRenderer;
-            // scriptableRenderer.NoWayToGetScriptableRendererData
-
-            KitchenRendererFeature feature = m_RendererData.rendererFeatures.OfType<KitchenRendererFeature>().FirstOrDefault();
-            feature.LookForKitchen();
         }
 
         protected void OnGameDataReady()
@@ -1099,8 +1090,6 @@ namespace Melcher
         // =====================================================================
         // Inspector-serialized fields
         // =====================================================================
-
-        [SerializeField] protected ScriptableRendererData m_RendererData = null;
 
         [UnityEngine.Serialization.FormerlySerializedAs("m_ProductVisualCatalog")]
         [SerializeField] protected ProductVisualDatabase m_ProductVisualDatabase = default;

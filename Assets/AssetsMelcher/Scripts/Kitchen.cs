@@ -51,7 +51,6 @@ namespace Melcher
         public CabinetLayout layout => m_CurrentCabinetLayout;
 
         //public IReadOnlyList<CabinetSection> cabinetSections => m_CabinetSections;
-        public IReadOnlyList<Cabinet> nearToFarCabinets => m_NearToFarCabinetSections;
 
         public KitchenCutoutClipping cutoutClipping => m_CutoutClipping;
 
@@ -3682,90 +3681,6 @@ namespace Melcher
                 // Ensure the height of the cabinets are updated to match up
                 // with the new countertop height.
                 m_CurrentCabinetLayout.UpdateMeshes();
-            }
-        }
-
-        public void FindAndSortCabinetsForViewPosition(Vector3 viewPosition)
-        {
-            // TODO: Move to CabinetLayout?
-            if (m_NearToFarCabinetSections == null)
-            {
-                m_NearToFarCabinetSections = new List<Cabinet>();
-            }
-
-            m_NearToFarCabinetSections.Clear();
-            if (m_CurrentCabinetLayout == null)
-            {
-                return;
-            }
-
-            foreach (Transform child in m_CurrentCabinetLayout.GetTransform())
-            {
-                if (child.TryGetComponent(out Cabinet cabinetSection))
-                {
-                    m_NearToFarCabinetSections.Add(cabinetSection);
-                }
-            }
-
-            m_NearToFarCabinetSections.Sort(
-                (a, b) =>
-                {
-                    float distToA = (a.GetTransform().position - viewPosition).sqrMagnitude;
-                    float distToB = (b.GetTransform().position - viewPosition).sqrMagnitude;
-                    return distToA.CompareTo(distToB);
-                }
-            );
-        }
-
-        /// <summary>
-        /// Override the kitchen's mesh renderers' rendering layer mask to
-        /// enable our render feature to draw the kitchen in sections, front-to-
-        /// back for cutout/stencil buffer purposes.
-        /// </summary>
-        /// <param name="renderingLayerIndexStart"></param>
-        public void UpdateRenderingMasksForKitchenForwardRenderPass(int renderingLayerIndexStart)
-        {
-            // Make a bitmask for the renderers' rendering layer mask that we
-            // don't want to change. Basically, Unity has a couple lighting
-            // layers that are enabled by default and we will keep them enabled
-            uint renderingMaskToPreserve = 0;
-            for (int i = 0; i < renderingLayerIndexStart; ++i)
-            {
-                renderingMaskToPreserve |= 1u << i;
-            }
-
-            // For each cabinet, create a bitmask that identifies the next
-            // available rendering layer. This will be used to target the
-            // renderers for front-to-back rendering in KitchenForwardRenderPass
-            int cabinetCount = m_NearToFarCabinetSections.Count;
-            for (int cabinetIndex = 0; cabinetIndex < cabinetCount; ++cabinetIndex)
-            {
-                uint renderingMaskToSet = 1u << (renderingLayerIndexStart + cabinetIndex);
-
-                Cabinet cabinet = m_NearToFarCabinetSections[cabinetIndex];
-                foreach (MeshRenderer r in cabinet.meshRenderers)
-                {
-                    r.renderingLayerMask = (r.renderingLayerMask & renderingMaskToPreserve) | renderingMaskToSet;
-                }
-
-                foreach (Occupant occupant in cabinet.occupants)
-                {
-                    occupant.productVisualContentInstance.SetCutOutRenderingMask(
-                        renderingMaskToSet,
-                        renderingMaskToPreserve
-                    );
-
-                    if (occupant.TryGetComponent(out CabinetShelf shelf))
-                    {
-                        foreach (Occupant nestedOccupant in shelf.occupants)
-                        {
-                            nestedOccupant.productVisualContentInstance.SetCutOutRenderingMask(
-                                renderingMaskToSet,
-                                renderingMaskToPreserve
-                            );
-                        }
-                    }
-                }
             }
         }
 
@@ -7482,7 +7397,6 @@ namespace Melcher
         // Non-serialized fields
         // =====================================================================
 
-        private List<Cabinet> m_NearToFarCabinetSections = new List<Cabinet>();
 
         private readonly KitchenCutoutClipping m_CutoutClipping = new KitchenCutoutClipping();
 

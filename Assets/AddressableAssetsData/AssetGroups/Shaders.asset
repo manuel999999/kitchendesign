@@ -13,22 +13,20 @@ MonoBehaviour:
   m_Name: Shaders
   m_EditorClassIdentifier: 
   m_GroupName: Shaders
-  m_Data:
-    m_SerializedData: []
   m_GUID: 834981ea87722e844ae703a602e8aff7
   m_SerializeEntries:
-  - m_GUID: 866f5cbbb8f4b016cbb34d661813b114
-    m_Address: Assets/AssetsMelcher/Shaders/TriplanarGraph.shadergraph
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f53222875d58b7d3d8390d9c33202cf3
-    m_Address: Assets/AssetsMelcher/Shaders/PosterizeGraph.shadergraph
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4043c2a575c2ece7e955b6939914dd48
     m_Address: Assets/AssetsMelcher/Shaders/CuboidVisualizationGraph.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68e6db2ebdc24f95958faec2be5558d6
+    m_Address: Assets/AssetsThirdParty/TextMesh Pro/Shaders/TMP_SDF.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 866f5cbbb8f4b016cbb34d661813b114
+    m_Address: Assets/AssetsMelcher/Shaders/TriplanarGraph.shadergraph
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -37,23 +35,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b30f4386cb64fd01ea3f09a0a121f526
-    m_Address: Assets/AssetsMelcher/Shaders/KitchenCutoutStencilShader.shader
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d2592aa55f1baa3a9bad299ea9fdc41d
-    m_Address: Assets/AssetsMelcher/Shaders/KitchenShadowCasterShader.shader
+  - m_GUID: f53222875d58b7d3d8390d9c33202cf3
+    m_Address: Assets/AssetsMelcher/Shaders/PosterizeGraph.shadergraph
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe393ace9b354375a9cb14cdbbc28be4
     m_Address: Assets/AssetsThirdParty/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 68e6db2ebdc24f95958faec2be5558d6
-    m_Address: Assets/AssetsThirdParty/TextMesh Pro/Shaders/TMP_SDF.shader
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

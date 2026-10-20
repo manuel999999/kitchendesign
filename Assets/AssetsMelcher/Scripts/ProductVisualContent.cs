@@ -157,40 +157,6 @@ namespace Melcher
             RefreshCutOutVisibility();
         }
 
-        public void SetCutOutRenderingMask(uint renderingMaskToSet, uint renderingMaskToPreserve)
-        {
-            SetMaskForCutOut(m_CountertopCutOut, renderingMaskToSet, renderingMaskToPreserve);
-            SetMaskForCutOut(m_CabinetCutOut, renderingMaskToSet, renderingMaskToPreserve);
-
-            // Set product-local cabinet sections to render with the cabinet.
-            // E.g., a CabinetShelf has a countertop mesh that should render
-            // with the same rules as the cabinet.
-            foreach (Renderer cabinetMeshInProduct in m_AdditionalCabinetRenderMaskMeshes)
-            {
-                cabinetMeshInProduct.renderingLayerMask =
-                    (cabinetMeshInProduct.renderingLayerMask & renderingMaskToPreserve) | renderingMaskToSet;
-            }
-
-            static void SetMaskForCutOut(CabinetCutOut cutOut, uint renderingMaskToSet, uint renderingMaskToPreserve)
-            {
-                var stencils = cutOut.stencils;
-                while (stencils.MoveNext())
-                {
-                    MeshRenderer stencil = stencils.Current;
-                    stencil.renderingLayerMask =
-                        (stencil.renderingLayerMask & renderingMaskToPreserve) | renderingMaskToSet;
-                }
-
-                var interiors = cutOut.interiors;
-                while (interiors.MoveNext())
-                {
-                    MeshRenderer interior = interiors.Current;
-                    interior.renderingLayerMask =
-                        (interior.renderingLayerMask & renderingMaskToPreserve) | renderingMaskToSet;
-                }
-            }
-        }
-
         /// <summary>
         /// Update the visibility of the cut-outs depending on the visual's
         /// current state. E.g., if the product is shown, the cut-outs may
