@@ -1,6 +1,7 @@
 namespace Melcher
 {
     using System;
+    using KitchenDesign.Shared.Enums;
     using UnityEngine;
 
     /// <summary>
@@ -133,6 +134,81 @@ namespace Melcher
             }
         }
 
+        public bool TryGetClipBox(out Bounds localBounds, out CutoutFaces openFaces)
+        {
+            localBounds = default;
+            openFaces = CutoutFaces.None;
+
+            if (!gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+
+            if (!m_HasClipBounds)
+            {
+                m_HasClipBounds = TryMeasureStencilBounds(out m_ClipBounds);
+            }
+
+            if (!m_HasClipBounds)
+            {
+                return false;
+            }
+
+            localBounds = m_ClipBounds;
+
+            foreach (CubeFace face in s_CubeFaces)
+            {
+                bool isWindow = GetCubeFace(m_StencilRoot, face).activeSelf;
+                bool isShared = m_IsCountertop
+                    ? face == CubeFace.YMin
+                    : face == CubeFace.YMax && !GetCubeFace(m_InteriorRoot, face).activeSelf;
+
+                if (isWindow || isShared)
+                {
+                    openFaces |= (CutoutFaces)(1 << (int)face);
+                }
+            }
+
+            return true;
+        }
+
+        private bool TryMeasureStencilBounds(out Bounds bounds)
+        {
+            bounds = default;
+            bool hasBounds = false;
+
+            foreach (MeshFilter meshFilter in m_StencilRoot.GetComponentsInChildren<MeshFilter>(includeInactive: true))
+            {
+                if (!meshFilter.sharedMesh)
+                {
+                    continue;
+                }
+
+                Matrix4x4 toRoot = m_StencilRoot.worldToLocalMatrix * meshFilter.transform.localToWorldMatrix;
+                Bounds meshBounds = meshFilter.sharedMesh.bounds;
+
+                for (int corner = 0; corner < 8; ++corner)
+                {
+                    Vector3 point = toRoot.MultiplyPoint3x4(new Vector3(
+                        (corner & 1) == 0 ? meshBounds.min.x : meshBounds.max.x,
+                        (corner & 2) == 0 ? meshBounds.min.y : meshBounds.max.y,
+                        (corner & 4) == 0 ? meshBounds.min.z : meshBounds.max.z));
+
+                    if (!hasBounds)
+                    {
+                        bounds = new Bounds(point, Vector3.zero);
+                        hasBounds = true;
+                    }
+                    else
+                    {
+                        bounds.Encapsulate(point);
+                    }
+                }
+            }
+
+            return hasBounds;
+        }
+
         public GameObject GetInteriorFace(CubeFace face)
         {
             return GetCubeFace(m_InteriorRoot, face);
@@ -208,6 +284,9 @@ namespace Melcher
 
         static protected CubeFace[] s_CubeFaces =
             System.Linq.Enumerable.ToArray(MelcherEnumInfo<CubeFace>.values);
+
+        private bool m_HasClipBounds;
+        private Bounds m_ClipBounds;
 
         // =====================================================================
         // Nested types

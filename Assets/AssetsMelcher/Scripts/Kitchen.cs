@@ -53,6 +53,8 @@ namespace Melcher
         //public IReadOnlyList<CabinetSection> cabinetSections => m_CabinetSections;
         public IReadOnlyList<Cabinet> nearToFarCabinets => m_NearToFarCabinetSections;
 
+        public KitchenCutoutClipping cutoutClipping => m_CutoutClipping;
+
         public float baseCabinetDepthInMeters => m_SelectedBaseCabinetDepthInMeters;
 
 
@@ -4076,6 +4078,8 @@ namespace Melcher
 
         private void OnEnable()
         {
+            m_CutoutClipping.Attach(this);
+
             EventBridge.Designer.restart                    += Restart;
             EventBridge.Designer.createKitchen.OnInvoke     += CreateKitchen;
             EventBridge.Designer.onWantCabinetLayout        += GetCabinetLayout;
@@ -4133,6 +4137,8 @@ namespace Melcher
 
         private void OnDisable()
         {
+            m_CutoutClipping.Detach();
+
             EventBridge.Designer.restart                    -= Restart;
             EventBridge.Designer.createKitchen.OnInvoke     -= CreateKitchen;
             EventBridge.Designer.onWantCabinetLayout        -= GetCabinetLayout;
@@ -7477,6 +7483,8 @@ namespace Melcher
         // =====================================================================
 
         private List<Cabinet> m_NearToFarCabinetSections = new List<Cabinet>();
+
+        private readonly KitchenCutoutClipping m_CutoutClipping = new KitchenCutoutClipping();
 
         private CabinetLayout m_CurrentCabinetLayout;
         private GameObject m_CurrentHighlightObject;

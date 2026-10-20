@@ -1,0 +1,11 @@
+var k = Melcher.Kitchen.instance;
+Melcher.Cabinet target = null;
+foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (target == null) target = entry.element;
+var t = target.GetTransform();
+var center = t.position + t.rotation * new UnityEngine.Vector3(target.sizeInMeters.x * 0.5f, target.sizeInMeters.y, target.sizeInMeters.z * 0.5f);
+var go = UnityEngine.GameObject.Find("CutoutTestCam");
+go.transform.position = center + UnityEngine.Vector3.up * 4f;
+go.transform.rotation = UnityEngine.Quaternion.LookRotation(UnityEngine.Vector3.down, t.forward);
+var cam = go.GetComponent<UnityEngine.Camera>();
+cam.fieldOfView = 25f;
+return "topdown over " + center.ToString("F2");

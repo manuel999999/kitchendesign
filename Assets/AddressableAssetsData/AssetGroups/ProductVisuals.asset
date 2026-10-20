@@ -2250,6 +2250,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c2c17919f7010b46b5ca031a31b51ba
+    m_Address: Assets/AssetsMelcher/ProductVisuals/ProductVisual__ShelfTop.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c7d935a91cb7495d8f8ebc883e7fb1f
     m_Address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_BerlinGardens_WoodGrain_DarkAshHorizontal.prefab
     m_ReadOnly: 0
@@ -3412,6 +3417,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bfdf6c547d629fc3a8120682530456da
     m_Address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Cabinet_Wolf_SandCastle.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c01da120d0dfaba45b6b021491a00dcc
+    m_Address: Assets/AssetsMelcher/ProductVisuals/ProductVisual_Accessory_Stoll_StainlessSteelBurnerPlungeKit.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
