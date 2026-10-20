@@ -1,0 +1,19 @@
+{
+    "name": "KitchenDesign.Debugging",
+    "rootNamespace": "KitchenDesign.Debugging",
+    "references": [
+        "KitchenDesign",
+        "KitchenDesign.Shared"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,17 @@
+{
+    "name": "KitchenDesign.Events",
+    "rootNamespace": "KitchenDesign.Events",
+    "references": [
+        "Doge",
+        "KitchenDesign.Shared"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

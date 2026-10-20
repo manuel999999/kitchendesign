@@ -1,0 +1,18 @@
+{
+    "name": "Doge.EditorScripts",
+    "rootNamespace": "Doge.EditorScripts",
+    "references": [
+        "GUID:ba78c6d4b458f564a8cabd09573fdcfa"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
