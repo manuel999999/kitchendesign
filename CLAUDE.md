@@ -418,7 +418,8 @@ the old scenes (`MenuScene`, `DesignerScene`), the old `ProjectSettings`, and th
 it is refactored.
 
 Git (set up by the user on 2026-10-20): remote `origin` is
-`git@github.com:EmmanuelMGemini/kitchendesign.git` (SSH; GitHub user `EmmanuelMGemini`).
+`git@github.com:manuel999999/kitchendesign.git` (SSH; checked 2026-10-22). Commits are authored
+as `EmmanuelMGemini`.
 Branches `main` (pushed, `dec60d9 initial commit`) and `develop` (local, checked out). The user
 makes the commits. If Claude is ever asked to commit, ask first whether to drop the
 `Co-Authored-By` trailer.
@@ -449,6 +450,14 @@ that way: don't copy them into a team branch.
 This copy came from `7700e16a8c`, so it has them, and **they stay in this project** (user,
 2026-10-21, after weighing a local-only branch setup and deciding it wasn't worth the
 complexity).
+
+**graft (persistent memory).** The user's global setup (`~/.claude/rules/graft.md`) gives every
+session a memory graph shared across projects; it is used here too. In graft this project is
+`github.com/manuel999999/kitchendesign`, not bootstrapped yet (2026-10-22). This file is the
+source of truth for the project: its state, decisions and handover live here and are committed.
+graft holds what carries beyond one session or project: gotchas, procedures, fixes, each with
+`--source file:<path>` when it comes from a file here. When a graft note disagrees with this file
+or the code, this file wins, and the graft note is superseded or marked stale in the same session.
 ## How we work together
 These carry over from the sessions on the old project.
 
