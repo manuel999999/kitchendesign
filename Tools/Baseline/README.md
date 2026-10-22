@@ -60,6 +60,24 @@ client names; never copy it into a repo.
 - `menuitems.cs` (2026-10-22, B3.4): edit mode. Lists every `[MenuItem]` in our assemblies with
   whether the editor registered it (`Menu.MenuItemExists`, internal, through reflection), into
   `GeminiBaseline/menuitems-latest.txt`. After B3.4: 29 items, all registered.
+- `editprobe.sh` + `editstep.tmpl` + `editsig.tmpl` (2026-10-23, area 4): play mode, read-only on
+  the server (nothing is saved). Signs in, opens design 28316 (Catalog, two products, a low and a
+  high bar top) and makes a fixed series of edits through the same `EventBridge.Designer` calls the
+  toolbar makes: highlight, nudge, center, clone, drag (pointer positions projected from the
+  camera), delete, a resize-widget drag (the widget's own `OnBeginDrag/OnDrag/OnEndDrag`),
+  clone / reorder / add / delete a section, toe kicks, a finish, delete a backing, add a product.
+  Then it builds a new Standard L kitchen in the same session and repeats the edits there (Catalog
+  refuses free placement and widget resizes). After each edit it waits until the kitchen is stable
+  and writes a snapshot (`NN_step.txt`: selections, spans and backings, every cabinet's type, SKU,
+  size, position and materials, every product's position, the visible widgets); `log.txt` collects
+  toasts, notifications and highlight changes; at the end of each phase `measured.json` and
+  `resave.json` (top level, then `standard/`). Output in `GeminiBaseline/editprobe/` (deleted
+  first). Compare with `python3 -I compare_probe.py <ref> <new>`: everything identical except
+  `measured.json`'s `cameras` (the idle cover-photo vcam keeps its last pose, so it differs by
+  degrees between runs). About 10 minutes. Reference before area 4: `editprobe-HEAD-2026-10-23`.
+- `kitchendatacensus.cs` (2026-10-23, area 4): edit mode. Every serialized value of every brand
+  catalog, kitchen template, door / handle / leg style and door editor mapping asset, found by
+  type name (old or `…SO`), into `GeminiBaseline/kitchendatacensus-latest.txt` with a hash.
 - **None of these scripts take options.** `menucheck.sh --help` runs the whole menu check (it
   happened once, after the user's files had been restored, and rewrote their ProFit fallback
   JSON). Read a script instead of running it to see what it does.

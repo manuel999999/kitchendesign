@@ -1373,8 +1373,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 
 ## Tools
 - `Tools/Baseline/`: records the old app's baseline and compares this project against it
-  (`unity6/runall.sh` is the whole check), and `unity6/menucheck.sh` walks the menu screens and
-  the designer round trip read-only. Notes in `Tools/Baseline/README.md`.
+  (`unity6/runall.sh` is the whole check), `unity6/menucheck.sh` walks the menu screens and
+  the designer round trip read-only, and `unity6/editprobe.sh` (area 4) makes a fixed series of
+  edits (add, drag, resize, delete…) on a saved Catalog design and on a new Standard kitchen and
+  snapshots the kitchen after each. Notes in `Tools/Baseline/README.md`.
 - `Tools/Cutouts/`: the cutout prototype's driver and test snippets (sign in, load a design, add
   products, apply boxes, render a camera to a PNG). Notes in `Tools/Cutouts/README.md`.
 
@@ -1495,12 +1497,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
   committed. **Area 1 is done and committed (B1.1–B1.4, 2026-10-22; results in the plan).**
   **Area 2 is done and committed (B2.1–B2.3, 2026-10-22).** **Area 3 is done and committed
-  (B3.1–B3.4, 2026-10-22/23; results in the plan, "Area 3").** Next: area 4, the kitchen model,
-  which the plan says gets its own plan (`.claude/prompts/04-…`) first: split `Kitchen` into the
-  systems it is, replace `Kitchen.instance`, then spans and layouts, cabinets, occupancy and
-  products; it also takes over `ProductVisualContent`, `CabinetType`, the door-style lookup and
-  the brand rules (`Const.Gemini`, the padding numbers in `RuntimeProductOverrides`). The user
-  left the design and the details to Claude and wants each step checked and committed on its own.
+  (B3.1–B3.4, 2026-10-22/23; results in the plan, "Area 3").** **Area 4, the kitchen model, has its
+  own plan: `.claude/prompts/04-kitchen-model.md`** (written 2026-10-23; the user left the design
+  and the details to Claude and wants each step checked and committed on its own). The old repo
+  has nothing to bring over first except the rear wall, which still waits for the user (checked
+  2026-10-23, details in the plan). Steps B4.0–B4.10; progress is recorded in the plan.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

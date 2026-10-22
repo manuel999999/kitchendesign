@@ -1,0 +1,49 @@
+double R(float v) { return System.Math.Round((double)v, 4); }
+string V(UnityEngine.Vector3 v) { return R(v.x) + "," + R(v.y) + "," + R(v.z); }
+string outDir = "__OUTDIR__";
+string name = "__NAME__";
+var k = KitchenDesign.Kitchen.instance;
+if (k == null || k.layout == null) return "kitchen=none";
+var sb = new System.Text.StringBuilder();
+sb.Append("method=" + k.selectedBuildingMethod + " toekick=" + k.selectedToeKickType + " door=" + k.selectedDoorStyleName + " handle=" + k.selectedDoorHandleStyleName + "\n");
+sb.Append("finishes cab=" + (k.selectedCabinetFinish != null ? k.selectedCabinetFinish.sku : "-") + " ct=" + (k.selectedCountertopFinish != null ? k.selectedCountertopFinish.sku : "-") + " floor=" + (k.selectedFlooringFinish != null ? k.selectedFlooringFinish.sku : "-") + "\n");
+sb.Append("depth=" + R(k.baseCabinetDepthInMeters) + " ctthick=" + R(k.countertopThicknessInMeters) + "\n");
+foreach (var span in k.layout.spans)
+{
+    var bk = span.backing;
+    string riser = "-"; try { riser = V(bk.riserCuboid.size); } catch (System.Exception) { riser = "none"; }
+    sb.Append("span " + span.index + " backing=" + (bk != null && bk.info != null ? bk.info.sku + " riser=" + riser : "-") + "\n");
+}
+foreach (var e in k.layout.EnumerateCabinets())
+{
+    var c = e.element; if (c == null) { sb.Append("cab " + e.index + " null\n"); continue; }
+    var t = c.GetTransform();
+    var mats = new System.Collections.Generic.SortedSet<string>();
+    foreach (var r in t.GetComponentsInChildren<UnityEngine.MeshRenderer>(false)) { if (!r.enabled) continue; foreach (var m in r.sharedMaterials) mats.Add(m != null ? m.name : "null"); }
+    sb.Append("cab " + e.index + " " + c.cabinetType + " " + (c.cabinetSectionProductInfo != null ? c.cabinetSectionProductInfo.sku : "-") + " size=" + V(c.resizerCuboid.size) + " pos=" + V(t.position) + " active=" + t.gameObject.activeInHierarchy + " mats=" + string.Join("|", mats) + "\n");
+    foreach (var o in c.occupants)
+    {
+        sb.Append("  occ " + (o.productInfo != null ? o.productInfo.sku : "-") + " x=" + R(o.metersFromVolumeMinX) + " pos=" + V(o.transform.position) + " vol=" + (o.occupiedVolume != null ? o.occupiedVolume.name : "-") + "\n");
+        var shelf = o.GetComponent<KitchenDesign.OccupiableVolume>();
+        if (shelf != null) { foreach (var so in shelf.occupants) sb.Append("    nested " + (so.productInfo != null ? so.productInfo.sku : "-") + " x=" + R(so.metersFromVolumeMinX) + " pos=" + V(so.transform.position) + "\n"); }
+    }
+}
+var widgets = new System.Collections.Generic.List<string>();
+foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.KitchenWidget>(UnityEngine.FindObjectsSortMode.None))
+{
+    if (!w.isVisible) continue;
+    widgets.Add(w.name + "->" + (w.target != null ? w.target.name : "-"));
+}
+widgets.Sort(System.StringComparer.Ordinal);
+sb.Append("widgets " + string.Join(" ", widgets) + "\n");
+int occCount = UnityEngine.Object.FindObjectsByType<KitchenDesign.Occupant>(UnityEngine.FindObjectsSortMode.None).Length;
+int rend = k.GetComponentsInChildren<UnityEngine.Renderer>(false).Length;
+sb.Append("occupants=" + occCount + " renderers=" + rend + "\n");
+string text = sb.ToString();
+if (name != "")
+{
+    System.IO.Directory.CreateDirectory(outDir);
+    System.IO.File.WriteAllText(System.IO.Path.Combine(outDir, name + ".txt"), text);
+}
+uint h = 2166136261; foreach (char ch in text) { h = (h ^ ch) * 16777619; }
+return "sig=" + h.ToString("X8") + " occupants=" + occCount + " renderers=" + rend;

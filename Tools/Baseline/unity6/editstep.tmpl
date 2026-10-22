@@ -1,0 +1,207 @@
+string outDir = "__OUTDIR__";
+string step = "__STEP__";
+string logPath = System.IO.Path.Combine(outDir, "log.txt");
+void Log(string s) { System.IO.File.AppendAllText(logPath, s + "\n"); }
+var k = KitchenDesign.Kitchen.instance;
+if (k == null || k.layout == null) return "kitchen=none";
+var cabs = new System.Collections.Generic.List<KitchenDesign.Cabinet>();
+foreach (var e in k.layout.EnumerateCabinets()) cabs.Add(e.element);
+KitchenDesign.Occupant OccA()
+{
+    foreach (var c in cabs) foreach (var o in c.occupants) { if (o.GetComponent<KitchenDesign.CabinetShelf>() == null) return o; }
+    return null;
+}
+KitchenDesign.Occupant LastWithSku(string sku)
+{
+    KitchenDesign.Occupant found = null;
+    foreach (var c in cabs) foreach (var o in c.occupants) { if (o.productInfo != null && o.productInfo.sku == sku) found = o; }
+    return found;
+}
+KitchenDesign.Cabinet CabC()
+{
+    for (int i = 1; i < cabs.Count; i++)
+    {
+        var c = cabs[i];
+        if (c != null && c.cabinetType == KitchenDesign.CabinetType.Straight && c.occupants.Count == 0 && c.canHaveProducts) return c;
+    }
+    return null;
+}
+KitchenDesign.Cabinet DragTarget()
+{
+    KitchenDesign.Cabinet found = null;
+    foreach (var c in cabs) { if (c != null && c.cabinetType == KitchenDesign.CabinetType.Straight && c.canHaveProducts) found = c; }
+    return found;
+}
+UnityEngine.EventSystems.PointerEventData Pointer(UnityEngine.Vector3 world)
+{
+    var cam = UnityEngine.Camera.main;
+    UnityEngine.Vector3 sp = cam.WorldToScreenPoint(world);
+    var ev = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+    ev.position = new UnityEngine.Vector2(sp.x, sp.y);
+    ev.pressPosition = ev.position;
+    return ev;
+}
+UnityEngine.Vector3 TopCenter(KitchenDesign.Cabinet c)
+{
+    var cu = c.resizerCuboid;
+    return c.GetTransform().TransformPoint(new UnityEngine.Vector3(cu.center.x, cu.max.y, cu.center.z));
+}
+KitchenDesign.ResizerWidget Resizer(KitchenDesign.Cabinet c)
+{
+    foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.ResizerWidget>(UnityEngine.FindObjectsSortMode.None))
+    {
+        if (w.isVisible && w.target == c && w.affectExtent == KitchenDesign.Extent.Max) return w;
+    }
+    return null;
+}
+
+string Sku(KitchenDesign.Cabinet c) { return c == null ? "none" : c.cabinetSectionProductInfo != null ? c.cabinetSectionProductInfo.sku : c.name; }
+KitchenDesign.Occupant a = OccA();
+KitchenDesign.Cabinet cc = CabC();
+switch (step)
+{
+    case "setup":
+    {
+        System.IO.Directory.CreateDirectory(outDir);
+        System.IO.File.WriteAllText(logPath, "");
+        KitchenDesign.EventBridge.Designer.showToast += (t, h) => Log("toast: " + t);
+        KitchenDesign.EventBridge.Designer.showNotification += (t, m, d) => Log("notification: " + t + ": " + m);
+        KitchenDesign.EventBridge.Designer.onHighlightChanged.OnInvoke += go => { Log("highlight: " + (go != null ? go.name : "null")); return Cysharp.Threading.Tasks.UniTask.CompletedTask; };
+        return "setup occA=" + (a != null ? a.productInfo.sku : "none") + " cabC=" + Sku(cc);
+    }
+    case "hl_occ":
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(a.gameObject));
+        return "highlight " + a.productInfo.sku;
+    case "nudge":
+    {
+        UnityEngine.Vector3 p = a.productVisualContentInstance.GetTransform().localPosition + UnityEngine.Vector3.right * 2f * 0.0254f;
+        bool moved = false;
+        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.EventBridge.Designer.RepositionSnapMode.None, ref moved);
+        Log("nudge moved=" + moved);
+        return "nudge moved=" + moved;
+    }
+    case "nudge_up":
+    {
+        var drawer = LastWithSku("TEWD30-C"); if (drawer != null) a = drawer;
+        UnityEngine.Vector3 p = a.productVisualContentInstance.GetTransform().localPosition + UnityEngine.Vector3.up * 0.0254f;
+        bool moved = false;
+        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.EventBridge.Designer.RepositionSnapMode.None, ref moved);
+        Log("nudge_up moved=" + moved);
+        return "nudge_up moved=" + moved;
+    }
+    case "center":
+        KitchenDesign.EventBridge.Designer.centerOccupantInVolume(a);
+        return "center";
+    case "clone_occ":
+        KitchenDesign.EventBridge.Designer.onTryCloneProduct(a.productInfo, o => Log("cloned: " + (o != null ? o.productInfo.sku : "null")));
+        return "clone " + a.productInfo.sku;
+    case "drag_begin":
+    {
+        var o = LastWithSku(a.productInfo.sku);
+        var ev = Pointer(o.transform.position);
+        KitchenDesign.EventBridge.Designer.onOccupantDragBegin(o, ev);
+        return "drag begin " + o.name + " at " + ev.position;
+    }
+    case "drag_move":
+    {
+        var o = LastWithSku(a.productInfo.sku);
+        var t = DragTarget();
+        var ev = Pointer(TopCenter(t));
+        KitchenDesign.EventBridge.Designer.onOccupantDrag(o, ev);
+        return "drag to " + Sku(t) + " at " + ev.position;
+    }
+    case "drag_end":
+    {
+        var o = LastWithSku(a.productInfo.sku);
+        var ev = Pointer(TopCenter(DragTarget()));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onOccupantDragEnd.Invoke((o, ev)));
+        return "drag end";
+    }
+    case "destroy_occ":
+    {
+        var o = LastWithSku(a.productInfo.sku);
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryDestroyOccupant.Invoke(o));
+        return "destroy " + o.productInfo.sku;
+    }
+    case "hl_cab":
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(cc.gameObject));
+        return "highlight " + Sku(cc);
+    case "resize_begin":
+    case "resize_move":
+    case "resize_end":
+    {
+        var w = Resizer(cc); if (w == null) return "no resizer";
+        var cu = cc.resizerCuboid;
+        var t = cc.GetTransform();
+        UnityEngine.Vector3 p0 = t.TransformPoint(new UnityEngine.Vector3(cu.max.x, cu.max.y, cu.center.z));
+        UnityEngine.Vector3 p1 = p0 + t.right * 3f * 0.0254f;
+        UnityEngine.Vector3 s0 = w.worldCamera.WorldToScreenPoint(p0), s1 = w.worldCamera.WorldToScreenPoint(p1);
+        var ev = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+        ev.position = step == "resize_begin" ? new UnityEngine.Vector2(s0.x, s0.y) : new UnityEngine.Vector2(s1.x, s1.y);
+        if (step == "resize_begin") w.OnBeginDrag(ev);
+        else if (step == "resize_move") w.OnDrag(ev);
+        else w.OnEndDrag(ev);
+        return step + " " + w.name;
+    }
+    case "clone_cab":
+        KitchenDesign.EventBridge.Designer.onTryCloneSection(cc);
+        return "clone section " + Sku(cc);
+    case "reorder":
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryReorderCabinet.Invoke((cc, KitchenDesign.Extent.Max)));
+        return "reorder " + Sku(cc);
+    case "add_cab":
+        KitchenDesign.EventBridge.Designer.onTryAddSection(cc.cabinetSectionProductInfo, null);
+        return "add section " + Sku(cc);
+    case "destroy_cab":
+        KitchenDesign.EventBridge.Designer.onTryDestroySection(cc);
+        return "destroy section " + Sku(cc);
+    case "toekick":
+        KitchenDesign.EventBridge.Designer.tryToggleToeKicks();
+        return "toe kicks";
+    case "finish":
+    {
+        var f = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku("Cabinet_Challenger_Graphite", false);
+        if (f == null) return "finish not found";
+        KitchenDesign.EventBridge.Designer.onFinishMaterialChanged(f, KitchenDesign.Shared.Enums.ProductCategory.FinishCabinet);
+        return "finish " + f.sku;
+    }
+    case "destroy_backing":
+    {
+        foreach (var span in k.layout.spans)
+        {
+            if (span.backing == null) continue;
+            string bsku = span.backing.info != null ? span.backing.info.sku : span.backing.name;
+            Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryDestroyCabinetBacking.Invoke(span.backing));
+            return "destroy backing " + bsku;
+        }
+        return "no backing";
+    }
+    case "add_occ":
+        KitchenDesign.EventBridge.Designer.onTryAddProduct(a.productInfo, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
+        return "add " + a.productInfo.sku;
+    case "new_standard":
+    {
+        var layoutPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/AssetsMelcher/KitchenLayouts/StyleL.prefab").GetComponent<KitchenDesign.CabinetLayout>();
+        KitchenDesign.EventBridge.Designer.setBuildingMethod(KitchenDesign.KitchenBuildingMethod.Standard);
+        KitchenDesign.EventBridge.Designer.setCabinetLayout(layoutPrefab);
+        KitchenDesign.EventBridge.Designer.setKitchenTemplate(null);
+        KitchenDesign.EventBridge.Designer.setCountertopType(KitchenDesign.CountertopType.Default);
+        KitchenDesign.EventBridge.Designer.setBaseCabinetDepth(30f * 0.0254f);
+        KitchenDesign.EventBridge.Designer.setCountertopThickness(1.25f * 0.0254f);
+        KitchenDesign.EventBridge.Designer.setCountertopOverhang(KitchenDesign.CuboidPadding.one * 0.0254f);
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.createKitchen.Invoke());
+        return "new standard kitchen " + layoutPrefab.name;
+    }
+    case "add_grill":
+    case "add_drawer":
+    {
+        var pi = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku(step == "add_grill" ? "69008LP/69009NG" : "TEWD30-C", false);
+        if (pi == null) return "product not found";
+        KitchenDesign.EventBridge.Designer.onTryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
+        return "add " + pi.sku;
+    }
+    case "hl_none":
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(null));
+        return "highlight none";
+}
+return "unknown step " + step;
