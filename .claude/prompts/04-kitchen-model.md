@@ -208,6 +208,13 @@ changes).
 `_project/Scripts/KitchenModel/`) holds the 19 selection fields; `Kitchen`'s public properties
 forward to it, so no caller changes. Why first: every later part (save, load, finishes, drag)
 reads the selections, and one object to hand them is what lets them leave `Kitchen`.
+- **Done 2026-10-23.** 20 fields (the 19 plus the analytics key) became public fields of
+  `KitchenSelections`, public because `LoadFromJson` passes several as `out` arguments; `Kitchen`'s
+  references rewritten to `this._selections.…` by a script, its properties unchanged. Checks against
+  B4.2: `rulescheck.cs` 60/0; `coldstart.sh` both the reference; `runall.sh` `resave.json`
+  identical in all 8, photos within 0.07/255, only 36449's live orbit camera back at 45° (the
+  intermittent case); `menucheck.sh` 21 / 21 / 1,268; edit probe identical. The server dropped 7
+  more Kalamazoo products in between.
 
 **B4.4 — Save and price inputs out of `Kitchen`.** `KitchenSaveWriter` (`_project/Scripts/Save/`,
 `KitchenDesign.Save`) builds the JSON exactly as `SaveToJson` does; `Kitchen.SaveToJson` calls it.

@@ -1089,6 +1089,17 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     (`KitchenDesign.Geometry`): `Cuboid`, `CuboidPadding`, `OrientedBounds`, `LineSegment`,
     `Vector3T`, `VectorUtility`, `CabinetLocalDirectionUtil` (comments kept: moved, not
     refactored). Checked with `kitchendatacensus.cs` (every serialized value of the 61 assets).
+  - `KitchenSelections` (B4.3, `_project/Scripts/KitchenModel/`, `KitchenDesign.KitchenModel`): the
+    user's choices for the open design (building method, brand catalog, template, layout prefab,
+    door and handle style, end and back panel sizes, countertop type, the three finishes, base
+    cabinet depth, countertop thickness and overhang, toe kick, extra features, analytics key,
+    session start). Owned by `Kitchen`, whose `selected…` properties forward to it, and handed to
+    the parts that read the selections. Public fields, because the load passes several of them as
+    `out` arguments. The back panel depth is the extra depth added to the back of every cabinet when
+    back panels are on (Gemini), kept so it can be removed again and so authored corners' overhang
+    can be corrected. The overhang works because the countertop's 27-slice mesh has a 1" overhang
+    beyond its size on every side but the top; X and Z set the left/right and front/back overhangs.
+    The end panel setters on `Kitchen` toggle: setting the current width again sets it to 0.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's

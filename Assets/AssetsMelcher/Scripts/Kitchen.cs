@@ -6,6 +6,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Products;
+    using KitchenDesign.KitchenModel;
     using Unity.Cinemachine;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -44,17 +45,17 @@ namespace KitchenDesign
 
         public System.DateTime sessionStartTime
         {
-            get => m_SessionStartTime;
-            set => m_SessionStartTime = value;
+            get => this._selections.sessionStartTime;
+            set => this._selections.sessionStartTime = value;
         }
 
-        public KitchenBuildingMethod selectedBuildingMethod => m_SelectedBuildingMethod;
+        public KitchenBuildingMethod selectedBuildingMethod => this._selections.buildingMethod;
 
-        public BrandCatalogSO selectedBrandCatalog => m_SelectedBrandCatalog;
+        public BrandCatalogSO selectedBrandCatalog => this._selections.brandCatalog;
 
-        public CountertopType selectedCountertopType => m_SelectedCountertopType;
+        public CountertopType selectedCountertopType => this._selections.countertopType;
 
-        public CabinetToeKickType selectedToeKickType => m_SelectedToeKickType;
+        public CabinetToeKickType selectedToeKickType => this._selections.toeKickType;
 
         public CabinetLayout layout => m_CurrentCabinetLayout;
 
@@ -62,7 +63,7 @@ namespace KitchenDesign
 
         public KitchenCutoutClipping cutoutClipping => m_CutoutClipping;
 
-        public float baseCabinetDepthInMeters => m_SelectedBaseCabinetDepthInMeters;
+        public float baseCabinetDepthInMeters => this._selections.baseCabinetDepthInMeters;
 
 
         /// <summary>
@@ -72,12 +73,12 @@ namespace KitchenDesign
         /// </summary>
         public float cabinetHeightInMeters => 36.0f * Units.Inches2Meters;
 
-        public float countertopThicknessInMeters => m_SelectedCountertopThicknessInMeters;
+        public float countertopThicknessInMeters => this._selections.countertopThicknessInMeters;
 
-        public CuboidPadding baseCountertopOverhangInMeters => m_SelectedCountertopOverhangInMeters;
+        public CuboidPadding baseCountertopOverhangInMeters => this._selections.countertopOverhangInMeters;
 
 
-        public bool doCabinetsHaveColumns => m_SelectedBuildingMethod == KitchenBuildingMethod.Sections;
+        public bool doCabinetsHaveColumns => this._selections.buildingMethod == KitchenBuildingMethod.Sections;
 
         // TODO: Do something better than expose this directly. It is exposed
         //       so the ground can be temporarily hidden during screenshots
@@ -86,7 +87,7 @@ namespace KitchenDesign
 
         public string selectedDoorStyleName
         {
-            get => m_SelectedDoorStyleName;
+            get => this._selections.doorStyleName;
 
             // TODO: Remove the setter and add an event to EventBridge to
             //       handle changing the door style.
@@ -94,7 +95,7 @@ namespace KitchenDesign
             {
                 // Temporarily disabled, client request.
 
-                // if (value == "Shaker" && m_SelectedDoorStyleName != value)
+                // if (value == "Shaker" && this._selections.doorStyleName != value)
                 // {
                 //     EventBridge.Designer.showNotification?.Invoke(
                 //         title: "Shaker Doors",
@@ -103,36 +104,36 @@ namespace KitchenDesign
                 //     );
                 // }
 
-                m_SelectedDoorStyleName = value;
+                this._selections.doorStyleName = value;
 
             }
         }
 
         public string selectedDoorHandleStyleName
         {
-            get => m_SelectedDoorHandleStyleName;
+            get => this._selections.doorHandleStyleName;
             set
             {
-                m_SelectedDoorHandleStyleName = value;
+                this._selections.doorHandleStyleName = value;
             }
         }
 
         public float endPanelWidthInMetersLeft
         {
-            get => m_EndPanelWidthInMetersLeft;
-            set => m_EndPanelWidthInMetersLeft = m_EndPanelWidthInMetersLeft == value ? 0f : value;
+            get => this._selections.endPanelWidthInMetersLeft;
+            set => this._selections.endPanelWidthInMetersLeft = this._selections.endPanelWidthInMetersLeft == value ? 0f : value;
         }
 
         public float endPanelWidthInMetersRight
         {
-            get => m_EndPanelWidthInMetersRight;
-            set => m_EndPanelWidthInMetersRight = m_EndPanelWidthInMetersRight == value ? 0f : value;
+            get => this._selections.endPanelWidthInMetersRight;
+            set => this._selections.endPanelWidthInMetersRight = this._selections.endPanelWidthInMetersRight == value ? 0f : value;
         }
 
         public float backPanelDepthInMeters
         {
-            get => m_BackPanelDepthInMeters;
-            set => m_BackPanelDepthInMeters = m_BackPanelDepthInMeters == value ? 0f : value;
+            get => this._selections.backPanelDepthInMeters;
+            set => this._selections.backPanelDepthInMeters = this._selections.backPanelDepthInMeters == value ? 0f : value;
         }
 
         public void UpdateLayoutCabinetMeshes()
@@ -141,13 +142,13 @@ namespace KitchenDesign
             m_CurrentCabinetLayout.UpdatePositions();
         }
 
-        public CabinetLayout selectedCabinetLayout => m_SelectedCabinetLayout;
-        public KitchenTemplateSO selectedKitchenTemplate => m_SelectedKitchenTemplate;
-        public ProductInfo selectedCountertopFinish => m_SelectedCountertopFinish;
-        public ProductInfo selectedCabinetFinish => m_SelectedCabinetFinish;
-        public ProductInfo selectedFlooringFinish => m_SelectedFlooringFinish;
+        public CabinetLayout selectedCabinetLayout => this._selections.layoutPrefab;
+        public KitchenTemplateSO selectedKitchenTemplate => this._selections.kitchenTemplate;
+        public ProductInfo selectedCountertopFinish => this._selections.countertopFinish;
+        public ProductInfo selectedCabinetFinish => this._selections.cabinetFinish;
+        public ProductInfo selectedFlooringFinish => this._selections.flooringFinish;
 
-        public List<KitchenExtraFeature> selectedExtraFeatures => m_SelectedExtraFeatures;
+        public List<KitchenExtraFeature> selectedExtraFeatures => this._selections.extraFeatures;
 
         public ProductVisualDatabaseSO productVisualDatabase => m_ProductVisualDatabase;
 
@@ -158,8 +159,8 @@ namespace KitchenDesign
 
         public string analyticsKey
         {
-            get => m_AnalyticsKey;
-            set => m_AnalyticsKey = value;
+            get => this._selections.analyticsKey;
+            set => this._selections.analyticsKey = value;
         }
 
         // =====================================================================
@@ -182,9 +183,9 @@ namespace KitchenDesign
         public bool AreProductsForcedToCenterOfCabinets(Cabinet cabinetForRuleset)
         {
             return
-                (cabinetForRuleset != null && cabinetForRuleset.forceProductsToCenterBuildingMethods.HasFlag(m_SelectedBuildingMethod)) ||
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Sections ||
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog;
+                (cabinetForRuleset != null && cabinetForRuleset.forceProductsToCenterBuildingMethods.HasFlag(this._selections.buildingMethod)) ||
+                this._selections.buildingMethod == KitchenBuildingMethod.Sections ||
+                this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
         }
 
         /// <summary>
@@ -303,9 +304,9 @@ namespace KitchenDesign
 
             bool showFraction = false;
 
-            if(ProFitGlobals.appRules.MeasurementFractionsFollowBrandCatalog && m_SelectedBrandCatalog != null)
+            if(ProFitGlobals.appRules.MeasurementFractionsFollowBrandCatalog && this._selections.brandCatalog != null)
             {
-                showFraction = m_SelectedBrandCatalog.showFractionInMeasurements;
+                showFraction = this._selections.brandCatalog.showFractionInMeasurements;
             }
 
             foreach (CabinetSpan span in layout.spans)
@@ -324,34 +325,34 @@ namespace KitchenDesign
             string paverFinishProductSku        = "";
             string deckFinishProductSku         = "";
 
-            if (m_SelectedCabinetFinish != null)
+            if (this._selections.cabinetFinish != null)
             {
-                cabinetFinishProductSku = m_SelectedCabinetFinish.sku;
+                cabinetFinishProductSku = this._selections.cabinetFinish.sku;
             }
 
-            if (m_SelectedCountertopFinish != null)
+            if (this._selections.countertopFinish != null)
             {
-                countertopFinishProductSku = m_SelectedCountertopFinish.sku;
+                countertopFinishProductSku = this._selections.countertopFinish.sku;
             }
 
             // For the flooring, we need to get the visual to know whether it is
             // paver or deck
-            if (m_SelectedFlooringFinish != null)
+            if (this._selections.flooringFinish != null)
             {
                 ProductVisualSO flooringVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
-                        m_SelectedFlooringFinish.visualId
+                        this._selections.flooringFinish.visualId
                     );
 
                 if (flooringVisual)
                 {
                     if (flooringVisual.info.flooringType == FlooringType.Stone)
                     {
-                        paverFinishProductSku = m_SelectedFlooringFinish.sku;
+                        paverFinishProductSku = this._selections.flooringFinish.sku;
                     }
                     else
                     {
-                        deckFinishProductSku = m_SelectedFlooringFinish.sku;
+                        deckFinishProductSku = this._selections.flooringFinish.sku;
                     }
                 }
             }
@@ -441,11 +442,11 @@ namespace KitchenDesign
 
             if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
             {
-                counterTopHeight = Utility.MeasurementFormat.FormatMetersToCentimeters(m_SelectedCountertopThicknessInMeters);
+                counterTopHeight = Utility.MeasurementFormat.FormatMetersToCentimeters(this._selections.countertopThicknessInMeters);
             }
             else
             {
-                counterTopHeight = Utility.MeasurementFormat.FormatMetersToImperial(m_SelectedCountertopThicknessInMeters);
+                counterTopHeight = Utility.MeasurementFormat.FormatMetersToImperial(this._selections.countertopThicknessInMeters);
             }
 
             JsonList topMeasurements = new List<object>();
@@ -546,7 +547,7 @@ namespace KitchenDesign
                     // For corner pieces, the length may be stretched if a
                     // neighbour cabinet has a bar top. Use the default
                     // counter depth as the corner's size
-                    lengthInMeters = m_SelectedBaseCabinetDepthInMeters;
+                    lengthInMeters = this._selections.baseCabinetDepthInMeters;
                 }
 
                 cabinetEntry.Add("size_in_meters_x", lengthInMeters);
@@ -576,8 +577,8 @@ namespace KitchenDesign
             float cabinetLinearMeters = 0.0f;
             float cabinetSquareMeters = 0.0f;
 
-            if (m_SelectedBuildingMethod == KitchenBuildingMethod.Standard ||
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Sections)
+            if (this._selections.buildingMethod == KitchenBuildingMethod.Standard ||
+                this._selections.buildingMethod == KitchenBuildingMethod.Sections)
             {
                 // The square area of Pro-Fit's cabinet finish is simpler
                 // to calculate than the other build modes.
@@ -635,7 +636,7 @@ namespace KitchenDesign
                     m_CurrentCabinetLayout.spans[0].cabinets[0].element.sizeInMeters.y;
 
                 float hiddenFaceLinearMeters =
-                    m_SelectedBaseCabinetDepthInMeters;
+                    this._selections.baseCabinetDepthInMeters;
 
                 float hiddenFaceSquareMeters =
                     hiddenFaceLinearMeters * cabinetHeight;
@@ -729,10 +730,10 @@ namespace KitchenDesign
             // itemized on the price sheet.
             float toeKickLinearMeters = 0.0f;
 
-            if (m_SelectedToeKickType != CabinetToeKickType.None)
+            if (this._selections.toeKickType != CabinetToeKickType.None)
             {
                 bool isToeKickInset =
-                    m_SelectedToeKickType == CabinetToeKickType.Inset;
+                    this._selections.toeKickType == CabinetToeKickType.Inset;
 
                 float? previousCabinetDepth = null;
 
@@ -1147,14 +1148,14 @@ namespace KitchenDesign
                         ) :
                         null;
 
-                bool isShakerDoorSelected = m_SelectedDoorStyleName == "Shaker";
-                bool isDecoGrain = m_SelectedCabinetFinish != null && m_SelectedCabinetFinish.manufacturerId == 140;
+                bool isShakerDoorSelected = this._selections.doorStyleName == "Shaker";
+                bool isDecoGrain = this._selections.cabinetFinish != null && this._selections.cabinetFinish.manufacturerId == 140;
 
                 // Number of end panels (i.e., number of ends that are not
                 // neighbouring a fridge cabinet).
                 int cabinetEndPanelCount = 0;
 
-                CabinetSectionDoorHandleStyleSO style = m_SelectedBrandCatalog.cabinetSectionDoorHandleStyle;
+                CabinetSectionDoorHandleStyleSO style = this._selections.brandCatalog.cabinetSectionDoorHandleStyle;
                 float handleBasePrice = 0f;
 
                 if(style != null)
@@ -1172,7 +1173,7 @@ namespace KitchenDesign
                     }
 
                     // MARK: Door Handle Style
-                    if(!string.IsNullOrEmpty(m_SelectedDoorHandleStyleName))
+                    if(!string.IsNullOrEmpty(this._selections.doorHandleStyleName))
                     {
                         CabinetSectionDoorHandle handle = cabinet.GetComponentInChildren<CabinetSectionDoorHandle>();
 
@@ -1183,7 +1184,7 @@ namespace KitchenDesign
                                  manualPriceSheetEntries.Add(
                                     CreateManualPriceSheetEntry(
                                         productSku: "HARDWARE",                                    
-                                        productName: m_SelectedDoorHandleStyleName,
+                                        productName: this._selections.doorHandleStyleName,
                                         price: handleBasePrice
                                     )
                                 );
@@ -1249,7 +1250,7 @@ namespace KitchenDesign
                             manualPriceSheetEntries.Add(fillerEntry);
                         }
 
-                        if (m_SelectedBrandCatalog.ruleset == BrandCatalogRuleset.Napoleon &&
+                        if (this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Napoleon &&
                             cabinet.Is(CabinetType.Corner))
                         {
                             // Add 2 45-degree transitions for each Napoleon
@@ -1304,9 +1305,9 @@ namespace KitchenDesign
                         bool isBesideACabinet = true;
 
                         EndPanelInfo endPanelInfo =
-                                m_SelectedBrandCatalog.
+                                this._selections.brandCatalog.
                                 cabinetRuntimeEndPanelInfo.
-                                GetEndPanelInfoByTargetDepthOrDefault(cabinet.sizeInMeters.z - m_BackPanelDepthInMeters);
+                                GetEndPanelInfoByTargetDepthOrDefault(cabinet.sizeInMeters.z - this._selections.backPanelDepthInMeters);
 
                         
                         // Only the left neighbour is an end cabinet: this side is already
@@ -1369,7 +1370,7 @@ namespace KitchenDesign
                     }
 
                     // MARK: Runtime End Panels
-                    if(m_SelectedBrandCatalog.hasEndPanelsOption &&
+                    if(this._selections.brandCatalog.hasEndPanelsOption &&
                         cabinet.cabinetType.IsEnd() &&
                         cabinet.sizeInMeters.x > 0)
                     {
@@ -1386,9 +1387,9 @@ namespace KitchenDesign
                         if(suffix != string.Empty)
                         {
                             EndPanelInfo endPanelInfo =
-                                m_SelectedBrandCatalog.
+                                this._selections.brandCatalog.
                                 cabinetRuntimeEndPanelInfo.
-                                GetEndPanelInfoByTargetDepthOrDefault(cabinet.sizeInMeters.z - m_BackPanelDepthInMeters);
+                                GetEndPanelInfoByTargetDepthOrDefault(cabinet.sizeInMeters.z - this._selections.backPanelDepthInMeters);
 
                             manualPriceSheetEntries.Add(
                                 CreateManualPriceSheetEntry(
@@ -1401,7 +1402,7 @@ namespace KitchenDesign
                     }
 
                     // MARK: Runtime Back Panels
-                    if(m_SelectedBrandCatalog.hasBackPanelsOption &&
+                    if(this._selections.brandCatalog.hasBackPanelsOption &&
                         selectedExtraFeatures.Contains(KitchenExtraFeature.CabinetBackPanels) &&
                         cabinet.cabinetSectionProductInfo != null &&
                         !cabinet.cabinetSectionVisual.info.IsCategoryAllowedInSection(ProductCategorySpecific.Fridge))
@@ -1413,19 +1414,19 @@ namespace KitchenDesign
 
                         if(cabinet.Is(CabinetType.Corner))
                         {
-                            width = cabinet.sizeInMeters.x - m_BackPanelDepthInMeters;
-                            depth = cabinet.sizeInMeters.z - m_BackPanelDepthInMeters;
+                            width = cabinet.sizeInMeters.x - this._selections.backPanelDepthInMeters;
+                            depth = cabinet.sizeInMeters.z - this._selections.backPanelDepthInMeters;
                             isCornerBackPanel = true;
                         }
 
                         FridgePanelInfo backPanel;
                         if(isCornerBackPanel)
                         {
-                            backPanel = m_SelectedBrandCatalog.FindFirstCabinetBackPanelByDepth(depth, cabinetProductInfo.cabinetSectionCategoryId);
+                            backPanel = this._selections.brandCatalog.FindFirstCabinetBackPanelByDepth(depth, cabinetProductInfo.cabinetSectionCategoryId);
                         }
                         else
                         {
-                            backPanel = m_SelectedBrandCatalog.FindFirstCabinetBackPanel(width, cabinetProductInfo.cabinetSectionCategoryId);
+                            backPanel = this._selections.brandCatalog.FindFirstCabinetBackPanel(width, cabinetProductInfo.cabinetSectionCategoryId);
                         }
 
                         JsonDict backPanelEntry;
@@ -1440,7 +1441,7 @@ namespace KitchenDesign
                         }
                         else
                         {
-                            FridgePanelInfo fallbackPanel = m_SelectedBrandCatalog.cabinetRuntimeBackPanelInfo.fallbackBackPanel;
+                            FridgePanelInfo fallbackPanel = this._selections.brandCatalog.cabinetRuntimeBackPanelInfo.fallbackBackPanel;
                             string backPanelProductId = $"{backPanel.productId}-{backPanel.specificPanelWidthInMeters * Units.Meters2Inches}x{backPanel.panelHeight}";
                             string backPanelProductName = $"{backPanel.productName} {backPanel.specificPanelWidthInMeters * Units.Meters2Inches}\"W x {backPanel.panelHeight}\"H";
 
@@ -1505,7 +1506,7 @@ namespace KitchenDesign
 
                         bool canAddFridgeBackPanel = CanAddFridgeBackPanelToPriceSheet();
 
-                        if(m_SelectedBrandCatalog.ruleset == BrandCatalogRuleset.Napoleon && fridgeEndPanelCount > 0)
+                        if(this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Napoleon && fridgeEndPanelCount > 0)
                         {
                             canAddFridgeBackPanel = false;
                         }
@@ -1729,11 +1730,11 @@ namespace KitchenDesign
                                 };
 
                         float backsplashPricePerLinearInch =
-                            m_SelectedCountertopFinish.id == ChallengerBrushedStainlessFinishId ?
+                            this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
                                 12.0f : 5.0f;
 
                         float highBarTopPricePerLinearInch =
-                            m_SelectedCountertopFinish.id == ChallengerBrushedStainlessFinishId ?
+                            this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
                                 63.0f : 40.0f;
 
                         // Challenger uses a linear length formula.
@@ -1853,10 +1854,10 @@ namespace KitchenDesign
                 }
 
                 if (selectedBrandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong &&
-                    m_SelectedCabinetFinish != null)
+                    this._selections.cabinetFinish != null)
                 {
                     // WeatherStrong finishes require end vents.
-                    if(m_SelectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AmericanOutdoorCabinets)
+                    if(this._selections.brandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AmericanOutdoorCabinets)
                     {
                         manualPriceSheetEntries.Add(
                             CreateManualPriceSheetEntry(
@@ -1866,7 +1867,7 @@ namespace KitchenDesign
                             )
                         );
                     }
-                    else if(m_SelectedBrandCatalog.cabinetManufacturerId is
+                    else if(this._selections.brandCatalog.cabinetManufacturerId is
                         Const.Gemini.ManufactersIds.Endura or
                         Const.Gemini.ManufactersIds.AgoraBerlinGardens)
                     {
@@ -1941,7 +1942,7 @@ namespace KitchenDesign
             }
 
             List<string> extraFeatures = new List<string>();
-            foreach (KitchenExtraFeature feature in m_SelectedExtraFeatures)
+            foreach (KitchenExtraFeature feature in this._selections.extraFeatures)
             {
                 extraFeatures.Add(feature.ToString());
             }
@@ -1980,13 +1981,13 @@ namespace KitchenDesign
                 { "price_changes", priceChanges },                      // used by server
 
                 { "kitchen_layout_style", m_CurrentCabinetLayout.style.ToString() },
-                { "kitchen_building_method", m_SelectedBuildingMethod.ToString() },
-                { "countertop_type", m_SelectedCountertopType.ToString() },
-                { "toe_kick_type", m_SelectedToeKickType.ToString() },
+                { "kitchen_building_method", this._selections.buildingMethod.ToString() },
+                { "countertop_type", this._selections.countertopType.ToString() },
+                { "toe_kick_type", this._selections.toeKickType.ToString() },
                 { "cabinets", cabinetList },
                 { "cabinet_spans", cabinetSpanList },
-                { "base_cabinet_depth_in_meters", m_SelectedBaseCabinetDepthInMeters },
-                { "countertop_thickness_in_meters", m_SelectedCountertopThicknessInMeters },
+                { "base_cabinet_depth_in_meters", this._selections.baseCabinetDepthInMeters },
+                { "countertop_thickness_in_meters", this._selections.countertopThicknessInMeters },
                 { "extra_features", extraFeatures },
 
                 // These values aren't used anymore by us but we'll send them
@@ -2007,9 +2008,9 @@ namespace KitchenDesign
                 { "cabinetDepthInitial", 0 },
             };
 
-            if (m_AnalyticsKey != null)
+            if (this._selections.analyticsKey != null)
             {
-                string analyticsKey = string.IsNullOrEmpty(m_AnalyticsKey) ? null : m_AnalyticsKey;
+                string analyticsKey = string.IsNullOrEmpty(this._selections.analyticsKey) ? null : this._selections.analyticsKey;
                 saveJson.Add("analytics_key", analyticsKey);
             }
 
@@ -2026,9 +2027,9 @@ namespace KitchenDesign
             // https://3.basecamp.com/3293895/buckets/37470979/messages/8820074401#__recording_8823524482
             string disclaimer = null;
 
-            if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog)
+            if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
             {
-                if (m_SelectedBrandCatalog.ruleset == BrandCatalogRuleset.Napoleon)
+                if (this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Napoleon)
                 {
                     disclaimer = "Countertop not included on this final quote.";
                 }
@@ -2076,15 +2077,15 @@ namespace KitchenDesign
             }
 
 
-            if (m_SelectedBrandCatalog)
+            if (this._selections.brandCatalog)
             {
-                saveJson.Add("brand_catalog", m_SelectedBrandCatalog.catalogName);
-                saveJson.Add("brand_catalog_id", m_SelectedBrandCatalog.catalogId);
-                saveJson.Add("door_style_name", m_SelectedDoorStyleName);
-                saveJson.Add("door_handle_style_name", m_SelectedDoorHandleStyleName);
-                saveJson.Add("end_panel_width_left_in_meters", m_EndPanelWidthInMetersLeft);
-                saveJson.Add("end_panel_width_right_in_meters", m_EndPanelWidthInMetersRight);
-                saveJson.Add("back_panel_depth_in_meters", m_BackPanelDepthInMeters);
+                saveJson.Add("brand_catalog", this._selections.brandCatalog.catalogName);
+                saveJson.Add("brand_catalog_id", this._selections.brandCatalog.catalogId);
+                saveJson.Add("door_style_name", this._selections.doorStyleName);
+                saveJson.Add("door_handle_style_name", this._selections.doorHandleStyleName);
+                saveJson.Add("end_panel_width_left_in_meters", this._selections.endPanelWidthInMetersLeft);
+                saveJson.Add("end_panel_width_right_in_meters", this._selections.endPanelWidthInMetersRight);
+                saveJson.Add("back_panel_depth_in_meters", this._selections.backPanelDepthInMeters);
             }
 
 
@@ -2129,11 +2130,11 @@ namespace KitchenDesign
                 const int ChallengerBrushedStainlessFinishId = 1960;
 
                 float backsplashPricePerLinearInch =
-                    m_SelectedCountertopFinish.id == ChallengerBrushedStainlessFinishId ?
+                    this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
                         12.0f : 5.0f;
 
                 float highBarTopPricePerLinearInch =
-                    m_SelectedCountertopFinish.id == ChallengerBrushedStainlessFinishId ?
+                    this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
                         63.0f : 40.0f;
 
                 // Challenger uses a linear length formula.
@@ -2278,16 +2279,16 @@ namespace KitchenDesign
                 .GetValue("kitchen_building_method", out string kitchenBuildingMethodName, defaultValue: "")
                 .GetValue("brand_catalog", out string brandCatalogName, defaultValue: null)
                 .GetValue("brand_catalog_id", out int brandCatalogId, defaultValue: -1)
-                .GetValue("door_style_name", out m_SelectedDoorStyleName, defaultValue: null)
-                .GetValue("door_handle_style_name", out m_SelectedDoorHandleStyleName, defaultValue: "")
-                .GetValue("end_panel_width_left_in_meters", out m_EndPanelWidthInMetersLeft, defaultValue: 0f)
-                .GetValue("end_panel_width_right_in_meters", out m_EndPanelWidthInMetersRight, defaultValue: 0f)
-                .GetValue("back_panel_depth_in_meters", out m_BackPanelDepthInMeters, defaultValue: 0f)
+                .GetValue("door_style_name", out this._selections.doorStyleName, defaultValue: null)
+                .GetValue("door_handle_style_name", out this._selections.doorHandleStyleName, defaultValue: "")
+                .GetValue("end_panel_width_left_in_meters", out this._selections.endPanelWidthInMetersLeft, defaultValue: 0f)
+                .GetValue("end_panel_width_right_in_meters", out this._selections.endPanelWidthInMetersRight, defaultValue: 0f)
+                .GetValue("back_panel_depth_in_meters", out this._selections.backPanelDepthInMeters, defaultValue: 0f)
                 .GetValue("countertop_type", out string countertopTypeName, defaultValue: "")
                 .GetValue("toe_kick_type", out string toeKickType, defaultValue: "")
                 .GetValue("base_cabinet_depth_in_meters", out float baseCabinetDepthInMeters)
                 .GetValue("countertop_thickness_in_meters", out float countertopThicknessInMeters)
-                .GetValue("analytics_key", out m_AnalyticsKey, defaultValue: null)
+                .GetValue("analytics_key", out this._selections.analyticsKey, defaultValue: null)
                 .GetList("cabinets", out JsonList cabinetDataList)
                 .GetList("cabinet_spans", out JsonList cabinetSpanList, errorIfNotFound: false)
                 .GetList("extra_features", out JsonList extraFeaturesList, errorIfNotFound: false);
@@ -2304,28 +2305,28 @@ namespace KitchenDesign
             // building method.
             EnumInfo<KitchenBuildingMethod>.TryParse(
                 kitchenBuildingMethodName,
-                out m_SelectedBuildingMethod,
+                out this._selections.buildingMethod,
                 defaultValue: KitchenBuildingMethod.Standard
             );
 
-            if (m_SelectedBuildingMethod == 0)
+            if (this._selections.buildingMethod == 0)
             {
-                m_SelectedBuildingMethod = KitchenBuildingMethod.Standard;
+                this._selections.buildingMethod = KitchenBuildingMethod.Standard;
             }
 
             // The countertop overhang isn't saved, so reconstruct it from other
             // values.
             float countertopOverhangInMeters = 1.0f * Units.Inches2Meters;
 
-            if (m_SelectedBuildingMethod == KitchenBuildingMethod.Sections)
+            if (this._selections.buildingMethod == KitchenBuildingMethod.Sections)
             {
                 // Stoll cabinets use 0.5" countertop overhang instead of 1".
                 countertopOverhangInMeters *= 0.5f;
             }
 
-            m_SelectedBrandCatalog = null;
+            this._selections.brandCatalog = null;
 
-            bool isCatalogMode = m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog;
+            bool isCatalogMode = this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
             bool hasCatalogName = !string.IsNullOrEmpty(brandCatalogName);
             if (isCatalogMode != hasCatalogName)
             {
@@ -2345,14 +2346,14 @@ namespace KitchenDesign
                     {
                         if (brandCatalog.catalogId == brandCatalogId)
                         {
-                            m_SelectedBrandCatalog = brandCatalog;
+                            this._selections.brandCatalog = brandCatalog;
                             EventBridge.Designer.refreshCabinetLoadingUiImage();
                             break;
                         }
                     }
                 }
 
-                if (!m_SelectedBrandCatalog)
+                if (!this._selections.brandCatalog)
                 {
                     // Older saves only store the catalog's name.
 
@@ -2360,13 +2361,13 @@ namespace KitchenDesign
                     {
                         if (brandCatalog.catalogName == brandCatalogName)
                         {
-                            m_SelectedBrandCatalog = brandCatalog;
+                            this._selections.brandCatalog = brandCatalog;
                             break;
                         }
                     }
                 }
 
-                if (!m_SelectedBrandCatalog)
+                if (!this._selections.brandCatalog)
                 {
                     MelcherLog.LogError($"Could not find brand catalog with " +
                         $"name: {MelcherFormat.ConsoleString(brandCatalogName)} " +
@@ -2377,7 +2378,7 @@ namespace KitchenDesign
                 }
             }
 
-            m_SelectedCountertopOverhangInMeters =
+            this._selections.countertopOverhangInMeters =
                 new CuboidPadding()
                 {
                     left = countertopOverhangInMeters,
@@ -2392,18 +2393,18 @@ namespace KitchenDesign
             // the design's selected building method (and catalog, if it
             // exists) so therefore they need to be refreshed before we begin
             // populating the kitchen.
-            EventBridge.Designer.onBuildingMethodChanged?.Invoke(m_SelectedBuildingMethod);
+            EventBridge.Designer.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
 
-            await EventBridge.Designer.onBrandCatalogChanged.InvokeIfNonEmpty(m_SelectedBrandCatalog);
+            await EventBridge.Designer.onBrandCatalogChanged.InvokeIfNonEmpty(this._selections.brandCatalog);
 
-            m_SelectedCabinetFinish = ProFitGlobals.catalogData.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
-            m_SelectedCountertopFinish = ProFitGlobals.catalogData.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
+            this._selections.cabinetFinish = ProFitGlobals.catalogData.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
+            this._selections.countertopFinish = ProFitGlobals.catalogData.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
 
             string flooringId = !string.IsNullOrEmpty(deckFinishProductSku) ? deckFinishProductSku : paverFinishProductSku;
-            m_SelectedFlooringFinish = ProFitGlobals.catalogData.FindProductInfoBySku(flooringId, findCabinetSection: false);
+            this._selections.flooringFinish = ProFitGlobals.catalogData.FindProductInfoBySku(flooringId, findCabinetSection: false);
 
-            m_SelectedBaseCabinetDepthInMeters = baseCabinetDepthInMeters;
-            m_SelectedCountertopThicknessInMeters = countertopThicknessInMeters;
+            this._selections.baseCabinetDepthInMeters = baseCabinetDepthInMeters;
+            this._selections.countertopThicknessInMeters = countertopThicknessInMeters;
 
             // Convert the style name to a cabinet layout prefab
             // TODO: Move the prefab array to another script
@@ -2418,8 +2419,8 @@ namespace KitchenDesign
                 throw new System.InvalidOperationException($"Couldn't find cabinet layout prefab for layout {kitchenLayoutStyleName}");
             }
 
-            m_SelectedCabinetLayout = cabinetLayoutPrefab;
-            await CreateCabinetLayoutFromShape(m_SelectedCabinetLayout);
+            this._selections.layoutPrefab = cabinetLayoutPrefab;
+            await CreateCabinetLayoutFromShape(this._selections.layoutPrefab);
 
             // Try to load the countertop top from the save. Saves that were
             // created before the Sections building method was published won't
@@ -2427,7 +2428,7 @@ namespace KitchenDesign
             // countertop type.
             EnumInfo<CountertopType>.TryParse(
                 countertopTypeName,
-                out m_SelectedCountertopType,
+                out this._selections.countertopType,
                 defaultValue: CountertopType.Default
             );
 
@@ -2436,13 +2437,13 @@ namespace KitchenDesign
             // will default to not having a toe kick.
             EnumInfo<CabinetToeKickType>.TryParse(
                 toeKickType,
-                out m_SelectedToeKickType,
+                out this._selections.toeKickType,
                 defaultValue: CabinetToeKickType.None
             );
 
             bool remakeCabinets =
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Sections ||
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog;
+                this._selections.buildingMethod == KitchenBuildingMethod.Sections ||
+                this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
 
             if (string.IsNullOrEmpty(kitchenBuildingMethodName))
             {
@@ -2632,7 +2633,7 @@ namespace KitchenDesign
                             kitchen: this
                         );
 
-                    cabinet.SetToeKickType(m_SelectedToeKickType);
+                    cabinet.SetToeKickType(this._selections.toeKickType);
 
                     cabinet.normalizedAnchorToPreviousSection = normalizedAnchorToPreviousSection;
 
@@ -2676,31 +2677,31 @@ namespace KitchenDesign
                     // Stoll's "Adjustable Smoker Cabinets"
                     sizeInMeters.y = cabinetProductInfo.productSizeInMeters.y;
                 }
-                else if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                else if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
                     cabinet.Is(CabinetType.Corner, CabinetModelType.Procedural))
                 {
                     // Restore the height of procedural corners in Catalog
                     // building method. Otherwise, those cabinets may be a
                     // different height from all the other authored cabinets.
-                    sizeInMeters.y = m_SelectedBrandCatalog.standardCabinetHeightInMeters;
+                    sizeInMeters.y = this._selections.brandCatalog.standardCabinetHeightInMeters;
                 }
 
-                sizeInMeters.z = m_SelectedBaseCabinetDepthInMeters;
+                sizeInMeters.z = this._selections.baseCabinetDepthInMeters;
                 cabinet.sizeInMeters = sizeInMeters;
 
                 if (cabinet.cabinetType.IsHeightTransition() &&
-                    m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog &&
-                    m_SelectedBrandCatalog != null &&
-                    m_SelectedBrandCatalog.cabinetSectionLegStyle)
+                    this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
+                    this._selections.brandCatalog != null &&
+                    this._selections.brandCatalog.cabinetSectionLegStyle)
                 {
                     // Restore height transition cabinet's offset from the
                     // ground.
                     cabinet.cabinet.transform.position +=
-                        Vector3.up * m_SelectedBrandCatalog.cabinetSectionLegStyle.heightInMeters;
+                        Vector3.up * this._selections.brandCatalog.cabinetSectionLegStyle.heightInMeters;
                 }
 
                 cabinet.SetCountertopThickness(countertopThicknessInMeters);
-                cabinet.SetCountertopOverhang(m_SelectedCountertopOverhangInMeters);
+                cabinet.SetCountertopOverhang(this._selections.countertopOverhangInMeters);
 
                 if (cabinetMinSizeInMeters.HasValue)
                 {
@@ -2739,7 +2740,7 @@ namespace KitchenDesign
             // Set the base cabinet depth. We do this here (for all spans)
             // before setting customized per-span depths in a moment to avoid
             // overwriting the custom depths.
-            SetBaseCabinetDepth(m_SelectedBaseCabinetDepthInMeters);
+            SetBaseCabinetDepth(this._selections.baseCabinetDepthInMeters);
 
             // Handle adding backings now that the cabinets are properly sized.
             // Backings are recorded in the cabinet spans but they may be
@@ -2776,7 +2777,7 @@ namespace KitchenDesign
             // Read the kitchen extras. These are simple flags used to
             // represent highly specific features to a certain kitchen. E.g.,
             // Challenger Design's "Premium Finish Package".
-            m_SelectedExtraFeatures.Clear();
+            this._selections.extraFeatures.Clear();
             if (extraFeaturesList != null)
             {
                 for (int i = 0; i < extraFeaturesList.Count; ++i)
@@ -2795,16 +2796,16 @@ namespace KitchenDesign
                         continue;
                     }
 
-                    m_SelectedExtraFeatures.Add(extraFeature);
+                    this._selections.extraFeatures.Add(extraFeature);
                 }
             }
 
             // Apply the saved back panel depth. Cabinets do not serialize their
             // individual depths so this is applied as an offset from their
             // current depth.
-            if (!MelcherCommon.IsAlmostEqual(m_BackPanelDepthInMeters, 0.0f, 0.001f))
+            if (!MelcherCommon.IsAlmostEqual(this._selections.backPanelDepthInMeters, 0.0f, 0.001f))
             {
-                ApplyDeltaToAllCabinetDepths(m_BackPanelDepthInMeters);
+                ApplyDeltaToAllCabinetDepths(this._selections.backPanelDepthInMeters);
             }
 
             m_CurrentCabinetLayout.UpdatePositions();
@@ -2845,13 +2846,13 @@ namespace KitchenDesign
             );
 
             // Restore the flooring finish
-            await ChangeFinish(m_SelectedFlooringFinish, ProductCategory.FinishFloor);
+            await ChangeFinish(this._selections.flooringFinish, ProductCategory.FinishFloor);
 
             CenterTheGround();
 
             if(ProFitGlobals.appRules.ReappliesCountertopThicknessAfterLoad)
             {
-                SetCountertopThickness(m_SelectedCountertopThicknessInMeters);
+                SetCountertopThickness(this._selections.countertopThicknessInMeters);
             }            
 
             // Try to refresh the cabinet layout (to fix an issue where the
@@ -3114,10 +3115,10 @@ namespace KitchenDesign
                 case ProductCategory.BarTopHigh:
                     backingPrefab = m_HighBarTopPrefab;
 
-                    if (m_SelectedBrandCatalog &&
-                        m_SelectedBrandCatalog.highBarTopOverridePrefab)
+                    if (this._selections.brandCatalog &&
+                        this._selections.brandCatalog.highBarTopOverridePrefab)
                     {
-                        backingPrefab = m_SelectedBrandCatalog.highBarTopOverridePrefab;
+                        backingPrefab = this._selections.brandCatalog.highBarTopOverridePrefab;
                     }
                     break;
 
@@ -3196,7 +3197,7 @@ namespace KitchenDesign
         {
             string topInfoPhrase = "";
 
-            if (m_SelectedCabinetLayout)
+            if (this._selections.layoutPrefab)
             {
                 string combinedClientName = ProFitGlobals.TryGetClientCombinedName();
 
@@ -3208,16 +3209,16 @@ namespace KitchenDesign
                 {
                     countertopThicknessDisplayFormat =
                         Utility.MeasurementFormat.FormatMetersToCentimeters(
-                            m_SelectedCountertopThicknessInMeters
+                            this._selections.countertopThicknessInMeters
                         );
                 }
                 else
                 {
                     countertopThicknessDisplayFormat =
-                    Utility.MeasurementFormat.FormatMetersToImperial(m_SelectedCountertopThicknessInMeters);
+                    Utility.MeasurementFormat.FormatMetersToImperial(this._selections.countertopThicknessInMeters);
                 }
 
-                topInfoPhrase = $"{combinedClientName}. {m_SelectedCabinetLayout.displayName}. Counter-top Thickness: {countertopThicknessDisplayFormat}";
+                topInfoPhrase = $"{combinedClientName}. {this._selections.layoutPrefab.displayName}. Counter-top Thickness: {countertopThicknessDisplayFormat}";
             }
 
             m_TopInfoLabel.phrase = topInfoPhrase;
@@ -3249,7 +3250,7 @@ namespace KitchenDesign
 
                 m_CurrentCabinetLayout.SetKitchen(this);
 
-                if (m_SelectedBuildingMethod == KitchenBuildingMethod.Standard)
+                if (this._selections.buildingMethod == KitchenBuildingMethod.Standard)
                 {
                     // In standard mode, we enforce extra padding in the
                     // corners to prevent objects on adjacent spans from
@@ -3289,7 +3290,7 @@ namespace KitchenDesign
                         cabinet.occupiablePaddingInMeters = occupiablePaddingInMeters;
                     }
                 }
-                else if (m_SelectedBuildingMethod == KitchenBuildingMethod.Sections)
+                else if (this._selections.buildingMethod == KitchenBuildingMethod.Sections)
                 {
                     // In Sections mode, corners cabinets are flanked with
                     // extra sections that shim in the cabinet columns for the
@@ -3380,7 +3381,7 @@ namespace KitchenDesign
                             // the width of a support column because the other
                             // half exists in the neighbouring cabinet.
                             cornerColumnSizeInMeters.x = Const.CabinetColumnWidthInMeters * 0.5f;
-                            cornerColumnSizeInMeters.z = m_SelectedBaseCabinetDepthInMeters;
+                            cornerColumnSizeInMeters.z = this._selections.baseCabinetDepthInMeters;
 
                             cabinet.sizeInMeters = cornerColumnSizeInMeters;
                         }
@@ -3398,32 +3399,32 @@ namespace KitchenDesign
                     // Apply the cabinet size changes.
                     m_CurrentCabinetLayout.UpdatePositions();
                 }
-                else if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                else if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
                 {
-                    m_SelectedBaseCabinetDepthInMeters = m_SelectedBrandCatalog.standardCabinetDepthInMeters;
+                    this._selections.baseCabinetDepthInMeters = this._selections.brandCatalog.standardCabinetDepthInMeters;
 
                     // In Catalog building method, the default procedural
                     // cabinets must be replaced with custom modeled versions.
 
                     ProductInfo fallbackCabinetSectionInfo =
                         ProFitGlobals.catalogData.FindProductInfoById(
-                                m_SelectedBrandCatalog.fallbackDefaultCabinetSectionProductServerId,
+                                this._selections.brandCatalog.fallbackDefaultCabinetSectionProductServerId,
                                 findCabinetSection: true
                             );
 
                     if (fallbackCabinetSectionInfo == null)
                     {
                         MelcherLog.LogError(
-                            $"No fallback cabinet product ID found for \"{m_SelectedBrandCatalog.fallbackDefaultCabinetSectionProductServerId}\".",
-                            m_SelectedBrandCatalog
+                            $"No fallback cabinet product ID found for \"{this._selections.brandCatalog.fallbackDefaultCabinetSectionProductServerId}\".",
+                            this._selections.brandCatalog
                         );
                     }
 
                     if (!ProFitGlobals.catalogData.FindBrandCatalogInfoById(selectedBrandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo))
                     {
                         MelcherLog.LogError(
-                            $"No brand catalog for ID \"{m_SelectedBrandCatalog.catalogId}\".",
-                            m_SelectedBrandCatalog
+                            $"No brand catalog for ID \"{this._selections.brandCatalog.catalogId}\".",
+                            this._selections.brandCatalog
                         );
                     }
 
@@ -3442,10 +3443,10 @@ namespace KitchenDesign
                             m_CurrentCabinetLayout.GetCabinetAtIndex(i);
 
                         if (cabinet.cabinetType.IsEnd() &&
-                            m_SelectedBrandCatalog.fridgeEndPanelInfo.specificPanelWidthInMeters > 0.0f)
+                            this._selections.brandCatalog.fridgeEndPanelInfo.specificPanelWidthInMeters > 0.0f)
                         {
                             Vector3 sizeInMeters = cabinet.sizeInMeters;
-                            sizeInMeters.x = m_SelectedBrandCatalog.fridgeEndPanelInfo.specificPanelWidthInMeters;
+                            sizeInMeters.x = this._selections.brandCatalog.fridgeEndPanelInfo.specificPanelWidthInMeters;
                             cabinet.sizeInMeters = sizeInMeters;
                         }
 
@@ -3456,7 +3457,7 @@ namespace KitchenDesign
                                 selectedBrandCatalog.standardCabinetHeightInMeters
                             );
 
-                            cabinet.InstantiateCabinetLegs(m_SelectedBrandCatalog);
+                            cabinet.InstantiateCabinetLegs(this._selections.brandCatalog);
                             continue;
                         }
 
@@ -3486,7 +3487,7 @@ namespace KitchenDesign
                             {
                                 MelcherLog.LogError(
                                     $"No product info found for default cabinet section #{nextDefaultCabinetSectionIndex}, server ID: {defaultSectionServerId}",
-                                    m_SelectedBrandCatalog
+                                    this._selections.brandCatalog
                                 );
 
                                 continue;
@@ -3516,14 +3517,14 @@ namespace KitchenDesign
 
                             MelcherLog.LogError(
                                 $"No replacement cabinet defined or found for cabinet at index {i}. Using fallback.",
-                                m_SelectedBrandCatalog
+                                this._selections.brandCatalog
                             );
 
                             if (replacementCabinetInfo == null)
                             {
                                 MelcherLog.LogError(
-                                    $"No fallback cabinet product ID provided for Catalog {m_SelectedBrandCatalog.name}.",
-                                    m_SelectedBrandCatalog
+                                    $"No fallback cabinet product ID provided for Catalog {this._selections.brandCatalog.name}.",
+                                    this._selections.brandCatalog
                                 );
 
                                 continue;
@@ -3587,9 +3588,9 @@ namespace KitchenDesign
                     }
                 }
 
-                SetBaseCabinetDepth(m_SelectedBaseCabinetDepthInMeters);
-                SetCountertopThickness(m_SelectedCountertopThicknessInMeters);
-                SetCountertopOverhang(m_SelectedCountertopOverhangInMeters);
+                SetBaseCabinetDepth(this._selections.baseCabinetDepthInMeters);
+                SetCountertopThickness(this._selections.countertopThicknessInMeters);
+                SetCountertopOverhang(this._selections.countertopOverhangInMeters);
 
                 // Move cabinets to their proper anchors
                 m_CurrentCabinetLayout.UpdatePositions();
@@ -3639,7 +3640,7 @@ namespace KitchenDesign
         /// </summary>
         public void SetBaseCabinetDepth(float depthInMeters)
         {
-            m_SelectedBaseCabinetDepthInMeters = depthInMeters;
+            this._selections.baseCabinetDepthInMeters = depthInMeters;
 
             if (m_CurrentCabinetLayout)
             {
@@ -3665,7 +3666,7 @@ namespace KitchenDesign
 
         public void SetCountertopThickness(float thicknessInMeters)
         {
-            m_SelectedCountertopThicknessInMeters = thicknessInMeters;
+            this._selections.countertopThicknessInMeters = thicknessInMeters;
 
             if (m_CurrentCabinetLayout)
             {
@@ -3922,9 +3923,9 @@ namespace KitchenDesign
             m_SecondaryHighlightMaterial = ProFitGlobals.appOptions.appSkin.secondarySelectionMaterial;
 
             // Assume the default material is selected for each surface type
-            m_SelectedCabinetFinish     = null;
-            m_SelectedCountertopFinish  = null;
-            m_SelectedFlooringFinish    = null;
+            this._selections.cabinetFinish     = null;
+            this._selections.countertopFinish  = null;
+            this._selections.flooringFinish    = null;
 
             Camera eventCamera = GetCamera();
 
@@ -4116,7 +4117,7 @@ namespace KitchenDesign
 
             async UniTaskVoid OnRestart()
             {
-                m_SessionStartTime = System.DateTime.UtcNow;
+                this._selections.sessionStartTime = System.DateTime.UtcNow;
 
                 m_TopInfoLabel.phrase = "";
 
@@ -4130,17 +4131,17 @@ namespace KitchenDesign
 
                 SetBuildingMethod(ProFitGlobals.appOptions.defaultBuildingMethod);
                 SetCountertopType(CountertopType.Default);
-                m_SelectedCabinetFinish = null;
-                m_SelectedCountertopFinish = null;
-                m_SelectedFlooringFinish = null;
-                m_SelectedCabinetLayout = null;
-                m_SelectedKitchenTemplate = null;
-                m_SelectedToeKickType = CabinetToeKickType.None;
-                m_SelectedExtraFeatures.Clear();
-                m_AnalyticsKey = "";
+                this._selections.cabinetFinish = null;
+                this._selections.countertopFinish = null;
+                this._selections.flooringFinish = null;
+                this._selections.layoutPrefab = null;
+                this._selections.kitchenTemplate = null;
+                this._selections.toeKickType = CabinetToeKickType.None;
+                this._selections.extraFeatures.Clear();
+                this._selections.analyticsKey = "";
 
                 // Restore the default flooring material
-                await ChangeFinish(m_SelectedFlooringFinish, ProductCategory.FinishFloor);
+                await ChangeFinish(this._selections.flooringFinish, ProductCategory.FinishFloor);
 
                 // Destroy the old kitchen. Passing null will let us destroy the
                 // old one without creating a new one
@@ -4154,7 +4155,7 @@ namespace KitchenDesign
                 {
                     EventBridge.Designer.showBuildingMethodsUi.Invoke();
                 }
-                else if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                else if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
                 {
                     EventBridge.Designer.showBrandCatalogUi.Invoke();
                 }
@@ -4204,21 +4205,21 @@ namespace KitchenDesign
             EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Load);
 
             // Assume the default material is selected for each surface type
-            if (m_SelectedKitchenTemplate)
+            if (this._selections.kitchenTemplate)
             {
                 EventBridge.Designer.setSpinnerStatusMessage?.Invoke(
-                    $"Preparing from {m_SelectedKitchenTemplate.displayName} template"
+                    $"Preparing from {this._selections.kitchenTemplate.displayName} template"
                 );
 
                 Dictionary<string, object> saveJson =
                     (Dictionary<string, object>)
-                        MiniJSON.Json.Deserialize(m_SelectedKitchenTemplate.saveData.text);
+                        MiniJSON.Json.Deserialize(this._selections.kitchenTemplate.saveData.text);
 
-                float selectedCountertopThicknessInMeters = m_SelectedCountertopThicknessInMeters;
+                float selectedCountertopThicknessInMeters = this._selections.countertopThicknessInMeters;
 
                 BrandCatalogSO selectedBrandCatalog =
-                    m_SelectedBrandCatalog ?
-                        ProFitGlobals.runtimeBrandCatalogs.Find(x => x.catalogId == m_SelectedBrandCatalog.catalogId) :
+                    this._selections.brandCatalog ?
+                        ProFitGlobals.runtimeBrandCatalogs.Find(x => x.catalogId == this._selections.brandCatalog.catalogId) :
                         null;
 
                 await LoadFromJson(saveJson);
@@ -4226,7 +4227,7 @@ namespace KitchenDesign
                 // A non-null but empty analytics key. This ensures the kitchen
                 // will be tracked for analytics (as opposed to a strictly null
                 // analytics key read from a pre-analytics save file).
-                m_AnalyticsKey = "";
+                this._selections.analyticsKey = "";
 
                 // Ensure the user-selected values are not erased after loading
                 // a template file.
@@ -4239,30 +4240,30 @@ namespace KitchenDesign
             else
             {
                 EventBridge.Designer.setSpinnerStatusMessage?.Invoke(
-                    $"Preparing from {m_SelectedCabinetLayout.displayName} layout"
+                    $"Preparing from {this._selections.layoutPrefab.displayName} layout"
                 );
 
-                await CreateCabinetLayoutFromShape(m_SelectedCabinetLayout);
+                await CreateCabinetLayoutFromShape(this._selections.layoutPrefab);
             }
 
             // A non-null, but empty analytics token. This is used to signal to
             // the server that this design needs an analytics token assigned
             // when it is next saved. Legacy saves which lack an analytics token
             // (m_AnalyticsToken == null) will not be tracked for analytics.
-            m_AnalyticsKey = "";
+            this._selections.analyticsKey = "";
 
             // Apply brand catalog's default toe kick. Currently, this is only
             // necessary to enforce Napoleon's mandatory toe kick.
-            if (m_CurrentCabinetLayout && m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog)
+            if (m_CurrentCabinetLayout && this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
             {
-                m_SelectedToeKickType = m_SelectedBrandCatalog.defaultToeKickType;
-                EventBridge.Designer.onToeKickTypeChanged?.Invoke(m_SelectedToeKickType);
+                this._selections.toeKickType = this._selections.brandCatalog.defaultToeKickType;
+                EventBridge.Designer.onToeKickTypeChanged?.Invoke(this._selections.toeKickType);
             }
 
             // Ensure the cabinet is the client's intended outside-edge length
             // (at time of writing, that is 15", as set as initial size on
             // straight cabinet prefab)
-            if (m_CurrentCabinetLayout && m_SelectedBuildingMethod == KitchenBuildingMethod.Standard)
+            if (m_CurrentCabinetLayout && this._selections.buildingMethod == KitchenBuildingMethod.Standard)
             {
                 foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
                 {
@@ -4281,12 +4282,12 @@ namespace KitchenDesign
 
                         if (leftCabinet && leftCabinet.cabinetType == CabinetType.Corner)
                         {
-                            cabinetSizeInMeters.x -= m_SelectedBaseCabinetDepthInMeters;
+                            cabinetSizeInMeters.x -= this._selections.baseCabinetDepthInMeters;
                         }
 
                         if (rightCabinet && rightCabinet.cabinetType == CabinetType.Corner)
                         {
-                            cabinetSizeInMeters.x -= m_SelectedBaseCabinetDepthInMeters;
+                            cabinetSizeInMeters.x -= this._selections.baseCabinetDepthInMeters;
                         }
 
                         cabinet.sizeInMeters = cabinetSizeInMeters;
@@ -4312,24 +4313,24 @@ namespace KitchenDesign
 
         protected void SetBuildingMethod(KitchenBuildingMethod buildingMethod)
         {
-            m_SelectedBuildingMethod = buildingMethod;
+            this._selections.buildingMethod = buildingMethod;
 
-            EventBridge.Designer.onBuildingMethodChanged?.Invoke(m_SelectedBuildingMethod);
+            EventBridge.Designer.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
         }
 
         protected async UniTask SetBrandCatalog(BrandCatalogSO brandCatalog)
         {
-            m_SelectedBrandCatalog = brandCatalog;
+            this._selections.brandCatalog = brandCatalog;
 
-            m_SelectedDoorStyleName =
+            this._selections.doorStyleName =
                 brandCatalog.defaultCabinetSectionDoorStyleName;
 
-            m_SelectedDoorHandleStyleName = 
+            this._selections.doorHandleStyleName = 
                 brandCatalog.defaultCabinetSectionDoorHandleStyleName;
 
-            m_EndPanelWidthInMetersLeft = 0f;
-            m_EndPanelWidthInMetersRight = 0f;
-            m_BackPanelDepthInMeters = 0f;
+            this._selections.endPanelWidthInMetersLeft = 0f;
+            this._selections.endPanelWidthInMetersRight = 0f;
+            this._selections.backPanelDepthInMeters = 0f;
 
             // TODO: Display a sprite for the selected brand catalog in the
             //       designer scene.
@@ -4343,17 +4344,17 @@ namespace KitchenDesign
         /// </summary>
         protected void SetCountertopType(CountertopType countertopType)
         {
-            m_SelectedCountertopType = countertopType;
+            this._selections.countertopType = countertopType;
         }
 
         protected void SetCabinetLayout(CabinetLayout layoutPrefab)
         {
-            m_SelectedCabinetLayout = layoutPrefab;
+            this._selections.layoutPrefab = layoutPrefab;
         }
 
         protected void SetKitchenTemplate(KitchenTemplateSO template)
         {
-            m_SelectedKitchenTemplate = template;
+            this._selections.kitchenTemplate = template;
         }
 
         protected async UniTask TryDestroyOccupant(Occupant occupant)
@@ -4501,14 +4502,14 @@ namespace KitchenDesign
                     );
 
                     Vector3 sizeInMeters = replacementCornerCabinet.sizeInMeters;
-                    sizeInMeters.x = m_SelectedBaseCabinetDepthInMeters;
-                    if (m_SelectedBrandCatalog)
+                    sizeInMeters.x = this._selections.baseCabinetDepthInMeters;
+                    if (this._selections.brandCatalog)
                     {
                         // Ensure the cabinet's height matches the catalog's
                         // default value.
-                        sizeInMeters.y = m_SelectedBrandCatalog.standardCabinetHeightInMeters;
+                        sizeInMeters.y = this._selections.brandCatalog.standardCabinetHeightInMeters;
                     }
-                    sizeInMeters.z = m_SelectedBaseCabinetDepthInMeters;
+                    sizeInMeters.z = this._selections.baseCabinetDepthInMeters;
                     replacementCornerCabinet.sizeInMeters = sizeInMeters;
                 }
 
@@ -4559,7 +4560,7 @@ namespace KitchenDesign
 
         private void SetCountertopOverhang(CuboidPadding overhangInMeters)
         {
-            m_SelectedCountertopOverhangInMeters = overhangInMeters;
+            this._selections.countertopOverhangInMeters = overhangInMeters;
 
             if (m_CurrentCabinetLayout)
             {
@@ -4732,14 +4733,14 @@ namespace KitchenDesign
                         Vector3.up * selectedBrandCatalog.cabinetSectionLegStyle.heightInMeters;
                 }
 
-                heightTransitionCabinet.SetCountertopThickness(m_SelectedCountertopThicknessInMeters);
-                heightTransitionCabinet.SetCountertopOverhang(m_SelectedCountertopOverhangInMeters);
+                heightTransitionCabinet.SetCountertopThickness(this._selections.countertopThicknessInMeters);
+                heightTransitionCabinet.SetCountertopOverhang(this._selections.countertopOverhangInMeters);
 
                 await layout.ReorderCabinet(heightTransitionCabinet, i.index + 1);
 
                 Vector3 sizeInMeters = heightTransitionCabinet.sizeInMeters;
                 sizeInMeters.x = Const.CabinetColumnWidthInMeters * 0.5f;
-                sizeInMeters.z = m_SelectedBaseCabinetDepthInMeters;
+                sizeInMeters.z = this._selections.baseCabinetDepthInMeters;
                 heightTransitionCabinet.sizeInMeters = sizeInMeters;
 
                 await heightTransitionCabinet.SetCabinetMaterials(
@@ -4916,9 +4917,9 @@ namespace KitchenDesign
                         RotateCameraToFrontOfCabinet(addedOccupant.cabinet);
                     }
 
-                    if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog &&
-                        m_SelectedBrandCatalog != null &&
-                        m_SelectedBrandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong)
+                    if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
+                        this._selections.brandCatalog != null &&
+                        this._selections.brandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong)
                     {
                         bool isHeatProduct =
                             addedOccupant.productVisual.info.runtimePrefabCategory == ProductCategorySpecific.Burner ||
@@ -4988,7 +4989,7 @@ namespace KitchenDesign
             {
                 Cabinet newCabinetTemplateOverride = null;
 
-                if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
                 {
                     newCabinetTemplateOverride = cabinetToClone;
                 }
@@ -5172,7 +5173,7 @@ namespace KitchenDesign
             Vector3 sectionSizeInMeters = cabinetPrefab.minSizeInMeters;
 
             sectionSizeInMeters.y = cabinetPrefab.initialSizeInMeters.y;
-            sectionSizeInMeters.z = m_SelectedBaseCabinetDepthInMeters;
+            sectionSizeInMeters.z = this._selections.baseCabinetDepthInMeters;
 
             if (cabinetSectionProductInfo != null)
             {
@@ -5242,7 +5243,7 @@ namespace KitchenDesign
                 layout.UpdateMeshes();
             }
 
-            createdCabinet.SetToeKickType(m_SelectedToeKickType);
+            createdCabinet.SetToeKickType(this._selections.toeKickType);
 
             (ResizerWidget left, ButtonWidget middle, ResizerWidget right) =
                 CreateResizeWidgetsForCabinet(createdCabinet, Camera.main);
@@ -5390,7 +5391,7 @@ namespace KitchenDesign
 
         private async UniTask OnOccupantAddedToCabinet(Occupant occupant)
         {
-            if (m_SelectedBuildingMethod != KitchenBuildingMethod.Sections)
+            if (this._selections.buildingMethod != KitchenBuildingMethod.Sections)
             {
                 return;
             }
@@ -5496,7 +5497,7 @@ namespace KitchenDesign
 
         private async UniTask OnOccupantRemovedFromCabinet(Occupant occupant)
         {
-            if (m_SelectedBuildingMethod == KitchenBuildingMethod.Sections &&
+            if (this._selections.buildingMethod == KitchenBuildingMethod.Sections &&
                 ReferenceEquals(occupant.occupiedVolume, occupant.cabinet))
             {
                 // Recover Stoll cabinet's original maximum size. The max size
@@ -5912,12 +5913,12 @@ namespace KitchenDesign
 
         protected void TrySendOnBrandCatalogChanged()
         {
-            if(ProFitGlobals.appRules.RequiresBrandCatalog && m_SelectedBrandCatalog == null)
+            if(ProFitGlobals.appRules.RequiresBrandCatalog && this._selections.brandCatalog == null)
             {
                 return;
             }
 
-            EventBridge.Designer.onBrandCatalogChanged?.Invoke(m_SelectedBrandCatalog);
+            EventBridge.Designer.onBrandCatalogChanged?.Invoke(this._selections.brandCatalog);
         }
 
         // Used to pass values "by ref" to async functions.
@@ -6019,7 +6020,7 @@ namespace KitchenDesign
             // added when the user already has a selection.
             bool isNewHighlight = highlightObject != m_CurrentHighlightObject;
 
-            if (m_SelectedBuildingMethod != KitchenBuildingMethod.Standard)
+            if (this._selections.buildingMethod != KitchenBuildingMethod.Standard)
             {
                 // We only allow double-clicking an occupant to select its
                 // cabinet when the building mode uses occupant auto-centering,
@@ -6159,7 +6160,7 @@ namespace KitchenDesign
             switch (finishCategory)
             {
                 case ProductCategory.FinishFloor:
-                    m_SelectedFlooringFinish = finishProduct;
+                    this._selections.flooringFinish = finishProduct;
 
                     // Pick between the wood floor model or stone floor model
                     bool isStone = flooringType == FlooringType.Stone;
@@ -6173,9 +6174,9 @@ namespace KitchenDesign
                     return;
 
                 case ProductCategory.FinishCabinet:
-                    m_SelectedCabinetFinish = finishProduct;
+                    this._selections.cabinetFinish = finishProduct;
 
-                    if (m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog && m_SelectedCabinetFinish.manufacturerId == 140)
+                    if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog && this._selections.cabinetFinish.manufacturerId == 140)
                     {
                         EventBridge.Designer.showNotification?.Invoke(
                             title: "Deco Grain",
@@ -6186,7 +6187,7 @@ namespace KitchenDesign
                     break;
 
                 case ProductCategory.FinishCountertop:
-                    m_SelectedCountertopFinish = finishProduct;
+                    this._selections.countertopFinish = finishProduct;
                     break;
 
                 default:
@@ -6285,9 +6286,9 @@ namespace KitchenDesign
             }
 
             MelcherLog.Assert(
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Sections ||
-                m_SelectedBuildingMethod == KitchenBuildingMethod.Catalog,
-                $"Cabinet reordering is assumed to not work in {m_SelectedBuildingMethod} building method."
+                this._selections.buildingMethod == KitchenBuildingMethod.Sections ||
+                this._selections.buildingMethod == KitchenBuildingMethod.Catalog,
+                $"Cabinet reordering is assumed to not work in {this._selections.buildingMethod} building method."
             );
 
             if (args.cabinetToReorder.cabinetType.IsMidSpanCabinetType(selectedBuildingMethod) &&
@@ -6361,8 +6362,8 @@ namespace KitchenDesign
         /// </summary>
         protected void TryToggleToeKicks()
         {
-            MelcherLog.Breadcrumb($"Building method: {m_SelectedBuildingMethod}");
-            if (m_SelectedBuildingMethod != KitchenBuildingMethod.Catalog)
+            MelcherLog.Breadcrumb($"Building method: {this._selections.buildingMethod}");
+            if (this._selections.buildingMethod != KitchenBuildingMethod.Catalog)
             {
                 return;
             }
@@ -6380,19 +6381,19 @@ namespace KitchenDesign
             //}
 
             //int currentToeKickTypeIndex =
-            //    MelcherCommon.IndexOf(toeKickTypes, m_SelectedToeKickType);
+            //    MelcherCommon.IndexOf(toeKickTypes, this._selections.toeKickType);
 
             //int newToeKickTypeIndex =
             //    (currentToeKickTypeIndex + 1) % toeKickTypes.Count;
 
-            //m_SelectedToeKickType = toeKickTypes[newToeKickTypeIndex];
+            //this._selections.toeKickType = toeKickTypes[newToeKickTypeIndex];
 
-            m_SelectedToeKickType =
-                m_SelectedToeKickType == CabinetToeKickType.None ?
+            this._selections.toeKickType =
+                this._selections.toeKickType == CabinetToeKickType.None ?
                     CabinetToeKickType.Inset :
                     CabinetToeKickType.None;
 
-            EventBridge.Designer.onToeKickTypeChanged?.Invoke(m_SelectedToeKickType);
+            EventBridge.Designer.onToeKickTypeChanged?.Invoke(this._selections.toeKickType);
         }
 
         protected void OnToeKickTypeChanged(CabinetToeKickType toeKickType)
@@ -6705,10 +6706,10 @@ namespace KitchenDesign
         public async UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn)
         {
             Material cabinetMaterial =
-                await GetSelectedOrDefaultFinishMaterial(m_SelectedCabinetFinish);
+                await GetSelectedOrDefaultFinishMaterial(this._selections.cabinetFinish);
 
             Material countertopMaterial =
-                await GetSelectedOrDefaultFinishMaterial(m_SelectedCountertopFinish);
+                await GetSelectedOrDefaultFinishMaterial(this._selections.countertopFinish);
 
             if (allowHighlightToReturn && m_CurrentHighlightObject)
             {
@@ -7417,101 +7418,29 @@ namespace KitchenDesign
         private OccupiableVolume m_VolumeBeingResized;
         private Occupant m_ProductBeingDragged;
 
-        /// <summary>
-        ///     The time at which the player started this design (new) or when
-        ///     it was reopened for editing (loaded).
-        /// </summary>
-        private System.DateTime m_SessionStartTime;
 
         // Player's kitchen customizations:
 
-        private KitchenBuildingMethod m_SelectedBuildingMethod;
 
-        /// <summary>
-        ///     The brand catalog that was selected in the Universal Kitchen
-        ///     Designer app. This dictates which cabinet layouts and door
-        ///     styles are available. It can only be chosen before a kitchen
-        ///     design is started.
-        /// </summary>
-        private BrandCatalogSO m_SelectedBrandCatalog;
 
-        /// <summary>
-        ///     The template the user selected during the initial kitchen
-        ///     setup. This is only used during Catalog building method and
-        ///     effectively represents a save file the kitchen will use at the
-        ///     start.
-        /// </summary>
-        private KitchenTemplateSO m_SelectedKitchenTemplate;
 
-        /// <summary>
-        ///     The name of the door style in-use during <see
-        ///     cref="KitchenBuildingMethod.Catalog"/>.
-        /// </summary>
-        private string m_SelectedDoorStyleName;
 
-        /// <summary>
-        ///     The name of the door handle style in-use during <see
-        ///     cref="KitchenBuildingMethod.Catalog"/>.
-        /// </summary>
-        private string m_SelectedDoorHandleStyleName;
 
-        private float m_EndPanelWidthInMetersLeft;
-        private float m_EndPanelWidthInMetersRight;
 
-        /// <summary>
-        ///     The extra depth added to the back of all cabinets when a back
-        ///     panel is added (Gemini). This is normally 0. It allows us to
-        ///     track how much depth to remove when the back panels are removed
-        ///     and to correct the countertop overhang distance for authored
-        ///     corner cabinets.
-        /// </summary>
-        private float m_BackPanelDepthInMeters;
 
-        private CountertopType m_SelectedCountertopType;
 
-        /// <summary>
-        ///     The kitchen layout prefab the player selected during kitchen
-        ///     setup. This is just the template that will be instantiated. See
-        ///     <see cref="layout"/> for the actual instantiated layout.
-        /// </summary>
-        private CabinetLayout m_SelectedCabinetLayout;
-        private ProductInfo m_SelectedCountertopFinish;
-        private ProductInfo m_SelectedCabinetFinish;
-        private ProductInfo m_SelectedFlooringFinish;
 
-        private float m_SelectedBaseCabinetDepthInMeters;
-        private float m_SelectedCountertopThicknessInMeters;
 
-        /// <summary>
-        ///     The amount the countertop's edge should overhang its cabinet.
-        ///     This works because the countertop 27-slice mesh has a 1-inch
-        ///     overhang beyond its represented size. (Everywhere apart from
-        ///     the vertical axis.) This means that the Y-values can be left at
-        ///     1.0 because it has no effect. Then, the X- and Z-components can
-        ///     be set independently to control the overhang of the countertop
-        ///     on its left and right edges and front and back edges,
-        ///     respectively.
-        /// </summary>
-        private CuboidPadding m_SelectedCountertopOverhangInMeters;
 
-        /// <summary>
-        ///     Whether the user has chosen to enable toe kicks. Gemini-only.
-        /// </summary>
-        private CabinetToeKickType m_SelectedToeKickType;
 
-        /// <summary>
-        ///     A list of optional, extra features that were added to this
-        ///     kitchen. At the moment, the only extra feature is Challenger's
-        ///     "Premium Finish Package" which otherwise has no where to be
-        ///     saved.
-        /// </summary>
-        private List<KitchenExtraFeature> m_SelectedExtraFeatures = new List<KitchenExtraFeature>();
 
         /// <summary>
         ///     A kludge that ensures the OnCabinetReordered callback that is
         ///     used to setup the cabinet height transition cabinets doesn't
         ///     recurse when new cabinets are added and reordered mid event.
         /// </summary>
+        private readonly KitchenSelections _selections = new KitchenSelections();
+
         private bool m_IsUpdatingCabinetHeightTransitions;
 
         /// <summary>
@@ -7521,16 +7450,6 @@ namespace KitchenDesign
         /// </summary>
         private UniTask? m_LastOccupantDraggedTask = default;
 
-        /// <summary>
-        ///     This is a token that is shared between all saves that are part
-        ///     of the same lineage. When a new kitchen is saved for the first
-        ///     time, the server assigns an analytics token. This is used to
-        ///     merge the analytics from subsequent saves of this kitchen into
-        ///     one report (e.g., how long the user has been designing this
-        ///     kitchen, which products this kitchen ultimately decided to use,
-        ///     etc.)
-        /// </summary>
-        private string m_AnalyticsKey;
 
         // =====================================================================
         // Static fields
