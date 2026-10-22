@@ -1,14 +1,9 @@
-namespace KitchenDesign
+using KitchenDesign.Shared.Enums;
+
+namespace KitchenDesign.Shared.Common
 {
-    using Melcher;
     public static class ProductCategorySpecificExtensions
     {
-        /// <summary>
-        ///     Convert a <see cref="ProductCategorySpecific"/> enum to a
-        ///     <see cref="ProductCategory"/>. The latter is used more widely
-        ///     through the app and therefore it is convenient to support this
-        ///     conversion.
-        /// </summary>
         public static ProductCategory ToProductCategory(this ProductCategorySpecific specificCategory)
         {
             return specificCategory switch
@@ -30,12 +25,5 @@ namespace KitchenDesign
                 _                                   => ProductCategory.Unknown
             };
         }
-
-    }   // class ProductCategorySpecificExtensions
-
-}   // namespace KitchenDesign
-
-/// ===========================================================================
-/// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
-/// Initial creation date: 2024-05-17
-/// ===========================================================================
+    }
+}

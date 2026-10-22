@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Shared.Enums;
     using System;
     using UnityEngine;
 
@@ -387,40 +388,6 @@ namespace KitchenDesign
         [SerializeField]
         protected float m_SectionEndPanelSizeInches = default;
 
-        // ====================================================================
-        // Types
-        // ====================================================================
-
-        public enum CabinetCutOutMode
-        {
-            /// <summary>
-            ///     The default behaviour. The countertop and cabinet cut-outs
-            ///     will render normally.
-            /// </summary>
-            Normal,
-
-            /// <summary>
-            ///     Special rule for Stoll fixed smoker cabinets. The front
-            ///     countertop is preserved (forming a bridge in front of the
-            ///     smoker) and the cabinet cut-out's height is reduced. In the
-            ///     real world, this provides more stability to the cabinet.
-            /// </summary>
-            StollFixedSmokerCabinet,
-
-            /// <summary>
-            ///     This says that any occupant added to this cabinet will not
-            ///     use cut-outs (countertop or cabinet). This is used with
-            ///     Challenger's ceramic cabinets which have an empty shelf
-            ///     below the countertop for a Smoker to be placed.
-            /// </summary>
-            NoCutOuts,
-
-            /// <summary>
-            ///     Like <see cref="NoCutOuts"/>, except it only prevents
-            ///     cut-outs on smoker products.
-            /// </summary>
-            NoSmokerCutOuts,
-        }
 
 #if UNITY_EDITOR
         // ====================================================================

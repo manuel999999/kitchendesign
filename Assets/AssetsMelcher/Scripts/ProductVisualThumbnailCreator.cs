@@ -4,6 +4,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.Shared.Enums;
     using UnityEngine;
     using UnityEngine.Rendering.Universal;
     using UnityEditor;

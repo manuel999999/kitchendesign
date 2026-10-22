@@ -6,6 +6,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Interfaces;
+    using KitchenDesign.Shared.Enums;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;

@@ -1226,8 +1226,8 @@ namespace KitchenDesign
         {
             // Fetch the cabinet's cut-out mode in case there are any special
             // rules as they will affect the measurements here.
-            ProductVisualInfo.CabinetCutOutMode cabinetCutOutMode =
-                ProductVisualInfo.CabinetCutOutMode.Normal;
+            CabinetCutOutMode cabinetCutOutMode =
+                CabinetCutOutMode.Normal;
 
             if (occupant.cabinet is Cabinet cabinet &&
                 cabinet.cabinetSectionVisualPrefab)
@@ -1307,7 +1307,7 @@ namespace KitchenDesign
                     PointOnCuboid(cutOutCuboidInVolumeSpace, 1.0f, 0.0f, normalizedCuboidZ),
                     PointOnCuboid(cutOutCuboidInVolumeSpace, 1.0f, 1.0f, normalizedCuboidZ)
                 );
-            if (cabinetCutOutMode == ProductVisualInfo.CabinetCutOutMode.StollFixedSmokerCabinet &&
+            if (cabinetCutOutMode == CabinetCutOutMode.StollFixedSmokerCabinet &&
                 !occupant.productVisual.info.anchor.IsAtBottom())
             {
                 height.end.y -= Const.Stoll.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop + kitchen.countertopThicknessInMeters;
@@ -1335,7 +1335,7 @@ namespace KitchenDesign
             depth.end += upward;
             // If the product is at the top and directly at the front or back,
             // we must include the countertop overhang in the cut-out size
-            if (!occupant.productVisual.info.anchor.IsAtBottom() && cabinetCutOutMode == ProductVisualInfo.CabinetCutOutMode.Normal)
+            if (!occupant.productVisual.info.anchor.IsAtBottom() && cabinetCutOutMode == CabinetCutOutMode.Normal)
             {
                 if (isProductOnOrAtFront && occupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Front))
                 {

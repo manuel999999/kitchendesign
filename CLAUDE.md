@@ -1035,6 +1035,29 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
+  "Area 3").
+  - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
+    product type, mapped from its strings by `CatalogJson`; it decides the menu a product is in),
+    `ProductCategorySpecific` (a finer, fixed category set on the visual, so runtime visuals can
+    be adjusted before any product that uses them is known; fridges, smokers and ice boxes have
+    their own values here), `ProductAnchor`, `FlooringType` (which floor mesh a floor finish
+    uses), `CabinetModelType` (procedural 27-slice cube or authored model),
+    `CabinetSectionFootingType` (authored Catalog cabinets: on the ground, on visible legs,
+    floating, or floating with the air below occupiable), `CabinetCutOutMode` (was nested in
+    `ProductVisualInfo`): `StollFixedSmokerCabinet` keeps the front countertop as a bridge in
+    front of the smoker and lowers the cabinet cut-out (sturdier in the real cabinet), `NoCutOuts`
+    is Challenger's ceramic cabinets with an open shelf under the countertop for a smoker,
+    `NoSmokerCutOuts` the same for smokers only. All of these are stored in assets as
+    `MelcherStableEnum` (by name), so renaming a value breaks assets while reordering doesn't;
+    keep both stable anyway. Their pure helpers (`IsOnTop`, `IsFinish`, `IsBacking`,
+    `ToProductCategory`, …) are in `_projectShared/Common/`.
+  - `ProductVisualDatabaseEntry.uxml` names `ProductAnchor` as text
+    (`KitchenDesign.Shared.Enums.ProductAnchor, KitchenDesign.Shared`).
+  - Checked with `Tools/Baseline/unity6/visualscensus.cs` (edit mode): every source visual's
+    content address and every public value of its info, written to
+    `GeminiBaseline/visualscensus-latest.txt` with a hash; it finds the types by name, so it
+    works across the renames. Reference before area 3: 901 entries, hash `E3B8044CE6426AA5`.
 - **App and data assets** (B2.3 of the refactor, 2026-10-22): `AppProfileSO`, `AppOptionsSO`
   (+ its `.Editor` partial), `GroupDatabaseSO`, `ProductIdRemapDatabaseSO` in
   `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`), moved with their `.meta` so every

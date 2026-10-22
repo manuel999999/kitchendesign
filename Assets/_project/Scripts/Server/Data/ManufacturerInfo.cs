@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KitchenDesign.Shared.Enums;
 
 namespace KitchenDesign.Server
 {

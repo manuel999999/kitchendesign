@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Shared.Enums;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -534,7 +535,7 @@ namespace KitchenDesign
                     cabinetCutOutBack = false;
                 }
 
-                ProductVisualInfo.CabinetCutOutMode cutOutMode =
+                CabinetCutOutMode cutOutMode =
                     occupiedCabinet.cabinetSectionVisual.info.sectionCutOutMode;
 
                 if (!m_ProductVisual.info.anchor.IsAtBottom())
@@ -543,7 +544,7 @@ namespace KitchenDesign
                     // touch the countertop. Therefore, the `!IsAtBottom()`
                     // check.
 
-                    if (cutOutMode == ProductVisualInfo.CabinetCutOutMode.StollFixedSmokerCabinet)
+                    if (cutOutMode == CabinetCutOutMode.StollFixedSmokerCabinet)
                     {
                         // This is a Stoll fixed smoker cabinet. The front edge of the
                         // countertop is kept for support (do not cut into overhang).
@@ -554,8 +555,8 @@ namespace KitchenDesign
                         cabinetCutOutMetersToKeepBelowCountertop =
                             Const.Stoll.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop;
                     }
-                    else if (cutOutMode == ProductVisualInfo.CabinetCutOutMode.NoCutOuts ||
-                        (cutOutMode == ProductVisualInfo.CabinetCutOutMode.NoSmokerCutOuts && m_ProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker))
+                    else if (cutOutMode == CabinetCutOutMode.NoCutOuts ||
+                        (cutOutMode == CabinetCutOutMode.NoSmokerCutOuts && m_ProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker))
                     {
                         // Disable all cut-outs.
 

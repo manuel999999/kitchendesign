@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Shared.Enums;
     using MEC;
     using System;
     using System.Collections;

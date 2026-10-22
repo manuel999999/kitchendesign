@@ -46,6 +46,12 @@ client names; never copy it into a repo.
 - `rulescheck.cs` (2026-10-22): for each of the three `AppOptions` assets, the old app checks
   written out by hand against what `AppRulesFactory.Create(userFilter)` returns. Edit mode, no
   play. Must print `mismatches=0`.
+- `visualscensus.cs` (2026-10-22, area 3): edit mode. Writes every source visual of the product
+  visual database (name, content address, every public value of its info) to
+  `GeminiBaseline/visualscensus-latest.txt` and prints its hash. Types are found by name, so it
+  works before and after the `…SO` renames. Compare the file with an earlier copy (`cmp`) after
+  any change to the visual types; the reference before area 3 is `visualscensus-before-B3.txt`
+  (901 entries, hash `E3B8044CE6426AA5`).
 - `runall.sh` and `menucheck.sh` don't swap the app profile. Before running them: hash and back
   up `Resources/AppProfile.asset` and every `Resources/*/FallbackJSON` folder, then put in the
   committed profile (`git show HEAD:Assets/AssetsMelcher/Resources/AppProfile.asset`, Gemini) and

@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Server;
+    using KitchenDesign.Shared.Enums;
     using UnityEngine;
     using UnityEngine.UI;
 

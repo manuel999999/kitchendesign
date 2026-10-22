@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
+    using KitchenDesign.Shared.Enums;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;

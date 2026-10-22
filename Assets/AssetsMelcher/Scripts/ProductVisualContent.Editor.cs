@@ -3,6 +3,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Shared.Enums;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using UnityEditor;

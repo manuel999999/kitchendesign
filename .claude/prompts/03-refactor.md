@@ -610,6 +610,135 @@ As area 1 (`rulescheck.cs`, `coldstart.sh` ×2, `runall.sh` + `compare_runs.py` 
 one the run before wrote (it goes through the same parse/serialize path), compared before the
 backup is restored.
 
+## Area 3 — Products and visuals (planned 2026-10-22)
+The user left the design to Claude ("write its section in the plan, then build it step by step
+like areas 1 and 2"); same rules: no behaviour change, each step checked and committed on its own.
+
+### Today (read 2026-10-22)
+- **`ProductInfo`** (287 lines): the server's product record, a plain class (not
+  `[Serializable]`; parsed by key in `CatalogJson`). Its copy constructor makes the runtime copies;
+  an editor-only static constructor asserts 26 fields so a new field isn't forgotten there. 504
+  uses in 32 files.
+- **The visual assets**, all ScriptableObjects: `ProductVisual` (an info plus the Addressables
+  address of its content; `MakeRuntimeClone`), `ProductVisualInfo` (the always-loaded data: id,
+  thumbnail, anchor, the section flags; a nested enum `CabinetCutOutMode`), `ProductVisualDatabase`
+  (the list of source visuals; it makes the runtime clones itself, in `Awake` in builds and on
+  entering play mode in the editor, and `FindRuntimeVisualByID`). The database is referenced by
+  `DesignerScene`, `Kitchen` and four designer screens, all in `DesignerScene.unity`.
+- **`ProductVisualContent`** (940 + 915 editor lines): the root component of every visual prefab.
+  Most of it is the placed product's cut-outs, measures, plan labels, highlight materials and
+  collider: the kitchen model.
+- **Addressables:** `AssetAddress<T>` (a `[Serializable]` struct holding an address, plus an
+  editor-only cached asset), `IAssetAddress` (for its drawer), `AssetAddressUtility` (unused),
+  `Internal.AssetAddressData`; `AddressableEditorUtility` and `ProFitAddressableEditorUtility`
+  (editor-only, in the runtime assembly). Addresses are asset paths.
+- **`ProductVisualContentLoader`**: a `MelcherMonoBehaviourRegistry` on an object in
+  `DesignerScene`, found 20 times with `FirstFromActiveScene()` (Kitchen, Cabinet, CabinetLayout,
+  two screens, DesignerScene). It loads a visual's content through Addressables once, keeps the
+  handle, makes a runtime copy of the prefab, raises `onProductVisualContentLoaded`, and releases
+  every handle when the designer scene is destroyed.
+- **Product rules in `DesignerScene`**: `OnBuildingMethodChanged` rebuilds the runtime products
+  from the source products and applies the app rules (`ModifyProductInfoForAppRules`; the Catalog
+  branch calls an empty method); `OnProductVisualContentLoaded` sets the smoker cut-out height;
+  `OnBrandCatalogChanged` sets the product side padding per brand catalog.
+- **Enums** used by the product and visual types: `ProductCategory`, `ProductCategorySpecific`,
+  `ProductAnchor`, `FlooringType`, `CabinetModelType`, `CabinetSectionFootingType`,
+  `ProductVisualInfo.CabinetCutOutMode` (`ProductVisualContent` has a second, unused copy). All are
+  stored in assets as `MelcherStableEnum` (by name), never as plain enum fields; the server's
+  category strings are mapped by `CatalogJson`. **One UXML names a type as text:**
+  `ProductVisualDatabaseEntry.uxml`, `KitchenDesign.ProductAnchor, KitchenDesign`.
+- **`ProFitUtility` leftovers for this area:** `FindProductVisual` (2 callers),
+  `FindDoorStyleVisual` (unused; the door lookup in use is `CabinetSectionDoorUtility`'s),
+  `ProFitUtility.Editor` (`OverwriteSpecificLogFile`, 3 callers; `FindAllAssetGuidsInFolder`, 2;
+  `FindAllCabinetSectionModelGuids`, unused).
+- **Editor tools** (in `KitchenDesign.Tools.Editor`): the database window
+  `ProductVisualDatabaseManager` (2,453 lines, 2 UXML) and the database inspector, the Cloder
+  database sets/states managers and their entry file, the visual tools (dump, mismatched models,
+  reserialize, insulated-jacket fix, editor help), the `AssetAddress` drawer, the Addressables
+  group commands, `FilteredObjectSelector`.
+
+### Not in area 3
+`ProductVisualContent` stays as it is for area 4: what it holds is the placed product (cut-outs,
+measures, materials), and area 4 splits it along with `Occupant` and `CabinetCutOut`. Its name
+stays (the old CLAUDE.md uses it). `CabinetType` and its extensions stay for area 4 (they need
+`KitchenBuildingMethod`). The door-style lookup (`CabinetSectionDoorUtility`) and the brand
+padding's manufacturer ids are brand rules (area 4). `ProductVisualThumbnailCreator` is area 6.
+
+### Steps
+**B3.1 — Product enums to Shared.** `ProductCategory`, `ProductCategorySpecific`,
+`ProductAnchor`, `FlooringType`, `CabinetModelType`, `CabinetSectionFootingType` and
+`CabinetCutOutMode` (out of `ProductVisualInfo`) to `_projectShared/Enums/` with explicit values
+equal to today's; the unused copy in `ProductVisualContent` deleted. Their extension classes
+(`ProductAnchorExtensions`, `ProductCategoryExtensions`, `ProductCategorySpecificExtensions`;
+pure, enum-only) to `_projectShared/Common/`. `git mv` with `.meta`. The UXML's type string
+becomes `KitchenDesign.Shared.Enums.ProductAnchor, KitchenDesign.Shared`. Usings added by script.
+Check: compile; every visual info asset still loads its stable enums (a count of each value
+across the database, before and after); the database window opens; then the usual runs.
+- **Done 2026-10-22.** 7 enums (values as listed by the script: e.g. `ProductCategory` 0–21,
+  `CabinetCutOutMode` 0–3), 3 extension classes; 27 files got usings (script in the session
+  scratchpad, with a small C# lexer that tells code from comments and strings). Compiles with no
+  errors. New check `visualscensus.cs`: identical before and after (901 entries, hash
+  `E3B8044CE6426AA5`). The database, states and sets windows open and close with no console
+  error; the UXML type string resolves. `rulescheck.cs` 60/0; `coldstart.sh` both the
+  reference; `runall.sh` against B2.3: `resave.json` identical, camera noise only, photos within
+  0.09/255 (kept as `unity6-after-B3.1-2026-10-22/`); `menucheck.sh` 21 / 21 / 1,268. The sign-in
+  wrote a Gemini `products.json` that differs from git: the server has new products (Delta Heat);
+  this run's files are B3.2's reference.
+
+**B3.2 — The product and visual types by what they are.**
+- `ProductInfo` → `_project/Scripts/Server/Data/` (`KitchenDesign.Server`), next to the other
+  server records.
+- `ProductVisual` → `ProductVisualSO`, `ProductVisualInfo` → `ProductVisualInfoSO`,
+  `ProductVisualDatabase` → `ProductVisualDatabaseSO` (R-CODE-8), `git mv` with `.meta` into
+  `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`). Asset file names and the
+  `ProductVisual_` / `^` / `@` naming they rely on don't change: those are asset names, which the
+  rename script leaves alone (string literals, including literals inside interpolation holes).
+- `AssetAddress<T>` and `AssetAddressData` → `_project/Scripts/Serializables/`
+  (`KitchenDesign.Serializables`). `IAssetAddress` and the editor helpers (merged into one
+  `AddressablesForEditor`, R-ASM-4) → `_project/Scripts/AddressableContent/`
+  (`KitchenDesign.AddressableContent`; not `…Addressables`, which would hide Unity's
+  `Addressables` class inside our namespace). `AssetAddressUtility` deleted (unused).
+- `FindProductVisual` → `ProductVisualLookups.FindById` (`_project/Scripts/Products/`,
+  `KitchenDesign.Products`). `ProFitUtility.FindDoorStyleVisual` and
+  `FindAllCabinetSectionModelGuids` deleted (unused); `OverwriteSpecificLogFile` →
+  `Utility.LogFilesForEditor`; `FindAllAssetGuidsInFolder` (a one-line wrapper) inlined.
+- Check: compile (editor and macOS player); every visual, info and database asset loads as the new
+  class with the same data (counts, ids, content addresses); no asset file changes; the usual runs.
+
+**B3.3 — The content loader as a constructed system, the product rules out of the scene.**
+- `ProductVisualContentStatus` (`_project/Scripts/Products/`): a plain class that does what the
+  loader component does (`LoadContent`, `IsLoadingOrLoaded`, `Purge`, the `ContentLoaded` C#
+  event); `LoadedProductContent` (the source/runtime prefab pair) its own file. **Constructed by
+  `AppInitializer`**, because the designer's start-up (`DesignerScene.OnEnable` subscribes,
+  `OnStateAdded` runs) happens before a scene initializer can hand anything over (B1.2). It is
+  given to `DesignerSceneInitializer`, which purges it in `OnDestroy`: the moment the old component
+  released its handles. Old code reaches it as `ProFitGlobals.productContent` until its area. The
+  event stays a C# event, not an `Event<Domain>`: its payload is the content prefab, a
+  `KitchenDesign` type that can't move to Shared. The component is removed from `DesignerScene`
+  through the editor and the script deleted.
+- `RuntimeProductOverrides` (`_project/Scripts/Products/`, static): `RebuildRuntimeProducts`
+  (the building-method rebuild with the app rules), `ApplySmokerCutOutHeight`,
+  `ApplyBrandCatalogPadding`, taking the catalog data, the visual database, the rules and the
+  content as arguments. `DesignerScene` keeps its subscriptions and calls them, so they run in the
+  same order relative to the other listeners. The empty Catalog method goes; its branch keeps
+  doing nothing (no inset reset in Catalog without app overrides), exactly as now.
+- Check: compile; a play-mode probe that content loads, the event fires once per visual and the
+  handles are released when going back to the menu (count before/after); the usual runs.
+
+**B3.4 — The editor tools into `KitchenDesign.Products.Editor`.** A new editor-only asmdef in
+`_project/Editor/Products/`, namespace `KitchenDesign.ProductsEditor` (R-ASM-3), with the database
+window and inspector, the Cloder sets/states managers and entry file, the visual tools, the
+`AssetAddress` drawer, the Addressables group commands and `FilteredObjectSelector` (with their
+UXML). `KitchenDesign.Tools.Editor` references it where it still uses one of them. The
+`EditorPrefs` key string stays. One type per file. Check: compile; each window and menu command of
+the moved tools opens and closes with no new console error and no file change; the usual runs.
+
+### Checks
+As area 2 (`rulescheck.cs`, `coldstart.sh` ×2, `runall.sh` + `compare_runs.py` + `photodiff.sh`,
+`menucheck.sh`, the fallback JSON a sign-in writes byte-identical to the run before), with the
+user's `AppProfile.asset` and every `Resources/*/FallbackJSON` folder backed up and restored
+around the play-mode runs.
+
 ## Decisions (user, 2026-10-22)
 1. **The core package keeps `namespace Melcher` for now.** App code imports it with
    `using Melcher;`. Later we make our own library to replace it, so phase B should not build new
