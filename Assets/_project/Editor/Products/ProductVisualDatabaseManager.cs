@@ -1,10 +1,11 @@
-namespace KitchenDesign
+namespace KitchenDesign.ProductsEditor
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
     using KitchenDesign.AddressableContent;
+    using KitchenDesign.ProductsEditor.Scriptables;
     using MEC;
     using System;
     using System.Collections;
@@ -18,8 +19,6 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UIElements;
     using System.Threading.Tasks;
-    using UnityEditor.Timeline.Actions;
-
     /// <summary>
     ///     The <see cref="ProductVisualDatabaseManager"/> is an editor window
     ///     for managing the kitchen models and visual product data in the
@@ -1229,7 +1228,7 @@ namespace KitchenDesign
         {
             CreateAndAddModelProductVisualPrefab(
                 "Product",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeProductModelsFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeProductModelsFolder,
                 static (GameObject modelToUse, ProductVisualContent newVisual, SerializedObject serializedObject) =>
                 {
                     using SerializedProperty modelPrefabProperty =
@@ -1249,7 +1248,7 @@ namespace KitchenDesign
         {
             CreateAndAddMultipleModelProductVisualPrefab(
                 "Product",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeProductModelsFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeProductModelsFolder,
                 static (GameObject modelToUse, ProductVisualContent newVisual, SerializedObject serializedObject) =>
                 {
                     using SerializedProperty modelPrefabProperty =
@@ -1269,7 +1268,7 @@ namespace KitchenDesign
         {
             CreateAndAddModelProductVisualPrefab(
                 "Cabinet Section",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeCabinetSectionModelsFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeCabinetSectionModelsFolder,
                 static (GameObject modelToUse, ProductVisualContent newVisual, SerializedObject serializedObject) =>
                 {
                     using SerializedProperty modelPrefabProperty =
@@ -1285,7 +1284,7 @@ namespace KitchenDesign
         {
             CreateAndAddMultipleModelProductVisualPrefab(
                 "Cabinet Section",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeCabinetSectionModelsFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeCabinetSectionModelsFolder,
                 static (GameObject modelToUse, ProductVisualContent newVisual, SerializedObject serializedObject) =>
                 {
                     using SerializedProperty modelPrefabProperty =
@@ -1301,7 +1300,7 @@ namespace KitchenDesign
         {
             GetObjectAssetUsingPicker(
                 "Select Material",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeFinishesFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeFinishesFolder,
                 $"t:{nameof(Material)}",
                 HandleSelection,
                 assetFilter: (args) =>
@@ -1327,7 +1326,7 @@ namespace KitchenDesign
         {
             GetMultipleObjectAssetUsingPicker(
                 "Select Materials",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeFinishesFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeFinishesFolder,
                 $"t:{nameof(Material)}",
                 HandleSelection,
                 assetFilter: (args) =>
@@ -1374,7 +1373,7 @@ namespace KitchenDesign
             // Prompt the user for a model
             GetMultipleObjectAssetUsingPicker(
                 pickerTitle,
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeProductVisualsFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeProductVisualsFolder,
                 $"t:{nameof(ProductVisualSO)}",
                 HandleSelection,
                 assetFilter: null,
@@ -1424,7 +1423,7 @@ namespace KitchenDesign
             // Prompt the user for a model
             GetObjectAssetUsingPicker(
                 "Select Visual",
-                "Assets/" + ProFitEditorOptions.Get().dataRelativeProductVisualsFolder,
+                "Assets/" + ProductEditorOptionsSO.Get().dataRelativeProductVisualsFolder,
                 $"t:{nameof(ProductVisualSO)}",
                 HandleSelection,
                 assetFilter: null

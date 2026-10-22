@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.ProductsEditor.Scriptables;
     using System.Collections.Generic;
     using System.Reflection;
     using UnityEngine;
@@ -22,7 +23,7 @@ namespace KitchenDesign
     {
         void OnPostprocessModel(GameObject modelAsset)
         {
-            ProFitEditorOptions editorOptions = ProFitEditorOptions.Get();
+            ProductEditorOptionsSO editorOptions = ProductEditorOptionsSO.Get();
 
             if (!editorOptions ||
                 !editorOptions.defaultProductMaterial ||
@@ -196,9 +197,9 @@ namespace KitchenDesign
                 return;
             }
 
-            if (!ProFitEditorOptions.Get())
+            if (!ProductEditorOptionsSO.Get())
             {
-                MelcherLog.LogWarning($"Models in {PendingReimportsPath} were imported without their material remap because {nameof(ProFitEditorOptions)} could not be loaded. They are reimported once it can be.");
+                MelcherLog.LogWarning($"Models in {PendingReimportsPath} were imported without their material remap because {nameof(ProductEditorOptionsSO)} could not be loaded. They are reimported once it can be.");
                 return;
             }
 
@@ -206,7 +207,7 @@ namespace KitchenDesign
             paths.Remove("");
             System.IO.File.Delete(PendingReimportsPath);
 
-            MelcherLog.Log($"Reimporting {paths.Count} models that were imported before {nameof(ProFitEditorOptions)} could be loaded.");
+            MelcherLog.Log($"Reimporting {paths.Count} models that were imported before {nameof(ProductEditorOptionsSO)} could be loaded.");
 
             AssetDatabase.StartAssetEditing();
 

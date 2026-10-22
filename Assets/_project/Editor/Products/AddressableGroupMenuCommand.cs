@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ProductsEditor
 {
     using Melcher;
     using KitchenDesign.Scriptables;
@@ -15,7 +15,7 @@ namespace KitchenDesign
     ///     Provides menu items to process the project's assets into their
     ///     intended Addressable asset groups.
     /// </summary>
-    public static class ProFitAddressableGroupMenuCommand
+    public static class AddressableGroupMenuCommand
     {
         [MenuItem("Tools/Melcher Studios/Pro-Fit/Fix missing addressable groups")]
         public static void FixMissingAddressableGroups()
@@ -181,7 +181,7 @@ namespace KitchenDesign
             string logOutputPath =
                 Path.Combine(
                     MelcherPredefinedFilePath.project,
-                    nameof(ProFitAddressableGroupMenuCommand) + ".txt"
+                    nameof(AddressableGroupMenuCommand) + ".txt"
                 );
 
             using StreamWriter logWriter = new StreamWriter(logOutputPath);

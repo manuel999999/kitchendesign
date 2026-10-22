@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ProductsEditor
 {
     using Melcher;
     using KitchenDesign.Scriptables;

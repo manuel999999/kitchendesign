@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ProductsEditor.Scriptables
 {
     using Melcher;
     using UnityEngine;
@@ -6,21 +6,21 @@ namespace KitchenDesign
 
     [CreateAssetMenu(fileName = "ProFitEditorOptions", menuName = "Melcher Studios/Pro-Fit/Editor Options")]
 
-    public class ProFitEditorOptions : MelcherScriptableObject
+    public class ProductEditorOptionsSO : MelcherScriptableObject
     {
         // =====================================================================
         // Static functions
         // =====================================================================
 
-        public static ProFitEditorOptions Get()
+        public static ProductEditorOptionsSO Get()
         {
             if (!s_Instance)
             {
-                string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProFitEditorOptions)}");
+                string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProductEditorOptionsSO)}");
                 for (int i = 0; i < guids.Length && !s_Instance; ++i)
                 {
                     string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
-                    s_Instance = AssetDatabase.LoadAssetAtPath<ProFitEditorOptions>(assetPath);
+                    s_Instance = AssetDatabase.LoadAssetAtPath<ProductEditorOptionsSO>(assetPath);
                 }
             }
 
@@ -81,7 +81,7 @@ namespace KitchenDesign
         // Static fields
         // =====================================================================
 
-        protected static ProFitEditorOptions s_Instance;
+        protected static ProductEditorOptionsSO s_Instance;
 
     }   // class ProFitEditorOptions
 

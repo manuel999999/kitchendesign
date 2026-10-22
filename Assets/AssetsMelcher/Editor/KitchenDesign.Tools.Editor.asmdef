@@ -11,7 +11,7 @@
         "Unity.Addressables",
         "Unity.Addressables.Editor",
         "Unity.ResourceManager",
-        "Unity.Timeline.Editor"
+        "KitchenDesign.Products.Editor"
     ],
     "includePlatforms": [
         "Editor"

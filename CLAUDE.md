@@ -1050,6 +1050,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+  `KitchenDesign.Products.Editor` (B3.4, `_project/Editor/Products/`, Editor only, autoReferenced
+  off, namespace `KitchenDesign.ProductsEditor`): the product visual tools; refs KitchenDesign,
+  Shared, the core package and its editor assembly, MEC, MiniJSON, Addressables (+ editor),
+  ResourceManager. `KitchenDesign.Tools.Editor` references it (the finish material generator uses
+  `FilteredObjectSelector`, the FBX importer `ProductEditorOptionsSO`); nothing points back.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
@@ -1122,6 +1127,20 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     make an entry, create groups packed separately) are in `_project/Scripts/AddressableContent/`
     (`KitchenDesign.AddressableContent`: a namespace ending in `.Addressables` would hide Unity's
     `Addressables` class in our code).
+  - Editor tools (B3.4), `KitchenDesign.Products.Editor`: the database window
+    (`ProductVisualDatabaseManager` and its two UXML, which it gets through its script's default
+    references, so they move with the `.meta`), the database inspector, the user's Cloder tools for
+    it (`ProductVisualDatabaseSetsManager`, `…StatesManager`, `…EntryFile`; their `EditorPrefs`
+    key keeps its old `Melcher.` text, or the set-aside list is lost), the visual tools (dump,
+    mismatched models, reserialize, insulated-jacket fix, `ProductVisualEditorHelp`), the
+    `AssetAddress` drawer, `AddressableGroupMenuCommand` (was `ProFitAddressableGroupMenuCommand`;
+    menu paths unchanged), `FilteredObjectSelector`, and `ProductEditorOptionsSO` (was
+    `ProFitEditorOptions`; the asset `AssetsMelcher/Editor/ProFitEditorOptions.asset` is found by
+    type). Comments in these files stay: they were moved, not refactored. **The FBX import
+    postprocessor (`ProFitProductModelFbxImporter`) stays in `KitchenDesign.Tools.Editor` on
+    purpose:** Unity counts the model postprocessors (type and version) among each model's import
+    dependencies, so moving or renaming it is expected to reimport every model and run its material
+    remap again (not measured; avoided). Move it only together with a planned model reimport.
   - Checked with `Tools/Baseline/unity6/visualscensus.cs` (edit mode): every source visual's
     content address and every public value of its info, written to
     `GeminiBaseline/visualscensus-latest.txt` with a hash; it finds the types by name, so it
@@ -1475,9 +1494,13 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   2026-10-22; the user left names and refactoring details to Claude. `ProFitGlobals` keeps
   forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
   committed. **Area 1 is done and committed (B1.1–B1.4, 2026-10-22; results in the plan).**
-  **Area 2 is done and committed (B2.1–B2.3, 2026-10-22).** Next: area 3 (products and
-  visuals): write its section in the plan, then build it the same way. The user left the design
-  and the details to Claude and wants each step checked and committed on its own.
+  **Area 2 is done and committed (B2.1–B2.3, 2026-10-22).** **Area 3 is done and committed
+  (B3.1–B3.4, 2026-10-22/23; results in the plan, "Area 3").** Next: area 4, the kitchen model,
+  which the plan says gets its own plan (`.claude/prompts/04-…`) first: split `Kitchen` into the
+  systems it is, replace `Kitchen.instance`, then spans and layouts, cabinets, occupancy and
+  products; it also takes over `ProductVisualContent`, `CabinetType`, the door-style lookup and
+  the brand rules (`Const.Gemini`, the padding numbers in `RuntimeProductOverrides`). The user
+  left the design and the details to Claude and wants each step checked and committed on its own.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

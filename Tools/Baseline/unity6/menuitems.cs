@@ -1,3 +1,4 @@
+var exists = typeof(UnityEditor.Menu).GetMethod("MenuItemExists", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic, null, new[] { typeof(string) }, null);
 var lines = new System.Collections.Generic.List<string>();
 foreach (var a in System.AppDomain.CurrentDomain.GetAssemblies())
 {
@@ -7,8 +8,8 @@ foreach (var a in System.AppDomain.CurrentDomain.GetAssemblies())
             foreach (UnityEditor.MenuItem mi in m.GetCustomAttributes(typeof(UnityEditor.MenuItem), false))
             {
                 if (mi.validate) continue;
-                bool exists = mi.menuItem.StartsWith("CONTEXT/") || mi.menuItem.StartsWith("Assets/") || mi.menuItem.StartsWith("GameObject/") || UnityEditor.Menu.MenuItemExists(mi.menuItem);
-                lines.Add(mi.menuItem + " | " + t.Name + "." + m.Name + " | exists=" + exists);
+                bool found = mi.menuItem.StartsWith("CONTEXT/") || mi.menuItem.StartsWith("Assets/") || mi.menuItem.StartsWith("GameObject/") || (bool)exists.Invoke(null, new object[] { mi.menuItem });
+                lines.Add(mi.menuItem + " | " + t.Name + "." + m.Name + " | exists=" + found);
             }
 }
 lines.Sort(System.StringComparer.Ordinal);

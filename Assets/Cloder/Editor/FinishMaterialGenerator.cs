@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.ProductsEditor;
     using System;
     using System.Collections.Generic;
     using System.IO;

@@ -57,6 +57,9 @@ client names; never copy it into a repo.
   27755 and 32569 and goes back to the menu after each, printing the content status's states
   (succeeded, failed, with runtime copy) and how many `ContentLoaded` events fired. Reference:
   27755 18 states and 18 events, 32569 8 and 26 in total, 0 states in the menu each time.
+- `menuitems.cs` (2026-10-22, B3.4): edit mode. Lists every `[MenuItem]` in our assemblies with
+  whether the editor registered it (`Menu.MenuItemExists`, internal, through reflection), into
+  `GeminiBaseline/menuitems-latest.txt`. After B3.4: 29 items, all registered.
 - **None of these scripts take options.** `menucheck.sh --help` runs the whole menu check (it
   happened once, after the user's files had been restored, and rewrote their ProFit fallback
   JSON). Read a script instead of running it to see what it does.

@@ -762,6 +762,25 @@ window and inspector, the Cloder sets/states managers and entry file, the visual
 UXML). `KitchenDesign.Tools.Editor` references it where it still uses one of them. The
 `EditorPrefs` key string stays. One type per file. Check: compile; each window and menu command of
 the moved tools opens and closes with no new console error and no file change; the usual runs.
+- **Done 2026-10-22.** 14 scripts and 3 UXML moved with `.meta` (the UXML reach their windows
+  through the scripts' default references, kept by the `.meta`); `ProFitEditorOptions` became
+  `ProductEditorOptionsSO` (in `Scriptables/`, the database window needs it) and
+  `ProFitAddressableGroupMenuCommand` `AddressableGroupMenuCommand`. **The FBX import postprocessor
+  stays in `KitchenDesign.Tools.Editor`:** moving or renaming a model postprocessor is expected to
+  reimport every model (CLAUDE.md). Comments in the moved tools stay (moved, not refactored).
+  The database window's unused `using UnityEditor.Timeline.Actions;` went, and with it the Timeline
+  reference. The new asmdef needed MEC and MiniJSON (found by compiling). Checks: compiles; new
+  `menuitems.cs`: 29 menu items, all registered, the 10 of the moved files the same as their
+  `[MenuItem]`s at HEAD (the "before" list wasn't captured: the first version of the snippet called
+  a `Menu.MenuItemExists` that isn't public in 6.6); the database, states and sets windows, the
+  database and visual inspectors and `FilteredObjectSelector` open and close with 0 console
+  errors; the options asset loads as the new class; census identical; no asset file changed and
+  no model was reimported (906 visual prefabs were reimported after a compile, no file changed).
+  `rulescheck.cs` 60/0; `coldstart.sh` both the reference; `runall.sh` against B3.3 identical,
+  photos within 0.05/255 (kept as `unity6-after-B3.4-2026-10-22/`); `menucheck.sh` 21 / 21 /
+  1,268. The sign-in's `products.json` differed from B3.3's only in one more Kalamazoo link and
+  description edited on the dashboard.
+- **Area 3 is done.**
 
 ### Checks
 As area 2 (`rulescheck.cs`, `coldstart.sh` ×2, `runall.sh` + `compare_runs.py` + `photodiff.sh`,
