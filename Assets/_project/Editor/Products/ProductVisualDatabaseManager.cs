@@ -78,7 +78,7 @@ namespace KitchenDesign.ProductsEditor
             listView.itemsSource = m_Database ? (IList)m_Database.sourceEntries : null;
 
             // Display products with any status by default.
-            m_SearchStatusFilter = (ProductVisualContent.EditorSetupStatus)~0;
+            m_SearchStatusFilter = (ProductVisualEditorSetupStatus)~0;
 
             RefreshSearch();
         }
@@ -251,7 +251,7 @@ namespace KitchenDesign.ProductsEditor
             {
                 row.userData = i;
 
-                ProductVisualContent.EditorSetupStatus rowStatus = ProductVisualContent.EditorSetupStatus.MissingFields;
+                ProductVisualEditorSetupStatus rowStatus = ProductVisualEditorSetupStatus.MissingFields;
                 string              rowId = "";
                 UnityEngine.Object  rowVisualPrefab = null;
                 string              rowVisualPrefabName = "";
@@ -286,11 +286,11 @@ namespace KitchenDesign.ProductsEditor
                 GUIContent statusContent = null;
                 switch (rowStatus)
                 {
-                    case ProductVisualContent.EditorSetupStatus.MissingFields:
+                    case ProductVisualEditorSetupStatus.MissingFields:
                         statusContent = m_StatusRed;
                         break;
 
-                    case ProductVisualContent.EditorSetupStatus.HashHasChanged:
+                    case ProductVisualEditorSetupStatus.HashHasChanged:
                         statusContent = m_StatusOrange;
                         break;
 
@@ -519,7 +519,7 @@ namespace KitchenDesign.ProductsEditor
                 statusMessage = $"{sourceItemCount} items";
             }
 
-            if (m_SearchStatusFilter != (ProductVisualContent.EditorSetupStatus)~0 || hasSearchInput)
+            if (m_SearchStatusFilter != (ProductVisualEditorSetupStatus)~0 || hasSearchInput)
             {
                 statusMessage = $"Matched {m_DisplayedData.Count} of {sourceItemCount} items";
             }
@@ -1485,7 +1485,7 @@ namespace KitchenDesign.ProductsEditor
         {
             ToolbarMenu searchFilterMenu = rootVisualElement.Q<ToolbarMenu>("SearchFilterMenu");
 
-            bool isDefaultFilter = m_SearchStatusFilter == (ProductVisualContent.EditorSetupStatus)~0;
+            bool isDefaultFilter = m_SearchStatusFilter == (ProductVisualEditorSetupStatus)~0;
 
             TextElement toolbarLabel = searchFilterMenu.Q<TextElement>();
             toolbarLabel.style.unityFontStyleAndWeight =
@@ -1496,12 +1496,12 @@ namespace KitchenDesign.ProductsEditor
             searchFilterMenu.menu.MenuItems().Clear();
             searchFilterMenu.menu.AppendAction("Reset", OnSearchStatusFilterClicked_Reset);
             searchFilterMenu.menu.AppendSeparator();
-            searchFilterMenu.menu.AppendAction("Include good", OnSearchStatusFilterClicked_Good, GetSearchFilterItemStatus(ProductVisualContent.EditorSetupStatus.Good));
-            searchFilterMenu.menu.AppendAction("Include changed", OnSearchStatusFilterClicked_Changed, GetSearchFilterItemStatus(ProductVisualContent.EditorSetupStatus.HashHasChanged));
-            searchFilterMenu.menu.AppendAction("Include incomplete", OnSearchStatusFilterClicked_Incomplete, GetSearchFilterItemStatus(ProductVisualContent.EditorSetupStatus.MissingFields));
+            searchFilterMenu.menu.AppendAction("Include good", OnSearchStatusFilterClicked_Good, GetSearchFilterItemStatus(ProductVisualEditorSetupStatus.Good));
+            searchFilterMenu.menu.AppendAction("Include changed", OnSearchStatusFilterClicked_Changed, GetSearchFilterItemStatus(ProductVisualEditorSetupStatus.HashHasChanged));
+            searchFilterMenu.menu.AppendAction("Include incomplete", OnSearchStatusFilterClicked_Incomplete, GetSearchFilterItemStatus(ProductVisualEditorSetupStatus.MissingFields));
         }
 
-        private DropdownMenuAction.Status GetSearchFilterItemStatus(ProductVisualContent.EditorSetupStatus mask)
+        private DropdownMenuAction.Status GetSearchFilterItemStatus(ProductVisualEditorSetupStatus mask)
         {
             return m_SearchStatusFilter.HasFlag(mask) ?
                 DropdownMenuAction.Status.Checked :
@@ -1510,28 +1510,28 @@ namespace KitchenDesign.ProductsEditor
 
         private void OnSearchStatusFilterClicked_Reset(DropdownMenuAction action)
         {
-            m_SearchStatusFilter = (ProductVisualContent.EditorSetupStatus)~0;
+            m_SearchStatusFilter = (ProductVisualEditorSetupStatus)~0;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
 
         private void OnSearchStatusFilterClicked_Good(DropdownMenuAction action)
         {
-            m_SearchStatusFilter ^= ProductVisualContent.EditorSetupStatus.Good;
+            m_SearchStatusFilter ^= ProductVisualEditorSetupStatus.Good;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
 
         private void OnSearchStatusFilterClicked_Changed(DropdownMenuAction action)
         {
-            m_SearchStatusFilter ^= ProductVisualContent.EditorSetupStatus.HashHasChanged;
+            m_SearchStatusFilter ^= ProductVisualEditorSetupStatus.HashHasChanged;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
 
         private void OnSearchStatusFilterClicked_Incomplete(DropdownMenuAction action)
         {
-            m_SearchStatusFilter ^= ProductVisualContent.EditorSetupStatus.MissingFields;
+            m_SearchStatusFilter ^= ProductVisualEditorSetupStatus.MissingFields;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
@@ -2437,7 +2437,7 @@ namespace KitchenDesign.ProductsEditor
         /// </summary>
         private IReadOnlyList<ProductVisualSO> m_DisplayedData;
 
-        private ProductVisualContent.EditorSetupStatus m_SearchStatusFilter = (ProductVisualContent.EditorSetupStatus)~0;
+        private ProductVisualEditorSetupStatus m_SearchStatusFilter = (ProductVisualEditorSetupStatus)~0;
 
         // ====================================================================
         // Nested types

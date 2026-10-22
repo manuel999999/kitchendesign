@@ -1055,6 +1055,23 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   Shared, the core package and its editor assembly, MEC, MiniJSON, Addressables (+ editor),
   ResourceManager. `KitchenDesign.Tools.Editor` references it (the finish material generator uses
   `FilteredObjectSelector`, the FBX importer `ProductEditorOptionsSO`); nothing points back.
+- **Kitchen model** (area 4 of the refactor, from 2026-10-23; plan:
+  `.claude/prompts/04-kitchen-model.md`).
+  - Enums (B4.1) in `_projectShared/Enums/`, values as before: `CabinetType`,
+    `KitchenBuildingMethod` (flags, because cabinet prefabs store sets of methods:
+    `m_AllowedFitToProductWidthBuildingMethods`, `m_ForceProductsToCenterBuildingMethods`),
+    `CountertopType`, `CabinetToeKickType`, `KitchenStyle`, `KitchenExtraFeature`, `Extent`,
+    `MeasurementAxis`, `CabinetLocalDirection`, `BrandCatalogRuleset`, `OccupantCuboidStatus`, and
+    the ones that were nested in their class, renamed so they stand on their own:
+    `CabinetResizeAxis` (`Cabinet.ResizeAxis`), `RiserMaterialMode`, `CutOutCubeFace`,
+    `ShelfBottomShape`, `VolumeOverlap` (`OccupiableVolume.IsOverlap`), `MeasureDisplayFlag`,
+    `MeasureMode`, `SlicedMeshSkinScaleMode`, `SlicedMeshAxisScaling`,
+    `ProductVisualEditorSetupStatus`. **The design JSON stores `cabinet_type`,
+    `kitchen_layout_style`, `kitchen_building_method`, `countertop_type`, `toe_kick_type` and
+    `extra_features` by value name**, so those names are frozen (R-DATA-3) as well as the numbers.
+    Assets store the model's enums as `MelcherStableEnum` (by name) or as plain ints, so the type
+    names were free to change. Their pure helpers (`CabinetTypeExtensions`, `KitchenStyleExtensions`,
+    `CabinetLocalDirectionExtensions`) are in `_projectShared/Common/`.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's

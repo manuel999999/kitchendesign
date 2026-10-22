@@ -569,7 +569,7 @@ namespace KitchenDesign
             }
         }
 
-        public void SetBaseCabinetDepth(float baseDepthInMeters, ResizeAxis resizeAxis)
+        public void SetBaseCabinetDepth(float baseDepthInMeters, CabinetResizeAxis resizeAxis)
         {
             if (Is(CabinetType.CornerWedge))
             {
@@ -637,12 +637,12 @@ namespace KitchenDesign
             // TODO: Make this support changing the cabinet depth with products
             //       added
 
-            if (resizeAxis.HasFlag(ResizeAxis.Z))
+            if (resizeAxis.HasFlag(CabinetResizeAxis.Z))
             {
                 m_SizeInMeters.z = baseDepthInMeters + backingDepthInMetersZ;
             }
 
-            if (resizeAxis.HasFlag(ResizeAxis.X) && Is(CabinetType.Corner))
+            if (resizeAxis.HasFlag(CabinetResizeAxis.X) && Is(CabinetType.Corner))
             {
                 // If this is a corner, we need to update the width to affect the
                 // depth of the next span.
@@ -2981,12 +2981,6 @@ namespace KitchenDesign
         // Types
         // ====================================================================
 
-        [System.Flags]
-        public enum ResizeAxis
-        {
-            X   = 1 << 0,
-            Z   = 1 << 2,
-        }
 
 #if UNITY_EDITOR
         // =====================================================================

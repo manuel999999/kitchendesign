@@ -53,31 +53,31 @@ namespace KitchenDesign
         public void SetActiveStencils(bool cutOutFront, bool cutOutTop, bool cutOutBack)
         {
             // Assume all stencils off by default
-            foreach (CubeFace face in EnumInfo<CubeFace>.values)
+            foreach (CutOutCubeFace face in EnumInfo<CutOutCubeFace>.values)
             {
                 SetStencilFaceActive(face, active: false);
             }
 
             if (cutOutFront)
             {
-                SetStencilFaceActive(CubeFace.ZMin, active: true);
+                SetStencilFaceActive(CutOutCubeFace.ZMin, active: true);
             }
 
             if (cutOutTop)
             {
-                SetStencilFaceActive(CubeFace.YMax, active: true);
+                SetStencilFaceActive(CutOutCubeFace.YMax, active: true);
             }
 
             if (cutOutBack)
             {
-                SetStencilFaceActive(CubeFace.ZMax, active: true);
+                SetStencilFaceActive(CutOutCubeFace.ZMax, active: true);
             }
 
             if (m_IsCountertop)
             {
                 // Always hide the bottom interior face of the countertop
                 // cut-out. This lets us look into the cabinet cut-out below it
-                GetCubeFace(interiorRoot, CubeFace.YMin).gameObject.SetActive(false);
+                GetCubeFace(interiorRoot, CutOutCubeFace.YMin).gameObject.SetActive(false);
             }
             else
             {
@@ -87,7 +87,7 @@ namespace KitchenDesign
                 // hidden so we can look up into the countertop cut-out. If
                 // there's no top cut-out, we can show the interior face.
                 bool showCabinetTopInteriorFace = !cutOutTop;
-                GetCubeFace(interiorRoot, CubeFace.YMax).gameObject.SetActive(showCabinetTopInteriorFace);
+                GetCubeFace(interiorRoot, CutOutCubeFace.YMax).gameObject.SetActive(showCabinetTopInteriorFace);
             }
 
             if (m_IsCabinetShelf)
@@ -95,7 +95,7 @@ namespace KitchenDesign
                 // Hide the bottom-most interior face on cabinet shelves. This
                 // ensures it doesn't z-fight with the separate countertop
                 // section that will render beneath it.
-                GetCubeFace(interiorRoot, CubeFace.YMin).gameObject.SetActive(false);
+                GetCubeFace(interiorRoot, CutOutCubeFace.YMin).gameObject.SetActive(false);
             }
         }
 
@@ -121,12 +121,12 @@ namespace KitchenDesign
 
             localBounds = m_ClipBounds;
 
-            foreach (CubeFace face in s_CubeFaces)
+            foreach (CutOutCubeFace face in s_CubeFaces)
             {
                 bool isWindow = GetCubeFace(m_StencilRoot, face).activeSelf;
                 bool isShared = m_IsCountertop
-                    ? face == CubeFace.YMin
-                    : face == CubeFace.YMax && !GetCubeFace(m_InteriorRoot, face).activeSelf;
+                    ? face == CutOutCubeFace.YMin
+                    : face == CutOutCubeFace.YMax && !GetCubeFace(m_InteriorRoot, face).activeSelf;
 
                 if (isWindow || isShared)
                 {
@@ -174,7 +174,7 @@ namespace KitchenDesign
             return hasBounds;
         }
 
-        public GameObject GetInteriorFace(CubeFace face)
+        public GameObject GetInteriorFace(CutOutCubeFace face)
         {
             return GetCubeFace(m_InteriorRoot, face);
         }
@@ -183,15 +183,15 @@ namespace KitchenDesign
         {
             // Hide bottom of countertop cut-out so we can view into
             // cabinet cut-out down it
-            interiorRoot.GetChild((int)CubeFace.YMin).gameObject.SetActive(!m_IsCountertop);
+            interiorRoot.GetChild((int)CutOutCubeFace.YMin).gameObject.SetActive(!m_IsCountertop);
         }
 
-        protected GameObject GetCubeFace(Transform cube, CubeFace face)
+        protected GameObject GetCubeFace(Transform cube, CutOutCubeFace face)
         {
             return cube.GetChild((int)face).gameObject;
         }
 
-        private void SetStencilFaceActive(CubeFace face, bool active)
+        private void SetStencilFaceActive(CutOutCubeFace face, bool active)
         {
             GetCubeFace(m_StencilRoot, face).gameObject.SetActive(active);
             GetCubeFace(m_InteriorRoot, face).gameObject.SetActive(!active);
@@ -235,8 +235,8 @@ namespace KitchenDesign
         // Internal static fields
         // ====================================================================
 
-        static protected CubeFace[] s_CubeFaces =
-            System.Linq.Enumerable.ToArray(MelcherEnumInfo<CubeFace>.values);
+        static protected CutOutCubeFace[] s_CubeFaces =
+            System.Linq.Enumerable.ToArray(MelcherEnumInfo<CutOutCubeFace>.values);
 
         private bool m_HasClipBounds;
         private Bounds m_ClipBounds;
@@ -245,20 +245,6 @@ namespace KitchenDesign
         // Nested types
         // =====================================================================
 
-        /// <summary>
-        /// Symbolic names for the faces of a cube. These values correspond to
-        /// to the order of the submeshes within the meter cube/cut-out cube
-        /// model.
-        /// </summary>
-        public enum CubeFace
-        {
-            XMax,
-            XMin,
-            YMax,
-            YMin,
-            ZMax,
-            ZMin
-        }   // enum CubeFace
 
     }   // class CabinetCutOut
 

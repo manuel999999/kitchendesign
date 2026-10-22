@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
     /// <summary>
@@ -56,92 +57,6 @@ namespace KitchenDesign
 
     }   // struct VolumeOccupantResult
 
-    /// <summary>
-    ///     Summarizes the result of an attempt to insert an occupant into a
-    ///     cabinet volume.
-    /// </summary>
-    public enum OccupantCuboidStatus
-    {
-        /// <summary>
-        ///     The product fits in the volume. None of the product's cuboid
-        ///     expands beyond the volume it was compared to.
-        /// </summary>
-        Fits,
-
-        /// <summary>
-        ///     The volume doesn't allow this product to be added. Some cabinet
-        ///     sections disallow all products (e.g., corners, ends and spacers)
-        ///     and <see cref="CabinetShelf"/> is restricted to burners.
-        /// </summary>
-        CannotContainProduct,
-
-        /// <summary>
-        ///     The product would overlap another product.
-        /// </summary>
-        OverlapsAnotherOccupant,
-
-        /// <summary>
-        ///     The product would overlap the cabinet span's backing.
-        /// </summary>
-        OverlapsBacking,
-
-        /// <summary>
-        ///     The product is too far left in the volume.
-        /// </summary>
-        TooFarLeft,
-
-        /// <summary>
-        ///     The product is too far right in the volume.
-        /// </summary>
-        TooFarRight,
-
-        /// <summary>
-        ///     The product is too far down in the volume.
-        /// </summary>
-        TooFarDown,
-
-        /// <summary>
-        ///     The product is too far up in the volume.
-        /// </summary>
-        TooFarUp,
-
-        /// <summary>
-        ///     The product is too far back in the volume.
-        /// </summary>
-        TooFarBack,
-
-        /// <summary>
-        ///     The product is too far forward in the volume.
-        /// </summary>
-        TooFarForward,
-
-        /// <summary>
-        ///     The product needs to resize the cabinet but doing so would
-        ///     cause issues. E.g., the cabinet might shrink such that existing
-        ///     products would be invalid.
-        /// </summary>
-        CannotResizeCabinet,
-
-        /// <summary>
-        ///     Used when trying to add a cabinet backing to a cabinet span
-        ///     that has non-standard cabinet heights. That is, the two
-        ///     features are mutually exclusive.
-        /// </summary>
-        NotCompatible,
-
-        /// <summary>
-        ///     The product could not be instantiated a reason relating to
-        ///     the data. For example, the <see cref="ProductInfo"/> for the
-        ///     product may not have been found.
-        /// </summary>
-        DataError,
-
-        /// <summary>
-        ///     Unity's instantiate function returned <see langword="null"/>.
-        /// </summary>
-        InstantiateError,
-
-    }   // enum OccupantCuboidStatus
 
 }   // namespace KitchenDesign
 

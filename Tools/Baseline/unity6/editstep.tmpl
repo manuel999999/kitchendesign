@@ -22,14 +22,14 @@ KitchenDesign.Cabinet CabC()
     for (int i = 1; i < cabs.Count; i++)
     {
         var c = cabs[i];
-        if (c != null && c.cabinetType == KitchenDesign.CabinetType.Straight && c.occupants.Count == 0 && c.canHaveProducts) return c;
+        if (c != null && c.cabinetType == KitchenDesign.Shared.Enums.CabinetType.Straight && c.occupants.Count == 0 && c.canHaveProducts) return c;
     }
     return null;
 }
 KitchenDesign.Cabinet DragTarget()
 {
     KitchenDesign.Cabinet found = null;
-    foreach (var c in cabs) { if (c != null && c.cabinetType == KitchenDesign.CabinetType.Straight && c.canHaveProducts) found = c; }
+    foreach (var c in cabs) { if (c != null && c.cabinetType == KitchenDesign.Shared.Enums.CabinetType.Straight && c.canHaveProducts) found = c; }
     return found;
 }
 UnityEngine.EventSystems.PointerEventData Pointer(UnityEngine.Vector3 world)
@@ -50,7 +50,7 @@ KitchenDesign.ResizerWidget Resizer(KitchenDesign.Cabinet c)
 {
     foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.ResizerWidget>(UnityEngine.FindObjectsSortMode.None))
     {
-        if (w.isVisible && w.target == c && w.affectExtent == KitchenDesign.Extent.Max) return w;
+        if (w.isVisible && w.target == c && w.affectExtent == KitchenDesign.Shared.Enums.Extent.Max) return w;
     }
     return null;
 }
@@ -147,7 +147,7 @@ switch (step)
         KitchenDesign.EventBridge.Designer.onTryCloneSection(cc);
         return "clone section " + Sku(cc);
     case "reorder":
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryReorderCabinet.Invoke((cc, KitchenDesign.Extent.Max)));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryReorderCabinet.Invoke((cc, KitchenDesign.Shared.Enums.Extent.Max)));
         return "reorder " + Sku(cc);
     case "add_cab":
         KitchenDesign.EventBridge.Designer.onTryAddSection(cc.cabinetSectionProductInfo, null);
@@ -182,10 +182,10 @@ switch (step)
     case "new_standard":
     {
         var layoutPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/AssetsMelcher/KitchenLayouts/StyleL.prefab").GetComponent<KitchenDesign.CabinetLayout>();
-        KitchenDesign.EventBridge.Designer.setBuildingMethod(KitchenDesign.KitchenBuildingMethod.Standard);
+        KitchenDesign.EventBridge.Designer.setBuildingMethod(KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard);
         KitchenDesign.EventBridge.Designer.setCabinetLayout(layoutPrefab);
         KitchenDesign.EventBridge.Designer.setKitchenTemplate(null);
-        KitchenDesign.EventBridge.Designer.setCountertopType(KitchenDesign.CountertopType.Default);
+        KitchenDesign.EventBridge.Designer.setCountertopType(KitchenDesign.Shared.Enums.CountertopType.Default);
         KitchenDesign.EventBridge.Designer.setBaseCabinetDepth(30f * 0.0254f);
         KitchenDesign.EventBridge.Designer.setCountertopThickness(1.25f * 0.0254f);
         KitchenDesign.EventBridge.Designer.setCountertopOverhang(KitchenDesign.CuboidPadding.one * 0.0254f);

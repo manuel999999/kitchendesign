@@ -172,7 +172,7 @@ namespace KitchenDesign
             m_WorldSpaceLabelOptionalBackground?.gameObject.SetActive(isVisible);
         }
 
-        public void SetDisplayFlags(DisplayFlag mask)
+        public void SetDisplayFlags(MeasureDisplayFlag mask)
         {
             m_DisplayFlags = mask;
 
@@ -200,23 +200,23 @@ namespace KitchenDesign
         {
             bool hasEndPoint = m_EndPoint;
 
-            DisplayFlag effectiveDisplayFlags = m_DisplayFlags;
+            MeasureDisplayFlag effectiveDisplayFlags = m_DisplayFlags;
             if (!hasEndPoint)
             {
-                effectiveDisplayFlags = DisplayFlag.None;
+                effectiveDisplayFlags = MeasureDisplayFlag.None;
             }
 
             // Reveal/hide the visual components if the endpoint exists/doesn't exist
-            bool useLabel = effectiveDisplayFlags.HasFlag(DisplayFlag.Label);
+            bool useLabel = effectiveDisplayFlags.HasFlag(MeasureDisplayFlag.Label);
             m_WorldSpaceLabel.enabled = useLabel;
             if (m_WorldSpaceLabelOptionalBackground)
             {
                 m_WorldSpaceLabelOptionalBackground.enabled = useLabel;
             }
 
-            m_LineRenderer.enabled = effectiveDisplayFlags.HasFlag(DisplayFlag.Line);
+            m_LineRenderer.enabled = effectiveDisplayFlags.HasFlag(MeasureDisplayFlag.Line);
 
-            bool useTickMark = effectiveDisplayFlags.HasFlag(DisplayFlag.Tick);
+            bool useTickMark = effectiveDisplayFlags.HasFlag(MeasureDisplayFlag.Tick);
             m_TickMark1.enabled = useTickMark;
             m_TickMark2.enabled = useTickMark;
 
@@ -424,7 +424,7 @@ namespace KitchenDesign
         protected MeasurementUnit m_DisplayUnits = MeasurementUnit.FeetAndInches;
 
         [SerializeField]
-        protected DisplayFlag m_DisplayFlags = DisplayFlag.Label | DisplayFlag.Line | DisplayFlag.Tick;
+        protected MeasureDisplayFlag m_DisplayFlags = MeasureDisplayFlag.Label | MeasureDisplayFlag.Line | MeasureDisplayFlag.Tick;
 
         // ====================================================================
         // OnValidate-serialized fields
@@ -458,17 +458,6 @@ namespace KitchenDesign
         // Nested types
         // ====================================================================
 
-        [System.Flags]
-        public enum DisplayFlag
-        {
-            None    = 0,
-
-            Label   = 1 << 0,
-            Line    = 1 << 1,
-            Tick    = 1 << 2,
-
-            All     = ~0
-        }   // enum DisplayFlag
 
     }   // class Measure
 

@@ -1006,7 +1006,7 @@ namespace KitchenDesign
 
                 cabinet.SetBaseCabinetDepth(
                     m_BaseCabinetDepthInMeters,
-                    cabinet.IsYawSimilar(orientationAlignedCabinet) ? Cabinet.ResizeAxis.Z : Cabinet.ResizeAxis.X
+                    cabinet.IsYawSimilar(orientationAlignedCabinet) ? CabinetResizeAxis.Z : CabinetResizeAxis.X
                 );
 
                 foreach (Occupant occupant in cabinet.occupants)

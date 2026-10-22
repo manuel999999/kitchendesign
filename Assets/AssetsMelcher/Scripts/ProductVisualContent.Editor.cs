@@ -78,7 +78,7 @@ namespace KitchenDesign
             }
         }
 
-        public EditorSetupStatus editorSetupStatus
+        public ProductVisualEditorSetupStatus editorSetupStatus
         {
             get
             {
@@ -113,15 +113,15 @@ namespace KitchenDesign
                     //m_ReferenceSizeInInches.sqrMagnitude <= 0.0f ||
                     (m_SectionModelPrefab && m_EditorOnlyVisualInfo.anchor == ProductAnchor.Unknown))
                 {
-                    return EditorSetupStatus.MissingFields;
+                    return ProductVisualEditorSetupStatus.MissingFields;
                 }
 
                 if (m_ApprovedHash != currentHash)
                 {
-                    return EditorSetupStatus.HashHasChanged;
+                    return ProductVisualEditorSetupStatus.HashHasChanged;
                 }
 
-                return EditorSetupStatus.Good;
+                return ProductVisualEditorSetupStatus.Good;
             }
         }
 
@@ -903,13 +903,6 @@ namespace KitchenDesign
 
         }   // class PropertyName
 
-        [System.Flags]
-        public enum EditorSetupStatus
-        {
-            Good            = 1 << 0,
-            HashHasChanged  = 1 << 1,
-            MissingFields   = 1 << 2,
-        }   // enum Status
 
 
     }   // class ProductVisualContent

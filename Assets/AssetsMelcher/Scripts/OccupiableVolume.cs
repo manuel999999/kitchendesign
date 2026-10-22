@@ -1374,7 +1374,7 @@ namespace KitchenDesign
             // destination
             foreach (Occupant otherOccupant in destinationCabinetVolume.occupants)
             {
-                if (IsOverlapping(occupantBeingMoved, occupantProposedCuboidInDestination, otherOccupant) == IsOverlap.Yes)
+                if (IsOverlapping(occupantBeingMoved, occupantProposedCuboidInDestination, otherOccupant) == VolumeOverlap.Yes)
                 {
                     return false;
                 }
@@ -1383,14 +1383,14 @@ namespace KitchenDesign
             return true;
         }
 
-        protected IsOverlap IsOverlapping(Occupant occupantBeingMoved, Cuboid proposedDestinationCuboid, Occupant possibleBlockingOccupant)
+        protected VolumeOverlap IsOverlapping(Occupant occupantBeingMoved, Cuboid proposedDestinationCuboid, Occupant possibleBlockingOccupant)
         {
             MelcherLog.Log($"We are moving: {occupantBeingMoved.name}, Maybe blocked by: {possibleBlockingOccupant.name}", possibleBlockingOccupant);
 
             if (occupantBeingMoved == possibleBlockingOccupant)
             {
                 // Cannot block itself.
-                return IsOverlap.No;
+                return VolumeOverlap.No;
             }
 
             // There are 4 possible situations depending on which of the
@@ -1439,7 +1439,7 @@ namespace KitchenDesign
                 {
                     // Early exit. Broad-phase test showed no overlap so none
                     // of its occupants overlap.
-                    return IsOverlap.No;
+                    return VolumeOverlap.No;
                 }
 
                 Cuboid blockerOccupantCuboid =
@@ -1453,7 +1453,7 @@ namespace KitchenDesign
 
                     blockerOccupantCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
 
-                    return IsOverlap.Yes;
+                    return VolumeOverlap.Yes;
                 }
 
                 Vector3 offsetOfShelfPositionToCabinetPosition =
@@ -1490,7 +1490,7 @@ namespace KitchenDesign
 
                         blockerOccupantCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
 
-                        return IsOverlap.Yes;
+                        return VolumeOverlap.Yes;
                     }
 
                     for (int j = 0; j < nestedStationaryCount; ++j)
@@ -1517,7 +1517,7 @@ namespace KitchenDesign
 
                             nestedStationaryOccupantCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
 
-                            return IsOverlap.Yes;
+                            return VolumeOverlap.Yes;
                         }
 
                         if (Cuboid.Overlaps(nestedStationaryOccupantCuboid, nestedMovingOccupantCuboid))
@@ -1526,7 +1526,7 @@ namespace KitchenDesign
 
                             nestedStationaryOccupantCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
 
-                            return IsOverlap.Yes;
+                            return VolumeOverlap.Yes;
                         }
 
                         nestedStationaryOccupantCuboid.Transform(GetTransform()).Draw(Color.grey, s_LineDuration);
@@ -1581,7 +1581,7 @@ namespace KitchenDesign
                 {
                     // Early exit. Broad-phase test showed no overlap so none
                     // of the occupants overlap.
-                    return IsOverlap.No;
+                    return VolumeOverlap.No;
                 }
 
                 // Compare the moving shelf's occupied volume to the stationary
@@ -1592,7 +1592,7 @@ namespace KitchenDesign
 
                     blockerOccupantCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
 
-                    return IsOverlap.Yes;
+                    return VolumeOverlap.Yes;
                 }
 
                 // This is the offset needed to shift the product-in-shelf's
@@ -1630,7 +1630,7 @@ namespace KitchenDesign
 
                         blockerOccupantCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
 
-                        return IsOverlap.Yes;
+                        return VolumeOverlap.Yes;
                     }
                 }
             }
@@ -1655,7 +1655,7 @@ namespace KitchenDesign
                 {
                     // Early exit. Broad-phase test showed no overlap so none
                     // of its occupants overlap.
-                    return IsOverlap.No;
+                    return VolumeOverlap.No;
                 }
 
                 if (this != possibleBlockerAsShelf)
@@ -1676,7 +1676,7 @@ namespace KitchenDesign
                     {
                         shelfCutOutCuboid.Transform(GetTransform()).Draw(Color.red, 1.0f, drawX: true, offset: 1);
 
-                        return IsOverlap.Yes;
+                        return VolumeOverlap.Yes;
                     }
                 }
 
@@ -1705,7 +1705,7 @@ namespace KitchenDesign
                     {
                         shelfItemCuboid.Transform(GetTransform()).Draw(Color.red, s_LineDuration);
 
-                        return IsOverlap.Yes;
+                        return VolumeOverlap.Yes;
                     }
 
                     shelfItemCuboid.Transform(GetTransform()).Draw(Color.grey, s_LineDuration);
@@ -1728,11 +1728,11 @@ namespace KitchenDesign
                 {
                     MelcherLog.Log("Can't move because we overlap with " + possibleBlockingOccupant.name, possibleBlockingOccupant, severity: MelcherLogSeverity.Verbose);
                     c.Draw(Color.red, s_LineDuration, drawX: true, offset: 1);
-                    return IsOverlap.Yes;
+                    return VolumeOverlap.Yes;
                 }
             }
 
-            return IsOverlap.No;
+            return VolumeOverlap.No;
         }
 
         /// <summary>
@@ -2875,24 +2875,6 @@ namespace KitchenDesign
 
         }   // readonly struct ReanchoredOccupant
 
-        /// <summary>
-        ///     This enum is used to prevent confusion in functions as a bool's
-        ///     return value can be ambiguous or switch contexts being
-        ///     different functions.
-        /// </summary>
-        protected enum IsOverlap
-        {
-            /// <summary>
-            ///     The cuboids do not overlap.
-            /// </summary>
-            No,
-
-            /// <summary>
-            ///     The cuboids do overlap.
-            /// </summary>
-            Yes
-
-        }   // enum IsOverlap
 
     }   // class OccupiableVolume
 

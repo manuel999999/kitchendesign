@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
 
@@ -94,13 +95,13 @@ namespace KitchenDesign
 
         protected void UseToNearestOccupantMeasureMode(MelcherButton caller)
         {
-            m_MeasurementOverlayManager.measureMode = MeasurementOverlayManager.MeasureMode.ToNearestOccupant;
+            m_MeasurementOverlayManager.measureMode = MeasureMode.ToNearestOccupant;
             UpdateMeasureModeButtons();
         }
 
         protected void UseToVolumeEdgeMeasureMode(MelcherButton caller)
         {
-            m_MeasurementOverlayManager.measureMode = MeasurementOverlayManager.MeasureMode.ToCabinetEdge;
+            m_MeasurementOverlayManager.measureMode = MeasureMode.ToCabinetEdge;
             UpdateMeasureModeButtons();
         }
 
@@ -184,7 +185,7 @@ namespace KitchenDesign
         protected void UpdateMeasureModeButtons()
         {
             bool isUsingNearestMode =
-                m_MeasurementOverlayManager.measureMode == MeasurementOverlayManager.MeasureMode.ToNearestOccupant;
+                m_MeasurementOverlayManager.measureMode == MeasureMode.ToNearestOccupant;
 
             m_ToNearestOccupantMeasureModeIndicator.gameObject.SetActive(isUsingNearestMode);
             m_ToVolumeEdgeMeasureModeIndicator.gameObject.SetActive(!isUsingNearestMode);

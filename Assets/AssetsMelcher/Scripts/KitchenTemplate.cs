@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = nameof(KitchenTemplate), menuName = "Melcher Studios/Pro-Fit/Kitchen Template")]

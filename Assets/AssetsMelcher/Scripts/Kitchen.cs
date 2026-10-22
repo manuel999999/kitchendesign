@@ -655,7 +655,7 @@ namespace KitchenDesign
 
                     if (span.backing &&
                         span.backing.hasRiserAndRiserCountertop &&
-                        span.backing.riserMaterialMode == CabinetBacking.RiserMaterialMode.UseCabinetMaterial)
+                        span.backing.riserMaterialMode == RiserMaterialMode.UseCabinetMaterial)
                     {
                         Cuboid riserCuboid = span.backing.riserCuboid;
 
@@ -4495,7 +4495,7 @@ namespace KitchenDesign
 
                     replacementCornerCabinet.SetBaseCabinetDepth(
                         baseCabinetDepthInMeters,
-                        Cabinet.ResizeAxis.X | Cabinet.ResizeAxis.Z
+                        CabinetResizeAxis.X | CabinetResizeAxis.Z
                     );
 
                     Vector3 sizeInMeters = replacementCornerCabinet.sizeInMeters;
@@ -6434,7 +6434,7 @@ namespace KitchenDesign
             // Calculate the position needed to center the product
             float metersFromVolumeMinX = occupant.metersFromVolumeMinX;
 
-            if (m_MeasurementOverlayManager.measureMode == MeasurementOverlayManager.MeasureMode.ToCabinetEdge)
+            if (m_MeasurementOverlayManager.measureMode == MeasureMode.ToCabinetEdge)
             {
                 // Center within the overall volume.
 
@@ -6446,7 +6446,7 @@ namespace KitchenDesign
 
                 metersFromVolumeMinX -= occupiedCuboid.width * 0.5f;
             }
-            else if (m_MeasurementOverlayManager.measureMode == MeasurementOverlayManager.MeasureMode.ToNearestOccupant)
+            else if (m_MeasurementOverlayManager.measureMode == MeasureMode.ToNearestOccupant)
             {
                 // Find the distance to the closest objects.
 

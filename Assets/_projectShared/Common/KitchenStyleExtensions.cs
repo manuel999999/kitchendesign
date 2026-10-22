@@ -1,9 +1,7 @@
-namespace KitchenDesign
-{
-    using Melcher;
-    using KitchenDesign.Server;
-    using UnityEngine;
+using KitchenDesign.Shared.Enums;
 
+namespace KitchenDesign.Shared.Common
+{
     public static class KitchenStyleExtensions
     {
         public static string ToDisplayName(this KitchenStyle kitchenStyle)
@@ -17,11 +15,5 @@ namespace KitchenDesign
                 _ => throw new System.ArgumentException(nameof(kitchenStyle))
             };
         }
-    }   // class KitchenStyleExtensions
-
-}   // namespace KitchenDesign
-
-/// ===========================================================================
-/// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
-/// Initial creation date: 2024-12-03
-/// ===========================================================================
+    }
+}

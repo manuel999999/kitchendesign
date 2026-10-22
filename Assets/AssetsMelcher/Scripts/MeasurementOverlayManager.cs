@@ -492,11 +492,6 @@ namespace KitchenDesign
         // Types
         // ====================================================================
 
-        public enum MeasureMode
-        {
-            ToNearestOccupant,
-            ToCabinetEdge,
-        }
 
     }   // class MeasurementOverlayManager
 

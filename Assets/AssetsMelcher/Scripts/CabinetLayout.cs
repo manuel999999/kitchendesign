@@ -1278,10 +1278,10 @@ namespace KitchenDesign
                     {
                         MelcherLog.Assert(span.orientationAlignedCabinet != null, "Span's orientation cabinet is null.", newCabinet);
 
-                        Cabinet.ResizeAxis resizeAxis =
+                        CabinetResizeAxis resizeAxis =
                             newCabinet.IsYawSimilar(span.orientationAlignedCabinet) ?
-                                Cabinet.ResizeAxis.Z :
-                                Cabinet.ResizeAxis.X;
+                                CabinetResizeAxis.Z :
+                                CabinetResizeAxis.X;
 
                         newCabinet.SetBaseCabinetDepth(
                             span.baseCabinetDepthInMeters,
@@ -1294,7 +1294,7 @@ namespace KitchenDesign
             {
                 newCabinet.SetBaseCabinetDepth(
                     kitchen.baseCabinetDepthInMeters,
-                    Cabinet.ResizeAxis.Z
+                    CabinetResizeAxis.Z
                 );
             }
 

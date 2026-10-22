@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using UnityEngine;
@@ -81,22 +82,22 @@ namespace KitchenDesign
                 Vector3 localScale =
                     MelcherCommon.ComponentWiseDivide(cuboid.size, sizeInMeters);
 
-                if (slice.scalingX == AxisScaling.PreserveOriginalScale)
+                if (slice.scalingX == SlicedMeshAxisScaling.PreserveOriginalScale)
                 {
                     localScale.x = 1.0f;
                 }
 
-                if (slice.scalingY == AxisScaling.PreserveOriginalScale)
+                if (slice.scalingY == SlicedMeshAxisScaling.PreserveOriginalScale)
                 {
                     localScale.y = 1.0f;
                 }
 
-                if (slice.scalingZ == AxisScaling.PreserveOriginalScale)
+                if (slice.scalingZ == SlicedMeshAxisScaling.PreserveOriginalScale)
                 {
                     localScale.z = 1.0f;
                 }
 
-                if (slice.scalingX == AxisScaling.ScaleToSkin)
+                if (slice.scalingX == SlicedMeshAxisScaling.ScaleToSkin)
                 {
                     float skinScaleX =
                         slice.normalizedAnchor.x < 0.5f ?
@@ -107,7 +108,7 @@ namespace KitchenDesign
                         ApplySkinScale(localScale.x, skinScaleX, m_SkinScaleMode.x);
                 }
 
-                if (slice.scalingY == AxisScaling.ScaleToSkin)
+                if (slice.scalingY == SlicedMeshAxisScaling.ScaleToSkin)
                 {
                     float skinScaleY =
                         slice.normalizedAnchor.y < 0.5f ?
@@ -118,7 +119,7 @@ namespace KitchenDesign
                         ApplySkinScale(localScale.y, skinScaleY, m_SkinScaleMode.y);
                 }
 
-                if (slice.scalingZ == AxisScaling.ScaleToSkin)
+                if (slice.scalingZ == SlicedMeshAxisScaling.ScaleToSkin)
                 {
                     float skinScaleZ =
                         slice.normalizedAnchor.z < 0.5f ?
@@ -183,14 +184,14 @@ namespace KitchenDesign
                 return MelcherCommon.IsAlmostEqual(value, 0.0f, Threshold);
             }
 
-            static float ApplySkinScale(float currentValue, float scale, SkinScaleMode skinScaleMode)
+            static float ApplySkinScale(float currentValue, float scale, SlicedMeshSkinScaleMode skinScaleMode)
             {
                 return
                     skinScaleMode switch
                     {
-                        SkinScaleMode.Absolute => scale,
-                        SkinScaleMode.Relative => currentValue * scale,
-                        _ => throw new System.ArgumentException($"Unhandled {nameof(SkinScaleMode)} value: {skinScaleMode}", nameof(skinScaleMode))
+                        SlicedMeshSkinScaleMode.Absolute => scale,
+                        SlicedMeshSkinScaleMode.Relative => currentValue * scale,
+                        _ => throw new System.ArgumentException($"Unhandled {nameof(SlicedMeshSkinScaleMode)} value: {skinScaleMode}", nameof(skinScaleMode))
                     };
             }
         }
@@ -207,7 +208,7 @@ namespace KitchenDesign
         //       The stable enum's property drawer throws an exception when
         //       trying to access the X value of the Vector3T. Tried using
         //       serializedProperty.boxedValue but this also errored. -Ryan
-        protected Vector3T<SkinScaleMode> m_SkinScaleMode = new (SkinScaleMode.Absolute);
+        protected Vector3T<SlicedMeshSkinScaleMode> m_SkinScaleMode = new (SlicedMeshSkinScaleMode.Absolute);
 
         [SerializeField]
         protected Vector3 m_SizeInInches = Vector3.one * Units.Meters2Inches;
@@ -259,38 +260,14 @@ namespace KitchenDesign
             public bool scaleAlongY;
             public bool scaleAlongZ;
 
-            public AxisScaling scalingX;
-            public AxisScaling scalingY;
-            public AxisScaling scalingZ;
+            public SlicedMeshAxisScaling scalingX;
+            public SlicedMeshAxisScaling scalingY;
+            public SlicedMeshAxisScaling scalingZ;
 
             public List<MeshRenderer> meshRenderers;
         }
 
-        public enum SkinScaleMode
-        {
-            /// <summary>
-            ///     The skin scale is used as the absolute scale.
-            /// </summary>
-            Absolute,
 
-            /// <summary>
-            ///     The skin scale is multiplied by the current cuboid size.
-            /// </summary>
-            Relative,
-        }
-
-        public enum AxisScaling
-        {
-            /// <summary>
-            ///     This axis's scale will be kept at 1.0. This is useful for
-            ///     some 45-degree corner cabinets whose inner corner would
-            ///     otherwise be skewed/distorted if trying to match the
-            ///     sliced mesh's scale or skin size.
-            /// </summary>
-            PreserveOriginalScale,
-            ScaleToSize,
-            ScaleToSkin,
-        }
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
@@ -318,18 +295,18 @@ namespace KitchenDesign
             {
                 Slice slice = m_Slices[i];
 
-                if (slice.scalingX != AxisScaling.PreserveOriginalScale ||
-                    slice.scalingY != AxisScaling.PreserveOriginalScale ||
-                    slice.scalingZ != AxisScaling.PreserveOriginalScale)
+                if (slice.scalingX != SlicedMeshAxisScaling.PreserveOriginalScale ||
+                    slice.scalingY != SlicedMeshAxisScaling.PreserveOriginalScale ||
+                    slice.scalingZ != SlicedMeshAxisScaling.PreserveOriginalScale)
                 {
                     // Already treated. We won't try to migrate the old scaling
                     // values.
                     continue;
                 }
 
-                slice.scalingX = slice.scaleAlongX ? AxisScaling.ScaleToSize : AxisScaling.ScaleToSkin;
-                slice.scalingY = slice.scaleAlongY ? AxisScaling.ScaleToSize : AxisScaling.ScaleToSkin;
-                slice.scalingZ = slice.scaleAlongZ ? AxisScaling.ScaleToSize : AxisScaling.ScaleToSkin;
+                slice.scalingX = slice.scaleAlongX ? SlicedMeshAxisScaling.ScaleToSize : SlicedMeshAxisScaling.ScaleToSkin;
+                slice.scalingY = slice.scaleAlongY ? SlicedMeshAxisScaling.ScaleToSize : SlicedMeshAxisScaling.ScaleToSkin;
+                slice.scalingZ = slice.scaleAlongZ ? SlicedMeshAxisScaling.ScaleToSize : SlicedMeshAxisScaling.ScaleToSkin;
 
                 m_Slices[i] = slice;
 

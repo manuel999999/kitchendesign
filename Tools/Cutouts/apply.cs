@@ -38,9 +38,9 @@ void AddCutOut(KitchenDesign.CabinetCutOut c, int s, string label)
     var open = KitchenDesign.Shared.Enums.CutoutFaces.None;
     for (int f = 0; f < 6; f++)
     {
-        var face = (KitchenDesign.CabinetCutOut.CubeFace)f;
+        var face = (KitchenDesign.CutOutCubeFace)f;
         bool window = c.stencilRoot.GetChild(f).gameObject.activeSelf;
-        bool shared = c.isCountertop ? face == KitchenDesign.CabinetCutOut.CubeFace.YMin : (face == KitchenDesign.CabinetCutOut.CubeFace.YMax && !c.GetInteriorFace(face).activeSelf);
+        bool shared = c.isCountertop ? face == KitchenDesign.CutOutCubeFace.YMin : (face == KitchenDesign.CutOutCubeFace.YMax && !c.GetInteriorFace(face).activeSelf);
         if (window || shared) open |= (KitchenDesign.Shared.Enums.CutoutFaces)(1 << f);
     }
     bool added = set.AddBox(s, root, b, open);

@@ -149,6 +149,15 @@ until the kitchen is stable and writes a snapshot (selections, spans and backing
 type, SKU, size, position and materials, every product's position, visible widgets); at the end
 `measured.json` and `resave.json` (built, never sent). Read-only on the server. Two runs on the same
 code must be identical before it is used as a reference. `Tools/Baseline/unity6/editprobe.sh`.
+- **Done 2026-10-23.** Two runs on the unchanged code: every snapshot, both `resave.json` and the
+  log identical; `measured.json` differs only in cameras (the idle cover-photo vcam keeps its last
+  pose, several degrees apart between runs), so `compare_probe.py` ignores `cameras`. The first
+  version raised the resize widget's `onResized` through reflection, which changed nothing: the
+  widget resizes the cabinet in its own `OnDrag` and only then tells the kitchen, so the probe drives
+  `OnBeginDrag/OnDrag/OnEndDrag` with projected pointer positions (the right cabinet grows 3"). In
+  the Catalog phase the app refuses the nudge, the clone ("No Room Available") and the widget resize,
+  as it does for a user; the Standard phase clones, drags the clone to another cabinet and resizes.
+  Reference: `GeminiBaseline/editprobe-HEAD-2026-10-23`. Committed with this plan.
 
 **B4.1 — The model's enums to Shared.** The enums listed above to `_projectShared/Enums/` with
 explicit values equal to today's, nested ones taken out of their class under names that stand on
@@ -160,6 +169,15 @@ their own: `CabinetResizeAxis`, `RiserMaterialMode`, `CutOutCubeFace`, `ShelfBot
 (`CabinetLocalDirectionUtil` uses the core package, so it stays with the geometry, B4.2.) Check: as
 B3.1 (no asset file changes; every `MelcherStableEnum` stores names; plain enum fields keep their
 ints).
+- **Done 2026-10-23.** 21 enums (11 moved files, 10 new), 3 helpers moved and stripped of comments
+  (script in the session scratchpad: a C# lexer that tells code from comments and strings, renames
+  in code only). One rename the script missed: `nameof(SkinScaleMode)` inside an interpolated
+  string (the lexer treated the whole string as text); fixed by hand, and the lexer now treats
+  interpolation holes as code. Compiles in the editor and as macOS player scripts. Checks against
+  B3.4: `rulescheck.cs` 60/0; `coldstart.sh` both 13 errors / 4 warnings; `runall.sh` identical
+  (photos within 0.03/255; kept as `unity6-after-B4.1`); fallback JSON identical to the probe's
+  sign-in; `menucheck.sh` 21 / 21 / 1,268; edit probe identical (`editprobe-after-B4.1`). No asset
+  file changed.
 
 **B4.2 — The model's data and value types by what they are.** ScriptableObjects renamed with `SO`
 and moved with their `.meta` to `_project/Scripts/Scriptables/`: `BrandCatalogSO`,

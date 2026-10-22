@@ -1,8 +1,8 @@
-namespace KitchenDesign
-{
-    using Melcher;
-    using UnityEngine;
+using KitchenDesign.Shared.Enums;
+using UnityEngine;
 
+namespace KitchenDesign.Shared.Common
+{
     public static class CabinetLocalDirectionExtensions
     {
         public static Vector3 ToVector3(this CabinetLocalDirection direction)
@@ -25,20 +25,13 @@ namespace KitchenDesign
                     return Vector3.down;
 
                 case CabinetLocalDirection.Front:
-                    // Intentionally Vector3.back. The front of the cabinet
-                    // points towards -Z
                     return Vector3.back;
 
                 case CabinetLocalDirection.Back:
-                    // Intentional Vector3.forward.
                     return Vector3.forward;
             }
         }
 
-        /// <summary>
-        /// Convert the direction to an axis; i.e., a direction without a + or
-        /// -.
-        /// </summary>
         public static MeasurementAxis ToAxis(this CabinetLocalDirection direction)
         {
             switch (direction)
@@ -60,16 +53,8 @@ namespace KitchenDesign
             }
         }
 
-        /// <summary>
-        /// Get the reverse direction.
-        /// </summary>
         public static CabinetLocalDirection Reverse(this CabinetLocalDirection direction)
         {
-            // We could do something clever, like add 1 if the number is even
-            // or subtract 1 otherwise, but that adds a extra dependency on the
-            // implementation of CabinetLocalDirection. It would be prone to
-            // break if the enum was ever reordered or expanded.
-
             switch (direction)
             {
                 default:
@@ -94,12 +79,5 @@ namespace KitchenDesign
                     return CabinetLocalDirection.Front;
             }
         }
-
-    }   // class CabinetLocalDirectionExtensions
-
-}   // namespace KitchenDesign
-
-/// ===========================================================================
-/// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
-/// Initial creation date: 2022-11-07
-/// ===========================================================================
+    }
+}

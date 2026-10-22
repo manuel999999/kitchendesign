@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
@@ -299,12 +300,6 @@ namespace KitchenDesign
 
         }   // struct InflateCabinetDepths
 
-        public enum RiserMaterialMode
-        {
-            UseCabinetMaterial,
-            UseCountertopMaterial,
-            KeepUnchanged
-        }
 
     }   // class CabinetBacking
 

@@ -383,13 +383,13 @@ namespace KitchenDesign
 
             countertopCuboid.height = 0.0f;
 
-            if (m_BottomShape.value == BottomShape.Flat)
+            if (m_BottomShape.value == ShelfBottomShape.Flat)
             {
                 // Use a non-zero height to prevent zero length mesh normals
                 // which would cause rendering issues.
                 countertopCuboid.yMin -= 0.001f;
             }
-            else if (m_BottomShape.value == BottomShape.Countertop)
+            else if (m_BottomShape.value == ShelfBottomShape.Countertop)
             {
                 // Match kitchen's countertop thickness and apply the
                 // countertop overlap.
@@ -690,7 +690,7 @@ namespace KitchenDesign
         protected Material m_MaterialOverride = default;
 
         [SerializeField]
-        protected MelcherStableEnum<BottomShape> m_BottomShape = new (BottomShape.Countertop);
+        protected MelcherStableEnum<ShelfBottomShape> m_BottomShape = new (ShelfBottomShape.Countertop);
 
         [SerializeField]
         protected TransformHelper m_NestedCountertop = default;
@@ -721,22 +721,6 @@ namespace KitchenDesign
         // Nested types
         // ====================================================================
 
-        /// <summary>
-        ///     Different ways the bottom of the shelf will be sized.
-        /// </summary>
-        public enum BottomShape
-        {
-            /// <summary>
-            ///     The bottom of the shelf is a countertop and therefore has
-            ///     a thickness and lip that matches the kitchen's settings.
-            /// </summary>
-            Countertop,
-
-            /// <summary>
-            ///     The bottom of the shelf is flat and does not have lip.
-            /// </summary>
-            Flat,
-        }
 
     }   // class CabinetShelf
 

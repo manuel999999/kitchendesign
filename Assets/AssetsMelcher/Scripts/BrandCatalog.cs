@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Scriptables;
@@ -50,7 +51,7 @@ namespace KitchenDesign
 
         public CabinetToeKickType defaultToeKickType => m_DefaultToeKickType;
 
-        public CabinetBacking.RiserMaterialMode backingRiserMaterialMode => m_BackingRiserMaterialMode;
+        public RiserMaterialMode backingRiserMaterialMode => m_BackingRiserMaterialMode;
 
         public bool showToeKickButton => m_ShowToeKickButton;
 
@@ -442,7 +443,7 @@ namespace KitchenDesign
         protected MelcherStableEnum<CabinetToeKickType> m_DefaultToeKickType = new (CabinetToeKickType.None);
 
         [SerializeField]
-        private MelcherStableEnum<CabinetBacking.RiserMaterialMode> m_BackingRiserMaterialMode = new (CabinetBacking.RiserMaterialMode.KeepUnchanged);
+        private MelcherStableEnum<RiserMaterialMode> m_BackingRiserMaterialMode = new (RiserMaterialMode.KeepUnchanged);
 
         [SerializeField]
         protected bool m_ShowToeKickButton = true;

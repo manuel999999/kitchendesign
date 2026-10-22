@@ -1519,7 +1519,7 @@ namespace KitchenDesign
                         downward * 2.0f,
                         extraDistanceInMetersForLabelOnly: 0.0f,
                         m_CabinetMeasureColorX,
-                        Measure.DisplayFlag.All
+                        MeasureDisplayFlag.All
                     );
 
                     // Measure the thickness of the countertop.
@@ -1536,7 +1536,7 @@ namespace KitchenDesign
                         leftward,
                         extraDistanceInMetersForLabelOnly: 0.0f,
                         m_CabinetMeasureColorY,
-                        Measure.DisplayFlag.All
+                        MeasureDisplayFlag.All
                     );
 
                     // Measure the cabinet's height minus the countertop.
@@ -1559,7 +1559,7 @@ namespace KitchenDesign
                         leftward,
                         extraDistanceInMetersForLabelOnly: downwardGrowingCountertopFixDistanceInMeters, // intentional, non-zero distance. Ideally will be 0 once countertops grow upwards.
                         m_CabinetMeasureColorY,
-                        Measure.DisplayFlag.All
+                        MeasureDisplayFlag.All
                     );
 
                     // Measure the total cabinet height (including countertop).
@@ -1570,7 +1570,7 @@ namespace KitchenDesign
                         leftward * 3.0f,
                         extraDistanceInMetersForLabelOnly: downwardGrowingCountertopFixDistanceInMeters, // intentional, non-zero distance. Ideally will be 0 once countertops grow upwards.
                         m_CabinetMeasureColorY,
-                        Measure.DisplayFlag.All
+                        MeasureDisplayFlag.All
                     );
                 }
 
@@ -1612,7 +1612,7 @@ namespace KitchenDesign
                             leftward + upward,
                             extraDistanceInMetersForLabelOnly: 0.0f,
                             m_CabinetMeasureColorZ,
-                            Measure.DisplayFlag.All
+                            MeasureDisplayFlag.All
                         );
 
                         if(kitchen.backPanelDepthInMeters > 0.0f)
@@ -1624,7 +1624,7 @@ namespace KitchenDesign
                                 leftward + upward,
                                 extraDistanceInMetersForLabelOnly: 0.0f,
                                 m_CabinetMeasureColorZ,
-                                Measure.DisplayFlag.All
+                                MeasureDisplayFlag.All
                             );
                         }
                     }
@@ -1660,7 +1660,7 @@ namespace KitchenDesign
                         countertopWidthLabelOffset,
                         extraDistanceInMetersForLabelOnly: 0.0f,
                         m_CabinetMeasureColorX,
-                        Measure.DisplayFlag.All
+                        MeasureDisplayFlag.All
                     );
 
                     // --
@@ -1703,7 +1703,7 @@ namespace KitchenDesign
                                 upward,
                                 extraDistanceInMetersForLabelOnly: 0.0f,
                                 m_CabinetMeasureColorX,
-                                Measure.DisplayFlag.All
+                                MeasureDisplayFlag.All
                             );
                         }
 
@@ -1720,7 +1720,7 @@ namespace KitchenDesign
                                 upward,
                                 extraDistanceInMetersForLabelOnly: 0.0f,
                                 m_CabinetMeasureColorZ,
-                                Measure.DisplayFlag.All
+                                MeasureDisplayFlag.All
                             );
                         }
                     }
@@ -1833,7 +1833,7 @@ namespace KitchenDesign
                             Vector3.zero,
                             extraDistanceInMetersForLabelOnly: 0.0f,
                             Color.black,
-                            Measure.DisplayFlag.Line
+                            MeasureDisplayFlag.Line
                         );
 
                         // Add separating lines between cabinets in Catalog mode.
@@ -1844,7 +1844,7 @@ namespace KitchenDesign
                             Vector3.zero,
                             extraDistanceInMetersForLabelOnly: 0.0f,
                             Color.black,
-                            Measure.DisplayFlag.Line
+                            MeasureDisplayFlag.Line
                         );
                     }
 
@@ -1930,7 +1930,7 @@ namespace KitchenDesign
                             downward,
                             extraDistanceInMetersForLabelOnly: 0.0f,
                             m_CabinetMeasureColorX,
-                            Measure.DisplayFlag.All
+                            MeasureDisplayFlag.All
                         );
 
                         if (topDownMeasureDirection != towardsFront)
@@ -1947,7 +1947,7 @@ namespace KitchenDesign
                             topDownMeasureDirection + upward,
                             extraDistanceInMetersForLabelOnly: 0.0f,
                             m_CabinetMeasureColorX,
-                            Measure.DisplayFlag.All
+                            MeasureDisplayFlag.All
                         );
                     }
                 }
@@ -1972,7 +1972,7 @@ namespace KitchenDesign
                     Vector3     pointOffset,
                     float       extraDistanceInMetersForLabelOnly,
                     Color       color,
-                    Measure.DisplayFlag displayFlags)
+                    MeasureDisplayFlag displayFlags)
                 {
                     AddMeasureBetweenCabinetPoints(
                         ScreenshotAngle.Front,
@@ -1994,7 +1994,7 @@ namespace KitchenDesign
                     Vector3     pointOffset,
                     float       extraDistanceInMetersForLabelOnly,
                     Color       color,
-                    Measure.DisplayFlag displayFlags)
+                    MeasureDisplayFlag displayFlags)
                 {
                     AddMeasureBetweenCabinetPoints(
                         ScreenshotAngle.Top,
@@ -2204,7 +2204,7 @@ namespace KitchenDesign
                         measurementPair.extraDistanceInMetersForLabelOnly,
                         span,
                         lineColor,
-                        Measure.DisplayFlag.All,
+                        MeasureDisplayFlag.All,
                         measurementsInScreenshots
                     );
                 }
@@ -2285,7 +2285,7 @@ namespace KitchenDesign
                         extraDistanceInMetersForLabelOnly,
                         cabinetSpan,
                         lineColor,
-                        Measure.DisplayFlag.All,
+                        MeasureDisplayFlag.All,
                         measurementsInScreenshots
                     );
 
@@ -2392,7 +2392,7 @@ namespace KitchenDesign
             float           extraDistanceInMetersForLabelOnly,
             CabinetSpan     cabinetSpan,
             Color           lineColor,
-            Measure.DisplayFlag    displayFlags,
+            MeasureDisplayFlag    displayFlags,
             List<MeasurementForScreenshot> measurementsForScreenshots)
         {
             if (m_NextMeasurePrefabIndex >= m_MeasurePrefabPool.Count)
