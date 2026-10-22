@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Interfaces;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Linq;
@@ -447,7 +448,7 @@ namespace KitchenDesign
 
         protected Sprite GetLoadingImage(BrandCatalog catalog)
         {
-            if(ProFitGlobals.isAppOptionGemini)
+            if(ProFitGlobals.appRules.RequiresBrandCatalog)
             {
                 if(catalog != null && catalog.BrandCatalogLoadingImage != null)
                 {
@@ -533,7 +534,7 @@ namespace KitchenDesign
         {
             KitchenBuildingMethod selectedBuildingMethod = m_Kitchen.selectedBuildingMethod;
 
-            if (selectedBuildingMethod != KitchenBuildingMethod.Catalog && !IsStollBuild())
+            if (selectedBuildingMethod != KitchenBuildingMethod.Catalog && !ProFitGlobals.appRules.AdjustsSmokerCutOutHeight)
             {
                 return;
             }
@@ -574,15 +575,7 @@ namespace KitchenDesign
         /// </summary>
         protected void OnBuildingMethodChanged(KitchenBuildingMethod newBuildingMethod)
         {
-            bool isStollBuild =
-                ProFitGlobals.isAppOptionStoll;
-
-            int stollManufacturerId = -1;
-
-            if (GetStollManufacturer(out ManufacturerInfo stollInfo))
-            {
-                stollManufacturerId = stollInfo.id;
-            }
+            IAppRules appRules = ProFitGlobals.appRules;
 
             // Make copies of the server-parsed product data. This allows the
             // app to override some values on the copies while maintaining the
@@ -624,12 +617,10 @@ namespace KitchenDesign
                 }
 
 
-                if (isStollBuild)
+                if (appRules.AppliesRuntimeProductOverrides)
                 {
-                    ModifyProductInfoForStollBuild(
-                        stollManufacturerId,
-                        sourceProductInfo,
-                        sourceProductVisual.info,
+                    ModifyProductInfoForAppRules(
+                        appRules,
                         runtimeProductInfo,
                         runtimeProductVisual.info
                     );
@@ -657,31 +648,20 @@ namespace KitchenDesign
             );
         }
 
-        /// <summary>
-        ///     This function is invoked on each product that is registered.
-        ///     Its purpose function is to apply any Stoll-specific changes to
-        ///     the product.
-        /// </summary>
-        /// <param name="sourceProductInfo"></param>
-        /// <param name="sourceProductVisual"></param>
-        /// <param name="runtimeProductInfo"></param>
-        /// <param name="runtimeProductVisual"></param>
-        /// <param name="stollManufacturerId"></param>
-        protected void ModifyProductInfoForStollBuild(
-            int                 stollManufacturerId,
-            ProductInfo         sourceProductInfo,
-            ProductVisualInfo   sourceVisualInfo,
+        protected void ModifyProductInfoForAppRules(
+            IAppRules           appRules,
             ProductInfo         runtimeProductInfo,
             ProductVisualInfo   runtimeVisualInfo)
         {
-            if (runtimeProductInfo.sku == "Backing:BarTop")
-            {
-                // Stoll's bar top risers are 3" deep.
+            float? highBarTopRiserDepthInMeters = appRules.HighBarTopRiserDepthInMeters;
 
+            if (highBarTopRiserDepthInMeters.HasValue &&
+                runtimeProductInfo.sku == "Backing:BarTop")
+            {
                 Vector3 productSizeInMeters =
                     runtimeProductInfo.productSizeInMeters;
 
-                productSizeInMeters.z = 3.0f * Const.Inches2Meters;
+                productSizeInMeters.z = highBarTopRiserDepthInMeters.Value;
 
                 runtimeProductInfo.productSizeInMeters = productSizeInMeters;
             }
@@ -691,33 +671,22 @@ namespace KitchenDesign
                 return;
             }
 
-            if (runtimeVisualInfo.runtimePrefabCategory == ProductCategorySpecific.Fridge)
-            {
-                // Pro-Fit said that a quarter inch or no padding is fine
-                // for fridges. This was later requested to be no padding.
-                const float StollFridgeHorizontalPaddingInInches = 0.0f;
+            float? fridgeHorizontalPaddingInMeters = appRules.FridgeHorizontalPaddingInMeters;
 
-                runtimeProductInfo.productPaddingInMeters.left = StollFridgeHorizontalPaddingInInches * Const.Inches2Meters;
-                runtimeProductInfo.productPaddingInMeters.right = StollFridgeHorizontalPaddingInInches * Const.Inches2Meters;
+            if (fridgeHorizontalPaddingInMeters.HasValue &&
+                runtimeVisualInfo.runtimePrefabCategory == ProductCategorySpecific.Fridge)
+            {
+                runtimeProductInfo.productPaddingInMeters.left = fridgeHorizontalPaddingInMeters.Value;
+                runtimeProductInfo.productPaddingInMeters.right = fridgeHorizontalPaddingInMeters.Value;
             }
 
-            // Apply the custom minimum offsets for Stoll products.
+            float? bottomAnchoredProductInsetInMeters = appRules.BottomAnchoredProductInsetInMeters;
 
-            if (runtimeVisualInfo.anchor.IsAtBottom() &&
+            if (bottomAnchoredProductInsetInMeters.HasValue &&
+                runtimeVisualInfo.anchor.IsAtBottom() &&
                 runtimeVisualInfo.initialInsetFromEdgeInMeters > 0.0f)
             {
-                // The distance between the bottom of the cabinet and the start of
-                // a cut-out for a Stoll product.
-                float stollBottomProductBottomPadding = 4.0f * Const.Inches2Meters;
-
-                // The distance between the bottom of the cabinet and the start of
-                // a cut-out for a non-Stoll product.
-                float nonStollBottomProductBottomPadding = 4.0f * Const.Inches2Meters;
-
-                runtimeVisualInfo.initialInsetFromEdgeInMeters =
-                    runtimeProductInfo.manufacturerId == stollManufacturerId ?
-                        stollBottomProductBottomPadding :
-                        nonStollBottomProductBottomPadding;
+                runtimeVisualInfo.initialInsetFromEdgeInMeters = bottomAnchoredProductInsetInMeters.Value;
             }
         }
 
@@ -1076,16 +1045,6 @@ namespace KitchenDesign
             SetCabinetBeingSwapped(null);
 
             await EventBridge.Designer.onTryHighlightObject.Invoke(null);
-        }
-
-        protected static bool IsStollBuild()
-        {
-            return ProFitGlobals.isAppOptionStoll;
-        }
-
-        protected static bool GetStollManufacturer(out ManufacturerInfo stollInfo)
-        {
-            return ProFitUtility.FindManufacturerByName("Stoll", out stollInfo);
         }
 
         // =====================================================================

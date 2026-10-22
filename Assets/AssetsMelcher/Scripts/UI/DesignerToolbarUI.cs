@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Interfaces;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -124,11 +125,8 @@ namespace KitchenDesign
 
                 if (categoryButton == m_StainlessSteelBurnerPlungeButton)
                 {
-                    // Stoll-specific plunge option.
-                    // TODO: This button will be migrated to a sub menu in
-                    //       under "add section" or "add accessory".
                     categoryButton.gameObject.SetActive(
-                        ProFitGlobals.isAppOptionStoll
+                        ProFitGlobals.appRules.ShowsPlungeCategory
                     );
                     continue;
                 }
@@ -373,10 +371,9 @@ namespace KitchenDesign
 
             if (ProFitUtility.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
             {
-                if (ProFitGlobals.appOptions.userFilter != UserFilter.Stoll &&
+                if (!ProFitGlobals.appRules.IncludesStollManufacturer &&
                     manufacturer.name.Equals("Stoll", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Disallow products by Stoll in non-Stoll builds.
                     return false;
                 }
             }
@@ -685,16 +682,12 @@ namespace KitchenDesign
                         );
                 }
 
-                // Manufacturer 137 is only available in the Pro-Fit build.
-                if (!ProFitGlobals.isAppOptionProFit)
-                {
-                    const int proFitOnlyManufacturerId = 137;
+                IAppRules appRules = ProFitGlobals.appRules;
 
-                    manufacturerIdsInCategory =
-                        manufacturerIdsInCategory.Where(
-                            static manufacturerId => manufacturerId != proFitOnlyManufacturerId
-                        );
-                }
+                manufacturerIdsInCategory =
+                    manufacturerIdsInCategory.Where(
+                        manufacturerId => appRules.IsManufacturerIdAvailable(manufacturerId)
+                    );
 
                 AddButtonsForIds(
                     buttonParent:           scrollContent,

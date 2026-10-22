@@ -421,7 +421,7 @@ Git (set up by the user on 2026-10-20): remote `origin` is
 `git@github.com:manuel999999/kitchendesign.git` (SSH; checked 2026-10-22). Commits are authored
 as `EmmanuelMGemini`.
 Branches `main` (pushed, `dec60d9 initial commit`) and `develop` (local, checked out). The user
-makes the commits or asks Claude to; the `Co-Authored-By` trailer is fine (2026-10-22).
+makes the commits or asks Claude to; the `Co-Authored-By` trailer is fine here, since this is the user's own repo (2026-10-22; it is dropped only on projects made for others).
 
 `_projectDefaults` still holds content from Unity's project template (`Readme.asset`,
 `TutorialInfo/`, `InputSystem_Actions.inputactions`, the sample scene). Pointed out to the user,
@@ -468,7 +468,7 @@ These carry over from the sessions on the old project.
   comments on our changes. Propose `file-only` for `CODE_COMMENTS` when section 0 asks, but let
   the user answer.
 - **Stage by default, commit only when asked.** Stage only the files from the change at hand. The
-  user commits, or asks Claude to. The `Co-Authored-By: Claude` trailer is fine (user,
+  user commits, or asks Claude to. The `Co-Authored-By: Claude` trailer is fine in this repo, the user's own (user,
   2026-10-22); no need to ask about it any more.
 - **Measure, don't guess.** Sizes, memory and timings come from the editor or a build, not from
   estimates.
@@ -958,6 +958,10 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   every other photo matched; on the warm editor they matched (≤0.14). Re-capture before treating a
   cover-photo difference as a regression. The CLI's `console` keeps only the last 2,000 entries;
   read errors from `Logs/Editor.log`.
+- **`SplashScene` is switched off in the build list** (the old project's too): the app starts at
+  `PlatformSetupScene`. Played on its own in the editor, Splash's `buildIndex + 1` asks for a scene
+  that doesn't exist and it stays on the splash. Test start-up from `PlatformSetupScene`
+  (`Tools/Baseline/unity6/coldstart.sh`).
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -987,6 +991,23 @@ None yet.
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **App rules** (B1.1 of the refactor, 2026-10-22): `KitchenDesign.Shared.Interfaces.IAppRules`
+  with `ProFitAppRules`, `StollAppRules`, `GeminiAppRules` (`_project/Scripts/AppRules/`),
+  chosen by `AppRulesFactory.Create(appOptions.userFilter)`. Every place the old code checked
+  which app it was now asks a rule; the table of old check → rule is in
+  `.claude/prompts/03-refactor.md`, "Area 1". **No code outside `AppRules/` may test
+  `userFilter` to change behaviour.** The three places that still read it (`LogInUI`, `SignUpUI`,
+  `QuickLogInWidget`) use it as the app's identity on the server, not as a rule. Old code reaches
+  the rules through `ProFitGlobals.appRules` (created once per domain, reset at
+  `SubsystemRegistration`). Why rules return `null` for "leave the value alone" (the high bar top
+  sizes, fridge padding, bottom inset): only Stoll overrides them, and the caller keeps its own
+  value otherwise. Each app has exactly one building method today (ProFit Standard, Stoll
+  Sections, Gemini Catalog), but app and building method stay separate axes: what the old code
+  tested by building method (the Sections bowing limit, the 0.5" overhang) stays a building-method
+  rule, and the per-brand checks (`Const.Gemini.ManufactersIds`) belong on `BrandCatalog` (area 4).
+  Why two manufacturer rules (`IncludesStollManufacturer`, `IsManufacturerIdAvailable`): the
+  whitelist screen hides only Stoll, the toolbar also hides 137. Checked with
+  `Tools/Baseline/unity6/rulescheck.cs` (all three apps) and the Gemini baseline.
 - **`CameraLevelAimBehavior`** (`_project/Scripts/Behaviors/`, 2026-10-20): a `CinemachineExtension`
   that, at the Finalize stage, takes the framed direction, moves the aim point by
   `worldAimOffset` (world space, at the Look At target's distance) and re-aims with the reference
@@ -1186,8 +1207,11 @@ None yet.
 - **Phase A of the refactor done and committed 2026-10-22** (four commits). A1 (third-party asmdefs), A2
   (`Melcher` → `KitchenDesign`, 239 files), A3 (old code in `KitchenDesign` /
   `KitchenDesign.Tools.Editor`). Each checked: compile (and a macOS player-script compile), baseline
-  identical to the pre-rename run, menu check, editor tool windows. **Next: phase B, area 1 (app foundation)**:
-  write its section in the plan and agree it with the user before editing.
+  identical to the pre-rename run, menu check, editor tool windows. **Next: phase B, area 1 (app foundation).**
+  Its section ("Area 1 — App foundation" in `.claude/prompts/03-refactor.md`) was agreed on
+  2026-10-22; the user left names and refactoring details to Claude. `ProFitGlobals` keeps
+  forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
+  committed by the user. **B1.1 (app rules) is done and staged** (results in the plan).
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

@@ -57,7 +57,7 @@ namespace KitchenDesign
             IEnumerable<ManufacturerInfo> availableManufacturers =
                 allManufactures.Where(x => !string.IsNullOrEmpty(x.name));
 
-            if (ProFitGlobals.appOptions.userFilter != UserFilter.Stoll)
+            if (!ProFitGlobals.appRules.IncludesStollManufacturer)
             {
                 // Find the manufacturer ID of Stoll as it may be filtered out from
                 // the list of all manufacturers in the next step.

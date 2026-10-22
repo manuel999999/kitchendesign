@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using Unity.Cinemachine;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -296,7 +297,7 @@ namespace KitchenDesign
 
             bool showFraction = false;
 
-            if(ProFitGlobals.appOptions.userFilter == UserFilter.Gemini && m_SelectedBrandCatalog != null)
+            if(ProFitGlobals.appRules.MeasurementFractionsFollowBrandCatalog && m_SelectedBrandCatalog != null)
             {
                 showFraction = m_SelectedBrandCatalog.showFractionInMeasurements;
             }
@@ -920,7 +921,7 @@ namespace KitchenDesign
             Dictionary<int, float> productIdToPriceChangeFactor = new ();
 
             // MARK: Stoll Price Sheet
-            if (ProFitGlobals.isAppOptionStoll)
+            if (ProFitGlobals.appRules.PriceSheetExtras == PriceSheetExtras.StollCustomKitchen)
             {
                 // All custom kitchen's have this fee.
                 manualPriceSheetEntries.Add(
@@ -1127,7 +1128,7 @@ namespace KitchenDesign
             }
 
             // MARK: Gemini Price Sheet
-            if (ProFitGlobals.appOptions.userFilter == UserFilter.Gemini)
+            if (ProFitGlobals.appRules.PriceSheetExtras == PriceSheetExtras.GeminiCatalog)
             {
                 // When a Challenger Premium Finish Package is installed, the
                 // cost of each cabinet is increased by $463.
@@ -2028,10 +2029,7 @@ namespace KitchenDesign
             }
             else
             {
-                if(ProFitGlobals.isAppOptionStoll)
-                {
-                    disclaimer = "Countertop and finishes not included on this final quote.";
-                }
+                disclaimer = ProFitGlobals.appRules.NonCatalogQuoteDisclaimer;
             }
 
             if (!string.IsNullOrWhiteSpace(disclaimer))
@@ -2845,9 +2843,7 @@ namespace KitchenDesign
 
             CenterTheGround();
 
-            // Re-apply the countertop thickness for stoll
-            // to ensure the countertops are the correct thickness.
-            if(ProFitGlobals.isAppOptionStoll)
+            if(ProFitGlobals.appRules.ReappliesCountertopThicknessAfterLoad)
             {
                 SetCountertopThickness(m_SelectedCountertopThicknessInMeters);
             }            
@@ -5910,7 +5906,7 @@ namespace KitchenDesign
 
         protected void TrySendOnBrandCatalogChanged()
         {
-            if(ProFitGlobals.appOptions.userFilter == UserFilter.Gemini && m_SelectedBrandCatalog == null)
+            if(ProFitGlobals.appRules.RequiresBrandCatalog && m_SelectedBrandCatalog == null)
             {
                 return;
             }

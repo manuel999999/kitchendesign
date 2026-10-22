@@ -126,7 +126,7 @@ namespace KitchenDesign
                         inches += feet * Mathf.RoundToInt(Const.InchesPerFoot);
                     }
 
-                    if (numerator > 0 && denominator > 0 && ProFitGlobals.appOptions.userFilter == UserFilter.Gemini) // only enabled for gemini, for now
+                    if (numerator > 0 && denominator > 0 && ProFitGlobals.appRules.ShowsTickerFractions)
                     {
                         stringBuilder.AppendFormat("{0,2} {1}/{2}\"", inches, numerator, denominator);
                     }

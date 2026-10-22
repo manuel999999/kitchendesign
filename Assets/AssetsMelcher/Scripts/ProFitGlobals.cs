@@ -6,6 +6,8 @@ namespace KitchenDesign
     using System.IO;
     using UnityEngine;
     using MEC;
+    using KitchenDesign.AppRules;
+    using KitchenDesign.Shared.Interfaces;
 
     using JsonList = System.Collections.Generic.IList<object>;
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
@@ -331,14 +333,15 @@ namespace KitchenDesign
         /// </remarks>
         public static AppOptions appOptions => appProfile.appOptions;
 
-        /// <summary>
-        ///     <see langword="true"/> if the app is currently configured for
-        ///     the Stoll build. See <see cref="appOptions"/> and <see
-        ///     cref="UserFilter"/>.
-        /// </summary>
-        public static bool isAppOptionGemini = appOptions.userFilter == UserFilter.Gemini;
-        public static bool isAppOptionProFit = appOptions.userFilter == UserFilter.ProFit;
-        public static bool isAppOptionStoll = appOptions.userFilter == UserFilter.Stoll;
+        public static IAppRules appRules => s_AppRules ??= AppRulesFactory.Create(appOptions.userFilter);
+
+        private static IAppRules s_AppRules;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetAppRules()
+        {
+            s_AppRules = null;
+        }
 
         // ====================================================================
         // Static methods

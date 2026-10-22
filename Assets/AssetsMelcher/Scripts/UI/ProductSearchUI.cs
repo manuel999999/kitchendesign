@@ -72,7 +72,7 @@ namespace KitchenDesign
                         continue;
                     }
 
-                    if(ProFitGlobals.isAppOptionGemini && productInfo.category == ProductCategory.Storage)
+                    if(!ProFitGlobals.appRules.ShowsStorageInProductSearch && productInfo.category == ProductCategory.Storage)
                     {
                         continue;
                     }
@@ -96,7 +96,7 @@ namespace KitchenDesign
                     }
 
                     ProductVisual doorStyleVisual = null;
-                    if(ProFitGlobals.isAppOptionGemini)
+                    if(ProFitGlobals.appRules.RequiresBrandCatalog)
                     {
                         Kitchen kitchen = Kitchen.instance;
 

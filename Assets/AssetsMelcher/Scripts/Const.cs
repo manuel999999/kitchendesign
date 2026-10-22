@@ -26,8 +26,6 @@ namespace KitchenDesign
         /// </summary>
         public const float OccupantMinimumHorizontalPaddingInMeters = 5.0f * Const.Inches2Meters;
 
-        public const float StollOccupantMinimumHorizontalPaddingInMeters = 0f;
-
         /// <summary>
         /// The minimum *vertical* spacing between products. This behaves
         /// identically to <see cref="OccupantMinimumHorizontalPaddingInMeters"/>
@@ -52,7 +50,6 @@ namespace KitchenDesign
         ///     supports are used to render one whole.
         /// </summary>
         public const float CabinetColumnWidthInMeters = 3.0f * Const.Inches2Meters;
-        public const float StollCabinetColumnWidthInMeters = 6.0f * Const.Inches2Meters;
 
         public const float SectionBuildingMethodMinCabinetLengthInMeters = 18.0f * Const.Inches2Meters;
 

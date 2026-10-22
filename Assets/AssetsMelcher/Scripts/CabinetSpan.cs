@@ -249,11 +249,12 @@ namespace KitchenDesign
 
             float riserDepthInMeters = backingInfo.productSizeInMeters.z;
 
-            if (ProFitGlobals.isAppOptionStoll &&
+            float? highBarTopRiserDepthInMeters = ProFitGlobals.appRules.HighBarTopRiserDepthInMeters;
+
+            if (highBarTopRiserDepthInMeters.HasValue &&
                 backingInfo.category == ProductCategory.BarTopHigh)
             {
-                // High bar top risers are 3" thick for Stoll.
-                riserDepthInMeters = 3.0f * Const.Inches2Meters;
+                riserDepthInMeters = highBarTopRiserDepthInMeters.Value;
             }
 
             backingCuboidInSpanSpace.zMin =
@@ -766,12 +767,12 @@ namespace KitchenDesign
                 }
             }
 
-            if (ProFitGlobals.isAppOptionStoll &&
+            float? highBarTopCountertopThicknessInMeters = ProFitGlobals.appRules.HighBarTopCountertopThicknessInMeters;
+
+            if (highBarTopCountertopThicknessInMeters.HasValue &&
                 m_CabinetBacking.info.category == ProductCategory.BarTopHigh)
             {
-                // High bar top countertops are always 2" thick for Stoll, no
-                // matter what the kitchen's countertop thickness is.
-                countertopThicknessInMeters = 2.0f * Const.Inches2Meters;
+                countertopThicknessInMeters = highBarTopCountertopThicknessInMeters.Value;
             }
 
             // Calculate the riser's size. It spans from the leftmost cabinet
@@ -802,14 +803,12 @@ namespace KitchenDesign
                 m_CabinetBacking.countertopOverhangInMeters
                     .Inflate(countertopCuboidInSpanSpace);
 
-            if (ProFitGlobals.isAppOptionStoll &&
+            float? highBarTopCountertopDepthInMeters = ProFitGlobals.appRules.HighBarTopCountertopDepthInMeters;
+
+            if (highBarTopCountertopDepthInMeters.HasValue &&
                 backing.info.category == ProductCategory.BarTopHigh)
             {
-                // High bar tops are 14" deep for Stoll. The countertop model
-                // adds a 1" edge on every side of this cuboid, so 12" here is
-                // rendered as 14".
-                // TODO: Make this a field that can be specified for all backings.
-                countertopCuboidInSpanSpace.depth = 12.0f * Const.Inches2Meters;
+                countertopCuboidInSpanSpace.depth = highBarTopCountertopDepthInMeters.Value;
             }
 
             // Factor in the overhang of the backing's neighbouring backings.

@@ -2273,16 +2273,10 @@ namespace KitchenDesign
                 product.productPaddingInMeters.top      = Const.OccupantMinimumVerticalPaddingInMeters;
                 product.productPaddingInMeters.bottom   = 0.0f;
 
-                if(ProFitGlobals.isAppOptionStoll)
-                {
-                    product.productPaddingInMeters.left     = Const.StollOccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                    product.productPaddingInMeters.right    = Const.StollOccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                }
-                else
-                {
-                    product.productPaddingInMeters.left     = Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                    product.productPaddingInMeters.right    = Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                }
+                float occupantMinimumHorizontalPaddingInMeters = ProFitGlobals.appRules.OccupantMinimumHorizontalPaddingInMeters;
+
+                product.productPaddingInMeters.left     = occupantMinimumHorizontalPaddingInMeters * 0.5f;
+                product.productPaddingInMeters.right    = occupantMinimumHorizontalPaddingInMeters * 0.5f;
 
                 if (productTags != null)
                 {
@@ -3009,16 +3003,10 @@ namespace KitchenDesign
                 cabinet.productPaddingInMeters.top      = 0.0f;// Const.OccupantMinimumVerticalPaddingInMeters * 0.5f;
                 cabinet.productPaddingInMeters.bottom   = 0.0f;// Const.OccupantMinimumVerticalPaddingInMeters * 0.5f;
 
-                if(ProFitGlobals.isAppOptionStoll)
-                {
-                    cabinet.productPaddingInMeters.left     = Const.StollOccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                    cabinet.productPaddingInMeters.right    = Const.StollOccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                }
-                else
-                {
-                    cabinet.productPaddingInMeters.left     = Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                    cabinet.productPaddingInMeters.right    = Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                }
+                float occupantMinimumHorizontalPaddingInMeters = ProFitGlobals.appRules.OccupantMinimumHorizontalPaddingInMeters;
+
+                cabinet.productPaddingInMeters.left     = occupantMinimumHorizontalPaddingInMeters * 0.5f;
+                cabinet.productPaddingInMeters.right    = occupantMinimumHorizontalPaddingInMeters * 0.5f;
 
                 // Add entry to list so we can output a file of the product ID
                 // and associated model ID

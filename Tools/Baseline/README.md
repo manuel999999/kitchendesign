@@ -30,6 +30,27 @@ client names; never copy it into a repo.
   (almost all "Could not find product visual" for visuals held back by the product thinning).
   The CLI's `console` command keeps only the last 2,000 entries, so read the errors themselves
   from `Logs/Editor.log`.
+- **Run against run** (2026-10-22, for the refactor's "no behaviour change" checks):
+  `runall.sh` deletes `GeminiBaseline/unity6/`, so first copy it to a named folder (e.g.
+  `unity6-after-A3-2026-10-22`). Then `python3 -I compare_runs.py <ref> <new>` (folder names under
+  `GeminiBaseline/`): `resave.json` must be byte-identical, `measured.json` may differ only in
+  camera angles within 0.01° (runs vary by about 0.0001°). `photodiff.sh <ref> <new>`: mean
+  per-channel difference (/255) of every save photo, one CLI call per design (the 5 s main-thread
+  limit). Fills `photodiff.tmpl` into a temp file.
+- `coldstart.sh <scene path>` (2026-10-22): plays from that scene, lists every scene it passes
+  through, waits for the menu to settle, prints the sign-in state, the visible menu screens and the
+  console counts. Read-only. Start from `PlatformSetupScene`: `SplashScene` is switched off in the
+  build list (in the old project too), so builds start at PlatformSetup, and Splash played on its
+  own asks for a build index that doesn't exist. Reference (B1.1 code, signed out, no saved
+  token): `PlatformSetupScene MenuScene`, Welcome screen, 13 errors, 4 warnings.
+- `rulescheck.cs` (2026-10-22): for each of the three `AppOptions` assets, the old app checks
+  written out by hand against what `AppRulesFactory.Create(userFilter)` returns. Edit mode, no
+  play. Must print `mismatches=0`.
+- `runall.sh` and `menucheck.sh` don't swap the app profile. Before running them: hash and back
+  up `Resources/AppProfile.asset` and every `Resources/*/FallbackJSON` folder, then put in the
+  committed profile (`git show HEAD:Assets/AssetsMelcher/Resources/AppProfile.asset`, Gemini) and
+  `AssetDatabase.Refresh()`. Afterwards restore from that backup, not from git, and compare the
+  hashes.
 - Snippets are `eval_file` bodies: statements and local functions, fully qualified names, no
   `using`s, no classes (the CLI rejects them; `run_script` would end play mode).
 - `dbstate.cs` shows whether the visual database's runtime lookup is built; `mkrt.cs` builds it

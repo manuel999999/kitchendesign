@@ -152,7 +152,7 @@ Proposed order. The hubs come first because every other area uses them.
    and `ProFitUtility` are split by owner (helpers into `Utility/`, the rest to the type that uses
    them). `MenuSceneInitializer` and `DesignerSceneInitializer` start as thin shells that today's
    `MenuScene`/`DesignerScene` hand off to, and grow as areas move into them. `EventBridge` stays
-   until the areas that use it are done.
+   until the areas that use it are done. **Detailed in "Area 1 — App foundation" below.**
 2. **Server and offline data.** `ProFitWeb` (4,299 lines) becomes a server client constructed by
    the `AppInitializer`; `ProFitWebTypes` become `Serializables/` with their JSON names frozen
    (R-DATA-3); the offline fallback JSON loading; `GroupDatabase`, `ProductIdRemapDatabase`,
@@ -209,6 +209,244 @@ Proposed order. The hubs come first because every other area uses them.
   opened and closed; the user checks those by hand when an area changes them.
 - **Not covered:** end panels (no usable baseline design, see the handover), WebGL and phones
   (modules not installed), the three app profiles other than Gemini.
+
+## Area 1 — App foundation (agreed 2026-10-22)
+The user agreed the approach, including keeping `ProFitGlobals` as forwards, and left the names
+and the refactoring details to Claude.
+
+### How it works today (read 2026-10-22)
+- **Start.** `Main.RuntimeInit` (`[RuntimeInitializeOnLoadMethod(BeforeSceneLoad)]`) sets the
+  culture to en-US, the log level and `ProFitGlobals.isVerbose` (editor, debug build, `?verbose`,
+  `--verbose`), quality level 0, turns off the render debug UI, initialises DOTween, and calls
+  `ProFitGlobals.Init()` (in the editor only when the open scene is in the build list). In the
+  editor it also polls F1 to kick the user.
+- **`ProFitGlobals.Init()`** is a MEC coroutine: reset every field, read the fallback JSON from
+  `Resources/<App>/FallbackJSON` (manufacturers, product groups, cabinet section categories, brand
+  catalogs, tags, compatibilities, products, cabinets; the catalog ones only when
+  `cabinetDataAvailability` allows), apply the product overrides, build the variant lists, probe
+  the server (switching http/https once if it fails), download brand catalogs (then
+  `PopulateRuntimeBrandCatalogs`), manufacturers, product groups, tags and compatibilities, add the
+  editor-only fake products for unused visuals, then run the `ExecuteWhenReady` queue.
+- **Scenes** (build list): `SplashScene` → `PlatformSetupScene` (waits for the globals; on WebGL
+  and in the editor checks white label mode; loads `MenuScene` or, for white label,
+  `DesignerScene`) → `MenuScene` ↔ `DesignerScene` (back through
+  `IntermediateDesignerToMenuScene`). Splash loads `buildIndex + 1`; the others load by name.
+- Each scene script is a `MelcherStateMachineState`. The core package's `MelcherGlobalStateMachine`
+  calls `OnStateAdded` from `MelcherSceneManager.sceneLoaded`: after `Awake`, before `Start`. It is
+  created at `BeforeSceneLoad`, so it is subscribed before anything a boot scene could add, and
+  `OnStateAdded` always runs before an app-level `sceneLoaded` handler.
+- `runall.sh` and `menucheck.sh` press play from `MenuScene`, so Splash and PlatformSetup don't
+  run in the checks.
+- **Each app has exactly one building method** (`m_AllowBuildingMethods: 0` in all three
+  `AppOptions`): ProFit Standard, Stoll Sections, Gemini Catalog. Many "Stoll" behaviours are
+  gated on Sections, not on the app (the bowing limit, the 0.5" overhang, `Const.Stoll`'s bowing
+  and depth values), and the `Const.Gemini.ManufactersIds` checks are per cabinet brand. Neither
+  is an app check, so neither moves in area 1: building-method rules go with the kitchen model
+  (area 4), brand rules onto `BrandCatalog` / `BrandCatalogRuleset` (area 4).
+
+### The main decision: `ProFitGlobals` keeps only forwards, and is deleted last
+Its state and logic all move out in area 1, into systems the `AppInitializer` constructs. What
+remains of `ProFitGlobals` is a list of static properties that forward to those systems: no state
+of its own except the references the `AppInitializer` hands it, and no logic. Each later area
+replaces its files' uses with references passed through `Initialize(...)` and deletes the forwards
+nobody uses any more. The class goes when the list is empty (area 7 at the latest).
+
+Why: most of the 63 files that use it are the kitchen model (area 4) and the screens (area 5).
+Nothing constructs them through an initializer yet, so they have nowhere to receive a reference
+from. Removing every use now would mean either a new static under another name (the same problem)
+or touching each of those files twice. The forward list keeps the remaining dependency visible and
+countable. The old code reaches the app rules the same way (`ProFitGlobals.appRules`) until its
+area passes them in.
+
+The forwards are the one app-wide static store this area adds (project override for R-DATA-8).
+They reset at `SubsystemRegistration`. `appProfile` and `appOptions` still work in edit mode,
+because editor tools and `OnValidate` read them (`ProFitBuildProcessor`,
+`ProFitAddressableGroupMenuCommand`, `ProductIdRemapDatabase`, `ProductVisualContent`,
+`ProductVisualThumbnailCreator`). With no `AppInitializer` running, they load the profile from
+`Resources` once and load it again if it was destroyed, instead of once per access.
+
+### Steps
+Each step is checked and committed on its own, as in phase A.
+
+**B1.1 — App rules.**
+- `KitchenDesign.Shared.Interfaces.IAppRules` (`_projectShared/Interfaces/IAppRules.cs`). Members
+  use only primitives and Shared types, since Shared references nothing.
+- `ProFitAppRules`, `StollAppRules`, `GeminiAppRules` (`_project/Scripts/AppRules/`, namespace
+  `KitchenDesign.AppRules`): plain classes. `AppRulesFactory.Create(UserFilter)` picks one. Until
+  B1.3 the forward `ProFitGlobals.appRules` creates it from the profile. From B1.3 the
+  `AppInitializer` creates it once.
+- New enum `PriceSheetExtras` (`_projectShared/Enums/`: `None = 0`, `StollCustomKitchen = 1`,
+  `GeminiCatalog = 2`).
+- Every app check, and the rule that replaces it:
+
+  | Where (today) | What it does | Rule |
+  |---|---|---|
+  | `ProFitWeb` 2276, 3012 | product and cabinet side padding: Stoll 0, others 5" | `OccupantMinimumHorizontalPaddingInMeters` |
+  | `CabinetLayout` 1615 | column width: Stoll 6", others 3" | `CabinetColumnWidthInMeters` |
+  | `CabinetSpan` 252; `DesignerScene` `ModifyProductInfoForStollBuild` (`Backing:BarTop`) | Stoll high bar top riser 3" deep | `HighBarTopRiserDepthInMeters` (`null` = use the product size) |
+  | `CabinetSpan` 769; `Kitchen` 2850 (re-apply after load) | Stoll high bar top countertop 2" thick | `HighBarTopCountertopThicknessInMeters` (`null` = kitchen value; the re-apply runs when it has a value) |
+  | `CabinetSpan` 805 | Stoll high bar top countertop 12" (14" drawn) | `HighBarTopCountertopDepthInMeters` |
+  | `DesignerScene` `ModifyProductInfoForStollBuild` | fridge side padding 0; bottom-anchored product inset 4" | `FridgeHorizontalPaddingInMeters`, `BottomAnchoredProductInsetInMeters` (`null` = unchanged) |
+  | `DesignerScene` 536 (`IsStollBuild`) | smoker cut-out height applied on content load (Stoll, or Catalog method) | `AdjustsSmokerCutOutHeight` |
+  | `Kitchen` 923, 1130 | the Stoll and Gemini price sheet blocks | `PriceSheetExtras` (the blocks themselves move into per-app price sheet code in area 4) |
+  | `Kitchen` 2031 | Stoll disclaimer when not in Catalog | `NonCatalogQuoteDisclaimer` (`null` = none) |
+  | `Kitchen` 299 | measurement fractions follow the brand catalog (Gemini) | `MeasurementFractionsFollowBrandCatalog` |
+  | `CabinetTickerWidget` 129 | fractions in the ticker (Gemini) | `ShowsTickerFractions` |
+  | `Kitchen` 5913; `DesignerScene` 450; `ProductSearchUI` 99 | a brand catalog is required: no "catalog changed" while it's null, loading image from the catalog, search limited to the catalog's sections | `RequiresBrandCatalog` |
+  | `ProductSearchUI` 75 | no storage in product search (Gemini) | `ShowsStorageInProductSearch` |
+  | `DesignerToolbarUI` 131 | plunge button (Stoll) | `ShowsPlungeCategory` |
+  | `ManufacturerWhitelistUI` 60; `DesignerToolbarUI` 376 | Stoll's products only in Stoll | `IncludesStollManufacturer` |
+  | `DesignerToolbarUI` 689 | manufacturer 137 only in ProFit | `IsManufacturerIdAvailable(int)` |
+
+  `Const.StollOccupantMinimumHorizontalPaddingInMeters` and `Const.StollCabinetColumnWidthInMeters`
+  move into `StollAppRules`; the non-Stoll values stay in `Const` (the kitchen uses them
+  elsewhere). Not app checks, so unchanged: `LogInUI` 79, `SignUpUI` 181, `QuickLogInWidget` 21.
+  They compare or send the app's `userFilter` itself (its identity on the server).
+  The manufacturer check was first one rule, `IsManufacturerAvailable(id, name)`. It became two
+  because the whitelist screen hides only Stoll, never 137: one rule would have started hiding
+  137 there.
+- `ProFitGlobals.isAppOptionGemini/ProFit/Stoll` are deleted.
+- Check: compile; `runall.sh` and `menucheck.sh` (Gemini). The baseline only covers Gemini, so
+  there is also a per-app table: an editor snippet evaluates every old expression and every new
+  rule for each of the three `AppOptions` assets, and they must be equal.
+- **Done 2026-10-22.** Compiles with no errors. `rulescheck.cs`: 60 checks, 0 mismatches.
+  `runall.sh` against the A3 run (`GeminiBaseline/unity6-after-A3-2026-10-22/`, kept for this):
+  `resave.json` identical in all 8 designs, measurements identical apart from camera angles within
+  0.0002°, save photos within 0.09/255. Kept as `unity6-after-B1.1-2026-10-22/`. `menucheck.sh`:
+  21 / 21 / 1,268, as before. User files backed up, restored and hash-checked; no Addressables
+  change. New checks for the refactor: `compare_runs.py`, `photodiff.sh`, `coldstart.sh`,
+  `rulescheck.cs` (`Tools/Baseline/README.md`). `ProFitGlobals.appRules` creates the rules once
+  per domain and resets at `SubsystemRegistration`. In edit mode it keeps the first app it saw
+  until the next domain reload; play mode always reloads the domain in this project.
+- **Found while checking:** `SplashScene` is switched off in the build list (the old project's
+  too), so the app starts at `PlatformSetupScene` and B1.2's "build index 1" after the boot scene
+  is PlatformSetup.
+
+**B1.2 — Boot scene.**
+- `_projectAssets/Scenes/BootScene.unity`, build index 0, with one object holding
+  `AppInitializer` (`DontDestroyOnLoad`). `[SerializeField] private AppProfile appProfile` points
+  at the same `Resources/AppProfile.asset`, so switching apps works as it does today.
+- `AppInitializer.Awake` does what `Main.RuntimeInit` did, in the same order (DOTween's capacity
+  first, R-ARC-4), then `ProFitGlobals.Init()` unchanged, then loads build index 1: today
+  PlatformSetup, since Splash is switched off. If Splash is ever switched on again, it is index 1
+  and its `buildIndex + 1` still leads to PlatformSetup. `Main.cs` is deleted. The F1 kick
+  becomes a menu item with an F1 shortcut in `_projectDebugging` (`Tools/Kitchen Design/Kick
+  signed-in user`), instead of a coroutine that polls input.
+- **Playing from any scene in the editor:** `BootSceneForEditor` (`#if UNITY_EDITOR`,
+  `[InitializeOnLoad]`) sets `EditorSceneManager.playModeStartScene` to `BootScene` while the
+  open scene is in the build list, and remembers that scene (`SessionState`). In the editor,
+  `AppInitializer` then loads the remembered scene instead of Splash, so pressing play in
+  `MenuScene` behaves as it does today and the checks don't change. A scene outside the build list
+  (a test scene) starts as itself with no app. Today such a scene still gets `Main`'s culture and
+  log level, so that is a small difference.
+- **Scene initializers:** an abstract `SceneInitializer : MonoBehaviour` with `Initialize(...)`
+  taking the app systems as arguments, and `MenuSceneInitializer` / `DesignerSceneInitializer` on a
+  root object of each scene. The `AppInitializer` listens to `SceneManager.sceneLoaded`, takes the
+  loaded scene's `SceneInitializer` from its root objects (`GetRootGameObjects` +
+  `TryGetComponent`, not a `Find…`), calls `Initialize`, then raises `EventApp.OnSceneReady`
+  (`_projectEvents/Events/EventApp.cs`, Doge `ActionEvent`). In area 1 the two only keep what they
+  receive. Because `OnStateAdded` runs first (see above), today's scene scripts can't use it there;
+  they keep using the forwards until area 5 moves their start-up into the initializer and the
+  scene stops being a `MelcherStateMachineState` (decision 1).
+- Check: as B1.1, plus `coldstart.sh` from `PlatformSetupScene` and from `BootScene` (both must
+  give `… PlatformSetupScene MenuScene`, the Welcome screen and the reference console counts).
+  The Remember Me path (a saved token) isn't covered: the quick sign-in doesn't save one, and
+  saving one would mean writing the user's PlayerPrefs.
+
+**B1.3 — Split `ProFitGlobals` into app-wide systems.** Plain classes, created and owned by the
+`AppInitializer`; MEC coroutines keep working without a MonoBehaviour.
+
+| New | Folder, namespace | Takes over |
+|---|---|---|
+| `LaunchOptions` | `_project/Scripts/Game/`, `KitchenDesign` | `isVerbose`, debug mode; `GetWebDomainOfApp`, `GetDistributorUrlParameter` (how and where the app was started) |
+| `AppProfile` (the asset) | stays where it is | `appProfile`, `appOptions`; gains `GetFallbackJsonPath` and `GetAppResourcesName` from `ProFitUtility` (they depend only on the profile) |
+| `CatalogDataStatus` | `_project/Scripts/CatalogData/`, `KitchenDesign.CatalogData` | `manufacturers`, `productGroups`, `productTags`, `cabinetCompatibilities`, `cabinetSectionCategories`, `serverBrandCatalogs`, `runtimeBrandCatalogs`, `sourceProducts`, `runtimeProducts` and their lookups, `baseProductIdToProductVariantIds`; `Init`'s loading (fallback, then server), `LoadFallbackWebResponse`, `LoadAndApplyProductOverrides`, `BuildProductVariantLists`, `PopulateRuntimeBrandCatalogs`, `ExecuteWhenReady` (as `ExecuteWhenLoaded`), the editor fake products; from `ProFitUtility` the `Find…` lookups for manufacturers, groups, categories, brand catalog infos, compatibilities and products, and `GetProductVariantList` |
+| `ClientListStatus` | `_project/Scripts/Session/`, `KitchenDesign.Session` | `userClients`, `activeClientId`, `activeQuoteId`, `activeClientWantsToBeContacted`, `TryGetClient…`, `TryGetClientCombinedName` |
+| `SessionStatus` | `_project/Scripts/Session/`, `KitchenDesign.Session` | `user` (with the kiosk preference it reads), `userProfile`, `isKioskModeEnabled`, `useWhiteLabelMode`, `logInCoroutineState`, `LogOut`, `ForgetRememberMeData`, the auto-kick coroutine, `KickUser`; from `ProFitUtility` `FinishLogInCoroutine`, `ShouldUseWhiteLabelMode`, `GetWhiteLabelAuthorizedDomain`; `Const.PlayerPrefs_Token` |
+
+- `ProFitGlobals.LogInCoroutineState` becomes `LogInState` in `_projectShared/Enums/`
+  (`NotStarted = 0`, `Running = 1`, `Finished = 2`; never saved). `AppOptions.CabinetDataAvailability`
+  moves there too (`None = 0`, `ClientOnly = 1`, `Server = 2`). It is a `MelcherStableEnum`, which
+  stores names, so the assets don't change.
+- The editor menu item `DumpSinksWithZeroDepth` moves to `_projectDebugging`.
+- The callers inside area 1 (`PlatformSetupScene`, `MenuScene`'s and `DesignerScene`'s use of
+  the startup queue, the login flow) take the systems directly where they are constructed or
+  handed over. Every other caller goes through the forwards.
+- **Who uses whom:** `SessionStatus` → `ClientListStatus`, `CatalogDataStatus` (log out clears
+  both; the login flow fills both). Neither of those uses the session. No cycles.
+- **`EventBridge` in area 1: no delegate is removed.** The systems call the same delegates the
+  old code called (`Menu.showFullScreenSpinner`, `showBackgroundSpinner`,
+  `setSpinnerStatusMessage`, `showHomeUi`, `showWelcomeUi`, `pushLogInUi`,
+  `show/hideTrialCountdownUi` (menu and designer), `showUserKickedPrompt`,
+  `Designer.loadMenuScene`). Each is a command to a screen, and the screens are area 5. The only
+  new event is `EventApp.OnSceneReady`.
+- Check: as B1.2.
+
+**B1.4 — The generic helpers.** Mechanical: the class name changes at each call site, nothing
+else.
+- `Const`'s unit conversions (`Inches2Meters`, `Meters2Inches`, `Meters2Centimeters`,
+  `Centimeters2Meters`, `InchesPerFoot`; about 175 uses in 40 files) → `KitchenDesign.Shared.Common.Units`.
+- From `ProFitUtility`, into `Utility/` (`KitchenDesign.Utility`), one class per concern:
+  `MeasurementFormat` (`FormatMetersToCentimeters`, `FormatMetersToImperial…`,
+  `TryParseImperialString`), `UrlUtility` (`GetBaseDomain`, `GetDomain`), `RuntimePrefabs`
+  (`InstantiatePrefabAsRuntimePrefab`, `IsPrefab`), `RendererUtility` (`SetAllRendererMaterials`,
+  `SetGameObjectLayerRecursively`), `RenderQuality` (`TrySetRenderQuality`), `MemoryUtility`
+  (`GarbageCollectOnLowMemoryDevices`), `RandomNames` (`RandomName`, `RandomPlace`).
+- What stays, until its area: in `Const`, the kitchen's paddings and limits and `Const.Gemini`
+  (area 4), `ErrorColor` (5), `DialogResult_*` and `Tag` (editor tools, 3). In `ProFitUtility`,
+  the drag planes, cuboid tests, `IsDistanceAlmostZero`, the corner wedge length,
+  `DoesCategoryUseSizes` and `Vector3ToJson` (4), `FindProductVisual` and
+  `FindDoorStyleVisual` (3), the URLs the menu opens (`OpenProductUrl`,
+  `OpenSubscriptionLandingPage`, `ShowTermsAndConditions`; 5), and `ProFitUtility.Editor` (3).
+- Check: compile, `runall.sh`, `menucheck.sh`.
+
+### The `Initialize()` chain after area 1
+1. `LaunchOptions`: first, because the log level and DOTween's debug mode depend on it.
+2. Culture, quality level, render debug UI, DOTween capacity and init: before anything formats
+   numbers or tweens.
+3. `AppProfile` (serialized), then the `IAppRules` for its `userFilter`: before any data is
+   parsed, because parsing products reads the padding rule.
+4. Construct `CatalogDataStatus`, `ClientListStatus`, `SessionStatus`, then hand them and the
+   rules to the `ProFitGlobals` forwards. The forwards must work before step 5, because the loading
+   code (`ProFitWeb`, area 2) still reads them.
+5. `CatalogDataStatus.Initialize(profile, rules)` starts loading (fallback, then server).
+6. `ClientListStatus.Initialize()`, then `SessionStatus.Initialize(profile, clients, catalog)`.
+7. Load Splash (or, in the editor, the scene play was pressed in). On each scene load: that scene's
+   `SceneInitializer.Initialize(...)`, then `EventApp.OnSceneReady`.
+
+These whys go into CLAUDE.md's "The Initialize() chain" when the code lands (`file-only` mode).
+
+### Found while reading, kept as they are
+Area 1 doesn't change behaviour. The user decides about these.
+1. **Kiosk mode for white label sessions.** `PlatformSetupScene` reads
+   `"User/{pendingUser.Value.id}/isKioskModeEnabled"`: no `$`, so it is that literal text, and not
+   the `User.<id>.isKioskModeEnabled` form used everywhere else. It then assigns
+   `isKioskModeEnabled`, whose setter writes under the *current* user's key, which at that moment
+   is the default user (id 0). So a white label session always starts with kiosk mode off and
+   writes "off" for user 0.
+2. **`MenuScene.OnGameDataReady` sets `appOptions.simulateWhiteLabelMode = false`** in the
+   editor. That changes the `AppOptions` asset in memory, and on disk the next time the editor
+   saves assets.
+3. **`ModifyProductInfoForStollBuild`'s bottom inset** was 4" for Stoll and for non-Stoll
+   products, so its manufacturer test changed nothing. Removed in B1.1, together with the Stoll
+   manufacturer lookup that fed it (`GetStollManufacturer`; `FindManufacturerByName` has no side
+   effects, so nothing observable changes). The method is now `ModifyProductInfoForAppRules`.
+
+The user left these and the naming to Claude (2026-10-22). Items 1 and 2 stay as they are until
+the screens are refactored (area 5), so area 1 can be checked as "no behaviour change".
+
+### Not in area 1
+`ProFitWeb` and `ProFitWebTypes` (area 2; `UserFilter`, `User` and `UserProfile` stay there, and
+the http/https probe stays a `ProFitWeb` call inside `CatalogDataStatus`'s loading). Building-method
+and brand rules (area 4). The screens' use of the systems, including white label and kiosk
+(area 5).
+
+### Runs for each step
+`runall.sh` and `menucheck.sh` use the committed Gemini `AppProfile.asset`. Before them: hash and
+back up the user's `AppProfile.asset` and every `Resources/*/FallbackJSON` folder (signing in
+rewrites them), and put in the committed profile. After: restore from that backup (never from
+git), check the hashes, `AssetDatabase.Refresh()`, and check `git status` for Addressables group
+changes (CLAUDE.md, Gotchas).
 
 ## Decisions (user, 2026-10-22)
 1. **The core package keeps `namespace Melcher` for now.** App code imports it with

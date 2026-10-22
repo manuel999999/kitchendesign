@@ -1612,16 +1612,10 @@ namespace KitchenDesign
                 CuboidPadding occupiablePaddingInMeters =
                     cabinet.occupiablePaddingInMeters;
 
-                if(ProFitGlobals.isAppOptionStoll)
-                {
-                    occupiablePaddingInMeters.left = Const.StollCabinetColumnWidthInMeters * 0.5f;
-                    occupiablePaddingInMeters.right = Const.StollCabinetColumnWidthInMeters * 0.5f;
-                }
-                else
-                {
-                    occupiablePaddingInMeters.left = Const.CabinetColumnWidthInMeters * 0.5f;
-                    occupiablePaddingInMeters.right = Const.CabinetColumnWidthInMeters * 0.5f;
-                }
+                float cabinetColumnWidthInMeters = ProFitGlobals.appRules.CabinetColumnWidthInMeters;
+
+                occupiablePaddingInMeters.left = cabinetColumnWidthInMeters * 0.5f;
+                occupiablePaddingInMeters.right = cabinetColumnWidthInMeters * 0.5f;
 
                 
 
