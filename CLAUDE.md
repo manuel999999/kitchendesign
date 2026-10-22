@@ -1119,6 +1119,13 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     from it; the countertop area no longer counts backings or plunges, nor subtracts cut-outs
     (client feedback: the customer pays for the cut-out area too). WeatherStrong fridge and ice box
     cabinets count only the back for the toe kick.
+  - `KitchenSaveReader` (B4.5, `_project/Scripts/Save/`): loads a design (`LoadFromJson`, the
+    occupants and shelves, the backing by SKU, and the requested save from the client list, which
+    is how Edit Design opens a design). `Kitchen.LoadFromJson` and `TryLoadRequestedSave` forward to
+    it. It still drives `Kitchen`'s building methods (layout, depth, thickness, finishes, widgets,
+    cameras, ground), so it holds the `Kitchen`; that back-reference goes when layout building
+    leaves `Kitchen`. It gets the layout prefabs, backing sprites and backing prefabs from
+    `Kitchen`'s serialized fields, which stay there so the scene doesn't change.
   - Price inputs, `_project/Scripts/Pricing/` (`KitchenDesign.Pricing`): `PriceSheetInputs` (the
     manual price-sheet lines and the per-product price factors), `IPriceSheetExtras` with
     `StollPriceSheet` and `GeminiCatalogPriceSheet`, picked by the app rule `PriceSheetExtras`,
