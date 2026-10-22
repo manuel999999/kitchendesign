@@ -940,7 +940,8 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
 - **Opening the project in batch mode rewrote `AddressableAssetsData/AssetGroups/ProductMaterials.asset`**
   (2026-10-22): Addressables dropped 49 read-only entries (`Kitchen_Default.mat` and product
   display materials) on load. Not from any code change; restored from git. After any batch run,
-  check `git status` for Addressables group changes before staging.
+  check `git status` for Addressables group changes before staging. It happened again on 2026-10-22 when
+  the user reopened the editor (the same 49 entries); restored from git.
 - **The shell's `grep` is ugrep**, and its `--include` returned nothing on asset searches without
   an error. Use `find … | xargs /usr/bin/grep` for searches over scenes, prefabs and assets.
 - **DOTween manages its own asmdef.** `DOTween.Modules.asmdef` exists only while
