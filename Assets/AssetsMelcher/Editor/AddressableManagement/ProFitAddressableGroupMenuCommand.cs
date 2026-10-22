@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -534,5 +535,5 @@ namespace Melcher
 
     }   // class ProFitAddressableGroupMenuCommand
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

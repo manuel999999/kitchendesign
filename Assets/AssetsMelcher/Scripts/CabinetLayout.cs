@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -1983,7 +1984,7 @@ namespace Melcher
 
     }   // class CabinetLayout
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

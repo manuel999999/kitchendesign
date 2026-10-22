@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using UnityEngine;
 
@@ -210,4 +211,4 @@ namespace Melcher
 #endregion /Fields
 
     }   // class CabinetSectionDoorHandle
-}   // namespace Melcher
+}   // namespace KitchenDesign

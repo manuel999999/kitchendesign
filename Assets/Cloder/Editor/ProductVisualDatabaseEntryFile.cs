@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;

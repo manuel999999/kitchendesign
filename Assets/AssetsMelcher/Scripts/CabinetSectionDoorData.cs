@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     [System.Serializable]
     public class CabinetSectionDoorData
     {

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using UnityEngine;
     using UnityEngine.UI;
@@ -167,7 +168,7 @@ namespace Melcher
 
     }   // class ManufacturerWhitelistRow
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

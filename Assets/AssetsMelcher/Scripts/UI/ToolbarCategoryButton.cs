@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using UnityEngine;
 
@@ -63,7 +64,7 @@ namespace Melcher
 
     }   // class ToolbarCategoryButton
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

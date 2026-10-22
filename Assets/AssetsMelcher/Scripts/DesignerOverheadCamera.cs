@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Unity.Cinemachine;
     using MEC;
     using System;
@@ -148,7 +149,7 @@ namespace Melcher
 
     }   // class DesignerOverheadCamera
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

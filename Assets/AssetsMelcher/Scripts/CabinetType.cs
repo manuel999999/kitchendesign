@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     // TODO: Check that this is always serialized as a MelcherStableEnum.
     public enum CabinetType
     {
@@ -58,7 +59,7 @@ namespace Melcher
 
     }   // enum CabinetType
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

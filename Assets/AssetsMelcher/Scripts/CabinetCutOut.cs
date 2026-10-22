@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using KitchenDesign.Shared.Enums;
     using UnityEngine;
@@ -261,7 +262,7 @@ namespace Melcher
 
     }   // class CabinetCutOut
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

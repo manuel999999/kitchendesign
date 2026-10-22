@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     /// <summary>
@@ -29,5 +30,5 @@ namespace Melcher
 
     }   // enum KitchenExtraFeature
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

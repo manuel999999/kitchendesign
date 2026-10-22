@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using UnityEngine;
@@ -176,5 +177,5 @@ namespace Melcher
 
     }   // class ProductVisualContentManager
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.ObjectModel;
@@ -1210,7 +1211,7 @@ namespace Melcher
 
     }   // class CabinetSpan
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

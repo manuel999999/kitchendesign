@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     /// Types of screenshot camera angles. This is used to determine what
     /// product measurements should be made visible when taking screenshots. It
@@ -37,7 +38,7 @@ namespace Melcher
 
     }   // enum ScreenshotAngle
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     public enum CabinetModelType
     {
         Unknown,
@@ -15,7 +16,7 @@ namespace Melcher
         Authored
     }   // enum CabinetModelType
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

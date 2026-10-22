@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -339,7 +340,7 @@ namespace Melcher
 
     }   // class SlicedMesh
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

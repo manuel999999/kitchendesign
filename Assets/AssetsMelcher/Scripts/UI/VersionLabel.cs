@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     public class VersionLabel : MelcherMonoBehaviour
@@ -29,7 +30,7 @@ namespace Melcher
 
     }   // class VersionLabel
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

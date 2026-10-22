@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Helper object used to pass data "by-ref".
     ///     <br /><br />
@@ -44,5 +45,5 @@ namespace Melcher
 
     }   // class Ref
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

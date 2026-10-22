@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEditor;
 
@@ -105,7 +106,7 @@ namespace Melcher
 
     }   // class ProFitKitchenFinishTools
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

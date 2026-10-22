@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEditor;
     using UnityEngine;
 
@@ -98,6 +99,6 @@ namespace Melcher
 
     }   // class ProFitAppOptions
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 #endif  // if UNITY_EDITOR

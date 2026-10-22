@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -371,7 +372,7 @@ namespace Melcher
 
     }   // class FilteredObjectSelector
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ============================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

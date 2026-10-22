@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;
@@ -265,7 +266,7 @@ namespace Melcher
 
     }   // class BrandCatalogUI
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

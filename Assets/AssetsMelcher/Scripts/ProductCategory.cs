@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     public enum ProductCategory
     {
         Unknown,
@@ -48,7 +49,7 @@ namespace Melcher
 
     }   // enum ProductCategory
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

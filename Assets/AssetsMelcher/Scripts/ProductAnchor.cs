@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     /// Mounting/anchoring options.
     /// </summary>
@@ -14,7 +15,7 @@ namespace Melcher
         OnBackAtBottom
     }   // enum ProductAnchor
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

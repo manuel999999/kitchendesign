@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -2891,7 +2892,7 @@ namespace Melcher
 
     }   // class OccupiableVolume
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

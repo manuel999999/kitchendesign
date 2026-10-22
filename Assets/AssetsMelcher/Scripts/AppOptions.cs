@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using JetBrains.Annotations;
     using UnityEngine;
 
@@ -270,4 +271,4 @@ namespace Melcher
 
     }   // class AppOptions
 
-}   // namespace Melcher
+}   // namespace KitchenDesign

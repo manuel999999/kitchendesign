@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using DG.Tweening;
     using UnityEngine;
 
@@ -98,5 +99,5 @@ namespace Melcher
         private RecyclableTween<Tween> m_ScaleTween = new ();
     }   // class QuickHint
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

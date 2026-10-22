@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     [System.Serializable]
@@ -31,5 +32,5 @@ namespace Melcher
         [SerializeField] protected float m_PanelDepthInInches = default;
     }   // class BackPanelsInfo
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

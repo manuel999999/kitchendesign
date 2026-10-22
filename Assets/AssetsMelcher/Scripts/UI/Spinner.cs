@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     /// <summary>
@@ -25,5 +26,5 @@ namespace Melcher
         protected Transform m_Transform = default;
     }   // class Spinner
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

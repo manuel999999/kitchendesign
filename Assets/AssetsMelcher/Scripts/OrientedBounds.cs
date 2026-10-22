@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     /// <summary>
@@ -98,5 +99,5 @@ namespace Melcher
         }
     }   // class OrientedBounds
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

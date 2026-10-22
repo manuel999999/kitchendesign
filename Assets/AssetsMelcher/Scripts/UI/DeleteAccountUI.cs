@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using UnityEngine;
     using TMPro;
@@ -119,7 +120,7 @@ namespace Melcher
 
     }   // class DeleteAccountUI
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

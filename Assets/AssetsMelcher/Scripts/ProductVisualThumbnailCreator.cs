@@ -1,7 +1,8 @@
 #if UNITY_EDITOR
 
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEngine.Rendering.Universal;
     using UnityEditor;
@@ -649,7 +650,7 @@ namespace Melcher
 
     }   // class ProductVisualThumbnailCreator
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 #endif  // if UNITY_EDITOR
 

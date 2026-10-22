@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using UnityEditor;
@@ -909,5 +910,5 @@ namespace Melcher
 
     }   // class ProductVisualContent
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 #endif  // if UNITY_EDITOR

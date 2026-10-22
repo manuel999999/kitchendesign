@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using Cysharp.Threading.Tasks;
     using TMPro;
@@ -209,5 +210,5 @@ namespace Melcher
         [SerializeField] protected ToolbarProductButton m_ProductButtonPrefab = null;
     }   // class ProductSearchUI
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

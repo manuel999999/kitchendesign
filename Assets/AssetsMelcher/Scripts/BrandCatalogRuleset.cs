@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     A ruleset indicates special behaviours for a catalog to follow.
     ///     For example, WeatherStrong does not add a back panel to a fridge.
@@ -21,5 +22,5 @@ namespace Melcher
 
     }   // enum BrandCatalogRuleset
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

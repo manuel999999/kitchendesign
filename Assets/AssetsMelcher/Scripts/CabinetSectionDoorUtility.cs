@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
 
     public static class CabinetSectionDoorUtility
@@ -175,5 +176,5 @@ namespace Melcher
 #endregion /Fields
     }   // class CabinetSectionDoorUtility
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

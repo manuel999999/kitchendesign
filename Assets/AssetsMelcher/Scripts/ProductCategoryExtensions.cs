@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     public static class ProductCategoryExtensions
     {
         /// <summary>
@@ -25,7 +26,7 @@ namespace Melcher
 
     }   // class ProductCategoryExtensions
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

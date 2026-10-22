@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Intended to allow arbitrary data to be grouped in a convenient
     ///     Vector3 format. For example, this is useful for associating boolean
@@ -81,7 +82,7 @@ namespace Melcher
 
     }   // struct Vector3T
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

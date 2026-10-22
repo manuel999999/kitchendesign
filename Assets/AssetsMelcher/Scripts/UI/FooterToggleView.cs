@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
@@ -90,7 +91,7 @@ namespace Melcher
 
     }   // class FooterToggleView
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

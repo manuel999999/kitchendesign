@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using MEC;
     using System;
     using System.Collections.Generic;
@@ -74,7 +75,7 @@ namespace Melcher
 
     }   // static class ProFitCoroutineUtility
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

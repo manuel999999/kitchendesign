@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEditor;
     using System.Collections.Generic;
@@ -352,4 +353,4 @@ namespace Melcher
 
     }   // class BulkRemapModelMaterials
 
-}   // namespace Melcher
+}   // namespace KitchenDesign

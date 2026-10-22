@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using UnityEditor;
     using UnityEditor.AddressableAssets;
@@ -206,5 +207,5 @@ namespace Melcher
         private static readonly List<AddressableAssetEntry> s_TemporaryAssetEntryList = new ();
     }   // class AssetAddressTDrawer
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

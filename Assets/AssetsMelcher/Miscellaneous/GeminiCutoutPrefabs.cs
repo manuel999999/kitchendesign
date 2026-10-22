@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
 #if UNITY_EDITOR
     using UnityEditor;
     using UnityEngine;

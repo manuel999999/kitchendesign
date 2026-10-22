@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using MEC;
     using System;
     using UnityEngine;
@@ -34,5 +35,5 @@ namespace Melcher
         }
     }   // class IntermediateDesignerToMenuScene
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

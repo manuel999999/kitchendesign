@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -191,6 +192,6 @@ namespace Melcher
 
     }   // class AddressableEditorUtility
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 #endif  // if UNITY_EDITOR
 

@@ -1,5 +1,5 @@
-var k = Melcher.Kitchen.instance;
-Melcher.Cabinet target = null;
+var k = KitchenDesign.Kitchen.instance;
+KitchenDesign.Cabinet target = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (target == null) target = entry.element;
 var t = target.GetTransform();
 var center = t.position + t.rotation * new UnityEngine.Vector3(target.sizeInMeters.x * 0.5f, target.sizeInMeters.y, target.sizeInMeters.z * 0.5f);

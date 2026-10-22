@@ -1,6 +1,6 @@
 double R(float v) { return System.Math.Round((double)v, 4); }
 System.Collections.Generic.List<object> V(UnityEngine.Vector3 v) { return new System.Collections.Generic.List<object> { R(v.x), R(v.y), R(v.z) }; }
-System.Collections.Generic.Dictionary<string, object> C(Melcher.Cuboid c)
+System.Collections.Generic.Dictionary<string, object> C(KitchenDesign.Cuboid c)
 {
     UnityEngine.Vector3 s = c.max - c.min;
     return new System.Collections.Generic.Dictionary<string, object> {
@@ -40,7 +40,7 @@ object DrawnBoundsIn(UnityEngine.Transform space, UnityEngine.Renderer[] rs)
 }
 
 string outDir = "__OUTDIR__";
-var k = Melcher.Kitchen.instance;
+var k = KitchenDesign.Kitchen.instance;
 var layout = k.layout;
 var root = new System.Collections.Generic.Dictionary<string, object>();
 root["quote_id"] = __QUOTE__;
@@ -96,7 +96,7 @@ foreach (var e in layout.EnumerateCabinets())
 }
 root["cabinets"] = cabs;
 
-var occList = new System.Collections.Generic.List<Melcher.Occupant>(UnityEngine.Object.FindObjectsByType<Melcher.Occupant>(UnityEngine.FindObjectsSortMode.None));
+var occList = new System.Collections.Generic.List<KitchenDesign.Occupant>(UnityEngine.Object.FindObjectsByType<KitchenDesign.Occupant>(UnityEngine.FindObjectsSortMode.None));
 occList.Sort((a, b) => { int cx = a.transform.position.x.CompareTo(b.transform.position.x); return cx != 0 ? cx : a.transform.position.z.CompareTo(b.transform.position.z); });
 var occs = new System.Collections.Generic.List<object>();
 foreach (var o in occList)

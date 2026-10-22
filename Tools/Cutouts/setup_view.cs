@@ -1,15 +1,15 @@
-var k = Melcher.Kitchen.instance;
+var k = KitchenDesign.Kitchen.instance;
 var cabMat = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Material>("Assets/AssetsMelcher/Finishes/Cabinet_Endura_WhiteOak.mat");
 var topMat = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Material>("Assets/AssetsMelcher/Finishes/Countertop_Challenger_SilverVein.mat");
 Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.layout.SetCabinetMaterials(cabMat, topMat, null));
 bool showProducts = __SHOW__;
-Melcher.Cabinet target = null;
+KitchenDesign.Cabinet target = null;
 foreach (var entry in k.layout.EnumerateCabinets())
 {
     foreach (var occ in entry.element.occupants)
     {
         occ.productVisualContentInstance.SetProductVisibility(showProducts);
-        if (occ.TryGetComponent(out Melcher.CabinetShelf shelf)) foreach (var nested in shelf.occupants) nested.productVisualContentInstance.SetProductVisibility(showProducts);
+        if (occ.TryGetComponent(out KitchenDesign.CabinetShelf shelf)) foreach (var nested in shelf.occupants) nested.productVisualContentInstance.SetProductVisibility(showProducts);
         if (target == null) target = entry.element;
     }
 }

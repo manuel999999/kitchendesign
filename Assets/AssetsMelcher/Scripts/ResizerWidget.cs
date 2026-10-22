@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEngine.EventSystems;
     using DG.Tweening;
@@ -295,7 +296,7 @@ namespace Melcher
 
     }   // class ResizerWidget
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

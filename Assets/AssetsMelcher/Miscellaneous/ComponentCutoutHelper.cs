@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     public class ComponentCutoutHelper : MelcherMonoBehaviour
@@ -64,5 +65,5 @@ namespace Melcher
         [SerializeField] private Transform m_ExtentEdgeMarker;
     }   // class ComponentCutoutHelper
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

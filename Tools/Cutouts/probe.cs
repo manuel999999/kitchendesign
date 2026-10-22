@@ -1,5 +1,5 @@
-var k = Melcher.Kitchen.instance;
-Melcher.Occupant sink = null;
+var k = KitchenDesign.Kitchen.instance;
+KitchenDesign.Occupant sink = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (occ.name.Contains("__NAME__")) sink = occ;
 var c = sink.productVisualContentInstance.countertopCutOut.stencilRoot;
 var b = new UnityEngine.Bounds(c.position, UnityEngine.Vector3.zero);

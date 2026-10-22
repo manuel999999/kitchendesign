@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "CabinetSectionLegStyle", menuName = "Melcher Studios/Pro-Fit/Cabinet Section Leg Style")]
@@ -33,7 +34,7 @@ namespace Melcher
 
     }   // class CabinetSectionLegStyle
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -36,5 +37,5 @@ namespace Melcher
         }
     }   // class PCMBandaidFix
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

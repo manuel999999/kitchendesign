@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -359,7 +360,7 @@ namespace Melcher
 
     }   // class ClientQuoteListUI
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Represents the different types of countertops in the app.
     ///     <br /><br />
@@ -21,7 +22,7 @@ namespace Melcher
 
     }   // enum CountertopType
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic

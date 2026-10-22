@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Linq;
     using UnityEngine;
     using UnityEditor;
@@ -66,7 +67,7 @@ namespace Melcher
         }
     }   // class AddGrillWithInsulatedJacketToCabinetVisuals
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,7 +1,7 @@
-var k = Melcher.Kitchen.instance;
+var k = KitchenDesign.Kitchen.instance;
 if (k == null || k.layout == null) return "no kitchen";
 var set = new KitchenDesign.Cutouts.CutoutClipSet();
-var extraField = typeof(Melcher.ProductVisualContent).GetField("m_AdditionalCabinetRenderMaskMeshes", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+var extraField = typeof(KitchenDesign.ProductVisualContent).GetField("m_AdditionalCabinetRenderMaskMeshes", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 int slot = 0;
 int renderers = 0;
 string log = "";
@@ -14,7 +14,7 @@ void SetSlot(UnityEngine.Renderer r, int s)
     renderers++;
 }
 
-void AddCutOut(Melcher.CabinetCutOut c, int s, string label)
+void AddCutOut(KitchenDesign.CabinetCutOut c, int s, string label)
 {
     if (c == null) return;
     foreach (var r in c.interiorRoot.GetComponentsInChildren<UnityEngine.MeshRenderer>(true)) SetSlot(r, s);
@@ -38,9 +38,9 @@ void AddCutOut(Melcher.CabinetCutOut c, int s, string label)
     var open = KitchenDesign.Shared.Enums.CutoutFaces.None;
     for (int f = 0; f < 6; f++)
     {
-        var face = (Melcher.CabinetCutOut.CubeFace)f;
+        var face = (KitchenDesign.CabinetCutOut.CubeFace)f;
         bool window = c.stencilRoot.GetChild(f).gameObject.activeSelf;
-        bool shared = c.isCountertop ? face == Melcher.CabinetCutOut.CubeFace.YMin : (face == Melcher.CabinetCutOut.CubeFace.YMax && !c.GetInteriorFace(face).activeSelf);
+        bool shared = c.isCountertop ? face == KitchenDesign.CabinetCutOut.CubeFace.YMin : (face == KitchenDesign.CabinetCutOut.CubeFace.YMax && !c.GetInteriorFace(face).activeSelf);
         if (window || shared) open |= (KitchenDesign.Shared.Enums.CutoutFaces)(1 << f);
     }
     bool added = set.AddBox(s, root, b, open);
@@ -48,7 +48,7 @@ void AddCutOut(Melcher.CabinetCutOut c, int s, string label)
     log += "\n  slot " + s + " " + label + (c.isCountertop ? " countertop" : " cabinet") + " size=" + size.ToString("F3") + " open=" + open + (added ? "" : " DROPPED");
 }
 
-void AddOccupant(Melcher.Occupant occ, int s, string prefix)
+void AddOccupant(KitchenDesign.Occupant occ, int s, string prefix)
 {
     var pvc = occ.productVisualContentInstance;
     if (pvc == null) return;
@@ -56,7 +56,7 @@ void AddOccupant(Melcher.Occupant occ, int s, string prefix)
     if (extra != null) foreach (var r in extra) SetSlot(r as UnityEngine.Renderer, s);
     AddCutOut(pvc.cabinetCutOut, s, prefix + occ.name);
     AddCutOut(pvc.countertopCutOut, s, prefix + occ.name);
-    if (occ.TryGetComponent(out Melcher.CabinetShelf shelf))
+    if (occ.TryGetComponent(out KitchenDesign.CabinetShelf shelf))
     {
         foreach (var nested in shelf.occupants) AddOccupant(nested, s, prefix + occ.name + "/");
     }

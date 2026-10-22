@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using Cysharp.Threading.Tasks;
     using System.Linq;
@@ -218,7 +219,7 @@ namespace Melcher
 
     }   // class CabinetShapeUI
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

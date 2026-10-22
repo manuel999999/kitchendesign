@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Used by authored cabinets in Catalogs building mode.
     /// </summary>
@@ -31,7 +32,7 @@ namespace Melcher
 
     }   // enum CabinetSectionFootingType
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

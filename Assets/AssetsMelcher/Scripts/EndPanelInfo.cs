@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     [System.Serializable]
@@ -41,5 +42,5 @@ namespace Melcher
         }
     }
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

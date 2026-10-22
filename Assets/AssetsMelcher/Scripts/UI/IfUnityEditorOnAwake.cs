@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -16,5 +17,5 @@ namespace Melcher
 
     }   // class IfUnityEditorOnAwake
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

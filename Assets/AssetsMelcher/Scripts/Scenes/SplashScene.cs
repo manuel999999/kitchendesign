@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Video;
@@ -179,4 +180,4 @@ namespace Melcher
 
     }   // class SplashScene
 
-}   // namespace Melcher
+}   // namespace KitchenDesign

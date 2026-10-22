@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEditor;
     using UnityEditor.AddressableAssets.Settings;
 
@@ -27,5 +28,5 @@ namespace Melcher
 
     }   // class ProFitAddressableEditorUtility
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 #endif  // if UNITY_EDITOR

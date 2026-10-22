@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using System.Collections.ObjectModel;
     using UnityEngine;
@@ -220,7 +221,7 @@ namespace Melcher
 
     }   // class ProFitAppProfile
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic

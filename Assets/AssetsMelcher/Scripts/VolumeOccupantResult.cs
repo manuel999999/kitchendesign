@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     This contains the results of an occupant placement attempt. I.e.,
     ///     whether a product could be added to a volume. The information
@@ -140,7 +141,7 @@ namespace Melcher
 
     }   // enum OccupantCuboidStatus
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

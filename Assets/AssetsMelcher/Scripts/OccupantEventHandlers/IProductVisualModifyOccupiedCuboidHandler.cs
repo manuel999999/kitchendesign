@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     This interface provides a way for <see cref="ProductVisualContent"/>s
     ///     to modify the cuboid they occupy in an <see
@@ -29,7 +30,7 @@ namespace Melcher
 
     }   // interface IProductVisualModifyOccupiedCuboidHandler
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic

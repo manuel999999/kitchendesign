@@ -8,14 +8,14 @@ void Add(UnityEngine.Material m, string source)
 }
 foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:AppSkin"))
 {
-    var s = UnityEditor.AssetDatabase.LoadAssetAtPath<Melcher.AppSkin>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
+    var s = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.AppSkin>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
     Add(s.primarySelectionMaterial, "skin " + s.name + " primary");
     Add(s.secondarySelectionMaterial, "skin " + s.name + " secondary");
 }
 Add(UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Material>("Assets/AssetsMelcher/Materials/Kitchen_Default.mat"), "default");
 foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:BrandCatalog"))
 {
-    var c = UnityEditor.AssetDatabase.LoadAssetAtPath<Melcher.BrandCatalog>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
+    var c = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.BrandCatalog>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
     if (c != null) Add(c.defaultCabinetFinishOverride, "catalog override");
 }
 foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:Material", new[] { "Assets/AssetsMelcher/Finishes" }))
@@ -28,7 +28,7 @@ int sections = 0;
 foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/AssetsMelcher/ProductVisuals" }))
 {
     var go = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
-    var pvc = go == null ? null : go.GetComponent<Melcher.ProductVisualContent>();
+    var pvc = go == null ? null : go.GetComponent<KitchenDesign.ProductVisualContent>();
     if (pvc == null) continue;
     Add(pvc.sectionMaterialOverride, "sectionOverride");
     if (pvc.sectionModelPrefab != null)

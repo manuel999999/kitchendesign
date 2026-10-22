@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Determines the types of options the player has during kitchen
     ///     design. The intent is to allow the same project to be reused with
@@ -36,7 +37,7 @@ namespace Melcher
 
     }   // enum KitchenBuildingMethod
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Similar to <see cref="ProductCategory"/> except it provides more
     ///     granular values. It is intended to help categorize product visuals
@@ -42,7 +43,7 @@ namespace Melcher
         BurnerWithInsulatedJacket
     }   // enum ProductCategorySpecific
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

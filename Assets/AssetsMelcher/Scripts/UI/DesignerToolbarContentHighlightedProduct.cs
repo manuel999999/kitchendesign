@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.UI;
@@ -511,7 +512,7 @@ namespace Melcher
 
     }   // class DesignerToolbarContentHighlightedProduct
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

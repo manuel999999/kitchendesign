@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEditor;
@@ -116,5 +117,5 @@ namespace Melcher
         }
     }   // class CabinetSectionDoorEditorMapping
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 #endif

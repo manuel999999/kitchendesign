@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using TMPro;
 
@@ -57,7 +58,7 @@ namespace Melcher
         [SerializeField] protected TMP_InputField m_InputField = null;
     }   // class EditProfilePromptRow
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

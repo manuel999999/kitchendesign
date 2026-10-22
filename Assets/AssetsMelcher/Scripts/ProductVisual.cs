@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     /// <summary>
@@ -127,5 +128,5 @@ namespace Melcher
 
     }   // class ProductVisual
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

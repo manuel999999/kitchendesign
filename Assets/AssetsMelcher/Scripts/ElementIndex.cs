@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     A type that pairs any type with an index. It is originally intended
     ///     to be used as a type argument for <see cref="System.Predicate{T}"/>,
@@ -28,7 +29,7 @@ namespace Melcher
 
     }   // class ElementIndex
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic

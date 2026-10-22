@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     /// <summary>
@@ -38,5 +39,5 @@ namespace Melcher
         private float m_Cad;
     }   // class Price
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

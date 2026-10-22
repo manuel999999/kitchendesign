@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using DG.Tweening;
 
     /// <summary>
@@ -102,7 +103,7 @@ namespace Melcher
 
     }   // class RecyclableTween
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

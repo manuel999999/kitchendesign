@@ -1,5 +1,6 @@
-﻿namespace Melcher
+﻿namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
 #if UNITY_WEBGL
@@ -196,4 +197,4 @@
 
     }   // class MelcherWebGL
 
-}   // namespace Melcher
+}   // namespace KitchenDesign

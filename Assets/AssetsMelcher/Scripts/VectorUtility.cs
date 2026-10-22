@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     public static class VectorUtility
@@ -10,5 +11,5 @@ namespace Melcher
         }
     }   // class VectorUtility
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

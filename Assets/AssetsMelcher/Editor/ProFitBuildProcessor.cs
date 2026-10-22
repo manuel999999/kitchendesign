@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEditor.Build;
     using UnityEditor.Build.Reporting;
     using UnityEditor;
@@ -235,7 +236,7 @@ namespace Melcher
 
     }   // class ProFitBuildProcess
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

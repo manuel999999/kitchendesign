@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -75,5 +76,5 @@ namespace Melcher
 #endif
     }   // class CabinetSectionDoorStyle
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

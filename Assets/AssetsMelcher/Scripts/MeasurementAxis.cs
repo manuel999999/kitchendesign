@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     /// Represents an axis that a measurement was calculated across. We use
     /// this in <see cref="KitchenScreenshotManager.OccupantMeasurementPair"/>
@@ -13,7 +14,7 @@ namespace Melcher
         Z
     }   // enum MeasurementAxis
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

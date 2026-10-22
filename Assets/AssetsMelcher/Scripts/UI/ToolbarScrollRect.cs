@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using DG.Tweening;
     using UnityEngine.UI;
@@ -147,7 +148,7 @@ namespace Melcher
 
     }   // class ToolbarScrollRect
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

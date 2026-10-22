@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using MEC;
     using System.Collections.Generic;
     using UnityEditor;
@@ -83,5 +84,5 @@ namespace Melcher
         }
     }   // class SceneSavingHandler
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 

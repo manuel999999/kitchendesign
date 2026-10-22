@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     public class ListControllerSortMode
     {
         /// <summary>
@@ -35,7 +36,7 @@ namespace Melcher
 
     }   // class ListControllerSortMode
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

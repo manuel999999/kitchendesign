@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using System.Text;
     using System.Collections.Generic;
     using UnityEngine;
@@ -222,7 +223,7 @@ namespace Melcher
 
     }   // class CabinetTickerWidget
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

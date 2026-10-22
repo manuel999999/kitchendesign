@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     /// A direction that is in the local-space of a cabinet/volume.
     /// </summary>
@@ -44,7 +45,7 @@ namespace Melcher
 
     }   // class CabinetLocalDirection
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

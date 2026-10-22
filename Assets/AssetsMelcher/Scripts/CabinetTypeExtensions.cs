@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Utility functions for quickly checking if an enum is one of many
     ///     values. E.g., checking if a cabinet is an end.
@@ -80,7 +81,7 @@ namespace Melcher
 
     }   // class CabinetTypeExtensions
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

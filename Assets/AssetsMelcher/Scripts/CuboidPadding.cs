@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Represents a set of distances for each face of a <see
     ///     cref="Cuboid"/>. It can be applied to a cuboid to return a new
@@ -142,7 +143,7 @@ namespace Melcher
 
     }   // struct CuboidPadding
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

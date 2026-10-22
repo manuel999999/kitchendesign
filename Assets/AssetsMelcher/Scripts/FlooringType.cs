@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     /// <summary>
     ///     Indicates what floor mesh to use for a <see
     ///     cref="ProductCategory.FinishFloor"/> <see cref="ProductVisualContent"/>.
@@ -10,7 +11,7 @@ namespace Melcher
         Stone,
     }   // enum FlooringType
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic

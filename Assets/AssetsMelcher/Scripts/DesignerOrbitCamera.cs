@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using Unity.Cinemachine;
     using DG.Tweening;
     using UnityEngine;
@@ -153,7 +154,7 @@ namespace Melcher
         protected float m_TargetCameraYaw;
     }   // class DesignerOrbitCamera
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

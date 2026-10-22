@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEditor;
     using System.Collections.Generic;
@@ -111,7 +112,7 @@ namespace Melcher
 
     }   // class ProductVisualDatabaseEditor
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ============================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,12 +1,13 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     public enum Extent
     {
         Min,
         Max
     }   // enum Extent
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
@@ -108,4 +109,4 @@ namespace Melcher
 
     }   // class RecordingUI
 
-}   // namespace Melcher
+}   // namespace KitchenDesign

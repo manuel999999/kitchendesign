@@ -1,5 +1,6 @@
-namespace Melcher
+namespace KitchenDesign
 {
+    using Melcher;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = nameof(KitchenTemplate), menuName = "Melcher Studios/Pro-Fit/Kitchen Template")]
@@ -37,7 +38,7 @@ namespace Melcher
 
     }   // class KitchenTemplate
 
-}   // namespace Melcher
+}   // namespace KitchenDesign
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
