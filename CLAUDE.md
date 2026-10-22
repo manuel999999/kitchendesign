@@ -986,6 +986,11 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   reloads them (a script rename of their class, for example). The asset files never change, so
   it repeats. Harmless, but it adds 2 warnings to a run, and any comparison of addresses must
   normalise them first.
+- **Three strings sent to the server contain U+FFFD** (an old encoding loss in `Kitchen.cs`,
+  kept as they are): the price-sheet name `"OASIS� 45� Transition Piece"` (Napoleon corners) and the
+  cabinet finish area units `" ft�"` / `" m�"`. The PDF presumably shows the replacement character.
+  Fixing them changes what the server receives, so it is a change for the user to decide, not part
+  of the refactor. Keep source files UTF-8 so they survive moves byte for byte.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -1100,6 +1105,41 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     can be corrected. The overhang works because the countertop's 27-slice mesh has a 1" overhang
     beyond its size on every side but the top; X and Z set the left/right and front/back overhangs.
     The end panel setters on `Kitchen` toggle: setting the current width again sets it to 0.
+  - **Save and price inputs** (B4.4). `KitchenSaveWriter` (`_project/Scripts/Save/`,
+    `KitchenDesign.Save`) builds the design JSON exactly as `Kitchen.SaveToJson` did (that method now
+    calls it). It writes two independent halves: what the server reads to build the quote PDF
+    (`islandType`, `islandDimensions`, the finish SKUs, the legacy `modelSaveData`, the top and
+    front measurements, `cabinet_list`, `manual_price_sheet_entries`, `price_changes`,
+    `countertop_area`, the disclaimer…) and what the app reads to reload the design (`cabinets`,
+    `cabinet_spans`, `kitchen_layout_style`, …). Some logic is duplicated between them (custom
+    cut-out sizes). An occupant's cut-out size is saved only when it differs from the product's
+    default, so changing a product's cut-out on the dashboard updates old designs. The JSON key
+    strings are the frozen format (R-DATA-3). Areas: ProFit and Stoll count the cabinet finish area
+    without the hidden faces where spans meet; occupants on the front or back subtract their cut-out
+    from it; the countertop area no longer counts backings or plunges, nor subtracts cut-outs
+    (client feedback: the customer pays for the cut-out area too). WeatherStrong fridge and ice box
+    cabinets count only the back for the toe kick.
+  - Price inputs, `_project/Scripts/Pricing/` (`KitchenDesign.Pricing`): `PriceSheetInputs` (the
+    manual price-sheet lines and the per-product price factors), `IPriceSheetExtras` with
+    `StollPriceSheet` and `GeminiCatalogPriceSheet`, picked by the app rule `PriceSheetExtras`,
+    `ChallengerCountertopInfo`. The prices and SKUs in them are business rules agreed with the
+    clients (sources in the old code's comments, Basecamp threads):
+    - Stoll: a setup fee on every custom kitchen; countertops priced per sq. ft. of overall length
+      × depth (contiguous spans share the corner; the client's own example divided by 35 where it
+      meant 144); cabinet finishes by the summed outside length of the spans in feet; custom
+      cabinets at their price; a corbel per pair of visible back column halves on high bar tops; a
+      backsplash line per foot.
+    - Gemini catalog: Challenger's premium finish package per cabinet; Shaker doors +5% and Deco
+      Grain finishes +25% on cabinet prices (as price factors); handles per door handle; fillers
+      added twice (front and back, "-Melony"); two 45° transition pieces per Napoleon corner (two
+      45s make a 90); Agora corners priced as their own SKU and Agora kamado grill cabinets forced
+      to get end panels on the sides not next to an end cabinet; runtime end and back panels;
+      fridge panels (not on Agora or Toppin; fridge back panels not on American Outdoor Cabinets
+      or Endura); cabinet end panels when the catalog has a SKU; Challenger countertops by linear
+      length and depth band (corners counted once, high bar tops separately); toe kicks (the first
+      few follow the client's table, then one per 96"; WeatherStrong: front + back + 54" for the
+      ends, divided by 96, rounded up); WeatherStrong end vents; no toe kick line for Agora.
+    The brand checks inside are still manufacturer-id comparisons until B4.8.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
