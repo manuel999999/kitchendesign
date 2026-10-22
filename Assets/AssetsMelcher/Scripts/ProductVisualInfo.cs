@@ -94,6 +94,7 @@ namespace Melcher
 #endif  // if UNITY_EDITOR
         }
 
+        public float forcedCabinetCuboidDepthInMeters => m_ForcedCabinetCuboidDepthInMeters;
         public string brandCatalogName => m_BrandCatalogName;
         public string sectionDoorStyleName => m_SectionDoorStyleName;
         public string sectionDoorStyleDisplayName => m_SectionDoorStyleDisplayName;
@@ -115,6 +116,19 @@ namespace Melcher
             foreach (MelcherStableEnum<ProductCategorySpecific> allowed in m_ProductCategoriesAllowedInSection)
             {
                 if (category == allowed.value)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsProductManufacturerAllowedInSection(int manufacturerId)
+        {
+            foreach (int allowedManufacturer in m_ProductManufacturersAllowedInSection)
+            {
+                if (allowedManufacturer == manufacturerId)
                 {
                     return true;
                 }
@@ -336,6 +350,19 @@ namespace Melcher
 
         [SerializeField]
         private MelcherStableEnum<ProductCategorySpecific>[] m_ProductCategoriesAllowedInSection;
+
+        [SerializeField]
+        private int[] m_ProductManufacturersAllowedInSection;
+
+        [Tooltip("Overrides the depth of this section's occupiable cuboid " +
+            "when a product is being forced to be compatible with the " +
+            "cabinet. Some cabinets are shallower than the product we need " +
+            "to place in them, so the fit check would otherwise reject the " +
+            "product. Set this to the depth (in meters) the section should " +
+            "pretend to have so the forced product still fits. Leave at 0 " +
+            "to use the section's real depth.")]
+        [SerializeField]
+        private float m_ForcedCabinetCuboidDepthInMeters;
 
         [SerializeField]
         private string m_BrandCatalogName;

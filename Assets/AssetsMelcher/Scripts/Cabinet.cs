@@ -270,6 +270,13 @@ namespace Melcher
                         kitchen.selectedBrandCatalog.cabinetSectionLegStyle.heightInMeters;
                 }
 
+                if(cabinetSectionVisual != null &&
+                    cabinetSectionVisual.info != null &&
+                    cabinetSectionVisual.info.forcedCabinetCuboidDepthInMeters > 0f)
+                {
+                    result.zMax = cabinetSectionVisual.info.forcedCabinetCuboidDepthInMeters;
+                }
+
                 return result;
             }
         }
@@ -1677,7 +1684,8 @@ namespace Melcher
                         m_CabinetSectionProductInfo.visualId
                     );
 
-                isProductAllowed = cabinetVisual.info.IsCategoryAllowedInSection(productVisualInfo.runtimePrefabCategory);
+                isProductAllowed = cabinetVisual.info.IsCategoryAllowedInSection(productVisualInfo.runtimePrefabCategory) ||
+                    cabinetVisual.info.IsProductManufacturerAllowedInSection(productInfo.manufacturerId);
 
                 CabinetCompatibilityInfo cabinetCompatibility =
                     ProFitUtility.FindCompatibilityById(m_CabinetSectionProductInfo.compatibilityId);
