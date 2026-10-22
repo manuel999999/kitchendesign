@@ -2,6 +2,7 @@ using KitchenDesign.Server;
 using System;
 using System.Collections.Generic;
 using KitchenDesign.Shared.Enums;
+using KitchenDesign.Shared.Interfaces;
 using MEC;
 using Melcher;
 using UnityEngine;
@@ -13,13 +14,17 @@ namespace KitchenDesign.CatalogData
     public sealed class CatalogDataStatus
     {
         private readonly AppProfile _appProfile;
+        private readonly IAppRules _appRules;
+        private readonly ServerClient _server;
         private readonly Dictionary<(int id, bool isCabinetSection), ProductInfo> _runtimeProductsById = new();
         private readonly Dictionary<(string sku, bool isCabinetSection), ProductInfo> _runtimeProductsBySku = new();
         private Action _queuedActions;
 
-        public CatalogDataStatus(AppProfile appProfile)
+        public CatalogDataStatus(AppProfile appProfile, IAppRules appRules, ServerClient server)
         {
             this._appProfile = appProfile;
+            this._appRules = appRules;
+            this._server = server;
         }
 
         public bool IsLoaded { get; private set; }
@@ -118,24 +123,7 @@ namespace KitchenDesign.CatalogData
             IReadOnlyList<ManufacturerInfo> manufacturerList =
                 (IReadOnlyList<ManufacturerInfo>)this.Manufacturers ?? Array.Empty<ManufacturerInfo>();
 
-            return FindManufacturerByName(manufacturerList, manufacturerNameToFind, out manufacturer);
-        }
-
-        public static bool FindManufacturerByName(IReadOnlyList<ManufacturerInfo> manufacturers, string manufacturerNameToFind, out ManufacturerInfo manufacturer)
-        {
-            int manufacturerCount = manufacturers.Count;
-
-            for (int i = 0; i < manufacturerCount; ++i)
-            {
-                if (string.Equals(manufacturers[i].name, manufacturerNameToFind, StringComparison.OrdinalIgnoreCase))
-                {
-                    manufacturer = manufacturers[i];
-                    return true;
-                }
-            }
-
-            manufacturer = default;
-            return false;
+            return CatalogLookups.FindManufacturerByName(manufacturerList, manufacturerNameToFind, out manufacturer);
         }
 
         public bool FindManufacturerById(int manufacturerIdToFind, out ManufacturerInfo manufacturer)
@@ -159,21 +147,7 @@ namespace KitchenDesign.CatalogData
 
         public bool FindProductGroupByName(string groupNameToFind, out ProductGroupInfo group)
         {
-            IReadOnlyList<ProductGroupInfo> productGroupList =
-                (IReadOnlyList<ProductGroupInfo>)this.ProductGroups ?? Array.Empty<ProductGroupInfo>();
-
-            int productGroupCount = productGroupList.Count;
-            for (int i = 0; i < productGroupCount; ++i)
-            {
-                if (string.Equals(productGroupList[i].name, groupNameToFind, StringComparison.OrdinalIgnoreCase))
-                {
-                    group = productGroupList[i];
-                    return true;
-                }
-            }
-
-            group = default;
-            return false;
+            return CatalogLookups.FindProductGroupByName(this.ProductGroups, groupNameToFind, out group);
         }
 
         public bool FindProductGroupById(int groupIdToFind, out ProductGroupInfo group)
@@ -192,45 +166,6 @@ namespace KitchenDesign.CatalogData
             }
 
             group = default;
-            return false;
-        }
-
-        public static bool FindCabinetSectionCategoryByName(
-            IReadOnlyList<CabinetSectionCategoryInfo> categoryList,
-            string categoryNameToFind,
-            out CabinetSectionCategoryInfo cabinetSectionCategory)
-        {
-            int categoryCount = categoryList.Count;
-
-            for (int i = 0; i < categoryCount; ++i)
-            {
-                if (string.Equals(categoryList[i].name, categoryNameToFind, StringComparison.OrdinalIgnoreCase))
-                {
-                    cabinetSectionCategory = categoryList[i];
-                    return true;
-                }
-            }
-
-            cabinetSectionCategory = default;
-            return false;
-        }
-
-        public static bool FindCabinetSectionCategoryById(
-            IReadOnlyList<CabinetSectionCategoryInfo> categoryList,
-            int categoryIdToFind,
-            out CabinetSectionCategoryInfo cabinetSectionCategory)
-        {
-            int categoryCount = categoryList.Count;
-            for (int i = 0; i < categoryCount; ++i)
-            {
-                if (categoryList[i].id == categoryIdToFind)
-                {
-                    cabinetSectionCategory = categoryList[i];
-                    return true;
-                }
-            }
-
-            cabinetSectionCategory = default;
             return false;
         }
 
@@ -299,7 +234,7 @@ namespace KitchenDesign.CatalogData
         public Exception LoadAndApplyProductOverrides()
         {
             string productOverridesListPath =
-                this._appProfile.GetFallbackJsonPath(ProFitWeb.ProductOverridesListFileName);
+                this._appProfile.GetFallbackJsonPath(FallbackJsonFiles.ProductOverrides);
 
             TextAsset productOverridesListJson = Resources.Load<TextAsset>(productOverridesListPath);
 
@@ -316,9 +251,11 @@ namespace KitchenDesign.CatalogData
             }
 
             Exception error =
-                ProFitWeb.TryParseProductList(
+                CatalogJson.TryParseProductList(
                     new MelcherJsonObjectParser(response),
                     this.Manufacturers,
+                    this.ProductGroups,
+                    this._appRules,
                     out List<ProductInfo> overrideProductList
                 );
 
@@ -458,10 +395,10 @@ namespace KitchenDesign.CatalogData
         {
             AppOptions appOptions = this._appProfile.appOptions;
 
-            if (this.LoadFallbackWebResponse(ProFitWeb.FallbackManufacturersFileName) is JsonDict manufacturersResponse)
+            if (this.LoadFallbackWebResponse(FallbackJsonFiles.Manufacturers) is JsonDict manufacturersResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseManufacturers(
+                    CatalogJson.TryParseManufacturers(
                         new MelcherJsonObjectParser(manufacturersResponse),
                         out List<ManufacturerInfo> manufacturers
                     );
@@ -474,10 +411,10 @@ namespace KitchenDesign.CatalogData
                 }
             }
 
-            if (this.LoadFallbackWebResponse(ProFitWeb.FallbackProductGroupsFileName) is JsonDict productGroupsResponse)
+            if (this.LoadFallbackWebResponse(FallbackJsonFiles.ProductGroups) is JsonDict productGroupsResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseProductGroups(
+                    CatalogJson.TryParseProductGroups(
                         new MelcherJsonObjectParser(productGroupsResponse),
                         out List<ProductGroupInfo> productGroups
                     );
@@ -490,10 +427,10 @@ namespace KitchenDesign.CatalogData
                 }
             }
 
-            if (this.LoadFallbackWebResponse(ProFitWeb.FallbackCabinetSectionCategoriesFileName) is JsonDict categoriesResponse)
+            if (this.LoadFallbackWebResponse(FallbackJsonFiles.CabinetSectionCategories) is JsonDict categoriesResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseCabinetSectionCategoryList(
+                    CatalogJson.TryParseCabinetSectionCategoryList(
                         new MelcherJsonObjectParser(categoriesResponse),
                         out List<CabinetSectionCategoryInfo> cabinetSectionCategories
                     );
@@ -507,10 +444,10 @@ namespace KitchenDesign.CatalogData
             }
 
             if (appOptions.cabinetDataAvailability >= CabinetDataAvailability.ClientOnly &&
-                this.LoadFallbackWebResponse(ProFitWeb.FallbackBrandCatalogsFileName) is JsonDict brandCatalogsResponse)
+                this.LoadFallbackWebResponse(FallbackJsonFiles.BrandCatalogs) is JsonDict brandCatalogsResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseBrandCatalogs(
+                    CatalogJson.TryParseBrandCatalogs(
                         new MelcherJsonObjectParser(brandCatalogsResponse),
                         out List<BrandCatalogInfo> serverBrandCatalogs
                     );
@@ -524,10 +461,10 @@ namespace KitchenDesign.CatalogData
             }
 
             if (appOptions.cabinetDataAvailability >= CabinetDataAvailability.ClientOnly &&
-                this.LoadFallbackWebResponse(ProFitWeb.FallbackTagsFileName) is JsonDict tagsResponse)
+                this.LoadFallbackWebResponse(FallbackJsonFiles.Tags) is JsonDict tagsResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseTags(
+                    CatalogJson.TryParseTags(
                         new MelcherJsonObjectParser(tagsResponse),
                         out List<ProductTagInfo> productTags
                     );
@@ -540,10 +477,10 @@ namespace KitchenDesign.CatalogData
                 }
             }
 
-            if (this.LoadFallbackWebResponse(ProFitWeb.FallbackCompatibilitiesFileName) is JsonDict compatibilitiesResponse)
+            if (this.LoadFallbackWebResponse(FallbackJsonFiles.Compatibilities) is JsonDict compatibilitiesResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseCompatibilities(
+                    CatalogJson.TryParseCompatibilities(
                         new MelcherJsonObjectParser(compatibilitiesResponse),
                         out List<CabinetCompatibilityInfo> cabinetCompatibilities
                     );
@@ -556,12 +493,14 @@ namespace KitchenDesign.CatalogData
                 }
             }
 
-            if (this.LoadFallbackWebResponse(ProFitWeb.FallbackProductListFileName) is JsonDict productsResponse)
+            if (this.LoadFallbackWebResponse(FallbackJsonFiles.Products) is JsonDict productsResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseProductList(
+                    CatalogJson.TryParseProductList(
                         new MelcherJsonObjectParser(productsResponse),
                         this.Manufacturers,
+                        this.ProductGroups,
+                        this._appRules,
                         out List<ProductInfo> sourceProducts
                     );
 
@@ -574,13 +513,16 @@ namespace KitchenDesign.CatalogData
             }
 
             if (appOptions.cabinetDataAvailability >= CabinetDataAvailability.ClientOnly &&
-                this.LoadFallbackWebResponse(ProFitWeb.FallbackCabinetListFileName) is JsonDict cabinetsResponse)
+                this.LoadFallbackWebResponse(FallbackJsonFiles.Cabinets) is JsonDict cabinetsResponse)
             {
                 Exception error =
-                    ProFitWeb.TryParseCabinetList(
+                    CatalogJson.TryParseCabinetList(
                         new MelcherJsonObjectParser(cabinetsResponse),
                         this.Manufacturers,
                         this.CabinetSectionCategories,
+                        this.ProductGroups,
+                        this.SourceProducts,
+                        this._appRules,
                         out List<ProductInfo> cabinetList
                     );
 
@@ -599,58 +541,22 @@ namespace KitchenDesign.CatalogData
 
             this.BuildProductVariantLists();
 
-            bool hostIsReachable = false;
-
-            if (Application.internetReachability == NetworkReachability.NotReachable)
+            IEnumerator<float> probe = this._server.Connection.ProbeCoroutine();
+            while (probe.MoveNext())
             {
-                MelcherLog.LogWarning($"The internet is not reachable.");
+                yield return probe.Current;
             }
-            else
-            {
-                var firstRequest =
-                    MelcherWebRequestBuilder.Get(ProFitWeb.Host)
-                        .OnCompleted(
-                            onCompleted: (_, error) =>
-                            {
-                                hostIsReachable = error == null;
-                            }
-                        )
-                        .Send();
 
-                yield return Timing.WaitUntilDone(firstRequest);
-
-                if (!hostIsReachable)
-                {
-                    ProFitWeb.UseHttps = !ProFitWeb.UseHttps;
-                    MelcherLog.LogWarning($"Changed {nameof(ProFitWeb.UseHttps)} to " + ProFitWeb.UseHttps);
-
-                    var secondRequest =
-                        MelcherWebRequestBuilder.Get(ProFitWeb.Host)
-                            .OnCompleted(
-                                onCompleted: (_, error) =>
-                                {
-                                    hostIsReachable = error == null;
-                                }
-                            )
-                            .Send();
-
-                    yield return Timing.WaitUntilDone(secondRequest);
-                }
-
-                if (!hostIsReachable)
-                {
-                    MelcherLog.LogError("The server is not reachable: " + ProFitWeb.domain);
-                }
-            }
+            bool hostIsReachable = this._server.Connection.IsHostReachable;
 
             if (hostIsReachable)
             {
-                MelcherLog.Log("Found server at: " + ProFitWeb.Host);
+                MelcherLog.Log("Found server at: " + this._server.Connection.Host);
 
                 if (appOptions.cabinetDataAvailability >= CabinetDataAvailability.Server)
                 {
                     var request =
-                        ProFitWeb.GetBrandCatalogs(
+                        this._server.Catalog.GetBrandCatalogs(
                             onSuccess: newBrandCatalogs => this.ServerBrandCatalogs = newBrandCatalogs,
                             onError: (builder, error, jsonValue) =>
                             {
@@ -665,7 +571,7 @@ namespace KitchenDesign.CatalogData
 
                 {
                     var request =
-                        ProFitWeb.GetManufacturers(
+                        this._server.Catalog.GetManufacturers(
                             onSuccess: newManufacturers => this.Manufacturers = newManufacturers,
                             onError: (builder, error, jsonValue) =>
                             {
@@ -678,7 +584,7 @@ namespace KitchenDesign.CatalogData
 
                 {
                     var request =
-                        ProFitWeb.GetProductGroups(
+                        this._server.Catalog.GetProductGroups(
                             onSuccess: newProductGroupsList => this.ProductGroups = newProductGroupsList,
                             onError: (builder, error, jsonValue) =>
                             {
@@ -692,7 +598,7 @@ namespace KitchenDesign.CatalogData
                 if (appOptions.cabinetDataAvailability >= CabinetDataAvailability.Server)
                 {
                     var request =
-                        ProFitWeb.GetTags(
+                        this._server.Catalog.GetTags(
                             onSuccess: newProductTagsList => this.ProductTags = newProductTagsList,
                             onError: (builder, error, jsonValue) =>
                             {
@@ -706,7 +612,7 @@ namespace KitchenDesign.CatalogData
                 if (appOptions.cabinetDataAvailability >= CabinetDataAvailability.Server)
                 {
                     var request =
-                        ProFitWeb.GetCompatibilities(
+                        this._server.Catalog.GetCompatibilities(
                             onSuccess: newCabinetCompatibilities => this.CabinetCompatibilities = newCabinetCompatibilities,
                             onError: (builder, error, jsonValue) =>
                             {

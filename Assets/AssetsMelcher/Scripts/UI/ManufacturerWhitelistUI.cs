@@ -364,7 +364,7 @@ namespace KitchenDesign
                 );
             }
 
-            ProFitWeb.UpdateProfile(
+            ProFitGlobals.server.Accounts.UpdateProfile(
                 ProFitGlobals.user,
                 profileCopy,
                 password: null,

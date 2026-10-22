@@ -83,7 +83,7 @@ namespace KitchenDesign
             UserClientQuote quote = ProFitGlobals.userClients[clientIndex].quotes[quoteIndex];
 
             EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
-            ProFitWeb.UpdateQuote(
+            ProFitGlobals.server.Quotes.UpdateQuote(
                 ProFitGlobals.user,
                 m_ClientId,
                 m_QuoteId,

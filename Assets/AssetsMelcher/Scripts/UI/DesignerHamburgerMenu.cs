@@ -250,7 +250,7 @@ namespace KitchenDesign
             // a new one. TODO: Add a prompt to overwrite old save.
             //if (ProFitGlobals.activeQuoteId.HasValue)
             //{
-            //    ProFitWeb.UpdateQuote(
+            //    ProFitGlobals.server.Quotes.UpdateQuote(
             //        ProFitGlobals.user,
             //        ProFitGlobals.activeClientId.GetValueOrDefault(),
             //        ProFitGlobals.activeQuoteId.Value,
@@ -282,7 +282,7 @@ namespace KitchenDesign
             //}
             //else
             {
-                ProFitWeb.CreateQuote(
+                ProFitGlobals.server.Quotes.CreateQuote(
                     ProFitGlobals.user,
                     ProFitGlobals.activeClientId.GetValueOrDefault(),
                     saveName,
@@ -357,7 +357,7 @@ namespace KitchenDesign
                                 }
                             }
 
-                            ProFitWeb.RecordAnalytics(
+                            ProFitGlobals.server.Analytics.RecordAnalytics(
                                 ProFitGlobals.user,
                                 analyticsKey,
                                 productIds,

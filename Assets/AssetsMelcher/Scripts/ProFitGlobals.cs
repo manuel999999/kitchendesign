@@ -16,6 +16,7 @@ namespace KitchenDesign
         private static AppProfile s_AppProfile;
         private static IAppRules s_AppRules;
         private static LaunchOptions s_LaunchOptions;
+        private static ServerClient s_Server;
         private static CatalogDataStatus s_CatalogData;
         private static ClientListStatus s_ClientList;
         private static SessionStatus s_Session;
@@ -24,6 +25,7 @@ namespace KitchenDesign
             AppProfile appProfile,
             IAppRules appRules,
             LaunchOptions launchOptions,
+            ServerClient server,
             CatalogDataStatus catalogData,
             ClientListStatus clientList,
             SessionStatus session)
@@ -31,6 +33,7 @@ namespace KitchenDesign
             s_AppProfile = appProfile;
             s_AppRules = appRules;
             s_LaunchOptions = launchOptions;
+            s_Server = server;
             s_CatalogData = catalogData;
             s_ClientList = clientList;
             s_Session = session;
@@ -39,7 +42,7 @@ namespace KitchenDesign
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetBindings()
         {
-            Bind(null, null, null, null, null, null);
+            Bind(null, null, null, null, null, null, null);
         }
 
         public static AppProfile appProfile
@@ -66,11 +69,13 @@ namespace KitchenDesign
 
         public static LaunchOptions launchOptions => s_LaunchOptions ??= LaunchOptions.FromEnvironment(appOptions);
 
-        public static CatalogDataStatus catalogData => s_CatalogData ??= new CatalogDataStatus(appProfile);
+        public static ServerClient server => s_Server ??= new ServerClient(appProfile, appRules);
+
+        public static CatalogDataStatus catalogData => s_CatalogData ??= new CatalogDataStatus(appProfile, appRules, server);
 
         public static ClientListStatus clientList => s_ClientList ??= new ClientListStatus();
 
-        public static SessionStatus session => s_Session ??= new SessionStatus(appProfile, clientList, catalogData);
+        public static SessionStatus session => s_Session ??= new SessionStatus(appProfile, appRules, server, clientList, catalogData);
 
         public static bool isVerbose => launchOptions.IsVerbose;
 

@@ -64,7 +64,7 @@ namespace KitchenDesign
             m_MessageBox.Clear();
             EventBridge.Menu.showFullScreenSpinner.Invoke(true);
 
-            ProFitWeb.DeleteAccount(
+            ProFitGlobals.server.Accounts.DeleteAccount(
                 ProFitGlobals.user,
                 m_PasswordInput.text,
                 onSuccess: () =>

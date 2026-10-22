@@ -54,7 +54,7 @@ namespace KitchenDesign
                 // log in screen
                 MelcherLog.LogEditorOnly("Trying to log in with session in PlayerPrefs");
                 EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting User Profile");
-                ProFitWeb.GetProfile(
+                ProFitGlobals.server.Accounts.GetProfile(
                     apiToken,
                     isOffline: false,
                     onSuccess: userProfile =>

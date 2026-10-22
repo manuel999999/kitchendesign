@@ -24,7 +24,7 @@ namespace KitchenDesign
             new FileKind
             {
                 label = "Components (products.json)",
-                fileName = ProFitWeb.FallbackProductListFileName + ".json",
+                fileName = Server.FallbackJsonFiles.Products + ".json",
                 listKey = "components",
                 modelIdKey = "model_id",
                 typeKey = "type",
@@ -34,7 +34,7 @@ namespace KitchenDesign
             new FileKind
             {
                 label = "Cabinet sections (cabinets.json)",
-                fileName = ProFitWeb.FallbackCabinetListFileName + ".json",
+                fileName = Server.FallbackJsonFiles.Cabinets + ".json",
                 listKey = "cabinet_sections",
                 modelIdKey = "cabinet_model_id",
                 typeKey = "cabinet_section_type",

@@ -78,7 +78,7 @@ namespace KitchenDesign
                     // Check if the distributor is setup for white labeling.
 
                     MelcherWebCoroutine request =
-                        ProFitWeb.CheckWhiteLabelAuthorization(
+                        ProFitGlobals.server.Accounts.CheckWhiteLabelAuthorization(
                             webDomainOfApp,
                             distributorUrlParameter,
                             onSuccess: newUser =>
@@ -114,7 +114,7 @@ namespace KitchenDesign
                     );
 
                     MelcherWebCoroutine request =
-                        ProFitWeb.LogIn(
+                        ProFitGlobals.server.Accounts.LogIn(
                             signInEmail: "",
                             password: "",
                             isOffline: true,
@@ -140,7 +140,7 @@ namespace KitchenDesign
                     m_LoadingUi.Show();
 
                     MelcherWebCoroutine request =
-                        ProFitWeb.GetProfile(
+                        ProFitGlobals.server.Accounts.GetProfile(
                             pendingUser.Value.apiToken,
                             isOffline: pendingUser.Value.userType == UserType.Offline,
                             onSuccess: newUserProfile =>

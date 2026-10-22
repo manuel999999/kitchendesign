@@ -2290,7 +2290,7 @@ namespace KitchenDesign
 
             if (parser.hasErrors)
             {
-                MelcherLog.LogError(ProFitWeb.CombineParserErrorsIntoException(parser).Message, this);
+                MelcherLog.LogError(Server.ServerJson.CombineParserErrorsIntoException(parser).Message, this);
                 return false;
             }
 
@@ -2469,7 +2469,7 @@ namespace KitchenDesign
 
                 if (parser.hasErrors)
                 {
-                    MelcherLog.LogError($"Error reading cabinet index {i}: " + ProFitWeb.CombineParserErrorsIntoException(parser).Message);
+                    MelcherLog.LogError($"Error reading cabinet index {i}: " + Server.ServerJson.CombineParserErrorsIntoException(parser).Message);
                     continue;
                 }
 
@@ -2519,7 +2519,7 @@ namespace KitchenDesign
 
                     if (parser.hasErrors)
                     {
-                        MelcherLog.LogError($"Error remaking cabinet index {i}: " + ProFitWeb.CombineParserErrorsIntoException(parser).Message);
+                        MelcherLog.LogError($"Error remaking cabinet index {i}: " + Server.ServerJson.CombineParserErrorsIntoException(parser).Message);
                         continue;
                     }
 
@@ -2873,7 +2873,7 @@ namespace KitchenDesign
             {
                 if (requireOccupants)
                 {
-                    MelcherLog.LogError($"Error reading occupants in volume: " + ProFitWeb.CombineParserErrorsIntoException(parser).Message);
+                    MelcherLog.LogError($"Error reading occupants in volume: " + Server.ServerJson.CombineParserErrorsIntoException(parser).Message);
                 }
 
                 return;
@@ -2895,7 +2895,7 @@ namespace KitchenDesign
 
                 if (string.IsNullOrEmpty(productSku) && productId == 0)
                 {
-                    MelcherLog.LogError($"Error reading occupant: " + ProFitWeb.CombineParserErrorsIntoException(parser).Message);
+                    MelcherLog.LogError($"Error reading occupant: " + Server.ServerJson.CombineParserErrorsIntoException(parser).Message);
                     continue;
                 }
 
@@ -2933,7 +2933,7 @@ namespace KitchenDesign
 
                 if (parser.hasErrors)
                 {
-                    MelcherLog.LogError($"Failed to parse occupant in volume: " + ProFitWeb.CombineParserErrorsIntoException(parser).Message);
+                    MelcherLog.LogError($"Failed to parse occupant in volume: " + Server.ServerJson.CombineParserErrorsIntoException(parser).Message);
                     continue;
                 }
 

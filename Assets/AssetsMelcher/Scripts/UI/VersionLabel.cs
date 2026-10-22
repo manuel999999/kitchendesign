@@ -13,7 +13,7 @@ namespace KitchenDesign
         {
             string phrase = $"v{Application.version}{ProFitGlobals.appOptions.versionSuffix}";
 
-            if (ProFitWeb.IsTestServer)
+            if (ProFitGlobals.server.Connection.IsTestServer)
             {
                 phrase += " (test)";
             }

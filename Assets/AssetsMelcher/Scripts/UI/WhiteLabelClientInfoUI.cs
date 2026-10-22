@@ -172,7 +172,7 @@ namespace KitchenDesign
                     // new or similar user
 
                     MelcherWebCoroutine request =
-                        ProFitWeb.FindClientByEmail(
+                        ProFitGlobals.server.Clients.FindClientByEmail(
                             ProFitGlobals.user,
                             clientEmail: m_EmailField.text,
                             onComplete: (foundClient, newUserClient) =>
@@ -203,7 +203,7 @@ namespace KitchenDesign
                     pendingClient.zipCode       = m_ZipCodeField.text;
 
                     MelcherWebCoroutine request =
-                        ProFitWeb.UpdateClient(
+                        ProFitGlobals.server.Clients.UpdateClient(
                             ProFitGlobals.user,
                             pendingClient,
                             onSuccess: SetActiveClient,
@@ -215,7 +215,7 @@ namespace KitchenDesign
                 else
                 {
                     MelcherWebCoroutine request =
-                        ProFitWeb.CreateClient(
+                        ProFitGlobals.server.Clients.CreateClient(
                             ProFitGlobals.user,
                             m_FirstNameField.text,
                             m_LastNameField.text,

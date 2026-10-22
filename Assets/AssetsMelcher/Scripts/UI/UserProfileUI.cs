@@ -340,7 +340,7 @@ namespace KitchenDesign
         {
             EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
 
-            ProFitWeb.UpdateProfile(
+            ProFitGlobals.server.Accounts.UpdateProfile(
                 ProFitGlobals.user,
                 newProfile,
                 password,

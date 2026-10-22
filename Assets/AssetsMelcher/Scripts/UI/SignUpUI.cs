@@ -177,7 +177,7 @@ namespace KitchenDesign
                 contactUrl = contactInfo;
             }
 
-            ProFitWeb.SignUp(
+            ProFitGlobals.server.Accounts.SignUp(
                 userType:           m_SignUpUserType,
                 userFilter:         ProFitGlobals.appOptions.userFilter,
                 businessName:       m_BusinessNameField.text,

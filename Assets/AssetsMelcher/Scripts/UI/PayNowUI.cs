@@ -84,7 +84,7 @@ namespace KitchenDesign
                 }
 
                 var getProfileRequest =
-                    ProFitWeb.GetProfile(
+                    ProFitGlobals.server.Accounts.GetProfile(
                         ProFitGlobals.user.apiToken,
                         isOffline: ProFitGlobals.user.userType == UserType.Offline,
                         onSuccess: (newUserProfile) =>

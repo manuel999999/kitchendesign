@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using KitchenDesign.CatalogData;
 using KitchenDesign.Shared.Enums;
+using KitchenDesign.Shared.Interfaces;
 using MEC;
 using Melcher;
 using UnityEngine;
@@ -18,13 +19,17 @@ namespace KitchenDesign.Session
         private readonly AppProfile _appProfile;
         private readonly ClientListStatus _clientList;
         private readonly CatalogDataStatus _catalogData;
+        private readonly ServerClient _server;
+        private readonly IAppRules _appRules;
 
         private User _user;
         private bool _isKioskModeEnabled;
         private CoroutineHandle _autoKickUserCoroutine;
 
-        public SessionStatus(AppProfile appProfile, ClientListStatus clientList, CatalogDataStatus catalogData)
+        public SessionStatus(AppProfile appProfile, IAppRules appRules, ServerClient server, ClientListStatus clientList, CatalogDataStatus catalogData)
         {
+            this._appRules = appRules;
+            this._server = server;
             this._appProfile = appProfile;
             this._clientList = clientList;
             this._catalogData = catalogData;
@@ -163,7 +168,7 @@ namespace KitchenDesign.Session
             if (fetchClients)
             {
                 MelcherWebCoroutine getClientListRequest =
-                    ProFitWeb.GetClientList(
+                    this._server.Clients.GetClientList(
                         this.User,
                         onSuccess: clientList =>
                         {
@@ -206,9 +211,10 @@ namespace KitchenDesign.Session
             requestSucceeded = false;
 
             MelcherWebCoroutine getProductListRequest =
-                ProFitWeb.GetProductList(
+                this._server.Catalog.GetProductList(
                     this.User,
                     this._catalogData.Manufacturers,
+                    () => this._catalogData.ProductGroups,
                     onSuccess: productCatalog =>
                     {
                         this._catalogData.SourceProducts = productCatalog;
@@ -232,7 +238,7 @@ namespace KitchenDesign.Session
                 requestSucceeded = false;
 
                 MelcherWebCoroutine getCabinetSectionCategoriesRequest =
-                    ProFitWeb.GetCabinetSectionCategories(
+                    this._server.Catalog.GetCabinetSectionCategories(
                         onSuccess: cabinetSectionCategories =>
                         {
                             this._catalogData.CabinetSectionCategories = cabinetSectionCategories;
@@ -251,7 +257,7 @@ namespace KitchenDesign.Session
                 requestSucceeded = false;
 
                 MelcherWebCoroutine getBrandCatalogsRequest =
-                    ProFitWeb.GetBrandCatalogs(
+                    this._server.Catalog.GetBrandCatalogs(
                         onSuccess: brandCatalog =>
                         {
                             this._catalogData.ServerBrandCatalogs = brandCatalog;
@@ -272,10 +278,12 @@ namespace KitchenDesign.Session
                 requestSucceeded = false;
 
                 MelcherWebCoroutine getCabinetListRequest =
-                    ProFitWeb.GetCabinetList(
+                    this._server.Catalog.GetCabinetList(
                         this.User,
                         this._catalogData.Manufacturers,
                         this._catalogData.CabinetSectionCategories,
+                        () => this._catalogData.ProductGroups,
+                        () => this._catalogData.SourceProducts,
                         onSuccess: cabinetList =>
                         {
                             if (this._catalogData.SourceProducts != null)
@@ -301,13 +309,16 @@ namespace KitchenDesign.Session
             }
             else if (cabinetDataAvailability >= CabinetDataAvailability.ClientOnly)
             {
-                if (this._catalogData.LoadFallbackWebResponse(ProFitWeb.FallbackCabinetListFileName) is JsonDict response)
+                if (this._catalogData.LoadFallbackWebResponse(FallbackJsonFiles.Cabinets) is JsonDict response)
                 {
                     Exception error =
-                        ProFitWeb.TryParseCabinetList(
+                        CatalogJson.TryParseCabinetList(
                             new MelcherJsonObjectParser(response),
                             this._catalogData.Manufacturers,
                             this._catalogData.CabinetSectionCategories,
+                            this._catalogData.ProductGroups,
+                            this._catalogData.SourceProducts,
+                            this._appRules,
                             out List<ProductInfo> cabinetList
                         );
 
@@ -373,7 +384,7 @@ namespace KitchenDesign.Session
                 yield return Timing.WaitForSeconds(20.0f);
 
                 yield return Timing.WaitUntilDone(
-                    ProFitWeb.GetProfile(
+                    this._server.Accounts.GetProfile(
                         this.User.apiToken,
                         this.User.userType == UserType.Offline,
                         onSuccess: newUserProfile =>

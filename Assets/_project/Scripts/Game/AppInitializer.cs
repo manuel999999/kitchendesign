@@ -2,6 +2,7 @@ using System.Globalization;
 using KitchenDesign.AppRules;
 using KitchenDesign.CatalogData;
 using KitchenDesign.Events;
+using KitchenDesign.Server;
 using KitchenDesign.Session;
 using KitchenDesign.Shared.Interfaces;
 using Melcher;
@@ -50,11 +51,12 @@ namespace KitchenDesign
 
             this._appRules = AppRulesFactory.Create(this.appProfile.appOptions.userFilter);
 
-            CatalogDataStatus catalogData = new CatalogDataStatus(this.appProfile);
+            ServerClient server = new ServerClient(this.appProfile, this._appRules);
+            CatalogDataStatus catalogData = new CatalogDataStatus(this.appProfile, this._appRules, server);
             ClientListStatus clientList = new ClientListStatus();
-            SessionStatus session = new SessionStatus(this.appProfile, clientList, catalogData);
+            SessionStatus session = new SessionStatus(this.appProfile, this._appRules, server, clientList, catalogData);
 
-            ProFitGlobals.Bind(this.appProfile, this._appRules, launchOptions, catalogData, clientList, session);
+            ProFitGlobals.Bind(this.appProfile, this._appRules, launchOptions, server, catalogData, clientList, session);
 
             session.Initialize();
             clientList.Initialize();

@@ -908,7 +908,7 @@ namespace KitchenDesign
                         cabinetSectionCategoryId =>
                         {
                             bool foundCategory =
-                                CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
+                                Server.CatalogLookups.FindCabinetSectionCategoryById(
                                     ProFitGlobals.cabinetSectionCategories,
                                     cabinetSectionCategoryId,
                                     out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -921,7 +921,7 @@ namespace KitchenDesign
             foreach (int cabinetSectionCategoryId in cabinetSectionCategoryIds)
             {
                 bool foundCategory =
-                    CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
+                    Server.CatalogLookups.FindCabinetSectionCategoryById(
                         ProFitGlobals.cabinetSectionCategories,
                         cabinetSectionCategoryId,
                         out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -977,7 +977,7 @@ namespace KitchenDesign
                         static cabinetSectionCategoryId =>
                         {
                             bool foundCategory =
-                                CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
+                                Server.CatalogLookups.FindCabinetSectionCategoryById(
                                     ProFitGlobals.cabinetSectionCategories,
                                     cabinetSectionCategoryId,
                                     out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -990,7 +990,7 @@ namespace KitchenDesign
             foreach (int cabinetSectionId in cabinetSectionGroupsInCatalog)
             {
                 bool foundCategory =
-                    CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
+                    Server.CatalogLookups.FindCabinetSectionCategoryById(
                         ProFitGlobals.cabinetSectionCategories,
                         cabinetSectionId,
                         out CabinetSectionCategoryInfo cabinetSectionCategory

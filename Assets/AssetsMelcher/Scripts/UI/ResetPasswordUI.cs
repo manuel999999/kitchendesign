@@ -32,7 +32,7 @@ namespace KitchenDesign
 
         protected void TryResetPassword(MelcherButton caller)
         {
-            ProFitWeb.ResetPassword(
+            ProFitGlobals.server.Accounts.ResetPassword(
                 m_EmailField.text,
                 OnSuccess,
                 OnError

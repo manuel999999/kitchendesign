@@ -206,7 +206,7 @@ namespace KitchenDesign
         {
             EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
 
-            ProFitWeb.UpdateClient(
+            ProFitGlobals.server.Clients.UpdateClient(
                 ProFitGlobals.user,
                 newProfile,
                 onSuccess: userClient =>

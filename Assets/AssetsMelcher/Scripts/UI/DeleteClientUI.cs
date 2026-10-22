@@ -69,7 +69,7 @@ namespace KitchenDesign
             EventBridge.Menu.showFullScreenSpinner.Invoke(true);
             m_MessageBox.Clear();
 
-            ProFitWeb.DeleteClient(
+            ProFitGlobals.server.Clients.DeleteClient(
                 ProFitGlobals.user,
                 m_ClientId,
                 onSuccess: () =>

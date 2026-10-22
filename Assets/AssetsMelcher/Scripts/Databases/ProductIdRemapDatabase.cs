@@ -82,7 +82,7 @@ namespace KitchenDesign
         {
             string fallbackManufacturerJsonPath =
                 ProFitGlobals.appProfile.GetFallbackJsonPath(
-                        ProFitWeb.FallbackManufacturersFileName
+                        Server.FallbackJsonFiles.Manufacturers
                 );
 
             TextAsset fallbackManufacturerJson =
@@ -108,7 +108,7 @@ namespace KitchenDesign
             }
 
             System.Exception manufacturerException =
-                ProFitWeb.TryParseManufacturers(
+                Server.CatalogJson.TryParseManufacturers(
                     new MelcherJsonObjectParser(manufacturerJson),
                     out List<ManufacturerInfo> manufacturers
                 );
@@ -121,7 +121,7 @@ namespace KitchenDesign
 
             string fallbackProductListJsonPath =
                 ProFitGlobals.appProfile.GetFallbackJsonPath(
-                        ProFitWeb.FallbackProductListFileName
+                        Server.FallbackJsonFiles.Products
                 );
 
             TextAsset fallbackProductListJson =
@@ -150,9 +150,11 @@ namespace KitchenDesign
                 new (productListJson);
 
             System.Exception productListException =
-                ProFitWeb.TryParseProductList(
+                Server.CatalogJson.TryParseProductList(
                     new MelcherJsonObjectParser(productListJson),
                     manufacturers,
+                    ProFitGlobals.productGroups,
+                    ProFitGlobals.appRules,
                     out List<ProductInfo> productInfos
                 );
 
@@ -204,7 +206,7 @@ namespace KitchenDesign
         {
             string fallbackManufacturerJsonPath =
                 ProFitGlobals.appProfile.GetFallbackJsonPath(
-                        ProFitWeb.FallbackManufacturersFileName
+                        Server.FallbackJsonFiles.Manufacturers
                 );
 
             TextAsset fallbackManufacturerJson =
@@ -230,7 +232,7 @@ namespace KitchenDesign
             }
 
             System.Exception manufacturerException =
-                ProFitWeb.TryParseManufacturers(
+                Server.CatalogJson.TryParseManufacturers(
                     new MelcherJsonObjectParser(manufacturerJson),
                     out List<ManufacturerInfo> manufacturers
                 );
@@ -243,7 +245,7 @@ namespace KitchenDesign
 
             string fallbackProductListJsonPath =
                 ProFitGlobals.appProfile.GetFallbackJsonPath(
-                        ProFitWeb.FallbackProductListFileName
+                        Server.FallbackJsonFiles.Products
                 );
 
             TextAsset fallbackProductListJson =
@@ -272,9 +274,11 @@ namespace KitchenDesign
                 new (productListJson);
 
             System.Exception productListException =
-                ProFitWeb.TryParseProductList(
+                Server.CatalogJson.TryParseProductList(
                     new MelcherJsonObjectParser(productListJson),
                     manufacturers,
+                    ProFitGlobals.productGroups,
+                    ProFitGlobals.appRules,
                     out List<ProductInfo> productInfos
                 );
 
@@ -286,7 +290,7 @@ namespace KitchenDesign
 
             string fallbackCabinetListJsonPath =
                 ProFitGlobals.appProfile.GetFallbackJsonPath(
-                        ProFitWeb.FallbackCabinetListFileName
+                        Server.FallbackJsonFiles.Cabinets
                 );
 
             TextAsset fallbackCabinetListJson =
@@ -296,7 +300,7 @@ namespace KitchenDesign
 
             string fallbackCabinetCategoriesJsonPath =
                 ProFitGlobals.appProfile.GetFallbackJsonPath(
-                        ProFitWeb.FallbackCabinetSectionCategoriesFileName
+                        Server.FallbackJsonFiles.CabinetSectionCategories
                 );
 
             TextAsset fallbackCabinetCategoriesJson =
@@ -320,7 +324,7 @@ namespace KitchenDesign
                 }
 
                 Exception cabinetCategoriesException =
-                    ProFitWeb.TryParseCabinetSectionCategoryList(
+                    Server.CatalogJson.TryParseCabinetSectionCategoryList(
                         new MelcherJsonObjectParser(cabinetCategoriesJson),
                         out List<CabinetSectionCategoryInfo> cabinetCategories
                     );
@@ -343,10 +347,13 @@ namespace KitchenDesign
                 }
 
                 Exception cabinetListException =
-                    ProFitWeb.TryParseCabinetList(
+                    Server.CatalogJson.TryParseCabinetList(
                         new MelcherJsonObjectParser(cabinetListJson),
                         manufacturers,
                         cabinetCategories,
+                        ProFitGlobals.productGroups,
+                        ProFitGlobals.sourceProducts,
+                        ProFitGlobals.appRules,
                         out cabinetProductInfos
                     );
 

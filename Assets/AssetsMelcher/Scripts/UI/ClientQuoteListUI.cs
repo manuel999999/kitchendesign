@@ -92,7 +92,7 @@ namespace KitchenDesign
             int clientId = ProFitGlobals.activeClientId.Value;
 
             // Refetch the client to get their quote list
-            ProFitWeb.GetClient(
+            ProFitGlobals.server.Clients.GetClient(
                 ProFitGlobals.user,
                 clientId,
                 onSuccess: OnSuccess,
@@ -301,10 +301,10 @@ namespace KitchenDesign
         {
             int quoteIndex = m_FilteredQuoteIndices[row.index];
             string pdfEndpoint = m_ActiveClientQuotes[quoteIndex].pdfEndpoint;
-            string pdfUrl = ProFitWeb.Host + pdfEndpoint;
+            string pdfUrl = ProFitGlobals.server.Connection.Host + pdfEndpoint;
             MelcherLog.LogVerbose(
                 $"Opening PDF url: {pdfUrl}\n" +
-                $"Host: {ProFitWeb.Host}\n" +
+                $"Host: {ProFitGlobals.server.Connection.Host}\n" +
                 $"Endpoint: {m_ActiveClientQuotes[quoteIndex].pdfEndpoint}"
             );
             pdfUrl = Uri.EscapeUriString(pdfUrl);

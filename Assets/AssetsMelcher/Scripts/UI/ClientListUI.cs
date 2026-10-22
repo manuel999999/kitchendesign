@@ -59,7 +59,7 @@ namespace KitchenDesign
         {
             EventBridge.Menu.showFullScreenSpinner.Invoke(true);
 
-            ProFitWeb.GetClientList(
+            ProFitGlobals.server.Clients.GetClientList(
                 ProFitGlobals.user,
                 onSuccess: OnSuccess,
                 onError: (request, error, jsonValue) =>

@@ -66,7 +66,7 @@ namespace KitchenDesign
             m_MessageBox.Clear();
             EventBridge.Menu.showFullScreenSpinner.Invoke(true);
 
-            ProFitWeb.DeleteQuote(
+            ProFitGlobals.server.Quotes.DeleteQuote(
                 ProFitGlobals.user,
                 m_QuoteId,
                 onSuccess: () =>

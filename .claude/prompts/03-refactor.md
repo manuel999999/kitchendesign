@@ -572,6 +572,16 @@ committed on its own.
   before the catalog data, which (with the session) now receives it in its constructor. Old
   callers reach it through `ProFitGlobals.server` until their area.
 - `ProFitWeb.cs` is deleted.
+- **Done 2026-10-22.** 20 files in `Server/`, split by a one-off script (session scratchpad);
+  comments dropped, whys in CLAUDE.md ("Server client"). 24 files' calls rewritten
+  (`ProFitGlobals.server.<Group>.<Request>`, `Server.<Parser>.TryParse…`). The offline branches
+  of `GetProductList`/`GetCabinetList` now use the lists passed in instead of
+  `ProFitGlobals.manufacturers`/`cabinetSectionCategories`; every caller passes those same
+  lists. Checks: `rulescheck.cs` 60/0, `coldstart.sh` both the reference, `runall.sh` against B2.1
+  identical (photos within 0.09/255; kept as `unity6-after-B2.2-2026-10-22/`), the 8 fallback
+  JSON files the sign-in wrote byte-identical to B2.1's, `menucheck.sh` 21 / 21 / 1,268. Log
+  lines from the parsers now carry the new class names (`[CatalogJson] Error parsing cabinet…`
+  instead of `[ProFitWeb] …`).
 
 **B2.3 — The data assets, by what they are.** `GroupDatabase`, `ProductIdRemapDatabase`,
 `AppProfile` and `AppOptions` are ScriptableObjects: renamed with the `SO` suffix (R-CODE-8),

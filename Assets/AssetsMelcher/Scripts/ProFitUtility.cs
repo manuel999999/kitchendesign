@@ -35,7 +35,7 @@ namespace KitchenDesign
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             const string Endpoint = "/admin/components/{product_id}/edit";
             Application.OpenURL(
-                ProFitWeb.Host + Endpoint.Replace("{product_id}", productServerId.ToString())
+                ProFitGlobals.server.Connection.Host + Endpoint.Replace("{product_id}", productServerId.ToString())
             );
 #endif  // if UNITY_EDITOR || DEVELOPMENT_BUILD
         }
@@ -59,7 +59,7 @@ namespace KitchenDesign
         public static void ShowTermsAndConditions()
         {
             const string Endpoint = "/webgl/privacy-policy.html";
-            Application.OpenURL(ProFitWeb.Host + Endpoint);
+            Application.OpenURL(ProFitGlobals.server.Connection.Host + Endpoint);
         }
 
         public static ProductVisual FindProductVisual(IReadOnlyList<ProductVisual> productVisuals, string visualId)

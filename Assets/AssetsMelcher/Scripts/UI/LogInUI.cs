@@ -41,7 +41,7 @@ namespace KitchenDesign
                 m_EmailField.text.Equals("guest", StringComparison.OrdinalIgnoreCase) &&
                 m_PasswordField.text.Equals("guest", StringComparison.OrdinalIgnoreCase);
 
-            ProFitWeb.LogIn(
+            ProFitGlobals.server.Accounts.LogIn(
                 m_EmailField.text,
                 m_PasswordField.text,
                 offlineMode,
@@ -56,7 +56,7 @@ namespace KitchenDesign
                 EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting User Profile");
 
                 // Get the user's profile
-                ProFitWeb.GetProfile(
+                ProFitGlobals.server.Accounts.GetProfile(
                     user.apiToken,
                     offlineMode,
                     OnProfileSuccess,
@@ -131,7 +131,7 @@ namespace KitchenDesign
                 //MelcherLog.Log("host is: " + host);
 
                 bool isWhitelisted =
-                    ProFitWeb.WhitelistedEmbedDomains.Any(whitelistedDomain => host.EndsWith(whitelistedDomain, StringComparison.OrdinalIgnoreCase));
+                    ProFitGlobals.server.Connection.WhitelistedEmbedDomains.Any(whitelistedDomain => host.EndsWith(whitelistedDomain, StringComparison.OrdinalIgnoreCase));
                 //MelcherLog.Log("is whitelisted: " + isWhitelisted, logLevel: MelcherLog.LogLevel.Always);
 
                 bool hasAuthorizedDomain = !string.IsNullOrEmpty(authorizedDomain);

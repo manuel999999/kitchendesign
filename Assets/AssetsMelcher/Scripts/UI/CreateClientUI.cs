@@ -120,7 +120,7 @@ namespace KitchenDesign
                 kv.Value.colors = m_FieldColorBlockDefault;
             }
 
-            ProFitWeb.CreateClient(
+            ProFitGlobals.server.Clients.CreateClient(
                 ProFitGlobals.user,
                 m_FirstNameField.text,
                 m_LastNameField.text,
