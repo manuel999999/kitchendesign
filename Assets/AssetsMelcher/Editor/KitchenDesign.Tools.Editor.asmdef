@@ -1,0 +1,26 @@
+{
+    "name": "KitchenDesign.Tools.Editor",
+    "rootNamespace": "KitchenDesign",
+    "references": [
+        "KitchenDesign",
+        "ca.melcher.unity.core",
+        "ca.melcher.unity.core.editor",
+        "ca.melcher.unity.moreeffectivecoroutines",
+        "ca.melcher.unity.minijson",
+        "Unity.Addressables",
+        "Unity.Addressables.Editor",
+        "Unity.ResourceManager",
+        "Unity.Timeline.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

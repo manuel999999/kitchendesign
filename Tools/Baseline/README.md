@@ -16,6 +16,20 @@ client names; never copy it into a repo.
   waits until `kstatus.cs` is stable three times, takes the save photos (`photos.cs`, as F6),
   measures (`measure.tmpl` → `measured.json` + `resave.json`), and moves `photo_*.jpg` from the
   project root into `GeminiBaseline/unity6/<quote id>/photos/`.
+- `menucheck.sh` (2026-10-22): the menu smoke check, read-only (never creates, edits, deletes or
+  saves on the server). Signs in with the quick sign-in, then drives the menu through the same
+  `EventBridge.Menu` delegates the buttons call (`menu.tmpl`, one step per call): home, client
+  list, client 10191's quotes, client info, quote info (opened and closed), user profile, the
+  log-out prompt (opened and closed). Each step prints the top of `MenuScene.m_MenuHistory` and
+  which screens are visible (`MelcherUI.IsVisible()`; `activeInHierarchy` is true for all of
+  them). Then it opens design 27755, goes back with `EventBridge.Designer.loadMenuScene`
+  (`tomenu.cs`, no save prompt, nothing saved) and checks the menu again. Prints the editor
+  console's error count after sign-in, after the menu and at the end. Reference counts
+  (2026-10-22, Gemini quick sign-in): 21 errors after sign-in (server JSON missing
+  `manufacturer` / `cabinet_section_type` keys), unchanged through the menu, 1,268 at the end
+  (almost all "Could not find product visual" for visuals held back by the product thinning).
+  The CLI's `console` command keeps only the last 2,000 entries, so read the errors themselves
+  from `Logs/Editor.log`.
 - Snippets are `eval_file` bodies: statements and local functions, fully qualified names, no
   `using`s, no classes (the CLI rejects them; `run_script` would end play mode).
 - `dbstate.cs` shows whether the visual database's runtime lookup is built; `mkrt.cs` builds it

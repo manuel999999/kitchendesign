@@ -421,8 +421,7 @@ Git (set up by the user on 2026-10-20): remote `origin` is
 `git@github.com:manuel999999/kitchendesign.git` (SSH; checked 2026-10-22). Commits are authored
 as `EmmanuelMGemini`.
 Branches `main` (pushed, `dec60d9 initial commit`) and `develop` (local, checked out). The user
-makes the commits. If Claude is ever asked to commit, ask first whether to drop the
-`Co-Authored-By` trailer.
+makes the commits or asks Claude to; the `Co-Authored-By` trailer is fine (2026-10-22).
 
 `_projectDefaults` still holds content from Unity's project template (`Readme.asset`,
 `TutorialInfo/`, `InputSystem_Actions.inputactions`, the sample scene). Pointed out to the user,
@@ -469,9 +468,8 @@ These carry over from the sessions on the old project.
   comments on our changes. Propose `file-only` for `CODE_COMMENTS` when section 0 asks, but let
   the user answer.
 - **Stage by default, commit only when asked.** Stage only the files from the change at hand. The
-  user does not want Claude attribution to reach shared history: before committing anything that
-  could leave this machine, ask whether to drop the `Co-Authored-By` trailer. Ask about this again
-  when git is set up here, along with the `CLAUDE_MD_GIT` choice.
+  user commits, or asks Claude to. The `Co-Authored-By: Claude` trailer is fine (user,
+  2026-10-22); no need to ask about it any more.
 - **Measure, don't guess.** Sizes, memory and timings come from the editor or a build, not from
   estimates.
 - **Plain, short replies.** Say what was found, what is recommended, and what is waiting on the
@@ -939,6 +937,27 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   Entering play mode refreshes too, which is why the baseline runs still used the swapped profile.
 - **The CLI's main-thread limit is 5 s per snippet.** About 60 test renders, or decoding every
   baseline photo in one call, times out; split by material or by design.
+- **Opening the project in batch mode rewrote `AddressableAssetsData/AssetGroups/ProductMaterials.asset`**
+  (2026-10-22): Addressables dropped 49 read-only entries (`Kitchen_Default.mat` and product
+  display materials) on load. Not from any code change; restored from git. After any batch run,
+  check `git status` for Addressables group changes before staging.
+- **The shell's `grep` is ugrep**, and its `--include` returned nothing on asset searches without
+  an error. Use `find … | xargs /usr/bin/grep` for searches over scenes, prefabs and assets.
+- **DOTween manages its own asmdef.** `DOTween.Modules.asmdef` exists only while
+  `DOTweenSettings.createASMDEF` is 1; with 0, DOTween's asset postprocessor deletes the file on the
+  next editor start (`ASMDEFManager.ApplyASMDEFSettings`). Change it through DOTween (Utility Panel,
+  or the setting plus `ApplyASMDEFSettings`), never by writing the asmdef by hand.
+- **Type names stored as text break on a namespace or assembly change.** Scenes, prefabs and
+  `.asset` files bind scripts by GUID, but UXML (`<uie:EnumField type="Ns.Type, Assembly">`),
+  `[SerializeReference]` data, UnityEvent argument types and `MelcherSignal` argument types store
+  `Namespace.Type, Assembly`. When code moves namespace or assembly in phase B, search every text
+  asset type (`find … | xargs /usr/bin/grep`), not only scenes, prefabs and assets.
+- **A freshly opened editor can photograph finishes without their textures.** After batch
+  compiles and a new editor start (2026-10-22), three designs' cover photos in the first
+  `runall.sh` drew cabinets with a white noisy texture and black countertops (2.4–19.5/255), while
+  every other photo matched; on the warm editor they matched (≤0.14). Re-capture before treating a
+  cover-photo difference as a regression. The CLI's `console` keeps only the last 2,000 entries;
+  read errors from `Logs/Editor.log`.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -957,6 +976,17 @@ None yet.
   (`_projectShared`, refs nothing), `KitchenDesign.Debugging` (`_projectDebugging`, Editor only,
   autoReferenced off, refs KitchenDesign, Shared). All reference by name. `KitchenDesign` also
   references `Unity.Cinemachine` (2026-10-20, for `CameraLevelAimBehavior`).
+  **Since phase A of the refactor (2026-10-22) all the old code is in our assemblies and namespace**,
+  files not moved yet: `.asmref` files put `AssetsMelcher/Scripts`, `/Miscellaneous`,
+  `/Plugins/WebGL`, `Procedural Assets` and `Cloder` into `KitchenDesign`; the old editor tools
+  (`AssetsMelcher/Editor`, and `Cloder/Editor` through an `.asmref`) are
+  `KitchenDesign.Tools.Editor` (Editor only). The namespace is `KitchenDesign` throughout (sub
+  namespaces come with phase B); every old file has `using Melcher;` for the core package, which
+  keeps `namespace Melcher` until it is replaced by our own library. `KitchenDesign` references the
+  core package, MEC, MiniJSON, UniTask (+Addressables), `DOTween.Modules`, `RecyclingListView`,
+  TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
+  `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
+  holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
 - **`CameraLevelAimBehavior`** (`_project/Scripts/Behaviors/`, 2026-10-20): a `CinemachineExtension`
   that, at the Finalize stage, takes the framed direction, moves the aim point by
   `worldAimOffset` (world space, at the Look At target's distance) and re-aims with the reference
@@ -976,7 +1006,7 @@ None yet.
     default) never clips. **Any new material that can land on a cabinet or countertop needs one
     of these shaders**, and a graph that allows material overrides (like `PosterizeGraph`) also
     needs `_AlphaClip` on in each material. URP Lit and Simple Lit don't clip.
-  - `Melcher.KitchenCutoutClipping` (`AssetsMelcher/Scripts/`, owned by `Kitchen`): rebuilds
+  - `KitchenDesign.KitchenCutoutClipping` (`AssetsMelcher/Scripts/`, owned by `Kitchen`): rebuilds
     slots and boxes before every render (`RenderPipelineManager.beginContextRendering`). Why:
     every change path (load, drag, resize, inset, shelf, highlight, the photos' manual renders)
     is covered without hooking each one; 0.03 ms per refresh. `CabinetCutOut.TryGetClipBox`
@@ -1043,7 +1073,8 @@ None yet.
 
 ## Tools
 - `Tools/Baseline/`: records the old app's baseline and compares this project against it
-  (`unity6/runall.sh` is the whole check). Notes in `Tools/Baseline/README.md`.
+  (`unity6/runall.sh` is the whole check), and `unity6/menucheck.sh` walks the menu screens and
+  the designer round trip read-only. Notes in `Tools/Baseline/README.md`.
 - `Tools/Cutouts/`: the cutout prototype's driver and test snippets (sign in, load a design, add
   products, apply boxes, render a camera to a PNG). Notes in `Tools/Cutouts/README.md`.
 
@@ -1054,8 +1085,8 @@ None yet.
   reached because offline guest (ProFit) has no data for the kept brands; signing in from
   `MenuScene` would need a fuller copy.
 - **The copy is done (2026-10-20)**, from commit `7700e16a8c`, step 1 of
-  `.claude/prompts/01-copy-and-upgrade.md` (counts and checks there). Not committed yet; the user
-  commits. The old repo's `.gitattributes` came over (26,787 files there are in Git LFS) and the
+  `.claude/prompts/01-copy-and-upgrade.md` (counts and checks there). Committed as `131b0020`
+  ("Initial project clone"). The old repo's `.gitattributes` came over (26,787 files there are in Git LFS) and the
   user installed LFS here. Step 3's compile fixes are done (see "Upgrade fixes in the copy").
   **Next:** the user asked (2026-10-20) for only a few hundred products in the copy, so the full
   import was stopped. The baseline (step 2) is done. Step 1b is done: 899 of 8,552 database
@@ -1089,15 +1120,14 @@ None yet.
   entries). Steps 2 and 4 done (2026-10-21): wired into the app, all 8 baseline designs save
   identically, photos match. Step 3 done 2026-10-21 (old stencil path removed; baseline
   unchanged, see the plan). The three non-clipping materials were switched on 2026-10-21 (see
-  "Key systems: Cutouts"; not committed yet, the user commits). Next, when the user asks: WebGL
+  "Key systems: Cutouts"; committed in `ba666e23`). Next, when the user asks: WebGL
   and phone, then the UI blur, the orbit camera, the `UberPost` alpha. WebGL and phone measurements are
   parked: the user will add the 6000.6.6f1 build modules later (2026-10-21); ask before starting.
   (The 2022.3.62f2 editor has WebGL, iOS and Android if the old app's numbers are ever wanted.) Was: step 2 (wire `CutoutClipSet` into `Kitchen`/`CabinetCutOut`, a
   clip-capable shader for `Kitchen_Default`, the local keyword). The editor was left in play mode
   on design 72249 with the boxes applied (`CutoutTestCam` shows the cutouts).
 - Later: removing the unused `_projectDefaults/Settings` URP
-  assets, checking the ambient fix in a player build. Nothing is committed: the whole copy is
-  untracked in this repo; the user commits (LFS is set up).
+  assets, checking the ambient fix in a player build. The user makes the commits (LFS is set up).
 - **The baseline (old plan step 2), proposed 2026-10-20, waiting on the user's answers.** Per
   saved design, kept outside both repos (design names and JSON contain client names; proposed
   `/Users/emmanuel/Documents/Unity/GeminiBaseline/`): `server.json` (the design as stored, from
@@ -1146,6 +1176,18 @@ None yet.
   from the build list; `InputSystem_Actions`, cleared as project-wide actions; Readme,
   TutorialInfo, `SampleSceneProfile`). `Settings/` (URP assets) stays. The track A copy was
   deleted. A Unity `.gitignore` was added.
+- **Refactor plan agreed 2026-10-22:** `.claude/prompts/03-refactor.md` (step 6 of the copy
+  plan, with the `Melcher` → `KitchenDesign` namespace change; the core package keeps `Melcher`
+  until we replace it with our own library). Phase A moves the old code into our assemblies and
+  namespace unchanged, in one session; phase B refactors area by area. First, all code missing
+  from the old repo comes over (audit in the plan): forced product occupancy is in; the user's rear wall (`77f53840ee`) comes over later, once the user has finished it
+  in the old project (user, 2026-10-22; the commit there is incomplete, no
+  `ProductCategory.CabinetRearWall`).
+- **Phase A of the refactor done and committed 2026-10-22** (four commits). A1 (third-party asmdefs), A2
+  (`Melcher` → `KitchenDesign`, 239 files), A3 (old code in `KitchenDesign` /
+  `KitchenDesign.Tools.Editor`). Each checked: compile (and a macOS player-script compile), baseline
+  identical to the pre-rename run, menu check, editor tool windows. **Next: phase B, area 1 (app foundation)**:
+  write its section in the plan and agree it with the user before editing.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a
