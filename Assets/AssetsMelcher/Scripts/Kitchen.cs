@@ -256,7 +256,7 @@ namespace KitchenDesign
 
         public JsonDict SaveToJson()
         {
-            // TODO: We're forcing an invariant culture at startup (see Main.cs)
+            // TODO: We're forcing an invariant culture at startup (see AppInitializer)
             //       but a better fix would be to enforce the invariant culture
             //       just for this function. Something like:
             //

@@ -327,18 +327,27 @@ Each step is checked and committed on its own, as in phase A.
   `AppInitializer` (`DontDestroyOnLoad`). `[SerializeField] private AppProfile appProfile` points
   at the same `Resources/AppProfile.asset`, so switching apps works as it does today.
 - `AppInitializer.Awake` does what `Main.RuntimeInit` did, in the same order (DOTween's capacity
-  first, R-ARC-4), then `ProFitGlobals.Init()` unchanged, then loads build index 1: today
-  PlatformSetup, since Splash is switched off. If Splash is ever switched on again, it is index 1
+  first, R-ARC-4), then `ProFitGlobals.Init()` unchanged. `Start` loads build index 1: today
+  PlatformSetup, since Splash is switched off. It has to be `Start`: a load started in the
+  first scene's `Awake` runs before that scene counts as loaded, so `MelcherSceneManager` doesn't
+  register it for unloading and logs "The scene BootScene appears to have been unloaded from
+  outside of MelcherSceneManager". If Splash is ever switched on again, it is index 1
   and its `buildIndex + 1` still leads to PlatformSetup. `Main.cs` is deleted. The F1 kick
   becomes a menu item with an F1 shortcut in `_projectDebugging` (`Tools/Kitchen Design/Kick
   signed-in user`), instead of a coroutine that polls input.
-- **Playing from any scene in the editor:** `BootSceneForEditor` (`#if UNITY_EDITOR`,
-  `[InitializeOnLoad]`) sets `EditorSceneManager.playModeStartScene` to `BootScene` while the
-  open scene is in the build list, and remembers that scene (`SessionState`). In the editor,
-  `AppInitializer` then loads the remembered scene instead of Splash, so pressing play in
-  `MenuScene` behaves as it does today and the checks don't change. A scene outside the build list
-  (a test scene) starts as itself with no app. Today such a scene still gets `Main`'s culture and
-  log level, so that is a small difference.
+- **Playing from any scene in the editor:** `AppInitializer` is a prefab
+  (`_projectAssets/Prefabs/AppInitializer.prefab`); `BootScene` holds an instance.
+  `StartAppForEditor` (`#if UNITY_EDITOR`, `[RuntimeInitializeOnLoadMethod(BeforeSceneLoad)]`)
+  instantiates the prefab when play starts in any other build-list scene. That is the moment
+  `Main.RuntimeInit` ran, so pressing play in `MenuScene` behaves as before and the checks don't
+  change. `AppInitializer` loads build index 1 only when it sits in the boot scene (build index
+  0). A scene outside the build list (a test scene) starts as itself with no app. Today such a
+  scene still gets `Main`'s culture and log level, so that is a small difference.
+  First built with `EditorSceneManager.playModeStartScene` (play always starts in `BootScene`,
+  which then loads the scene that was open). Dropped: with a start scene different from the open
+  scene, 6.6's Hierarchy window logs 4 `Assertion failed on expression: 'manager != NULL'`
+  (`HierarchyWindow.SetViewState`) during every play. That would add editor noise to every check
+  and every play.
 - **Scene initializers:** an abstract `SceneInitializer : MonoBehaviour` with `Initialize(...)`
   taking the app systems as arguments, and `MenuSceneInitializer` / `DesignerSceneInitializer` on a
   root object of each scene. The `AppInitializer` listens to `SceneManager.sceneLoaded`, takes the
@@ -352,6 +361,17 @@ Each step is checked and committed on its own, as in phase A.
   give `… PlatformSetupScene MenuScene`, the Welcome screen and the reference console counts).
   The Remember Me path (a saved token) isn't covered: the quick sign-in doesn't save one, and
   saving one would mean writing the user's PlayerPrefs.
+- **Done 2026-10-22.** Compiles with no errors. `coldstart.sh` from `PlatformSetupScene` and from
+  `BootScene`: both `PlatformSetupScene MenuScene`, Welcome, 13 errors, 4 warnings (the B1.1
+  reference). In play from `MenuScene`: one `AppInitializer` (in `DontDestroyOnLoad`), the menu's
+  initializer holds the profile and `GeminiAppRules`, culture en-US. `runall.sh` against the B1.1
+  run: `resave.json` identical in all 8, camera noise only, photos within 0.14/255. Kept as
+  `unity6-after-B1.2-2026-10-22/`. `menucheck.sh`: 21 / 21 / 1,268 errors (warnings at the end
+  vary by a couple between runs: 8,694 / 8,696 / 8,694). Saving `MenuScene` and `DesignerScene`
+  in the editor also wrote edit-time values the app recomputes at runtime: TMP's default font
+  (LiberationSans SDF) on three icon texts, the localizer's FontAwesome tag, one
+  `MelcherSafeAreaConformerDock` size; `DesignerScene` dropped the orphan `m_RendererData`.
+  The baseline shows no effect.
 
 **B1.3 — Split `ProFitGlobals` into app-wide systems.** Plain classes, created and owned by the
 `AppInitializer`; MEC coroutines keep working without a MonoBehaviour.

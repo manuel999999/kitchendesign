@@ -958,6 +958,12 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   every other photo matched; on the warm editor they matched (≤0.14). Re-capture before treating a
   cover-photo difference as a regression. The CLI's `console` keeps only the last 2,000 entries;
   read errors from `Logs/Editor.log`.
+- **Don't start a scene load from the first scene's `Awake`.** That scene doesn't count as loaded
+  yet, so `MelcherSceneManager` doesn't register it for the unload and logs "appears to have been
+  unloaded from outside of MelcherSceneManager". `AppInitializer` loads from `Start`.
+- **`EditorSceneManager.playModeStartScene` makes 6.6's Hierarchy window log 4
+  `Assertion failed on expression: 'manager != NULL'`** on every play when the start scene isn't
+  the open scene. Hence the `StartAppForEditor` prefab hook instead.
 - **`SplashScene` is switched off in the build list** (the old project's too): the app starts at
   `PlatformSetupScene`. Played on its own in the editor, Splash's `buildIndex + 1` asks for a scene
   that doesn't exist and it stays on the splash. Test start-up from `PlatformSetupScene`
@@ -966,13 +972,35 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   `ImageConversion.LoadImage` and `GetPixels32`.
 
 ## Scene and prefab map
-No scenes yet. Planned: a boot scene holding `AppInitializer`, then the menu and designer scenes.
+Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `PlatformSetupScene` (1),
+`MenuScene` (2), `DesignerScene` (3), `IntermediateDesignerToMenuScene` (4).
+- `_projectAssets/Scenes/BootScene.unity`: one root, `AppInitializer` (an instance of
+  `_projectAssets/Prefabs/AppInitializer.prefab`, `AppInitializer` component, `appProfile` →
+  `Resources/AppProfile.asset`). Moves itself to `DontDestroyOnLoad`.
+- `MenuScene`: root `MenuSceneInitializer` (first sibling). `DesignerScene`: root
+  `DesignerSceneInitializer` (first sibling). The rest of both scenes is the old app's, unchanged.
+- In the editor, playing any other build-list scene gets an `AppInitializer` from the prefab at
+  `BeforeSceneLoad` (`StartAppForEditor`), and that scene plays as itself.
 
 ## The Initialize() chain
-`AppInitializer` (`_project/Scripts/Game/`) exists and is empty. Nothing is constructed yet.
+`AppInitializer` (`_project/Scripts/Game/`), B1.2 of the refactor (2026-10-22):
+1. `Awake`: culture en-US, log level and `isVerbose` (editor, debug build, `?verbose`,
+   `--verbose`), quality level 0, render debug UI off, `DOTweenInit.Init` (capacity). First,
+   because everything after it logs, formats numbers or tweens.
+2. `Awake`: `ProFitGlobals.Init()` starts loading the fallback data, then the server's. The
+   screens wait for it through `ProFitGlobals.ExecuteWhenReady`.
+3. `Start`, boot scene only: load build index 1 (`PlatformSetupScene`). Not in `Awake`, see
+   Gotchas (`MelcherSceneManager` and a load from the first scene's `Awake`).
+4. On every scene load: the root `SceneInitializer` of that scene gets `Initialize(appProfile,
+   appRules)`, then `EventApp.OnSceneReady` is raised. This runs after the old scene script's
+   `OnStateAdded` (the core package's state machine is subscribed first), so the old scene
+   scripts can't use what the initializer receives yet; they keep using `ProFitGlobals`.
+B1.3 replaces step 2 with the app-wide systems (the plan, "Area 1").
 
 ## Events
-None yet.
+- `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's
+  `SceneInitializer` was initialized. No listeners yet.
+- Everything else still goes through the old `EventBridge`.
 
 ## Key systems
 - **Assemblies (2026-10-20):** `KitchenDesign` (`_project/Scripts`, refs Events, Shared, Doge),
@@ -991,6 +1019,15 @@ None yet.
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **Boot and scene initializers** (B1.2 of the refactor, 2026-10-22): `AppInitializer`,
+  `SceneInitializer` (abstract, `Initialize(AppProfile, IAppRules)`), `MenuSceneInitializer`,
+  `DesignerSceneInitializer` (they only keep what they get, until areas move into them),
+  `StartAppForEditor` (all in `_project/Scripts/Game/`). The old `Main.RuntimeInit` is gone; its
+  F1 "kick the signed-in user" is now a menu item, `Tools/Kitchen Design/Kick signed-in user`
+  (F1, play mode only; `_projectDebugging/Menus/SessionDebugMenu.cs`). Order and whys: "The
+  Initialize() chain". Checked with `coldstart.sh` from `PlatformSetupScene` and from
+  `BootScene` (both the B1.1 reference: PlatformSetup → Menu, Welcome, 13 errors, 4 warnings),
+  plus the baseline and menu check.
 - **App rules** (B1.1 of the refactor, 2026-10-22): `KitchenDesign.Shared.Interfaces.IAppRules`
   with `ProFitAppRules`, `StollAppRules`, `GeminiAppRules` (`_project/Scripts/AppRules/`),
   chosen by `AppRulesFactory.Create(appOptions.userFilter)`. Every place the old code checked
@@ -1211,7 +1248,10 @@ None yet.
   Its section ("Area 1 — App foundation" in `.claude/prompts/03-refactor.md`) was agreed on
   2026-10-22; the user left names and refactoring details to Claude. `ProFitGlobals` keeps
   forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
-  committed by the user. **B1.1 (app rules) is done and staged** (results in the plan).
+  committed by the user. **B1.1 (app rules) is done and staged; B1.2 (boot scene) is done and
+  unstaged on top of it** (results in the plan). Next: B1.3, splitting `ProFitGlobals` into
+  `CatalogDataStatus`, `ClientListStatus`, `SessionStatus`, `LaunchOptions`, once B1.1 and B1.2
+  are committed.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

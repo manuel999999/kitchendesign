@@ -17163,6 +17163,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7580853311279578293, guid: cb1d8dc643d0e4a3984cb108f51c0b48, type: 3}
   m_PrefabInstance: {fileID: 637817769}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639643566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639643568}
+  - component: {fileID: 639643567}
+  m_Layer: 0
+  m_Name: DesignerSceneInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &639643567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639643566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5344002a5031d45508250806ac445a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: KitchenDesign::KitchenDesign.DesignerSceneInitializer
+--- !u!4 &639643568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639643566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &645311973 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 261214157776303903, guid: c6b1d577e77146046992b0a505798ac9, type: 3}
@@ -41488,7 +41532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80736ffeba6214473b7089e2ba4793d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RendererData: {fileID: 11400000, guid: f046926c8e9796546934c0ebe93b0c1f, type: 2}
   m_ProductVisualDatabase: {fileID: 11400000, guid: 4af6daf38d0950a4c9c3a02de0fc651b, type: 2}
   m_Kitchen: {fileID: 1168655925}
   m_WhiteLabelClientInfoUi: {fileID: 2127339067}
@@ -46553,7 +46596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uF110"
+  m_text: "<font=\"FontAwesome/Font Awesome 6 Free-Solid-900\">\uF110</font>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -67578,6 +67621,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 639643568}
   - {fileID: 963194228}
   - {fileID: 1519661573}
   - {fileID: 757805829}

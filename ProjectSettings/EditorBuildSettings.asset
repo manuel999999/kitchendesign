@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/_projectAssets/Scenes/BootScene.unity
+    guid: 63a55f06511ae437783165a381da5c67
   - enabled: 0
     path: Assets/AssetsMelcher/Scenes/SplashScene.unity
     guid: 88ed9cc4ffda1b440ae17d3b52b3fd9c
