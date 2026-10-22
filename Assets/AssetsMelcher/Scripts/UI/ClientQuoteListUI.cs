@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -255,7 +256,7 @@ namespace KitchenDesign
                 EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
                 EventBridge.Menu.showBackgroundSpinner?.Invoke(false);
 
-                while (ProFitGlobals.logInCoroutineState != ProFitGlobals.LogInCoroutineState.Finished)
+                while (ProFitGlobals.logInCoroutineState != LogInState.Finished)
                 {
                     yield return Timing.WaitForOneFrame;
                 }
@@ -318,7 +319,7 @@ namespace KitchenDesign
                 EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
                 EventBridge.Menu.showBackgroundSpinner?.Invoke(false);
 
-                while (ProFitGlobals.logInCoroutineState != ProFitGlobals.LogInCoroutineState.Finished)
+                while (ProFitGlobals.logInCoroutineState != LogInState.Finished)
                 {
                     yield return Timing.WaitForOneFrame;
                 }

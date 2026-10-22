@@ -987,15 +987,21 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 1. `Awake`: culture en-US, log level and `isVerbose` (editor, debug build, `?verbose`,
    `--verbose`), quality level 0, render debug UI off, `DOTweenInit.Init` (capacity). First,
    because everything after it logs, formats numbers or tweens.
-2. `Awake`: `ProFitGlobals.Init()` starts loading the fallback data, then the server's. The
-   screens wait for it through `ProFitGlobals.ExecuteWhenReady`.
+2. `Awake` (B1.3): `LaunchOptions` first (the log level and DOTween's debug mode depend on it),
+   then the `IAppRules` for the profile's `userFilter` (product parsing reads the padding rule),
+   then construct `CatalogDataStatus`, `ClientListStatus`, `SessionStatus` and hand all of them to
+   `ProFitGlobals.Bind` before initializing anything, because the loading code (`ProFitWeb`)
+   still reads the forwards. Then `session.Initialize()`, `clientList.Initialize()`,
+   `catalogData.Initialize()`: the order the old `ProFitGlobals.Init` reset its fields in (the
+   session's reset writes user 0's kiosk preference, as it always did). The catalog starts loading
+   the fallback data, then the server's; the screens wait for it through
+   `ProFitGlobals.ExecuteWhenReady`.
 3. `Start`, boot scene only: load build index 1 (`PlatformSetupScene`). Not in `Awake`, see
    Gotchas (`MelcherSceneManager` and a load from the first scene's `Awake`).
 4. On every scene load: the root `SceneInitializer` of that scene gets `Initialize(appProfile,
    appRules)`, then `EventApp.OnSceneReady` is raised. This runs after the old scene script's
    `OnStateAdded` (the core package's state machine is subscribed first), so the old scene
    scripts can't use what the initializer receives yet; they keep using `ProFitGlobals`.
-B1.3 replaces step 2 with the app-wide systems (the plan, "Area 1").
 
 ## Events
 - `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's
@@ -1019,6 +1025,49 @@ B1.3 replaces step 2 with the app-wide systems (the plan, "Area 1").
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **App-wide systems** (B1.3 of the refactor, 2026-10-22). Plain classes, constructed and owned
+  by `AppInitializer`; collaborators come in through the constructor.
+  - `LaunchOptions` (`_project/Scripts/Game/`): debug mode and verbose (editor, debug build,
+    `?verbose` URL parameter, `--verbose` argument), the WebGL page's domain and `distributor`
+    parameter (white label). In the editor, `AppOptions.simulateWhiteLabelMode` replaces the last
+    two with the simulated values.
+  - `CatalogDataStatus` (`_project/Scripts/CatalogData/`): the server's data (manufacturers,
+    product groups, tags, compatibilities, cabinet section categories, brand catalogs, products
+    and cabinets) and its lookups. `Initialize` loads the fallback JSON from
+    `Resources/<App>/FallbackJSON` first, so the app works offline, then applies the product
+    overrides (products the dashboard can't describe yet; allowed to fail), builds the variant
+    lists, probes the server (switching http/https once if the first try fails) and downloads
+    fresh brand catalogs, manufacturers, groups, tags and compatibilities; `ExecuteWhenLoaded`
+    queues work until then. Products and cabinets are downloaded at sign-in instead
+    (`SessionStatus.FinishLogInCoroutine`). Why the variant list starts with the base product's
+    id: the toolbar treats the whole family as one list. Why the runtime products are copies of
+    the source products: `DesignerScene` rewrites some values per app and building method (bar top
+    sizes, padding), and the copies can be rebuilt from the originals; their lookup key includes
+    "is a cabinet section", because cabinet sections and products can share a server id.
+    `PopulateRuntimeBrandCatalogs` uses a preset catalog when the server's id matches, or a clone
+    of the preset with the same cabinet manufacturer; don't call it while a kitchen is open, or the
+    kitchen keeps a catalog that is no longer in the list. In the editor the load adds fake
+    products for visuals no product uses, so every model can be checked on a cabinet (written to
+    `Logs/<App>/issues-unused-product-visuals.txt`). `CabinetDataAvailability`
+    (`_projectShared/Enums/`): `None`, `ClientOnly` (Stoll: the dashboard has no cabinet data, so
+    it ships as fallback JSON), `Server` (Gemini).
+  - `ClientListStatus` (`_project/Scripts/Session/`): the signed-in user's clients, the active
+    client and quote (how the menu tells the designer which design to open), and whether the
+    active client wants to be contacted (kept from a Napoleon requirement that no longer applies).
+  - `SessionStatus` (`_project/Scripts/Session/`): the user (setting it reads that user's kiosk
+    preference), profile, sign-in state (`LogInState`, `_projectShared/Enums/`; the menu can be
+    used while products still download), kiosk mode (a PIN in front of the client list and the
+    profile, kept per device in `PlayerPrefs` under `User.<id>.isKioskModeEnabled`; anyone with
+    access to the device's preferences can turn it off), white label mode, Remember Me (the token
+    in `PlayerPrefs` under `Token`), log out, the auto-kick that checks the subscription every 20 s
+    and kicks expired trials and subscriptions, and the sign-in flow. Uses `ClientListStatus` and
+    `CatalogDataStatus` (log out clears both, sign-in fills both); neither uses the session.
+  - **`ProFitGlobals` is now only forwards** to these systems, the profile and the rules, plus
+    the system instances themselves (`catalogData`, `clientList`, `session`, `launchOptions`). It is
+    the one app-wide static store of this area (reset at `SubsystemRegistration`). New code doesn't
+    use it; each area replaces its own uses with references passed in, and the class goes when no
+    one uses it. With no `AppInitializer` running (edit mode, test scenes), the forwards create
+    default instances, and `appProfile` loads `Resources/AppProfile` once.
 - **Boot and scene initializers** (B1.2 of the refactor, 2026-10-22): `AppInitializer`,
   `SceneInitializer` (abstract, `Initialize(AppProfile, IAppRules)`), `MenuSceneInitializer`,
   `DesignerSceneInitializer` (they only keep what they get, until areas move into them),
@@ -1035,8 +1084,8 @@ B1.3 replaces step 2 with the app-wide systems (the plan, "Area 1").
   `.claude/prompts/03-refactor.md`, "Area 1". **No code outside `AppRules/` may test
   `userFilter` to change behaviour.** The three places that still read it (`LogInUI`, `SignUpUI`,
   `QuickLogInWidget`) use it as the app's identity on the server, not as a rule. Old code reaches
-  the rules through `ProFitGlobals.appRules` (created once per domain, reset at
-  `SubsystemRegistration`). Why rules return `null` for "leave the value alone" (the high bar top
+  the rules through `ProFitGlobals.appRules` (handed over by `AppInitializer`; in edit mode
+  created from the profile on first use). Why rules return `null` for "leave the value alone" (the high bar top
   sizes, fridge padding, bottom inset): only Stoll overrides them, and the caller keeps its own
   value otherwise. Each app has exactly one building method today (ProFit Standard, Stoll
   Sections, Gemini Catalog), but app and building method stay separate axes: what the old code
@@ -1248,10 +1297,9 @@ B1.3 replaces step 2 with the app-wide systems (the plan, "Area 1").
   Its section ("Area 1 — App foundation" in `.claude/prompts/03-refactor.md`) was agreed on
   2026-10-22; the user left names and refactoring details to Claude. `ProFitGlobals` keeps
   forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
-  committed by the user. **B1.1 (app rules) is done and staged; B1.2 (boot scene) is done and
-  unstaged on top of it** (results in the plan). Next: B1.3, splitting `ProFitGlobals` into
-  `CatalogDataStatus`, `ClientListStatus`, `SessionStatus`, `LaunchOptions`, once B1.1 and B1.2
-  are committed.
+  committed. **B1.1 (app rules), B1.2 (boot scene) and B1.3 (app-wide systems) are done and
+  committed** (results in the plan). Next: B1.4, the generic helpers (`Const`'s units →
+  `Shared.Common.Units`, the generic `ProFitUtility` helpers → `Utility/`).
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

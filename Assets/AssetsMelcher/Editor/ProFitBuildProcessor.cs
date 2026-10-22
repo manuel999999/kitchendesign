@@ -197,7 +197,7 @@ namespace KitchenDesign
                     .ToArray();
 
             string activeAppResourcesName =
-                ProFitUtility.GetAppResourcesName(ProFitGlobals.appProfile);
+                ProFitGlobals.appProfile.GetAppResourcesName();
 
             DirectoryInfo fromDirectoryInfo = new (from);
 

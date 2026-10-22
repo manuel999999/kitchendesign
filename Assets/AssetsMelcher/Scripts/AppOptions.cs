@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using JetBrains.Annotations;
     using UnityEngine;
 
@@ -243,31 +244,6 @@ namespace KitchenDesign
             "guaranteed to be constant.")]
         [SerializeField]
         protected ProductIdRemapDatabase m_RemappedProductIdDatabase = default;
-
-        // ====================================================================
-        // Nested types
-        // ====================================================================
-
-        public enum CabinetDataAvailability
-        {
-            /// <summary>
-            ///     No cabinet data available for this app profile.
-            /// </summary>
-            None,
-
-            /// <summary>
-            ///     In Stoll, the dashboard does not support cabinet data.
-            ///     However, Pro-Fit still wants authored cabinets here. To
-            ///     compensate, we store the cabinet data locally with the app.
-            /// </summary>
-            ClientOnly,
-
-            /// <summary>
-            ///     The server has the ability to define and return cabinet
-            ///     data to the app. Used by Gemini.
-            /// </summary>
-            Server
-        }
 
     }   // class AppOptions
 

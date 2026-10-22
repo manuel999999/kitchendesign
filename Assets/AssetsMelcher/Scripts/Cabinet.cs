@@ -1689,7 +1689,7 @@ namespace KitchenDesign
                     cabinetVisual.info.IsProductManufacturerAllowedInSection(productInfo.manufacturerId);
 
                 CabinetCompatibilityInfo cabinetCompatibility =
-                    ProFitUtility.FindCompatibilityById(m_CabinetSectionProductInfo.compatibilityId);
+                    ProFitGlobals.catalogData.FindCompatibilityById(m_CabinetSectionProductInfo.compatibilityId);
 
                 if (cabinetCompatibility != null)
                 {
@@ -2593,7 +2593,7 @@ namespace KitchenDesign
 
             // Try to add a plunge (shelf)
             ProductInfo plungeProductInfo =
-                ProFitUtility.FindProductInfoBySku(plungeProductSku, findCabinetSection: false);
+                ProFitGlobals.catalogData.FindProductInfoBySku(plungeProductSku, findCabinetSection: false);
 
             if (plungeProductInfo == null)
             {

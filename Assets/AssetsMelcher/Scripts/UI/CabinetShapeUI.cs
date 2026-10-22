@@ -120,7 +120,7 @@ namespace KitchenDesign
 
                 EventBridge.Designer.showBuildingMethodsUi.Invoke();
             }
-            else if (ProFitUtility.ShouldUseWhiteLabelMode())
+            else if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 

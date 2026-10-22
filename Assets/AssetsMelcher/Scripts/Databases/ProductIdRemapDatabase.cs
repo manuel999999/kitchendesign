@@ -80,9 +80,8 @@ namespace KitchenDesign
         private void Migrate()
         {
             string fallbackManufacturerJsonPath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    ProFitWeb.FallbackManufacturersFileName
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        ProFitWeb.FallbackManufacturersFileName
                 );
 
             TextAsset fallbackManufacturerJson =
@@ -120,9 +119,8 @@ namespace KitchenDesign
             }
 
             string fallbackProductListJsonPath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    ProFitWeb.FallbackProductListFileName
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        ProFitWeb.FallbackProductListFileName
                 );
 
             TextAsset fallbackProductListJson =
@@ -204,9 +202,8 @@ namespace KitchenDesign
         private void CaptureCurrentIds()
         {
             string fallbackManufacturerJsonPath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    ProFitWeb.FallbackManufacturersFileName
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        ProFitWeb.FallbackManufacturersFileName
                 );
 
             TextAsset fallbackManufacturerJson =
@@ -244,9 +241,8 @@ namespace KitchenDesign
             }
 
             string fallbackProductListJsonPath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    ProFitWeb.FallbackProductListFileName
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        ProFitWeb.FallbackProductListFileName
                 );
 
             TextAsset fallbackProductListJson =
@@ -288,9 +284,8 @@ namespace KitchenDesign
             }
 
             string fallbackCabinetListJsonPath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    ProFitWeb.FallbackCabinetListFileName
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        ProFitWeb.FallbackCabinetListFileName
                 );
 
             TextAsset fallbackCabinetListJson =
@@ -299,9 +294,8 @@ namespace KitchenDesign
                 );
 
             string fallbackCabinetCategoriesJsonPath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    ProFitWeb.FallbackCabinetSectionCategoriesFileName
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        ProFitWeb.FallbackCabinetSectionCategoriesFileName
                 );
 
             TextAsset fallbackCabinetCategoriesJson =

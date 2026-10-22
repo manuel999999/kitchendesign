@@ -79,7 +79,7 @@ namespace KitchenDesign
         {
             m_CanvasGroup.interactable = false;
 
-            if (ProFitUtility.ShouldUseWhiteLabelMode())
+            if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 

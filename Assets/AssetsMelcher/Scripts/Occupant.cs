@@ -354,7 +354,7 @@ namespace KitchenDesign
                 truncatedProductName = truncatedProductName.Substring(0, MaxNameLengthToDisplay - 3) + "...";
             }
 
-            if (!ProFitUtility.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
+            if (!ProFitGlobals.catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
             {
                 manufacturerInfo.name = "Unknown Manufacturer";
             }

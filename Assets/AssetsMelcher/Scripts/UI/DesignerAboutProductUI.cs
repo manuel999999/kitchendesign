@@ -16,7 +16,7 @@ namespace KitchenDesign
 
         public void ShowProductInfo(ProductInfo productInfo, ProductVisual productVisual)
         {
-            if (!ProFitUtility.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
+            if (!ProFitGlobals.catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
             {
                 manufacturerInfo.name = "Unknown Manufacturer";
             }

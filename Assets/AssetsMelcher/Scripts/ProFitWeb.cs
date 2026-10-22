@@ -1861,8 +1861,7 @@ namespace KitchenDesign
 
                 // Read the fallback product list
                 string fallbackProductListPath =
-                    ProFitUtility.GetFallbackJsonPath(
-                        ProFitGlobals.appProfile,
+                    ProFitGlobals.appProfile.GetFallbackJsonPath(
                         FallbackProductListFileName
                     );
 
@@ -2038,7 +2037,7 @@ namespace KitchenDesign
 
                 {
                     // Lookup the manufacturer ID from the name
-                    if (ProFitUtility.FindManufacturerByName(manufacturers, manufacturerName, out ManufacturerInfo manufacturerInfo))
+                    if (CatalogData.CatalogDataStatus.FindManufacturerByName(manufacturers, manufacturerName, out ManufacturerInfo manufacturerInfo))
                     {
                         product.manufacturerId = manufacturerInfo.id;
                     }
@@ -2084,7 +2083,7 @@ namespace KitchenDesign
                 if (!string.IsNullOrEmpty(productGroupName))
                 {
                     // Lookup the group ID from the name (if given)
-                    if (ProFitUtility.FindProductGroupByName(productGroupName, out ProductGroupInfo productGroup))
+                    if (ProFitGlobals.catalogData.FindProductGroupByName(productGroupName, out ProductGroupInfo productGroup))
                     {
                         product.groupId = productGroup.id;
                     }
@@ -2613,8 +2612,7 @@ namespace KitchenDesign
 
                 // Read the fallback cabinet list
                 string fallbackCabinetListPath =
-                    ProFitUtility.GetFallbackJsonPath(
-                        ProFitGlobals.appProfile,
+                    ProFitGlobals.appProfile.GetFallbackJsonPath(
                         FallbackCabinetListFileName
                     );
 
@@ -2797,7 +2795,7 @@ namespace KitchenDesign
 
                 {
                     // Lookup the manufacturer ID from the name
-                    if (ProFitUtility.FindManufacturerByName(manufacturers, manufacturerName, out ManufacturerInfo manufacturerInfo))
+                    if (CatalogData.CatalogDataStatus.FindManufacturerByName(manufacturers, manufacturerName, out ManufacturerInfo manufacturerInfo))
                     {
                         cabinet.manufacturerId = manufacturerInfo.id;
                     }
@@ -2844,7 +2842,7 @@ namespace KitchenDesign
                 if (!string.IsNullOrEmpty(productGroupName))
                 {
                     // Lookup the group ID from the name (if given)
-                    if (ProFitUtility.FindProductGroupByName(productGroupName, out ProductGroupInfo productGroup))
+                    if (ProFitGlobals.catalogData.FindProductGroupByName(productGroupName, out ProductGroupInfo productGroup))
                     {
                         cabinet.groupId = productGroup.id;
                     }
@@ -2856,7 +2854,7 @@ namespace KitchenDesign
 
                 {
                     // Lookup the cabinet category ID from the name
-                    if (ProFitUtility.FindCabinetSectionCategoryByName(cabinetCategories, cabinetSectionCategoryName, out CabinetSectionCategoryInfo cabinetSectionCategory))
+                    if (CatalogData.CatalogDataStatus.FindCabinetSectionCategoryByName(cabinetCategories, cabinetSectionCategoryName, out CabinetSectionCategoryInfo cabinetSectionCategory))
                     {
                         cabinet.cabinetSectionCategoryId = cabinetSectionCategory.id;
                     }
@@ -4239,9 +4237,8 @@ namespace KitchenDesign
         private static void SaveFallbackJsonResource(string fileNameNoExt, string contents)
         {
             string resourcePath =
-                ProFitUtility.GetFallbackJsonPath(
-                    ProFitGlobals.appProfile,
-                    fileNameNoExt
+                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                        fileNameNoExt
                 );
 
             string assetPath =

@@ -1616,8 +1616,8 @@ namespace KitchenDesign
                 if (selectedBrandCatalog.ruleset == BrandCatalogRuleset.Challenger)
                 {
                     if (selectedCountertopFinish != null &&
-                        ProFitUtility.FindManufacturerById(selectedCountertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer) &&
-                        ProFitUtility.FindManufacturerByName(selectedBrandCatalog.catalogName, out ManufacturerInfo challengerManufacturer) &&
+                        ProFitGlobals.catalogData.FindManufacturerById(selectedCountertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer) &&
+                        ProFitGlobals.catalogData.FindManufacturerByName(selectedBrandCatalog.catalogName, out ManufacturerInfo challengerManufacturer) &&
                         countertopFinishManufacturer.id == challengerManufacturer.id)
                     {
                         // Add Challenger countertops to the price sheet.
@@ -2111,7 +2111,7 @@ namespace KitchenDesign
                 };
             }
 
-            bool hasFoundFinishManufacturer = ProFitUtility.FindManufacturerById(selectedCountertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer);
+            bool hasFoundFinishManufacturer = ProFitGlobals.catalogData.FindManufacturerById(selectedCountertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer);
 
             if (hasFoundFinishManufacturer &&
                 countertopFinishManufacturer.id == selectedBrandCatalog.cabinetManufacturerId)
@@ -2390,11 +2390,11 @@ namespace KitchenDesign
 
             await EventBridge.Designer.onBrandCatalogChanged.InvokeIfNonEmpty(m_SelectedBrandCatalog);
 
-            m_SelectedCabinetFinish = ProFitUtility.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
-            m_SelectedCountertopFinish = ProFitUtility.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
+            m_SelectedCabinetFinish = ProFitGlobals.catalogData.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
+            m_SelectedCountertopFinish = ProFitGlobals.catalogData.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
 
             string flooringId = !string.IsNullOrEmpty(deckFinishProductSku) ? deckFinishProductSku : paverFinishProductSku;
-            m_SelectedFlooringFinish = ProFitUtility.FindProductInfoBySku(flooringId, findCabinetSection: false);
+            m_SelectedFlooringFinish = ProFitGlobals.catalogData.FindProductInfoBySku(flooringId, findCabinetSection: false);
 
             m_SelectedBaseCabinetDepthInMeters = baseCabinetDepthInMeters;
             m_SelectedCountertopThicknessInMeters = countertopThicknessInMeters;
@@ -2533,7 +2533,7 @@ namespace KitchenDesign
                         if (cabinetId > 0)
                         {
                             cabinetProductInfo =
-                                ProFitUtility.FindProductInfoById(
+                                ProFitGlobals.catalogData.FindProductInfoById(
                                     cabinetId,
                                     findCabinetSection: true
                                 );
@@ -2542,7 +2542,7 @@ namespace KitchenDesign
                         if (cabinetProductInfo == null)
                         {
                             cabinetProductInfo =
-                                ProFitUtility.FindProductInfoBySku(
+                                ProFitGlobals.catalogData.FindProductInfoBySku(
                                     cabinetSku,
                                     findCabinetSection: true
                                 );
@@ -2556,7 +2556,7 @@ namespace KitchenDesign
                             if (remappedCabinetId.HasValue)
                             {
                                 cabinetProductInfo =
-                                    ProFitUtility.FindProductInfoById(
+                                    ProFitGlobals.catalogData.FindProductInfoById(
                                         remappedCabinetId.Value,
                                         findCabinetSection: true
                                     );
@@ -2942,7 +2942,7 @@ namespace KitchenDesign
                     // Newer saves record their products via the server ID
                     // as this is guaranteed not to change.
                     productInfo =
-                        ProFitUtility.FindProductInfoById(
+                        ProFitGlobals.catalogData.FindProductInfoById(
                             productId,
                             findCabinetSection: false
                         );
@@ -2954,7 +2954,7 @@ namespace KitchenDesign
                     // product was found), try to lookup the product by its
                     // SKU.
                     productInfo =
-                        ProFitUtility.FindProductInfoBySku(
+                        ProFitGlobals.catalogData.FindProductInfoBySku(
                             productSku,
                             findCabinetSection: false
                         );
@@ -2969,7 +2969,7 @@ namespace KitchenDesign
                         if (remappedProductId.HasValue)
                         {
                             ProductInfo remappedProductInfo =
-                                ProFitUtility.FindProductInfoById(
+                                ProFitGlobals.catalogData.FindProductInfoById(
                                     remappedProductId.Value,
                                     findCabinetSection: false
                                 );
@@ -3082,7 +3082,7 @@ namespace KitchenDesign
             }
 
             ProductInfo backingProductInfo =
-                ProFitUtility.FindProductInfoBySku(
+                ProFitGlobals.catalogData.FindProductInfoBySku(
                     backingProductSku,
                     findCabinetSection: false
                 );
@@ -3400,7 +3400,7 @@ namespace KitchenDesign
                     // cabinets must be replaced with custom modeled versions.
 
                     ProductInfo fallbackCabinetSectionInfo =
-                        ProFitUtility.FindProductInfoById(
+                        ProFitGlobals.catalogData.FindProductInfoById(
                                 m_SelectedBrandCatalog.fallbackDefaultCabinetSectionProductServerId,
                                 findCabinetSection: true
                             );
@@ -3413,7 +3413,7 @@ namespace KitchenDesign
                         );
                     }
 
-                    if (!ProFitUtility.FindBrandCatalogInfoById(selectedBrandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo))
+                    if (!ProFitGlobals.catalogData.FindBrandCatalogInfoById(selectedBrandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo))
                     {
                         MelcherLog.LogError(
                             $"No brand catalog for ID \"{m_SelectedBrandCatalog.catalogId}\".",
@@ -3471,7 +3471,7 @@ namespace KitchenDesign
                             ++nextDefaultCabinetSectionIndex;
 
                             replacementCabinetInfo =
-                                ProFitUtility.FindProductInfoById(
+                                ProFitGlobals.catalogData.FindProductInfoById(
                                     defaultSectionServerId,
                                     findCabinetSection: true
                                 );
@@ -4140,7 +4140,7 @@ namespace KitchenDesign
                 // old one without creating a new one
                 await CreateCabinetLayoutFromShape(prefab: null);
 
-                if (ProFitUtility.ShouldUseWhiteLabelMode())
+                if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
                 {
                     EventBridge.Designer.showWhiteLabelClientInfoUi.Invoke();
                 }

@@ -389,9 +389,31 @@ Each step is checked and committed on its own, as in phase A.
   moves there too (`None = 0`, `ClientOnly = 1`, `Server = 2`). It is a `MelcherStableEnum`, which
   stores names, so the assets don't change.
 - The editor menu item `DumpSinksWithZeroDepth` moves to `_projectDebugging`.
-- The callers inside area 1 (`PlatformSetupScene`, `MenuScene`'s and `DesignerScene`'s use of
-  the startup queue, the login flow) take the systems directly where they are constructed or
-  handed over. Every other caller goes through the forwards.
+- Inside the systems, collaborators are passed in: `SessionStatus` gets the profile, the client
+  list and the catalog data in its constructor; `CatalogDataStatus` gets the profile. Every caller
+  in the old code goes through `ProFitGlobals`, including `PlatformSetupScene`, `MenuScene` and
+  `DesignerScene`. Their start-up runs in `OnStateAdded`, before a scene initializer can hand them
+  anything (see B1.2).
+- The `ProFitUtility` functions that moved are called through the system they now belong to:
+  `ProFitGlobals.catalogData.FindManufacturerById(…)`, `ProFitGlobals.session.FinishLogInCoroutine(…)`,
+  `ProFitGlobals.launchOptions.GetWebDomainOfApp()`, `ProFitGlobals.appProfile.GetFallbackJsonPath(…)`.
+  The two category lookups and the list overload of `FindManufacturerByName` take their list as
+  an argument and stay static (`CatalogData.CatalogDataStatus.…`). 63 call sites in 19 files,
+  rewritten by a one-off script (session scratchpad).
+- Without an `AppInitializer` (edit mode, a test scene outside the build list) the forwards
+  create default instances on first use, so editor tools and `OnValidate` that read
+  `ProFitGlobals` work as before (empty lists, the profile from `Resources`).
+- **Done 2026-10-22.** Compiles with no errors. `rulescheck.cs` 60/0. `coldstart.sh` from
+  PlatformSetup and from Boot: the reference (13 errors, 4 warnings). `runall.sh` against the
+  B1.2 run: `resave.json` identical in all 8, camera noise only, photos within 0.14/255; kept as
+  `unity6-after-B1.3-2026-10-22/`. `menucheck.sh`: one run 22 / 22 / 1,269, the next 21 / 21 /
+  1,268. The app's own log lines were the same in both, so the extra error was the editor's.
+  Removed from `ProFitGlobals` with no forward, because nothing outside the new systems used
+  them: `Init`, `isInitialized`, `productTags`, `cabinetCompatibilities`,
+  `LoadFallbackWebResponse`, `LoadAndApplyProductOverrides`, `BuildProductVariantLists`,
+  `PopulateRuntimeBrandCatalogs`, `FindRuntimeProductById/BySku`, `StartAutoKickCoroutine`,
+  `TryGetClientQuoteIndex`, the `LogInCoroutineState` enum (now `LogInState`). The editor menu
+  item moved to `Tools/Kitchen Design/Dump sinks with zero depth`.
 - **Who uses whom:** `SessionStatus` → `ClientListStatus`, `CatalogDataStatus` (log out clears
   both; the login flow fills both). Neither of those uses the session. No cycles.
 - **`EventBridge` in area 1: no delegate is removed.** The systems call the same delegates the
@@ -429,9 +451,12 @@ else.
 4. Construct `CatalogDataStatus`, `ClientListStatus`, `SessionStatus`, then hand them and the
    rules to the `ProFitGlobals` forwards. The forwards must work before step 5, because the loading
    code (`ProFitWeb`, area 2) still reads them.
-5. `CatalogDataStatus.Initialize(profile, rules)` starts loading (fallback, then server).
-6. `ClientListStatus.Initialize()`, then `SessionStatus.Initialize(profile, clients, catalog)`.
-7. Load Splash (or, in the editor, the scene play was pressed in). On each scene load: that scene's
+5. `SessionStatus.Initialize()`, `ClientListStatus.Initialize()`, then
+   `CatalogDataStatus.Initialize()`, which starts loading (fallback, then server). The order is
+   the order the old `Init` reset its fields in; the session's reset writes the kiosk preference
+   of user 0, as before.
+6. `Start`, boot scene only: load build index 1 (`PlatformSetupScene`). In the editor, any other
+   build-list scene plays as itself (`StartAppForEditor`). On each scene load: that scene's
    `SceneInitializer.Initialize(...)`, then `EventApp.OnSceneReady`.
 
 These whys go into CLAUDE.md's "The Initialize() chain" when the code lands (`file-only` mode).

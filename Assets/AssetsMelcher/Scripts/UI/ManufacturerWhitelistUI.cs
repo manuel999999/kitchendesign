@@ -61,7 +61,7 @@ namespace KitchenDesign
             {
                 // Find the manufacturer ID of Stoll as it may be filtered out from
                 // the list of all manufacturers in the next step.
-                if (ProFitUtility.FindManufacturerByName("Stoll", out ManufacturerInfo stoll))
+                if (ProFitGlobals.catalogData.FindManufacturerByName("Stoll", out ManufacturerInfo stoll))
                 {
                     availableManufacturers =
                         availableManufacturers.Where(x => x.id != stoll.id);
@@ -199,7 +199,7 @@ namespace KitchenDesign
             }
 
             string manufacturerName = "<unknown>";
-            if (ProFitUtility.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
+            if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
             {
                 manufacturerName = manufacturer.name;
             }
@@ -241,7 +241,7 @@ namespace KitchenDesign
             int manufacturerId =
                 m_ManufacturerListEntries[row.index].manufacturerId;
 
-            ProFitUtility.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo);
+            ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo);
 
             decimal markupPercentage = 0.0m;
             m_ManufacturerIdToMarkupPercentages.TryGetValue(manufacturerId, out markupPercentage);

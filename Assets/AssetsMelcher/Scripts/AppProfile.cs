@@ -84,6 +84,25 @@ namespace KitchenDesign
             return m_OccupantDefaultMaterialOperation.Result;
         }
 
+        public string GetAppResourcesName()
+        {
+            string appType = m_AppOptions.name.Substring($"{nameof(AppOptions)}_".Length);
+
+            if (m_TargetServerType != ServerType.Production)
+            {
+                appType += $"_{m_TargetServerType}";
+            }
+
+            return appType;
+        }
+
+        public string GetFallbackJsonPath(string fileNameWithoutExtension)
+        {
+            const string FallbackResourceFolder = "FallbackJSON/";
+
+            return System.IO.Path.Combine(GetAppResourcesName(), FallbackResourceFolder, fileNameWithoutExtension);
+        }
+
         // =====================================================================
         // Inspector-serialized fields
         // =====================================================================

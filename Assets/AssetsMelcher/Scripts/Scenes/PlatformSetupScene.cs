@@ -56,7 +56,7 @@ namespace KitchenDesign
                 // To make development easier, there is an option to simulate
                 // white label mode in the editor set in ProFitAppOptions.
 
-                string webDomainOfApp = ProFitUtility.GetWebDomainOfApp();
+                string webDomainOfApp = ProFitGlobals.launchOptions.GetWebDomainOfApp();
 
                 MelcherLog.Log(
                     "webDomainOfApp: " + webDomainOfApp,
@@ -64,7 +64,7 @@ namespace KitchenDesign
                 );
 
                 string distributorUrlParameter =
-                    ProFitUtility.GetDistributorUrlParameter();
+                    ProFitGlobals.launchOptions.GetDistributorUrlParameter();
 
                 MelcherLog.Log(
                     "distributorUrlParameter: " + distributorUrlParameter,
@@ -200,7 +200,7 @@ namespace KitchenDesign
                     sceneNameToLoad = "DesignerScene";
 
                     yield return Timing.WaitUntilDone(
-                        Timing.RunCoroutine(ProFitUtility.FinishLogInCoroutine(rememberMe: false, fetchClients: false, ErrorHandler))
+                        Timing.RunCoroutine(ProFitGlobals.session.FinishLogInCoroutine(rememberMe: false, fetchClients: false, ErrorHandler))
                     );
 
                     EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Loading 3D Designer");

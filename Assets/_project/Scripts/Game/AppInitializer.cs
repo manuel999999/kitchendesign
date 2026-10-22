@@ -1,6 +1,9 @@
-using System;
 using System.Globalization;
+using KitchenDesign.AppRules;
+using KitchenDesign.CatalogData;
 using KitchenDesign.Events;
+using KitchenDesign.Session;
+using KitchenDesign.Shared.Interfaces;
 using Melcher;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,32 +19,25 @@ namespace KitchenDesign
         [SerializeField] private AppProfile appProfile;
 
         private bool _loadsFirstAppScene;
+        private IAppRules _appRules;
 
         private void Awake()
         {
             this._loadsFirstAppScene = this.gameObject.scene.buildIndex == BootSceneBuildIndex;
             DontDestroyOnLoad(this.gameObject);
 
+            LaunchOptions launchOptions = LaunchOptions.FromEnvironment(this.appProfile.appOptions);
+
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
-            bool isDebugMode = Application.isEditor || Debug.isDebugBuild;
-            bool isVerbose = isDebugMode || MelcherWebGL.GetUrlParameter("verbose") != null;
-
-            if (!isVerbose && Application.platform != RuntimePlatform.WebGLPlayer)
-            {
-                string[] arguments = Environment.GetCommandLineArgs();
-                isVerbose |= Array.FindIndex(arguments, x => "--verbose".Equals(x, StringComparison.OrdinalIgnoreCase)) >= 0;
-            }
-
             MelcherLog.Log(
-                $"{nameof(AppInitializer)}:isDebugMode={isDebugMode} isVerbose={isVerbose}",
+                $"{nameof(AppInitializer)}:isDebugMode={launchOptions.IsDebugMode} isVerbose={launchOptions.IsVerbose}",
                 severity: MelcherLogSeverity.MaxValue
             );
 
-            MelcherLog.minimumSeverityToDisplay = isVerbose ? MelcherLogSeverity.Verbose : MelcherLogSeverity.Warning;
-            MelcherWebRequestBuilder.runtimeDebug = isVerbose;
-            ProFitGlobals.isVerbose = isVerbose;
+            MelcherLog.minimumSeverityToDisplay = launchOptions.IsVerbose ? MelcherLogSeverity.Verbose : MelcherLogSeverity.Warning;
+            MelcherWebRequestBuilder.runtimeDebug = launchOptions.IsVerbose;
 
             if (QualitySettings.GetQualityLevel() != 0)
             {
@@ -50,11 +46,21 @@ namespace KitchenDesign
 
             UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
 
-            DOTweenInit.Init(isDebugMode);
+            DOTweenInit.Init(launchOptions.IsDebugMode);
+
+            this._appRules = AppRulesFactory.Create(this.appProfile.appOptions.userFilter);
+
+            CatalogDataStatus catalogData = new CatalogDataStatus(this.appProfile);
+            ClientListStatus clientList = new ClientListStatus();
+            SessionStatus session = new SessionStatus(this.appProfile, clientList, catalogData);
+
+            ProFitGlobals.Bind(this.appProfile, this._appRules, launchOptions, catalogData, clientList, session);
+
+            session.Initialize();
+            clientList.Initialize();
+            catalogData.Initialize();
 
             SceneManager.sceneLoaded += this.OnSceneLoaded;
-
-            ProFitGlobals.Init();
         }
 
         private void Start()
@@ -81,7 +87,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                sceneInitializer.Initialize(this.appProfile, ProFitGlobals.appRules);
+                sceneInitializer.Initialize(this.appProfile, this._appRules);
                 EventApp.OnSceneReady.Raise();
                 return;
             }

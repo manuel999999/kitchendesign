@@ -66,7 +66,7 @@ namespace KitchenDesign
                 bool comingSoon =
                     brandCatalog.fallbackDefaultCabinetSectionProductServerId == 0 &&
                     string.IsNullOrWhiteSpace(brandCatalog.fallbackDefaultCabinetSectionProductSku) &&
-                    ProFitUtility.FindBrandCatalogInfoById(brandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo) &&
+                    ProFitGlobals.catalogData.FindBrandCatalogInfoById(brandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo) &&
                     !ProFitGlobals.runtimeProducts.Any(x => x.category == ProductCategory.CabinetSection && x.manufacturerId == brandCatalogInfo.cabinetManufacturerId);
 
                 catalogCard.SetComingSoon(comingSoon);
@@ -213,7 +213,7 @@ namespace KitchenDesign
         {
             m_CanvasGroup.interactable = false;
 
-            if (ProFitUtility.ShouldUseWhiteLabelMode())
+            if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 

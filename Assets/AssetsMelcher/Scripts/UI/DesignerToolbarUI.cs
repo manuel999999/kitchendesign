@@ -239,9 +239,9 @@ namespace KitchenDesign
                 }
                 else if (
                     categoryButton.category == ProductCategory.Accessory &&
-                    ProFitUtility.ShouldUseWhiteLabelMode() &&
-                    ProFitUtility.GetWhiteLabelAuthorizedDomain() != null &&
-                    ProFitUtility.GetWhiteLabelAuthorizedDomain().Contains("napoleon.com", StringComparison.OrdinalIgnoreCase))
+                    ProFitGlobals.session.ShouldUseWhiteLabelMode() &&
+                    ProFitGlobals.session.GetWhiteLabelAuthorizedDomain() != null &&
+                    ProFitGlobals.session.GetWhiteLabelAuthorizedDomain().Contains("napoleon.com", StringComparison.OrdinalIgnoreCase))
                 {
                     // Accessory option is not available to white-labeled
                     // Napoleon.
@@ -369,7 +369,7 @@ namespace KitchenDesign
         {
             UserProfile profile = ProFitGlobals.userProfile;
 
-            if (ProFitUtility.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
+            if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
             {
                 if (!ProFitGlobals.appRules.IncludesStollManufacturer &&
                     manufacturer.name.Equals("Stoll", StringComparison.OrdinalIgnoreCase))
@@ -602,7 +602,7 @@ namespace KitchenDesign
                             static manufacturerId =>
                             {
                                 // Sort by the order defined in the dashboard.
-                                if (ProFitUtility.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer) &&
+                                if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer) &&
                                     manufacturer.order >= 0)
                                 {
                                     return manufacturer.order;
@@ -636,7 +636,7 @@ namespace KitchenDesign
 
                     if (!string.IsNullOrEmpty(manufacturerNameToLimitTo))
                     {
-                        if (!ProFitUtility.FindManufacturerByName(manufacturerNameToLimitTo, out ManufacturerInfo allowedManufacturer))
+                        if (!ProFitGlobals.catalogData.FindManufacturerByName(manufacturerNameToLimitTo, out ManufacturerInfo allowedManufacturer))
                         {
                             MelcherLog.LogError($"Unable to find manufacturer by name '{manufacturerNameToLimitTo}'");
                         }
@@ -653,7 +653,7 @@ namespace KitchenDesign
                                         // In the editor, allow undefined
                                         // finish visuals to be tested.
 
-                                        if (ProFitUtility.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo) &&
+                                        if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo) &&
                                             string.IsNullOrWhiteSpace(manufacturerInfo.name))
                                         {
                                             MelcherLog.Breadcrumb("Allowing default manufacturer.");
@@ -906,7 +906,7 @@ namespace KitchenDesign
                         cabinetSectionCategoryId =>
                         {
                             bool foundCategory =
-                                ProFitUtility.FindCabinetSectionCategoryById(
+                                CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
                                     ProFitGlobals.cabinetSectionCategories,
                                     cabinetSectionCategoryId,
                                     out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -919,7 +919,7 @@ namespace KitchenDesign
             foreach (int cabinetSectionCategoryId in cabinetSectionCategoryIds)
             {
                 bool foundCategory =
-                    ProFitUtility.FindCabinetSectionCategoryById(
+                    CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
                         ProFitGlobals.cabinetSectionCategories,
                         cabinetSectionCategoryId,
                         out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -975,7 +975,7 @@ namespace KitchenDesign
                         static cabinetSectionCategoryId =>
                         {
                             bool foundCategory =
-                                ProFitUtility.FindCabinetSectionCategoryById(
+                                CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
                                     ProFitGlobals.cabinetSectionCategories,
                                     cabinetSectionCategoryId,
                                     out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -988,7 +988,7 @@ namespace KitchenDesign
             foreach (int cabinetSectionId in cabinetSectionGroupsInCatalog)
             {
                 bool foundCategory =
-                    ProFitUtility.FindCabinetSectionCategoryById(
+                    CatalogData.CatalogDataStatus.FindCabinetSectionCategoryById(
                         ProFitGlobals.cabinetSectionCategories,
                         cabinetSectionId,
                         out CabinetSectionCategoryInfo cabinetSectionCategory
@@ -1572,7 +1572,7 @@ namespace KitchenDesign
                                 foreach (int manufacturerId in kitchen.selectedBrandCatalog.whitelistedHighBarTopCountertopManufacturers)
                                 {
                                     bool foundManufacturer =
-                                        ProFitUtility.FindManufacturerById(
+                                        ProFitGlobals.catalogData.FindManufacturerById(
                                             manufacturerId,
                                             out ManufacturerInfo manufacturerInfo
                                         );
@@ -1926,7 +1926,7 @@ namespace KitchenDesign
         protected void ShowNextOrPreviousProductVariant(bool next)
         {
             List<int> productVariantIds =
-                ProFitUtility.GetProductVariantList(m_ProductBreadcrumb.productInfo);
+                ProFitGlobals.catalogData.GetProductVariantList(m_ProductBreadcrumb.productInfo);
 
             // We might encounter an error trying to display the next/previous
             // product variant. If this happens, we'll keep trying different
@@ -1949,7 +1949,7 @@ namespace KitchenDesign
                 int productIdAtVariantIndex = productVariantIds[variantIndex];
 
                 ProductInfo productInfoForVariant =
-                    ProFitUtility.FindProductInfoById(
+                    ProFitGlobals.catalogData.FindProductInfoById(
                         productIdAtVariantIndex,
                         findCabinetSection: false
                     );

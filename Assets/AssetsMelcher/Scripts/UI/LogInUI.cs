@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using MEC;
     using System;
     using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace KitchenDesign
         {
             m_MessageBox.Clear();
 
-            if (ProFitGlobals.logInCoroutineState == ProFitGlobals.LogInCoroutineState.Running)
+            if (ProFitGlobals.logInCoroutineState == LogInState.Running)
             {
                 // The previous log in attempt still has a background task
                 // running.
@@ -149,7 +150,7 @@ namespace KitchenDesign
             }
 #endif  // if UNITY_WEBGL && !UNITY_EDITOR
 
-            Timing.RunCoroutine(ProFitUtility.FinishLogInCoroutine(rememberMe, fetchClients: true, ErrorHandler));
+            Timing.RunCoroutine(ProFitGlobals.session.FinishLogInCoroutine(rememberMe, fetchClients: true, ErrorHandler));
         }
 
         public void ClearForm()

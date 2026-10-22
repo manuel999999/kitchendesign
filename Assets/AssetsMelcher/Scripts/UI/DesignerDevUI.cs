@@ -216,7 +216,7 @@ namespace KitchenDesign
 
                             string manufacturerName = "Unknown Manufacturer";
 
-                            if (ProFitUtility.FindManufacturerById(productAtIndex.manufacturerId, out ManufacturerInfo manufacturerInfo))
+                            if (ProFitGlobals.catalogData.FindManufacturerById(productAtIndex.manufacturerId, out ManufacturerInfo manufacturerInfo))
                             {
                                 manufacturerName = manufacturerInfo.name;
                             }

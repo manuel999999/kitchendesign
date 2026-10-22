@@ -373,7 +373,7 @@ namespace KitchenDesign
 
                         // Show a confirmation screen for the completed save.
 
-                        if (ProFitUtility.ShouldUseWhiteLabelMode())
+                        if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
                         {
                             string notificationMessage =
                                 "Thank you for using our 3D Outdoor Kitchen Design Tool. Your design and quote have been emailed to you.";
@@ -485,7 +485,7 @@ namespace KitchenDesign
         /// </summary>
         protected void SetupUI()
         {
-            bool isWhiteLabelLayout = ProFitUtility.ShouldUseWhiteLabelMode();
+            bool isWhiteLabelLayout = ProFitGlobals.session.ShouldUseWhiteLabelMode();
 
             bool showQuitButton = !isWhiteLabelLayout;
             m_QuitButton.gameObject.SetActive(showQuitButton);

@@ -48,7 +48,7 @@ namespace KitchenDesign
                 m_ProductVariantIndex = -1;
 
                 List<int> productVariants =
-                    ProFitUtility.GetProductVariantList(m_ProductInfo);
+                    ProFitGlobals.catalogData.GetProductVariantList(m_ProductInfo);
 
                 if (productVariants != null && productVariants.Count > 0)
                 {

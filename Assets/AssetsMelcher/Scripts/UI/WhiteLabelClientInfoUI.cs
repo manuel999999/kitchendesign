@@ -60,7 +60,7 @@ namespace KitchenDesign
             // The "I want to be contacted" checkbox is only used by Napoleon
             // in white label mode.
             bool isWhiteLabeledNapoleon =
-                ProFitUtility.ShouldUseWhiteLabelMode() &&
+                ProFitGlobals.session.ShouldUseWhiteLabelMode() &&
                 authorizedDomain.Contains("napoleon.com", StringComparison.OrdinalIgnoreCase);
 
             m_WantsFileEmailed.gameObject.SetActive(isWhiteLabeledNapoleon);
