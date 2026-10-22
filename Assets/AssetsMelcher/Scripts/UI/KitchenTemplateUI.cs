@@ -6,6 +6,7 @@ namespace KitchenDesign
     using System.Linq;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     Allows the user to select a default kitchen design. This is used by
@@ -64,10 +65,10 @@ namespace KitchenDesign
 
             int nextToggleIndex = 0;
             int? selectedToggleIndex = null;
-            BrandCatalog brandCatalog = kitchen.selectedBrandCatalog;
+            BrandCatalogSO brandCatalog = kitchen.selectedBrandCatalog;
             for (int i = 0; i < brandCatalog.kitchenTemplates.Count; ++i)
             {
-                KitchenTemplate template = brandCatalog.kitchenTemplates[i];
+                KitchenTemplateSO template = brandCatalog.kitchenTemplates[i];
                 if (template.style != kitchenStyle)
                 {
                     continue;
@@ -120,7 +121,7 @@ namespace KitchenDesign
 
             KitchenStyle selectedStyle = kitchen.selectedCabinetLayout.style;
 
-            KitchenTemplate template =
+            KitchenTemplateSO template =
                 kitchen.selectedBrandCatalog.kitchenTemplates
                     .Where(x => x.style == selectedStyle)
                     .Skip(toggleIndex)

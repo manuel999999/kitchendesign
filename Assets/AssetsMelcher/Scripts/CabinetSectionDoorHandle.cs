@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using System;
     using UnityEngine;
+    using KitchenDesign.Serializables;
+    using KitchenDesign.Scriptables;
 
     public class CabinetSectionDoorHandle : MonoBehaviour
     {
@@ -12,7 +14,7 @@ namespace KitchenDesign
         // ====================================================================
 
         public static void InstantiateHandle(
-            CabinetSectionDoorHandleStyle   doorHandleStyle,
+            CabinetSectionDoorHandleStyleSO   doorHandleStyle,
             string                          cabinetBaseVisualId,
             string                          selectedDoorHandleStyle,
             Transform                       cabinet,
@@ -61,7 +63,7 @@ namespace KitchenDesign
             handle.ActivateDoorHandleStyle(selectedDoorHandleStyle);
         }
 
-        protected static CabinetSectionDoorHandleData GetDoorHandleDataByCabinetBaseId(CabinetSectionDoorHandleStyle doorHandleStyle, string cabinetBaseVisualId)
+        protected static CabinetSectionDoorHandleData GetDoorHandleDataByCabinetBaseId(CabinetSectionDoorHandleStyleSO doorHandleStyle, string cabinetBaseVisualId)
         {
             if (doorHandleStyle == default)
             {
@@ -93,7 +95,7 @@ namespace KitchenDesign
 
 #if UNITY_EDITOR
         public static Transform InstantiateHandleEditor(
-            CabinetSectionDoorHandleStyle   doorHandleStyle,
+            CabinetSectionDoorHandleStyleSO   doorHandleStyle,
             string                          cabinetBaseVisualId,
             string                          selectedDoorHandleStyle,
             Transform                       parent)

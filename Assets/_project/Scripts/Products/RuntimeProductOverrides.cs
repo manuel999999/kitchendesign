@@ -114,7 +114,7 @@ namespace KitchenDesign.Products
         public static void ApplyBrandCatalogPadding(
             CatalogDataStatus       catalogData,
             ProductVisualDatabaseSO productVisualDatabase,
-            BrandCatalog            selectedBrandCatalog)
+            BrandCatalogSO            selectedBrandCatalog)
         {
             foreach (ProductInfo runtimeProductInfo in catalogData.RuntimeProducts)
             {

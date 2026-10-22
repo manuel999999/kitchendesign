@@ -1,15 +1,16 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Serializables;
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
 
     [CreateAssetMenu(fileName = "CabinetSectionDoor", menuName = "Melcher Studios/Pro-Fit/Cabinet Section Door")]
-    public class CabinetSectionDoorStyle : MelcherScriptableObject
+    public class CabinetSectionDoorStyleSO : MelcherScriptableObject
     {
         // =====================================================================
         // Properties

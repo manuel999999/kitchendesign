@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     /// This interface is used by <see cref="Occupant"/> to request information

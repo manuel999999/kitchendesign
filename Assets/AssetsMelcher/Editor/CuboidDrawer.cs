@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using UnityEngine;
     using UnityEditor;
+    using KitchenDesign.Geometry;
 
 
     [CustomPropertyDrawer(typeof(Cuboid))]

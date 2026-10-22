@@ -1,5 +1,5 @@
 #if UNITY_EDITOR
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Scriptables;
@@ -7,9 +7,10 @@ namespace KitchenDesign
     using System.Collections.ObjectModel;
     using UnityEditor;
     using UnityEngine;
+    using KitchenDesign.Serializables;
 
     [CreateAssetMenu(fileName = "CabinetSectionDoorEditorMapping", menuName = "Melcher Studios/Pro-Fit/Cabinet Section Door Editor Mapping")]
-    public class CabinetSectionDoorEditorMapping : MelcherScriptableObject
+    public class CabinetSectionDoorEditorMappingSO : MelcherScriptableObject
     {
         // =====================================================================
         // Properties
@@ -36,7 +37,7 @@ namespace KitchenDesign
 
             AppProfileSO appProfile = AssetDatabase.LoadAssetAtPath<AppProfileSO>("Assets/AssetsMelcher/Resources/AppProfile.asset");
             
-            ReadOnlyCollection<BrandCatalog> brandCatalogs = appProfile.presetBrandCatalogs;
+            ReadOnlyCollection<BrandCatalogSO> brandCatalogs = appProfile.presetBrandCatalogs;
 
             for(int i = 0; i < brandCatalogs.Count; i++)
             {
@@ -47,9 +48,9 @@ namespace KitchenDesign
             EditorUtility.SetDirty(this);
         }
 
-        private void TryAddToFullCabinetDoorMapping(ref List<CabinetSectionDoorData> map, ref HashSet<string> registeredDoors, BrandCatalog catalog)
+        private void TryAddToFullCabinetDoorMapping(ref List<CabinetSectionDoorData> map, ref HashSet<string> registeredDoors, BrandCatalogSO catalog)
         {
-            CabinetSectionDoorStyle doorStyles = catalog.cabinetSectionDoorStyle;
+            CabinetSectionDoorStyleSO doorStyles = catalog.cabinetSectionDoorStyle;
             if(doorStyles == default)
             {
                 Debug.LogWarning($"Brand Catalog {catalog.name} does not have a Cabinet Section Door Style assigned. Skipping.");

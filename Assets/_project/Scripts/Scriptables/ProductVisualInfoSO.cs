@@ -6,6 +6,7 @@ namespace KitchenDesign.Scriptables
     using KitchenDesign.Serializables;
     using System;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     [CreateAssetMenu(fileName ="", menuName = "Melcher Studios/Pro-Fit/Product Visual Info")]
     public class ProductVisualInfoSO : MelcherScriptableObject

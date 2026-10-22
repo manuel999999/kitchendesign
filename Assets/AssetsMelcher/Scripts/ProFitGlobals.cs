@@ -144,7 +144,7 @@ namespace KitchenDesign
 
         public static List<BrandCatalogInfo> serverBrandCatalogs => catalogData.ServerBrandCatalogs;
 
-        public static List<BrandCatalog> runtimeBrandCatalogs => catalogData.RuntimeBrandCatalogs;
+        public static List<BrandCatalogSO> runtimeBrandCatalogs => catalogData.RuntimeBrandCatalogs;
 
         public static List<ManufacturerInfo> manufacturers => catalogData.Manufacturers;
 

@@ -7,6 +7,8 @@ namespace KitchenDesign
     using Cysharp.Threading.Tasks;
     using System.Linq;
     using UnityEngine;
+    using KitchenDesign.Geometry;
+    using KitchenDesign.Scriptables;
 
     public class CabinetShapeUI : MelcherUI
     {
@@ -137,7 +139,7 @@ namespace KitchenDesign
         protected void OnNextButtonClicked(MelcherButton caller)
         {
             Kitchen kitchen = Kitchen.instance;
-            BrandCatalog brandCatalog = kitchen.selectedBrandCatalog;
+            BrandCatalogSO brandCatalog = kitchen.selectedBrandCatalog;
 
             if (m_ShapeToggleGroup.IsAnyToggleOn())
             {
@@ -145,7 +147,7 @@ namespace KitchenDesign
 
                 if (brandCatalog != null)
                 {
-                    IEnumerable<KitchenTemplate> templatesForStyle =
+                    IEnumerable<KitchenTemplateSO> templatesForStyle =
                         brandCatalog.kitchenTemplates.Where(
                             x => x.style == kitchen.selectedCabinetLayout.style
                         );

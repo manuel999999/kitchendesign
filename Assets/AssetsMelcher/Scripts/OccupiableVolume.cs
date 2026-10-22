@@ -9,6 +9,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     Represents a 3D space that can be occupied by products. This may be

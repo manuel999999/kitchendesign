@@ -1,11 +1,11 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "CabinetSectionLegStyle", menuName = "Melcher Studios/Pro-Fit/Cabinet Section Leg Style")]
-    public class CabinetSectionLegStyle : MelcherScriptableObject
+    public class CabinetSectionLegStyleSO : MelcherScriptableObject
     {
         // ====================================================================
         // Properties

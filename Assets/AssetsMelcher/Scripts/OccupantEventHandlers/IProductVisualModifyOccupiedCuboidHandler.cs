@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Geometry;
     /// <summary>
     ///     This interface provides a way for <see cref="ProductVisualContent"/>s
     ///     to modify the cuboid they occupy in an <see

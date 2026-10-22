@@ -1,6 +1,6 @@
 double R(float v) { return System.Math.Round((double)v, 4); }
 System.Collections.Generic.List<object> V(UnityEngine.Vector3 v) { return new System.Collections.Generic.List<object> { R(v.x), R(v.y), R(v.z) }; }
-System.Collections.Generic.Dictionary<string, object> C(KitchenDesign.Cuboid c)
+System.Collections.Generic.Dictionary<string, object> C(KitchenDesign.Geometry.Cuboid c)
 {
     UnityEngine.Vector3 s = c.max - c.min;
     return new System.Collections.Generic.Dictionary<string, object> {

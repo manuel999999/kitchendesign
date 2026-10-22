@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -8,6 +8,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEngine;
+    using KitchenDesign.Serializables;
 
     /// <summary>
     ///     This is the app-local information about a Brand Catalog. Not to be
@@ -16,7 +17,7 @@ namespace KitchenDesign
     ///     information than this scriptable object.
     /// </summary>
     [CreateAssetMenu(fileName = "BrandCatalog", menuName = "Melcher Studios/Pro-Fit/Brand Catalog")]
-    public class BrandCatalog : MelcherScriptableObject
+    public class BrandCatalogSO : MelcherScriptableObject
     {
         // ====================================================================
         // Properties
@@ -86,13 +87,13 @@ namespace KitchenDesign
         public Material defaultCabinetFinishOverride =>
             m_DefaultCabinetFinishOverride;
 
-        public CabinetSectionDoorStyle cabinetSectionDoorStyle =>
+        public CabinetSectionDoorStyleSO cabinetSectionDoorStyle =>
             m_CabinetSectionDoorStyle;
 
-        public CabinetSectionDoorHandleStyle cabinetSectionDoorHandleStyle =>
+        public CabinetSectionDoorHandleStyleSO cabinetSectionDoorHandleStyle =>
             m_CabinetSectionDoorHandleStyle;
 
-        public CabinetSectionLegStyle cabinetSectionLegStyle =>
+        public CabinetSectionLegStyleSO cabinetSectionLegStyle =>
             m_CabinetSectionLegStyle;
 
         public CabinetBacking highBarTopOverridePrefab =>
@@ -148,7 +149,7 @@ namespace KitchenDesign
 
         public BackPanelsInfo cabinetRuntimeBackPanelInfo => m_CabinetRuntimeBackPanelInfo;
 
-        public ReadOnlyCollection<KitchenTemplate> kitchenTemplates => m_KitchenTemplates.readOnly;
+        public ReadOnlyCollection<KitchenTemplateSO> kitchenTemplates => m_KitchenTemplates.readOnly;
 
         public BrandCatalogInfo info => ProFitGlobals.serverBrandCatalogs.Find(x => x.id == m_CatalogId);
 
@@ -498,13 +499,13 @@ namespace KitchenDesign
         protected Material m_DefaultCabinetFinishOverride = default;
 
         [SerializeField]
-        protected CabinetSectionDoorStyle m_CabinetSectionDoorStyle = default;
+        protected CabinetSectionDoorStyleSO m_CabinetSectionDoorStyle = default;
 
         [SerializeField]
-        protected CabinetSectionDoorHandleStyle m_CabinetSectionDoorHandleStyle = default;
+        protected CabinetSectionDoorHandleStyleSO m_CabinetSectionDoorHandleStyle = default;
 
         [SerializeField]
-        protected CabinetSectionLegStyle m_CabinetSectionLegStyle = default;
+        protected CabinetSectionLegStyleSO m_CabinetSectionLegStyle = default;
 
         [Tooltip("A custom high bar top used by this kitchen.")]
         [SerializeField, MelcherAssetField]
@@ -590,7 +591,7 @@ namespace KitchenDesign
         protected BackPanelsInfo m_CabinetRuntimeBackPanelInfo = default;
 
         [SerializeField]
-        protected MelcherReadWriteList<KitchenTemplate> m_KitchenTemplates = new ();
+        protected MelcherReadWriteList<KitchenTemplateSO> m_KitchenTemplates = new ();
 
         // ====================================================================
         // Non-serialized fields
@@ -603,92 +604,10 @@ namespace KitchenDesign
         // Nested types
         // ====================================================================
 
-        public class DoorStyleInfo
-        {
-            // ====================================================================
-            // Constructors
-            // ====================================================================
-
-            public DoorStyleInfo(string doorStyleName)
-            {
-                m_Name = doorStyleName;
-            }
-
-            public DoorStyleInfo(string doorStyleName, string doorStyleDisplayName)
-            {
-                m_Name = doorStyleName;
-                m_DoorStyleDisplayName = doorStyleDisplayName == string.Empty ? doorStyleName : doorStyleDisplayName;
-            }
-
-            // ====================================================================
-            // Properties
-            // ====================================================================
-
-            public string name => m_Name;
-            public string doorStyleDisplayName => m_DoorStyleDisplayName;
-
-            public ReadOnlyCollection<ProductVisualSO> visuals => m_Visuals.readOnly;
-
-            public Sprite toolbarButtonSprite => m_ToolbarButtonSprite;
-
-            // ====================================================================
-            // Methods
-            // ====================================================================
-
-            public void AddVisual(ProductVisualSO productVisual)
-            {
-                if (!m_Visuals.readOnly.Contains(productVisual))
-                {
-                    m_Visuals.mutable.Add(productVisual);
-                }
-            }
-
-            // ====================================================================
-            // Fields
-            // ====================================================================
-
-            protected string m_Name;
-            protected string m_DoorStyleDisplayName;
-            protected MelcherReadWriteList<ProductVisualSO> m_Visuals = new ();
-            protected Sprite m_ToolbarButtonSprite;
-
-        }   // class DoorStyleInfo
 
         // TODO: Rename to "CabinetPanel" or something. This is to describe
         //       panels that attach to fridges at the end of a cabinet, or just
         //       a normal end panel on a regular cabinet.
-        [System.Serializable]
-        public class FridgePanelInfo
-        {
-            public string productName => m_ProductName;
-            public string productId => m_ProductId;
-
-            public string panelHeight => m_PanelHeightInInches.ToString();
-
-            public float dealerPrice => m_PriceSheetPrice.GetPrice(ProFitGlobals.userProfile.currency);
-
-            public float specificPanelWidthInMeters => m_SpecificPanelWidthInInches * Units.Inches2Meters;
-
-            [SerializeField]
-            protected string m_ProductName = default;
-
-            [SerializeField]
-            protected string m_ProductId = default;
-
-            [SerializeField]
-            protected float m_PanelHeightInInches = default;
-
-            [SerializeField]
-            private Price m_PriceSheetPrice = default;
-
-            [Tooltip("This field servers two purposes: For back panels, it " +
-                "is the width of the cabinet from the fridge's left edge to " +
-                "it's right edge. For side panels, it is the width the panel " +
-                "adds to the fridge cabinet's padding on any side where the " +
-                "fridge touches the end of the kitchen.")]
-            [SerializeField]
-            protected float m_SpecificPanelWidthInInches = default;
-        }
 
         // ====================================================================
         // Editor-only

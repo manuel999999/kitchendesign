@@ -8,6 +8,8 @@ namespace KitchenDesign
     using System;
     using UnityEngine;
     using UnityEngine.EventSystems;
+    using KitchenDesign.Geometry;
+    using KitchenDesign.Serializables;
 
     /// <summary>
     ///     This script is attached to the Backsplash and Bar Top prefabs. It
@@ -285,20 +287,6 @@ namespace KitchenDesign
         // Nested types
         // =====================================================================
 
-        /// <summary>
-        ///     Stores a measurement that should be different between different
-        ///     kitchen builders. This type may need to be moved to its own
-        ///     file, but ideally we would have a way to save these differences
-        ///     to the server.
-        /// </summary>
-        [System.Serializable]
-        public struct BuilderSpecificDistance
-        {
-            public float proFit;
-
-            public float stoll;
-
-        }   // struct InflateCabinetDepths
 
 
     }   // class CabinetBacking

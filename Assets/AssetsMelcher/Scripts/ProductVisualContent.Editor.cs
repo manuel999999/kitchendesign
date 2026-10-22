@@ -11,6 +11,7 @@ namespace KitchenDesign
     using UnityEditor;
     using UnityEditor.SceneManagement;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     using static UnityEditor.PrefabUtility;
 
@@ -636,7 +637,7 @@ namespace KitchenDesign
 
             if (!correspondingCabinetSectionVisual)
             {
-                if(customCabinetDoorVisualName == CabinetSectionDoorEditorMapping.SuppressedDoorValidationErrorString)
+                if(customCabinetDoorVisualName == CabinetSectionDoorEditorMappingSO.SuppressedDoorValidationErrorString)
                 {
                     return;
                 }
@@ -668,7 +669,7 @@ namespace KitchenDesign
 
         protected string FindCabinetBaseFromMapping(string doorName)
         {
-            CabinetSectionDoorEditorMapping mapping = AssetDatabase.LoadAssetAtPath<CabinetSectionDoorEditorMapping>("Assets/AssetsMelcher/Resources/CabinetSectionDoorEditorMapping.asset");
+            CabinetSectionDoorEditorMappingSO mapping = AssetDatabase.LoadAssetAtPath<CabinetSectionDoorEditorMappingSO>("Assets/AssetsMelcher/Resources/CabinetSectionDoorEditorMapping.asset");
             if(mapping == null)
             {
                 MelcherLog.LogError("Failed to load CabinetSectionDoorEditorMapping asset.");

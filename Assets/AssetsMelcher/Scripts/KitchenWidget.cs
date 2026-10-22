@@ -4,6 +4,7 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     A base class for a world space UI object that anchor to the

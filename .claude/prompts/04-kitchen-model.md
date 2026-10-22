@@ -187,6 +187,22 @@ and moved with their `.meta` to `_project/Scripts/Scriptables/`: `BrandCatalogSO
 helpers to `_project/Scripts/Geometry/` (`KitchenDesign.Geometry`). Check: as B3.2 (each asset of
 those types loads as the new class with the same data, through a census snippet; no asset file
 changes).
+- **Done 2026-10-23.** 6 ScriptableObjects renamed and moved, 11 serializable types (4 taken out
+  of `BrandCatalog`, `CabinetBacking` and `SlicedMesh`; `SlicedMesh.Slice` became
+  `SlicedMeshSlice`), 7 geometry files; 70 files changed by a script (session scratchpad) that
+  renames in code only, interpolation holes included. Compiles in the editor and as macOS player
+  scripts. `kitchendatacensus.cs`: identical before and after (61 assets, 215,254 values, hash
+  `43965C8199303F1E`), every asset loads as its `…SO` class. Checks against B4.1: `rulescheck.cs`
+  60/0; `coldstart.sh` both the reference; `menucheck.sh` 21 / 21 / 1,268; edit probe identical.
+  `runall.sh` (kept as `unity6-after-B4.2`): 7 designs identical, but 36449 (the only Toppin
+  design) had its live orbit camera at yaw 0° instead of 45° and its product 3" left of the stored
+  position (photos up to 5.8/255). A second run (`unity6-after-B4.2b`): `resave.json` identical in
+  all 8 and photos within 0.14/255, only 36449's live camera at 0° again. The code diff normalises
+  to renames, usings and namespaces only (no extension methods moved, no type name used as text).
+  B4.1's code rerun the same day gave 45°, and an instrumented B4.2 run of all 8 designs gave 45°
+  too, so the result is intermittent. The instrumentation found the restart-order race described in
+  CLAUDE.md (handover, orbit view). The server dropped 40 Kalamazoo products between the B4.1 and
+  B4.2 sign-ins, so the fallback JSON differed only in those.
 
 **B4.3 — The kitchen's selections in one object.** `KitchenSelections` (plain class,
 `_project/Scripts/KitchenModel/`) holds the 19 selection fields; `Kitchen`'s public properties

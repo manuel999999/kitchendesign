@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     Renders a cuboid within an <see cref="OccupiableVolume"/> to

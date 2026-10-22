@@ -4,6 +4,7 @@ namespace KitchenDesign.Server
     using KitchenDesign.Shared.Enums;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     public class ProductInfo
     {

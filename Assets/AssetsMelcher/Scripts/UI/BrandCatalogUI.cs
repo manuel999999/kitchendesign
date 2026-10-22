@@ -43,7 +43,7 @@ namespace KitchenDesign
             List<BrandCatalogToggle> catalogCards = new List<BrandCatalogToggle>();
 
             // Recreate the catalog cards that this user has access to
-            foreach (BrandCatalog brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+            foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
             {
                 bool allowed =
                     ProFitGlobals.userProfile.adminSelectedBrandCatalogIds == null ||
@@ -148,7 +148,7 @@ namespace KitchenDesign
                         }
                     }
 
-                    foreach (BrandCatalog brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+                    foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
                     {
                         brandCatalog.PopulateRuntimeData(
                             cabinetSectionProductInfos,
@@ -197,7 +197,7 @@ namespace KitchenDesign
                         ((Component)toggle).transform
                     );
 
-                BrandCatalog selectedCatalog = brandCatalogToggle.brandCatalog;
+                BrandCatalogSO selectedCatalog = brandCatalogToggle.brandCatalog;
 
                 using var raycasterEnabler =
                     MelcherDeferred.Defer(

@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Serializables;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     References a <see cref="BrandCatalog"/>. This is intended to be
@@ -20,7 +21,7 @@ namespace KitchenDesign
         ///     Get/set the brand catalog. This should be assigned a value
         ///     from <see cref="ProFitGlobals.runtimeBrandCatalogs"/>.
         /// </summary>
-        public BrandCatalog brandCatalog
+        public BrandCatalogSO brandCatalog
         {
             get => m_BrandCatalog;
             set
@@ -72,7 +73,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField]
-        protected BrandCatalog m_BrandCatalog;
+        protected BrandCatalogSO m_BrandCatalog;
 
         [SerializeField]
         protected Image m_CatalogImage;

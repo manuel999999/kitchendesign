@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
     using System.Collections.Generic;
+    using KitchenDesign.Serializables;
 
     public static class CabinetSectionDoorUtility
     {
@@ -14,7 +15,7 @@ namespace KitchenDesign
         public static ProductVisualSO FindDoorStyleVisual(
             IReadOnlyList<ProductVisualSO>    productVisuals,
             ProductVisualSO                   cabinetSectionVisual,
-            BrandCatalog                    brandCatalog,
+            BrandCatalogSO                    brandCatalog,
             string                          doorStyleName)
         {
             if(brandCatalog == null)
@@ -119,7 +120,7 @@ namespace KitchenDesign
             }
         }
 
-        public static void TryInitialize(BrandCatalog catalog)
+        public static void TryInitialize(BrandCatalogSO catalog)
         {
             if(m_IsCollectionsInitialized == false)
             {

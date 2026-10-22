@@ -33,7 +33,7 @@ namespace KitchenDesign.Scriptables
 
         public UniversalRenderPipelineAsset runtimeQuality => m_RuntimeQuality;
 
-        public ReadOnlyCollection<BrandCatalog> presetBrandCatalogs => m_PresetBrandCatalogs.readOnly;
+        public ReadOnlyCollection<BrandCatalogSO> presetBrandCatalogs => m_PresetBrandCatalogs.readOnly;
 
         public GroupDatabaseSO brandCatalogLogoDatabase =>
             m_AppOptions.GetBrandCatalogLogoDatabase(m_TargetServerType);
@@ -132,7 +132,7 @@ namespace KitchenDesign.Scriptables
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogs")]
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogDatabase")]
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogPresets")]
-        protected MelcherReadWriteList<BrandCatalog> m_PresetBrandCatalogs = new ();
+        protected MelcherReadWriteList<BrandCatalogSO> m_PresetBrandCatalogs = new ();
 
         private AsyncOperationHandle<Material> m_OccupantDefaultMaterialOperation;
 

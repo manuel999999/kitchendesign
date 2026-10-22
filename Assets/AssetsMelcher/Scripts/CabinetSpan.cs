@@ -9,6 +9,7 @@ namespace KitchenDesign
     using System.Collections.ObjectModel;
     using System.Linq;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     A <see cref="CabinetSpan"/> is a way of referring to a group of

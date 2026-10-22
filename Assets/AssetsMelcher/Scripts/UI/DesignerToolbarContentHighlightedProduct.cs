@@ -8,6 +8,7 @@ namespace KitchenDesign
     using Cysharp.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     /// Manages the UI for the highlighted product in the toolbar.

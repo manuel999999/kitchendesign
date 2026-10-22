@@ -1,21 +1,22 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Serializables;
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
 
     [CreateAssetMenu(fileName = "CabinetSectionDoorHandleStyle", menuName = "Melcher Studios/Pro-Fit/Cabinet Section Door Handle Style")]
-    public class CabinetSectionDoorHandleStyle : MelcherScriptableObject
+    public class CabinetSectionDoorHandleStyleSO : MelcherScriptableObject
     {
         // =====================================================================
         // Properties
         // =====================================================================
 
-        public BrandCatalog brandCatalog => m_BrandCatalog;
+        public BrandCatalogSO brandCatalog => m_BrandCatalog;
         public float baseHandlePrice => m_BaseHandlePrice;
         public TextAsset mapping => m_Mapping;
         public CabinetSectionDoorHandleData defaultPrefab => m_DefaultHandle;
@@ -26,7 +27,7 @@ namespace KitchenDesign
         // Inspector-serialized fields
         // ====================================================================
 
-        [SerializeField] private BrandCatalog m_BrandCatalog;
+        [SerializeField] private BrandCatalogSO m_BrandCatalog;
         [SerializeField] private float m_BaseHandlePrice;
         [SerializeField] private TextAsset m_Mapping;
         [SerializeField] private CabinetSectionDoorHandleData m_DefaultHandle;

@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using System;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     Renders a cuboid around an occupant to indicate the space it

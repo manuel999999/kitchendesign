@@ -16,6 +16,7 @@ namespace KitchenDesign
     using DG.Tweening;
     using System;
     using Cysharp.Threading.Tasks;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     Manages the full toolbar state.
@@ -1188,7 +1189,7 @@ namespace KitchenDesign
                 ToolbarGroupButton button =
                     Instantiate(m_ManufacturerButtonPrefab, scrollContent);
 
-                BrandCatalog.DoorStyleInfo doorStyleInfo = doorStyles[i];
+                DoorStyleInfo doorStyleInfo = doorStyles[i];
 
                 button.name = caller.category + doorStyleInfo.name + "Button";
                 button.phrase = doorStyleInfo.doorStyleDisplayName;
@@ -1214,7 +1215,7 @@ namespace KitchenDesign
                 ToolbarGroupButton button =
                     Instantiate(m_ManufacturerButtonPrefab, scrollContent);
 
-                BrandCatalog.DoorStyleInfo doorHandleStyleInfo = doorHandleStyles[i];
+                DoorStyleInfo doorHandleStyleInfo = doorHandleStyles[i];
 
                 button.name = caller.category + doorHandleStyleInfo.name + "Button";
                 button.phrase = System.Text.RegularExpressions.Regex.Replace(doorHandleStyleInfo.name, "(?<!^)([A-Z])", " $1");
@@ -1352,10 +1353,10 @@ namespace KitchenDesign
                     {
                         // This is a button to change the door style.
 
-                        BrandCatalog selectedBrandCatalog =
+                        BrandCatalogSO selectedBrandCatalog =
                             kitchen.selectedBrandCatalog;
 
-                        BrandCatalog.DoorStyleInfo doorStyleInfo =
+                        DoorStyleInfo doorStyleInfo =
                             selectedBrandCatalog.doorStyles[caller.targetId];
 
                         kitchen.selectedDoorStyleName = doorStyleInfo.name;
@@ -1449,10 +1450,10 @@ namespace KitchenDesign
                     {
                         // This is a button to change the door handle style.
 
-                        BrandCatalog selectedBrandCatalog =
+                        BrandCatalogSO selectedBrandCatalog =
                             kitchen.selectedBrandCatalog;
 
-                        BrandCatalog.DoorStyleInfo doorHandleStyleInfo =
+                        DoorStyleInfo doorHandleStyleInfo =
                             selectedBrandCatalog.doorHandleStyles[caller.targetId];
 
                         kitchen.selectedDoorHandleStyleName = doorHandleStyleInfo.name;
@@ -2133,7 +2134,7 @@ namespace KitchenDesign
 
             Kitchen kitchen = Kitchen.instance;
 
-            BrandCatalog selectedBrandCatalog = kitchen.selectedBrandCatalog;
+            BrandCatalogSO selectedBrandCatalog = kitchen.selectedBrandCatalog;
 
             int defaultManufacturerId = ProFitGlobals.appProfile.defaultManufacturerId;
 
@@ -2242,7 +2243,7 @@ namespace KitchenDesign
             return productsInCategory;
         }
 
-        protected async UniTask OnBrandCatalogChanged(BrandCatalog brandCatalog)
+        protected async UniTask OnBrandCatalogChanged(BrandCatalogSO brandCatalog)
         {
             SetupCategoryToolbar();
 

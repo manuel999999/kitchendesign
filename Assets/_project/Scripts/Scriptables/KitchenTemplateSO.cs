@@ -1,17 +1,17 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = nameof(KitchenTemplate), menuName = "Melcher Studios/Pro-Fit/Kitchen Template")]
-    public class KitchenTemplate : MelcherScriptableObject
+    [CreateAssetMenu(fileName = "KitchenTemplate", menuName = "Melcher Studios/Pro-Fit/Kitchen Template")]
+    public class KitchenTemplateSO : MelcherScriptableObject
     {
         // ====================================================================
         // Properties
         // ====================================================================
 
-        public BrandCatalog brandCatalog => m_BrandCatalog;
+        public BrandCatalogSO brandCatalog => m_BrandCatalog;
         public KitchenStyle style => m_KitchenStyle;
         public Sprite previewSprite => m_PreviewSprite;
         public TextAsset saveData => m_SaveData;
@@ -22,7 +22,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField]
-        protected BrandCatalog m_BrandCatalog = default;
+        protected BrandCatalogSO m_BrandCatalog = default;
 
         [SerializeField]
         protected MelcherStableEnum<KitchenStyle> m_KitchenStyle = new (KitchenStyle.L);

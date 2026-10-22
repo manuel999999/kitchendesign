@@ -13,6 +13,8 @@ namespace KitchenDesign
     using System.Linq;
     using UnityEngine;
     using UnityEngine.EventSystems;
+    using KitchenDesign.Geometry;
+    using KitchenDesign.Serializables;
 
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
     using JsonList = System.Collections.Generic.IList<object>;
@@ -48,7 +50,7 @@ namespace KitchenDesign
 
         public KitchenBuildingMethod selectedBuildingMethod => m_SelectedBuildingMethod;
 
-        public BrandCatalog selectedBrandCatalog => m_SelectedBrandCatalog;
+        public BrandCatalogSO selectedBrandCatalog => m_SelectedBrandCatalog;
 
         public CountertopType selectedCountertopType => m_SelectedCountertopType;
 
@@ -140,7 +142,7 @@ namespace KitchenDesign
         }
 
         public CabinetLayout selectedCabinetLayout => m_SelectedCabinetLayout;
-        public KitchenTemplate selectedKitchenTemplate => m_SelectedKitchenTemplate;
+        public KitchenTemplateSO selectedKitchenTemplate => m_SelectedKitchenTemplate;
         public ProductInfo selectedCountertopFinish => m_SelectedCountertopFinish;
         public ProductInfo selectedCabinetFinish => m_SelectedCabinetFinish;
         public ProductInfo selectedFlooringFinish => m_SelectedFlooringFinish;
@@ -1152,7 +1154,7 @@ namespace KitchenDesign
                 // neighbouring a fridge cabinet).
                 int cabinetEndPanelCount = 0;
 
-                CabinetSectionDoorHandleStyle style = m_SelectedBrandCatalog.cabinetSectionDoorHandleStyle;
+                CabinetSectionDoorHandleStyleSO style = m_SelectedBrandCatalog.cabinetSectionDoorHandleStyle;
                 float handleBasePrice = 0f;
 
                 if(style != null)
@@ -1416,7 +1418,7 @@ namespace KitchenDesign
                             isCornerBackPanel = true;
                         }
 
-                        BrandCatalog.FridgePanelInfo backPanel;
+                        FridgePanelInfo backPanel;
                         if(isCornerBackPanel)
                         {
                             backPanel = m_SelectedBrandCatalog.FindFirstCabinetBackPanelByDepth(depth, cabinetProductInfo.cabinetSectionCategoryId);
@@ -1438,7 +1440,7 @@ namespace KitchenDesign
                         }
                         else
                         {
-                            BrandCatalog.FridgePanelInfo fallbackPanel = m_SelectedBrandCatalog.cabinetRuntimeBackPanelInfo.fallbackBackPanel;
+                            FridgePanelInfo fallbackPanel = m_SelectedBrandCatalog.cabinetRuntimeBackPanelInfo.fallbackBackPanel;
                             string backPanelProductId = $"{backPanel.productId}-{backPanel.specificPanelWidthInMeters * Units.Meters2Inches}x{backPanel.panelHeight}";
                             string backPanelProductName = $"{backPanel.productName} {backPanel.specificPanelWidthInMeters * Units.Meters2Inches}\"W x {backPanel.panelHeight}\"H";
 
@@ -1496,7 +1498,7 @@ namespace KitchenDesign
                     float fridgeWidthInInches = (float)imperial.totalInches;
 
                     {
-                        BrandCatalog.FridgePanelInfo fridgePanel =
+                        FridgePanelInfo fridgePanel =
                             selectedBrandCatalog.FindFirstFridgeBackPanel(
                                 fridge.productInfo.productSizeInMeters.x
                             );
@@ -1553,7 +1555,7 @@ namespace KitchenDesign
                             fridgeEndPanelCount = 0;
                         }
 
-                        BrandCatalog.FridgePanelInfo endPanel =
+                        FridgePanelInfo endPanel =
                             selectedBrandCatalog.fridgeEndPanelInfo;
 
                         string productId = $"{endPanel.productId}-{selectedBrandCatalog.standardCabinetDepthInInches}x{endPanel.panelHeight}";
@@ -1591,7 +1593,7 @@ namespace KitchenDesign
                 // branch based on whether it has a SKU.
                 if (!string.IsNullOrWhiteSpace(selectedBrandCatalog.cabinetEndPanelInfo.productId))
                 {
-                    BrandCatalog.FridgePanelInfo cabinetEndPanelInfo =
+                    FridgePanelInfo cabinetEndPanelInfo =
                         selectedBrandCatalog.cabinetEndPanelInfo;
 
                     JsonDict cabinetEndPanelEntry =
@@ -2339,7 +2341,7 @@ namespace KitchenDesign
                 {
                     // Newer saves store the catalog by ID (and name, but
                     // prefer ID).
-                    foreach (BrandCatalog brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+                    foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
                     {
                         if (brandCatalog.catalogId == brandCatalogId)
                         {
@@ -2354,7 +2356,7 @@ namespace KitchenDesign
                 {
                     // Older saves only store the catalog's name.
 
-                    foreach (BrandCatalog brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+                    foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
                     {
                         if (brandCatalog.catalogName == brandCatalogName)
                         {
@@ -4214,7 +4216,7 @@ namespace KitchenDesign
 
                 float selectedCountertopThicknessInMeters = m_SelectedCountertopThicknessInMeters;
 
-                BrandCatalog selectedBrandCatalog =
+                BrandCatalogSO selectedBrandCatalog =
                     m_SelectedBrandCatalog ?
                         ProFitGlobals.runtimeBrandCatalogs.Find(x => x.catalogId == m_SelectedBrandCatalog.catalogId) :
                         null;
@@ -4315,7 +4317,7 @@ namespace KitchenDesign
             EventBridge.Designer.onBuildingMethodChanged?.Invoke(m_SelectedBuildingMethod);
         }
 
-        protected async UniTask SetBrandCatalog(BrandCatalog brandCatalog)
+        protected async UniTask SetBrandCatalog(BrandCatalogSO brandCatalog)
         {
             m_SelectedBrandCatalog = brandCatalog;
 
@@ -4349,7 +4351,7 @@ namespace KitchenDesign
             m_SelectedCabinetLayout = layoutPrefab;
         }
 
-        protected void SetKitchenTemplate(KitchenTemplate template)
+        protected void SetKitchenTemplate(KitchenTemplateSO template)
         {
             m_SelectedKitchenTemplate = template;
         }
@@ -7431,7 +7433,7 @@ namespace KitchenDesign
         ///     styles are available. It can only be chosen before a kitchen
         ///     design is started.
         /// </summary>
-        private BrandCatalog m_SelectedBrandCatalog;
+        private BrandCatalogSO m_SelectedBrandCatalog;
 
         /// <summary>
         ///     The template the user selected during the initial kitchen
@@ -7439,7 +7441,7 @@ namespace KitchenDesign
         ///     effectively represents a save file the kitchen will use at the
         ///     start.
         /// </summary>
-        private KitchenTemplate m_SelectedKitchenTemplate;
+        private KitchenTemplateSO m_SelectedKitchenTemplate;
 
         /// <summary>
         ///     The name of the door style in-use during <see

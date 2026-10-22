@@ -10,6 +10,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.EventSystems;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     Represents a placed instance of a product. An occupant pairs an

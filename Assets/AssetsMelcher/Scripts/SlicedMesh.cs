@@ -5,6 +5,8 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Geometry;
+    using KitchenDesign.Serializables;
 
     /// <summary>
     ///     Implements 27-slice scaling of a cuboid mesh.
@@ -15,7 +17,7 @@ namespace KitchenDesign
         // Properties
         // =====================================================================
 
-        public IReadOnlyList<Slice> slices => m_Slices;
+        public IReadOnlyList<SlicedMeshSlice> slices => m_Slices;
         public Cuboid cuboid => m_Cuboid;
 
         public CuboidPadding skinScale
@@ -45,7 +47,7 @@ namespace KitchenDesign
                 return;
             }
 
-            foreach (Slice slice in m_Slices)
+            foreach (SlicedMeshSlice slice in m_Slices)
             {
                 Vector3 sizeInMeters =
                     slice.sizeInInches * Units.Inches2Meters;
@@ -221,7 +223,7 @@ namespace KitchenDesign
         protected bool m_ShowFlatSlices = false;
 
         [SerializeField]
-        protected List<Slice> m_Slices = null;
+        protected List<SlicedMeshSlice> m_Slices = null;
 
         [SerializeField]
         protected bool m_AllowUpdateInPrefabs = default;
@@ -236,36 +238,6 @@ namespace KitchenDesign
         // Nested types
         // =====================================================================
 
-        [System.Serializable]
-        public struct Slice
-        {
-            public string name => m_Name;
-
-            /// <summary>
-            /// For the Inspector
-            /// </summary>
-            [SerializeField] private string m_Name;
-
-            public Vector3 normalizedAnchor;
-
-            [Tooltip("The length of mesh. Used to properly scale meshes " +
-                "that are not a uniform 1 meter box. E.g., some cabinet " +
-                "countertop meshes have a specific size. When any one of " +
-                "these axises is 0, it is interpreted as 1 meter long.")]
-            public Vector3 sizeInInches;
-
-            // These values have been superseded by the `AxisScaling` values
-            // but will temporarily remain in code to help the transition.
-            public bool scaleAlongX;
-            public bool scaleAlongY;
-            public bool scaleAlongZ;
-
-            public SlicedMeshAxisScaling scalingX;
-            public SlicedMeshAxisScaling scalingY;
-            public SlicedMeshAxisScaling scalingZ;
-
-            public List<MeshRenderer> meshRenderers;
-        }
 
 
 
@@ -293,7 +265,7 @@ namespace KitchenDesign
         {
             for (int i = 0; i < m_Slices.Count; ++i)
             {
-                Slice slice = m_Slices[i];
+                SlicedMeshSlice slice = m_Slices[i];
 
                 if (slice.scalingX != SlicedMeshAxisScaling.PreserveOriginalScale ||
                     slice.scalingY != SlicedMeshAxisScaling.PreserveOriginalScale ||

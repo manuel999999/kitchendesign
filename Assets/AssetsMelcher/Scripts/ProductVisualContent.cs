@@ -10,6 +10,7 @@ namespace KitchenDesign
     using TMPro;
     using System.Threading.Tasks;
     using Cysharp.Threading.Tasks;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     A <see cref="ProductVisualContent"/> represents one of many

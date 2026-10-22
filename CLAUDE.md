@@ -1072,6 +1072,23 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     Assets store the model's enums as `MelcherStableEnum` (by name) or as plain ints, so the type
     names were free to change. Their pure helpers (`CabinetTypeExtensions`, `KitchenStyleExtensions`,
     `CabinetLocalDirectionExtensions`) are in `_projectShared/Common/`.
+  - Data and value types (B4.2). ScriptableObjects in `_project/Scripts/Scriptables/`:
+    `BrandCatalogSO`, `KitchenTemplateSO`, `CabinetSectionDoorStyleSO`,
+    `CabinetSectionDoorHandleStyleSO`, `CabinetSectionLegStyleSO`, `CabinetSectionDoorEditorMappingSO`
+    (moved with their `.meta`; 61 assets, names unchanged). The editor mapping is loaded by path
+    (`Resources/CabinetSectionDoorEditorMapping.asset`); the template's create menu keeps the default
+    file name `KitchenTemplate`. Serializables in `_project/Scripts/Serializables/`:
+    `BackPanelInfo(s)`, `EndPanelInfo(s)`, `CabinetSectionDoorData` (cabinet id → door prefab name),
+    `CabinetSectionDoorHandleData` (cabinet id → handle count), `Price` (a price per currency; only
+    the catalogs' panel prices live in the app, everything else is priced by the server),
+    `DoorStyleInfo`, `FridgePanelInfo` (despite the name, any panel at the end of a fridge or a
+    cabinet, with its price-sheet price), `BuilderSpecificDistance` (a distance that differs between
+    ProFit and Stoll), `SlicedMeshSlice` (its `scaleAlongX/Y/Z` were replaced by `scalingX/Y/Z`;
+    `SlicedMesh` migrates old data when it validates). They bind by field name, so taking them out
+    of their classes changes no asset. Geometry in `_project/Scripts/Geometry/`
+    (`KitchenDesign.Geometry`): `Cuboid`, `CuboidPadding`, `OrientedBounds`, `LineSegment`,
+    `Vector3T`, `VectorUtility`, `CabinetLocalDirectionUtil` (comments kept: moved, not
+    refactored). Checked with `kitchendatacensus.cs` (every serialized value of the 61 assets).
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
@@ -1436,6 +1453,16 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   design loaded (27755) started its orbit at yaw 89° instead of 45°, and the next run on the warm
   editor was back to 45°, so the start angle depends on something left from earlier (or not yet
   initialized) rather than on the design.
+  **Found 2026-10-23 (logged during B4.2):** `Kitchen.Restart` is subscribed to
+  `EventBridge.Designer.restart` before `DesignerOrbitCamera.ResetView`. When a design's load
+  reaches its layout without waiting a frame (44392 does), `onKitchenLayoutChanged` sets the
+  layout's start yaw first and `ResetView` then puts back the scene's 45°, so 44392 (Straight,
+  start yaw 0°) always starts at 45°. 36449's layout arrives two frames later and wins. Separately,
+  the live `MainCamera` measured after the save photos sometimes reads yaw 0° for 36449 (3 of 6
+  runs on 2026-10-23), with the save photos unchanged; and in one run its product sat 3" left of
+  the stored position (the Toppin heated-product padding missing at load; the padding is applied on
+  `onBrandCatalogChanged`, which `Restart` raises only after the load). Both intermittent, both
+  in code area 4 moves (B4.5); the camera itself is area 6.
 - **Cutouts by clipping: prototype built 2026-10-20** (results in `.claude/prompts/02-cutouts-by-clipping.md`,
   step 1). The user gave the go on the look (2026-10-20). The nested case (a burner in a plunge)
   was tested the same day and works; the two plunge visuals are back in the copy (901 database

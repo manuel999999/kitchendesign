@@ -6,6 +6,7 @@ namespace KitchenDesign
     using Cysharp.Threading.Tasks;
     using System.Linq;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     public class CabinetOtherSizesUI : MelcherUI
     {

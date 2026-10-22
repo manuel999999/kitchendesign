@@ -33,7 +33,7 @@ namespace KitchenDesign.CatalogData
 
         public List<CabinetSectionCategoryInfo> CabinetSectionCategories { get; set; } = new(capacity: 0);
         public List<BrandCatalogInfo> ServerBrandCatalogs { get; set; } = new(capacity: 0);
-        public List<BrandCatalog> RuntimeBrandCatalogs { get; set; } = new();
+        public List<BrandCatalogSO> RuntimeBrandCatalogs { get; set; } = new();
         public List<ManufacturerInfo> Manufacturers { get; set; } = new(capacity: 0);
         public List<ProductGroupInfo> ProductGroups { get; set; } = new(capacity: 0);
         public List<ProductTagInfo> ProductTags { get; set; } = new(capacity: 0);
@@ -370,7 +370,7 @@ namespace KitchenDesign.CatalogData
 
             foreach (BrandCatalogInfo serverBrandCatalog in this.ServerBrandCatalogs)
             {
-                foreach (BrandCatalog presetBrandCatalog in this._appProfile.presetBrandCatalogs)
+                foreach (BrandCatalogSO presetBrandCatalog in this._appProfile.presetBrandCatalogs)
                 {
                     if (serverBrandCatalog.id == presetBrandCatalog.catalogId)
                     {
@@ -380,7 +380,7 @@ namespace KitchenDesign.CatalogData
 
                     if (serverBrandCatalog.cabinetManufacturerId == presetBrandCatalog.cabinetManufacturerId)
                     {
-                        BrandCatalog serverDefinedCatalog = UnityEngine.Object.Instantiate(presetBrandCatalog);
+                        BrandCatalogSO serverDefinedCatalog = UnityEngine.Object.Instantiate(presetBrandCatalog);
 
                         serverDefinedCatalog.catalogName = serverBrandCatalog.name;
                         serverDefinedCatalog.catalogId = serverBrandCatalog.id;

@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Geometry
 {
     using Melcher;
     /// <summary>

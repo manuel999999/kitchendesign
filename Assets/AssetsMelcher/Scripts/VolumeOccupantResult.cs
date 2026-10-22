@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
+    using KitchenDesign.Geometry;
     /// <summary>
     ///     This contains the results of an occupant placement attempt. I.e.,
     ///     whether a product could be added to a volume. The information

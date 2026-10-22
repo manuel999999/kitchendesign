@@ -7,6 +7,7 @@ namespace KitchenDesign
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     /// This interface is used by cabinets to request information from the
@@ -16,9 +17,9 @@ namespace KitchenDesign
     {
         public KitchenBuildingMethod selectedBuildingMethod { get; }
 
-        public BrandCatalog selectedBrandCatalog { get; }
+        public BrandCatalogSO selectedBrandCatalog { get; }
 
-        public KitchenTemplate selectedKitchenTemplate { get; }
+        public KitchenTemplateSO selectedKitchenTemplate { get; }
 
         public CountertopType selectedCountertopType { get; }
 

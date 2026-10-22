@@ -11,6 +11,8 @@ namespace KitchenDesign
     using System.Linq;
     using TMPro;
     using UnityEngine;
+    using KitchenDesign.Geometry;
+    using KitchenDesign.Serializables;
 
     /// <summary>
     ///     A cabinet has a few meshes to render: the cabinet, the countertop,
@@ -750,7 +752,7 @@ namespace KitchenDesign
 
             int sliceIndex = -1;
 
-            foreach (SlicedMesh.Slice slice in m_Countertop.slices)
+            foreach (SlicedMeshSlice slice in m_Countertop.slices)
             {
                 ++sliceIndex;
 
@@ -1507,7 +1509,7 @@ namespace KitchenDesign
                 // WeatherStrong has specific fridge panel sizes. Find the
                 // one that is just large enough to fit this product.
 
-                BrandCatalog.FridgePanelInfo fridgePanel =
+                FridgePanelInfo fridgePanel =
                     kitchen.selectedBrandCatalog.FindFirstFridgeBackPanel(
                         desiredCabinetWidthInMeters
                     );
@@ -2135,7 +2137,7 @@ namespace KitchenDesign
 
             if (m_Countertop)
             {
-                foreach (SlicedMesh.Slice slice in m_Countertop.slices)
+                foreach (SlicedMeshSlice slice in m_Countertop.slices)
                 {
                     foreach (MeshRenderer sliceRenderer in slice.meshRenderers)
                     {
@@ -2210,7 +2212,7 @@ namespace KitchenDesign
         ///     cref="KitchenBuildingMethod.Catalog"/>.
         /// </param>
         public void InstantiateCabinetModel(
-            BrandCatalog brandCatalog,
+            BrandCatalogSO brandCatalog,
             ProductVisualInfoSO cabinetDoorVisualInfo,
             ProductVisualContent cabinetDoorVisualPrefab,
             float sectionLengthInMeters)
@@ -2354,7 +2356,7 @@ namespace KitchenDesign
             RemakeCabinetDoor(cabinetDoorVisualInfo, cabinetDoorVisualPrefab);
         }
 
-        public void InstantiateCabinetLegs(BrandCatalog brandCatalog)
+        public void InstantiateCabinetLegs(BrandCatalogSO brandCatalog)
         {
             if (!brandCatalog)
             {
@@ -2383,7 +2385,7 @@ namespace KitchenDesign
                 return;
             }
 
-            CabinetSectionLegStyle legStyle =
+            CabinetSectionLegStyleSO legStyle =
                 brandCatalog.cabinetSectionLegStyle;
 
             float cabinetLegHeight = legStyle.heightInMeters;
@@ -2487,7 +2489,7 @@ namespace KitchenDesign
             /// </summary>
             static void InstantiateLeg(
                 List<CabinetSectionLeg> cabinetLegs,
-                CabinetSectionLegStyle  legStyle,
+                CabinetSectionLegStyleSO  legStyle,
                 ICabinet                cabinet,
                 Vector3                 normalizedCabinetAnchor,
                 Vector3                 offsetFromCabinetAnchorInMeters)

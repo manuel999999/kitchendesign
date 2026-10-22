@@ -188,7 +188,7 @@ switch (step)
         KitchenDesign.EventBridge.Designer.setCountertopType(KitchenDesign.Shared.Enums.CountertopType.Default);
         KitchenDesign.EventBridge.Designer.setBaseCabinetDepth(30f * 0.0254f);
         KitchenDesign.EventBridge.Designer.setCountertopThickness(1.25f * 0.0254f);
-        KitchenDesign.EventBridge.Designer.setCountertopOverhang(KitchenDesign.CuboidPadding.one * 0.0254f);
+        KitchenDesign.EventBridge.Designer.setCountertopOverhang(KitchenDesign.Geometry.CuboidPadding.one * 0.0254f);
         Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.createKitchen.Invoke());
         return "new standard kitchen " + layoutPrefab.name;
     }

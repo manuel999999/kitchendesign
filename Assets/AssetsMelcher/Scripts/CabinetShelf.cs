@@ -7,6 +7,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     This script is attached to products that are cabinet shelves. I.e.,

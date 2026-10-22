@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Geometry
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;

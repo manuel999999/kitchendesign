@@ -11,6 +11,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     This class manages the list of cabinets that belongs to a kitchen.

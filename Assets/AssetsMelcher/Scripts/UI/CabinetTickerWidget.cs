@@ -7,6 +7,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using Cysharp.Threading.Tasks;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     A label that displays the dimensions of a cabinet section. This is

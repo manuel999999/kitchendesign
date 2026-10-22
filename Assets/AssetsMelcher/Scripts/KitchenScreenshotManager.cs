@@ -7,6 +7,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using TMPro;
     using UnityEngine;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     This class is responsible for taking screenshots of the kitchen to

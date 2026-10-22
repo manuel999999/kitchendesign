@@ -2,6 +2,8 @@ namespace KitchenDesign
 {
     using Melcher;
     using UnityEngine;
+    using KitchenDesign.Geometry;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     Represents an instantiated instance of a cabinet leg.
@@ -13,7 +15,7 @@ namespace KitchenDesign
         // ====================================================================
 
         public static CabinetSectionLeg InstantiateLeg(
-            CabinetSectionLegStyle  legStyle,
+            CabinetSectionLegStyleSO  legStyle,
             ICabinet                cabinet,
             Vector3                 normalizedCabinetAnchor,
             Vector3                 offsetFromCabinetAnchorInMeters)
@@ -49,7 +51,7 @@ namespace KitchenDesign
         // Properties
         // ====================================================================
 
-        public CabinetSectionLegStyle legStyle { get; protected set; }
+        public CabinetSectionLegStyleSO legStyle { get; protected set; }
 
         public Transform legInstance { get; protected set; }
 

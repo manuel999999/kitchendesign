@@ -443,7 +443,7 @@ namespace KitchenDesign
             m_LoadingUi.UpdateLoadingImage();
         }
 
-        protected Sprite GetLoadingImage(BrandCatalog catalog)
+        protected Sprite GetLoadingImage(BrandCatalogSO catalog)
         {
             if(ProFitGlobals.appRules.RequiresBrandCatalog)
             {
@@ -544,7 +544,7 @@ namespace KitchenDesign
             );
         }
 
-        protected async UniTask OnBrandCatalogChanged(BrandCatalog selectedBrandCatalog)
+        protected async UniTask OnBrandCatalogChanged(BrandCatalogSO selectedBrandCatalog)
         {
             RuntimeProductOverrides.ApplyBrandCatalogPadding(
                 ProFitGlobals.catalogData,

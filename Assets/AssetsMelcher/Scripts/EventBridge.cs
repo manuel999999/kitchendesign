@@ -11,6 +11,7 @@ namespace KitchenDesign
     using UnityEngine.Events;
     using UnityEngine.EventSystems;
     using UnityEngine.SceneManagement;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     A static group of events which allow scripts to communicate with
@@ -374,9 +375,9 @@ namespace KitchenDesign
             ///     cref="BrandCatalog"/> the user selected. This is called
             ///     by <see cref="BrandCatalogUI"/>.
             /// </summary>
-            public static SequentiallyAwaitedDelegate<BrandCatalog> setBrandCatalog = new ();
+            public static SequentiallyAwaitedDelegate<BrandCatalogSO> setBrandCatalog = new ();
 
-            public static SequentiallyAwaitedDelegate<BrandCatalog> onBrandCatalogChanged = new ();
+            public static SequentiallyAwaitedDelegate<BrandCatalogSO> onBrandCatalogChanged = new ();
 
             /// <summary>
             ///     Used to inform systems when a kitchen is finished being
@@ -395,7 +396,7 @@ namespace KitchenDesign
             ///     because this is treated as a new kitchen and works even
             ///     during edit mode when launching the Designer scene alone.
             /// </summary>
-            public static Action<KitchenTemplate> setKitchenTemplate;
+            public static Action<KitchenTemplateSO> setKitchenTemplate;
 
             public static Action<CountertopType> setCountertopType;
 

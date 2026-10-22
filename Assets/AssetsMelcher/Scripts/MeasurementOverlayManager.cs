@@ -8,6 +8,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.EventSystems;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     /// This class updates the measurement overlays that appear when a product

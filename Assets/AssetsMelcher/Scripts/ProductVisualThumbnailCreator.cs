@@ -12,6 +12,7 @@ namespace KitchenDesign
     using System.Linq;
     using System.Collections.Generic;
     using MEC;
+    using KitchenDesign.Geometry;
 
     /// <summary>
     ///     These functions were originally defined in <see
@@ -154,7 +155,7 @@ namespace KitchenDesign
             {
                 // Create temporary cabinet legs for WeatherStrong cabinets
 
-                BrandCatalog weatherStrongBrandCatalog =
+                BrandCatalogSO weatherStrongBrandCatalog =
                     MelcherCommon.Find(
                         ProFitGlobals.appProfile.presetBrandCatalogs,
                         static x => x.catalogName == "WeatherStrong"
@@ -629,7 +630,7 @@ namespace KitchenDesign
             {
                 m_UsedBrandCatalogName = visualInfo.brandCatalogName;
 
-                BrandCatalog usedBrandCatalog =
+                BrandCatalogSO usedBrandCatalog =
                     MelcherCommon.Find(
                         ProFitGlobals.appProfile.presetBrandCatalogs,
                         static x => x.catalogName == m_UsedBrandCatalogName
