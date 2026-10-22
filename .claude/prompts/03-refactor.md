@@ -742,6 +742,18 @@ across the database, before and after); the database window opens; then the usua
   doing nothing (no inset reset in Catalog without app overrides), exactly as now.
 - Check: compile; a play-mode probe that content loads, the event fires once per visual and the
   handles are released when going back to the menu (count before/after); the usual runs.
+- **Done 2026-10-22.** The loader's object (`Product Visual Content Loader`, a root of
+  `DesignerScene` with only that component) removed through the editor first, so the scene diff
+  is exactly that object; then the script (session scratchpad). `RuntimeProductOverrides` was
+  generated from `DesignerScene`'s own methods, so the logic is the same text; a dry run on a
+  copy was read before it was applied. `SceneInitializer.Initialize` takes the content status as
+  a third argument (the menu keeps it unused) rather than per-scene signatures. Compiles in the
+  editor and as macOS player scripts. New `contentprobe.sh`: 27755 18 contents / 18 events,
+  32569 8 / 8, and 0 states back in the menu each time. `rulescheck.cs` 60/0; `coldstart.sh`
+  both the reference; `runall.sh` against B3.2: identical, photos within 0.05/255 (kept as
+  `unity6-after-B3.3-2026-10-22/`); `menucheck.sh` 22 / 22 / 1,269 (the CLI timeout again). The
+  sign-in's Gemini `products.json` differed from B3.1's only in two Kalamazoo descriptions and
+  links edited on the dashboard in between; this run's files are B3.4's reference.
 
 **B3.4 — The editor tools into `KitchenDesign.Products.Editor`.** A new editor-only asmdef in
 `_project/Editor/Products/`, namespace `KitchenDesign.ProductsEditor` (R-ASM-3), with the database

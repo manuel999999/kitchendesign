@@ -53,6 +53,13 @@ client names; never copy it into a repo.
   any change to the visual types; the reference before area 3 is `visualscensus-before-B3.txt`
   (901 entries, hash `D72B3E9CB18746DF`). The output is Unicode-normalised (NFC): two
   content addresses flip between composed and decomposed "è" in memory (CLAUDE.md, Gotchas).
+- `contentprobe.sh` + `contentprobe.cs` (2026-10-22, B3.3): play mode, read-only. Signs in, opens
+  27755 and 32569 and goes back to the menu after each, printing the content status's states
+  (succeeded, failed, with runtime copy) and how many `ContentLoaded` events fired. Reference:
+  27755 18 states and 18 events, 32569 8 and 26 in total, 0 states in the menu each time.
+- **None of these scripts take options.** `menucheck.sh --help` runs the whole menu check (it
+  happened once, after the user's files had been restored, and rewrote their ProFit fallback
+  JSON). Read a script instead of running it to see what it does.
 - `runall.sh` and `menucheck.sh` don't swap the app profile. Before running them: hash and back
   up `Resources/AppProfile.asset` and every `Resources/*/FallbackJSON` folder, then put in the
   committed profile (`git show HEAD:Assets/AssetsMelcher/Resources/AppProfile.asset`, Gemini) and

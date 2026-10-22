@@ -5,6 +5,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.Products;
     using Unity.Cinemachine;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -3032,8 +3033,8 @@ namespace KitchenDesign
                 }
 
                 ProductVisualContent productVisualPrefab =
-                    await ProductVisualContentLoader.FirstFromActiveScene()
-                        .ProductVisualToContent(productVisual);
+                    await ProFitGlobals.productContent
+                        .LoadContent(productVisual);
 
                 Occupant occupant =
                     await volume.InstantiateAndInsertOccupantAt(
@@ -3222,7 +3223,7 @@ namespace KitchenDesign
 
         public async UniTask CreateCabinetLayoutFromShape(CabinetLayout prefab)
         {
-            ProductVisualContentLoader.FirstFromActiveScene()
+            ProFitGlobals.productContent
                 .Purge();
 
             MelcherLog.LogEditorOnly("Trying to create cabinet layout from prefab: " + prefab, prefab);
@@ -4889,8 +4890,8 @@ namespace KitchenDesign
                 }
 
                 ProductVisualContent productVisualPrefab =
-                    await ProductVisualContentLoader.FirstFromActiveScene()
-                        .ProductVisualToContent(productVisual);
+                    await ProFitGlobals.productContent
+                        .LoadContent(productVisual);
 
                 Occupant addedOccupant =
                     await TryInstantiateProductAnywhere(
@@ -5028,8 +5029,8 @@ namespace KitchenDesign
                         }
 
                         ProductVisualContent productVisualPrefab =
-                            await ProductVisualContentLoader.FirstFromActiveScene()
-                                .ProductVisualToContent(productVisual);
+                            await ProFitGlobals.productContent
+                                .LoadContent(productVisual);
 
                         Occupant newOccupant =
                             await to.InstantiateAndInsertOccupantAt(
@@ -5095,8 +5096,8 @@ namespace KitchenDesign
                 }
 
                 ProductVisualContent cabinetSectionVisualContent =
-                    await ProductVisualContentLoader.FirstFromActiveScene()
-                        .ProductVisualToContent(cabinetSectionVisual);
+                    await ProFitGlobals.productContent
+                        .LoadContent(cabinetSectionVisual);
 
                 if (cabinetSectionVisualContent.sectionModelPrefab)
                 {
@@ -6138,8 +6139,8 @@ namespace KitchenDesign
                 else
                 {
                     ProductVisualContent finishVisualContent =
-                        await ProductVisualContentLoader.FirstFromActiveScene()
-                            .ProductVisualToContent(finishProductVisual);
+                        await ProFitGlobals.productContent
+                            .LoadContent(finishProductVisual);
 
                     finishMaterial = finishVisualContent.finishMaterial;
                     flooringType = finishProductVisual.info.flooringType;
@@ -6749,8 +6750,8 @@ namespace KitchenDesign
                 else
                 {
                     ProductVisualContent finishVisualPrefab =
-                        await ProductVisualContentLoader.FirstFromActiveScene()
-                            .ProductVisualToContent(finishVisual);
+                        await ProFitGlobals.productContent
+                            .LoadContent(finishVisual);
 
                     if (finishVisualPrefab != null && finishVisualPrefab.finishMaterial != null)
                     {

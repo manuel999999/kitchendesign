@@ -9,6 +9,7 @@ using KitchenDesign.Shared.Interfaces;
 using Melcher;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using KitchenDesign.Products;
 
 namespace KitchenDesign
 {
@@ -22,6 +23,7 @@ namespace KitchenDesign
 
         private bool _loadsFirstAppScene;
         private IAppRules _appRules;
+        private ProductVisualContentStatus _productContent;
 
         private void Awake()
         {
@@ -56,8 +58,9 @@ namespace KitchenDesign
             CatalogDataStatus catalogData = new CatalogDataStatus(this.appProfile, this._appRules, server);
             ClientListStatus clientList = new ClientListStatus();
             SessionStatus session = new SessionStatus(this.appProfile, this._appRules, server, clientList, catalogData);
+            this._productContent = new ProductVisualContentStatus();
 
-            ProFitGlobals.Bind(this.appProfile, this._appRules, launchOptions, server, catalogData, clientList, session);
+            ProFitGlobals.Bind(this.appProfile, this._appRules, launchOptions, server, catalogData, clientList, session, this._productContent);
 
             session.Initialize();
             clientList.Initialize();
@@ -90,7 +93,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                sceneInitializer.Initialize(this.appProfile, this._appRules);
+                sceneInitializer.Initialize(this.appProfile, this._appRules, this._productContent);
                 EventApp.OnSceneReady.Raise();
                 return;
             }

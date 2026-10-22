@@ -7,6 +7,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Interfaces;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Serializables;
+    using KitchenDesign.Products;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Linq;
@@ -160,8 +161,7 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            ProductVisualContentLoader.FirstFromActiveScene()
-                .onProductVisualContentLoaded += OnProductVisualContentLoaded;
+            ProFitGlobals.productContent.ContentLoaded += OnProductVisualContentLoaded;
 
             EventBridge.Designer.loadMenuScene              += LoadMenuScene;
             EventBridge.Designer.restart                    += ForgetCabinetSettings;
@@ -185,15 +185,7 @@ namespace KitchenDesign
 
         protected void OnDisable()
         {
-            ProductVisualContentLoader contentLoader =
-                ProductVisualContentLoader.FirstFromActiveScene();
-
-            if (contentLoader)
-            {
-                // We were getting a null reference exception here. It seems
-                // FirstFromActiveScene() fails during a scene transition.
-                contentLoader.onProductVisualContentLoaded -= OnProductVisualContentLoaded;
-            }
+            ProFitGlobals.productContent.ContentLoaded -= OnProductVisualContentLoaded;
 
             EventBridge.Designer.loadMenuScene              -= LoadMenuScene;
             EventBridge.Designer.restart                    -= ForgetCabinetSettings;
@@ -530,383 +522,35 @@ namespace KitchenDesign
             m_TrialCountdownUi.Hide();
         }
 
-        /// <summary>
-        ///     Called when a product visual's addressable content is loaded.
-        /// </summary>
-        /// <param name="productVisual"></param>
-        /// <param name="newlyLoadedProductVisualContent"></param>
-        protected void OnProductVisualContentLoaded(AssetAddress<ProductVisualContent> address, ProductVisualContentLoader.LoadedContent newlyLoadedProductVisualContent)
+        protected void OnProductVisualContentLoaded(AssetAddress<ProductVisualContent> address, LoadedProductContent newlyLoadedProductVisualContent)
         {
-            KitchenBuildingMethod selectedBuildingMethod = m_Kitchen.selectedBuildingMethod;
-
-            if (selectedBuildingMethod != KitchenBuildingMethod.Catalog && !ProFitGlobals.appRules.AdjustsSmokerCutOutHeight)
-            {
-                return;
-            }
-
-            ProductVisualSO runtimeProductVisual = null;
-
-            foreach (ProductVisualSO i in m_ProductVisualDatabase.runtimeEntries)
-            {
-                if (i.contentAddress == address)
-                {
-                    runtimeProductVisual = i;
-                    break;
-                }
-            }
-
-            foreach (ProductInfo runtimeProductInfo in ProFitGlobals.runtimeProducts)
-            {
-                if (runtimeProductInfo.visualId == runtimeProductVisual.info.id)
-                {
-                    ModifySmokerContentCutOutHeight(
-                        runtimeProductInfo.sourceProductInfo,
-                        runtimeProductVisual.sourceProductVisual.info,
-                        newlyLoadedProductVisualContent.sourceContentPrefab,
-                        runtimeProductInfo,
-                        runtimeProductVisual.info,
-                        newlyLoadedProductVisualContent.runtimeContentPrefab,
-                        14.0f * Units.Inches2Meters
-                    );
-                }
-            }
-        }
-
-        /// <summary>
-        ///     Creates and alters the runtime products depending on which
-        ///     build mode is selected. E.g., bar tops do not extend the
-        ///     cabinet in Stoll builds. Also, fridges have tighter padding in
-        ///     Stoll builds. Etc.
-        /// </summary>
-        protected void OnBuildingMethodChanged(KitchenBuildingMethod newBuildingMethod)
-        {
-            IAppRules appRules = ProFitGlobals.appRules;
-
-            // Make copies of the server-parsed product data. This allows the
-            // app to override some values on the copies while maintaining the
-            // ability to restore the original server values if necessary.
-
-            // TODO: This feels error-prone. It would be better to populate the
-            //       runtime products list once and then reset those entries to
-            //       match their source's values here. -Ryan
-            ProFitGlobals.ClearRuntimeProducts();
-
-            foreach (ProductInfo sourceProductInfo in ProFitGlobals.sourceProducts)
-            {
-                ProductInfo runtimeProductInfo = new (sourceProductInfo);
-
-                ProFitGlobals.AddRuntimeProduct(runtimeProductInfo);
-
-                ProductVisualSO sourceProductVisual =
-                    Products.ProductVisualLookups.FindById(
-                        m_ProductVisualDatabase.sourceEntries,
-                        runtimeProductInfo.visualId
-                    );
-
-                if (!sourceProductVisual)
-                {
-                    // This is a visual that we disabled (likely for memory
-                    // optimization) and therefore isn't available. Skip it.
-                    continue;
-                }
-
-                ProductVisualSO runtimeProductVisual =
-                    m_ProductVisualDatabase.FindRuntimeVisualByID(
-                        runtimeProductInfo.visualId
-                    );
-
-                if (!runtimeProductVisual)
-                {
-                    MelcherLog.LogError("Did not find runtime visual for " +  runtimeProductInfo.visualId);
-                    continue;
-                }
-
-
-                if (appRules.AppliesRuntimeProductOverrides)
-                {
-                    ModifyProductInfoForAppRules(
-                        appRules,
-                        runtimeProductInfo,
-                        runtimeProductVisual.info
-                    );
-                }
-                else if (newBuildingMethod == KitchenBuildingMethod.Catalog)
-                {
-                    ModifyProductInfoForCatalogBuildingMethod(
-                        sourceProductInfo,
-                        sourceProductVisual.info,
-                        runtimeProductInfo,
-                        runtimeProductVisual.info
-                    );
-                }
-                else
-                {
-                    runtimeProductVisual.info.initialInsetFromEdgeInMeters =
-                        sourceProductVisual.info.initialInsetFromEdgeInMeters;
-                }
-            }
-
-            MelcherLog.Assert(
-                ProFitGlobals.sourceProducts.Count == ProFitGlobals.runtimeProducts.Count,
-                $"Failed to create an equal number of runtime product info as there are source product info. (Source={ProFitGlobals.sourceProducts.Count} vs Runtime={ProFitGlobals.runtimeProducts.Count}). " +
-                $"These must be exactly one runtime entry for each source entry."
+            RuntimeProductOverrides.ApplySmokerCutOutHeight(
+                ProFitGlobals.catalogData,
+                m_ProductVisualDatabase,
+                ProFitGlobals.appRules,
+                m_Kitchen.selectedBuildingMethod,
+                address,
+                newlyLoadedProductVisualContent
             );
         }
 
-        protected void ModifyProductInfoForAppRules(
-            IAppRules           appRules,
-            ProductInfo         runtimeProductInfo,
-            ProductVisualInfoSO   runtimeVisualInfo)
+        protected void OnBuildingMethodChanged(KitchenBuildingMethod newBuildingMethod)
         {
-            float? highBarTopRiserDepthInMeters = appRules.HighBarTopRiserDepthInMeters;
-
-            if (highBarTopRiserDepthInMeters.HasValue &&
-                runtimeProductInfo.sku == "Backing:BarTop")
-            {
-                Vector3 productSizeInMeters =
-                    runtimeProductInfo.productSizeInMeters;
-
-                productSizeInMeters.z = highBarTopRiserDepthInMeters.Value;
-
-                runtimeProductInfo.productSizeInMeters = productSizeInMeters;
-            }
-
-            if (!runtimeVisualInfo)
-            {
-                return;
-            }
-
-            float? fridgeHorizontalPaddingInMeters = appRules.FridgeHorizontalPaddingInMeters;
-
-            if (fridgeHorizontalPaddingInMeters.HasValue &&
-                runtimeVisualInfo.runtimePrefabCategory == ProductCategorySpecific.Fridge)
-            {
-                runtimeProductInfo.productPaddingInMeters.left = fridgeHorizontalPaddingInMeters.Value;
-                runtimeProductInfo.productPaddingInMeters.right = fridgeHorizontalPaddingInMeters.Value;
-            }
-
-            float? bottomAnchoredProductInsetInMeters = appRules.BottomAnchoredProductInsetInMeters;
-
-            if (bottomAnchoredProductInsetInMeters.HasValue &&
-                runtimeVisualInfo.anchor.IsAtBottom() &&
-                runtimeVisualInfo.initialInsetFromEdgeInMeters > 0.0f)
-            {
-                runtimeVisualInfo.initialInsetFromEdgeInMeters = bottomAnchoredProductInsetInMeters.Value;
-            }
+            RuntimeProductOverrides.RebuildRuntimeProducts(
+                ProFitGlobals.catalogData,
+                m_ProductVisualDatabase,
+                ProFitGlobals.appRules,
+                newBuildingMethod
+            );
         }
 
-        /// <summary>
-        ///     This function is invoked on each product that is registered.
-        ///     Its purpose function is to apply any Catalog-specific changes
-        ///     to the product.
-        /// </summary>
-        protected void ModifyProductInfoForCatalogBuildingMethod(
-            ProductInfo         sourceProductInfo,
-            ProductVisualInfoSO   sourceVisualInfo,
-            ProductInfo         runtimeProductInfo,
-            ProductVisualInfoSO   runtimeVisualInfo)
-        {
-            if (runtimeProductInfo == null)
-            {
-                return;
-            }
-
-        }
-
-        private void ModifySmokerContentCutOutHeight(
-            ProductInfo         sourceProductInfo,
-            ProductVisualInfoSO   sourceVisualInfo,
-            ProductVisualContent sourceVisualContent,
-            ProductInfo         runtimeProductInfo,
-            ProductVisualInfoSO   runtimeVisualInfo,
-            ProductVisualContent runtimeVisualContent,
-            float               desiredCutOutHeightInMeters)
-        {
-            if (runtimeVisualInfo.runtimePrefabCategory != ProductCategorySpecific.Smoker)
-            {
-                return;
-            }
-
-            // Setup to shift the size of products cut-outs, or restore the
-            // original cut-out size.
-
-            Vector3 adjustmentOffsetInMeters = Vector3.zero;
-
-            float cutOutHeightInMeters =
-                sourceVisualContent.modelCutOutExtentMax.localPosition.y -
-                sourceVisualContent.modelCutOutExtentMin.localPosition.y;
-
-            if (runtimeVisualInfo.anchor == ProductAnchor.OnFrontAtTop &&
-                runtimeVisualInfo.initialInsetFromEdgeInMeters <= 0.0f)
-            {
-                // This is a smoker that plunges into its cabinet from the
-                // top. We want to adjust its plunge depth to fit the requested
-                // 14" depth.
-
-                adjustmentOffsetInMeters =
-                    Vector3.up * (cutOutHeightInMeters - desiredCutOutHeightInMeters);
-
-                cutOutHeightInMeters = desiredCutOutHeightInMeters;
-            }
-
-            runtimeProductInfo.cutOutSizeInMeters.y = cutOutHeightInMeters;
-
-            runtimeVisualContent.modelCutOutExtentMin.localPosition =
-                sourceVisualContent.modelCutOutExtentMin.localPosition + adjustmentOffsetInMeters;
-
-            int modelCount = sourceVisualContent.scaleOrigin.childCount;
-
-            for (int i = 0; i < modelCount; ++i)
-            {
-                Transform sourceModel = sourceVisualContent.scaleOrigin.GetChild(i);
-                Transform runtimeModel = runtimeVisualContent.scaleOrigin.GetChild(i);
-
-                runtimeModel.localPosition = sourceModel.localPosition + adjustmentOffsetInMeters;
-            }
-        }
-
-        /// <summary>
-        ///     Apply changes that are specific to a brand catalog. Currently,
-        ///     this is only that Challenger Designs requires a mandatory 2.5"
-        ///     of padding on the left and right of grills.
-        /// </summary>
         protected async UniTask OnBrandCatalogChanged(BrandCatalog selectedBrandCatalog)
         {
-            ProductVisualContentLoader contentLoader =
-                ProductVisualContentLoader.FirstFromActiveScene();
-
-            foreach (ProductInfo runtimeProductInfo in ProFitGlobals.runtimeProducts)
-            {
-                if (string.IsNullOrEmpty(runtimeProductInfo.visualId))
-                {
-                    // We are going to skip printing a warning message if the
-                    // visual ID is completely empty. This is because there
-                    // are seemingly a lot of products that have been added
-                    // to the dashboard recently which do not have a product
-                    // visual ID, intentional maybe, so there's no point in
-                    // polluting the console logs here.
-                    continue;
-                }
-
-                ProductVisualSO runtimeProductVisual =
-                    m_ProductVisualDatabase.FindRuntimeVisualByID(
-                        runtimeProductInfo.visualId
-                    );
-
-                if (!runtimeProductVisual)
-                {
-                    // This is likely a product visual that was unlinked from
-                    // the database (to save memory). Log a warning anyway:
-                    MelcherLog.LogWarningEditorOnly($"Visual ID not found in the product visual database: {runtimeProductInfo.visualId}");
-                    continue;
-                }
-
-                float paddingInMeters = runtimeProductInfo.sourceProductInfo.productPaddingInMeters.left;
-
-                bool isHeatedProduct =
-                    runtimeProductVisual.info.runtimePrefabCategory is
-                        ProductCategorySpecific.Grill or
-                        ProductCategorySpecific.GrillWithInsulatedJacket or
-                        ProductCategorySpecific.Cookware or
-                        ProductCategorySpecific.Smoker;
-
-                if (selectedBrandCatalog)
-                {
-                    // TODO: Should we do this for every product category?
-                    if (isHeatedProduct ||
-                        runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Fridge)
-                    {
-                        // By default, make most products have no padding in
-                        // catalog mode. Challenger requires padding for its
-                        // grills and fridges though and this is handled
-                        // shortly hereafter.
-                        paddingInMeters = 0.0f;
-                    }
-
-                    if (selectedBrandCatalog.ruleset == BrandCatalogRuleset.Challenger)
-                    {
-                        if (runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Fridge)
-                        {
-                            // Challenger fridges have a 1/4" of padding on the
-                            // left and right.
-                            // https://3.basecamp.com/3293895/buckets/37470979/messages/9033213434#__recording_9140977268
-                            paddingInMeters = 0.25f * Units.Inches2Meters;
-                        }
-                        else if (runtimeProductVisual.info.runtimePrefabCategory != ProductCategorySpecific.Smoker)
-                        {
-                            // Otherwise, all products except for smokers (which
-                            // come in their own housing) use 3" padding on
-                            // the left and right.
-                            // https://3.basecamp.com/3293895/buckets/37470979/messages/9033213434#__recording_9140931189
-                            paddingInMeters = Const.Gemini.Challenger.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
-                        }
-                    }
-
-                    if (runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Fridge)
-                    {
-                        // Fix for z-fighting when a fridge is next to an open shelf.
-                        // TODO: Consider adding a flag to ProductVisual to indicate
-                        //       whether a cabinet is 'see-through' and then ensure a
-                        //       fridge panel is added if it is next to a see-through
-                        //       cabinet. -Ryan
-                        const float MinimumPaddingInMeters = (1 / 128.0f) * Units.Inches2Meters;
-                        paddingInMeters = MinimumPaddingInMeters;
-                    }
-
-                    if (runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Shelf)
-                    {
-                        paddingInMeters = 0.0f;
-                    }
-
-                    bool isHeatedOrBurnerProduct =
-                        runtimeProductVisual.info.runtimePrefabCategory is
-                            ProductCategorySpecific.Grill or
-                            ProductCategorySpecific.GrillWithInsulatedJacket or
-                            ProductCategorySpecific.Cookware or
-                            ProductCategorySpecific.Burner or
-                            ProductCategorySpecific.BurnerWithInsulatedJacket or
-                            ProductCategorySpecific.Smoker;
-
-                    // MARK: Custom Catalog Padding
-                    if(isHeatedOrBurnerProduct)
-                    {
-                        if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AgoraBerlinGardens) // agora
-                        {
-                            if(runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker)
-                            {
-                                paddingInMeters = 0f;
-                            }
-                            else
-                            {
-                                paddingInMeters = 2.25f * Units.Inches2Meters;
-                            }
-                        } 
-                        else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Toppin) // toppin
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Endura) // endura
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.WeatherStrong) // weather strong
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.WeatherStrongSelect) // weather strong select
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Naturekast) // naturekast
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                    }
-                }
-
-                runtimeProductInfo.productPaddingInMeters.left = paddingInMeters;
-                runtimeProductInfo.productPaddingInMeters.right = paddingInMeters;
-            }
+            RuntimeProductOverrides.ApplyBrandCatalogPadding(
+                ProFitGlobals.catalogData,
+                m_ProductVisualDatabase,
+                selectedBrandCatalog
+            );
 
             await UniTask.CompletedTask;
         }

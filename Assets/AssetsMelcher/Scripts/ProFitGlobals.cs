@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
+    using KitchenDesign.Products;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -21,6 +22,7 @@ namespace KitchenDesign
         private static CatalogDataStatus s_CatalogData;
         private static ClientListStatus s_ClientList;
         private static SessionStatus s_Session;
+        private static ProductVisualContentStatus s_ProductContent;
 
         public static void Bind(
             AppProfileSO appProfile,
@@ -29,7 +31,8 @@ namespace KitchenDesign
             ServerClient server,
             CatalogDataStatus catalogData,
             ClientListStatus clientList,
-            SessionStatus session)
+            SessionStatus session,
+            ProductVisualContentStatus productContent)
         {
             s_AppProfile = appProfile;
             s_AppRules = appRules;
@@ -38,12 +41,13 @@ namespace KitchenDesign
             s_CatalogData = catalogData;
             s_ClientList = clientList;
             s_Session = session;
+            s_ProductContent = productContent;
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetBindings()
         {
-            Bind(null, null, null, null, null, null, null);
+            Bind(null, null, null, null, null, null, null, null);
         }
 
         public static AppProfileSO appProfile
@@ -77,6 +81,8 @@ namespace KitchenDesign
         public static ClientListStatus clientList => s_ClientList ??= new ClientListStatus();
 
         public static SessionStatus session => s_Session ??= new SessionStatus(appProfile, appRules, server, clientList, catalogData);
+
+        public static ProductVisualContentStatus productContent => s_ProductContent ??= new ProductVisualContentStatus();
 
         public static bool isVerbose => launchOptions.IsVerbose;
 

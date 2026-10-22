@@ -10,7 +10,7 @@ var visual = db.FindRuntimeVisualByID(info.visualId);
 if (visual == null) return "no visual " + info.visualId;
 async Cysharp.Threading.Tasks.UniTaskVoid Run()
 {
-    var prefab = await KitchenDesign.ProductVisualContentLoader.FirstFromActiveScene().ProductVisualToContent(visual);
+    var prefab = await KitchenDesign.ProFitGlobals.productContent.LoadContent(visual);
     var result = await shelf.TryInstantiateOccupantAnywhere(info, visual, prefab, k.InstantiateOccupant, null);
     UnityEngine.Debug.Log("[CutoutProto] into shelf: " + (result.newOccupant ? result.newOccupant.name : "failed " + result.result.status));
 }

@@ -5,6 +5,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.Products;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -194,8 +195,8 @@ namespace KitchenDesign
                     return;
                 }
 
-                ProductVisualContentLoader contentManager =
-                    ProductVisualContentLoader.FirstFromActiveScene();
+                ProductVisualContentStatus contentManager =
+                    ProFitGlobals.productContent;
 
                 await ClearProducts();
 
@@ -230,7 +231,7 @@ namespace KitchenDesign
                         else
                         {
                             ProductVisualContent visualPrefab =
-                                await contentManager.ProductVisualToContent(productVisual);
+                                await contentManager.LoadContent(productVisual);
 
                             bool newOccupant =
                                 await m_Kitchen.TryInstantiateProductAnywhere(

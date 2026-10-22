@@ -996,7 +996,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   `_projectAssets/Prefabs/AppInitializer.prefab`, `AppInitializer` component, `appProfile` →
   `Resources/AppProfile.asset`). Moves itself to `DontDestroyOnLoad`.
 - `MenuScene`: root `MenuSceneInitializer` (first sibling). `DesignerScene`: root
-  `DesignerSceneInitializer` (first sibling). The rest of both scenes is the old app's, unchanged.
+  `DesignerSceneInitializer` (first sibling). The rest of both scenes is the old app's, except
+  that `DesignerScene`'s root `Product Visual Content Loader` object is gone (B3.3; its job is
+  `ProductVisualContentStatus`).
 - In the editor, playing any other build-list scene gets an `AppInitializer` from the prefab at
   `BeforeSceneLoad` (`StartAppForEditor`), and that scene plays as itself.
 
@@ -1007,9 +1009,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    because everything after it logs, formats numbers or tweens.
 2. `Awake` (B1.3): `LaunchOptions` first (the log level and DOTween's debug mode depend on it),
    then the `IAppRules` for the profile's `userFilter` (product parsing reads the padding rule),
-   then construct `CatalogDataStatus`, `ClientListStatus`, `SessionStatus` and hand all of them to
-   `ProFitGlobals.Bind` before initializing anything, because the loading code (`ProFitWeb`)
-   still reads the forwards. Then `session.Initialize()`, `clientList.Initialize()`,
+   then construct the `ServerClient`, `CatalogDataStatus`, `ClientListStatus`, `SessionStatus` and
+   the `ProductVisualContentStatus` (B3.3) and hand all of them to `ProFitGlobals.Bind` before
+   initializing anything, because old code still reads the forwards. The content status is
+   app-wide only because the designer's start-up (`DesignerScene.OnEnable` subscribes to it)
+   runs before a scene initializer can hand anything over; it holds nothing outside the designer
+   (see step 4). Then `session.Initialize()`, `clientList.Initialize()`,
    `catalogData.Initialize()`: the order the old `ProFitGlobals.Init` reset its fields in (the
    session's reset writes user 0's kiosk preference, as it always did). The catalog starts loading
    the fallback data, then the server's; the screens wait for it through
@@ -1017,7 +1022,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 3. `Start`, boot scene only: load build index 1 (`PlatformSetupScene`). Not in `Awake`, see
    Gotchas (`MelcherSceneManager` and a load from the first scene's `Awake`).
 4. On every scene load: the root `SceneInitializer` of that scene gets `Initialize(appProfile,
-   appRules)`, then `EventApp.OnSceneReady` is raised. This runs after the old scene script's
+   appRules, productContent)`, then `EventApp.OnSceneReady` is raised. `DesignerSceneInitializer`
+   purges the content status in its `OnDestroy`, when the designer scene goes: the moment the old
+   loader component released its Addressables handles. This runs after the old scene script's
    `OnStateAdded` (the core package's state machine is subscribed first), so the old scene
    scripts can't use what the initializer receives yet; they keep using `ProFitGlobals`.
 
@@ -1083,6 +1090,31 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     database's own note: editing prefabs from editor scripts can leave loaded prefab references
     stale (reporting null) until reloaded, so Domain Reload stays on in play mode.
     `ProductVisualLookups.FindById` (`_project/Scripts/Products/`) finds a visual in a given list.
+  - **Content loading (B3.3)**, `_project/Scripts/Products/` (`KitchenDesign.Products`).
+    `ProductVisualContentStatus` (plain class, constructed by `AppInitializer`; old code reaches
+    it as `ProFitGlobals.productContent`) loads a visual's content prefab through Addressables
+    once per address, keeps the handle, makes a runtime copy of the prefab
+    (`LoadedProductContent`: source and runtime prefab), and raises `ContentLoaded` once per
+    loaded content. `LoadContent` returns the runtime copy for a runtime visual and the source
+    prefab for a source visual. `Purge` releases every handle; it runs when the designer scene
+    goes (`DesignerSceneInitializer.OnDestroy`) and when `Kitchen` builds a new layout. The
+    runtime copies (in `DontDestroyOnLoad`) are not destroyed by a purge, as before. Why
+    `ContentLoaded` is a C# event and not an `Event<Domain>`: its payload is the content prefab, a
+    `KitchenDesign` type that can't move to Shared. Checked with
+    `Tools/Baseline/unity6/contentprobe.sh` (27755: 18 contents loaded, 18 events, 0 after
+    returning to the menu; 32569: 8).
+  - `RuntimeProductOverrides` (static): `RebuildRuntimeProducts` (on a building method change:
+    new runtime copies of every source product, then the app rules, or in non-Catalog methods the
+    visual's inset reset to its source value; Catalog without app overrides changes nothing),
+    `ApplySmokerCutOutHeight` (when content loads, in Catalog or when the app rules ask: a smoker
+    that plunges from the top gets a 14" cut-out, its model moved to match),
+    `ApplyBrandCatalogPadding` (on a brand catalog change: products' side padding per catalog;
+    Challenger's fridges ¼", its other products except smokers half the Challenger occupant
+    padding; fridges at least 1/128" against z-fighting next to open shelves; shelves 0; heated
+    and burner products 2¼" for Agora (smokers 0) and 3" for Toppin, Endura, WeatherStrong,
+    WeatherStrong Select and NatureKast). `DesignerScene` keeps its event subscriptions and calls
+    these, so they run in the same order among the other listeners as before. The brand-specific
+    numbers are brand rules and move onto `BrandCatalog` in area 4.
   - Addressables: `AssetAddress<T>` and `AssetAddressData` (`_project/Scripts/Serializables/`) hold
     an address and, in the editor, the asset; unlike `AssetReferenceT` they own nothing, so
     passing one around never raises the question of who releases the load. Addresses are asset

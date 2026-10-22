@@ -5,6 +5,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.Products;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;
@@ -2051,8 +2052,8 @@ namespace KitchenDesign
                     {
                         // Load the cabinet section prefab.
                         ProductVisualContent cabinetSectionVisualPrefab =
-                            await ProductVisualContentLoader.FirstFromActiveScene()
-                                .ProductVisualToContent(cabinetSectionVisual);
+                            await ProFitGlobals.productContent
+                                .LoadContent(cabinetSectionVisual);
 
                         Material sectionMaterialOverride =
                             cabinetSectionVisualPrefab.sectionMaterialOverride;
@@ -2617,8 +2618,8 @@ namespace KitchenDesign
             }
 
             ProductVisualContent plungeVisualPrefab =
-                await ProductVisualContentLoader.FirstFromActiveScene()
-                    .ProductVisualToContent(plungeProductVisual);
+                await ProFitGlobals.productContent
+                    .LoadContent(plungeProductVisual);
 
             Cuboid? backingOccupancyInWorldSpace = null;
 

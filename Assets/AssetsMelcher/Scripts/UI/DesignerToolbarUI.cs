@@ -7,6 +7,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Interfaces;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Products;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -1422,8 +1423,8 @@ namespace KitchenDesign
                             if (replacementCabinetDoorVisual)
                             {
                                 ProductVisualContent replacementCabinetDoorVisualPrefab =
-                                    await ProductVisualContentLoader.FirstFromActiveScene()
-                                        .ProductVisualToContent(replacementCabinetDoorVisual);
+                                    await ProFitGlobals.productContent
+                                        .LoadContent(replacementCabinetDoorVisual);
 
                                 i.element.RemakeCabinetDoor(
                                     replacementCabinetDoorVisual.info,
@@ -1859,8 +1860,8 @@ namespace KitchenDesign
 
             if (visual)
             {
-                ProductVisualContentLoader.FirstFromActiveScene()
-                    .ProductVisualToContent(visual).Forget();
+                ProFitGlobals.productContent
+                    .LoadContent(visual).Forget();
             }
             else
             {

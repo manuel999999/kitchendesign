@@ -5,6 +5,7 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
+    using KitchenDesign.Products;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -1457,11 +1458,11 @@ namespace KitchenDesign
                 }
                 else
                 {
-                    ProductVisualContentLoader contentLoader =
-                        ProductVisualContentLoader.FirstFromActiveScene();
+                    ProductVisualContentStatus contentLoader =
+                        ProFitGlobals.productContent;
 
                     ProductVisualContent cabinetSectionVisualPrefab =
-                        await contentLoader.ProductVisualToContent(cabinetSectionVisual);
+                        await contentLoader.LoadContent(cabinetSectionVisual);
 
                     newCabinet.SetCabinetSectionProductVisualPrefab(
                         cabinetSectionVisual,
@@ -1484,7 +1485,7 @@ namespace KitchenDesign
                         if (cabinetDoorVisual)
                         {
                             cabinetDoorVisualPrefab =
-                                await contentLoader.ProductVisualToContent(cabinetDoorVisual);
+                                await contentLoader.LoadContent(cabinetDoorVisual);
                         }
 
                         newCabinet.InstantiateCabinetModel(
