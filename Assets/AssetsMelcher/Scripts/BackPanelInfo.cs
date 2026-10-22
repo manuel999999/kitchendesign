@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     [System.Serializable]
@@ -24,7 +25,7 @@ namespace KitchenDesign
         public BrandCatalog.FridgePanelInfo fallbackBackPanel => m_FallbackBackPanel;
         public BackPanelInfo defaultBackPanels => m_DefaultBackPanels;
         public BackPanelInfo[] backPanels => m_BackPanels;
-        public float panelDepthInMeters => m_PanelDepthInInches * Const.Inches2Meters;
+        public float panelDepthInMeters => m_PanelDepthInInches * Units.Inches2Meters;
 
         [SerializeField] protected BrandCatalog.FridgePanelInfo m_FallbackBackPanel = default;
         [SerializeField] protected BackPanelInfo m_DefaultBackPanels = default;

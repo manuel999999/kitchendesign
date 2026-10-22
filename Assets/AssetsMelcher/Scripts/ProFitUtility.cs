@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using MEC;
     using System.Collections.Generic;
     using System.Globalization;
@@ -58,16 +59,6 @@ namespace KitchenDesign
         {
             const string Endpoint = "/webgl/privacy-policy.html";
             Application.OpenURL(ProFitWeb.Host + Endpoint);
-        }
-
-        public static void SetAllRendererMaterials(Renderer renderer, Material material)
-        {
-            Material[] sharedMaterials = renderer.sharedMaterials;
-            for (int i = 0; i < sharedMaterials.Length; ++i)
-            {
-                sharedMaterials[i] = material;
-            }
-            renderer.sharedMaterials = sharedMaterials;
         }
 
         public static ProductVisual FindProductVisual(IReadOnlyList<ProductVisual> productVisuals, string visualId)
@@ -271,7 +262,7 @@ namespace KitchenDesign
         /// </summary>
         public static bool IsDistanceAlmostZero(float meters)
         {
-            return Mathf.Abs(meters) < (Const.Inches2Meters * 0.0625f); // 1/16 inch
+            return Mathf.Abs(meters) < (Units.Inches2Meters * 0.0625f); // 1/16 inch
         }
 
         /// <summary>
@@ -351,266 +342,6 @@ namespace KitchenDesign
         }
 
         /// <summary>
-        /// Try to parse a length in inches into a length in meters. Tries to
-        /// decode an imperial formatted string E.g. <code>2' 3 1/2"</code>
-        /// </summary>
-        /// <param name="imperialText">The measurement in imperial format</param>
-        /// <param name="lengthInMeters"></param>
-        /// <param name="name">An optional name to associate with error messages</param>
-        /// <param name="errors">An optional list to collect error messages</param>
-        /// <returns>
-        /// Return true if the measurement could be parsed; otherwise, return
-        /// false. This function may return true but still append errors into
-        /// the error list.
-        /// </returns>
-        public static bool TryParseImperialString(
-            string          imperialText,
-            out float       lengthInMeters,
-            string          name = null,
-            List<string>    errors = null)
-        {
-            // Initialize the output to zero
-            lengthInMeters = 0.0f;
-
-            // Prep the optional name for better logging
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                name = string.Empty;
-            }
-            else
-            {
-                name += ": ";
-            }
-
-            // Normalize the quote characters. Users may copy and paste the
-            // measurements from a webpage that has some special quote characters
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder(imperialText);
-            foreach (string singleQuote in SingleQuoteCharacters)
-            {
-                buffer.Replace(singleQuote, "'");
-            }
-            foreach (string doubleQuote in DoubleQuoteCharacters)
-            {
-                buffer.Replace(doubleQuote, "\"");
-            }
-            imperialText = buffer.ToString();
-
-            // Look for groups of numbers. Each group may have one of the
-            // following optional suffixes:
-            //  ' = feet
-            //  " = inches
-            //  / = division with next number
-
-            const char Feet = '\'';
-            const char Inch = '"';
-            const char Divide = '/';
-
-            MatchCollection regexMatches = Regex.Matches(imperialText, @$"(?:(\d+(?:\.\d*)?)\s*[{Inch}{Feet}{Divide}]?)");
-
-            int matchCount = regexMatches.Count;
-            float lengthInInches = 0.0f;
-            for (int i = 0; i < matchCount; ++i)
-            {
-                string numberMatchText = regexMatches[i].Groups[1].Value;
-                if (!float.TryParse(numberMatchText, out float numberMatchAsFloat))
-                {
-                    errors?.Add(name + "Failed to parse float from: " + numberMatchText);
-                    return false;
-                }
-
-                string wholeMatchText = regexMatches[i].Value;
-                if (wholeMatchText.EndsWith(Feet))
-                {
-                    numberMatchAsFloat *= Const.InchesPerFoot;
-
-                }
-                else if (i == 0 && wholeMatchText.EndsWith(" ") &&
-                    ((i + 1 >= matchCount) || !regexMatches[i + 1].Value.EndsWith(Divide)))
-                {
-                    // If this is the first number, it doesn't have a suffix and the
-                    // next number is not a divisor, then this must be feet
-                    numberMatchAsFloat *= Const.InchesPerFoot;
-                }
-                else if (wholeMatchText.EndsWith(Divide))
-                {
-                    if (i + 1 >= matchCount)
-                    {
-                        errors?.Add(name + "Invalid imperial format: Division symbol must have a number after it");
-                        break;
-                    }
-
-                    // Get the next number and divide by it
-                    string nextNumberMatchText = regexMatches[i + 1].Groups[1].Value;
-                    if (!float.TryParse(nextNumberMatchText, out float divisor))
-                    {
-                        errors?.Add(name + "Failed to parse float from: " + nextNumberMatchText);
-                        break;
-                    }
-
-                    int numeratorAsInt = Mathf.RoundToInt(numberMatchAsFloat);
-                    int divisorAsInt = Mathf.RoundToInt(divisor);
-
-                    // Some quick input validation
-                    if (divisor == 0.0f)
-                    {
-                        errors?.Add(name + $"Would-be division by zero: {wholeMatchText}/{regexMatches[i + 1].Value}");
-                        return false;
-                    }
-
-                    if (!Mathf.Approximately(numberMatchAsFloat - numeratorAsInt, 0.0f))
-                    {
-                        errors?.Add(name + $"Numerator is a decimal: {wholeMatchText}/{regexMatches[i + 1].Value}");
-                    }
-
-                    if (!Mathf.Approximately(divisor - divisorAsInt, 0.0f))
-                    {
-                        errors?.Add(name + $"Denominator is a decimal: {wholeMatchText}/{regexMatches[i + 1].Value}");
-                    }
-
-                    if (divisorAsInt != 3 && divisorAsInt != 5 && Mathf.NextPowerOfTwo(divisorAsInt) != divisorAsInt)
-                    {
-                        // Warn if the fraction has a weird denominator. It
-                        // should be a power of two but we also allow 3 and 5.
-                        errors?.Add(name + $"Non-standard imperial denominator: {wholeMatchText}/{regexMatches[i + 1].Value}");
-                    }
-
-                    numberMatchAsFloat /= divisor;
-
-                    if (numberMatchAsFloat >= 1.0f)
-                    {
-                        errors?.Add(name + $"Improper fraction: {wholeMatchText}/{regexMatches[i + 1].Value}");
-                    }
-
-                    // Extra increment to skip the denominator group we already
-                    // processed
-                    ++i;
-                }
-
-                lengthInInches += numberMatchAsFloat;
-            }
-
-            lengthInMeters = lengthInInches * Const.Inches2Meters;
-
-            return true;
-        }
-
-        /// <summary>
-        ///     Return a string representation of a size in centimeters. E.g.,
-        ///     1m => "100.00cm"
-        /// </summary>
-        /// <param name="sizeInMeters"></param>
-        /// <param name="rightDecimalPlaces">
-        ///     The number of trailing decimal places that will be padded with
-        ///     zeros. If this is <see langword="null"/> the right end is not
-        ///     restricted or padded.
-        /// </param>
-        /// <param name="leftDecimalPlaces">
-        ///     The number of leading decimal places that will be padded with
-        ///     spaces. If this is <see langword="null"/>, the leading part
-        ///     of the number is not be padded.
-        /// </param>
-        /// <returns></returns>
-        public static string FormatMetersToCentimeters(float sizeInMeters, int? rightDecimalPlaces = 2, int? leftDecimalPlaces = null)
-        {
-            float sizeInCentimeters = sizeInMeters * Const.Meters2Centimeters;
-
-            string result =
-                rightDecimalPlaces.HasValue ?
-                    sizeInCentimeters.ToString("N" + rightDecimalPlaces.Value) :
-                    sizeInCentimeters.ToString();
-
-            if (leftDecimalPlaces.HasValue)
-            {
-                int numberOfDigitsBeforeDecimal =
-                    result.IndexOf(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-
-                if (numberOfDigitsBeforeDecimal < 0)
-                {
-                    numberOfDigitsBeforeDecimal = 0;
-                }
-
-                int unrestrictedLength =
-                    result.Length - numberOfDigitsBeforeDecimal;
-
-                result = result.PadLeft(unrestrictedLength + leftDecimalPlaces.Value);
-            }
-
-            return $"{result}cm";
-        }
-
-        public static string FormatMetersToImperial(float sizeInMeters, bool showFeet = true, bool showFraction = true, int minimumInchDivisions = ImperialUnit.DefaultMaximumInchDivision)
-        {
-            // Calculate values to display
-            return ImperialUnit.FromTotalMeters(sizeInMeters).ToString(showFeet, showFraction, minimumInchDivisions);
-        }
-
-        /// <summary>
-        /// Create a string for a measurement that is formatted with monospace
-        /// font so the text is less jittery if it is updated rapidly. Uses a
-        /// string builder for better performance.
-        /// </summary>
-        /// <param name="stringBuilder"></param>
-        /// <param name="monoSize"></param>
-        /// <param name="sizeInMeters"></param>
-        /// <param name="showFeet"></param>
-        /// <param name="showFraction"></param>
-        /// <returns></returns>
-        public static string FormatMetersToImperialMonospaced(
-            StringBuilder stringBuilder,
-            int monoSize,
-            float sizeInMeters,
-            bool showFeet = true,
-            bool showFraction = true,
-            int minimumInchDivisions = ImperialUnit.DefaultMaximumInchDivision,
-            bool showInchesWhenZero = true)
-        {
-            stringBuilder.Clear();
-
-            ImperialUnit.FromTotalMeters(sizeInMeters)
-                .GetValuesUsingMaximumInchDivisions(minimumInchDivisions, out int feet, out int inches, out int numerator, out int denominator);
-
-            stringBuilder.AppendFormat("<mspace={0}>", monoSize);
-            {
-                // Feet
-                if (feet > 0)
-                {
-                    stringBuilder.AppendFormat("{0,2}'", feet);
-                }
-                else
-                {
-                    stringBuilder.Append(' ', 3);   // Spaces to pad for: 2 number chars + 1 quote (') char
-                }
-
-                // Inches
-                if (inches > 0 || feet > 0 || showInchesWhenZero)
-                {
-                    stringBuilder.AppendFormat("{0,2}\"", inches);
-                }
-                else
-                {
-                    stringBuilder.Append(' ', 3);
-                }
-            }
-            stringBuilder.Append("</mspace>");
-
-            // Fractional inches
-            stringBuilder.AppendFormat("<size=50%><mspace={0}>", monoSize / 2);
-            {
-                if (numerator > 0 && denominator > 0)
-                {
-                    stringBuilder.AppendFormat("{0,1}/{1,1}", numerator, denominator);
-                }
-                else
-                {
-                    stringBuilder.Append(' ', 3);   // 1 numerator char + 1 slash char + 1 denominator char
-                }
-            }
-            stringBuilder.Append("</mspace></size>");
-
-            return stringBuilder.ToString();
-        }
-
-        /// <summary>
         /// Return <see langword="true"/> if the product category uses cut-out
         /// sizes and should therefore also report errors when they are missing
         /// during parsing. If a category doesn't use cut-out sizes, no errors
@@ -619,94 +350,6 @@ namespace KitchenDesign
         public static bool DoesCategoryUseSizes(ProductCategory category)
         {
             return !s_CategoriesWithoutSizes.Contains(category);
-        }
-
-        /// <summary>
-        /// Given a URL, return the second-level domain and top-level domain
-        /// part. E.g. "https://sub.root.com/abc" => "root.com". The URL's
-        /// scheme (e.g. http://) is optional and isn't include in the output.
-        /// If the input string doesn't have a second-level domain, the
-        /// function will behave the same but only return the root-level part.
-        /// E.g. "com", "ca", etc.
-        /// <br /><br />
-        ///
-        /// URL parts:
-        /// [Scheme]http://     [Domain]third.second.first/     [Path]other/part/
-        /// <br /><br />
-        ///
-        /// E.g. All of the following inputs would return <c>site.com</c>:
-        /// <code>
-        ///     site.com
-        ///     www.site.com/
-        ///     https://www.site.com
-        ///     https://subdomain.domain.site.com/abcd/1234/file.txt
-        /// </code>
-        /// </summary>
-        /// <param name="url">
-        /// URL to format. Does not require a scheme (e.g. "http://").
-        /// </param>
-        public static string GetBaseDomain(string url)
-        {
-            string baseDomain = url ?? "";
-
-            // Remove the scheme ("http://", "https://", etc.)
-            const string SchemeSeparator = "://";
-            int schemeIndex = baseDomain.IndexOf(SchemeSeparator);
-            if (schemeIndex >= 0)
-            {
-                baseDomain = baseDomain.Substring(schemeIndex + SchemeSeparator.Length);
-            }
-
-            // Remove anything after and including the first slash
-            int slashIndex = baseDomain.IndexOf('/');
-            if (slashIndex >= 0)
-            {
-                baseDomain = baseDomain.Substring(0, slashIndex);
-            }
-
-            // Test if this is an IP.
-            Match ipMatch = Regex.Match(baseDomain, @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b");
-            if (ipMatch != null && ipMatch.Success)
-            {
-                return ipMatch.Value;
-            }
-
-            // Remove all tertiary and higher subdomains
-            int lastDotIndex = baseDomain.LastIndexOf('.');
-            if (lastDotIndex > 0)
-            {
-                // Get second last dot:
-                //  lots.of.subdomains.root.com
-                //                    ^
-                int subdomainDotIndex = baseDomain.LastIndexOf('.', lastDotIndex - 1);
-                if (subdomainDotIndex >= 0)
-                {
-                    baseDomain = baseDomain.Substring(subdomainDotIndex + 1);
-                }
-            }
-
-            return baseDomain;
-        }
-
-        public static string GetDomain(string url)
-        {
-            if (!url.StartsWith("https://") && !url.StartsWith("http://"))
-            {
-                url = "https://" + url;
-            }
-
-            string host = "";
-
-            try
-            {
-                System.Uri uri = new System.Uri(url);
-                host = uri.Host;
-            }
-            catch
-            {
-            }
-
-            return host;
         }
 
         public static JsonDict Vector3ToJson(Vector3 vec)
@@ -731,112 +374,6 @@ namespace KitchenDesign
         // }
 
         /// <summary>
-        ///     Given a regular prefab, this function returns a duplicate as a
-        ///     "runtime prefab". A runtime prefab is intended to be like a
-        ///     regular prefab (as would be created in the editor) and live in
-        ///     memory only, but it must live in the scene.
-        /// </summary>
-        /// <typeparam name="PrefabType"></typeparam>
-        /// <param name="originalPrefab"></param>
-        /// <returns></returns>
-        public static PrefabType InstantiatePrefabAsRuntimePrefab<PrefabType>(PrefabType originalPrefab)
-            where PrefabType : Component
-        {
-            PrefabType runtimePrefab = GameObject.Instantiate(originalPrefab);
-
-            // Remove the "(clone)" suffix
-            runtimePrefab.gameObject.name = originalPrefab.name;
-
-            // Hide the clone; it is never meant to be seen. It is intended
-            // to live in-memory only and this is the closest to that we
-            // can get.
-            runtimePrefab.gameObject.SetActive(false);
-
-            // It is important that DontDestroyOnLoad get called after
-            // the object is disabled. Otherwise, some components in the
-            // runtime prefab may not behave correctly. E.g., the editor-only
-            // lights remaining active in ProductVisuals. Unity bug?
-            GameObject.DontDestroyOnLoad(runtimePrefab.gameObject);
-
-            return runtimePrefab;
-        }
-
-        /// <summary>
-        ///     Return <see cref="true"/> if <paramref name="gameObject"/> is
-        ///     a prefab asset or a Pro-Fit "runtime prefab". A runtime prefab
-        ///     is a simulation of a prefab asset at runtime; they are
-        ///     simulated by being instantiated into the DontDestroyOnLoadScene,
-        ///     allowing them to persist between scene changes, and having their
-        ///     game object disabled to remain hidden and non-updating.
-        /// </summary>
-        public static bool IsPrefab(GameObject gameObject)
-        {
-            if (!gameObject)
-            {
-                throw new System.ArgumentNullException(nameof(gameObject));
-            }
-
-            bool isPrefabAsset =
-                !gameObject.scene.IsValid();
-
-#if UNITY_EDITOR
-            // The scene.IsValid() trick doesn't work with prefabs in the prefab
-            // stage, so check against it explicitly.
-            isPrefabAsset |=
-                MelcherEditorUtility.IsPartOfCurrentPrefabStage(gameObject);
-#endif  // if UNITY_EDITOR
-
-            // "Runtime prefabs" exist in the DontDestroyOnLoadScene.
-            bool isRuntimePrefab =
-                gameObject.scene.path == "DontDestroyOnLoad";
-
-            return isPrefabAsset || isRuntimePrefab;
-        }
-
-        /// <summary>
-        ///     Set the GameObject and all of its grandchildren to a specific
-        ///     layer. This was initially created for applying the Cabinet game
-        ///     layer to all mesh subparts of a cabinet created within the
-        ///     Catalog building method.
-        /// </summary>
-        public static void SetGameObjectLayerRecursively(Transform transform, int layer)
-        {
-            transform.gameObject.layer = layer;
-
-            foreach (Transform child in transform)
-            {
-                SetGameObjectLayerRecursively(child, layer);
-            }
-        }
-
-        public static bool TrySetRenderQuality(UniversalRenderPipelineAsset requestedQuality)
-        {
-            int qualityCount = QualitySettings.names.Length;
-
-            for (int i = 0; i < qualityCount; ++i)
-            {
-                UniversalRenderPipelineAsset qualityPipeline =
-                    (UniversalRenderPipelineAsset)
-                        QualitySettings.GetRenderPipelineAssetAt(i);
-
-                if (qualityPipeline != requestedQuality)
-                {
-                    continue;
-                }
-
-                int currentQuality = QualitySettings.GetQualityLevel();
-                if (currentQuality != i)
-                {
-                    QualitySettings.SetQualityLevel(i);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
         ///     Given a corner wedge cabinet, compute the projected length of
         ///     the corner wedge onto its orthogonal neighbours. In other words,
         ///     uses the length of the corner wedge's hypotenuse to calculate
@@ -847,51 +384,7 @@ namespace KitchenDesign
             return Mathf.Sqrt(cornerWedge.sizeInMeters.x * cornerWedge.sizeInMeters.x / 2.0f);
         }
 
-        /// <summary>
-        ///     Force the garbage collector to run to free up memory (iOS).
-        ///      Without this, low-memory devices may run out of memory.
-        /// </summary>
-        public static void GarbageCollectOnLowMemoryDevices()
-        {
-#if UNITY_IOS
-            System.GC.Collect();
-#endif  // if UNITY_IOS
-        }
 
-
-#if UNITY_EDITOR
-        [UnityEditor.MenuItem("Tools/Melcher Studios/Tests/ProFitUtility.GetBaseDomain")]
-        private static void TestUrls()
-        {
-            MelcherLog.Log(GetBaseDomain(""));
-            MelcherLog.Log(GetBaseDomain("root.com"));
-            MelcherLog.Log(GetBaseDomain("root.com/"));
-            MelcherLog.Log(GetBaseDomain("www.root.com/"));
-            MelcherLog.Log(GetBaseDomain("https://www.root.com"));
-            MelcherLog.Log(GetBaseDomain("https://subdomain.domain.root.com/abcd"));
-            MelcherLog.Log(GetBaseDomain("https://subdomain.domain.root.com/abcd/1234/file.txt"));
-            MelcherLog.Log(GetBaseDomain("http://23.111.69.219/admin/"));
-            MelcherLog.Log(GetBaseDomain("http://23.111.69.219:8080/admin/"));
-            MelcherLog.Log(GetBaseDomain("23.111.69.219:8080/admin/"));
-            MelcherLog.Log(GetBaseDomain("23.111.69.219:8080"));
-        }
-
-        [UnityEditor.MenuItem("Tools/Melcher Studios/Tests/ProFitUtility.GetDomain")]
-        private static void TestGetDomain()
-        {
-            MelcherLog.Log(GetDomain(""));
-            MelcherLog.Log(GetDomain("root.com"));
-            MelcherLog.Log(GetDomain("root.com/"));
-            MelcherLog.Log(GetDomain("www.root.com/"));
-            MelcherLog.Log(GetDomain("https://www.root.com"));
-            MelcherLog.Log(GetDomain("https://subdomain.domain.root.com/abcd"));
-            MelcherLog.Log(GetDomain("https://subdomain.domain.root.com/abcd/1234/file.txt"));
-            MelcherLog.Log(GetDomain("http://23.111.69.219/admin/"));
-            MelcherLog.Log(GetDomain("http://23.111.69.219:8080/admin/"));
-            MelcherLog.Log(GetDomain("23.111.69.219:8080/admin/"));
-            MelcherLog.Log(GetDomain("23.111.69.219:8080"));
-        }
-#endif  // if UNITY_EDITOR
 
         // =====================================================================
         // Static fields
@@ -901,35 +394,7 @@ namespace KitchenDesign
         // measurements (string) to meters
         // From here: https://www.fileformat.info/info/unicode/char/search.htm?q=quotation&preview=entity
 
-        /// <summary>
-        /// Unicode characters to replace with ASCII double quote " (\u0022)
-        /// </summary>
-        public static readonly string[] DoubleQuoteCharacters = new[]
-        {
-            "\u201C",
-            "\u201D",
-            "\u201F",
-            "\u275D",
-            "\u275E",
-            "\u301D",
-            "\u301E",
-            "\U0001F676",
-            "\U0001F677",
-            "\U0001F678"
-        };
 
-        /// <summary>
-        /// Unicode characters to replace with ASCII single quote ' (\u0027)
-        /// </summary>
-        public static readonly string[] SingleQuoteCharacters = new[]
-        {
-            "\u2018",
-            "\u2019",
-            "\u201B",
-            "\u275B",
-            "\u275C",
-            "\uFF02",
-        };
 
         /// <summary>
         /// Product categories to ignore cut-out and overlap size validation
@@ -1010,50 +475,7 @@ namespace KitchenDesign
 
         }   // class Editor
 
-        /// <summary>
-        /// Retrieve a random name to use when filling out a user-sign up
-        /// form. The first time this function is called, it opens and reads a
-        /// file for the names (one name per line) and caches them for next
-        /// time.
-        /// </summary>
-        public static string RandomName()
-        {
-            if (s_RandomNames == null)
-            {
-                s_RandomNames = GetLinesFromAsset(
-                    "Assets/AssetsMelcher/Editor/RandomNames.txt"
-                );
-            }
 
-            return s_RandomNames[Random.Range(0, s_RandomNames.Count)];
-        }
-
-        public static string RandomPlace()
-        {
-            if (s_RandomPlaces == null)
-            {
-                s_RandomPlaces = GetLinesFromAsset(
-                    "Assets/AssetsMelcher/Editor/RandomPlaces.txt"
-                );
-            }
-
-            return s_RandomPlaces[Random.Range(0, s_RandomPlaces.Count)];
-        }
-
-        private static List<string> GetLinesFromAsset(string assetPath)
-        {
-            TextAsset namesAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(assetPath);
-
-            string[] names = namesAsset.text.Split(
-                new string[] { "\r\n", "\r", "\n" },
-                System.StringSplitOptions.None
-            );
-
-            return new List<string>(names);
-        }
-
-        private static List<string> s_RandomNames;
-        private static List<string> s_RandomPlaces;
 
         #endregion  // Editor-only
 #endif  // if UNITY_EDITOR

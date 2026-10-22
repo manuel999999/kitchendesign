@@ -1025,6 +1025,26 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **Generic helpers** (B1.4 of the refactor, 2026-10-22). `KitchenDesign.Shared.Common.Units`
+  (`_projectShared/Common/`): inch/metre/centimetre/foot conversions, the old `Const.Inches2Meters`
+  and friends. `_project/Scripts/Utility/` (`KitchenDesign.Utility`, called as
+  `Utility.<Class>.<Method>` from old code):
+  - `MeasurementFormat`: metres to centimetres or feet/inches text, and parsing typed imperial
+    sizes. Why the quote tables: phones and pasted text produce typographic quotes (‘ ’ “ ”), which
+    are normalised to ' and " before parsing.
+  - `UrlUtility`: `GetDomain` (host of a URL, a scheme added if missing) and `GetBaseDomain`
+    (the last two labels, or the IP). Self-tests: `Tools/Kitchen Design/Tests/…`
+    (`_projectDebugging/Menus/UrlDebugMenu.cs`).
+  - `RuntimePrefabs`: a "runtime prefab" is an inactive copy in `DontDestroyOnLoad` that stands
+    in for a prefab asset at runtime; `IsPrefab` treats those and real prefab assets (including the
+    prefab stage) alike. `DontDestroyOnLoad` must come after `SetActive(false)`, or some components
+    of the copy stay active (the product visuals' editor-only lights did).
+  - `RendererUtility`, `RenderQuality` (switch to the quality level that uses a given URP asset),
+    `MemoryUtility` (a GC on iOS only, where low-memory devices otherwise run out).
+  - `RandomNamesForEditor` (editor only): random names and places to fill the sign-up and client
+    forms while testing.
+  `KitchenDesign.Tools.Editor` now references `KitchenDesign.Shared` (for `Units`).
+  What stays in `Const` and `ProFitUtility` until its area: the plan, B1.4.
 - **App-wide systems** (B1.3 of the refactor, 2026-10-22). Plain classes, constructed and owned
   by `AppInitializer`; collaborators come in through the constructor.
   - `LaunchOptions` (`_project/Scripts/Game/`): debug mode and verbose (editor, debug build,
@@ -1297,9 +1317,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   Its section ("Area 1 — App foundation" in `.claude/prompts/03-refactor.md`) was agreed on
   2026-10-22; the user left names and refactoring details to Claude. `ProFitGlobals` keeps
   forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
-  committed. **B1.1 (app rules), B1.2 (boot scene) and B1.3 (app-wide systems) are done and
-  committed** (results in the plan). Next: B1.4, the generic helpers (`Const`'s units →
-  `Shared.Common.Units`, the generic `ProFitUtility` helpers → `Utility/`).
+  committed. **Area 1 is done and committed (B1.1–B1.4, 2026-10-22; results in the plan).**
+  Next: area 2 (server and offline data, `ProFitWeb`): write its section in the plan, then build
+  it the same way. The user left the design and the details to Claude and wants each step
+  checked and committed on its own.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace KitchenDesign
         ///     occupant plunges down whereas a front-mounted cabinet plunges
         ///     towards the cabinet's back.
         /// </summary>
-        public const float MinimumPlungeDepth = Const.Inches2Meters;
+        public const float MinimumPlungeDepth = Units.Inches2Meters;
 
         // =====================================================================
         // Properties
@@ -331,7 +332,7 @@ namespace KitchenDesign
             // Ensure this function is only called with a legit prefab instance.
             // I.e., not a prefab asset.
 
-            if (ProFitUtility.IsPrefab(newProductVisualInstance.gameObject))
+            if (Utility.RuntimePrefabs.IsPrefab(newProductVisualInstance.gameObject))
             {
                 throw new ArgumentException(
                     "Product visual instance must be a prefab instance and not a prefab asset.",
@@ -822,7 +823,7 @@ namespace KitchenDesign
 
             Cuboid cabinetCuboid = occupiedVolume.occupiableCuboid;
             Cuboid cutOutCuboid = GetCutOutCuboidInVolumeSpace();
-            const float Tolerance = Const.Inches2Meters * (1.0f / 32.0f);
+            const float Tolerance = Units.Inches2Meters * (1.0f / 32.0f);
 
             return MelcherCommon.IsAlmostEqual(
                 getCuboidEdge.Invoke(cabinetCuboid),

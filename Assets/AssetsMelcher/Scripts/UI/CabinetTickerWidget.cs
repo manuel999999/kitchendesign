@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System.Text;
     using System.Collections.Generic;
     using UnityEngine;
@@ -123,7 +124,7 @@ namespace KitchenDesign
                     }
                     else
                     {
-                        inches += feet * Mathf.RoundToInt(Const.InchesPerFoot);
+                        inches += feet * Mathf.RoundToInt(Units.InchesPerFoot);
                     }
 
                     if (numerator > 0 && denominator > 0 && ProFitGlobals.appRules.ShowsTickerFractions)
@@ -138,7 +139,7 @@ namespace KitchenDesign
                 else if (units == MeasurementUnit.Centimeters)
                 {
                     string distanceInCentimeters =
-                        ProFitUtility.FormatMetersToCentimeters(
+                        Utility.MeasurementFormat.FormatMetersToCentimeters(
                             distanceInMeters,
                             leftDecimalPlaces: 3
                         );

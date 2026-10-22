@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.ObjectModel;
@@ -280,7 +281,7 @@ namespace KitchenDesign
             // Force a minimum 1" height. Otherwise, the height is 0" and
             // any overlap checks with occupants will fail because we're at
             // the cabinet's Y-value extreme (top).
-            backingCuboidInSpanSpace.yMin -= 1.0f * Const.Inches2Meters;
+            backingCuboidInSpanSpace.yMin -= 1.0f * Units.Inches2Meters;
 
             return
                 backingCuboidInSpanSpace.Transform(
@@ -409,7 +410,7 @@ namespace KitchenDesign
 
             // Force minimum 1" height. If the height is 0", the bounds check
             // will because we're at the cabinet's Y-value extreme (top).
-            backingCuboidInWorldSpace.yMin -= 1.0f * Const.Inches2Meters;
+            backingCuboidInWorldSpace.yMin -= 1.0f * Units.Inches2Meters;
 
             foreach (ElementIndex<Cabinet> i in cabinets)
             {
@@ -759,7 +760,7 @@ namespace KitchenDesign
             if (m_CabinetBacking.hasRiserAndRiserCountertop &&
                 kitchen.selectedCountertopType == CountertopType.Stoll)
             {
-                const float MaxStollBackingCountertopThicknessInMeters = 2.0f * Const.Inches2Meters;
+                const float MaxStollBackingCountertopThicknessInMeters = 2.0f * Units.Inches2Meters;
 
                 if (countertopThicknessInMeters > MaxStollBackingCountertopThicknessInMeters)
                 {

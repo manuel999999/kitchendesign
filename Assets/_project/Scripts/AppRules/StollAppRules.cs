@@ -1,3 +1,4 @@
+using KitchenDesign.Shared.Common;
 using KitchenDesign.Shared.Enums;
 using KitchenDesign.Shared.Interfaces;
 
@@ -6,16 +7,16 @@ namespace KitchenDesign.AppRules
     public sealed class StollAppRules : IAppRules
     {
         public float OccupantMinimumHorizontalPaddingInMeters => 0.0f;
-        public float CabinetColumnWidthInMeters => 6.0f * Const.Inches2Meters;
+        public float CabinetColumnWidthInMeters => 6.0f * Units.Inches2Meters;
 
-        public float? HighBarTopRiserDepthInMeters => 3.0f * Const.Inches2Meters;
-        public float? HighBarTopCountertopThicknessInMeters => 2.0f * Const.Inches2Meters;
-        public float? HighBarTopCountertopDepthInMeters => 12.0f * Const.Inches2Meters;
+        public float? HighBarTopRiserDepthInMeters => 3.0f * Units.Inches2Meters;
+        public float? HighBarTopCountertopThicknessInMeters => 2.0f * Units.Inches2Meters;
+        public float? HighBarTopCountertopDepthInMeters => 12.0f * Units.Inches2Meters;
         public bool ReappliesCountertopThicknessAfterLoad => true;
 
         public bool AppliesRuntimeProductOverrides => true;
         public float? FridgeHorizontalPaddingInMeters => 0.0f;
-        public float? BottomAnchoredProductInsetInMeters => 4.0f * Const.Inches2Meters;
+        public float? BottomAnchoredProductInsetInMeters => 4.0f * Units.Inches2Meters;
         public bool AdjustsSmokerCutOutHeight => true;
 
         public PriceSheetExtras PriceSheetExtras => PriceSheetExtras.StollCustomKitchen;

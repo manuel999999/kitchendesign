@@ -39,7 +39,7 @@ namespace KitchenDesign
             var renderers = interiors;
             while (renderers.MoveNext())
             {
-                ProFitUtility.SetAllRendererMaterials(renderers.Current, material);
+                Utility.RendererUtility.SetAllRendererMaterials(renderers.Current, material);
             }
         }
 

@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace KitchenDesign
         {
             m_Cuboid = cuboid;
 
-            if (!m_AllowUpdateInPrefabs && ProFitUtility.IsPrefab(gameObject))
+            if (!m_AllowUpdateInPrefabs && Utility.RuntimePrefabs.IsPrefab(gameObject))
             {
                 // Only modify the visibility prefab instances. This
                 // prevents prefab assets being modified and dirtying git
@@ -46,7 +47,7 @@ namespace KitchenDesign
             foreach (Slice slice in m_Slices)
             {
                 Vector3 sizeInMeters =
-                    slice.sizeInInches * Const.Inches2Meters;
+                    slice.sizeInInches * Units.Inches2Meters;
 
                 Vector3 localPosition =
                     Cuboid.NormalizedToPoint(cuboid, slice.normalizedAnchor);
@@ -209,7 +210,7 @@ namespace KitchenDesign
         protected Vector3T<SkinScaleMode> m_SkinScaleMode = new (SkinScaleMode.Absolute);
 
         [SerializeField]
-        protected Vector3 m_SizeInInches = Vector3.one * Const.Meters2Inches;
+        protected Vector3 m_SizeInInches = Vector3.one * Units.Meters2Inches;
 
         [Tooltip("When enabled, mesh slices that are flat (i.e., one of " +
             "their three axises is scaled to zero) are still rendered. " +

@@ -56,8 +56,8 @@ namespace KitchenDesign
         public static readonly ReadOnlyCollection<string> WhitelistedEmbedDomains =
             new List<string>()
             {
-                ProFitUtility.GetBaseDomain(ProFitGlobals.appOptions.GetServerDomain(ServerType.Production)),
-                ProFitUtility.GetBaseDomain(ProFitGlobals.appOptions.GetServerDomain(ServerType.Test)),
+                Utility.UrlUtility.GetBaseDomain(ProFitGlobals.appOptions.GetServerDomain(ServerType.Production)),
+                Utility.UrlUtility.GetBaseDomain(ProFitGlobals.appOptions.GetServerDomain(ServerType.Test)),
                 "profitoutdoorliving.com",
                 "3doutdoorkitchendesign.com",
                 "stollkitchendesign.com",
@@ -2106,7 +2106,7 @@ namespace KitchenDesign
                 if (ProFitUtility.DoesCategoryUseSizes(product.category))
                 {
                     if (!string.IsNullOrWhiteSpace(productWidth) &&
-                        !ProFitUtility.TryParseImperialString(
+                        !Utility.MeasurementFormat.TryParseImperialString(
                             productWidth,
                             out product.productSizeInMeters.x,
                             nameof(productWidth),
@@ -2117,7 +2117,7 @@ namespace KitchenDesign
                     }
 
                     if (!string.IsNullOrWhiteSpace(productHeight) &&
-                        !ProFitUtility.TryParseImperialString(
+                        !Utility.MeasurementFormat.TryParseImperialString(
                             productHeight,
                             out product.productSizeInMeters.y,
                             nameof(productHeight),
@@ -2128,7 +2128,7 @@ namespace KitchenDesign
                     }
 
                     if (!string.IsNullOrWhiteSpace(productDepth) &&
-                        !ProFitUtility.TryParseImperialString(
+                        !Utility.MeasurementFormat.TryParseImperialString(
                             productDepth,
                             out product.productSizeInMeters.z,
                             nameof(productDepth),
@@ -2139,7 +2139,7 @@ namespace KitchenDesign
                     }
 
                     if (string.IsNullOrWhiteSpace(cutOutWidth) ||
-                        !ProFitUtility.TryParseImperialString(
+                        !Utility.MeasurementFormat.TryParseImperialString(
                             cutOutWidth,
                             out product.cutOutSizeInMeters.x,
                             nameof(cutOutWidth),
@@ -2151,7 +2151,7 @@ namespace KitchenDesign
                     }
 
                     if (string.IsNullOrWhiteSpace(cutOutHeight) ||
-                        !ProFitUtility.TryParseImperialString(
+                        !Utility.MeasurementFormat.TryParseImperialString(
                             cutOutHeight,
                             out product.cutOutSizeInMeters.y,
                             nameof(cutOutHeight),
@@ -2163,7 +2163,7 @@ namespace KitchenDesign
                     }
 
                     if (string.IsNullOrWhiteSpace(cutOutDepth) ||
-                        !ProFitUtility.TryParseImperialString(
+                        !Utility.MeasurementFormat.TryParseImperialString(
                             cutOutDepth,
                             out product.cutOutSizeInMeters.z,
                             nameof(cutOutDepth),
@@ -2232,7 +2232,7 @@ namespace KitchenDesign
                 if (!string.IsNullOrWhiteSpace(minWidth))
                 {
                     bool didParse =
-                        ProFitUtility.TryParseImperialString(
+                        Utility.MeasurementFormat.TryParseImperialString(
                             minWidth,
                             out float minWidthInMeters,
                             nameof(minWidth),
@@ -2252,7 +2252,7 @@ namespace KitchenDesign
                 if (!string.IsNullOrWhiteSpace(maxWidth))
                 {
                     bool didParse =
-                        ProFitUtility.TryParseImperialString(
+                        Utility.MeasurementFormat.TryParseImperialString(
                             maxWidth,
                             out float maxWidthInMeters,
                             nameof(maxWidth),
@@ -2900,7 +2900,7 @@ namespace KitchenDesign
 
                 // Validate measurements
                 if (!string.IsNullOrWhiteSpace(defaultCabinetWidth) &&
-                    !ProFitUtility.TryParseImperialString(
+                    !Utility.MeasurementFormat.TryParseImperialString(
                         defaultCabinetWidth,
                         out cabinet.productSizeInMeters.x,
                         nameof(defaultCabinetWidth),
@@ -2911,7 +2911,7 @@ namespace KitchenDesign
                 }
 
                 if (!string.IsNullOrWhiteSpace(defaultCabinetHeight) &&
-                    !ProFitUtility.TryParseImperialString(
+                    !Utility.MeasurementFormat.TryParseImperialString(
                         defaultCabinetHeight,
                         out cabinet.productSizeInMeters.y,
                         nameof(defaultCabinetHeight),
@@ -2922,7 +2922,7 @@ namespace KitchenDesign
                 }
 
                 if (!string.IsNullOrWhiteSpace(defaultCabinetDepth) &&
-                    !ProFitUtility.TryParseImperialString(
+                    !Utility.MeasurementFormat.TryParseImperialString(
                         defaultCabinetDepth,
                         out cabinet.productSizeInMeters.z,
                         nameof(defaultCabinetDepth),
@@ -2961,7 +2961,7 @@ namespace KitchenDesign
                 if (!string.IsNullOrWhiteSpace(minWidth))
                 {
                     bool didParse =
-                        ProFitUtility.TryParseImperialString(
+                        Utility.MeasurementFormat.TryParseImperialString(
                             minWidth,
                             out float minWidthInMeters,
                             nameof(minWidth),
@@ -2981,7 +2981,7 @@ namespace KitchenDesign
                 if (!string.IsNullOrWhiteSpace(maxWidth))
                 {
                     bool didParse =
-                        ProFitUtility.TryParseImperialString(
+                        Utility.MeasurementFormat.TryParseImperialString(
                             maxWidth,
                             out float maxWidthInMeters,
                             nameof(maxWidth),

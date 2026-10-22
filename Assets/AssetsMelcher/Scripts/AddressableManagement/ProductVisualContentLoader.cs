@@ -139,7 +139,7 @@ namespace KitchenDesign
             public LoadedContent(GameObject sourceContent)
             {
                 sourceContentPrefab = sourceContent.GetComponent<ProductVisualContent>();
-                runtimeContentPrefab = ProFitUtility.InstantiatePrefabAsRuntimePrefab(sourceContentPrefab);
+                runtimeContentPrefab = Utility.RuntimePrefabs.InstantiatePrefabAsRuntimePrefab(sourceContentPrefab);
             }
 
             public readonly ProductVisualContent sourceContentPrefab;

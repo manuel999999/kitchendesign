@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System;
     using UnityEngine;
@@ -39,8 +40,8 @@ namespace KitchenDesign
 
         public CuboidPadding countertopOverhangInMeters
         {
-            get => m_CountertopOverhangInInches * Const.Inches2Meters;
-            set => m_CountertopOverhangInInches = value * Const.Meters2Inches;
+            get => m_CountertopOverhangInInches * Units.Inches2Meters;
+            set => m_CountertopOverhangInInches = value * Units.Meters2Inches;
         }
 
         public Cuboid riserCuboid => m_Riser.cuboid;
@@ -68,7 +69,7 @@ namespace KitchenDesign
                     _ => m_InflateCabinetDepthByInches.proFit
                 };
 
-            return inches * Const.Inches2Meters;
+            return inches * Units.Inches2Meters;
         }
 
         /// <summary>
@@ -120,7 +121,7 @@ namespace KitchenDesign
                 Renderer[] riserRenderers = m_Riser.GetComponentsInChildren<Renderer>();
                 foreach (Renderer r in riserRenderers)
                 {
-                    ProFitUtility.SetAllRendererMaterials(r, cabinetMaterial);
+                    Utility.RendererUtility.SetAllRendererMaterials(r, cabinetMaterial);
                 }
             }
 
@@ -129,7 +130,7 @@ namespace KitchenDesign
                 Renderer[] countertopRenderers = m_RiserCountertop.GetComponentsInChildren<Renderer>();
                 foreach (Renderer r in countertopRenderers)
                 {
-                    ProFitUtility.SetAllRendererMaterials(r, countertopMaterial);
+                    Utility.RendererUtility.SetAllRendererMaterials(r, countertopMaterial);
                 }
             }
         }

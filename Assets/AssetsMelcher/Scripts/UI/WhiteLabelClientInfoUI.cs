@@ -117,13 +117,13 @@ namespace KitchenDesign
         protected void OnClickAutoFill(MelcherButton caller)
         {
 #if UNITY_EDITOR
-            m_FirstNameField.text   = ProFitUtility.RandomName();
-            m_LastNameField.text    = ProFitUtility.RandomName();
+            m_FirstNameField.text   = Utility.RandomNamesForEditor.RandomName();
+            m_LastNameField.text    = Utility.RandomNamesForEditor.RandomName();
             m_EmailField.text       = m_FirstNameField.text + m_LastNameField.text + Random.Range(50, 99) + "@fake.com";
             m_PhoneNumberField.text = PhoneNumber.Format(PhoneNumber.Random());
-            m_AddressField.text     = Random.Range(1, 9999) + " " + ProFitUtility.RandomPlace();
-            m_CityField.text        = ProFitUtility.RandomPlace();
-            m_StateField.text       = ProFitUtility.RandomPlace();
+            m_AddressField.text     = Random.Range(1, 9999) + " " + Utility.RandomNamesForEditor.RandomPlace();
+            m_CityField.text        = Utility.RandomNamesForEditor.RandomPlace();
+            m_StateField.text       = Utility.RandomNamesForEditor.RandomPlace();
             m_ZipCodeField.text     = Random.Range(10000, 99999).ToString();
 
             m_WantsFileEmailed.isOn = true;

@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using TMPro;
@@ -49,7 +50,7 @@ namespace KitchenDesign
 
             // Force the garbage collector to run to free up memory (iOS).
             // Without this, low-memory devices may run out of memory.
-            ProFitUtility.GarbageCollectOnLowMemoryDevices();
+            Utility.MemoryUtility.GarbageCollectOnLowMemoryDevices();
 
             // Get a temporary render texture for our screenshot (with MSAA
             // and stenciling enabled). MSAA: for soft edges, stenciling: for
@@ -1255,7 +1256,7 @@ namespace KitchenDesign
 
             // Define offsets used to push the measurement labels away from
             // cabinet so they render above everything else
-            const float ProductMeasurementOffset = 10.0f * Const.Inches2Meters;
+            const float ProductMeasurementOffset = 10.0f * Units.Inches2Meters;
             Vector3 towardsFront = Vector3.back * ProductMeasurementOffset;
             Vector3 towardsBack = -towardsFront;
             Vector3 towardsCamera = isProductOnOrAtFront ? towardsFront : towardsBack;
@@ -1268,7 +1269,7 @@ namespace KitchenDesign
                     PointOnCuboid(cutOutCuboidInVolumeSpace, 1.0f, 0.0f, normalizedCuboidZ)
                 );
             // Shift the line slightly into the cut-out box
-            const float XLabelMetersFromBottom = 1 * Const.Inches2Meters;
+            const float XLabelMetersFromBottom = 1 * Units.Inches2Meters;
             widthForFrontOrBack.begin.y += XLabelMetersFromBottom;
             widthForFrontOrBack.end.y += XLabelMetersFromBottom;
             // Shift the label closer to the camera
@@ -1311,7 +1312,7 @@ namespace KitchenDesign
                 height.end.y -= Const.Stoll.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop + kitchen.countertopThicknessInMeters;
             }
             // Shift the line slightly into the cut-out box
-            const float YLabelMetersFromLeft = 1 * Const.Inches2Meters;
+            const float YLabelMetersFromLeft = 1 * Units.Inches2Meters;
             height.begin.x -= YLabelMetersFromLeft;
             height.end.x -= YLabelMetersFromLeft;
             // Shift the label closer to the camera
@@ -1325,7 +1326,7 @@ namespace KitchenDesign
                     PointOnCuboid(cutOutCuboidInVolumeSpace, 0.0f, 1.0f, 1.0f)
                 );
             // Shift the line slightly into the cut-out box
-            const float ZLabelMetersFromLeft = 1 * Const.Inches2Meters;
+            const float ZLabelMetersFromLeft = 1 * Units.Inches2Meters;
             depth.begin.x += ZLabelMetersFromLeft;
             depth.end.x += ZLabelMetersFromLeft;
             // Shift the label closer to the camera
@@ -1420,7 +1421,7 @@ namespace KitchenDesign
 
             // Define the offsets to shift the cabinet measurement lines to
             // help them render outside of the cabinet.
-            const float CabinetMeasurementOffset = 4.0f * Const.Inches2Meters;
+            const float CabinetMeasurementOffset = 4.0f * Units.Inches2Meters;
             Vector3 leftward    = CabinetMeasurementOffset * Vector3.left;
             Vector3 downward    = CabinetMeasurementOffset * Vector3.down;
             Vector3 towardsBack = CabinetMeasurementOffset * Vector3.forward;
@@ -1594,7 +1595,7 @@ namespace KitchenDesign
                     Vector3 backPanel = new Vector3(0.0f, 0.0f, kitchen.backPanelDepthInMeters);
                     Vector3 backPanelMeasureOffset = 
                         (CabinetMeasurementOffset * new Vector3(1f, 0f, 0f)) +
-                        (Vector3.forward * Const.Inches2Meters);
+                        (Vector3.forward * Units.Inches2Meters);
 
                     if (kitchen.layout.style == KitchenStyle.Straight ||
                         kitchen.layout.style == KitchenStyle.Galley)
@@ -2429,7 +2430,7 @@ namespace KitchenDesign
             // How far to shift the measures away from the cabinet (towards
             // the camera). This is meant to prevent the measure's label or
             // line clipping into the cabinet.
-            const float MeasureOffsetFromCabinetInMeters = 2.0f * Const.Inches2Meters;
+            const float MeasureOffsetFromCabinetInMeters = 2.0f * Units.Inches2Meters;
 
             Vector3 offset = cabinetLocalDirectionToCamera * MeasureOffsetFromCabinetInMeters;
             fromPointInInputSpace += offset;

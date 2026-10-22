@@ -2,6 +2,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using UnityEditor;
@@ -206,7 +207,7 @@ namespace KitchenDesign
             Bounds colliderBoundsBefore = m_Collider.bounds;
 
             FitColliderToModel(
-                defaultCutOutSizeInMeters: Const.InchesPerFoot * Const.Inches2Meters * Vector3.one
+                defaultCutOutSizeInMeters: Units.InchesPerFoot * Units.Inches2Meters * Vector3.one
             );
 
             if (colliderBoundsBefore != m_Collider.bounds &&

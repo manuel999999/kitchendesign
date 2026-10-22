@@ -441,6 +441,15 @@ else.
   `FindDoorStyleVisual` (3), the URLs the menu opens (`OpenProductUrl`,
   `OpenSubscriptionLandingPage`, `ShowTermsAndConditions`; 5), and `ProFitUtility.Editor` (3).
 - Check: compile, `runall.sh`, `menucheck.sh`.
+- **Done 2026-10-22.** 168 unit constants and 101 helper calls rewritten in 45 files by a one-off
+  script (session scratchpad); comments in the moved code dropped, their whys in CLAUDE.md
+  ("Generic helpers"). The editor-only random names became `RandomNamesForEditor`, and the URL
+  self-tests a debug menu (`_projectDebugging/Menus/UrlDebugMenu.cs`). `KitchenDesign.Tools.Editor`
+  gained a reference to `KitchenDesign.Shared`. Compiles in the editor and as macOS player
+  scripts. `rulescheck.cs` 60/0; `coldstart.sh` both the reference; `runall.sh` against B1.3:
+  `resave.json` identical, camera noise only, photos within 0.09/255 (kept as
+  `unity6-after-B1.4-2026-10-22/`); `menucheck.sh` 21 / 21 / 1,268.
+- **Area 1 is done.**
 
 ### The `Initialize()` chain after area 1
 1. `LaunchOptions`: first, because the log level and DOTween's debug mode depend on it.

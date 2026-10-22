@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using MEC;
     using System;
     using System.Collections;
@@ -2116,11 +2117,11 @@ namespace KitchenDesign
                     visual.contentAddress.editorOnlyCachedAsset.modelCutOutExtentMax.position.y -
                     visual.contentAddress.editorOnlyCachedAsset.modelCutOutExtentMin.position.y;
 
-                if (visual.info.sectionOccupiableCuboidPaddingInMeters.bottom >= cabinetHeight - 1.0f * Const.Inches2Meters)
+                if (visual.info.sectionOccupiableCuboidPaddingInMeters.bottom >= cabinetHeight - 1.0f * Units.Inches2Meters)
                 {
                     MelcherLog.Log("Cabinet has no occupiable height: " + visual, visual);
                     CuboidPadding padding = visual.info.sectionOccupiableCuboidPaddingInInches;
-                    padding.bottom = (cabinetHeight - (2.0f * Const.Inches2Meters)) * Const.Meters2Inches;
+                    padding.bottom = (cabinetHeight - (2.0f * Units.Inches2Meters)) * Units.Meters2Inches;
                     visual.info.EditorOnlySetSectionOccupiableCuboidPaddingInInches(padding);
                     EditorUtility.SetDirty(visual);
                 }

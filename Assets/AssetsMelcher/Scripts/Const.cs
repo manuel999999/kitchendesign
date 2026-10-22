@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     public static class Const
@@ -9,14 +10,6 @@ namespace KitchenDesign
         // Measurements
         // =====================================================================
 
-        public const float Inches2Meters = 0.0254f;
-        public const float Meters2Inches = 1.0f / Inches2Meters;
-
-        public const float Meters2Centimeters = 100.0f;
-        public const float Centimeters2Meters = 1.0f / Meters2Centimeters;
-
-        public const float InchesPerFoot = 12.0f;
-
         /// <summary>
         /// The minimum *horizontal* spacing between products. All products
         /// have their cabinet-space cuboid inflated by this amount along their
@@ -24,7 +17,7 @@ namespace KitchenDesign
         /// cabinet- space cuboid to keep it centered within the space it
         /// occupies.
         /// </summary>
-        public const float OccupantMinimumHorizontalPaddingInMeters = 5.0f * Const.Inches2Meters;
+        public const float OccupantMinimumHorizontalPaddingInMeters = 5.0f * Units.Inches2Meters;
 
         /// <summary>
         /// The minimum *vertical* spacing between products. This behaves
@@ -33,7 +26,7 @@ namespace KitchenDesign
         /// </summary>
         // TODO: Implement proper vertical padding. We need to shift products
         //       up because we measure product's position from the min-extent.
-        public const float OccupantMinimumVerticalPaddingInMeters = 1.5f * Const.Inches2Meters;
+        public const float OccupantMinimumVerticalPaddingInMeters = 1.5f * Units.Inches2Meters;
 
         /// <summary>
         ///     The amount to shrink a cabinet's occupiable volume if it has
@@ -42,20 +35,20 @@ namespace KitchenDesign
         ///     Therefore this distance is 6" - (one half of an occupant's
         ///     padding).
         /// </summary>
-        public const float CabinetCornerOccupiablePaddingInMeters = (6.0f * Inches2Meters) - (OccupantMinimumHorizontalPaddingInMeters * 0.5f);
+        public const float CabinetCornerOccupiablePaddingInMeters = (6.0f * Units.Inches2Meters) - (OccupantMinimumHorizontalPaddingInMeters * 0.5f);
 
         /// <summary>
         ///     The width of a cabinet column as a whole. In practice, the app
         ///     renders cabinet supports in halves, so two adjacent cabinets'
         ///     supports are used to render one whole.
         /// </summary>
-        public const float CabinetColumnWidthInMeters = 3.0f * Const.Inches2Meters;
+        public const float CabinetColumnWidthInMeters = 3.0f * Units.Inches2Meters;
 
-        public const float SectionBuildingMethodMinCabinetLengthInMeters = 18.0f * Const.Inches2Meters;
+        public const float SectionBuildingMethodMinCabinetLengthInMeters = 18.0f * Units.Inches2Meters;
 
-        public const float SectionBuildingMethodMaxCabinetLengthInMeters = 60.0f * Const.Inches2Meters;
+        public const float SectionBuildingMethodMaxCabinetLengthInMeters = 60.0f * Units.Inches2Meters;
 
-        public const float MinMetersFromEdgeAfterNudge = 2.0f * Const.Inches2Meters;
+        public const float MinMetersFromEdgeAfterNudge = 2.0f * Units.Inches2Meters;
 
         /// <summary>
         ///     Within Sections building method, we limit the number of
@@ -69,7 +62,7 @@ namespace KitchenDesign
         ///     The distance an inset toe kick is shifted inward from the front
         ///     of the cabinet.
         /// </summary>
-        public const float ToeKickInsetInMeters = 1.5f * Const.Inches2Meters;
+        public const float ToeKickInsetInMeters = 1.5f * Units.Inches2Meters;
 
         // =====================================================================
         // Styling
@@ -108,18 +101,18 @@ namespace KitchenDesign
             ///     is larger than this, it can cause bowing on cabinets if
             ///     they are much longer than the occupant itself.
             /// </summary>
-            public const float MinimumOccupantWidthInMetersCausingBowing = 15.0f * Const.Inches2Meters;
+            public const float MinimumOccupantWidthInMetersCausingBowing = 15.0f * Units.Inches2Meters;
 
             /// <summary>
             ///     This is the maximum distance from an occupant the left and
             ///     right edge of a cabinet/shelf may be. This is to prevent
             ///     bowing.
             /// </summary>
-            public const float MaximumUnoccupiedPaddingInMeters = 8.0f * Const.Inches2Meters;
+            public const float MaximumUnoccupiedPaddingInMeters = 8.0f * Units.Inches2Meters;
 
             public const float DefaultCabinetDepth = 29.0f;
 
-            public const float FixedSmokerCabinetCutOutMetersToKeepBelowCountertop = 2.0f * Const.Inches2Meters;
+            public const float FixedSmokerCabinetCutOutMetersToKeepBelowCountertop = 2.0f * Units.Inches2Meters;
 
         }
 
@@ -129,7 +122,7 @@ namespace KitchenDesign
 
         public static class Gemini
         {
-            public const float FridgePanelWidthInMeters = 1.375f * Const.Inches2Meters;   // A fridge panel is 1 3/8"
+            public const float FridgePanelWidthInMeters = 1.375f * Units.Inches2Meters;   // A fridge panel is 1 3/8"
 
             public static class Challenger
             {
@@ -141,7 +134,7 @@ namespace KitchenDesign
                 ///
                 ///     <inheritdoc cref="Const.OccupantMinimumHorizontalPaddingInMeters"/>
                 /// </summary>
-                public const float OccupantMinimumHorizontalPaddingInMeters = 4.0f * Const.Inches2Meters;
+                public const float OccupantMinimumHorizontalPaddingInMeters = 4.0f * Units.Inches2Meters;
             }
 
             public static class ManufactersIds

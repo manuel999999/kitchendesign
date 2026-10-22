@@ -115,7 +115,7 @@ namespace KitchenDesign
             // Verify the user has permission to use the app from the current
             // host
             string authorizedDomain =
-                ProFitUtility.GetBaseDomain(ProFitGlobals.userProfile.authorizedDomain);
+                Utility.UrlUtility.GetBaseDomain(ProFitGlobals.userProfile.authorizedDomain);
 
             //MelcherLog.Log("user's authorized domain is: " + authorizedDomain, logLevel: MelcherLog.LogLevel.Always);
 

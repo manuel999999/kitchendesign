@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
 
@@ -201,7 +202,7 @@ namespace KitchenDesign
                 oldSizeInMeters.x + availableSpaceInMetersOnLeft + availableSpaceInMetersOnRight;
 
             // The minimum size of a cabinet shelf in meters.
-            float minimumWidthInMeters = Const.Inches2Meters * m_MinimumWidthInInches;
+            float minimumWidthInMeters = Units.Inches2Meters * m_MinimumWidthInInches;
 
             Vector3 newSizeInMeters = oldSizeInMeters;
             newSizeInMeters.x =
@@ -452,7 +453,7 @@ namespace KitchenDesign
                 Vector3 shelfDesiredCutOutSize = occupant.currentCutOutSizeInMeters;
 
                 shelfDesiredCutOutSize.z =
-                    occupantCuboid.depth + (m_FitWidthToOccupantPaddingInInches * Const.Inches2Meters);
+                    occupantCuboid.depth + (m_FitWidthToOccupantPaddingInInches * Units.Inches2Meters);
 
                 occupant.SetCutOutSizeInMeters(
                     shelfDesiredCutOutSize
@@ -460,7 +461,7 @@ namespace KitchenDesign
 
                 // Next the shelf's width
                 float desiredWidthInMeters =
-                    occupantCuboid.width  + (m_FitWidthToOccupantPaddingInInches * Const.Inches2Meters * 2.0f);
+                    occupantCuboid.width  + (m_FitWidthToOccupantPaddingInInches * Units.Inches2Meters * 2.0f);
 
                 float currentWidthInMeters = occupiableCuboid.width;
 
@@ -540,7 +541,7 @@ namespace KitchenDesign
 
             );
 
-            ProFitUtility.SetAllRendererMaterials(
+            Utility.RendererUtility.SetAllRendererMaterials(
                 m_NestedCountertop.GetComponent<Renderer>(),
                 countertopMaterial
             );
@@ -628,7 +629,7 @@ namespace KitchenDesign
                 await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
             );
 
-            ProFitUtility.SetAllRendererMaterials(
+            Utility.RendererUtility.SetAllRendererMaterials(
                 m_NestedCountertop.GetComponent<Renderer>(),
                 countertopMaterial
             );
@@ -659,7 +660,7 @@ namespace KitchenDesign
             occupiedCuboid.yMin -= kitchen.countertopThicknessInMeters;
 
             // Add a bit of padding beneath the countertop.
-            occupiedCuboid.yMin -= 2.0f * Const.Inches2Meters;
+            occupiedCuboid.yMin -= 2.0f * Units.Inches2Meters;
 
             // TODO: The following line should get used whenever we add
             //       mandatory vertical padding between products. -Ryan

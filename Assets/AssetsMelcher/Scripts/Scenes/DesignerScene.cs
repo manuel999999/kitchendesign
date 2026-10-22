@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Interfaces;
     using Cysharp.Threading.Tasks;
     using System;
@@ -561,7 +562,7 @@ namespace KitchenDesign
                         runtimeProductInfo,
                         runtimeProductVisual.info,
                         newlyLoadedProductVisualContent.runtimeContentPrefab,
-                        14.0f * Const.Inches2Meters
+                        14.0f * Units.Inches2Meters
                     );
                 }
             }
@@ -825,7 +826,7 @@ namespace KitchenDesign
                             // Challenger fridges have a 1/4" of padding on the
                             // left and right.
                             // https://3.basecamp.com/3293895/buckets/37470979/messages/9033213434#__recording_9140977268
-                            paddingInMeters = 0.25f * Const.Inches2Meters;
+                            paddingInMeters = 0.25f * Units.Inches2Meters;
                         }
                         else if (runtimeProductVisual.info.runtimePrefabCategory != ProductCategorySpecific.Smoker)
                         {
@@ -844,7 +845,7 @@ namespace KitchenDesign
                         //       whether a cabinet is 'see-through' and then ensure a
                         //       fridge panel is added if it is next to a see-through
                         //       cabinet. -Ryan
-                        const float MinimumPaddingInMeters = (1 / 128.0f) * Const.Inches2Meters;
+                        const float MinimumPaddingInMeters = (1 / 128.0f) * Units.Inches2Meters;
                         paddingInMeters = MinimumPaddingInMeters;
                     }
 
@@ -873,28 +874,28 @@ namespace KitchenDesign
                             }
                             else
                             {
-                                paddingInMeters = 2.25f * Const.Inches2Meters;
+                                paddingInMeters = 2.25f * Units.Inches2Meters;
                             }
                         } 
                         else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Toppin) // toppin
                         {
-                            paddingInMeters = 3f * Const.Inches2Meters;
+                            paddingInMeters = 3f * Units.Inches2Meters;
                         }
                         else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Endura) // endura
                         {
-                            paddingInMeters = 3f * Const.Inches2Meters;
+                            paddingInMeters = 3f * Units.Inches2Meters;
                         }
                         else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.WeatherStrong) // weather strong
                         {
-                            paddingInMeters = 3f * Const.Inches2Meters;
+                            paddingInMeters = 3f * Units.Inches2Meters;
                         }
                         else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.WeatherStrongSelect) // weather strong select
                         {
-                            paddingInMeters = 3f * Const.Inches2Meters;
+                            paddingInMeters = 3f * Units.Inches2Meters;
                         }
                         else if(selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Naturekast) // naturekast
                         {
-                            paddingInMeters = 3f * Const.Inches2Meters;
+                            paddingInMeters = 3f * Units.Inches2Meters;
                         }
                     }
                 }

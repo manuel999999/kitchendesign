@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System.Linq;
     using UnityEngine;
@@ -190,7 +191,7 @@ namespace KitchenDesign
 
                 EventBridge.Designer.setBaseCabinetDepth.Invoke(baseCabinetDepthInMeters);
                 EventBridge.Designer.setCountertopThickness.Invoke(countertopThicknessInMeters);
-                EventBridge.Designer.setCountertopOverhang.Invoke(countertopOverhangInInches * Const.Inches2Meters);
+                EventBridge.Designer.setCountertopOverhang.Invoke(countertopOverhangInInches * Units.Inches2Meters);
                 EventBridge.Designer.createKitchen.Invoke().Forget();
             }
             else
@@ -228,12 +229,12 @@ namespace KitchenDesign
                         if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
                             widthAsText =
-                                ProFitUtility.FormatMetersToCentimeters(widthInMeters);
+                                Utility.MeasurementFormat.FormatMetersToCentimeters(widthInMeters);
                         }
                         else
                         {
                             widthAsText =
-                                ProFitUtility.FormatMetersToImperial(widthInMeters);
+                                Utility.MeasurementFormat.FormatMetersToImperial(widthInMeters);
                         }
 
                         message += $"\n<b>{widthAsText}</b>";

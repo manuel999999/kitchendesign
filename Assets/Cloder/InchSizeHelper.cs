@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace KitchenDesign
             }
 
             transform.position +=
-                m_HookPositionInInches * Const.Inches2Meters - m_Hook.position;
+                m_HookPositionInInches * Units.Inches2Meters - m_Hook.position;
         }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace KitchenDesign
             Quaternion rotation = transform.rotation;
             Vector3 center = transform.TransformPoint(meshBounds.center);
             Vector3 currentSize = Vector3.Scale(Abs(transform.lossyScale), meshBounds.size);
-            Vector3 newSize = Abs(m_SizeInInches) * Const.Inches2Meters;
+            Vector3 newSize = Abs(m_SizeInInches) * Units.Inches2Meters;
 
             Vector3 startSides = SidesOf(m_Start, center, rotation, sideWhenCentered: -1.0f);
             Vector3 endSides = SidesOf(m_End, center, rotation, sideWhenCentered: 1.0f);
@@ -110,7 +111,7 @@ namespace KitchenDesign
             m_Start.position = startPosition;
             m_End.position = endPosition;
 
-            m_SizeInInches = RoundToThousandths(size * Const.Meters2Inches);
+            m_SizeInInches = RoundToThousandths(size * Units.Meters2Inches);
         }
 
         protected void Reset()
@@ -120,7 +121,7 @@ namespace KitchenDesign
             m_Hook = transform.Find("Hook");
 
             m_SizeInInches = RoundToThousandths(
-                Vector3.Scale(Abs(transform.lossyScale), meshBounds.size) * Const.Meters2Inches
+                Vector3.Scale(Abs(transform.lossyScale), meshBounds.size) * Units.Meters2Inches
             );
         }
 
@@ -205,7 +206,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField]
-        private Vector3 m_SizeInInches = Vector3.one * Const.Meters2Inches;
+        private Vector3 m_SizeInInches = Vector3.one * Units.Meters2Inches;
 
         [SerializeField]
         private Transform m_Start;

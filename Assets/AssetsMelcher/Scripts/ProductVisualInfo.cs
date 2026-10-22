@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System;
     using UnityEngine;
 
@@ -40,7 +41,7 @@ namespace KitchenDesign
 
         public float initialInsetFromEdgeInMeters
         {
-            get => m_InitialInsetFromEdgeInInches * Const.Inches2Meters;
+            get => m_InitialInsetFromEdgeInInches * Units.Inches2Meters;
 
             [System.Obsolete("This is a hack to quickly re-try adding " +
                 "products at different vertical positions. This whole " +
@@ -48,7 +49,7 @@ namespace KitchenDesign
                 "ProductInfo.anchorOffsetInMeters. This is now also " +
                 "used to change product offsets depending on which " +
                 "building mode is selected.")]
-            set => m_InitialInsetFromEdgeInInches = value * Const.Meters2Inches;
+            set => m_InitialInsetFromEdgeInInches = value * Units.Meters2Inches;
         }
 
         public bool hidesBackCountertopEdge => m_HidesBackCountertopEdge;
@@ -67,15 +68,15 @@ namespace KitchenDesign
         public int sectionInsetToeKickIndex => m_SectionInsetToeKickIndex;
 
         public Vector2 sectionProceduralInsetToeKickExtraInsetInMeters =>
-                m_SectionProceduralInsetToeKickExtraInsetInInches2 * Const.Inches2Meters;
+                m_SectionProceduralInsetToeKickExtraInsetInInches2 * Units.Inches2Meters;
 
         public CuboidPadding sectionOccupiableCuboidPaddingInInches =>
             m_SectionOccupiableCuboidPaddingInInches;
 
         public CuboidPadding sectionOccupiableCuboidPaddingInMeters =>
-            m_SectionOccupiableCuboidPaddingInInches * Const.Inches2Meters;
+            m_SectionOccupiableCuboidPaddingInInches * Units.Inches2Meters;
         public Vector2 cabinetLegHorizontalInsetFromCabinetEdgesOverrideInMeters =>
-            m_CabinetLegHorizontalInsetFromCabinetEdgesOverrideInInches * Const.Inches2Meters;
+            m_CabinetLegHorizontalInsetFromCabinetEdgesOverrideInInches * Units.Inches2Meters;
 
         public bool expectingCabinetDoors => m_ExpectingCabinetDoors;
         public bool sectionAppearsInDetailSheet => m_SectionAppearsInDetailSheet;

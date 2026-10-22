@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -460,7 +461,7 @@ namespace KitchenDesign
                     if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
                         cabinetSpan.backing &&
                         cabinetSectionProductInfo != null &&
-                        !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 36.0f * Const.Inches2Meters, tolerance: 0.001f))
+                        !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 36.0f * Units.Inches2Meters, tolerance: 0.001f))
                     {
                         canLastCabinetSpanReceiveCabinet = false;
 
@@ -959,7 +960,7 @@ namespace KitchenDesign
 
                     // TODO: Read this value from the cabinet's original prefab.
                     const float MinimumCabinetLength =
-                        2.0f * Const.InchesPerFoot * Const.Inches2Meters;
+                        2.0f * Units.InchesPerFoot * Units.Inches2Meters;
 
                     // Ensure the neighbour cabinets occupiable area and size
                     // constraints account for the corner wedge.

@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using UnityEngine;
     using TMPro;
@@ -104,7 +105,7 @@ namespace KitchenDesign
         /// <param name="productInfo"></param>
         public void SetProductInfo(ProductInfo productInfo)
         {
-            if (ProFitUtility.IsPrefab(gameObject))
+            if (Utility.RuntimePrefabs.IsPrefab(gameObject))
             {
                 // The ProductInfo field is only intended to be used by
                 // Occupants. This is to avoid the wrong ProductInfo
@@ -234,7 +235,7 @@ namespace KitchenDesign
             // The labels are shifted so they're not centered in the
             // measurement line. This is to avoid overlapping with the product
             // name label.
-            const float LabelInsetInMeters = 2.0f * Const.Inches2Meters;
+            const float LabelInsetInMeters = 2.0f * Units.Inches2Meters;
 
             float labelInsetPercentX = LabelInsetInMeters / widthForFrontOrBackInProductSpace.distance;
             m_MeasureX.labelNormalizedPositionWithinLine = labelInsetPercentX;
@@ -582,7 +583,7 @@ namespace KitchenDesign
 
                 foreach (MeshRenderer r in meshRenderers)
                 {
-                    ProFitUtility.SetAllRendererMaterials(r, highlightMaterial);
+                    Utility.RendererUtility.SetAllRendererMaterials(r, highlightMaterial);
                 }
             }
             else

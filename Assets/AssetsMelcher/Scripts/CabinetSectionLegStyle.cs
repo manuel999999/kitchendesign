@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "CabinetSectionLegStyle", menuName = "Melcher Studios/Pro-Fit/Cabinet Section Leg Style")]
@@ -13,9 +14,9 @@ namespace KitchenDesign
         public Transform legModelPrefab => m_LegModelPrefab;
 
         public Vector2 horizontalInsetFromCabinetEdgesInMeters =>
-            m_HorizontalInsetFromCabinetEdgesInInches * Const.Inches2Meters;
+            m_HorizontalInsetFromCabinetEdgesInInches * Units.Inches2Meters;
 
-        public float heightInMeters => m_HeightInInches * Const.Inches2Meters;
+        public float heightInMeters => m_HeightInInches * Units.Inches2Meters;
 
         // ====================================================================
         // Inspector-serialized fields

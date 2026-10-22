@@ -118,7 +118,7 @@ namespace KitchenDesign
             if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
             {
                 m_ValueLabel.phrase =
-                    ProFitUtility.FormatMetersToCentimeters(
+                    Utility.MeasurementFormat.FormatMetersToCentimeters(
                         selectedOption.sizeInMeters
                     );
 

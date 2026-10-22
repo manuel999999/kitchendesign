@@ -521,7 +521,7 @@ namespace KitchenDesign
             UniversalRenderPipelineAsset screenshotQuality =
                 ProFitGlobals.appProfile.screenshotQuality;
 
-            if (!ProFitUtility.TrySetRenderQuality(screenshotQuality))
+            if (!Utility.RenderQuality.TrySetRenderQuality(screenshotQuality))
             {
                 MelcherLog.LogError("Did not find requested render quality", screenshotQuality);
             }

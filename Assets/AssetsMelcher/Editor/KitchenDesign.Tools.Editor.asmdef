@@ -3,6 +3,7 @@
     "rootNamespace": "KitchenDesign",
     "references": [
         "KitchenDesign",
+        "KitchenDesign.Shared",
         "ca.melcher.unity.core",
         "ca.melcher.unity.core.editor",
         "ca.melcher.unity.moreeffectivecoroutines",

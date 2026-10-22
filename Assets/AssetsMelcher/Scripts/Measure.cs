@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System;
     using System.Text;
     using UnityEngine;
@@ -101,7 +102,7 @@ namespace KitchenDesign
                     if (m_DisplayUnits == MeasurementUnit.FeetAndInches)
                     {
                         text =
-                            ProFitUtility.FormatMetersToImperialMonospaced(
+                            Utility.MeasurementFormat.FormatMetersToImperialMonospaced(
                                 m_StringBuilder,
                                 monoSize,
                                 distanceInMeters,
@@ -113,7 +114,7 @@ namespace KitchenDesign
                     else if (m_DisplayUnits == MeasurementUnit.Centimeters)
                     {
                         string distanceInCentimeters =
-                            ProFitUtility.FormatMetersToCentimeters(distanceInMeters);
+                            Utility.MeasurementFormat.FormatMetersToCentimeters(distanceInMeters);
 
                         text = $"<mspace={monoSize}>{distanceInCentimeters}</mspace>";
                     }
@@ -127,7 +128,7 @@ namespace KitchenDesign
                     if (m_DisplayUnits == MeasurementUnit.FeetAndInches)
                     {
                         text =
-                            ProFitUtility.FormatMetersToImperial(
+                            Utility.MeasurementFormat.FormatMetersToImperial(
                                 distanceInMeters,
                                 m_ShowFeet,
                                 minimumInchDivisions: m_MinimumInchDivisions
@@ -136,7 +137,7 @@ namespace KitchenDesign
                     else if (m_DisplayUnits == MeasurementUnit.Centimeters)
                     {
                         text =
-                            ProFitUtility.FormatMetersToCentimeters(
+                            Utility.MeasurementFormat.FormatMetersToCentimeters(
                                 distanceInMeters,
                                 leftDecimalPlaces: 3
                             );
@@ -285,7 +286,7 @@ namespace KitchenDesign
                 // The amount to shift the tick marks into the line. This is
                 // to avoid the ticks overlapping when two measurements are
                 // too close
-                Vector3 tickInsetFromBeginning = Vector3.zero;//midLineDirection * (Const.Inches2Meters * 0.25f);
+                Vector3 tickInsetFromBeginning = Vector3.zero;//midLineDirection * (Units.Inches2Meters * 0.25f);
 
                 Vector3 startTickTopInLineSpace     = startInLineSpace + tickInsetFromBeginning + (lineTickDirection * m_TickSizeInMeters);
                 Vector3 startTickBottomInLineSpace  = startInLineSpace + tickInsetFromBeginning - (lineTickDirection * m_TickSizeInMeters);

@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;
@@ -95,7 +96,7 @@ namespace KitchenDesign
         {
             get
             {
-                float standardHeightInMeters = m_InitialSizeInches.y * Const.Inches2Meters;
+                float standardHeightInMeters = m_InitialSizeInches.y * Units.Inches2Meters;
 
                 if (kitchen != null &&
                     kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
@@ -183,17 +184,17 @@ namespace KitchenDesign
 
         public bool canOccludeSelectionClick => m_CanOccludeSelectionClick;
 
-        public Vector3 initialSizeInMeters => m_InitialSizeInches * Const.Inches2Meters;
+        public Vector3 initialSizeInMeters => m_InitialSizeInches * Units.Inches2Meters;
         public Vector3 minSizeInMeters
         {
-            get => m_MinSizeInInches * Const.Inches2Meters;
-            set => m_MinSizeInInches = value / Const.Inches2Meters;
+            get => m_MinSizeInInches * Units.Inches2Meters;
+            set => m_MinSizeInInches = value / Units.Inches2Meters;
         }
 
         public Vector3 maxSizeInMeters
         {
-            get => m_MaxSizeInInches * Const.Inches2Meters;
-            set => m_MaxSizeInInches = value / Const.Inches2Meters;
+            get => m_MaxSizeInInches * Units.Inches2Meters;
+            set => m_MaxSizeInInches = value / Units.Inches2Meters;
         }
 
         /// <summary>
@@ -359,7 +360,7 @@ namespace KitchenDesign
 
         public void SetSizeFromInches(Vector3 inches)
         {
-            sizeInMeters = inches * Const.Inches2Meters;
+            sizeInMeters = inches * Units.Inches2Meters;
         }
 
         public void SetKitchen(IKitchen kitchen)
@@ -679,7 +680,7 @@ namespace KitchenDesign
                 // Change the overhang of the countertop mesh. The mesh uses
                 // one-inch as its base 1.0f scale, so convert meters to inches
                 // to not over scale the overhang.
-                m_Countertop.skinScale = overhangInMeters * Const.Meters2Inches;
+                m_Countertop.skinScale = overhangInMeters * Units.Meters2Inches;
 
                 ResizeMeshToCabinetSize();
 
@@ -695,7 +696,7 @@ namespace KitchenDesign
         {
             if (m_Countertop)
             {
-                return m_Countertop.skinScale * Const.Inches2Meters;
+                return m_Countertop.skinScale * Units.Inches2Meters;
             }
 
             return default;
@@ -853,7 +854,7 @@ namespace KitchenDesign
                                 // assumed to use the kitchen's standard depth.
                                 neighbourDepthInMeters =
                                     kitchen.selectedBrandCatalog ?
-                                        kitchen.selectedBrandCatalog.standardCabinetDepthInInches * Const.Inches2Meters :
+                                        kitchen.selectedBrandCatalog.standardCabinetDepthInInches * Units.Inches2Meters :
                                         kitchen.baseCabinetDepthInMeters;
                             }
                             else
@@ -955,7 +956,7 @@ namespace KitchenDesign
                     !IsAlmostZero(m_SizeInMeters.y) &&
                     !IsAlmostZero(m_SizeInMeters.z);
 
-                if (!ProFitUtility.IsPrefab(gameObject))
+                if (!Utility.RuntimePrefabs.IsPrefab(gameObject))
                 {
                     // Only modify the visibility of non-prefabs. This keeps
                     // assets from being modified unintentionally.
@@ -980,10 +981,10 @@ namespace KitchenDesign
                 {
                     // Extrude the countertop of corner wedge cabinets by an inch.
                     // (Add 2 inches because we're adjusting A and B in A^2 + B^2 = C^2)
-                    newCountertopCuboid.zMin -= Const.Inches2Meters * 2.0f;
-                    newCountertopCuboid.zMax += Const.Inches2Meters * 2.0f;
-                    newCountertopCuboid.xMin -= Const.Inches2Meters * 2.0f;
-                    newCountertopCuboid.xMax += Const.Inches2Meters * 2.0f;
+                    newCountertopCuboid.zMin -= Units.Inches2Meters * 2.0f;
+                    newCountertopCuboid.zMax += Units.Inches2Meters * 2.0f;
+                    newCountertopCuboid.xMin -= Units.Inches2Meters * 2.0f;
+                    newCountertopCuboid.xMax += Units.Inches2Meters * 2.0f;
                 }
 
                 // Resize the cabinet's countertop to stop immediately
@@ -1282,7 +1283,7 @@ namespace KitchenDesign
                         z: Const.CabinetColumnWidthInMeters
                     );
 
-                if (!ProFitUtility.IsPrefab(gameObject))
+                if (!Utility.RuntimePrefabs.IsPrefab(gameObject))
                 {
                     m_CornerColumn.gameObject.SetActive(areColumnsVisible);
                 }
@@ -1584,7 +1585,7 @@ namespace KitchenDesign
                 if (leftCabinet && leftCabinet.cabinetType.IsEnd() == false && leftCabinetPanelSize == 0)
                 {
                     float endPadding =
-                        cabinetSectionVisual.info.sectionEndPanelSizeInches * Const.Inches2Meters;
+                        cabinetSectionVisual.info.sectionEndPanelSizeInches * Units.Inches2Meters;
 
                     TryToResizeLength(ref endPadding, Extent.Min, forceAutoCenterProducts: true);
                     m_AppliedMidOfRunPaddingInMetersLeft = endPadding;
@@ -1593,7 +1594,7 @@ namespace KitchenDesign
                 if (rightCabinet && rightCabinet.cabinetType.IsEnd() == false && rightCabinetPanelSize == 0)
                 {
                     float endPadding =
-                        cabinetSectionVisual.info.sectionEndPanelSizeInches * Const.Inches2Meters;
+                        cabinetSectionVisual.info.sectionEndPanelSizeInches * Units.Inches2Meters;
 
                     TryToResizeLength(ref endPadding, Extent.Max, forceAutoCenterProducts: true);
                     m_AppliedMidOfRunPaddingInMetersRight = endPadding;
@@ -1645,7 +1646,7 @@ namespace KitchenDesign
                 Cuboid.NormalizedToPoint(cabinetCuboid, normalizedAnchorWithinCabinet);
 
             CuboidPadding countertopOverhangInMeters =
-                m_Kitchen != null ? m_Kitchen.baseCountertopOverhangInMeters : CuboidPadding.one * Const.Inches2Meters;
+                m_Kitchen != null ? m_Kitchen.baseCountertopOverhangInMeters : CuboidPadding.one * Units.Inches2Meters;
 
             Vector3 supportSizeInMeters =
                 new Vector3(
@@ -1663,7 +1664,7 @@ namespace KitchenDesign
 
             column.sizeInMeters = supportSizeInMeters;
 
-            if (!ProFitUtility.IsPrefab(gameObject))
+            if (!Utility.RuntimePrefabs.IsPrefab(gameObject))
             {
                 // Only modify the visibility of non-prefabs. This keeps
                 // assets from being modified unintentionally.
@@ -2114,7 +2115,7 @@ namespace KitchenDesign
                     // always uses the requested material.
                     foreach (MeshRenderer renderer in m_CabinetMeshRenderers)
                     {
-                        ProFitUtility.SetAllRendererMaterials(renderer, cabinetMaterialExclusive);
+                        Utility.RendererUtility.SetAllRendererMaterials(renderer, cabinetMaterialExclusive);
                     }
                 }
             }
@@ -2136,7 +2137,7 @@ namespace KitchenDesign
                     {
                         if (sliceRenderer)
                         {
-                            ProFitUtility.SetAllRendererMaterials(sliceRenderer, countertopMaterial);
+                            Utility.RendererUtility.SetAllRendererMaterials(sliceRenderer, countertopMaterial);
                         }
                     }
                 }
@@ -2144,19 +2145,19 @@ namespace KitchenDesign
 
             if (m_ToeKickLocalX && m_ToeKickLocalX.TryGetComponent(out Renderer toeKickLocalX))
             {
-                ProFitUtility.SetAllRendererMaterials(toeKickLocalX, cabinetMaterial);
+                Utility.RendererUtility.SetAllRendererMaterials(toeKickLocalX, cabinetMaterial);
             }
 
             if (m_ToeKickLocalZ && m_ToeKickLocalZ.TryGetComponent(out Renderer toeKickLocalZ))
             {
-                ProFitUtility.SetAllRendererMaterials(toeKickLocalZ, cabinetMaterial);
+                Utility.RendererUtility.SetAllRendererMaterials(toeKickLocalZ, cabinetMaterial);
             }
 
             foreach (GameObject insetToeKickVariation in m_InsetToeKickVariations)
             {
                 if (insetToeKickVariation.TryGetComponent(out Renderer renderer))
                 {
-                    ProFitUtility.SetAllRendererMaterials(renderer, cabinetMaterial);
+                    Utility.RendererUtility.SetAllRendererMaterials(renderer, cabinetMaterial);
                 }
             }
 
@@ -2181,7 +2182,7 @@ namespace KitchenDesign
             {
                 if (column && column.TryGetComponent(out MeshRenderer columnRenderer))
                 {
-                    ProFitUtility.SetAllRendererMaterials(columnRenderer, cabinetMaterial);
+                    Utility.RendererUtility.SetAllRendererMaterials(columnRenderer, cabinetMaterial);
                 }
             }
         }
@@ -2341,7 +2342,7 @@ namespace KitchenDesign
 
             // Apply the right layer to ensure the custom model supports
             // the cut-outs render feature.
-            ProFitUtility.SetGameObjectLayerRecursively(
+            Utility.RendererUtility.SetGameObjectLayerRecursively(
                 m_Cabinet.transform,
                 Weaver.Layers.Cabinet
             );

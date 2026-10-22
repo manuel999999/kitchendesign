@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace KitchenDesign
         // The measurement line is shifted away from the cabinet by this
         // amount to prevent it from clipping with the kitchen geometry
         public const float MeasurementLineOffsetFromCabinetInMeters =
-            1.0f * Const.Inches2Meters;
+            1.0f * Units.Inches2Meters;
 
         // ====================================================================
         // Methods

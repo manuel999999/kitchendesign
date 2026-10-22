@@ -124,19 +124,19 @@ namespace KitchenDesign
         protected void AutoFillForm(MelcherButton caller)
         {
 #if UNITY_EDITOR
-            string firstName = ProFitUtility.RandomName();
-            string lastName = ProFitUtility.RandomName();
+            string firstName = Utility.RandomNamesForEditor.RandomName();
+            string lastName = Utility.RandomNamesForEditor.RandomName();
             string email = firstName + lastName + Random.Range(50, 99) + "@fake.com";
 
-            m_BusinessNameField.text= ProFitUtility.RandomName() + "-" + ProFitUtility.RandomPlace();
+            m_BusinessNameField.text= Utility.RandomNamesForEditor.RandomName() + "-" + Utility.RandomNamesForEditor.RandomPlace();
             m_FirstNameField.text   = firstName;
             m_LastNameField.text    = lastName;
             m_ContactInfoField.text = email;
             m_SignInEmailField.text = email;
             m_PhoneNumberField.text = PhoneNumber.Format(PhoneNumber.Random());
-            m_AddressField.text     = Random.Range(1, 9999) + " " + ProFitUtility.RandomPlace();
-            m_CityField.text        = ProFitUtility.RandomPlace();
-            m_StateField.text       = ProFitUtility.RandomPlace();
+            m_AddressField.text     = Random.Range(1, 9999) + " " + Utility.RandomNamesForEditor.RandomPlace();
+            m_CityField.text        = Utility.RandomNamesForEditor.RandomPlace();
+            m_StateField.text       = Utility.RandomNamesForEditor.RandomPlace();
             m_ZipCodeField.text     = Random.Range(1000, 99999).ToString();
 
             m_PasswordField.text        = "Pass@123";

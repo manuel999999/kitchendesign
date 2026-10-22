@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     /// <summary>
@@ -31,10 +32,10 @@ namespace KitchenDesign
         /// </summary>
         public Vector3 offsetInMeters
         {
-            get => m_OffsetInInches * Const.Inches2Meters;
+            get => m_OffsetInInches * Units.Inches2Meters;
             set
             {
-                m_OffsetInInches = value * Const.Meters2Inches;
+                m_OffsetInInches = value * Units.Meters2Inches;
                 ApplyPositionAndScale();
             }
         }
@@ -51,10 +52,10 @@ namespace KitchenDesign
 
         public Vector3 sizeInMeters
         {
-            get => m_SizeInInches * Const.Inches2Meters;
+            get => m_SizeInInches * Units.Inches2Meters;
             set
             {
-                m_SizeInInches = value * Const.Meters2Inches;
+                m_SizeInInches = value * Units.Meters2Inches;
                 ApplyPositionAndScale();
             }
         }
@@ -72,11 +73,11 @@ namespace KitchenDesign
         {
             if (m_ApplyOffset)
             {
-                m_Transform.localPosition = m_OffsetInInches * Const.Inches2Meters;
+                m_Transform.localPosition = m_OffsetInInches * Units.Inches2Meters;
             }
 
             m_Transform.localScale =
-                Vector3.Scale(m_SizeInInches * Const.Inches2Meters, m_Scale);
+                Vector3.Scale(m_SizeInInches * Units.Inches2Meters, m_Scale);
         }
 
         // ====================================================================

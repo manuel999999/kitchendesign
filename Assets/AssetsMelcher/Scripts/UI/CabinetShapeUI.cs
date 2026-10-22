@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using Cysharp.Threading.Tasks;
     using System.Linq;
@@ -185,7 +186,7 @@ namespace KitchenDesign
             EventBridge.Designer.setCountertopType?.Invoke(countertopType);
             EventBridge.Designer.setBaseCabinetDepth.Invoke(baseCabinetDepthInMeters);
             EventBridge.Designer.setCountertopThickness.Invoke(countertopThicknessInMeters);
-            EventBridge.Designer.setCountertopOverhang.Invoke(countertopOverhangInInches * Const.Inches2Meters);
+            EventBridge.Designer.setCountertopOverhang.Invoke(countertopOverhangInInches * Units.Inches2Meters);
             EventBridge.Designer.createKitchen.Invoke().Forget();
     }
 

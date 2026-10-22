@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
@@ -38,12 +39,12 @@ namespace KitchenDesign
 
             if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
             {
-                widthAsText = ProFitUtility.FormatMetersToCentimeters(displayedWidthInMeters);
+                widthAsText = Utility.MeasurementFormat.FormatMetersToCentimeters(displayedWidthInMeters);
             }
             else
             {
                 widthAsText =
-                    ProFitUtility.FormatMetersToImperial(
+                    Utility.MeasurementFormat.FormatMetersToImperial(
                         displayedWidthInMeters
                     );
             }
@@ -165,13 +166,13 @@ namespace KitchenDesign
                     errorMessage = null;
 
                     displayedUserInputWidthInMeters =
-                        userInputMeasurementInCentimeters * Const.Centimeters2Meters;
+                        userInputMeasurementInCentimeters * Units.Centimeters2Meters;
                 }
             }
             else
             {
                 bool didParse =
-                    ProFitUtility.TryParseImperialString(
+                    Utility.MeasurementFormat.TryParseImperialString(
                         userInputMeasurementAsText,
                         out displayedUserInputWidthInMeters,
                         "Cabinet Width",
@@ -225,11 +226,11 @@ namespace KitchenDesign
 
                         if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
-                            minSizeInUserUnits = ProFitUtility.FormatMetersToCentimeters(minSizeInMeters);
+                            minSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToCentimeters(minSizeInMeters);
                         }
                         else
                         {
-                            minSizeInUserUnits = ProFitUtility.FormatMetersToImperial(minSizeInMeters);
+                            minSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToImperial(minSizeInMeters);
                         }
 
                         m_MessageBox.Error(
@@ -249,11 +250,11 @@ namespace KitchenDesign
 
                         if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
-                            maxSizeInUserUnits = ProFitUtility.FormatMetersToCentimeters(maxSizeInMeters);
+                            maxSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToCentimeters(maxSizeInMeters);
                         }
                         else
                         {
-                            maxSizeInUserUnits = ProFitUtility.FormatMetersToImperial(maxSizeInMeters);
+                            maxSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToImperial(maxSizeInMeters);
                         }
 
                         m_MessageBox.Error(
@@ -277,11 +278,11 @@ namespace KitchenDesign
 
                     if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                     {
-                        requestedSizeInUserUnits = ProFitUtility.FormatMetersToCentimeters(displayedUserInputWidthInMeters);
+                        requestedSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToCentimeters(displayedUserInputWidthInMeters);
                     }
                     else
                     {
-                        requestedSizeInUserUnits = ProFitUtility.FormatMetersToImperial(displayedUserInputWidthInMeters);
+                        requestedSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToImperial(displayedUserInputWidthInMeters);
                     }
 
                     m_MessageBox.Error(

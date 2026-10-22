@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEngine;
@@ -98,22 +99,22 @@ namespace KitchenDesign
             m_WhitelistedHighBarTopCountertopManufacturers.readOnly;
 
         public float standardCabinetDepthInMeters =>
-            m_StandardCabinetDepthInInches * Const.Inches2Meters;
+            m_StandardCabinetDepthInInches * Units.Inches2Meters;
 
         public float standardCabinetDepthInInches =>
             m_StandardCabinetDepthInInches;
 
         public float standardCabinetHeightInMeters =>
-            m_StandardCabinetHeightInInches * Const.Inches2Meters;
+            m_StandardCabinetHeightInInches * Units.Inches2Meters;
 
 
         public float highBarTopOverhangInInches => m_HighBarTopOverhangInInches;
 
-        public float highBarTopOverhangInMeters => m_HighBarTopOverhangInInches * Const.Inches2Meters;
+        public float highBarTopOverhangInMeters => m_HighBarTopOverhangInInches * Units.Inches2Meters;
 
         public float lowBarTopLengthInInches => m_LowBarTopLengthInInches;
 
-        public float lowBarTopLengthInMeters => m_LowBarTopLengthInInches * Const.Inches2Meters;
+        public float lowBarTopLengthInMeters => m_LowBarTopLengthInInches * Units.Inches2Meters;
 
         public float cabinetCountertopThicknessInInches => m_CabinetCountertopThicknessInInches;
 
@@ -128,7 +129,7 @@ namespace KitchenDesign
 
         public MeshRenderer cabinetVentPrefab => m_CabinetVentPrefab;
 
-        public float cabinetVentDistanceFromEdgeInMeters => m_CabinetVentDistanceFromEdgeInInches * Const.Inches2Meters;
+        public float cabinetVentDistanceFromEdgeInMeters => m_CabinetVentDistanceFromEdgeInInches * Units.Inches2Meters;
 
         public bool showFractionInMeasurements => m_ShowFractionInMeasurements;
 
@@ -663,7 +664,7 @@ namespace KitchenDesign
 
             public float dealerPrice => m_PriceSheetPrice.GetPrice(ProFitGlobals.userProfile.currency);
 
-            public float specificPanelWidthInMeters => m_SpecificPanelWidthInInches * Const.Inches2Meters;
+            public float specificPanelWidthInMeters => m_SpecificPanelWidthInInches * Units.Inches2Meters;
 
             [SerializeField]
             protected string m_ProductName = default;

@@ -50,7 +50,7 @@ namespace KitchenDesign
 
             if (urlOfApp != null)
             {
-                domain = ProFitUtility.GetDomain(urlOfApp);
+                domain = Utility.UrlUtility.GetDomain(urlOfApp);
             }
 
             return domain;

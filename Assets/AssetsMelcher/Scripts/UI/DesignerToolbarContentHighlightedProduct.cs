@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.UI;
@@ -89,15 +90,15 @@ namespace KitchenDesign
 
                     if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                     {
-                        w = ProFitUtility.FormatMetersToCentimeters(cabinetSizeInMeters.x);
-                        h = ProFitUtility.FormatMetersToCentimeters(cabinetSizeInMeters.y);
-                        d = ProFitUtility.FormatMetersToCentimeters(cabinetSizeInMeters.z);
+                        w = Utility.MeasurementFormat.FormatMetersToCentimeters(cabinetSizeInMeters.x);
+                        h = Utility.MeasurementFormat.FormatMetersToCentimeters(cabinetSizeInMeters.y);
+                        d = Utility.MeasurementFormat.FormatMetersToCentimeters(cabinetSizeInMeters.z);
                     }
                     else
                     {
-                        w = ProFitUtility.FormatMetersToImperial(cabinetSizeInMeters.x);
-                        h = ProFitUtility.FormatMetersToImperial(cabinetSizeInMeters.y);
-                        d = ProFitUtility.FormatMetersToImperial(cabinetSizeInMeters.z);
+                        w = Utility.MeasurementFormat.FormatMetersToImperial(cabinetSizeInMeters.x);
+                        h = Utility.MeasurementFormat.FormatMetersToImperial(cabinetSizeInMeters.y);
+                        d = Utility.MeasurementFormat.FormatMetersToImperial(cabinetSizeInMeters.z);
                     }
 
                     subtitle = $"{w} x {h} x {d}";
@@ -325,7 +326,7 @@ namespace KitchenDesign
                 maxYInMeters -= cutOutCuboid.height;
             }
 
-            Vector3 nudgeAmountInMeters = Vector3.up * Const.Inches2Meters;
+            Vector3 nudgeAmountInMeters = Vector3.up * Units.Inches2Meters;
             Vector3 newPosition = occupant.productVisualContentInstance.GetTransform().localPosition;
             newPosition += nudgeAmountInMeters;
 
@@ -367,7 +368,7 @@ namespace KitchenDesign
                 minYInMeters += cutOutCuboid.height;
             }
 
-            Vector3 nudgeAmountInMeters = Vector3.down * Const.Inches2Meters;
+            Vector3 nudgeAmountInMeters = Vector3.down * Units.Inches2Meters;
             Vector3 newPosition = occupant.productVisualContentInstance.GetTransform().localPosition;
             newPosition += nudgeAmountInMeters;
 

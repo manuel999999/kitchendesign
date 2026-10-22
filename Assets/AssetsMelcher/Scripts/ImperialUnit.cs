@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using System;
 
     /// <summary>
@@ -18,7 +19,7 @@ namespace KitchenDesign
         {
             return new ImperialUnit()
             {
-                m_Inches = totalMeters * Const.Meters2Inches
+                m_Inches = totalMeters * Units.Meters2Inches
             };
         }
 
@@ -37,24 +38,24 @@ namespace KitchenDesign
         /// <summary>
         /// The total measurement in meters.
         /// </summary>
-        public double totalMeters => m_Inches * Const.Inches2Meters;
+        public double totalMeters => m_Inches * Units.Inches2Meters;
 
         /// <summary>
         /// The number of whole feet that the measurement is divisible by.
         /// </summary>
-        public int feet => (int)Math.Floor(m_Inches / Const.InchesPerFoot);
+        public int feet => (int)Math.Floor(m_Inches / Units.InchesPerFoot);
 
         /// <summary>
         /// The total measurement in feet.
         /// </summary>
-        public double totalFeet => m_Inches / Const.InchesPerFoot;
+        public double totalFeet => m_Inches / Units.InchesPerFoot;
 
         /// <summary>
         /// The number of whole inches the measurement is divisible by that
         /// extend beyond whole divisions of feet. That is, the leftover inches
         /// after <see cref="feet"/> is removed.
         /// </summary>
-        public int inches => (int)Math.Floor(m_Inches - (feet * Const.InchesPerFoot));
+        public int inches => (int)Math.Floor(m_Inches - (feet * Units.InchesPerFoot));
 
         /// <summary>
         /// The total measurement in inches.
@@ -103,9 +104,9 @@ namespace KitchenDesign
 
             feet = this.feet;
 
-            while (inches >= Const.InchesPerFoot)
+            while (inches >= Units.InchesPerFoot)
             {
-                inches -= (int)Const.InchesPerFoot;
+                inches -= (int)Units.InchesPerFoot;
                 ++feet;
             }
         }
@@ -168,7 +169,7 @@ namespace KitchenDesign
 
         public void SetFromTotalMeters(float newTotalMeters)
         {
-            m_Inches = newTotalMeters * Const.Meters2Inches;
+            m_Inches = newTotalMeters * Units.Meters2Inches;
         }
 
         public void SetFromTotalInches(double totalInches)
@@ -183,7 +184,7 @@ namespace KitchenDesign
 
         public void Set(int feet, int inches, int numerator, int denominator)
         {
-            m_Inches = (feet * Const.InchesPerFoot) + inches;
+            m_Inches = (feet * Units.InchesPerFoot) + inches;
             if (denominator > 0)
             {
                 m_Inches += (double)numerator / denominator;
@@ -223,7 +224,7 @@ namespace KitchenDesign
 
             if (!showFeet)
             {
-                inches += (int)(feet * Const.InchesPerFoot);
+                inches += (int)(feet * Units.InchesPerFoot);
                 feet = 0;
             }
 

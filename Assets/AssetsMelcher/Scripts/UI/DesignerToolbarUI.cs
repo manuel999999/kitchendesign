@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Interfaces;
     using System.Collections.Generic;
     using System.Linq;
@@ -2084,7 +2085,7 @@ namespace KitchenDesign
 
                 // 10" here to account for overhang at the front and riser
                 // thickness (1" and 3", at the moment).
-                overhangInMeters.towardMaxZ = 10.0f * Const.Inches2Meters;
+                overhangInMeters.towardMaxZ = 10.0f * Units.Inches2Meters;
 
                 m_HighBarTopPrefab.countertopOverhangInMeters = overhangInMeters;
 
@@ -2248,7 +2249,7 @@ namespace KitchenDesign
             lowBarTopCountertopOverhangInMeters.towardMaxZ =
                 brandCatalog ?
                     brandCatalog.lowBarTopLengthInMeters :
-                    15.0f * Const.Inches2Meters;
+                    15.0f * Units.Inches2Meters;
 
             m_LowBarTopPrefab.countertopOverhangInMeters =
                 lowBarTopCountertopOverhangInMeters;
@@ -2261,7 +2262,7 @@ namespace KitchenDesign
             highBarTopOverhangInMeters.towardMaxZ =
                 brandCatalog ?
                     brandCatalog.highBarTopOverhangInMeters :
-                    10.0f * Const.Inches2Meters;
+                    10.0f * Units.Inches2Meters;
 
             m_HighBarTopPrefab.countertopOverhangInMeters =
                 highBarTopOverhangInMeters;

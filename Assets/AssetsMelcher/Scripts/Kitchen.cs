@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
     using Unity.Cinemachine;
     using Cysharp.Threading.Tasks;
@@ -64,7 +65,7 @@ namespace KitchenDesign
         /// This value is currently hard coded because it is unnecessary to
         /// change the height.
         /// </summary>
-        public float cabinetHeightInMeters => 36.0f * Const.Inches2Meters;
+        public float cabinetHeightInMeters => 36.0f * Units.Inches2Meters;
 
         public float countertopThicknessInMeters => m_SelectedCountertopThicknessInMeters;
 
@@ -281,15 +282,15 @@ namespace KitchenDesign
 
                 if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                 {
-                    length = ProFitUtility.FormatMetersToCentimeters(sizeInMeters.x) + " ";
-                    height = ProFitUtility.FormatMetersToCentimeters(sizeInMeters.y) + " ";
-                    depth = ProFitUtility.FormatMetersToCentimeters(sizeInMeters.z) + " ";
+                    length = Utility.MeasurementFormat.FormatMetersToCentimeters(sizeInMeters.x) + " ";
+                    height = Utility.MeasurementFormat.FormatMetersToCentimeters(sizeInMeters.y) + " ";
+                    depth = Utility.MeasurementFormat.FormatMetersToCentimeters(sizeInMeters.z) + " ";
                 }
                 else
                 {
-                    length = ProFitUtility.FormatMetersToImperial(sizeInMeters.x, showFraction: showFraction);
-                    height = ProFitUtility.FormatMetersToImperial(sizeInMeters.y, showFeet: false, showFraction: showFraction);
-                    depth = ProFitUtility.FormatMetersToImperial(sizeInMeters.z, showFeet: false, showFraction: showFraction);
+                    length = Utility.MeasurementFormat.FormatMetersToImperial(sizeInMeters.x, showFraction: showFraction);
+                    height = Utility.MeasurementFormat.FormatMetersToImperial(sizeInMeters.y, showFeet: false, showFraction: showFraction);
+                    depth = Utility.MeasurementFormat.FormatMetersToImperial(sizeInMeters.z, showFeet: false, showFraction: showFraction);
                 }
 
                 dimensions.Add($"{length} L x {height} H x {depth} D");
@@ -405,9 +406,9 @@ namespace KitchenDesign
 
                         if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
-                            w = ProFitUtility.FormatMetersToCentimeters(occupantCutOutSize.x);
-                            h = ProFitUtility.FormatMetersToCentimeters(occupantCutOutSize.y);
-                            d = ProFitUtility.FormatMetersToCentimeters(occupantCutOutSize.z);
+                            w = Utility.MeasurementFormat.FormatMetersToCentimeters(occupantCutOutSize.x);
+                            h = Utility.MeasurementFormat.FormatMetersToCentimeters(occupantCutOutSize.y);
+                            d = Utility.MeasurementFormat.FormatMetersToCentimeters(occupantCutOutSize.z);
                         }
                         else
                         {
@@ -435,11 +436,11 @@ namespace KitchenDesign
 
             if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
             {
-                counterTopHeight = ProFitUtility.FormatMetersToCentimeters(m_SelectedCountertopThicknessInMeters);
+                counterTopHeight = Utility.MeasurementFormat.FormatMetersToCentimeters(m_SelectedCountertopThicknessInMeters);
             }
             else
             {
-                counterTopHeight = ProFitUtility.FormatMetersToImperial(m_SelectedCountertopThicknessInMeters);
+                counterTopHeight = Utility.MeasurementFormat.FormatMetersToImperial(m_SelectedCountertopThicknessInMeters);
             }
 
             JsonList topMeasurements = new List<object>();
@@ -565,7 +566,7 @@ namespace KitchenDesign
                 cabinetSpanList.Add(cabinetSpanEntry);
             }
 
-            const float InchesToFeet = 1.0f / Const.InchesPerFoot;
+            const float InchesToFeet = 1.0f / Units.InchesPerFoot;
 
             float cabinetLinearMeters = 0.0f;
             float cabinetSquareMeters = 0.0f;
@@ -896,7 +897,7 @@ namespace KitchenDesign
             }
 
             float countertopAreaInSquareFeet =
-                countertopAreaInSquareMeters * (Const.Meters2Inches * Const.Meters2Inches) * (InchesToFeet * InchesToFeet);
+                countertopAreaInSquareMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet);
 
             string countertopArea =
                 ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
@@ -904,7 +905,7 @@ namespace KitchenDesign
                     countertopAreaInSquareMeters + " sq. m.";
 
             float countertopLinearLengthInFeet =
-                countertopLinearLengthInMeters * Const.Meters2Inches * InchesToFeet;
+                countertopLinearLengthInMeters * Units.Meters2Inches * InchesToFeet;
 
             JsonDict CreateManualPriceSheetEntry(string productSku, string productName, float price)
             {
@@ -994,7 +995,7 @@ namespace KitchenDesign
                     }
 
                     float stollCountertopAreaInSquareFeet =
-                        summedCountertopAreaInMeters * (Const.Meters2Inches * Const.Meters2Inches) * (InchesToFeet * InchesToFeet);
+                        summedCountertopAreaInMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet);
 
                     // Countertops are priced by sq. ft.
                     manualPriceSheetEntries.Add(
@@ -1030,7 +1031,7 @@ namespace KitchenDesign
                         CreateManualPriceSheetEntry(
                             selectedCabinetFinish.sku,
                             selectedCabinetFinish.name,
-                            selectedCabinetFinish.priceCustomer * Mathf.CeilToInt((summedOutsideWidthInMeters * Const.Meters2Inches) / Const.InchesPerFoot)
+                            selectedCabinetFinish.priceCustomer * Mathf.CeilToInt((summedOutsideWidthInMeters * Units.Meters2Inches) / Units.InchesPerFoot)
                         )
                     );
                 }
@@ -1114,7 +1115,7 @@ namespace KitchenDesign
                     );
                 }
 
-                int backsplashFeet = Mathf.CeilToInt(backsplashLinearMeters * Const.Meters2Inches / Const.InchesPerFoot);
+                int backsplashFeet = Mathf.CeilToInt(backsplashLinearMeters * Units.Meters2Inches / Units.InchesPerFoot);
                 for (int i = 0; i < backsplashFeet; ++i)
                 {
                     manualPriceSheetEntries.Add(
@@ -1435,8 +1436,8 @@ namespace KitchenDesign
                         else
                         {
                             BrandCatalog.FridgePanelInfo fallbackPanel = m_SelectedBrandCatalog.cabinetRuntimeBackPanelInfo.fallbackBackPanel;
-                            string backPanelProductId = $"{backPanel.productId}-{backPanel.specificPanelWidthInMeters * Const.Meters2Inches}x{backPanel.panelHeight}";
-                            string backPanelProductName = $"{backPanel.productName} {backPanel.specificPanelWidthInMeters * Const.Meters2Inches}\"W x {backPanel.panelHeight}\"H";
+                            string backPanelProductId = $"{backPanel.productId}-{backPanel.specificPanelWidthInMeters * Units.Meters2Inches}x{backPanel.panelHeight}";
+                            string backPanelProductName = $"{backPanel.productName} {backPanel.specificPanelWidthInMeters * Units.Meters2Inches}\"W x {backPanel.panelHeight}\"H";
 
                             backPanelEntry = CreateManualPriceSheetEntry(
                                 productSku: backPanelProductId,
@@ -1518,7 +1519,7 @@ namespace KitchenDesign
                                 if(isAgoraBerlinGardens)
                                 {
                                     fridgeWidthInInches += 1.5f;
-                                    productId = $"{fridgePanel.productId}x{cabinet.sizeInMeters.z * Const.Meters2Inches}x{cabinet.sizeInMeters.y * Const.Meters2Inches}";
+                                    productId = $"{fridgePanel.productId}x{cabinet.sizeInMeters.z * Units.Meters2Inches}x{cabinet.sizeInMeters.y * Units.Meters2Inches}";
                                     productName = fridgePanel.productName;
                                 }
                                 else
@@ -1529,7 +1530,7 @@ namespace KitchenDesign
                                     productName = fridgePanel.productName;
                                 }
 
-                                fridgeWidthInInches = fridgePanel.specificPanelWidthInMeters * Const.Meters2Inches;
+                                fridgeWidthInInches = fridgePanel.specificPanelWidthInMeters * Units.Meters2Inches;
                             }
 
                             manualPriceSheetEntries.Add(
@@ -1562,7 +1563,7 @@ namespace KitchenDesign
 
                         if (endPanel.specificPanelWidthInMeters > 0.0f)
                         {
-                            fridgeWidthInInches = endPanel.specificPanelWidthInMeters * Const.Meters2Inches;
+                            fridgeWidthInInches = endPanel.specificPanelWidthInMeters * Units.Meters2Inches;
 
                             // Use the panel's ID and name exactly since
                             // they're pre-sized.
@@ -1756,7 +1757,7 @@ namespace KitchenDesign
 
                             lastSpanDepthInMeters = outerCuboid.depth;
 
-                            float lastSpanDepthInInches = lastSpanDepthInMeters * Const.Meters2Inches;
+                            float lastSpanDepthInInches = lastSpanDepthInMeters * Units.Meters2Inches;
 
                             // A smudge value is used to ensure that the
                             // measured countertop depth isn't just a tiny
@@ -1769,7 +1770,7 @@ namespace KitchenDesign
                             {
                                 if (info.depthInInches >= lastSpanDepthInInches - Smudge)
                                 {
-                                    float inchesWide = backEdgeLinearLengthInMeters * Const.Meters2Inches;
+                                    float inchesWide = backEdgeLinearLengthInMeters * Units.Meters2Inches;
 
                                     totalLinearPricing += inchesWide * info.pricePerLinearInch;
 
@@ -1795,7 +1796,7 @@ namespace KitchenDesign
 
                                 spanBackingDepth = backingCuboid.depth;
 
-                                totalLinearPricing += (backingCuboid.width - lastSpanBackingDepth) * Const.Meters2Inches * backingPricePerLinearInch;
+                                totalLinearPricing += (backingCuboid.width - lastSpanBackingDepth) * Units.Meters2Inches * backingPricePerLinearInch;
                             }
 
                             lastSpanBackingDepth = spanBackingDepth;
@@ -1814,7 +1815,7 @@ namespace KitchenDesign
                     if (toeKickLinearMeters > 0.0f
                         && canHaveToeKickEntry)
                     {
-                        float toeKickLinearInches = toeKickLinearMeters * Const.Meters2Inches;
+                        float toeKickLinearInches = toeKickLinearMeters * Units.Meters2Inches;
 
                         // The first few toe kicks don't follow a clear pattern
                         // but then it becomes 1 toe kick every 96 inches.
@@ -1886,7 +1887,7 @@ namespace KitchenDesign
                     // https://3.basecamp.com/3293895/buckets/37470979/messages/8512024554#__recording_8573519126
 
                     const float WeatherStrongToeKickLengthInMeters =
-                        96.0f * Const.Inches2Meters;
+                        96.0f * Units.Inches2Meters;
 
                     int numberOfToeKicks =
                         Mathf.CeilToInt(toeKickLinearMeters / WeatherStrongToeKickLengthInMeters);
@@ -2043,7 +2044,7 @@ namespace KitchenDesign
                 // feet.
                 string finishLinearDistance =
                     ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
-                        cabinetLinearMeters * Const.Meters2Inches * InchesToFeet + " ft" :
+                        cabinetLinearMeters * Units.Meters2Inches * InchesToFeet + " ft" :
                         cabinetLinearMeters + " m";
 
                 saveJson["cabinetFinishArea"] = finishLinearDistance;
@@ -2052,7 +2053,7 @@ namespace KitchenDesign
             {
                 string finishSquareArea =
                     ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
-                        cabinetSquareMeters * (Const.Meters2Inches * Const.Meters2Inches) * (InchesToFeet * InchesToFeet) + " ft�" :
+                        cabinetSquareMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet) + " ft�" :
                         cabinetSquareMeters + " m�";
 
                 saveJson["cabinetFinishArea"] = finishSquareArea;
@@ -2063,8 +2064,8 @@ namespace KitchenDesign
             {
                 string toeKickLinearDistance =
                     ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
-                        ProFitUtility.FormatMetersToImperial(toeKickLinearMeters) :
-                        ProFitUtility.FormatMetersToCentimeters(toeKickLinearMeters);
+                        Utility.MeasurementFormat.FormatMetersToImperial(toeKickLinearMeters) :
+                        Utility.MeasurementFormat.FormatMetersToCentimeters(toeKickLinearMeters);
 
                 saveJson.Add("toe_kick_linear_distance", toeKickLinearDistance);
             }
@@ -2156,7 +2157,7 @@ namespace KitchenDesign
 
                     lastSpanDepthInMeters = outerCuboid.depth;
 
-                    float inchesWide = backEdgeLinearLengthInMeters * Const.Meters2Inches;
+                    float inchesWide = backEdgeLinearLengthInMeters * Units.Meters2Inches;
 
                     totalLinearPricing += inchesWide * usedPrice;
 
@@ -2178,7 +2179,7 @@ namespace KitchenDesign
 
                         spanBackingDepth = backingCuboid.depth;
 
-                        totalLinearPricing += (backingCuboid.width - lastSpanBackingDepth) * Const.Meters2Inches * backingPricePerLinearInch;
+                        totalLinearPricing += (backingCuboid.width - lastSpanBackingDepth) * Units.Meters2Inches * backingPricePerLinearInch;
                     }
 
                     lastSpanBackingDepth = spanBackingDepth;
@@ -2309,7 +2310,7 @@ namespace KitchenDesign
 
             // The countertop overhang isn't saved, so reconstruct it from other
             // values.
-            float countertopOverhangInMeters = 1.0f * Const.Inches2Meters;
+            float countertopOverhangInMeters = 1.0f * Units.Inches2Meters;
 
             if (m_SelectedBuildingMethod == KitchenBuildingMethod.Sections)
             {
@@ -2459,7 +2460,7 @@ namespace KitchenDesign
             // First pass: Restore the length of the cabinets
             for (int i = 0; i < cabinetDataList.Count; ++i)
             {
-                ProFitUtility.GarbageCollectOnLowMemoryDevices();
+                Utility.MemoryUtility.GarbageCollectOnLowMemoryDevices();
 
                 JsonDict cabinetData = (JsonDict)cabinetDataList[i];
                 parser.Reset(cabinetData)
@@ -2812,7 +2813,7 @@ namespace KitchenDesign
 
             // Force the garbage collector to run to free up memory (iOS).
             // Without this, low-memory devices may run out of memory.
-            ProFitUtility.GarbageCollectOnLowMemoryDevices();
+            Utility.MemoryUtility.GarbageCollectOnLowMemoryDevices();
 
             // Second pass: Restore the occupants
             for (int i = 0; i < cabinetDataList.Count; ++i)
@@ -2826,7 +2827,7 @@ namespace KitchenDesign
 
             // Force the garbage collector to run to free up memory (iOS).
             // Without this, low-memory devices may run out of memory.
-            ProFitUtility.GarbageCollectOnLowMemoryDevices();
+            Utility.MemoryUtility.GarbageCollectOnLowMemoryDevices();
 
             // Restore the cabinet materials
             (Material cabinetMaterial, Material countertopMaterial) =
@@ -3201,14 +3202,14 @@ namespace KitchenDesign
                 if (units == MeasurementUnit.Centimeters)
                 {
                     countertopThicknessDisplayFormat =
-                        ProFitUtility.FormatMetersToCentimeters(
+                        Utility.MeasurementFormat.FormatMetersToCentimeters(
                             m_SelectedCountertopThicknessInMeters
                         );
                 }
                 else
                 {
                     countertopThicknessDisplayFormat =
-                    ProFitUtility.FormatMetersToImperial(m_SelectedCountertopThicknessInMeters);
+                    Utility.MeasurementFormat.FormatMetersToImperial(m_SelectedCountertopThicknessInMeters);
                 }
 
                 topInfoPhrase = $"{combinedClientName}. {m_SelectedCabinetLayout.displayName}. Counter-top Thickness: {countertopThicknessDisplayFormat}";
@@ -3350,7 +3351,7 @@ namespace KitchenDesign
                     // Make the default cabinet sections small to match the
                     // smaller section sizes used in Sections building method.
                     float straightSectionWidthInMeters =
-                        (float)ImperialUnit.FromTotalInches(3.0f * Const.InchesPerFoot).totalMeters;
+                        (float)ImperialUnit.FromTotalInches(3.0f * Units.InchesPerFoot).totalMeters;
 
                     foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
                     {
@@ -3840,7 +3841,7 @@ namespace KitchenDesign
                         }
 
                         MelcherLog.Log(
-                            $"How are we calculating the required depth: depth in cabinet = {result.occupantCuboidWithinVolume.depth} ({result.occupantCuboidWithinVolume.depth * Const.Meters2Inches}, inset on z = {productInsetOnZ} ({productInsetOnZ * Const.Meters2Inches})",
+                            $"How are we calculating the required depth: depth in cabinet = {result.occupantCuboidWithinVolume.depth} ({result.occupantCuboidWithinVolume.depth * Units.Meters2Inches}, inset on z = {productInsetOnZ} ({productInsetOnZ * Units.Meters2Inches})",
                             severity: MelcherLogSeverity.Verbose
                         );
 
@@ -3858,7 +3859,7 @@ namespace KitchenDesign
                 if (cabinetDepthTooSmall)
                 {
                     string requiredSize =
-                        ProFitUtility.FormatMetersToImperial(
+                        Utility.MeasurementFormat.FormatMetersToImperial(
                             requiredDepth,
                             showFeet: false,
                             showFraction: true
@@ -3867,7 +3868,7 @@ namespace KitchenDesign
                     if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                     {
                         requiredSize =
-                            ProFitUtility.FormatMetersToCentimeters(requiredDepth);
+                            Utility.MeasurementFormat.FormatMetersToCentimeters(requiredDepth);
                     }
 
                     // Prompt the player to change their cabinet depth if the
@@ -5126,7 +5127,7 @@ namespace KitchenDesign
                 if (selectedBuildingMethod == KitchenBuildingMethod.Sections &&
                     cabinetSectionProductInfo != null &&
                     !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 0.0f, tolerance: 0.001f) &&
-                    !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 36.0f * Const.Inches2Meters, tolerance: 0.001f) &&
+                    !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 36.0f * Units.Inches2Meters, tolerance: 0.001f) &&
                     layout.spans.Any(static span => span.backing))
                 {
 
@@ -5359,7 +5360,7 @@ namespace KitchenDesign
                 }
 
                 string requiredSize =
-                    ProFitUtility.FormatMetersToImperial(
+                    Utility.MeasurementFormat.FormatMetersToImperial(
                         requiredWidthInMeters,
                         showFeet: false,
                         showFraction: true
@@ -5368,7 +5369,7 @@ namespace KitchenDesign
                 if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
                 {
                     requiredSize =
-                        ProFitUtility.FormatMetersToCentimeters(requiredWidthInMeters);
+                        Utility.MeasurementFormat.FormatMetersToCentimeters(requiredWidthInMeters);
                 }
 
                 EventBridge.Designer.showNotification.Invoke(
@@ -7077,7 +7078,7 @@ namespace KitchenDesign
                     draggedOccupant,
                     occupantMetersFromVolumeMinX,
                     productWidthInMeters,
-                    maxSnapDistanceInMeters: 4.0f * Const.Inches2Meters,
+                    maxSnapDistanceInMeters: 4.0f * Units.Inches2Meters,
                     out Occupant snappedTo
                 );
 
@@ -7112,7 +7113,7 @@ namespace KitchenDesign
         {
             if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
             {
-                return Mathf.Round(metersFromVolumeMinX * Const.Meters2Centimeters) * Const.Centimeters2Meters;
+                return Mathf.Round(metersFromVolumeMinX * Units.Meters2Centimeters) * Units.Centimeters2Meters;
             }
 
             // Snap to nearest 1/8"
@@ -7230,7 +7231,7 @@ namespace KitchenDesign
                 {
                     JsonDict gapEntry = new Dictionary<string, object>()
                     {
-                        { "inches", leadingSpanInMeters * Const.Meters2Inches },
+                        { "inches", leadingSpanInMeters * Units.Meters2Inches },
                         { "product_id", "" }
                     };
                     measurementEntries.Add(gapEntry);
@@ -7253,7 +7254,7 @@ namespace KitchenDesign
             {
                 JsonDict tailEntry = new Dictionary<string, object>()
                 {
-                    { "inches", trailingSpaceInMeters * Const.Meters2Inches },
+                    { "inches", trailingSpaceInMeters * Units.Meters2Inches },
                     { "product_id", "" }
                 };
                 measurementEntries.Add(tailEntry);

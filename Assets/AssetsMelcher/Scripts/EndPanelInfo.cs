@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
 
     [System.Serializable]
@@ -9,7 +10,7 @@ namespace KitchenDesign
         public string productName => m_ProductName;
         public string productId => m_ProductId;
         public float dealerPrice => m_PriceSheetPrice.GetPrice(ProFitGlobals.userProfile.currency);
-        public float targetDepth => m_TargetDepth * Const.Inches2Meters;
+        public float targetDepth => m_TargetDepth * Units.Inches2Meters;
 
         [SerializeField] protected string m_ProductName = default;
         [SerializeField] protected string m_ProductId = default;
@@ -23,7 +24,7 @@ namespace KitchenDesign
     public class EndPanelsInfo
     {
         public EndPanelInfo[] endPanels => m_EndPanels;
-        public float specificPanelWidthInMeters => m_SpecificPanelWidthInInches * Const.Inches2Meters;
+        public float specificPanelWidthInMeters => m_SpecificPanelWidthInInches * Units.Inches2Meters;
 
         [SerializeField] protected EndPanelInfo[] m_EndPanels = default;
         [SerializeField] protected float m_SpecificPanelWidthInInches = default;

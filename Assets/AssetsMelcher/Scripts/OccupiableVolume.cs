@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -1921,7 +1922,7 @@ namespace KitchenDesign
             using (var drawScope = Cuboid.StartDrawScope())
             {
                 Cuboid c = occupantOccupiedCuboid.Transform(GetTransform());
-                c.Draw(Color.magenta, Color.blue, 10.0f, offset: 3, step: Const.Inches2Meters);
+                c.Draw(Color.magenta, Color.blue, 10.0f, offset: 3, step: Units.Inches2Meters);
                 Debug.DrawLine(
                     Vector3.zero,
                     c.min,

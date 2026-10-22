@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Common;
     using UnityEngine;
     using UnityEngine.EventSystems;
     using DG.Tweening;
@@ -204,8 +205,8 @@ namespace KitchenDesign
 
                 if (units == MeasurementUnit.Centimeters)
                 {
-                    int lengthCentimetersDelta = Mathf.RoundToInt(cuboidLocalDragDelta.x * Const.Meters2Centimeters);
-                    lengthMetersDelta = lengthCentimetersDelta * Const.Centimeters2Meters;
+                    int lengthCentimetersDelta = Mathf.RoundToInt(cuboidLocalDragDelta.x * Units.Meters2Centimeters);
+                    lengthMetersDelta = lengthCentimetersDelta * Units.Centimeters2Meters;
                 }
                 else if (units == MeasurementUnit.FeetAndInches)
                 {
@@ -215,10 +216,10 @@ namespace KitchenDesign
                     const float MinimumInchIncrements = 1.0f / 2.0f;
 
                     int lengthHalfInchesDelta =
-                        Mathf.RoundToInt(cuboidLocalDragDelta.x * Const.Meters2Inches / MinimumInchIncrements);
+                        Mathf.RoundToInt(cuboidLocalDragDelta.x * Units.Meters2Inches / MinimumInchIncrements);
 
                     lengthMetersDelta =
-                        (lengthHalfInchesDelta * MinimumInchIncrements) * Const.Inches2Meters;
+                        (lengthHalfInchesDelta * MinimumInchIncrements) * Units.Inches2Meters;
                 }
 
                 // When adjusting the minimum extent, flip the sign of the
