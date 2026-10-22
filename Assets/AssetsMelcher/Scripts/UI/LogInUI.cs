@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Server;
     using KitchenDesign.Shared.Enums;
     using MEC;
     using System;

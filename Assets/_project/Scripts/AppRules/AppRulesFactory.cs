@@ -1,3 +1,4 @@
+using KitchenDesign.Shared.Enums;
 using System;
 using KitchenDesign.Shared.Interfaces;
 

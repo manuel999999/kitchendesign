@@ -14,6 +14,7 @@ for i in $(seq 1 40); do wait3; r=$(ev $D/state.cs); echo "$r" | grep -q "quickA
 ev $D/rib.cs >/dev/null; ev $D/quicklogin.cs
 for i in $(seq 1 60); do perl -e 'select(undef,undef,undef,5)'; r=$(ev $D/state.cs); echo "$r" | grep -qE "login=Finished clients=[1-9]" && break; done; echo "signed in: $r"
 echo "console after sign-in: $(errs)"
+unity command console --level error --tail 200 --json --no-banner 2>/dev/null | python3 -I -c "import json,sys,collections,re; es=json.load(sys.stdin)['data']['result']['entries']; c=collections.Counter(re.sub('<[^>]*>','',e['message'].split(chr(10))[0])[:110] for e in es); [print('   %3d %s' % (v,k)) for k,v in c.most_common()]"
 for s in home clients quotes clientinfo home clients quoteinfo quoteinfo_close profile logout logout_close home; do step $s; done
 echo "console after menu: $(errs)"
 sed "s/__CLIENT__/$C/g; s/__QUOTE__/$Q/g" $D/load.tmpl > $D/load.cs; ev $D/load.cs

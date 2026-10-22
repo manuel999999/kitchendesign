@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;

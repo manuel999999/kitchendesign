@@ -968,6 +968,10 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   `PlatformSetupScene`. Played on its own in the editor, Splash's `buildIndex + 1` asks for a scene
   that doesn't exist and it stays on the splash. Test start-up from `PlatformSetupScene`
   (`Tools/Baseline/unity6/coldstart.sh`).
+- **The Unity CLI logs its own timeouts as console errors**: "Failed to handle /api/exec request:
+  Main thread operation timed out after 5000ms" when an `eval` lands on a heavy frame (sign-in
+  parsing). It adds 1 to the check scripts' error counts now and then; `menucheck.sh` lists the
+  errors after sign-in so it can be told apart.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -1025,6 +1029,18 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **Server data types** (B2.1 of the refactor, 2026-10-22): `_project/Scripts/Server/Data/`
+  (`KitchenDesign.Server`): `User`, `UserProfile`, `UserClient`, `UserClientQuote`,
+  `ManufacturerInfo` (+ `ManufacturerDoorStyleInfo`), `ProductGroupInfo`, `ProductTagInfo`,
+  `CabinetCompatibilityInfo`, `BrandCatalogInfo`, `CabinetSectionCategoryInfo`; `ResponseCode`
+  and `MeasurementUnitExtensions` in `Server/`. Enums `ServerType`, `UserType`, `UserFilter`,
+  `Currency`, `MeasurementUnit` in `_projectShared/Enums/`, values as before (the first three are
+  serialized as ints in `AppProfile`/`AppOptions`). None of these is serialized by name: the
+  parsers read the server's JSON by key, so **the JSON key strings in the parsers are the frozen
+  format (R-DATA-3), not the C# names**. `User.userType` is set by the app, not sent by the
+  server. `UserProfile`: `dealerSelectedManufacturerIds` is the JSON `manufacturers`,
+  `adminSelectedManufacturerIds` is `whitelisted_manufacturers`; `whiteLabelReturnUrl` is where a
+  white label user goes after saving a design.
 - **Generic helpers** (B1.4 of the refactor, 2026-10-22). `KitchenDesign.Shared.Common.Units`
   (`_projectShared/Common/`): inch/metre/centimetre/foot conversions, the old `Const.Inches2Meters`
   and friends. `_project/Scripts/Utility/` (`KitchenDesign.Utility`, called as

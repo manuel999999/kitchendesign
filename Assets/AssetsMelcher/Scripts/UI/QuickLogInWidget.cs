@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using UnityEngine;
 
     public class QuickLogInWidget : MelcherMonoBehaviour

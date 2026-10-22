@@ -6,7 +6,7 @@ foreach (var n in names)
 {
     var o = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.AppOptions>("Assets/AssetsMelcher/AppOptions/" + n + ".asset");
     var f = o.userFilter;
-    bool stoll = f == KitchenDesign.UserFilter.Stoll, gemini = f == KitchenDesign.UserFilter.Gemini, profit = f == KitchenDesign.UserFilter.ProFit;
+    bool stoll = f == KitchenDesign.Shared.Enums.UserFilter.Stoll, gemini = f == KitchenDesign.Shared.Enums.UserFilter.Gemini, profit = f == KitchenDesign.Shared.Enums.UserFilter.ProFit;
     var r = KitchenDesign.AppRules.AppRulesFactory.Create(f);
     var exp = new System.Collections.Generic.List<(string, object, object)>
     {

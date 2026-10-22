@@ -502,6 +502,90 @@ rewrites them), and put in the committed profile. After: restore from that backu
 git), check the hashes, `AssetDatabase.Refresh()`, and check `git status` for Addressables group
 changes (CLAUDE.md, Gotchas).
 
+## Area 2 — Server and offline data (planned 2026-10-22)
+The user left the design to Claude ("feel free to proceed any time"); same rules as area 1: no
+behaviour change, each step checked (the run-against-run checks in `Tools/Baseline/README.md`) and
+committed on its own.
+
+### Today (read 2026-10-22)
+- `ProFitWeb` (4,285 lines) is a static class: about 30 requests (`MelcherWebRequestBuilder`
+  coroutines with a local `ParseResponse`), about 25 `TryParse…` functions that turn the server's
+  JSON into the types in `ProFitWebTypes`, the fallback file names, the server address
+  (`domain`/`Host` from the profile, the mutable `UseHttps`), and helpers
+  (`ValidateJsonResponse`, `CombineParserErrorsIntoException`, the auth header, and the
+  editor-only `SaveFallbackJsonResource` that rewrites `Resources/<App>/FallbackJSON` whenever a
+  catalog request succeeds in the editor).
+- About 70 uses in 25 files: the screens (sign-in, sign-up, profile, clients, quotes), the new
+  `CatalogDataStatus` and `SessionStatus`, `ProductIdRemapDatabase` (editor, reads the fallback
+  JSON) and `Kitchen` (one error helper).
+- `ProFitWebTypes` (505 lines): 5 enums, 10 structs and classes, an extension class. None is
+  `[Serializable]`; the parsers read the JSON by key strings. So the C# names and namespaces can
+  change, and **the key strings in the parsers are what R-DATA-3 freezes**. Of the enums, only
+  `ServerType` (`AppProfile.m_TargetServerType`), `UserFilter` (`AppOptions.m_UserFilter`) and
+  `MeasurementUnit` (`AppOptions.m_SimulatedPreferredUnits`, editor) are serialized, as ints.
+- Name-as-text traps for renames: `Resources.Load<AppProfile>(nameof(AppProfile))` (the asset is
+  called `AppProfile`), `AppProfile.GetAppResourcesName` strips `nameof(AppOptions) + "_"` from
+  the options asset's name, `ProFitBuildProcessor` searches `t:{nameof(AppOptions)}` (that one
+  follows a rename correctly). No scene, prefab, asset or UXML names any of these types.
+
+### Steps
+**B2.1 — Server data types.** `ProFitWebTypes.cs` split one type per file:
+- Enums to `_projectShared/Enums/` with explicit values equal to today's: `ServerType`
+  (Production 0, Test 1), `UserType` (None 0, Trial 1, Dealer 2, Offline 3), `UserFilter` (None 0,
+  ProFit 1, Stoll 2, Gemini 3), `Currency` (USD 0, CAD 1), `MeasurementUnit` (None 0,
+  FeetAndInches 1, Centimeters 2).
+- The data types to `_project/Scripts/Server/Data/`, namespace `KitchenDesign.Server`: `User`,
+  `UserProfile`, `UserClient`, `UserClientQuote`, `ProductTagInfo`, `CabinetCompatibilityInfo`,
+  `ManufacturerInfo`, `ManufacturerDoorStyleInfo`, `ProductGroupInfo`, `BrandCatalogInfo`,
+  `CabinetSectionCategoryInfo`; `ResponseCode` and `MeasurementUnitExtensions` to
+  `_project/Scripts/Server/`. `ProFitWebTypes.cs` is deleted (its `.meta` with it; nothing binds
+  to its GUID, it holds no MonoBehaviour).
+- Every file that names one of them gets `using KitchenDesign.Server;` /
+  `using KitchenDesign.Shared.Enums;` (script).
+- **Done 2026-10-22.** 13 files in `Server/` and `Server/Data/`, 5 enums; 51 files got the
+  usings (script in the session scratchpad); `rulescheck.cs` now names
+  `KitchenDesign.Shared.Enums.UserFilter`. Checks as area 1, all the reference; `runall.sh` against
+  B1.4 identical (kept as `unity6-after-B2.1-2026-10-22/`). The fallback JSON the run's sign-in
+  wrote is kept in the session scratchpad (`fallback-ref-b21/`) as B2.2's reference.
+  `menucheck.sh` now lists the errors after sign-in; the occasional extra error (22 instead of 21,
+  seen in B1.3 and here) is the CLI's own "Failed to handle /api/exec request: Main thread
+  operation timed out after 5000ms", logged when a polling snippet lands on a heavy frame.
+
+**B2.2 — The server client.** `ProFitWeb` is split by what each part is, in `_project/Scripts/Server/`
+(`KitchenDesign.Server`):
+- `ServerConnection` (class): the address (`Domain`, `Host`, `UseHttps`, `IsTestServer`,
+  `WhitelistedEmbedDomains`) from the profile, the http/https probe that `CatalogDataStatus` does
+  today (`ProbeCoroutine`), and the editor-only fallback writer.
+- `ServerJson` (static, pure): `ValidateJsonResponse`, `CombineParserErrorsIntoException`, the
+  auth header.
+- Requests, one class per server resource, each constructed with the `ServerConnection`:
+  `AccountRequests` (sign-up, log-in, white label check, password reset, profile get/update,
+  delete account), `ClientRequests` (client list/get/create/update/delete, find by e-mail),
+  `QuoteRequests` (create/update/delete/get quotes, idempotency token), `CatalogRequests`
+  (manufacturers, categories, groups, products, brand catalogs, cabinets, tags,
+  compatibilities), `AnalyticsRequests`.
+- Parsers, static and pure, next to their requests: `AccountJson`, `ClientJson`, `QuoteJson`,
+  `CatalogJson`. The product and cabinet parsers take the `IAppRules` as an argument (the padding
+  rule) instead of reading `ProFitGlobals`.
+- `FallbackJsonFiles` (constants): the fallback file names.
+- `ServerClient`: owns the connection and the request groups; constructed by `AppInitializer`
+  before the catalog data, which (with the session) now receives it in its constructor. Old
+  callers reach it through `ProFitGlobals.server` until their area.
+- `ProFitWeb.cs` is deleted.
+
+**B2.3 — The data assets, by what they are.** `GroupDatabase`, `ProductIdRemapDatabase`,
+`AppProfile` and `AppOptions` are ScriptableObjects: renamed with the `SO` suffix (R-CODE-8),
+`git mv` with their `.meta` into `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`),
+nested types into their own files. The two text uses of the names stay literal (`"AppProfile"`,
+`"AppOptions_"`). `BrandCatalog` stays for area 4: it carries the brand rules that
+`Const.Gemini` and `Kitchen` will move onto.
+
+### Checks
+As area 1 (`rulescheck.cs`, `coldstart.sh` ×2, `runall.sh` + `compare_runs.py` + `photodiff.sh`,
+`menucheck.sh`), plus for B2.2: the fallback JSON a sign-in writes must be byte-identical to the
+one the run before wrote (it goes through the same parse/serialize path), compared before the
+backup is restored.
+
 ## Decisions (user, 2026-10-22)
 1. **The core package keeps `namespace Melcher` for now.** App code imports it with
    `using Melcher;`. Later we make our own library to replace it, so phase B should not build new

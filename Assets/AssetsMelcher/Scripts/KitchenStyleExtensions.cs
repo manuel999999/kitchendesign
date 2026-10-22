@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Server;
     using UnityEngine;
 
     public static class KitchenStyleExtensions
