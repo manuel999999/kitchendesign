@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using UnityEditor.Build;
     using UnityEditor.Build.Reporting;
     using UnityEditor;
@@ -185,14 +186,14 @@ namespace KitchenDesign
             // Discover the names of available app options. This will be used
             // to determine which folders need to be moved.
             string[] appOptionGuids =
-                AssetDatabase.FindAssets($"t:{nameof(AppOptions)}");
+                AssetDatabase.FindAssets($"t:{nameof(AppOptionsSO)}");
 
             string[] appOptionNames =
                 appOptionGuids
                     .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
                     .Select(
                         path =>
-                            AssetDatabase.LoadAssetAtPath<AppOptions>(path).fileSystemName
+                            AssetDatabase.LoadAssetAtPath<AppOptionsSO>(path).fileSystemName
                     )
                     .ToArray();
 

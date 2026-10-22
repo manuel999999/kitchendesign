@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -9,21 +9,10 @@ namespace KitchenDesign
     using UnityEngine.Rendering.Universal;
     using UnityEngine.ResourceManagement.AsyncOperations;
 
-    /// <summary>
-    ///     This class is responsible for pointing at the <see
-    ///     cref="AppOptions"/> that will actually be used by the app.
-    ///     This allows multiple app options to exist and be easily swapped out
-    ///     (e.g., building a Stoll build or Pro-Fit build) without needing to
-    ///     update every field in the AppOptions object.
-    /// </summary>
     [CreateAssetMenu(fileName = "ProFitAppProfile", menuName = "Melcher Studios/Pro-Fit/App Profile")]
-    public class AppProfile : MelcherScriptableObject
+    public class AppProfileSO : MelcherScriptableObject
     {
-        // =====================================================================
-        // Properties
-        // =====================================================================
-
-        public AppOptions appOptions => m_AppOptions;
+        public AppOptionsSO appOptions => m_AppOptions;
 
         public ServerType targetServerType => m_TargetServerType;
 
@@ -33,31 +22,26 @@ namespace KitchenDesign
         public string serverDomain =>
             m_AppOptions.GetServerDomain(m_TargetServerType);
 
-        public GroupDatabase manufacturerDatabase =>
+        public GroupDatabaseSO manufacturerDatabase =>
             m_AppOptions.GetManufacturerDatabase(m_TargetServerType);
 
-        public GroupDatabase productGroupDatabase =>
+        public GroupDatabaseSO productGroupDatabase =>
             m_AppOptions.GetProductGroupDatabase(m_TargetServerType);
 
         public UniversalRenderPipelineAsset screenshotQuality => m_ScreenshotQuality;
 
         public UniversalRenderPipelineAsset runtimeQuality => m_RuntimeQuality;
 
-
         public ReadOnlyCollection<BrandCatalog> presetBrandCatalogs => m_PresetBrandCatalogs.readOnly;
 
-        public GroupDatabase brandCatalogLogoDatabase =>
+        public GroupDatabaseSO brandCatalogLogoDatabase =>
             m_AppOptions.GetBrandCatalogLogoDatabase(m_TargetServerType);
 
 #if UNITY_EDITOR
 
         public UnityEditor.SceneAsset screenshotScene => m_ScreenshotScene;
 
-#endif  // if UNITY_EDITOR
-
-        // ====================================================================
-        // Methods
-        // ====================================================================
+#endif
 
         public async UniTask<Material> GetDefaultKitchenMaterial()
         {
@@ -87,7 +71,7 @@ namespace KitchenDesign
 
         public string GetAppResourcesName()
         {
-            string appType = m_AppOptions.name.Substring($"{nameof(AppOptions)}_".Length);
+            string appType = m_AppOptions.name.Substring("AppOptions_".Length);
 
             if (m_TargetServerType != ServerType.Production)
             {
@@ -104,12 +88,8 @@ namespace KitchenDesign
             return System.IO.Path.Combine(GetAppResourcesName(), FallbackResourceFolder, fileNameWithoutExtension);
         }
 
-        // =====================================================================
-        // Inspector-serialized fields
-        // =====================================================================
-
         [SerializeField]
-        protected AppOptions m_AppOptions = default;
+        protected AppOptionsSO m_AppOptions = default;
 
         [SerializeField]
         protected ServerType m_TargetServerType = default;
@@ -153,42 +133,18 @@ namespace KitchenDesign
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogPresets")]
         protected MelcherReadWriteList<BrandCatalog> m_PresetBrandCatalogs = new ();
 
-        // ====================================================================
-        // Non-serialized fields
-        // ====================================================================
-
         private AsyncOperationHandle<Material> m_OccupantDefaultMaterialOperation;
 
         private AsyncOperationHandle<Material> m_KitchenDefaultMaterialOperation;
 
-
 #if UNITY_EDITOR
-        // ====================================================================
-        // Editor-only
-        // ====================================================================
 
-        /// <summary>
-        ///     The asset path of the finishes folder. This is relative to the
-        ///     project's root.
-        /// </summary>
         public string finishesFolderPath => UnityEditor.AssetDatabase.GetAssetPath(m_FinishesFolder);
 
-        /// <summary>
-        ///     The asset path of the models folder. This is relative to the
-        ///     project's root.
-        /// </summary>
         public string productModelFolderPath => UnityEditor.AssetDatabase.GetAssetPath(m_ProductModelFolder);
 
-        /// <summary>
-        ///     The asset path of the cabinet section's models folder. This is
-        ///     relative to the project's root.
-        /// </summary>
         public string cabinetSectionModelFolderPath => UnityEditor.AssetDatabase.GetAssetPath(m_CabinetSectionModelFolder);
 
-        /// <summary>
-        ///     The asset path of the product visual folder. This is relative
-        ///     to the project's root.
-        /// </summary>
         public string productVisualFolderPath => UnityEditor.AssetDatabase.GetAssetPath(m_ProductVisualFolder);
 
         public Shader triplanarShader => m_TriplanarShader;
@@ -209,7 +165,6 @@ namespace KitchenDesign
         protected UnityEditor.SceneAsset m_ScreenshotScene = default;
 
         [Space]
-
 
         [SerializeField]
         private UnityEditor.DefaultAsset m_FinishesFolder;
@@ -237,13 +192,7 @@ namespace KitchenDesign
         [SerializeField]
         private Shader m_UnlitShader;
 
-#endif  // if UNITY_EDITOR
+#endif
+    }
+}
 
-    }   // class ProFitAppProfile
-
-}   // namespace KitchenDesign
-
-/// ===========================================================================
-/// Initial author:        Ryan Scopic
-/// Initial creation date: 2024-01-23
-/// ===========================================================================

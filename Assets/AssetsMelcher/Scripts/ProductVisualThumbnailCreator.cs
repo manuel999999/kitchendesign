@@ -3,6 +3,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using UnityEngine;
     using UnityEngine.Rendering.Universal;
     using UnityEditor;
@@ -55,7 +56,7 @@ namespace KitchenDesign
                 EditorUtility.DisplayDialogComplex(
                     title: "Load screenshot scene?",
                     message: "The screenshot scene assigned to " +
-                        $"{nameof(AppProfile)} isn't loaded/active:\n" +
+                        $"{nameof(AppProfileSO)} isn't loaded/active:\n" +
                         $"{screenshotScenePath}\n" +
                         "If thumbnails are rendered without this as the active " +
                         "scene, the images will have incorrect reflections.\n" +

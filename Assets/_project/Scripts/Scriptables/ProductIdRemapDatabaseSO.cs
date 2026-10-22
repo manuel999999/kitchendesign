@@ -1,23 +1,19 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
+    using KitchenDesign.Serializables;
     using KitchenDesign.Server;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEngine;
 
-    /// <summary>
-    ///     This is a way to fix the design decision to not include the
-    ///     permanent product ID in the save files. If the user changes a
-    ///     product's ID, we must manually remap it to the new ID.
-    /// </summary>
     [CreateAssetMenu(fileName = "", menuName = "Melcher Studios/Pro-Fit/Product ID Remap Database")]
-    public class ProductIdRemapDatabase : MelcherScriptableObject
+    public class ProductIdRemapDatabaseSO : MelcherScriptableObject
     {
         public int? Lookup(string sku)
         {
-            foreach (Entry entry in m_Entries)
+            foreach (ProductIdRemapEntry entry in m_Entries)
             {
                 if (entry.skus.Contains(sku))
                 {
@@ -28,52 +24,13 @@ namespace KitchenDesign
             return m_NextDatabase ? m_NextDatabase.Lookup(sku) : null;
         }
 
-        // ====================================================================
-        // Inspector-serialized fields
-        // ====================================================================
-
         [Tooltip("If the ID is not found in this database, it will try " +
             "searching this next database.")]
         [SerializeField]
-        protected ProductIdRemapDatabase m_NextDatabase;
+        protected ProductIdRemapDatabaseSO m_NextDatabase;
 
         [SerializeField]
-        private List<Entry> m_Entries = new ();
-
-        // ====================================================================
-        // Nested types
-        // ====================================================================
-
-        [System.Serializable]
-        public struct Entry
-        {
-            public Entry(int productId, string productSku)
-            {
-                m_ProductId = productId;
-                m_KnownProductSkus = new ();
-                m_KnownProductSkus.mutable.Add(productSku);
-            }
-
-            // ====================================================================
-            // Properties
-            // ====================================================================
-
-            public int productId => m_ProductId;
-
-            public ReadOnlyCollection<string> skus => m_KnownProductSkus.readOnly;
-
-            // ====================================================================
-            // Inspector-serialized fields
-            // ====================================================================
-
-            [SerializeField]
-            private int m_ProductId;
-
-            [SerializeField]
-            [Tooltip("The list of known product SKUs that were once used by " +
-                "this product ID.")]
-            private MelcherReadWriteList<string> m_KnownProductSkus;
-        }
+        private List<ProductIdRemapEntry> m_Entries = new ();
 
 #if UNITY_EDITOR
         /*
@@ -168,7 +125,7 @@ namespace KitchenDesign
 
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                Entry entry = m_Entries[i];
+                ProductIdRemapEntry entry = m_Entries[i];
 
                 if (entry.m_ProductId != 0)
                 {
@@ -368,7 +325,7 @@ namespace KitchenDesign
 
             foreach (ProductInfo productInfo in productInfos)
             {
-                Entry entry = new Entry(productInfo.id, productInfo.sku);
+                ProductIdRemapEntry entry = new ProductIdRemapEntry(productInfo.id, productInfo.sku);
                 m_Entries.Add(entry);
             }
 
@@ -376,20 +333,14 @@ namespace KitchenDesign
             {
                 foreach (ProductInfo cabinetProductInfo in cabinetProductInfos)
                 {
-                    Entry entry = new Entry(cabinetProductInfo.id, cabinetProductInfo.sku);
+                    ProductIdRemapEntry entry = new ProductIdRemapEntry(cabinetProductInfo.id, cabinetProductInfo.sku);
                     m_Entries.Add(entry);
                 }
             }
 
             UnityEditor.EditorUtility.SetDirty(this);
         }
-#endif  // if UNITY_EDITOR
+#endif
+    }
+}
 
-    }   // class ProductIdRemapper
-
-}   // namespace KitchenDesign
-
-/// ===========================================================================
-/// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
-/// Initial creation date: 2025-02-21
-/// ===========================================================================

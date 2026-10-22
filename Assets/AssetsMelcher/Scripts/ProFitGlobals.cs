@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
     using System;
     using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace KitchenDesign
 
     public static class ProFitGlobals
     {
-        private static AppProfile s_AppProfile;
+        private static AppProfileSO s_AppProfile;
         private static IAppRules s_AppRules;
         private static LaunchOptions s_LaunchOptions;
         private static ServerClient s_Server;
@@ -22,7 +23,7 @@ namespace KitchenDesign
         private static SessionStatus s_Session;
 
         public static void Bind(
-            AppProfile appProfile,
+            AppProfileSO appProfile,
             IAppRules appRules,
             LaunchOptions launchOptions,
             ServerClient server,
@@ -45,13 +46,13 @@ namespace KitchenDesign
             Bind(null, null, null, null, null, null, null);
         }
 
-        public static AppProfile appProfile
+        public static AppProfileSO appProfile
         {
             get
             {
                 if (s_AppProfile == null)
                 {
-                    s_AppProfile = Resources.Load<AppProfile>(nameof(AppProfile));
+                    s_AppProfile = Resources.Load<AppProfileSO>("AppProfile");
 
                     if (!s_AppProfile)
                     {
@@ -63,7 +64,7 @@ namespace KitchenDesign
             }
         }
 
-        public static AppOptions appOptions => appProfile.appOptions;
+        public static AppOptionsSO appOptions => appProfile.appOptions;
 
         public static IAppRules appRules => s_AppRules ??= AppRulesFactory.Create(appOptions.userFilter);
 

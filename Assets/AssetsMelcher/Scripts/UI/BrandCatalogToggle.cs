@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Serializables;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -31,7 +32,7 @@ namespace KitchenDesign
 
                 // Try to lookup a logo for this (possibly) user-defined catalog.
                 if (m_BrandCatalog &&
-                    ProFitGlobals.appProfile.brandCatalogLogoDatabase.Find(brandCatalog.catalogId, out GroupDatabase.GroupInfo catalogLogoInfo))
+                    ProFitGlobals.appProfile.brandCatalogLogoDatabase.Find(brandCatalog.catalogId, out GroupInfo catalogLogoInfo))
                 {
                     catalogLogo = catalogLogoInfo.sprite;
                 }

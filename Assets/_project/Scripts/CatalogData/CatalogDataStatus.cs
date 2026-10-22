@@ -1,3 +1,4 @@
+using KitchenDesign.Scriptables;
 using KitchenDesign.Server;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,14 @@ namespace KitchenDesign.CatalogData
 {
     public sealed class CatalogDataStatus
     {
-        private readonly AppProfile _appProfile;
+        private readonly AppProfileSO _appProfile;
         private readonly IAppRules _appRules;
         private readonly ServerClient _server;
         private readonly Dictionary<(int id, bool isCabinetSection), ProductInfo> _runtimeProductsById = new();
         private readonly Dictionary<(string sku, bool isCabinetSection), ProductInfo> _runtimeProductsBySku = new();
         private Action _queuedActions;
 
-        public CatalogDataStatus(AppProfile appProfile, IAppRules appRules, ServerClient server)
+        public CatalogDataStatus(AppProfileSO appProfile, IAppRules appRules, ServerClient server)
         {
             this._appProfile = appProfile;
             this._appRules = appRules;
@@ -393,7 +394,7 @@ namespace KitchenDesign.CatalogData
 
         private IEnumerator<float> LoadCoroutine()
         {
-            AppOptions appOptions = this._appProfile.appOptions;
+            AppOptionsSO appOptions = this._appProfile.appOptions;
 
             if (this.LoadFallbackWebResponse(FallbackJsonFiles.Manufacturers) is JsonDict manufacturersResponse)
             {

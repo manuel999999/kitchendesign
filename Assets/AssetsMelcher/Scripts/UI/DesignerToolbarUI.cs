@@ -1,6 +1,8 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Serializables;
+    using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Interfaces;
@@ -767,7 +769,7 @@ namespace KitchenDesign
             ///     The app-local group database that knows which icons to use
             ///     with each ID. The database does not need to have an entry
             ///     for every ID. The ones that do not have an entry will
-            ///     fallback to the GroupDatabase's default icon.
+            ///     fallback to the GroupDatabaseSO's default icon.
             /// </param>
             /// <param name="findServerDataIndex">
             ///     A delegate that takes an ID argument and returns the index
@@ -802,14 +804,14 @@ namespace KitchenDesign
                 ToolbarGroupButton          buttonPrefab,
                 ToolbarGroupButton.IdType   idType,
                 IEnumerable<int>            ids,
-                GroupDatabase               appLocalDatabase,
+                GroupDatabaseSO               appLocalDatabase,
                 Func<int /* id */, int>     findServerDataIndex,
                 Func<int /* serverDataIndex */, string> getServerDataName,
                 Action<ToolbarGroupButton>  onButtonSpawned)
             {
                 foreach (int id in ids)
                 {
-                    GroupDatabase.GroupInfo buttonInfo;
+                    GroupInfo buttonInfo;
 
                     // Use the app-local database as the basis for the name and
                     // icon. This is superseded by server provided data if it

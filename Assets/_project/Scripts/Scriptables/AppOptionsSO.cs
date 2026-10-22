@@ -1,20 +1,13 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using JetBrains.Annotations;
     using UnityEngine;
 
-    /// <summary>
-    ///
-    /// </summary>
     [CreateAssetMenu(fileName = "AppOptions", menuName = "Melcher Studios/Pro-Fit/App Options")]
-    public partial class AppOptions : MelcherScriptableObject
+    public partial class AppOptionsSO : MelcherScriptableObject
     {
-        // ====================================================================
-        // Properties
-        // ====================================================================
-
         public string appDisplayName => m_AppDisplayName;
 
         public string fileSystemName => m_FileSystemName;
@@ -43,11 +36,7 @@ namespace KitchenDesign
 
         public CabinetDataAvailability cabinetDataAvailability => m_CabinetDataAvailability;
 
-        public ProductIdRemapDatabase remappedProductIdDatabase => m_RemappedProductIdDatabase;
-
-        // ====================================================================
-        // Methods
-        // ====================================================================
+        public ProductIdRemapDatabaseSO remappedProductIdDatabase => m_RemappedProductIdDatabase;
 
         public int GetDefaultManufacturerId(ServerType serverType)
         {
@@ -69,7 +58,7 @@ namespace KitchenDesign
             };
         }
 
-        public GroupDatabase GetManufacturerDatabase(ServerType serverType)
+        public GroupDatabaseSO GetManufacturerDatabase(ServerType serverType)
         {
             return serverType switch
             {
@@ -79,7 +68,7 @@ namespace KitchenDesign
             };
         }
 
-        public GroupDatabase GetProductGroupDatabase(ServerType serverType)
+        public GroupDatabaseSO GetProductGroupDatabase(ServerType serverType)
         {
             return serverType switch
             {
@@ -89,7 +78,7 @@ namespace KitchenDesign
             };
         }
 
-        public GroupDatabase GetBrandCatalogLogoDatabase(ServerType serverType)
+        public GroupDatabaseSO GetBrandCatalogLogoDatabase(ServerType serverType)
         {
             return serverType switch
             {
@@ -117,10 +106,6 @@ namespace KitchenDesign
             PlayerPrefs.Save();
         }
 
-        // ====================================================================
-        // Inspector-serialized fields
-        // ====================================================================
-
         [Header("Runtime")]
 
         [SerializeField]
@@ -140,8 +125,6 @@ namespace KitchenDesign
         [SerializeField]
         protected AppSkin m_AppSkin = default;
 
-        // TODO: Look at making this a scriptable object. Enums break if the
-        //       order of their defined values ever change.
         [Tooltip("This controls how new users are tagged to be filtered " +
             "in the dashboard. This value should match whichever site " +
             "the app is being built for. If it matches none of the " +
@@ -201,7 +184,6 @@ namespace KitchenDesign
         [SerializeField]
         protected string m_TestServerDomain = default;
 
-
         [Tooltip("The URL new users that sign up for a dealer account are " +
             "taken to.")]
         [SerializeField]
@@ -217,24 +199,24 @@ namespace KitchenDesign
         [Space]
 
         [SerializeField]
-        protected GroupDatabase m_ManufacturerDatabase = default;
+        protected GroupDatabaseSO m_ManufacturerDatabase = default;
 
         [SerializeField]
-        protected GroupDatabase m_ProductGroupDatabase = default;
+        protected GroupDatabaseSO m_ProductGroupDatabase = default;
 
         [SerializeField]
-        protected GroupDatabase m_BrandCatalogLogoDatabase = default;
+        protected GroupDatabaseSO m_BrandCatalogLogoDatabase = default;
 
         [Space]
 
         [SerializeField]
-        protected GroupDatabase m_TestManufacturerDatabase = default;
+        protected GroupDatabaseSO m_TestManufacturerDatabase = default;
 
         [SerializeField]
-        protected GroupDatabase m_TestProductGroupDatabase = default;
+        protected GroupDatabaseSO m_TestProductGroupDatabase = default;
 
         [SerializeField]
-        protected GroupDatabase m_TestBrandCatalogLogoDatabase = default;
+        protected GroupDatabaseSO m_TestBrandCatalogLogoDatabase = default;
 
         [Space]
 
@@ -243,8 +225,6 @@ namespace KitchenDesign
             "files that recorded products via their SKUs which are not " +
             "guaranteed to be constant.")]
         [SerializeField]
-        protected ProductIdRemapDatabase m_RemappedProductIdDatabase = default;
-
-    }   // class AppOptions
-
-}   // namespace KitchenDesign
+        protected ProductIdRemapDatabaseSO m_RemappedProductIdDatabase = default;
+    }
+}

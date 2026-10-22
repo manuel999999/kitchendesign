@@ -947,6 +947,11 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   `DOTweenSettings.createASMDEF` is 1; with 0, DOTween's asset postprocessor deletes the file on the
   next editor start (`ASMDEFManager.ApplyASMDEFSettings`). Change it through DOTween (Utility Panel,
   or the setting plus `ApplyASMDEFSettings`), never by writing the asmdef by hand.
+- **Renaming a type by script also renames it inside string literals and property names.** In
+  B2.3 a plain word-boundary rename would have turned the path `Resources/AppProfile.asset` into
+  `AppProfileSO.asset` and `public AppProfile AppProfile { get; }` into `AppProfileSO AppProfileSO`.
+  Rename outside string literals only (the code inside `{…}` of interpolated strings excepted), and
+  compile to catch renamed members.
 - **Type names stored as text break on a namespace or assembly change.** Scenes, prefabs and
   `.asset` files bind scripts by GUID, but UXML (`<uie:EnumField type="Ns.Type, Assembly">`),
   `[SerializeReference]` data, UnityEvent argument types and `MelcherSignal` argument types store
@@ -1029,6 +1034,19 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
   `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
   holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
+- **App and data assets** (B2.3 of the refactor, 2026-10-22): `AppProfileSO`, `AppOptionsSO`
+  (+ its `.Editor` partial), `GroupDatabaseSO`, `ProductIdRemapDatabaseSO` in
+  `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`), moved with their `.meta` so every
+  asset still binds; their nested serializable types are `GroupInfo`, `ProductIdRemapEntry` and the
+  editor-only `AndroidProjectSettings` in `_project/Scripts/Serializables/` (they bind by field name).
+  The assets keep their names: `Resources/AppProfile.asset` (one per project; which
+  `AppOptions_<App>` it points at decides the app), `AppOptions_ProFit/Stoll/Gemini`. Two places
+  use those names as text and must stay literal: `Resources.Load<AppProfileSO>("AppProfile")` and
+  `AppProfileSO.GetAppResourcesName`, which strips `"AppOptions_"` from the options asset's name to
+  get the `Resources/<App>` folder (plus `_Test` for the test server). The group databases map a
+  server id (manufacturer, product group, brand catalog) to a toolbar sprite, a sort order and an
+  optional local display name; the remap database maps product ids to every SKU they have had, so
+  designs saved with an old SKU still load.
 - **Server client** (B2.2 of the refactor, 2026-10-22), `_project/Scripts/Server/`
   (`KitchenDesign.Server`); the old static `ProFitWeb` is gone. `ServerClient` (constructed by
   `AppInitializer` before the catalog data and the session, which get it in their constructors;
@@ -1283,7 +1301,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   CM2's frame damping), and in 3 of 8 designs the orbit starts at yaw 0° where the old app had 45°
   or the reverse (32569, 44392, 36449). These looked like the previous design's orbit angle
   carried over, but 28316 doesn't fit that, so it's unconfirmed. Ask the user whether to chase
-  these next or go to cutouts.
+  these next or go to cutouts. Clue (2026-10-22): after reopening the editor, the first
+  design loaded (27755) started its orbit at yaw 89° instead of 45°, and the next run on the warm
+  editor was back to 45°, so the start angle depends on something left from earlier (or not yet
+  initialized) rather than on the design.
 - **Cutouts by clipping: prototype built 2026-10-20** (results in `.claude/prompts/02-cutouts-by-clipping.md`,
   step 1). The user gave the go on the look (2026-10-20). The nested case (a burner in a plunge)
   was tested the same day and works; the two plunge visuals are back in the copy (901 database
@@ -1361,9 +1382,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   2026-10-22; the user left names and refactoring details to Claude. `ProFitGlobals` keeps
   forwards until its last user is gone. Steps B1.1–B1.4 are each checked on their own and
   committed. **Area 1 is done and committed (B1.1–B1.4, 2026-10-22; results in the plan).**
-  Next: area 2 (server and offline data, `ProFitWeb`): write its section in the plan, then build
-  it the same way. The user left the design and the details to Claude and wants each step
-  checked and committed on its own.
+  **Area 2 is done and committed (B2.1–B2.3, 2026-10-22).** Next: area 3 (products and
+  visuals): write its section in the plan, then build it the same way. The user left the design
+  and the details to Claude and wants each step checked and committed on its own.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

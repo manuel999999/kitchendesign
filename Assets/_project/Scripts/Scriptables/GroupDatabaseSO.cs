@@ -1,33 +1,17 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
+    using KitchenDesign.Serializables;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
 
-    /// <summary>
-    /// A client-side collection of "groups". Each group has an ID, a sprite
-    /// and a debug name. Groups currently are used to sort products into
-    /// subcategories of manufacturers and products.
-    /// <br /><br />
-    ///
-    /// The sprite is used in the designer scene's toolbar to show a
-    /// manufacturer's or product group's icon.
-    /// </summary>
     [CreateAssetMenu(fileName = "GroupCatalog", menuName = "Melcher Studios/Pro-Fit/Group Database")]
-    public class GroupDatabase : MelcherScriptableObject
+    public class GroupDatabaseSO : MelcherScriptableObject
     {
-        // =====================================================================
-        // Properties
-        // =====================================================================
-
         public Sprite defaultSprite => m_DefaultSprite;
 
         public IReadOnlyList<GroupInfo> entries => m_Entries;
-
-        // =====================================================================
-        // Methods
-        // =====================================================================
 
         public int GetSortOrder(int id)
         {
@@ -37,7 +21,6 @@ namespace KitchenDesign
                     x => x.id == id
                 );
 
-            // Sort by index in catalog. If not found, sort it to the end
             return index >= 0 ? index : int.MaxValue;
         }
 
@@ -104,17 +87,14 @@ namespace KitchenDesign
                     found = true;
                 }
             }
-            
+
             if(!found)
-            {                
+            {
                 Debug.Log($"Comment '{m_EditorFindComment}' not found in catalog.");
             }
         }
 #endif
 
-        // =====================================================================
-        // Inspector-serialized fields
-        // =====================================================================
 #if UNITY_EDITOR
         [SerializeField] protected string m_EditorFindComment;
         [SerializeField] protected int m_EditorFindId;
@@ -124,40 +104,6 @@ namespace KitchenDesign
             "provide one.")]
         [SerializeField] protected Sprite m_DefaultSprite = null;
         [SerializeField] protected List<GroupInfo> m_Entries = null;
+    }
+}
 
-        // =====================================================================
-        // Nested types
-        // =====================================================================
-
-        [Serializable]
-        public struct GroupInfo
-        {
-            [Tooltip("A name shown in the inspector when this type is " +
-                "serialized in a collection.")]
-            public string comment;
-
-            [Tooltip("The ID that links this group to the corresponding " +
-                "product group or manufacturer on the server.")]
-            public int id;
-
-            [Tooltip("The image that displays in the designer scene " +
-                "toolbar. This can be null to use the GroupCatalog's " +
-                "default sprite.")]
-            public Sprite sprite;
-
-            public bool showCommentOnButton;
-
-            [Tooltip("The comment will be used as the display name in the " +
-                "toolbar, regardless of what is entered in the backend.")]
-            public bool useLocalCommentAsOverride;
-
-        }   // struct GroupInfo
-
-    }   // class GroupDatabase
-
-}   // namespace KitchenDesign
-
-/// ===========================================================================
-/// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
-/// Initial creation date: 2022-05-22
-/// ===========================================================================

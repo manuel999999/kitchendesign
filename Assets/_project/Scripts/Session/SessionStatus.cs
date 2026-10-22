@@ -1,3 +1,4 @@
+using KitchenDesign.Scriptables;
 using KitchenDesign.Server;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace KitchenDesign.Session
     {
         public const string RememberMeTokenKey = "Token";
 
-        private readonly AppProfile _appProfile;
+        private readonly AppProfileSO _appProfile;
         private readonly ClientListStatus _clientList;
         private readonly CatalogDataStatus _catalogData;
         private readonly ServerClient _server;
@@ -26,7 +27,7 @@ namespace KitchenDesign.Session
         private bool _isKioskModeEnabled;
         private CoroutineHandle _autoKickUserCoroutine;
 
-        public SessionStatus(AppProfile appProfile, IAppRules appRules, ServerClient server, ClientListStatus clientList, CatalogDataStatus catalogData)
+        public SessionStatus(AppProfileSO appProfile, IAppRules appRules, ServerClient server, ClientListStatus clientList, CatalogDataStatus catalogData)
         {
             this._appRules = appRules;
             this._server = server;

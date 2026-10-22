@@ -2,6 +2,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEditor;
@@ -33,7 +34,7 @@ namespace KitchenDesign
             List<CabinetSectionDoorData> map = new();
             HashSet<string> registeredDoors = new();
 
-            AppProfile appProfile = AssetDatabase.LoadAssetAtPath<AppProfile>("Assets/AssetsMelcher/Resources/AppProfile.asset");
+            AppProfileSO appProfile = AssetDatabase.LoadAssetAtPath<AppProfileSO>("Assets/AssetsMelcher/Resources/AppProfile.asset");
             
             ReadOnlyCollection<BrandCatalog> brandCatalogs = appProfile.presetBrandCatalogs;
 

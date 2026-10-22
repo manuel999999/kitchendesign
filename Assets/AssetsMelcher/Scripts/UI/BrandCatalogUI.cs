@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace KitchenDesign
     ///
     ///     This is one of several pop-ups that may appear at the start of the
     ///     game. This UI is intended to be skipped if the <see
-    ///     cref="AppOptions"/> in Resources is not configured for Gemini.
+    ///     cref="AppOptionsSO"/> in Resources is not configured for Gemini.
     /// </summary>
     public class BrandCatalogUI : MelcherUI
     {
@@ -78,7 +79,7 @@ namespace KitchenDesign
             catalogCards.Sort(
                 static (a, b) =>
                 {
-                    GroupDatabase catalogLogoDatabase =
+                    GroupDatabaseSO catalogLogoDatabase =
                         ProFitGlobals.appProfile.brandCatalogLogoDatabase;
 
                     int sortOrderA = catalogLogoDatabase.GetSortOrder(a.brandCatalog.catalogId);

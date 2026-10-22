@@ -1,10 +1,11 @@
+using KitchenDesign.Scriptables;
 using KitchenDesign.Shared.Interfaces;
 
 namespace KitchenDesign.Server
 {
     public sealed class ServerClient
     {
-        public ServerClient(AppProfile appProfile, IAppRules appRules)
+        public ServerClient(AppProfileSO appProfile, IAppRules appRules)
         {
             this.Connection = new ServerConnection(appProfile);
             this.Accounts = new AccountRequests(this.Connection);

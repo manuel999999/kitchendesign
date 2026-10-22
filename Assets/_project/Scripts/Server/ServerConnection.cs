@@ -1,3 +1,4 @@
+using KitchenDesign.Scriptables;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -11,7 +12,7 @@ namespace KitchenDesign.Server
 {
     public sealed class ServerConnection
     {
-        public ServerConnection(AppProfile appProfile)
+        public ServerConnection(AppProfileSO appProfile)
         {
             this.AppProfile = appProfile;
 
@@ -27,7 +28,7 @@ namespace KitchenDesign.Server
                 }.AsReadOnly();
         }
 
-        public AppProfile AppProfile { get; }
+        public AppProfileSO AppProfile { get; }
 
         public string Domain => this.AppProfile.serverDomain;
 

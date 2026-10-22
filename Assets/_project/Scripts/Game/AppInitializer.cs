@@ -1,3 +1,4 @@
+using KitchenDesign.Scriptables;
 using System.Globalization;
 using KitchenDesign.AppRules;
 using KitchenDesign.CatalogData;
@@ -17,7 +18,7 @@ namespace KitchenDesign
 
         private const int FirstAppSceneBuildIndex = 1;
 
-        [SerializeField] private AppProfile appProfile;
+        [SerializeField] private AppProfileSO appProfile;
 
         private bool _loadsFirstAppScene;
         private IAppRules _appRules;

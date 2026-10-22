@@ -11,7 +11,7 @@ namespace KitchenDesign
     ///
     ///     This is one of several pop-ups that may appear at the start of the
     ///     game. This UI is intended to be skipped if the <see
-    ///     cref="AppOptions"/> in Resources disallows building methods.
+    ///     cref="AppOptionsSO"/> in Resources disallows building methods.
     /// </summary>
     public class BuildingMethodUI : MelcherUI
     {

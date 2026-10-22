@@ -1,18 +1,14 @@
 #if UNITY_EDITOR
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
+    using KitchenDesign.Serializables;
     using KitchenDesign.Shared.Enums;
     using UnityEditor;
     using UnityEngine;
 
-    // Editor-only implementation details of ProFitAppOptions
-    public partial class AppOptions : MelcherScriptableObject
+    public partial class AppOptionsSO : MelcherScriptableObject
     {
-        // ====================================================================
-        // Properties
-        // ====================================================================
-
         public string appIdentifier => m_AppIdentifier;
 
         public Texture2D appIcon => m_AppIcon;
@@ -34,10 +30,6 @@ namespace KitchenDesign
         public MeasurementUnit simulatedPreferredUnits
             => m_SimulatedPreferredUnits;
 
-        // ====================================================================
-        // Methods
-        // ====================================================================
-
         public override void OnEditorPlayModeStateChanged(PlayModeStateChange mode)
         {
             base.OnEditorPlayModeStateChanged(mode);
@@ -56,10 +48,6 @@ namespace KitchenDesign
             }
         }
 
-        // ====================================================================
-        // Inspector-serialized members
-        // ====================================================================
-
         [Header("Editor-only")]
 
         [Tooltip("The application identifier used by Android/iOS. This is " +
@@ -75,7 +63,6 @@ namespace KitchenDesign
 
         [Space]
 
-
         [SerializeField] private bool m_SimulateWhiteLabel;
 
         [SerializeField] private string m_SimulatedWhiteLabelDomain;
@@ -84,22 +71,7 @@ namespace KitchenDesign
         [Space]
 
         [SerializeField] protected MeasurementUnit m_SimulatedPreferredUnits = default;
+    }
+}
 
-        // ====================================================================
-        // Nested types
-        // ====================================================================
-
-        [System.Serializable]
-        public class AndroidProjectSettings
-        {
-            public Texture2D adaptiveIconBackground;
-
-            public Texture2D adapativeIconForeground;
-
-        }   // class AndroidProjectSettings
-
-    }   // class ProFitAppOptions
-
-}   // namespace KitchenDesign
-
-#endif  // if UNITY_EDITOR
+#endif

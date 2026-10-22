@@ -589,6 +589,20 @@ committed on its own.
 nested types into their own files. The two text uses of the names stay literal (`"AppProfile"`,
 `"AppOptions_"`). `BrandCatalog` stays for area 4: it carries the brand rules that
 `Const.Gemini` and `Kitchen` will move onto.
+- **Done 2026-10-22.** `git mv` of the five files with their `.meta`; renamed by a script that
+  leaves string literals alone (the code inside interpolated `{…}` excepted), which kept the paths
+  `Resources/AppProfile.asset` and `AppOptions/…` intact; then fixed by hand: three properties the
+  rename had also renamed (`AppProfile`), `Resources.Load<AppProfileSO>("AppProfile")` and
+  `"AppOptions_"`. 15 files got the usings. Checked: editor and macOS player compile; every
+  asset of the four types loads as the new class with its data (8 group databases with their
+  entries, the remap database's 1,761 entries); no asset file changed; `rulescheck.cs` 60/0;
+  `coldstart.sh` both the reference. The first `runall.sh` after the editor was reopened (the user
+  paused the work for a release of the old app) differed in three cover photos (2.3–16.9/255, the
+  known fresh-editor texture artefact) and in 27755's live orbit camera (yaw 89° instead of 45°;
+  the save-photo cameras were identical); the repeat on the warm editor was identical to B2.2
+  (photos within 0.07/255; kept as `unity6-after-B2.3-2026-10-22/`, the first run as
+  `unity6-B2.3-fresh-editor-2026-10-22/`). `menucheck.sh` 21 / 21 / 1,268.
+- **Area 2 is done.**
 
 ### Checks
 As area 1 (`rulescheck.cs`, `coldstart.sh` ×2, `runall.sh` + `compare_runs.py` + `photodiff.sh`,

@@ -4,7 +4,7 @@ string[] names = { "AppOptions_ProFit", "AppOptions_Stoll", "AppOptions_Gemini" 
 int bad = 0, checks = 0;
 foreach (var n in names)
 {
-    var o = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.AppOptions>("Assets/AssetsMelcher/AppOptions/" + n + ".asset");
+    var o = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.Scriptables.AppOptionsSO>("Assets/AssetsMelcher/AppOptions/" + n + ".asset");
     var f = o.userFilter;
     bool stoll = f == KitchenDesign.Shared.Enums.UserFilter.Stoll, gemini = f == KitchenDesign.Shared.Enums.UserFilter.Gemini, profit = f == KitchenDesign.Shared.Enums.UserFilter.ProFit;
     var r = KitchenDesign.AppRules.AppRulesFactory.Create(f);

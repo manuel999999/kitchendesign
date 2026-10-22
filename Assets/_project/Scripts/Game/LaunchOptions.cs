@@ -1,3 +1,4 @@
+using KitchenDesign.Scriptables;
 using System;
 using System.Text.RegularExpressions;
 using Melcher;
@@ -7,9 +8,9 @@ namespace KitchenDesign
 {
     public sealed class LaunchOptions
     {
-        private readonly AppOptions _appOptions;
+        private readonly AppOptionsSO _appOptions;
 
-        private LaunchOptions(AppOptions appOptions, bool isDebugMode, bool isVerbose)
+        private LaunchOptions(AppOptionsSO appOptions, bool isDebugMode, bool isVerbose)
         {
             this._appOptions = appOptions;
             this.IsDebugMode = isDebugMode;
@@ -19,7 +20,7 @@ namespace KitchenDesign
         public bool IsDebugMode { get; }
         public bool IsVerbose { get; }
 
-        public static LaunchOptions FromEnvironment(AppOptions appOptions)
+        public static LaunchOptions FromEnvironment(AppOptionsSO appOptions)
         {
             bool isDebugMode = Application.isEditor || Debug.isDebugBuild;
             bool isVerbose = isDebugMode || MelcherWebGL.GetUrlParameter("verbose") != null;
