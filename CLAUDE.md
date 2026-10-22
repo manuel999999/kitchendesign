@@ -1126,6 +1126,20 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     cameras, ground), so it holds the `Kitchen`; that back-reference goes when layout building
     leaves `Kitchen`. It gets the layout prefabs, backing sprites and backing prefabs from
     `Kitchen`'s serialized fields, which stay there so the scene doesn't change.
+  - Interaction parts (B4.6, `_project/Scripts/KitchenModel/`): `KitchenInteractionState` (the
+    highlighted object, the volume being resized, the product being dragged; a resize or drag
+    doesn't start while another is running, and the highlight ignores clicks during either),
+    `KitchenWidgetsControl` (cabinet and shelf resize widgets, the size button, the dimension
+    tickers, the top info label), `KitchenMaterialControl` (highlight materials and finishes,
+    including the ground's wood or stone mesh; one class because the highlight reads the finish
+    materials and a finish change re-applies the highlight), `OccupantDragControl` (dragging a
+    product between cabinets and shelves, and the snapping). Constructed in `Kitchen.Awake` with the
+    serialized references, which stay on `Kitchen` so the scene doesn't change, then connected to
+    the widgets (materials and drag call the widgets; the widgets call nothing). They call back into
+    `Kitchen` for the camera, the ground, the cabinet height transitions, fitting a cabinet to a
+    product, rotating the camera to a cabinet, and the centring rule; those go when areas 5 and 6
+    take the cameras and the editing commands. `Kitchen.OnEnable` still makes every
+    `EventBridge.Designer` subscription in the old order, pointing at the parts (plan, decision 2).
   - Price inputs, `_project/Scripts/Pricing/` (`KitchenDesign.Pricing`): `PriceSheetInputs` (the
     manual price-sheet lines and the per-product price factors), `IPriceSheetExtras` with
     `StollPriceSheet` and `GeminiCatalogPriceSheet`, picked by the app rule `PriceSheetExtras`,

@@ -189,21 +189,9 @@ namespace KitchenDesign
                 this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
         }
 
-        /// <summary>
-        ///     Re-sync the ticker labels that show the current kitchen's
-        ///     dimensions to the current kitchen size. This is necessary when
-        ///     the kitchen's cabinet depth is changed from <see
-        ///     cref="CabinetOtherSizesUI"/> mid-design.
-        /// </summary>
         public void RefreshTickerLabels()
         {
-            foreach (Transform child in m_TickerDimensionsRoot)
-            {
-                if (child.TryGetComponent(out CabinetTickerWidget ticker))
-                {
-                    ticker.RefreshLabel();
-                }
-            }
+            this._widgets.RefreshTickerLabels();
         }
 
         /// <summary>
@@ -259,7 +247,7 @@ namespace KitchenDesign
             // depth.
             UpdateLayoutCabinetMeshes();
 
-            RefreshTickerLabels();
+            this._widgets.RefreshTickerLabels();
         }
 
         public JsonDict SaveToJson()
@@ -316,33 +304,7 @@ namespace KitchenDesign
 
         public void RefreshTopTickerInfo()
         {
-            string topInfoPhrase = "";
-
-            if (this._selections.layoutPrefab)
-            {
-                string combinedClientName = ProFitGlobals.TryGetClientCombinedName();
-
-                string countertopThicknessDisplayFormat = "";
-
-                MeasurementUnit units = ProFitGlobals.userProfile.activeUnits;
-
-                if (units == MeasurementUnit.Centimeters)
-                {
-                    countertopThicknessDisplayFormat =
-                        Utility.MeasurementFormat.FormatMetersToCentimeters(
-                            this._selections.countertopThicknessInMeters
-                        );
-                }
-                else
-                {
-                    countertopThicknessDisplayFormat =
-                    Utility.MeasurementFormat.FormatMetersToImperial(this._selections.countertopThicknessInMeters);
-                }
-
-                topInfoPhrase = $"{combinedClientName}. {this._selections.layoutPrefab.displayName}. Counter-top Thickness: {countertopThicknessDisplayFormat}";
-            }
-
-            m_TopInfoLabel.phrase = topInfoPhrase;
+            this._widgets.RefreshTopTickerInfo();
         }
 
         public async UniTask CreateCabinetLayoutFromShape(CabinetLayout prefab)
@@ -717,7 +679,7 @@ namespace KitchenDesign
                 m_CurrentCabinetLayout.UpdatePositions();
 
                 (Material cabinetMaterial, Material countertopMaterial) =
-                    await GetFinishMaterials(allowHighlightToReturn: true);
+                    await this._materials.GetFinishMaterials(allowHighlightToReturn: true);
 
                 // Refresh the cabinets materials. This ensures Napoleon (and
                 // any future catalogs that have a cabinet material override)
@@ -730,16 +692,16 @@ namespace KitchenDesign
                 );
             }
 
-            RefreshTopTickerInfo();
+            this._widgets.RefreshTopTickerInfo();
 
             // Forget the previous selection. (Only the kitchen will still
             // be valid and we want it to start un-selected.)
-            m_CurrentHighlightObject = null;
+            this._interaction.highlightObject = null;
 
             UpdateCameraAndFramingGroups();
 
-            RecreateResizeWidgets();
-            RecreateTickerWidgets();
+            this._widgets.RecreateResizeWidgets();
+            this._widgets.RecreateTickerWidgets();
 
             // Reset the ground
             if (m_CurrentCabinetLayout)
@@ -833,7 +795,7 @@ namespace KitchenDesign
             occupant.SetInfo(productInfo, productVisual, visualInstance);
 
             (Material cabinetMaterial, Material countertopMaterial) =
-                await GetFinishMaterials(allowHighlightToReturn: true);
+                await this._materials.GetFinishMaterials(allowHighlightToReturn: true);
 
             await occupant.SetCabinetMaterials(
                 cabinetMaterial,
@@ -855,8 +817,8 @@ namespace KitchenDesign
         /// </summary>
         public void Debug_ForgetSelection()
         {
-            m_ProductBeingDragged = null;
-            m_VolumeBeingResized = null;
+            this._interaction.productBeingDragged = null;
+            this._interaction.volumeBeingResized = null;
         }
 
         /// <summary>
@@ -1027,6 +989,12 @@ namespace KitchenDesign
 
         private void Awake()
         {
+            this._interaction = new KitchenInteractionState();
+            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot);
+            this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase);
+            this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask);
+            this._materials.Connect(this._widgets);
+            this._drag.Connect(this._widgets);
             this._saveWriter = new KitchenSaveWriter(this._selections, m_ProductVisualDatabase);
             this._saveReader = new KitchenSaveReader(this, this._selections, m_ProductVisualDatabase, m_LayoutPrefabs, m_CabinetBackingSprites, m_BacksplashPrefab, m_HighBarTopPrefab, m_LowBarTopPrefab);
 
@@ -1042,9 +1010,6 @@ namespace KitchenDesign
             s_KitchenInstance = this;
 
             m_Ground.gameObject.SetActive(false);
-
-            m_PrimaryHighlightMaterial = ProFitGlobals.appOptions.appSkin.primarySelectionMaterial;
-            m_SecondaryHighlightMaterial = ProFitGlobals.appOptions.appSkin.secondarySelectionMaterial;
 
             // Assume the default material is selected for each surface type
             this._selections.cabinetFinish     = null;
@@ -1090,7 +1055,7 @@ namespace KitchenDesign
             //        anchor: new (0.5f, 1.0f, 0.0f)
             //    );
 
-            SetCabinetShelfResizeWidgetsVisible(target: null);
+            this._widgets.SetCabinetShelfResizeWidgetsVisible(target: null);
 
             /// <summary>
             ///     Create a kitchen widget for a cabinet plunge/shelf.
@@ -1104,7 +1069,7 @@ namespace KitchenDesign
                 where WidgetType : KitchenWidget
             {
                 WidgetType widget =
-                    CreateKitchenWidget(
+                    KitchenWidgetsControl.CreateKitchenWidget(
                         widgetPrefab,
                         instanceParent,
                         eventCamera,
@@ -1150,7 +1115,7 @@ namespace KitchenDesign
             EventBridge.Designer.onTryDestroyOccupant.OnInvoke          += TryDestroyOccupant;
             EventBridge.Designer.onTryDestroyCabinetBacking.OnInvoke    += TryDestroyCabinetBacking;
             EventBridge.Designer.onTryDestroySection                    += TryDestroySection;
-            EventBridge.Designer.onFinishMaterialChanged                += OnToolbarFinishProductSelected;
+            EventBridge.Designer.onFinishMaterialChanged                += this._materials.OnToolbarFinishProductSelected;
             EventBridge.Designer.onTryRepositionOccupant                += TryRepositionProduct;
             EventBridge.Designer.onTryReorderCabinet.OnInvoke           += TryReorderCabinet;
             EventBridge.Designer.tryToggleToeKicks                      += TryToggleToeKicks;
@@ -1161,19 +1126,19 @@ namespace KitchenDesign
             EventBridge.Designer.onOccupantInstantiated.OnInvoke        += OnOccupantInstantiated;
             EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke      += OnOccupantAddedToCabinet;
             EventBridge.Designer.onOccupantRemovedFromCabinet.OnInvoke  += OnOccupantRemovedFromCabinet;
-            EventBridge.Designer.onOccupantDragBegin                    += OnOccupantDragBegin;
-            EventBridge.Designer.onOccupantDrag                         += OnOccupantDrag;
-            EventBridge.Designer.onOccupantDragEnd.OnInvoke             += OnOccupantDragEnd;
+            EventBridge.Designer.onOccupantDragBegin                    += this._drag.OnOccupantDragBegin;
+            EventBridge.Designer.onOccupantDrag                         += this._drag.OnOccupantDrag;
+            EventBridge.Designer.onOccupantDragEnd.OnInvoke             += this._drag.OnOccupantDragEnd;
 
-            EventBridge.Designer.onTryHighlightObject.OnInvoke          += TryHighlightObject;
+            EventBridge.Designer.onTryHighlightObject.OnInvoke          += this._materials.TryHighlightObject;
 
             foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
             {
                 if (shelfWidgetTransform.TryGetComponent(out ResizerWidget shelfWidget))
                 {
-                    shelfWidget.onResizeBegin += OnCabinetShelfResizeBegin;
-                    shelfWidget.onResizeEnd += OnCabinetShelfResizeEnd;
-                    shelfWidget.onResized += OnCabinetShelfResized;
+                    shelfWidget.onResizeBegin += this._widgets.OnCabinetShelfResizeBegin;
+                    shelfWidget.onResizeEnd += this._widgets.OnCabinetShelfResizeEnd;
+                    shelfWidget.onResized += this._widgets.OnCabinetShelfResized;
                 }
             }
         }
@@ -1207,7 +1172,7 @@ namespace KitchenDesign
             EventBridge.Designer.onTryDestroyOccupant.OnInvoke          -= TryDestroyOccupant;
             EventBridge.Designer.onTryDestroyCabinetBacking.OnInvoke    -= TryDestroyCabinetBacking;
             EventBridge.Designer.onTryDestroySection                    -= TryDestroySection;
-            EventBridge.Designer.onFinishMaterialChanged                -= OnToolbarFinishProductSelected;
+            EventBridge.Designer.onFinishMaterialChanged                -= this._materials.OnToolbarFinishProductSelected;
             EventBridge.Designer.onTryRepositionOccupant                -= TryRepositionProduct;
             EventBridge.Designer.onTryReorderCabinet.OnInvoke           -= TryReorderCabinet;
             EventBridge.Designer.tryToggleToeKicks                      -= TryToggleToeKicks;
@@ -1218,19 +1183,19 @@ namespace KitchenDesign
             EventBridge.Designer.onOccupantInstantiated.OnInvoke        -= OnOccupantInstantiated;
             EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke      -= OnOccupantAddedToCabinet;
             EventBridge.Designer.onOccupantRemovedFromCabinet.OnInvoke  -= OnOccupantRemovedFromCabinet;
-            EventBridge.Designer.onOccupantDragBegin                    -= OnOccupantDragBegin;
-            EventBridge.Designer.onOccupantDrag                         -= OnOccupantDrag;
-            EventBridge.Designer.onOccupantDragEnd.OnInvoke             -= OnOccupantDragEnd;
+            EventBridge.Designer.onOccupantDragBegin                    -= this._drag.OnOccupantDragBegin;
+            EventBridge.Designer.onOccupantDrag                         -= this._drag.OnOccupantDrag;
+            EventBridge.Designer.onOccupantDragEnd.OnInvoke             -= this._drag.OnOccupantDragEnd;
 
-            EventBridge.Designer.onTryHighlightObject.OnInvoke          -= TryHighlightObject;
+            EventBridge.Designer.onTryHighlightObject.OnInvoke          -= this._materials.TryHighlightObject;
 
             foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
             {
                 if (shelfWidgetTransform.TryGetComponent(out ResizerWidget shelfWidget))
                 {
-                    shelfWidget.onResizeBegin -= OnCabinetShelfResizeBegin;
-                    shelfWidget.onResizeEnd -= OnCabinetShelfResizeEnd;
-                    shelfWidget.onResized -= OnCabinetShelfResized;
+                    shelfWidget.onResizeBegin -= this._widgets.OnCabinetShelfResizeBegin;
+                    shelfWidget.onResizeEnd -= this._widgets.OnCabinetShelfResizeEnd;
+                    shelfWidget.onResized -= this._widgets.OnCabinetShelfResized;
                 }
             }
         }
@@ -1245,7 +1210,7 @@ namespace KitchenDesign
 
                 m_TopInfoLabel.phrase = "";
 
-                SetCabinetShelfResizeWidgetsVisible(target: null);
+                this._widgets.SetCabinetShelfResizeWidgetsVisible(target: null);
 
                 if (await TryLoadRequestedSave())
                 {
@@ -1265,7 +1230,7 @@ namespace KitchenDesign
                 this._selections.analyticsKey = "";
 
                 // Restore the default flooring material
-                await ChangeFinish(this._selections.flooringFinish, ProductCategory.FinishFloor);
+                await this._materials.ChangeFinish(this._selections.flooringFinish, ProductCategory.FinishFloor);
 
                 // Destroy the old kitchen. Passing null will let us destroy the
                 // old one without creating a new one
@@ -1335,7 +1300,7 @@ namespace KitchenDesign
 
                 await SetBrandCatalog(selectedBrandCatalog);
 
-                RefreshTopTickerInfo();
+                this._widgets.RefreshTopTickerInfo();
             }
             else
             {
@@ -1397,7 +1362,7 @@ namespace KitchenDesign
                 m_CurrentCabinetLayout.UpdatePositions();
                 m_CurrentCabinetLayout.UpdateMeshes();
 
-                RefreshTickerLabels();
+                this._widgets.RefreshTickerLabels();
 
                 CenterTheGround();
             }
@@ -1472,7 +1437,7 @@ namespace KitchenDesign
             }
 
             bool isOccupantHighlighted =
-                occupant.gameObject == m_CurrentHighlightObject;
+                occupant.gameObject == this._interaction.highlightObject;
 
             if (isOccupantHighlighted)
             {
@@ -1508,7 +1473,7 @@ namespace KitchenDesign
             }
 
             bool isBackingHighlighted =
-                backingToDestroy.gameObject == m_CurrentHighlightObject;
+                backingToDestroy.gameObject == this._interaction.highlightObject;
 
             if (isBackingHighlighted)
             {
@@ -1613,7 +1578,7 @@ namespace KitchenDesign
                     replacementCornerCabinet.sizeInMeters = sizeInMeters;
                 }
 
-                if (m_CurrentHighlightObject == cabinetToDestroy.gameObject)
+                if (this._interaction.highlightObject == cabinetToDestroy.gameObject)
                 {
                     await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
                 }
@@ -1719,7 +1684,7 @@ namespace KitchenDesign
         ///     Iterate through all kitchen cabinets, creating and removing
         ///     cabinet height transitions sections where needed.
         /// </summary>
-        protected async UniTask UpdateCabinetHeightTransitions()
+        internal async UniTask UpdateCabinetHeightTransitions()
         {
             if(m_CurrentCabinetLayout == null)
             {
@@ -1775,7 +1740,7 @@ namespace KitchenDesign
             // inspected cabinet if it is necessary.
 
             (Material cabinetMaterial, Material countertopMaterial) =
-                await GetFinishMaterials(allowHighlightToReturn: true);
+                await this._materials.GetFinishMaterials(allowHighlightToReturn: true);
 
             foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
             {
@@ -1855,119 +1820,6 @@ namespace KitchenDesign
 
         }
 
-        protected async UniTask OnCabinetResizedByWidget(ResizerWidget cabinetResizerWidget, float lengthMetersDelta)
-        {
-            Cabinet cabinet = (Cabinet)cabinetResizerWidget.target;
-
-            if (cabinetResizerWidget.affectExtent == Extent.Min && !cabinet.Is(CabinetType.CornerWedge))
-            {
-                // Counter-offset the cuboid's position when adjusting the
-                // minimum extent.
-
-                Transform targetTransform =
-                    cabinetResizerWidget.target.GetTransform();
-
-                targetTransform.parent.position +=
-                    targetTransform.TransformDirection(Vector3.right) * -lengthMetersDelta;
-            }
-
-            // REVIEW: I commented this out because it should happen automatically
-            //         when `onCabinetResized` is invoked below. We're doing it
-            //         twice, but maybe that is necessary? -Ryan
-            //await OnCabinetResized(cabinet);
-
-            // Emit the event about the cabinet being resized. This happens here
-            // because it is after all validation is performed and the listener
-            // will be assured the cabinet stays at the size it reports. (We
-            // were doing this in Cabinet.TryToResizeLengthAsUser, but that
-            // was too early.)
-            await EventBridge.Designer.onCabinetResized.InvokeIfNonEmpty(cabinet);
-        }
-
-        private void OnCabinetResizeBegin(ResizerWidget caller)
-        {
-            if (m_VolumeBeingResized != null || m_ProductBeingDragged)
-            {
-                // Disallow resizing if another action is underway
-                return;
-            }
-
-            m_VolumeBeingResized = caller.target;
-
-            // Hide all other widgets
-            var widgets =
-                new ComponentsInChildrenEnumerator<KitchenWidget>(
-                    m_CabinetResizeWidgetRoot
-                );
-
-            while (widgets.MoveNext())
-            {
-                widgets.Current.SetVisible(caller == widgets.Current);
-            }
-        }
-
-        private void OnCabinetResizeEnd(ResizerWidget caller)
-        {
-            if (m_VolumeBeingResized == caller.target)
-            {
-                m_VolumeBeingResized = null;
-
-                // Restore visibility of the resize widgets if the kitchen is
-                // still selected
-
-                SetCabinetResizeWidgetsVisible(true);// m_CurrentHighlightObject == gameObject);
-            }
-        }
-
-        protected void OnCabinetShelfResizeBegin(ResizerWidget caller)
-        {
-            if (m_VolumeBeingResized != null || m_ProductBeingDragged)
-            {
-                // Disallow resizing if another action is underway
-                return;
-            }
-
-            m_VolumeBeingResized = caller.target;
-
-            var widgets =
-                new ComponentsInChildrenEnumerator<KitchenWidget>(
-                    m_CabinetShelfResizeWidgetRoot
-                );
-
-            while (widgets.MoveNext())
-            {
-                widgets.Current.SetVisible(caller == widgets.Current);
-            }
-        }
-
-        protected void OnCabinetShelfResizeEnd(ResizerWidget caller)
-        {
-            if (m_VolumeBeingResized == caller.target)
-            {
-                m_VolumeBeingResized = null;
-
-                SetCabinetShelfResizeWidgetsVisible(caller.target);
-            }
-        }
-
-        /// <summary>
-        ///     Forwards the "shelf was resized" event to the <see
-        ///     cref="MeasurementOverlayManager"/> to keep the measurements to
-        ///     the nearest left and right neighbouring products synchronized to
-        ///     the shelf's new size.
-        /// </summary>
-        protected async UniTask OnCabinetShelfResized(ResizerWidget caller, float deltaLengthInMeters)
-        {
-            CabinetShelf resizedShelf = (CabinetShelf)caller.target;
-
-            await EventBridge.Designer.onOccupantResized.InvokeIfNonEmpty(resizedShelf.occupant);
-        }
-
-        protected void OnInputCabinetSizeClicked(ButtonWidget caller)
-        {
-            EventBridge.Designer.showSetOccupiableVolumeWidthPrompt?.Invoke(caller.target);
-        }
-
         /// <summary>
         /// Called when a user clicks Add after selecting a product in the
         /// product toolbar.
@@ -2040,7 +1892,7 @@ namespace KitchenDesign
             }
         }
 
-        private void RotateCameraToFrontOfCabinet(ICabinet cabinet)
+        internal void RotateCameraToFrontOfCabinet(ICabinet cabinet)
         {
             // When an occupant is added to a cabinet that the camera is
             // not facing, the camera is rotated to face it. (Client request.)
@@ -2109,7 +1961,7 @@ namespace KitchenDesign
                 layout.UpdateMeshes();
                 layout.UpdatePositions();
 
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(m_CurrentHighlightObject);
+                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(this._interaction.highlightObject);
 
                 await EventBridge.Designer.onCabinetAddedByUser.InvokeIfNonEmpty(newCabinet);
 
@@ -2346,7 +2198,7 @@ namespace KitchenDesign
             createdCabinet.SetToeKickType(this._selections.toeKickType);
 
             (ResizerWidget left, ButtonWidget middle, ResizerWidget right) =
-                CreateResizeWidgetsForCabinet(createdCabinet, Camera.main);
+                this._widgets.CreateResizeWidgetsForCabinet(createdCabinet, Camera.main);
 
             left.SetVisible(false);
             middle.SetVisible(false);
@@ -2359,90 +2211,7 @@ namespace KitchenDesign
             return createdCabinet;
         }
 
-        /// <summary>
-        ///     Set the visibility of the widgets used to resize a cabinet. The
-        ///     player can click and drag on these widgets to change the size
-        ///     of the cabinet section.
-        /// </summary>
-        /// <param name="visible">
-        ///     Whether to make the resizer widgets visible.
-        /// </param>
-        /// <param name="forceAffectAll">
-        ///     When <see langword="true"/>, the visibility of *all* cabinet
-        ///     widgets is modified to match <paramref name="visible"/>. The
-        ///     default value is <see langword="false"/> which means the
-        ///     widgets affected depends on the user's selection: if a cabinet
-        ///     is selected (i.e., in Sections Building Method), only that
-        ///     cabinet's widgets are changed.
-        /// </param>
-        private void SetCabinetResizeWidgetsVisible(bool visible, bool forceAffectAll = false)
-        {
-            var cabinetWidgets =
-                new ComponentsInChildrenEnumerator<KitchenWidget>(
-                    root: m_CabinetResizeWidgetRoot
-                );
-
-            if (forceAffectAll)
-            {
-                // Affect the visibility of all cabinets, regardless of the
-                // current highlight. This is used to hide all the widgets when
-                // they are first spawned. Oh, but we want to keep the widgets
-                // visible if the user has a selection.
-                while (cabinetWidgets.MoveNext())
-                {
-                    cabinetWidgets.Current.SetVisible(visible);
-                }
-
-                return;
-            }
-
-            // If the highlighted object is a cabinet, the user is in
-            // Sections mode and only the selected cabinet will be highlighted.
-
-            Cabinet mustMatch = null;
-            m_CurrentHighlightObject?.TryGetComponent(out mustMatch);
-
-            while (cabinetWidgets.MoveNext())
-            {
-                KitchenWidget widget = cabinetWidgets.Current;
-
-                if (mustMatch && widget.target != mustMatch)
-                {
-                    // Skip this cabinet if it does not match the requested
-                    // filter.
-                    continue;
-                }
-
-                Cabinet cabinetForWidget =
-                    (Cabinet)cabinetWidgets.Current.target;
-
-                if (cabinetForWidget.isResizable && widget.isVisible != visible)
-                {
-                    cabinetWidgets.Current.SetVisible(visible);
-                }
-            }
-        }
-
-        private void SetCabinetShelfResizeWidgetsVisible(OccupiableVolume target)
-        {
-            if (target && target is CabinetShelf shelf && !shelf.isResizable)
-            {
-                target = null;
-            }
-
-            var shelfWidgets =
-                new ComponentsInChildrenEnumerator<KitchenWidget>(
-                    root: m_CabinetShelfResizeWidgetRoot
-                );
-
-            while (shelfWidgets.MoveNext())
-            {
-                shelfWidgets.Current.target = target;
-                shelfWidgets.Current.SetVisible(target != null);
-            }
-        }
-
-        private Camera GetCamera()
+        internal Camera GetCamera()
         {
             // TODO: Add a better way to get the camera
             //MelcherLog.LogWarning("TODO: Make GetCamera() better");
@@ -2635,382 +2404,6 @@ namespace KitchenDesign
             await UniTask.CompletedTask;
         }
 
-        private void OnOccupantDragBegin(Occupant draggedOccupant, PointerEventData eventData)
-        {
-            if (m_VolumeBeingResized != null || m_ProductBeingDragged)
-            {
-                // Disallow dragging if another action is already underway
-                eventData.pointerDrag = null;
-                return;
-            }
-
-            Cabinet cabinet = (Cabinet)draggedOccupant.cabinet;
-
-            bool didDetectDragPlane =
-                ProFitUtility.CalculateCameraLocalDragPosition(
-                    cabinet,
-                    GetCamera(),
-                    eventData,
-                    out Vector3 _,
-                    out Plane _
-                );
-
-            if (!didDetectDragPlane)
-            {
-                // Raycast missed the drag plane (this shouldn't happen)
-                MelcherLog.LogWarning("Aborting product drag. Raycast didn't hit the calculated drag plane.", cabinet);
-                eventData.pointerDrag = null;
-                return;
-            }
-
-            MelcherLog.LogEditorOnly("Beginning drag");
-
-            m_ProductBeingDragged = draggedOccupant;
-
-            // Temporarily disable interactions on the product pointer layer
-            m_CameraPhysicsRaycaster.eventMask &= ~m_ProductPointerInteractionMask;
-
-            // Prevent resizing while dragging a product
-            SetCabinetResizeWidgetsVisible(false);
-            SetCabinetShelfResizeWidgetsVisible(target: null);
-        }
-
-        /// <summary>
-        ///     Called every frame while the user is dragging an occupant along
-        ///     an <see cref="OccupiableVolume"/>.
-        /// </summary>
-        /// <param name="draggedOccupant"></param>
-        /// <param name="eventData"></param>
-        private void OnOccupantDrag(Occupant draggedOccupant, PointerEventData eventData)
-        {
-            if (!m_LastOccupantDraggedTask.HasValue || m_LastOccupantDraggedTask.Value.Status != UniTaskStatus.Pending)
-            {
-                m_LastOccupantDraggedTask = OnOccupantDragAsync(draggedOccupant, eventData);
-                m_LastOccupantDraggedTask.Value.Forget();
-            }
-
-            async UniTask OnOccupantDragAsync(Occupant draggedOccupant, PointerEventData eventData)
-            {
-                Camera mainCamera = GetCamera();
-                Ray pointerRay = mainCamera.ScreenPointToRay(eventData.position);
-
-                bool isDraggingShelf = draggedOccupant.TryGetComponent(out CabinetShelf _);
-
-                OccupiableVolume startingVolume = draggedOccupant.occupiedVolume;
-
-                // Check if the product is being dragged onto a different cabinet.
-                // This is where we detect moving products between different cabinets.
-                Cabinet nearestCabinet = null;
-                float nearestCabinetDistance = float.MaxValue;
-                foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
-                {
-                    Cabinet cabinet = i.element;
-
-                    if (!cabinet.canHaveProducts)
-                    {
-                        continue;
-                    }
-
-                    if (draggedOccupant.isLockedToCabinet)
-                    {
-                        // Cannot drag locked occupants out of its cabinet.
-                        continue;
-                    }
-
-                    OrientedBounds cabinetOrientedBounds = cabinet.GetOrientedBounds();
-
-                    if (cabinetOrientedBounds.IntersectRay(pointerRay, out float distance) &&
-                        distance < nearestCabinetDistance)
-                    {
-                        nearestCabinet = cabinet;
-                        nearestCabinetDistance = distance;
-                    }
-                }
-
-                CabinetShelf nearestShelf = null;
-                float nearestShelfDistance = float.MaxValue;
-                if (nearestCabinet && !isDraggingShelf)
-                {
-                    // Check for cabinet shelves to drag products into.
-                    foreach (Occupant occupant in nearestCabinet.occupants)
-                    {
-                        if (occupant.TryGetComponent(out CabinetShelf shelf))
-                        {
-                            Cuboid shelfCabinetCuboid = shelf.resizerCuboid;
-
-                            OrientedBounds shelfBounds =
-                                new OrientedBounds(
-                                    new Bounds(shelfCabinetCuboid.center, shelfCabinetCuboid.size),
-                                    shelf.GetTransform().worldToLocalMatrix
-                                );
-
-                            shelfBounds.Draw(Color.magenta, 2.0f);
-
-                            if (shelfBounds.IntersectRay(pointerRay, out float distanceToShelf) &&
-                                distanceToShelf < nearestShelfDistance)
-                            {
-                                nearestShelf = shelf;
-                                nearestShelfDistance = distanceToShelf;
-                            }
-                        }
-                    }
-                }
-
-                if (nearestShelf && !ReferenceEquals(nearestShelf, draggedOccupant.occupiedVolume))
-                {
-                    bool didDetectDragPlane =
-                        ProFitUtility.CalculateCameraLocalDragPosition(
-                            nearestShelf,
-                            mainCamera,
-                            eventData,
-                            out Vector3 futureLastCameraLocalDragPosition,
-                            out Plane _
-                        );
-
-                    if (didDetectDragPlane)
-                    {
-                        Vector3 worldDragPosition =
-                            mainCamera.transform.TransformPoint(
-                                futureLastCameraLocalDragPosition
-                            );
-
-                        Vector3 volumeLocalDragPosition =
-                            nearestShelf.GetTransform().InverseTransformPoint(
-                                worldDragPosition
-                            );
-
-                        //Debug.DrawLine(mainCamera.transform.position, worldDragPosition, Color.blue, 0.1f);
-
-                        float metersFromCabinetMinX =
-                           DoDraggedOccupantSnapping(nearestShelf, draggedOccupant, volumeLocalDragPosition.x);
-
-                        m_MetersFromVolumeMinX.value = metersFromCabinetMinX;
-
-                        // TODO: FIXME: For now, we just assume the shelf is
-                        //       top-mounted and the occupant is top-mounted.
-                        m_MetersFromVolumeMinY.value = -nearestShelf.resizerCuboid.height;
-
-                        bool wasProductAdded = false;
-
-                        Cuboid? backingOccupancyInWorldSpace = null;
-
-                        CabinetSpan spanOfShelfCabinet =
-                            layout.FindCabinetSpan((Cabinet)nearestShelf.occupant.cabinet);
-
-                        if (spanOfShelfCabinet.backing)
-                        {
-                            backingOccupancyInWorldSpace =
-                                spanOfShelfCabinet.GetBackingOccupancyCuboidInWorldSpace(
-                                    spanOfShelfCabinet.backing.info,
-                                    spanOfShelfCabinet.backing
-                                );
-                        }
-
-                        if (AreProductsForcedToCenterOfCabinets(cabinetForRuleset: null))
-                        {
-                            wasProductAdded =
-                                await nearestShelf.TryAddOccupantCentered(
-                                    draggedOccupant,
-                                    backingOccupancyInWorldSpace,
-                                    m_MetersFromVolumeMinX,
-                                    m_MetersFromVolumeMinY
-                                );
-                        }
-                        else
-                        {
-                            wasProductAdded =
-                                await nearestShelf.TryAddOccupantNear(
-                                    draggedOccupant,
-                                    backingOccupancyInWorldSpace,
-                                    m_MetersFromVolumeMinX,
-                                    m_MetersFromVolumeMinY
-                                );
-                        }
-
-                        if (wasProductAdded)
-                        {
-                            EventBridge.Designer.onOccupantDragSuccess?.Invoke(
-                                draggedOccupant,
-                                eventData
-                            );
-                            return;
-                        }
-                    }
-                }
-
-
-                // Try to transfer the product to the nearest hovered cabinet. We
-                // do not do this if we are hovering over a cabinet shelf because
-                // that transfer was already handled/checked.
-                if (!nearestShelf && nearestCabinet && !ReferenceEquals(nearestCabinet, draggedOccupant.occupiedVolume))
-                {
-                    // Fetch the potential new local drag position for this
-                    // occupant. If the occupant switches cabinets and this
-                    // position isn't stored in m_LastCameraLocalDragPosition, the
-                    // next frame where the product is dragged will jump the
-                    // product based on the old cabinet's local space and look bad
-
-                    bool didDetectDragPlane =
-                        ProFitUtility.CalculateCameraLocalDragPosition(
-                            nearestCabinet,
-                            mainCamera,
-                            eventData,
-                            out Vector3 futureLastCameraLocalDragPosition,
-                            out Plane _
-                        );
-
-                    if (didDetectDragPlane)
-                    {
-                        // A raycast from the cursor hit the cabinet's "drag plane".
-
-                        Vector3 worldDragPosition =
-                            mainCamera.transform.TransformPoint(
-                                futureLastCameraLocalDragPosition
-                            );
-
-                        Vector3 volumeLocalDragPosition =
-                            nearestCabinet.GetTransform().InverseTransformPoint(
-                                worldDragPosition
-                            );
-
-                        //Debug.DrawLine(mainCamera.transform.position, worldDragPosition, Color.blue, 0.1f);
-
-                        m_MetersFromVolumeMinX.value =
-                           DoDraggedOccupantSnapping(nearestCabinet, draggedOccupant, volumeLocalDragPosition.x);
-
-                        m_MetersFromVolumeMinY.value =
-                            draggedOccupant.GetLocalPositionInVolume().y;
-
-                        if (draggedOccupant.occupiedVolume.parentVolume != null ||
-                            (!draggedOccupant.productVisual.info.anchor.IsAtBottom() && !MelcherCommon.IsAlmostEqual(draggedOccupant.cabinet.sizeInMeters.y, nearestCabinet.sizeInMeters.y, tolerance: 0.001f)))
-                        {
-                            // This occupant is in a shelf OR it is anchored
-                            // relative to the top of its cabinet and is moving to
-                            // a cabinet of a different height.
-                            // TODO: FIXME: This is a quick hack for moving
-                            //              occupants out of shelves. It assumes
-                            //              that only top-mounted products will be
-                            //              added to shelves.
-                            float currentDistanceFromTop =
-                                draggedOccupant.occupiedVolume.occupiableCuboid.yMax - draggedOccupant.GetLocalPositionInVolume().y;
-
-                            m_MetersFromVolumeMinY.value = nearestCabinet.sizeInMeters.y - currentDistanceFromTop;
-                        }
-
-                        Cuboid? backingOccupancyInWorldSpace = null;
-
-                        CabinetSpan spanOfNearestCabinet =
-                            layout.FindCabinetSpan(nearestCabinet);
-
-                        if (spanOfNearestCabinet.backing)
-                        {
-                            backingOccupancyInWorldSpace =
-                                spanOfNearestCabinet.GetBackingOccupancyCuboidInWorldSpace(
-                                    spanOfNearestCabinet.backing.info,
-                                    spanOfNearestCabinet.backing
-                                );
-                        }
-
-                        bool wasProductAdded;
-
-                        if (AreProductsForcedToCenterOfCabinets(cabinetForRuleset: nearestCabinet))
-                        {
-                            wasProductAdded =
-                                await nearestCabinet.TryAddOccupantCentered(
-                                    draggedOccupant,
-                                    backingOccupancyInWorldSpace,
-                                    m_MetersFromVolumeMinX,
-                                    m_MetersFromVolumeMinY
-                                );
-                        }
-                        else
-                        {
-                            wasProductAdded =
-                                await nearestCabinet.TryAddOccupantNear(
-                                    draggedOccupant,
-                                    backingOccupancyInWorldSpace,
-                                    m_MetersFromVolumeMinX,
-                                    m_MetersFromVolumeMinY
-                                );
-                        }
-
-                        if (wasProductAdded)
-                        {
-                            EventBridge.Designer.onOccupantDragSuccess?.Invoke(
-                                draggedOccupant,
-                                eventData
-                            );
-                            return;
-                        }
-                    }
-                }
-
-                // By this point, all cases have been handled except for dragging
-                // an occupant along the volume it is already attached to.
-
-                if (AreProductsForcedToCenterOfCabinets(cabinetForRuleset: (Cabinet)draggedOccupant.cabinet))
-                {
-                    // Ignore dragging products within their cabinet when the
-                    // kitchen is configured for products to always be centered
-                    // within their cabinet.
-                    return;
-                }
-
-                OccupiableVolume currentVolume = draggedOccupant.occupiedVolume;
-
-                bool drag =
-                    ProFitUtility.CalculateCameraLocalDragPosition(
-                        currentVolume,
-                        mainCamera,
-                        eventData,
-                        out Vector3 cameraLocalDragPosition,
-                        out Plane cameraLocalDragPlane
-                    );
-
-                if (drag)
-                {
-                    Vector3 worldDragPosition = mainCamera.transform.TransformPoint(cameraLocalDragPosition);
-                    Transform cabinetTransform = currentVolume.GetTransform();
-                    Vector3 volumeLocalDragPosition = cabinetTransform.InverseTransformPoint(worldDragPosition);
-
-                    m_MetersFromVolumeMinX.value =
-                        DoDraggedOccupantSnapping(currentVolume, draggedOccupant, volumeLocalDragPosition.x);
-
-                    m_MetersFromVolumeMinY.value = draggedOccupant.GetLocalPositionInVolume().y;
-
-                    Cuboid? backingOccupancyInWorldSpace = null;
-
-                    CabinetSpan spanOfCurrentCabinet =
-                        layout.FindCabinetSpan((Cabinet)draggedOccupant.cabinet);
-
-                    if (spanOfCurrentCabinet.backing)
-                    {
-                        backingOccupancyInWorldSpace =
-                            spanOfCurrentCabinet.GetBackingOccupancyCuboidInWorldSpace(
-                                spanOfCurrentCabinet.backing.info,
-                                spanOfCurrentCabinet.backing
-                            );
-                    }
-
-                    bool didMoveProduct =
-                        currentVolume.TryMoveOccupantNear(
-                            draggedOccupant,
-                            backingOccupancyInWorldSpace,
-                            ref m_MetersFromVolumeMinX.value,
-                            ref m_MetersFromVolumeMinY.value
-                        );
-
-                    if (didMoveProduct)
-                    {
-                        EventBridge.Designer.onOccupantDragSuccess?.Invoke(
-                            draggedOccupant,
-                            eventData
-                        );
-                    }
-                }
-            }
-        }
-
         protected void TrySendOnBrandCatalogChanged()
         {
             if(ProFitGlobals.appRules.RequiresBrandCatalog && this._selections.brandCatalog == null)
@@ -3022,69 +2415,6 @@ namespace KitchenDesign
         }
 
         // Used to pass values "by ref" to async functions.
-        private Ref<float> m_MetersFromVolumeMinX = new (0.0f);
-        private Ref<float> m_MetersFromVolumeMinY = new (0.0f);
-
-        private async UniTask OnOccupantDragEnd((Occupant draggedOccupant, PointerEventData eventData) args)
-        {
-            if (args.draggedOccupant == m_ProductBeingDragged)
-            {
-                m_ProductBeingDragged = null;
-
-                // Restore interaction on the product pointer layer
-                m_CameraPhysicsRaycaster.eventMask |= m_ProductPointerInteractionMask;
-
-                // Re-enable resizing when product drag ends
-                SetCabinetShelfResizeWidgetsVisible(m_CurrentHighlightObject.GetComponent<CabinetShelf>());
-
-                if (!await TryToFitCabinetToOccupant(args.draggedOccupant))
-                {
-                    // This cabinet could not be expanded to fit the occupant.
-                    // Try to find a better home.
-
-                    // TODO: Return the occupant to its previous location.
-                    //       -Ryan
-
-                    foreach (CabinetSpan cabinetSpan in layout.spans)
-                    {
-                        Cuboid? backingOccupancyInWorldSpace = null;
-
-                        if (cabinetSpan.backing)
-                        {
-                            backingOccupancyInWorldSpace =
-                                cabinetSpan.GetBackingOccupancyCuboidInWorldSpace(
-                                    cabinetSpan.backing.info,
-                                    cabinetSpan.backing
-                                );
-                        }
-
-                        foreach (ElementIndex<Cabinet> i in cabinetSpan.cabinets)
-                        {
-                            m_MetersFromVolumeMinX.value = 0.0f;
-                            m_MetersFromVolumeMinY.value = 0.0f;
-
-                            bool didAdd =
-                                await i.element.TryAddOccupantCentered(
-                                    args.draggedOccupant,
-                                    backingOccupancyInWorldSpace,
-                                    m_MetersFromVolumeMinX,
-                                    m_MetersFromVolumeMinY
-                                );
-
-                            if (didAdd)
-                            {
-                                return;
-                            }
-                        }
-
-                    }
-
-                    MelcherLog.LogError("Failed to resize destination cabinet and could not locate a suitable alternative location.", args.draggedOccupant);
-                }
-
-                RotateCameraToFrontOfCabinet(args.draggedOccupant.cabinet);
-            }
-        }
 
         /// <summary>
         ///     In some building methods (Sections and Catalog), some products
@@ -3092,7 +2422,7 @@ namespace KitchenDesign
         ///     cabinet. E.g., fridges do this.
         /// </summary>
         /// <param name="occupant"></param>
-        private async UniTask<bool> TryToFitCabinetToOccupant(Occupant occupant)
+        internal async UniTask<bool> TryToFitCabinetToOccupant(Occupant occupant)
         {
             if (!occupant.productVisual.info.fitSectionToProductWidth ||
                 !ReferenceEquals(occupant.occupiedVolume, occupant.cabinet))    // Dropped in a shelf. I.e., not directly on a cabinet.
@@ -3107,217 +2437,6 @@ namespace KitchenDesign
             await EventBridge.Designer.onCabinetResized.InvokeIfNonEmpty(cabinetToResize);
 
             return result;
-        }
-
-        /// <summary>
-        /// Called when an object wants to be highlighted.
-        /// <paramref name="highlightObject"/> may be an occupant or a cabinet.
-        /// </summary>
-        private async UniTask TryHighlightObject(GameObject highlightObject)
-        {
-            // Callers are allowed to request the same object highlighted
-            // again. This allows the highlight to be refreshed if objects are
-            // added when the user already has a selection.
-            bool isNewHighlight = highlightObject != m_CurrentHighlightObject;
-
-            if (this._selections.buildingMethod != KitchenBuildingMethod.Standard)
-            {
-                // We only allow double-clicking an occupant to select its
-                // cabinet when the building mode uses occupant auto-centering,
-                // this is because measurements within a cabinet are not
-                // vital in that case.
-
-                // This is to get around an issue with this current
-                // implementation where the occupant is still draggable after
-                // it's clicked twice and the cabinet is highlighted. When
-                // dragging an occupant in this state, the measurement lines
-                // are synchronized to the cabinet which is not useful to the
-                // client. A fix may be to listen to pointer-up events, however
-                // I believe I tried that a few months ago and ran into timing
-                // issues with other pointer events. -Ryan
-
-                if (!isNewHighlight &&
-                    highlightObject &&
-                    highlightObject.TryGetComponent(out Occupant highlightedOccupant))
-                {
-                    // Try to select its parent volume.
-                    highlightObject = highlightedOccupant.occupiedVolume.gameObject;
-                    isNewHighlight = true;
-                }
-            }
-
-            if (m_ProductBeingDragged || m_VolumeBeingResized != null)
-            {
-                // Ignore highlight changes while dragging or resizing
-                return;
-            }
-
-            // Remove the highlight from the last object
-            if (m_CurrentHighlightObject && isNewHighlight)
-            {
-                await UpdateHighlightMaterial(
-                    m_CurrentHighlightObject,
-                    primaryHighlightMaterial: null,
-                    secondaryHighlightMaterial: null
-                );
-
-                m_CurrentHighlightObject.TryGetComponent(out Occupant lastHighlightedProduct);
-
-                if (lastHighlightedProduct)
-                {
-                    if (m_CurrentHighlightObject.TryGetComponent(out IOccupantHighlightChangedHandler occupantHighlightChanged))
-                    {
-                        await occupantHighlightChanged.OnOccupantHighlightChanged(
-                            lastHighlightedProduct.cabinet,
-                            highlight: null
-                        );
-                    }
-                }
-            }
-
-            m_CurrentHighlightObject = highlightObject;
-
-            // Apply the highlight to the new object
-            if (m_CurrentHighlightObject)
-            {
-                await UpdateHighlightMaterial(
-                    m_CurrentHighlightObject,
-                    m_PrimaryHighlightMaterial,
-                    m_SecondaryHighlightMaterial
-                );
-
-                m_CurrentHighlightObject.TryGetComponent(out Occupant currentHighlightedProduct);
-
-                if (currentHighlightedProduct &&
-                    m_CurrentHighlightObject.TryGetComponent(out IOccupantHighlightChangedHandler occupantHighlightChanged))
-                {
-                    await occupantHighlightChanged.OnOccupantHighlightChanged(
-                        currentHighlightedProduct.cabinet,
-                        m_PrimaryHighlightMaterial
-                    );
-                }
-            }
-
-            if (isNewHighlight)
-            {
-                await EventBridge.Designer.onHighlightChanged.InvokeIfNonEmpty(m_CurrentHighlightObject);
-            }
-        }
-
-        protected void OnToolbarFinishProductSelected(ProductInfo finishProduct, ProductCategory fallbackFinishCategory)
-        {
-            ChangeFinish(finishProduct, fallbackFinishCategory).Forget();
-        }
-
-        internal async UniTask ChangeFinish(ProductInfo finishProduct, ProductCategory fallbackFinishCategory)
-        {
-            if (!fallbackFinishCategory.IsFinish())
-            {
-                MelcherLog.LogError(
-                    $"Received {fallbackFinishCategory} but require a finish category."
-                );
-            }
-
-            ProductCategory finishCategory = fallbackFinishCategory;
-            ProductVisualSO finishProductVisual = null;
-
-            Material finishMaterial = await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
-            FlooringType flooringType = FlooringType.Wood;
-
-            if (finishProduct != null)
-            {
-                finishCategory = finishProduct.category;
-
-                finishProductVisual =
-                    m_ProductVisualDatabase.FindRuntimeVisualByID(
-                        finishProduct.visualId
-                    );
-
-                if (!finishProductVisual)
-                {
-                    MelcherLog.LogError(
-                        $"No product visual found for finish '{finishProduct.name}' (id: {finishProduct.id}) with visual id '{finishProduct.visualId}'"
-                    );
-                }
-                else
-                {
-                    ProductVisualContent finishVisualContent =
-                        await ProFitGlobals.productContent
-                            .LoadContent(finishProductVisual);
-
-                    finishMaterial = finishVisualContent.finishMaterial;
-                    flooringType = finishProductVisual.info.flooringType;
-                }
-            }
-
-            if (finishCategory == ProductCategory.FinishFloor && !finishProductVisual)
-            {
-                finishMaterial = ProFitGlobals.appOptions.appSkin.kitchenDefaultFlooringMaterial;
-            }
-
-            await UpdateCabinetHeightTransitions();
-
-            switch (finishCategory)
-            {
-                case ProductCategory.FinishFloor:
-                    this._selections.flooringFinish = finishProduct;
-
-                    // Pick between the wood floor model or stone floor model
-                    bool isStone = flooringType == FlooringType.Stone;
-                    m_GroundStone.gameObject.SetActive(isStone);
-                    m_GroundWood.gameObject.SetActive(!isStone);
-
-                    m_GroundStone.sharedMaterial = finishMaterial;
-                    m_GroundWood.sharedMaterial = finishMaterial;
-
-                    // Intentional `return`
-                    return;
-
-                case ProductCategory.FinishCabinet:
-                    this._selections.cabinetFinish = finishProduct;
-
-                    if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog && this._selections.cabinetFinish.manufacturerId == 140)
-                    {
-                        EventBridge.Designer.showNotification?.Invoke(
-                            title: "Deco Grain",
-                            message: "Please note that the Deco Grain finish adds a 25% premium to your cabinet choices.",
-                            onDismiss: null
-                        );
-                    }
-                    break;
-
-                case ProductCategory.FinishCountertop:
-                    this._selections.countertopFinish = finishProduct;
-                    break;
-
-                default:
-                    MelcherLog.LogError(
-                        $"Unhandled finish category '{finishCategory}'",
-                        finishProductVisual
-                    );
-
-                    // Intentional `return`
-                    return;
-            }
-
-            if (m_CurrentHighlightObject != gameObject)
-            {
-                // The kitchen isn't selected so we can propagate the new
-                // material without overriding the highlight material
-
-                (Material cabinetMaterial, Material countertopMaterial) =
-                    await GetFinishMaterials(allowHighlightToReturn: false);
-
-                foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
-                {
-                    await span.SetCabinetMaterials(
-                        m_CurrentHighlightObject,
-                        cabinetMaterial,
-                        countertopMaterial,
-                        await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
-                    );
-                }
-            }
         }
 
 
@@ -3586,284 +2705,29 @@ namespace KitchenDesign
             return didCenterOccupant;
         }
 
-        /// <summary>
-        ///     Add or remove a highlight from an object. If <paramref
-        ///     name="primaryHighlightMaterial"/> is null, the highlight will be
-        ///     removed; otherwise, the highlight material will be set.
-        /// </summary>
-        /// <param name="highlightObject"></param>
-        /// <param name="primaryHighlightMaterial">
-        ///     The main highlight material. This is applied to the object
-        ///     the player has selected. If this is <see langword="null"/>,
-        ///     <paramref name="highlightObject"/> will be unhighlighted.
-        /// </param>
-        /// <param name="secondaryHighlightMaterial">
-        ///     This material is applied to cabinets and countertops that are
-        ///     not directly focused by a highlight. I.e., this is only
-        ///     relevant when <see cref="KitchenBuildingMethod.Sections"/> is
-        ///     enabled and the player has an individual cabinet selected.
-        /// </param>
-        private async UniTask UpdateHighlightMaterial(
-            GameObject  highlightObject,
-            Material    primaryHighlightMaterial,
-            Material    secondaryHighlightMaterial)
+        public UniTask SetTemporaryFinishMaterials(Material cabinetMaterial, Material countertopMaterial, Material cutOutMaterial)
         {
-            (Material cabinetMaterial, Material countertopMaterial) =
-                await GetFinishMaterials(allowHighlightToReturn: false);
-
-            Material defaultKitchenMaterial =
-               await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
-
-            // Check if this is a product visual that is/was selected
-            if (highlightObject.TryGetComponent(out Occupant occupant))
-            {
-                MelcherLog.Log(
-                    "Highlighting product: " + occupant,
-                    occupant,
-                    severity: MelcherLogSeverity.Verbose
-                );
-
-                await occupant.productVisualContentInstance.SetModelHighlight(
-                    primaryHighlightMaterial,
-                    primaryHighlightMaterial ? primaryHighlightMaterial : cabinetMaterial,
-                    countertopMaterial,
-                    defaultKitchenMaterial
-                );
-
-                CabinetShelf shelf = null;
-                if (primaryHighlightMaterial)
-                {
-                    shelf = highlightObject.GetComponent<CabinetShelf>();
-                }
-
-                SetCabinetShelfResizeWidgetsVisible(shelf);
-
-                return;
-            }
-            else if (highlightObject.TryGetComponent(out CabinetBacking backing))
-            {
-                MelcherLog.Log(
-                    "Highlighting backing: " + backing,
-                    backing,
-                    severity: MelcherLogSeverity.Verbose
-                );
-
-                Material activeCabinetMaterial =
-                    primaryHighlightMaterial ? primaryHighlightMaterial : cabinetMaterial;
-
-                Material activeCountertopMaterial =
-                    primaryHighlightMaterial ? primaryHighlightMaterial : countertopMaterial;
-
-                backing.OnCabinetMaterialsChanged(
-                    activeCabinetMaterial,
-                    activeCountertopMaterial
-                );
-
-                if (!backing.hasRiserAndRiserCountertop)
-                {
-                    CabinetSpan backingSpan = null;
-
-                    foreach (CabinetSpan span in layout.spans)
-                    {
-                        if (span.backing == backing)
-                        {
-                            backingSpan = span;
-                            break;
-                        }
-                    }
-
-                    if (backingSpan == null)
-                    {
-                        MelcherLog.LogError($"Could not find a cabinet span that has the backing, {backing.name}", backing);
-                        return;
-                    }
-
-                    // Alter the cabinets' countertop directly.
-                    foreach (ElementIndex<Cabinet> i in backingSpan.cabinets)
-                    {
-                        Cabinet cabinet = i.element;
-
-                        await cabinet.SetCabinetMaterials(
-                           cabinetMaterial,
-                           activeCountertopMaterial,
-                           defaultKitchenMaterial
-                        );
-                    }
-                }
-
-                return;
-            }
-
-            // No product visual. This must be a cabinet or the kitchen.
-
-            Material unfocusedCabinetMaterial       = cabinetMaterial;
-            Material unfocusedCountertopMaterial    = countertopMaterial;
-
-            bool isHighlighting = primaryHighlightMaterial;
-
-            if (isHighlighting)
-            {
-                // A highlight material is provided so we must be highlighting
-                // an object.
-
-                cabinetMaterial = primaryHighlightMaterial;
-                countertopMaterial = primaryHighlightMaterial;
-
-                unfocusedCabinetMaterial = secondaryHighlightMaterial;
-                unfocusedCountertopMaterial = secondaryHighlightMaterial;
-            }
-
-            MelcherLog.LogEditorOnly($"{(isHighlighting ? "Highlighting" : "Unhighlighting")} kitchen");
-
-            CenterTheGround();
-
-            // Hide the ground if we're highlighting or show the ground when
-            // we're removing the highlight
-            m_Ground.gameObject.SetActive(!isHighlighting);
-
-            highlightObject.TryGetComponent(out Cabinet individualCabinet);
-
-            // Show the resize widgets when the kitchen is selected
-            SetCabinetResizeWidgetsVisible(isHighlighting);
-
-            foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
-            {
-                foreach (ElementIndex<Cabinet> i in span.cabinets)
-                {
-                    Cabinet cabinet = i.element;
-
-                    if (!individualCabinet || individualCabinet == cabinet)
-                    {
-                        await cabinet.SetCabinetMaterials(
-                            cabinetMaterial,
-                            countertopMaterial,
-                            defaultKitchenMaterial
-                        );
-                    }
-                    else
-                    {
-                        await cabinet.SetCabinetMaterials(
-                            unfocusedCabinetMaterial,
-                            unfocusedCountertopMaterial,
-                            defaultKitchenMaterial
-                        );
-                    }
-                }
-
-                if (span.backing)
-                {
-                    if (!individualCabinet)
-                    {
-                        span.backing.OnCabinetMaterialsChanged(
-                            cabinetMaterial,
-                            countertopMaterial
-                        );
-                    }
-                    else
-                    {
-                        span.backing.OnCabinetMaterialsChanged(
-                            unfocusedCabinetMaterial,
-                            unfocusedCountertopMaterial
-                        );
-                    }
-                }
-            }
+            return this._materials.SetTemporaryFinishMaterials(cabinetMaterial, countertopMaterial, cutOutMaterial);
         }
 
-        /// <summary>
-        ///     Set the kitchen cabinet's materials but without marking them as
-        ///     selected. This is meant to be used temporarily when taking
-        ///     screenshots of the kitchen.
-        ///     <br /><br />
-        ///
-        ///     Pass <see langword="null"/> for either or both parameters to
-        ///     reset that material to the currently selected finish.
-        /// </summary>
-        public async UniTask SetTemporaryFinishMaterials(Material cabinetMaterial, Material countertopMaterial, Material cutOutMaterial)
+        public UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn)
         {
-            foreach (CabinetSpan span in layout.spans)
-            {
-                if (span.backing)
-                {
-                    span.backing.OnCabinetMaterialsChanged(
-                        cabinetMaterial,
-                        countertopMaterial
-                    );
-                }
-            }
-
-            // Iterate the cabinets separately from the spans to avoid
-            // double-treating corner cabinets. Corner cabinets belong to two
-            // cabinet spans.
-            await m_CurrentCabinetLayout.SetCabinetMaterials(
-                cabinetMaterial,
-                countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial(),
-                cutOutMaterial
-            );
+            return this._materials.GetFinishMaterials(allowHighlightToReturn);
         }
 
-        public async UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn)
+        public UniTask<Material> GetSelectedOrDefaultFinishMaterial(ProductInfo selectedFinish)
         {
-            Material cabinetMaterial =
-                await GetSelectedOrDefaultFinishMaterial(this._selections.cabinetFinish);
-
-            Material countertopMaterial =
-                await GetSelectedOrDefaultFinishMaterial(this._selections.countertopFinish);
-
-            if (allowHighlightToReturn && m_CurrentHighlightObject)
-            {
-                if (m_CurrentHighlightObject == gameObject)
-                {
-                    // The kitchen is selected. Return the highlight material so
-                    // newly added products apply the proper material to their
-                    // cut-outs
-                    cabinetMaterial = m_PrimaryHighlightMaterial;
-                    countertopMaterial = m_PrimaryHighlightMaterial;
-                }
-                else if (m_CurrentHighlightObject.TryGetComponent(out Cabinet cabinet))
-                {
-                    cabinetMaterial = m_SecondaryHighlightMaterial;
-                    countertopMaterial = m_SecondaryHighlightMaterial;
-                }
-            }
-
-            return (cabinetMaterial, countertopMaterial);
+            return this._materials.GetSelectedOrDefaultFinishMaterial(selectedFinish);
         }
 
-        public async UniTask<Material> GetSelectedOrDefaultFinishMaterial(ProductInfo selectedFinish)
+        internal UniTask ChangeFinish(ProductInfo finishProduct, ProductCategory fallbackFinishCategory)
         {
-            Material finishMaterial =
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
+            return this._materials.ChangeFinish(finishProduct, fallbackFinishCategory);
+        }
 
-            if (selectedFinish != null)
-            {
-                // Lookup the material in the product catalog
-                ProductVisualSO finishVisual =
-                    m_ProductVisualDatabase.FindRuntimeVisualByID(
-                        selectedFinish.visualId
-                    );
-
-                if (!finishVisual)
-                {
-                    MelcherLog.LogError(
-                        $"No product visual found for finish '{selectedFinish.name}' (id: {selectedFinish.id}) with visual id '{selectedFinish.visualId}'"
-                    );
-                }
-                else
-                {
-                    ProductVisualContent finishVisualPrefab =
-                        await ProFitGlobals.productContent
-                            .LoadContent(finishVisual);
-
-                    if (finishVisualPrefab != null && finishVisualPrefab.finishMaterial != null)
-                    {
-                        finishMaterial = finishVisualPrefab.finishMaterial;
-                    }
-                }
-            }
-
-            return finishMaterial;
+        internal void RecreateResizeWidgets()
+        {
+            this._widgets.RecreateResizeWidgets();
         }
 
         /// <summary>
@@ -3929,161 +2793,6 @@ namespace KitchenDesign
             }
         }
 
-        /// <summary>
-        ///     Create the cabinet resize widgets.
-        /// </summary>
-        internal void RecreateResizeWidgets()
-        {
-            // Remove the old widgets
-            foreach (Transform child in m_CabinetResizeWidgetRoot)
-            {
-                if (child.TryGetComponent(out ResizerWidget oldResizerWidget))
-                {
-                    oldResizerWidget.onResizeBegin -= OnCabinetResizeBegin;
-                    oldResizerWidget.onResizeEnd -= OnCabinetResizeEnd;
-                    oldResizerWidget.onResized -= OnCabinetResizedByWidget;
-                }
-
-                Destroy(child.gameObject);
-            }
-
-            // Create new widgets for each resizable cabinet
-            if (m_CurrentCabinetLayout)
-            {
-                Camera mainCamera = Camera.main;
-                foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
-                {
-                    Cabinet cabinet = i.element;
-
-                    if (cabinet.isResizable)
-                    {
-                        CreateResizeWidgetsForCabinet(cabinet, mainCamera);
-                    }
-                }
-
-                // Hide the resize widgets by default.
-                SetCabinetResizeWidgetsVisible(false, forceAffectAll: true);
-            }
-        }
-
-        protected (ResizerWidget left, ButtonWidget middle, ResizerWidget right) CreateResizeWidgetsForCabinet(Cabinet cabinet, Camera mainCamera)
-        {
-            // Resizer widgets normally anchor to the back of the cabinet but
-            // with spaces and corner wedges, they anchor to the front.
-            float zAnchor =
-                cabinet.cabinetType is CabinetType.Space or CabinetType.CornerWedge ?
-                    0.0f :
-                    1.0f;
-
-            ResizerWidget leftWidget =
-                CreateResizerWidget(
-                    "ResizeLeft_" + cabinet.name,
-                    new Vector3(0.0f, 1.0f, zAnchor),
-                    Extent.Min
-                );
-
-            ResizerWidget rightWidget =
-                CreateResizerWidget(
-                    "ResizeRight_" + cabinet.name,
-                    new Vector3(1.0f, 1.0f, zAnchor),
-                    Extent.Max
-                );
-
-            ButtonWidget middleWidget =
-                CreateKitchenWidget(
-                    m_InputCabinetSizeWidget,
-                    widgetParent: m_CabinetResizeWidgetRoot,
-                    mainCamera,
-                    cabinet
-                );
-
-            middleWidget.name = "InputCabinetSizeWidget";
-            middleWidget.normalizedTargetAnchor = new Vector3(0.5f, 1.0f, 1.0f);
-            middleWidget.onClicked += OnInputCabinetSizeClicked;
-
-            return (leftWidget, middleWidget, rightWidget);
-
-            /// <summary>
-            ///     Create a resizer for a cabinet.
-            /// </summary>
-            ResizerWidget CreateResizerWidget(string name, Vector3 anchor, Extent affectExtent)
-            {
-                ResizerWidget resizer =
-                    CreateKitchenWidget(
-                        m_ResizeCabinetWidgetPrefab,
-                        m_CabinetResizeWidgetRoot,
-                        mainCamera,
-                        cabinet
-                    );
-
-                resizer.name = name;
-                resizer.normalizedTargetAnchor = anchor;
-                resizer.affectExtent = affectExtent;
-                resizer.onResizeBegin += OnCabinetResizeBegin;
-                resizer.onResizeEnd += OnCabinetResizeEnd;
-                resizer.onResized += OnCabinetResizedByWidget;
-
-                return resizer;
-            }
-        }
-
-        protected ResizerWidget CreateCabinetResizer(Cabinet cabinet, Camera mainCamera)
-        {
-            ResizerWidget resizer =
-                Instantiate(
-                    m_ResizeCabinetWidgetPrefab,
-                    parent: m_CabinetResizeWidgetRoot
-                );
-
-            resizer.target = cabinet;
-            resizer.worldCamera = mainCamera;
-            resizer.onResizeBegin += OnCabinetResizeBegin;
-            resizer.onResizeEnd += OnCabinetResizeEnd;
-            resizer.onResized += OnCabinetResizedByWidget;
-
-            return resizer;
-        }
-
-        protected void RecreateTickerWidgets()
-        {
-            // Remove the old widgets
-            foreach (Transform child in m_TickerDimensionsRoot)
-            {
-                Destroy(child.gameObject);
-            }
-
-            // Create new ticker widgets for each cabinet span that can change.
-            if (!m_CurrentCabinetLayout)
-            {
-                return;
-            }
-
-            foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
-            {
-                foreach (ElementIndex<Cabinet> i in span.cabinets)
-                {
-                    Cabinet cabinet = i.element;
-
-                    if (!cabinet.isResizable && !cabinet.canHaveProducts)
-                    {
-                        continue;
-                    }
-
-                    CabinetTickerWidget widget =
-                        Instantiate(
-                            m_TickerDimensionsPrefab,
-                            m_TickerDimensionsRoot
-                        );
-
-                    widget.targetCabinetSpan = span.index;
-                    widget.RefreshLabel();
-
-                    // Skip to the next span.
-                    break;
-                }
-            }
-        }
-
         protected bool GetCenterOfTargetGroup(out Vector3 targetWorldCenter)
         {
             targetWorldCenter = Vector3.zero;
@@ -4141,185 +2850,9 @@ namespace KitchenDesign
             }
         }
 
-        /// <summary>
-        ///     This function is intended to be called when a product is
-        ///     dragged by the user. It handles snapping the product laterally
-        ///     to the center of other products, snapping the product to 1/8"
-        ///     increments and constraining the occupant to the size of the
-        ///     cabinet.
-        /// </summary>
-        /// <param name="occupiableVolume">
-        ///     The volume the occupant is being moved into/within.
-        /// </param>
-        /// <param name="draggedOccupant">
-        ///     The occupant being dragged. The occupant is not required to be
-        ///     an occupant of <paramref name="occupiableVolume"/>.
-        /// </param>
-        /// <param name="volumeLocalDragPositionX">
-        ///     The x-position of the user's cursor relative to <paramref
-        ///     name="occupiableVolume"/>'s local-space. I.e., the distance in
-        ///     meters that the cursor is along the volume's local x-axis.
-        /// </param>
-        /// <returns>
-        ///     The calculated new <see cref="Occupant.metersFromCabinetMinX"/>
-        ///     value for the dragged product.
-        /// </returns>
-        protected float DoDraggedOccupantSnapping(OccupiableVolume occupiableVolume, Occupant draggedOccupant, float volumeLocalDragPositionX)
-        {
-            float productWidthInMeters =
-                occupiableVolume.CalculateOccupancyCuboidForOccupant(
-                    draggedOccupant,
-                    overridePositionInVolumeX: 0.0f
-                ).width;
-
-            // Calculate the product's position relative to the cursor so it is
-            // horizontally centered on the cursor
-            float occupantMetersFromVolumeMinX =
-                volumeLocalDragPositionX - (productWidthInMeters * 0.5f);
-
-            // Try to snap the occupant to the center of any nearby products
-            occupantMetersFromVolumeMinX =
-                SnapOccupantToOtherOccupantCenters(
-                    occupiableVolume,
-                    draggedOccupant,
-                    occupantMetersFromVolumeMinX,
-                    productWidthInMeters,
-                    maxSnapDistanceInMeters: 4.0f * Units.Inches2Meters,
-                    out Occupant snappedTo
-                );
-
-            if (!snappedTo)
-            {
-                // The product didn't snap to any nearby products so force it
-                // to snap in 1/8" increments
-                occupantMetersFromVolumeMinX =
-                    SnapOccupantToVolumeIncrement(occupantMetersFromVolumeMinX);
-            }
-
-            // Ensure it's within the cabinet's bounds
-            Cuboid occupiableCuboid = occupiableVolume.occupiableCuboid;
-
-            OrientedBounds bounds =
-                new OrientedBounds(
-                    new Bounds(occupiableCuboid.center, occupiableCuboid.size),
-                    occupiableVolume.GetTransform().worldToLocalMatrix
-                );
-
-            bounds.Draw(Color.red, duration: 3.0f, drawX: true);
-
-            return Mathf.Clamp(occupantMetersFromVolumeMinX, occupiableCuboid.xMin, occupiableCuboid.xMax - productWidthInMeters);
-        }
-
-        /// <summary>
-        /// Snap the point to a 1/8" increment. This is intended to be used
-        /// when a player drags or positions a product. The goal is to simplify
-        /// the measurements that are displayed in the plan photos.
-        /// </summary>
-        protected float SnapOccupantToVolumeIncrement(float metersFromVolumeMinX)
-        {
-            if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
-            {
-                return Mathf.Round(metersFromVolumeMinX * Units.Meters2Centimeters) * Units.Centimeters2Meters;
-            }
-
-            // Snap to nearest 1/8"
-            return
-                (float)ImperialUnit.FromTotalMeters(metersFromVolumeMinX)
-                    .RoundToNearestDivision(8).totalMeters;
-        }
-
-        /// <summary>
-        ///     Try to snap an occupant to the horizontal center of a nearby
-        ///     occupant.
-        ///     <br /><br />
-        ///
-        ///     This is intended to be called when a product is being dragged
-        ///     by the user. Snapping to the center line of nearby products is
-        ///     usually what a user wants.
-        /// </summary>
-        /// <param name="metersFromVolumeMinX">
-        /// </param>
-        /// <param name="occupiableVolume">
-        /// </param>
-        /// <param name="productWidthInMeters">
-        /// </param>
-        /// <param name="draggedOccupant">
-        /// </param>
-        /// <param name="maxSnapDistanceInMeters">
-        ///     The maximum horizontal distance in meters that <paramref
-        ///     name="occupant"/> may be from another occupant's center line and
-        ///     still snap.
-        /// </param>
-        /// <param name="snappedTo">
-        ///     Output argument. If a product was near enough to be snapped to,
-        ///     this will be set to the product that was chosen. If no suitable
-        ///     snap occupant was found, this will be <see langword="null"/>.
-        /// </param>
-        /// <returns></returns>
-        protected float SnapOccupantToOtherOccupantCenters(
-            OccupiableVolume    occupiableVolume,
-            Occupant            draggedOccupant,
-            float               metersFromVolumeMinX,
-            float               productWidthInMeters,
-            float               maxSnapDistanceInMeters,
-            out Occupant        snappedTo)
-        {
-            snappedTo = null;
-
-            // Get the center point of the dragged product. This will be
-            // compared to other product's center position
-            float centerPositionMetersFromVolumeMinX =
-                metersFromVolumeMinX + productWidthInMeters * 0.5f;
-
-            // Distance from the nearest snap position
-            float closestCenterDistance = float.MaxValue;
-
-            foreach (Occupant otherOccupant in occupiableVolume.occupants)
-            {
-                if (draggedOccupant == otherOccupant)
-                {
-                    // Skip our self
-                    continue;
-                }
-
-                Cuboid otherOccupantSize =
-                    occupiableVolume.CalculateOccupancyCuboidForOccupant(otherOccupant);
-
-                float otherCenterPositionMetersFromCabinetMinX =
-                    otherOccupant.metersFromVolumeMinX + (otherOccupantSize.width * 0.5f);
-
-                float horizontalDistanceInMeters =
-                    Mathf.Abs(otherCenterPositionMetersFromCabinetMinX - centerPositionMetersFromVolumeMinX);
-
-                if (horizontalDistanceInMeters < Mathf.Min(maxSnapDistanceInMeters, closestCenterDistance))
-                {
-                    // The other occupant is close enough to snap to
-                    snappedTo = otherOccupant;
-
-                    closestCenterDistance = horizontalDistanceInMeters;
-
-                    metersFromVolumeMinX =
-                        otherCenterPositionMetersFromCabinetMinX - (productWidthInMeters * 0.5f);
-                }
-            }
-
-            return metersFromVolumeMinX;
-        }
-
         // ====================================================================
         // Static functions
         // ====================================================================
-
-        static WidgetType CreateKitchenWidget<WidgetType>(WidgetType widgetPrefab, Transform widgetParent, Camera eventCamera, OccupiableVolume target)
-            where WidgetType : KitchenWidget
-        {
-            WidgetType widget = Instantiate(widgetPrefab, widgetParent);
-
-            widget.worldCamera = eventCamera;
-            widget.target = target;
-
-            return widget;
-        }
 
         // =====================================================================
         // Inspector-serialized fields
@@ -4444,18 +2977,6 @@ namespace KitchenDesign
         private readonly KitchenCutoutClipping m_CutoutClipping = new KitchenCutoutClipping();
 
         private CabinetLayout m_CurrentCabinetLayout;
-        private GameObject m_CurrentHighlightObject;
-
-        protected Material m_PrimaryHighlightMaterial = null;
-        protected Material m_SecondaryHighlightMaterial = null;
-
-        /// <summary>
-        ///     The cabinet volume currently being resized. This can be a <see
-        ///     cref="Cabinet"/> or a <see cref="CabinetShelf"/> (or <see
-        ///     langword="null"/> to indicate no volume is being resized).
-        /// </summary>
-        private OccupiableVolume m_VolumeBeingResized;
-        private Occupant m_ProductBeingDragged;
 
 
         // Player's kitchen customizations:
@@ -4481,15 +3002,12 @@ namespace KitchenDesign
         private readonly KitchenSelections _selections = new KitchenSelections();
         private KitchenSaveWriter _saveWriter;
         private KitchenSaveReader _saveReader;
+        private KitchenInteractionState _interaction;
+        private KitchenWidgetsControl _widgets;
+        private KitchenMaterialControl _materials;
+        private OccupantDragControl _drag;
 
         private bool m_IsUpdatingCabinetHeightTransitions;
-
-        /// <summary>
-        ///     A reference to the last drag task that was started. This is
-        ///     used to prevent more than one OnOccupantDragged awaitables from
-        ///     running at the same time.
-        /// </summary>
-        private UniTask? m_LastOccupantDraggedTask = default;
 
 
         // =====================================================================
