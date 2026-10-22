@@ -51,7 +51,8 @@ client names; never copy it into a repo.
   `GeminiBaseline/visualscensus-latest.txt` and prints its hash. Types are found by name, so it
   works before and after the `…SO` renames. Compare the file with an earlier copy (`cmp`) after
   any change to the visual types; the reference before area 3 is `visualscensus-before-B3.txt`
-  (901 entries, hash `E3B8044CE6426AA5`).
+  (901 entries, hash `D72B3E9CB18746DF`). The output is Unicode-normalised (NFC): two
+  content addresses flip between composed and decomposed "è" in memory (CLAUDE.md, Gotchas).
 - `runall.sh` and `menucheck.sh` don't swap the app profile. Before running them: hash and back
   up `Resources/AppProfile.asset` and every `Resources/*/FallbackJSON` folder, then put in the
   committed profile (`git show HEAD:Assets/AssetsMelcher/Resources/AppProfile.asset`, Gemini) and

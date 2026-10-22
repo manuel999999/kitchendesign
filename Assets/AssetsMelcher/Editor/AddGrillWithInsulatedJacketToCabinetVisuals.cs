@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
     using System.Linq;
     using UnityEngine;
     using UnityEditor;
@@ -47,7 +48,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisualInfo productVisualInfo = productVisualContent.editorOnlyVisualInfo;
+                ProductVisualInfoSO productVisualInfo = productVisualContent.editorOnlyVisualInfo;
 
                 if (!productVisualInfo ||
                     productVisualInfo.runtimePrefabCategory != ProductCategorySpecific.CabinetSection ||

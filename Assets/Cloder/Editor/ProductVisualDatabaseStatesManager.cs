@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -27,7 +28,7 @@ namespace KitchenDesign
             ShowDatabase(null);
         }
 
-        public static void ShowDatabase(ProductVisualDatabase database)
+        public static void ShowDatabase(ProductVisualDatabaseSO database)
         {
             ProductVisualDatabaseStatesManager window =
                 GetWindow<ProductVisualDatabaseStatesManager>(WINDOW_TITLE);
@@ -42,7 +43,7 @@ namespace KitchenDesign
             window.Show();
         }
 
-        public void SetDatabase(ProductVisualDatabase database)
+        public void SetDatabase(ProductVisualDatabaseSO database)
         {
             m_Database = database;
             m_DatabaseField?.SetValueWithoutNotify(database);
@@ -75,7 +76,7 @@ namespace KitchenDesign
             VisualElement root = rootVisualElement;
 
             m_DatabaseField = new ObjectField("Database");
-            m_DatabaseField.objectType = typeof(ProductVisualDatabase);
+            m_DatabaseField.objectType = typeof(ProductVisualDatabaseSO);
             m_DatabaseField.allowSceneObjects = false;
             m_DatabaseField.SetValueWithoutNotify(m_Database);
             m_DatabaseField.RegisterValueChangedCallback(OnDatabaseChanged);
@@ -213,7 +214,7 @@ namespace KitchenDesign
 
         private void OnDatabaseChanged(ChangeEvent<UnityEngine.Object> changeEvent)
         {
-            m_Database = changeEvent.newValue as ProductVisualDatabase;
+            m_Database = changeEvent.newValue as ProductVisualDatabaseSO;
 
             Refresh();
         }
@@ -293,7 +294,7 @@ namespace KitchenDesign
                 return;
             }
 
-            foreach (ProductVisual visual in m_Database.sourceEntries)
+            foreach (ProductVisualSO visual in m_Database.sourceEntries)
             {
                 if (!ProductVisualDatabaseEntryFile.TryGetEntry(visual, out Entry entry))
                 {
@@ -589,12 +590,12 @@ namespace KitchenDesign
                 }
             }
 
-            List<ProductVisual> visuals = new ();
+            List<ProductVisualSO> visuals = new ();
             List<string> skippedNames = new ();
 
             foreach (Entry entry in state.entries)
             {
-                ProductVisual visual = ProductVisualDatabaseEntryFile.LoadVisual(entry.guid);
+                ProductVisualSO visual = ProductVisualDatabaseEntryFile.LoadVisual(entry.guid);
 
                 if (visual)
                 {
@@ -674,7 +675,7 @@ namespace KitchenDesign
             }
         }
 
-        [SerializeField] private ProductVisualDatabase m_Database = default;
+        [SerializeField] private ProductVisualDatabaseSO m_Database = default;
 
         private readonly List<Entry> m_CurrentEntries = new ();
         private readonly HashSet<string> m_CurrentGuids = new ();

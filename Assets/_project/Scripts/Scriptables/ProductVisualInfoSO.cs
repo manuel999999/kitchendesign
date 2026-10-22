@@ -1,41 +1,18 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Serializables;
     using System;
     using UnityEngine;
 
-    /// <summary>
-    ///     Lightweight product visual data that remains loaded at all times.
-    ///     Mainly, this separates plain-old-data from the heavier mesh and
-    ///     texture data.
-    ///     <br /><br />
-    ///
-    ///     See <see cref="ProductVisualContent"/> for the heavy content.
-    /// </summary>
     [CreateAssetMenu(fileName ="", menuName = "Melcher Studios/Pro-Fit/Product Visual Info")]
-    public class ProductVisualInfo : MelcherScriptableObject
+    public class ProductVisualInfoSO : MelcherScriptableObject
     {
-        // ====================================================================
-        // Properties
-        // ====================================================================
-
         public string id => m_Id;
         public Sprite thumbnail => m_Thumbnail;
 
-        /// <summary>
-        ///     This is a more specific categorization of the product that is
-        ///     intended to be used to make edits to the runtime product visual
-        ///     prefabs, without needing to know anything about the associated
-        ///     <see cref="ProductInfo"/>s.
-        ///     <br /><br />
-        ///
-        ///     This differs from <see cref="ProductInfo.category"/> because it
-        ///     will not change (unlike a product info's category which is set
-        ///     by the user in the dashboard) and provides much more granular
-        ///     sorting (e.g., the fridge category).
-        /// </summary>
         public ProductCategorySpecific runtimePrefabCategory => m_RuntimePrefabCategory;
 
         public ProductAnchor anchor => m_Anchor;
@@ -94,7 +71,7 @@ namespace KitchenDesign
             get => m_ProductCategoriesAllowedInSection;
 #if UNITY_EDITOR
             set => m_ProductCategoriesAllowedInSection = value;
-#endif  // if UNITY_EDITOR
+#endif
         }
 
         public float forcedCabinetCuboidDepthInMeters => m_ForcedCabinetCuboidDepthInMeters;
@@ -103,17 +80,6 @@ namespace KitchenDesign
         public string sectionDoorStyleDisplayName => m_SectionDoorStyleDisplayName;
         public float sectionEndPanelSizeInches => m_SectionEndPanelSizeInches;
 
-        // ====================================================================
-        // Methods
-        // ====================================================================
-
-        /// <summary>
-        ///     Check if a product category is allowed to fit in this cabinet
-        ///     section. This does not check if the object invoking the
-        ///     function is actually a cabinet. Intended to make it easier to
-        ///     work with the MelcherStableEnum array that is used for
-        ///     <see cref="m_ProductCategoriesAllowedInSectionSpecificStable"/>.
-        /// </summary>
         public bool IsCategoryAllowedInSection(ProductCategorySpecific category)
         {
             foreach (MelcherStableEnum<ProductCategorySpecific> allowed in m_ProductCategoriesAllowedInSection)
@@ -140,10 +106,6 @@ namespace KitchenDesign
             return false;
         }
 
-        // ====================================================================
-        // Fields
-        // ====================================================================
-
         [Tooltip("The identifier for the visual. This is a string that " +
             "ProductInfo's (entered in the server backend) can reference to " +
             "dictate how they are displayed in-app.")]
@@ -164,7 +126,6 @@ namespace KitchenDesign
         [SerializeField]
         private MelcherStableEnum<ProductCategorySpecific> m_RuntimePrefabCategory;
 
-        // --------------------------------------------------------------------
         [Header("Occupant")]
 
         [Tooltip("Defines where the product attaches/anchors to the cabinet.")]
@@ -215,9 +176,6 @@ namespace KitchenDesign
         [Tooltip("If true, this product's material will match the current " +
             "cabinet material (or kitchen highlight if the kitchen is " +
             "selected).")]
-        // TODO: Remove this? We now look for special materials assigned to the
-        //       original prefab and replace those with the cabinet material.
-        //       Still looks to be used.
         [SerializeField]
         private bool m_UseCabinetMaterial;
 
@@ -245,7 +203,6 @@ namespace KitchenDesign
         [SerializeField]
         private bool m_IsCountertopOven;
 
-        // --------------------------------------------------------------------
         [Header("Finish")]
 
         [Tooltip("If a product in the backend, belonging to the flooring " +
@@ -255,7 +212,6 @@ namespace KitchenDesign
         [SerializeField]
         private MelcherStableEnum<FlooringType> m_FlooringType = new (FlooringType.Wood);
 
-        // --------------------------------------------------------------------
         [Header("Section")]
 
         [SerializeField]
@@ -370,7 +326,6 @@ namespace KitchenDesign
         [SerializeField]
         private string m_BrandCatalogName;
 
-        // --------------------------------------------------------------------
         [Header("Section Door")]
 
         [Tooltip("If this is a section door, this field is the name of the " +
@@ -388,11 +343,7 @@ namespace KitchenDesign
         [SerializeField]
         protected float m_SectionEndPanelSizeInches = default;
 
-
 #if UNITY_EDITOR
-        // ====================================================================
-        // Editor-only
-        // ====================================================================
 
         public void EditorOnlySetId(string id)
         {
@@ -441,9 +392,6 @@ namespace KitchenDesign
             public const string Thumbnail = nameof(m_Thumbnail);
         }
 
-#endif  // if UNITY_EDITOR
-
-    }   // class ProductVisualInfo
-
-}   // namespace KitchenDesign
-
+#endif
+    }
+}

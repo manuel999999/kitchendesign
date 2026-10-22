@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;
@@ -293,7 +294,7 @@ namespace KitchenDesign
 
         public Cuboid countertopCuboid => m_Countertop ? m_Countertop.cuboid : default;
 
-        public ProductVisual cabinetSectionVisual => m_CabinetSectionVisual;
+        public ProductVisualSO cabinetSectionVisual => m_CabinetSectionVisual;
 
         /// <inheritdoc cref="m_CabinetSectionVisualPrefab"/>
         public ProductVisualContent cabinetSectionVisualPrefab => m_CabinetSectionVisualPrefab;
@@ -1675,7 +1676,7 @@ namespace KitchenDesign
             }
         }
 
-        public override bool CanContainProduct(ProductInfo productInfo, ProductVisualInfo productVisualInfo, ProductVisualContent productVisualContent)
+        public override bool CanContainProduct(ProductInfo productInfo, ProductVisualInfoSO productVisualInfo, ProductVisualContent productVisualContent)
         {
             bool isProductAllowed = m_CanHaveProducts;
 
@@ -1683,7 +1684,7 @@ namespace KitchenDesign
                 m_CabinetSectionProductInfo != null &&
                 !productVisualInfo.ignoreCabinetProductWhitelist)
             {
-                ProductVisual cabinetVisual =
+                ProductVisualSO cabinetVisual =
                     kitchen.productVisualDatabase.FindRuntimeVisualByID(
                         m_CabinetSectionProductInfo.visualId
                     );
@@ -2041,7 +2042,7 @@ namespace KitchenDesign
                     // Allow custom cabinet's material to be overwritten when they
                     // are not selected.
 
-                    ProductVisual cabinetSectionVisual =
+                    ProductVisualSO cabinetSectionVisual =
                         kitchen.productVisualDatabase.FindRuntimeVisualByID(
                             cabinetSectionProductInfo.visualId
                         );
@@ -2189,7 +2190,7 @@ namespace KitchenDesign
             }
         }
 
-        public void SetCabinetSectionProductVisualPrefab(ProductVisual cabinetSectionVisual, ProductVisualContent cabinetSectionVisualPrefab)
+        public void SetCabinetSectionProductVisualPrefab(ProductVisualSO cabinetSectionVisual, ProductVisualContent cabinetSectionVisualPrefab)
         {
             m_CabinetSectionVisual = cabinetSectionVisual;
             m_CabinetSectionVisualPrefab = cabinetSectionVisualPrefab;
@@ -2209,7 +2210,7 @@ namespace KitchenDesign
         /// </param>
         public void InstantiateCabinetModel(
             BrandCatalog brandCatalog,
-            ProductVisualInfo cabinetDoorVisualInfo,
+            ProductVisualInfoSO cabinetDoorVisualInfo,
             ProductVisualContent cabinetDoorVisualPrefab,
             float sectionLengthInMeters)
         {
@@ -2525,7 +2526,7 @@ namespace KitchenDesign
         ///     This function does not update the materials of the created
         ///     cabinet door.
         /// </summary>
-        public void RemakeCabinetDoor(ProductVisualInfo cabinetDoorVisualInfo, ProductVisualContent cabinetDoorVisualPrefab)
+        public void RemakeCabinetDoor(ProductVisualInfoSO cabinetDoorVisualInfo, ProductVisualContent cabinetDoorVisualPrefab)
         {
             if (m_CabinetDoorInstance)
             {
@@ -2604,7 +2605,7 @@ namespace KitchenDesign
                 return;
             }
 
-            ProductVisual plungeProductVisual =
+            ProductVisualSO plungeProductVisual =
                 kitchen.productVisualDatabase.FindRuntimeVisualByID(
                     plungeProductInfo.visualId
                 );
@@ -2940,7 +2941,7 @@ namespace KitchenDesign
         /// <summary>
         ///     The product visual that was used to create this cabinet.
         /// </summary>
-        protected ProductVisual m_CabinetSectionVisual;
+        protected ProductVisualSO m_CabinetSectionVisual;
 
         /// <summary>
         ///     The prefab that was used to instantiate <see

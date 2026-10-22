@@ -599,7 +599,7 @@ namespace KitchenDesign.Server
                 }
 
                 string outPath =
-                    ProFitUtility.Editor.OverwriteSpecificLogFile(
+                    Utility.LogFilesForEditor.Overwrite(
                         "issues-products.md",
                         stringBuilder.ToString()
                     );
@@ -1028,7 +1028,7 @@ namespace KitchenDesign.Server
                 }
 
                 string outPath =
-                    ProFitUtility.Editor.OverwriteSpecificLogFile(
+                    Utility.LogFilesForEditor.Overwrite(
                         "issues-cabinets.md",
                         stringBuilder.ToString()
                     );

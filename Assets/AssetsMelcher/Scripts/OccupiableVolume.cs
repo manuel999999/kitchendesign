@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -275,7 +277,7 @@ namespace KitchenDesign
         /// <param name="productInfo"></param>
         /// <param name="productVisual"></param>
         /// <returns></returns>
-        public abstract bool CanContainProduct(ProductInfo productInfo, ProductVisualInfo productVisualInfo, ProductVisualContent productVisualContent);
+        public abstract bool CanContainProduct(ProductInfo productInfo, ProductVisualInfoSO productVisualInfo, ProductVisualContent productVisualContent);
 
         /// <summary>
         ///     Called when the user attempts to resize a cuboid by dragging
@@ -369,7 +371,7 @@ namespace KitchenDesign
         /// </summary>
         public Cuboid CalculateOccupancyCuboidForProductInfo(
             ProductInfo     productInfo,
-            ProductVisual productVisual,
+            ProductVisualSO productVisual,
             ProductVisualContent productVisualPrefab,
             float?          positionInVolumeX = null,
             float?          positionInVolumeY = null,
@@ -1871,7 +1873,7 @@ namespace KitchenDesign
         public async UniTask<Occupant> TryInstantiateOccupantAt(
             bool                        userInitiated,
             ProductInfo                 productInfo,
-            ProductVisual               productVisual,
+            ProductVisualSO               productVisual,
             ProductVisualContent        productVisualPrefab,
             InstantiateOccupantHandler  productInstantiator,
             Cuboid?                     backingOccupancyInWorldSpace,
@@ -1905,7 +1907,7 @@ namespace KitchenDesign
 
         public async UniTask<(Occupant, VolumeOccupantResult)> TryInstantiateOccupantCentered(
             ProductInfo                 productInfo,
-            ProductVisual               productVisual,
+            ProductVisualSO               productVisual,
             ProductVisualContent        productVisualPrefab,
             InstantiateOccupantHandler  productInstantiator,
             Cuboid?                     backingOccupancyInWorldSpace)
@@ -1995,7 +1997,7 @@ namespace KitchenDesign
         /// </summary>
         public async UniTask<(Occupant newOccupant, VolumeOccupantResult result)> TryInstantiateOccupantAnywhere(
             ProductInfo                 productInfo,
-            ProductVisual               productVisual,
+            ProductVisualSO               productVisual,
             ProductVisualContent        productVisualPrefab,
             InstantiateOccupantHandler  productInstantiator,
             Cuboid?                     backingCuboidInWorldSpace)
@@ -2040,7 +2042,7 @@ namespace KitchenDesign
         /// </summary>
         public bool CanContainAndFitProductAt(
             ProductInfo     productInfo,
-            ProductVisual productVisual,
+            ProductVisualSO productVisual,
             ProductVisualContent productVisualPrefab,
             Cuboid?         backingOccupancyInWorldSpace,
             float           metersFromVolumeMinX,
@@ -2148,7 +2150,7 @@ namespace KitchenDesign
         /// </summary>
         public bool CanAddOccupantAnywhere(
             ProductInfo                 productInfo,
-            ProductVisual               productVisual,
+            ProductVisualSO               productVisual,
             ProductVisualContent        productVisualPrefab,
             Cuboid?                     backingOccupancyInWorldSpace,
             out float                   metersFromVolumeMinX,
@@ -2462,7 +2464,7 @@ namespace KitchenDesign
         public async UniTask<Occupant> InstantiateAndInsertOccupantAt(
             bool                    userInitiated,
             ProductInfo             productInfo,
-            ProductVisual           productVisual,
+            ProductVisualSO           productVisual,
             ProductVisualContent    productVisualPrefab,
             InstantiateOccupantHandler productInstantiator,
             float                   volumePositionX,
@@ -2494,7 +2496,7 @@ namespace KitchenDesign
         /// </summary>
         protected async UniTask<Occupant> InstantiateOccupant(
             ProductInfo                 productInfo,
-            ProductVisual  productVisual,
+            ProductVisualSO  productVisual,
             ProductVisualContent         productVisualPrefab,
             InstantiateOccupantHandler  instantiateProduct)
         {
@@ -2856,7 +2858,7 @@ namespace KitchenDesign
 
         public delegate UniTask<Occupant> InstantiateOccupantHandler(
             ProductInfo info,
-            ProductVisual productVisual,
+            ProductVisualSO productVisual,
             ProductVisualContent productVisualPrefab
         );
 

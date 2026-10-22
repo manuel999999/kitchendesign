@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
 
@@ -143,7 +145,7 @@ namespace KitchenDesign
         // Methods
         // =====================================================================
 
-        public override bool CanContainProduct(ProductInfo productInfo, ProductVisualInfo productVisualInfo, ProductVisualContent productVisualContent)
+        public override bool CanContainProduct(ProductInfo productInfo, ProductVisualInfoSO productVisualInfo, ProductVisualContent productVisualContent)
         {
             // Limit shelves to containing only burners.
             return productInfo.category == ProductCategory.Burner;

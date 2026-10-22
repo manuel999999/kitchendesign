@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.AddressableContent;
     using MEC;
     using System;
     using System.Collections;
@@ -44,7 +46,7 @@ namespace KitchenDesign
         /// <param name="database">
         ///     The database to display.
         /// </param>
-        public static void ShowDatabase(ProductVisualDatabase database)
+        public static void ShowDatabase(ProductVisualDatabaseSO database)
         {
             ProductVisualDatabaseManager window =
                 GetWindow<ProductVisualDatabaseManager>("Product Visual Database");
@@ -60,7 +62,7 @@ namespace KitchenDesign
         /// <summary>
         ///     Reset the window to display the database.
         /// </summary>
-        public void SetDatabase(ProductVisualDatabase database)
+        public void SetDatabase(ProductVisualDatabaseSO database)
         {
             //// These two lines seems to have fixed an issue where database
             //// entries would break - point to invalid data - after their model
@@ -266,7 +268,7 @@ namespace KitchenDesign
                 // Status
                 if (m_DisplayedData != null && m_DisplayedData[i])
                 {
-                    ProductVisual v = m_DisplayedData[i];
+                    ProductVisualSO v = m_DisplayedData[i];
                     ProductVisualContent content = v.contentAddress.editorOnlyCachedAsset;
 
                     rowVisualPrefab         = v;
@@ -379,7 +381,7 @@ namespace KitchenDesign
                     return haystack != null && !haystack.Contains(needle, ComparisonMode);
                 }
 
-                foreach (ProductVisual entry in m_Database.sourceEntries)
+                foreach (ProductVisualSO entry in m_Database.sourceEntries)
                 {
                     if (!entry)
                     {
@@ -441,7 +443,7 @@ namespace KitchenDesign
             else
             {
                 // Filter out products that are good (i.e. have no issues)
-                foreach (ProductVisual entry in m_Database.sourceEntries)
+                foreach (ProductVisualSO entry in m_Database.sourceEntries)
                 {
                     if (entry && m_SearchStatusFilter.HasFlag(entry.contentAddress.editorOnlyCachedAsset.editorSetupStatus))
                     {
@@ -552,9 +554,9 @@ namespace KitchenDesign
             }
         }
 
-        private ProductVisual RowEventToRowData(EventBase eventBase, out VisualElement caller, out int dataIndex)
+        private ProductVisualSO RowEventToRowData(EventBase eventBase, out VisualElement caller, out int dataIndex)
         {
-            ProductVisual productVisual = null;
+            ProductVisualSO productVisual = null;
 
             caller = (VisualElement)eventBase.currentTarget;
 
@@ -577,9 +579,9 @@ namespace KitchenDesign
             try
             {
                 string[] guids =
-                    ProFitUtility.Editor.FindAllAssetGuidsInFolder(
-                        assetSearchFilter,
-                        projectRelativeFolderPath
+                    AssetDatabase.FindAssets(
+                        filter: assetSearchFilter,
+                        searchInFolders: new[] { projectRelativeFolderPath }
                     );
 
                 for (int i = 0; i < guids.Length; ++i)
@@ -624,7 +626,7 @@ namespace KitchenDesign
 
             HashSet<UnityEngine.Object> objectsInUse = new ();
 
-            foreach (ProductVisual entry in m_Database.sourceEntries)
+            foreach (ProductVisualSO entry in m_Database.sourceEntries)
             {
                 ProductVisualContent content = entry.contentAddress.editorOnlyCachedAsset;
 
@@ -679,9 +681,9 @@ namespace KitchenDesign
             try
             {
                 string[] guids =
-                    ProFitUtility.Editor.FindAllAssetGuidsInFolder(
-                        assetSearchFilter,
-                        projectRelativeFolderPath
+                    AssetDatabase.FindAssets(
+                        filter: assetSearchFilter,
+                        searchInFolders: new[] { projectRelativeFolderPath }
                     );
 
                 for (int i = 0; i < guids.Length; ++i)
@@ -731,7 +733,7 @@ namespace KitchenDesign
 
             HashSet<UnityEngine.Object> objectsInUse = new ();
 
-            foreach (ProductVisual entry in m_Database.sourceEntries)
+            foreach (ProductVisualSO entry in m_Database.sourceEntries)
             {
                 ProductVisualContent content = entry.contentAddress.editorOnlyCachedAsset;
 
@@ -839,7 +841,7 @@ namespace KitchenDesign
             GetSearchField().SetValueWithoutNotify("");
             RefreshSearch();
 
-            IReadOnlyList<ProductVisual> sourceEntries = m_Database.sourceEntries;
+            IReadOnlyList<ProductVisualSO> sourceEntries = m_Database.sourceEntries;
 
             int selectIndex =
                 MelcherCommon.IndexOf(
@@ -910,7 +912,7 @@ namespace KitchenDesign
 
         private void OnRowVisualNameChanged(ChangeEvent<string> changeEvent)
         {
-            ProductVisual target =
+            ProductVisualSO target =
                 RowEventToRowData(changeEvent, out VisualElement caller, out int dataIndex);
 
             if (!target)
@@ -1003,7 +1005,7 @@ namespace KitchenDesign
 
         private void OnRowIdChanged(ChangeEvent<string> changeEvent)
         {
-            ProductVisual target =
+            ProductVisualSO target =
                 RowEventToRowData(changeEvent, out VisualElement caller, out int dataIndex);
 
             if (target)
@@ -1016,7 +1018,7 @@ namespace KitchenDesign
 
                 // Force a unique ID. Allow the ID to be empty
                 if (!string.IsNullOrEmpty(changeEvent.newValue) &&
-                    !IsProductVisualIdUnique(changeEvent.newValue, target, out ProductVisual collidesWith))
+                    !IsProductVisualIdUnique(changeEvent.newValue, target, out ProductVisualSO collidesWith))
                 {
                     error = "ID collides with " + collidesWith.name;
                     context = collidesWith;
@@ -1024,7 +1026,7 @@ namespace KitchenDesign
                 else
                 {
                     using SerializedObject serializedObject = new SerializedObject(target.info);
-                    using SerializedProperty idProperty = serializedObject.FindProperty(ProductVisualInfo.PropertyName.Id);
+                    using SerializedProperty idProperty = serializedObject.FindProperty(ProductVisualInfoSO.PropertyName.Id);
                     idProperty.stringValue = changeEvent.newValue;
                     serializedObject.ApplyModifiedProperties();
 
@@ -1048,9 +1050,9 @@ namespace KitchenDesign
             }
         }
 
-        private bool IsProductVisualIdUnique(string id, ProductVisual toIgnore, out ProductVisual collidesWith)
+        private bool IsProductVisualIdUnique(string id, ProductVisualSO toIgnore, out ProductVisualSO collidesWith)
         {
-            foreach (ProductVisual entry in m_Database.sourceEntries)
+            foreach (ProductVisualSO entry in m_Database.sourceEntries)
             {
                 if (!entry || entry == toIgnore)
                 {
@@ -1094,7 +1096,7 @@ namespace KitchenDesign
 
         private void OnRowVisualClicked(ClickEvent clickEvent)
         {
-            ProductVisual target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
+            ProductVisualSO target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
             if (target)
             {
                 MelcherEditorUtility.PingObject(target);
@@ -1111,7 +1113,7 @@ namespace KitchenDesign
 
         private void OnRowUnderlyingAssetClicked(ClickEvent clickEvent)
         {
-            ProductVisual target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
+            ProductVisualSO target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
             if (target)
             {
                 UnityEngine.Object asset =
@@ -1123,7 +1125,7 @@ namespace KitchenDesign
 
         private void OnRowVisualContentPrefabClicked(ClickEvent clickEvent)
         {
-            ProductVisual target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
+            ProductVisualSO target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
             if (target)
             {
                 UnityEngine.Object asset =
@@ -1135,7 +1137,7 @@ namespace KitchenDesign
 
         private void OnRowLightweightDataClicked(ClickEvent clickEvent)
         {
-            ProductVisual target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
+            ProductVisualSO target = RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
             if (target)
             {
                 UnityEngine.Object asset =
@@ -1147,7 +1149,7 @@ namespace KitchenDesign
 
         private void OnRowApproveModelPrefabClicked(ClickEvent clickEvent)
         {
-            ProductVisual target =
+            ProductVisualSO target =
                 RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
 
             if (target)
@@ -1160,7 +1162,7 @@ namespace KitchenDesign
             }
         }
 
-        private void ApproveModel(ProductVisual target)
+        private void ApproveModel(ProductVisualSO target)
         {
             ProductVisualContent productContent = target.contentAddress.editorOnlyCachedAsset;
 
@@ -1172,16 +1174,16 @@ namespace KitchenDesign
 
         private void OnRowAnchorChanged(ChangeEvent<Enum> changeEvent)
         {
-            ProductVisual target =
+            ProductVisualSO target =
                 RowEventToRowData(changeEvent, out VisualElement caller, out int dataIndex);
 
             if (target)
             {
-                ProductVisualInfo productVisualInfo = target.info;
+                ProductVisualInfoSO productVisualInfo = target.info;
 
                 {
                     using SerializedObject serializedObject = new SerializedObject(productVisualInfo);
-                    using SerializedProperty anchorProperty = serializedObject.FindProperty(ProductVisualInfo.PropertyName.Anchor);
+                    using SerializedProperty anchorProperty = serializedObject.FindProperty(ProductVisualInfoSO.PropertyName.Anchor);
                     anchorProperty.enumValueIndex = Convert.ToInt32(changeEvent.newValue);
                     serializedObject.ApplyModifiedProperties();
                 }
@@ -1194,7 +1196,7 @@ namespace KitchenDesign
 
         private void OnRowThumbnailClicked(ClickEvent clickEvent)
         {
-            ProductVisual target =
+            ProductVisualSO target =
                 RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
 
             if (target && target.info.thumbnail)
@@ -1212,7 +1214,7 @@ namespace KitchenDesign
         {
             if (ProductVisualThumbnailCreator.PromptLoadScreenshotScene())
             {
-                ProductVisual target =
+                ProductVisualSO target =
                     RowEventToRowData(clickEvent, out VisualElement caller, out int dataIndex);
 
                 ProductVisualThumbnailCreator.RenderScreenshot(
@@ -1373,7 +1375,7 @@ namespace KitchenDesign
             GetMultipleObjectAssetUsingPicker(
                 pickerTitle,
                 "Assets/" + ProFitEditorOptions.Get().dataRelativeProductVisualsFolder,
-                $"t:{nameof(ProductVisual)}",
+                $"t:{nameof(ProductVisualSO)}",
                 HandleSelection,
                 assetFilter: null,
                 assetPathFilter: assetPathFilter
@@ -1387,9 +1389,9 @@ namespace KitchenDesign
                     return false;
                 }
 
-                if (!(selection is ProductVisual productVisual))
+                if (!(selection is ProductVisualSO productVisual))
                 {
-                    MelcherLog.LogError($"Selection is not a {nameof(ProductVisual)}.", selection);
+                    MelcherLog.LogError($"Selection is not a {nameof(ProductVisualSO)}.", selection);
                     return false;
                 }
 
@@ -1399,7 +1401,7 @@ namespace KitchenDesign
 
                     using SerializedProperty entriesProperty =
                         serializedObject.FindProperty(
-                            ProductVisualDatabase.SourceEntriesMemberName
+                            ProductVisualDatabaseSO.SourceEntriesMemberName
                         );
 
                     int arraySize = entriesProperty.arraySize;
@@ -1423,7 +1425,7 @@ namespace KitchenDesign
             GetObjectAssetUsingPicker(
                 "Select Visual",
                 "Assets/" + ProFitEditorOptions.Get().dataRelativeProductVisualsFolder,
-                $"t:{nameof(ProductVisual)}",
+                $"t:{nameof(ProductVisualSO)}",
                 HandleSelection,
                 assetFilter: null
             );
@@ -1436,9 +1438,9 @@ namespace KitchenDesign
                     return;
                 }
 
-                if (!(selection is ProductVisual productVisual))
+                if (!(selection is ProductVisualSO productVisual))
                 {
-                    MelcherLog.LogError($"Selection is not a {nameof(ProductVisual)}.", selection);
+                    MelcherLog.LogError($"Selection is not a {nameof(ProductVisualSO)}.", selection);
                     return;
                 }
 
@@ -1448,7 +1450,7 @@ namespace KitchenDesign
 
                     using SerializedProperty entriesProperty =
                         serializedObject.FindProperty(
-                            ProductVisualDatabase.SourceEntriesMemberName
+                            ProductVisualDatabaseSO.SourceEntriesMemberName
                         );
 
                     int arraySize = entriesProperty.arraySize;
@@ -1585,8 +1587,8 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisual productVisual =
-                    AssetDatabase.LoadAssetAtPath<ProductVisual>(prefabAssetPath);
+                ProductVisualSO productVisual =
+                    AssetDatabase.LoadAssetAtPath<ProductVisualSO>(prefabAssetPath);
 
                 if (!productVisual)
                 {
@@ -1688,8 +1690,8 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisual productVisual =
-                    AssetDatabase.LoadAssetAtPath<ProductVisual>(prefabAssetPath);
+                ProductVisualSO productVisual =
+                    AssetDatabase.LoadAssetAtPath<ProductVisualSO>(prefabAssetPath);
 
                 if (!productVisual)
                 {
@@ -1771,7 +1773,7 @@ namespace KitchenDesign
             // Duplicate the selected product visual info
             //
 
-            ProductVisualInfo duplicateInfo =
+            ProductVisualInfoSO duplicateInfo =
                 Instantiate(m_LastVisualPrefabSelected.info);
 
             string duplicateInfoPath = duplicateVisualPath.Replace("^", "");
@@ -1823,7 +1825,7 @@ namespace KitchenDesign
             // Duplicate the selected product visual asset
             //
 
-            ProductVisual duplicateVisual =
+            ProductVisualSO duplicateVisual =
                 Instantiate(m_LastVisualPrefabSelected);
 
             duplicateVisual.EditorOnlySetInfo(duplicateInfo);
@@ -1935,13 +1937,13 @@ namespace KitchenDesign
 
             using SerializedProperty entriesProperty =
                 serializedObject.FindProperty(
-                    ProductVisualDatabase.SourceEntriesMemberName
+                    ProductVisualDatabaseSO.SourceEntriesMemberName
                 );
 
             int numberRemoved = 0;
 
             List<int> visualIndicesToRemove = new List<int>();
-            foreach (ProductVisual visualToRemove in m_FilteredData)
+            foreach (ProductVisualSO visualToRemove in m_FilteredData)
             {
                 if (!visualToRemove)
                 {
@@ -2033,7 +2035,7 @@ namespace KitchenDesign
 
                     using SerializedProperty entriesProperty =
                         serializedObject.FindProperty(
-                            ProductVisualDatabase.SourceEntriesMemberName
+                            ProductVisualDatabaseSO.SourceEntriesMemberName
                         );
 
                     entriesProperty.DeleteArrayElementAtIndex(productVisualSourceIndex);
@@ -2066,7 +2068,7 @@ namespace KitchenDesign
         {
             const string ToStrip = " Variant";
 
-            foreach (ProductVisual visual in m_DisplayedData)
+            foreach (ProductVisualSO visual in m_DisplayedData)
             {
                 if (!visual)
                 {
@@ -2101,7 +2103,7 @@ namespace KitchenDesign
 
         protected void FixCabinetsWithNoOccupiableHeight(DropdownMenuAction action)
         {
-            foreach (ProductVisual visual in m_Database.sourceEntries)
+            foreach (ProductVisualSO visual in m_Database.sourceEntries)
             {
                 if (!visual)
                 {
@@ -2203,8 +2205,8 @@ namespace KitchenDesign
             // Create the product visual info object.
             //
 
-            ProductVisualInfo productVisualInfo =
-                ScriptableObject.CreateInstance<ProductVisualInfo>();
+            ProductVisualInfoSO productVisualInfo =
+                ScriptableObject.CreateInstance<ProductVisualInfoSO>();
 
             productVisualInfo.name = entryName;
             productVisualInfo.EditorOnlySetId(selection.name);
@@ -2261,15 +2263,15 @@ namespace KitchenDesign
             Undo.RegisterCreatedObjectUndo(newPrefab, undoName);
 
             string contentGuid = AssetDatabase.AssetPathToGUID(contentPath);
-            ProFitAddressableEditorUtility.MakeAddressableWithGroupName(contentGuid, "ProductVisuals");
+            AddressablesForEditor.MakeAddressableWithGroupName(contentGuid, "ProductVisuals");
 
             //
             // Create the ProductVisual which binds the product
             // visual's content to its info.
             //
 
-            ProductVisual productVisual =
-                ScriptableObject.CreateInstance<ProductVisual>();
+            ProductVisualSO productVisual =
+                ScriptableObject.CreateInstance<ProductVisualSO>();
 
             productVisual.name = entryName + "^";
             productVisual.EditorOnlySetInfo(productVisualInfo);
@@ -2287,7 +2289,7 @@ namespace KitchenDesign
 
                 using SerializedProperty entriesProperty =
                     serializedObject.FindProperty(
-                        ProductVisualDatabase.SourceEntriesMemberName
+                        ProductVisualDatabaseSO.SourceEntriesMemberName
                     );
 
                 int arraySize = entriesProperty.arraySize;
@@ -2327,7 +2329,7 @@ namespace KitchenDesign
         /// </summary>
         protected void ApproveModelsOfFilteredResults()
         {
-            foreach (ProductVisual visual in m_DisplayedData)
+            foreach (ProductVisualSO visual in m_DisplayedData)
             {
                 if (visual)
                 {
@@ -2363,7 +2365,7 @@ namespace KitchenDesign
 
                 for (int i = 0; i < m_DisplayedData.Count; i++)
                 {
-                    ProductVisual visual = m_DisplayedData[i];
+                    ProductVisualSO visual = m_DisplayedData[i];
                     if (visual)
                     {
                         string productVisualAssetPath =
@@ -2411,7 +2413,7 @@ namespace KitchenDesign
         private GUIContent m_StatusRed;
 
         [SerializeField]
-        private ProductVisualDatabase m_Database = default;
+        private ProductVisualDatabaseSO m_Database = default;
 
         /// <summary>
         ///     Keeps track of the last entry the player selected. This
@@ -2421,20 +2423,20 @@ namespace KitchenDesign
         ///     searching for the product by name, selecting it, and then
         ///     clearing the selection.
         /// </summary>
-        private ProductVisual m_LastVisualPrefabSelected;
+        private ProductVisualSO m_LastVisualPrefabSelected;
 
         /// <summary>
         /// The database's entries with the search field and "exclude good
         /// entries" filters applied.
         /// </summary>
-        private List<ProductVisual> m_FilteredData = new ();
+        private List<ProductVisualSO> m_FilteredData = new ();
 
         /// <summary>
         /// The database entries that are actively being displayed. This is
         /// either <see cref="m_Database"/>'s <see cref="ProductVisualDatabase.sourceEntries"/>
         /// or <see cref="m_FilteredData"/>.
         /// </summary>
-        private IReadOnlyList<ProductVisual> m_DisplayedData;
+        private IReadOnlyList<ProductVisualSO> m_DisplayedData;
 
         private ProductVisualContent.EditorSetupStatus m_SearchStatusFilter = (ProductVisualContent.EditorSetupStatus)~0;
 

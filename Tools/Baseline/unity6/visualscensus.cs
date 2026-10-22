@@ -22,7 +22,7 @@ foreach (var v in entries)
     }
     sb.Append('\n');
 }
-string all = sb.ToString();
+string all = sb.ToString().Normalize();
 string outPath = System.Environment.GetEnvironmentVariable("HOME") + "/Documents/Unity/GeminiBaseline/visualscensus-latest.txt";
 System.IO.File.WriteAllText(outPath, all);
 var md5 = System.Security.Cryptography.MD5.Create();

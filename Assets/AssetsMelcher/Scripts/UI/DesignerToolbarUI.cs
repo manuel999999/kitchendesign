@@ -1121,7 +1121,7 @@ namespace KitchenDesign
 
             foreach (ProductInfo sectionProductInfo in cabinetsMatchingType)
             {
-                ProductVisual sectionVisual =
+                ProductVisualSO sectionVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         sectionProductInfo.visualId
                     );
@@ -1144,7 +1144,7 @@ namespace KitchenDesign
 
                 // Find the door style for this section that matches the
                 // current door style.
-                ProductVisual doorStyleVisual = null;
+                ProductVisualSO doorStyleVisual = null;
                 if (sectionVisual)
                 {
                     doorStyleVisual =
@@ -1377,7 +1377,7 @@ namespace KitchenDesign
                             }
 
                             // Find the model prefab that this cabinet section uses.
-                            ProductVisual cabinetSectionVisualPrefab =
+                            ProductVisualSO cabinetSectionVisualPrefab =
                                 m_ProductVisualDatabase.FindRuntimeVisualByID(
                                     cabinet.cabinetSectionProductInfo.visualId
                                 );
@@ -1404,7 +1404,7 @@ namespace KitchenDesign
                             string doorStyleVisualNameToFind =
                                 usedDoorStyleVisualName + "@" + kitchen.selectedDoorStyleName;
 
-                            ProductVisual replacementCabinetDoorVisual =
+                            ProductVisualSO replacementCabinetDoorVisual =
                                 MelcherCommon.Find(
                                     doorStyleInfo.visuals,
                                     x => x.info.name == doorStyleVisualNameToFind
@@ -1758,7 +1758,7 @@ namespace KitchenDesign
                 // Populate the product toolbar
                 foreach (ProductInfo productInfo in sortedProductsToDisplay)
                 {
-                    ProductVisual visual =
+                    ProductVisualSO visual =
                         m_ProductVisualDatabase.FindRuntimeVisualByID(
                             productInfo.visualId
                         );
@@ -1835,7 +1835,7 @@ namespace KitchenDesign
         {
             m_ProductBreadcrumb.productInfo = targetProductInfo;
 
-            ProductVisual visual =
+            ProductVisualSO visual =
                 m_ProductVisualDatabase.FindRuntimeVisualByID(
                     targetProductInfo.visualId
                 );
@@ -1908,7 +1908,7 @@ namespace KitchenDesign
         {
             ProductInfo productInfo = m_ProductBreadcrumb.productInfo;
 
-            ProductVisual productVisual =
+            ProductVisualSO productVisual =
                 m_ProductVisualDatabase.FindRuntimeVisualByID(
                     productInfo.visualId
                 );
@@ -2399,7 +2399,7 @@ namespace KitchenDesign
 
         [UnityEngine.Serialization.FormerlySerializedAs("m_ProductVisualCatalog")]
         [SerializeField, MelcherAssetField]
-        protected ProductVisualDatabase m_ProductVisualDatabase = null;
+        protected ProductVisualDatabaseSO m_ProductVisualDatabase = null;
 
         [Space]
 

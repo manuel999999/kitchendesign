@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -267,7 +269,7 @@ namespace KitchenDesign
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         public bool CanReplaceCabinetWithCabinetByProductInfo(
-            ProductVisualDatabase   productVisualDatabase,
+            ProductVisualDatabaseSO   productVisualDatabase,
             Cabinet                 cabinetToReplace,
             ProductInfo             possibleReplacementCabinetInfo)
         {
@@ -300,7 +302,7 @@ namespace KitchenDesign
                     return false;
             }
 
-            ProductVisual replacementCabinetVisual =
+            ProductVisualSO replacementCabinetVisual =
                 productVisualDatabase.FindRuntimeVisualByID(
                     possibleReplacementCabinetInfo.visualId
                 );
@@ -359,7 +361,7 @@ namespace KitchenDesign
                 if (neighboursNeighbourCabinet &&
                     neighboursNeighbourCabinet.cabinetSectionProductInfo != null)
                 {
-                    ProductVisual neighbourVisual =
+                    ProductVisualSO neighbourVisual =
                         productVisualDatabase.FindRuntimeVisualByID(
                             neighboursNeighbourCabinet.cabinetSectionProductInfo.visualId
                         );
@@ -1442,7 +1444,7 @@ namespace KitchenDesign
                 }
 
                 // Find the model prefab that this cabinet section will use.
-                ProductVisual cabinetSectionVisual =
+                ProductVisualSO cabinetSectionVisual =
                     kitchen.productVisualDatabase.FindRuntimeVisualByID(
                         cabinetSectionProductInfo.visualId
                     );
@@ -1469,7 +1471,7 @@ namespace KitchenDesign
                     if (cabinetSectionVisualPrefab.sectionModelPrefab)
                     {
                         // Now find the door from the currently selected door style.
-                        ProductVisual cabinetDoorVisual =
+                        ProductVisualSO cabinetDoorVisual =
                             CabinetSectionDoorUtility.FindDoorStyleVisual(
                                 kitchen.productVisualDatabase.runtimeEntries,
                                 cabinetSectionVisual,

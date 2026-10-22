@@ -2,6 +2,8 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -458,7 +460,7 @@ namespace KitchenDesign
             /// Called by the UI when the user wants to see the product's About
             /// pop-up.
             /// </summary>
-            public static Action<ProductInfo, ProductVisual>    onAboutProduct;
+            public static Action<ProductInfo, ProductVisualSO>    onAboutProduct;
 
             /// <summary>
             /// Called by the UI when the user wants to clone a product.

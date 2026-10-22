@@ -4,6 +4,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.AddressableContent;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using UnityEditor;
@@ -19,7 +21,7 @@ namespace KitchenDesign
         // Properties
         // ====================================================================
 
-        public ProductVisualInfo editorOnlyVisualInfo => m_EditorOnlyVisualInfo;
+        public ProductVisualInfoSO editorOnlyVisualInfo => m_EditorOnlyVisualInfo;
 
         /// <summary>
         ///     Only accessible in the editor. This camera is tagged as
@@ -127,7 +129,7 @@ namespace KitchenDesign
         // Methods
         // ====================================================================
 
-        public void EditorOnlySetEditorOnlyVisualInfo(ProductVisualInfo info)
+        public void EditorOnlySetEditorOnlyVisualInfo(ProductVisualInfoSO info)
         {
             m_EditorOnlyVisualInfo = info;
         }
@@ -146,7 +148,7 @@ namespace KitchenDesign
 
             string groupName = name;
 
-            AddressableEditorUtility.MakeAddressable(this, name, currentAssetPath);
+            AddressablesForEditor.MakeAddressable(this, name, currentAssetPath);
         }
 
         public void ReportErrorsInConsole()
@@ -198,7 +200,7 @@ namespace KitchenDesign
                 string visualInfoAssetPath =
                     extensionlessPath += "^.asset";
 
-                m_EditorOnlyVisualInfo = AssetDatabase.LoadAssetAtPath<ProductVisualInfo>(visualInfoAssetPath);
+                m_EditorOnlyVisualInfo = AssetDatabase.LoadAssetAtPath<ProductVisualInfoSO>(visualInfoAssetPath);
 
                 PrefabUtility.RecordPrefabInstancePropertyModifications(this);
             }
@@ -842,8 +844,8 @@ namespace KitchenDesign
             string visualInfoPath =
                     System.IO.Path.GetDirectoryName(contentPath) + "/" + content.name + ".asset";
 
-            ProductVisualInfo info =
-                AssetDatabase.LoadAssetAtPath<ProductVisualInfo>(visualInfoPath);
+            ProductVisualInfoSO info =
+                AssetDatabase.LoadAssetAtPath<ProductVisualInfoSO>(visualInfoPath);
 
             if (!info)
             {
@@ -861,7 +863,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField, MelcherReadOnlyInInspector]
-        private ProductVisualInfo m_EditorOnlyVisualInfo;
+        private ProductVisualInfoSO m_EditorOnlyVisualInfo;
 
         [SerializeField, HideInInspector]
         protected string m_PreviousFinishMaterialGuid = null;

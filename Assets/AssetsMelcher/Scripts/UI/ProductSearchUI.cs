@@ -2,6 +2,8 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using System;
     using Cysharp.Threading.Tasks;
     using TMPro;
@@ -85,7 +87,7 @@ namespace KitchenDesign
                     }
 #endif
 
-                    ProductVisual visual =
+                    ProductVisualSO visual =
                         m_ProductVisualDatabase.FindRuntimeVisualByID(
                             productInfo.visualId
                         );
@@ -96,7 +98,7 @@ namespace KitchenDesign
                         continue;
                     }
 
-                    ProductVisual doorStyleVisual = null;
+                    ProductVisualSO doorStyleVisual = null;
                     if(ProFitGlobals.appRules.RequiresBrandCatalog)
                     {
                         Kitchen kitchen = Kitchen.instance;
@@ -189,7 +191,7 @@ namespace KitchenDesign
 
         [Header(nameof(ProductSearchUI))]
         [SerializeField, MelcherAssetField]
-        protected ProductVisualDatabase m_ProductVisualDatabase = null;
+        protected ProductVisualDatabaseSO m_ProductVisualDatabase = null;
 
         [Space]
         [SerializeField] protected TMP_InputField m_SearchKeywordField = null;

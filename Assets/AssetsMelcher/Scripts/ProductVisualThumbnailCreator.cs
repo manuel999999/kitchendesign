@@ -93,7 +93,7 @@ namespace KitchenDesign
         }
 
         public static CoroutineHandle RenderScreenshot(
-            ProductVisualInfo visualInfo,
+            ProductVisualInfoSO visualInfo,
             ProductVisualContent visualContent,
             bool forceRender)
         {
@@ -104,7 +104,7 @@ namespace KitchenDesign
         }
 
         private static IEnumerator<float> RenderScreenshotRoutine(
-            ProductVisualInfo visualInfo,
+            ProductVisualInfoSO visualInfo,
             ProductVisualContent visualContent,
             bool forceRender)
         {
@@ -615,7 +615,7 @@ namespace KitchenDesign
             // Link the thumbnail to the product visual
             {
                 using SerializedObject serializedObject = new SerializedObject(target.editorOnlyVisualInfo);
-                using SerializedProperty thumbnailProperty = serializedObject.FindProperty(ProductVisualInfo.PropertyName.Thumbnail);
+                using SerializedProperty thumbnailProperty = serializedObject.FindProperty(ProductVisualInfoSO.PropertyName.Thumbnail);
                 thumbnailProperty.objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(thumbnailAssetPath);
                 serializedObject.ApplyModifiedProperties();
             }
@@ -623,7 +623,7 @@ namespace KitchenDesign
             AssetDatabase.SaveAssets();
         }
 
-        private static Transform InstantiateDoorHandle(ProductVisualInfo visualInfo, ProductVisualContent visualContent)
+        private static Transform InstantiateDoorHandle(ProductVisualInfoSO visualInfo, ProductVisualContent visualContent)
         {
             if (visualInfo.runtimePrefabCategory == ProductCategorySpecific.CabinetDoor)
             {

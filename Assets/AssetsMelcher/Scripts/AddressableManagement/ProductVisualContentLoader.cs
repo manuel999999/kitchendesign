@@ -1,6 +1,8 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Serializables;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using UnityEngine;
@@ -37,7 +39,7 @@ namespace KitchenDesign
         // Methods
         // ====================================================================
 
-        public async UniTask<ProductVisualContent> ProductVisualToContent(ProductVisual productVisual)
+        public async UniTask<ProductVisualContent> ProductVisualToContent(ProductVisualSO productVisual)
         {
             if (productVisual == null)
             {
@@ -61,7 +63,7 @@ namespace KitchenDesign
                     assetState.loadedContent.sourceContentPrefab;
         }
 
-        public bool IsProductVisualLoadingOrLoaded(ProductVisual productVisual)
+        public bool IsProductVisualLoadingOrLoaded(ProductVisualSO productVisual)
         {
             if (m_ProductVisualContentAssetStates.TryGetValue(productVisual.contentAddress, out AssetState assetState))
             {

@@ -1,6 +1,8 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     /// <summary>
     ///     This contains the results of an occupant placement attempt. I.e.,
     ///     whether a product could be added to a volume. The information
@@ -29,7 +31,7 @@ namespace KitchenDesign
 
         /// <summary>
         /// </summary>
-        public ProductVisual productVisual;
+        public ProductVisualSO productVisual;
 
         /// <summary>
         ///     The product that was trying to be inserted. It will be <see

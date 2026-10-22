@@ -5,6 +5,8 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Interfaces;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Serializables;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Linq;
@@ -542,9 +544,9 @@ namespace KitchenDesign
                 return;
             }
 
-            ProductVisual runtimeProductVisual = null;
+            ProductVisualSO runtimeProductVisual = null;
 
-            foreach (ProductVisual i in m_ProductVisualDatabase.runtimeEntries)
+            foreach (ProductVisualSO i in m_ProductVisualDatabase.runtimeEntries)
             {
                 if (i.contentAddress == address)
                 {
@@ -595,8 +597,8 @@ namespace KitchenDesign
 
                 ProFitGlobals.AddRuntimeProduct(runtimeProductInfo);
 
-                ProductVisual sourceProductVisual =
-                    ProFitUtility.FindProductVisual(
+                ProductVisualSO sourceProductVisual =
+                    Products.ProductVisualLookups.FindById(
                         m_ProductVisualDatabase.sourceEntries,
                         runtimeProductInfo.visualId
                     );
@@ -608,7 +610,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisual runtimeProductVisual =
+                ProductVisualSO runtimeProductVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         runtimeProductInfo.visualId
                     );
@@ -654,7 +656,7 @@ namespace KitchenDesign
         protected void ModifyProductInfoForAppRules(
             IAppRules           appRules,
             ProductInfo         runtimeProductInfo,
-            ProductVisualInfo   runtimeVisualInfo)
+            ProductVisualInfoSO   runtimeVisualInfo)
         {
             float? highBarTopRiserDepthInMeters = appRules.HighBarTopRiserDepthInMeters;
 
@@ -700,9 +702,9 @@ namespace KitchenDesign
         /// </summary>
         protected void ModifyProductInfoForCatalogBuildingMethod(
             ProductInfo         sourceProductInfo,
-            ProductVisualInfo   sourceVisualInfo,
+            ProductVisualInfoSO   sourceVisualInfo,
             ProductInfo         runtimeProductInfo,
-            ProductVisualInfo   runtimeVisualInfo)
+            ProductVisualInfoSO   runtimeVisualInfo)
         {
             if (runtimeProductInfo == null)
             {
@@ -713,10 +715,10 @@ namespace KitchenDesign
 
         private void ModifySmokerContentCutOutHeight(
             ProductInfo         sourceProductInfo,
-            ProductVisualInfo   sourceVisualInfo,
+            ProductVisualInfoSO   sourceVisualInfo,
             ProductVisualContent sourceVisualContent,
             ProductInfo         runtimeProductInfo,
-            ProductVisualInfo   runtimeVisualInfo,
+            ProductVisualInfoSO   runtimeVisualInfo,
             ProductVisualContent runtimeVisualContent,
             float               desiredCutOutHeightInMeters)
         {
@@ -786,7 +788,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisual runtimeProductVisual =
+                ProductVisualSO runtimeProductVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         runtimeProductInfo.visualId
                     );
@@ -940,7 +942,7 @@ namespace KitchenDesign
                             return false;
                         }
 
-                        ProductVisual potentialProductVisual =
+                        ProductVisualSO potentialProductVisual =
                             m_Kitchen.productVisualDatabase.FindRuntimeVisualByID(
                                 potentialProductInfo.visualId
                             );
@@ -1055,7 +1057,7 @@ namespace KitchenDesign
         // =====================================================================
 
         [UnityEngine.Serialization.FormerlySerializedAs("m_ProductVisualCatalog")]
-        [SerializeField] protected ProductVisualDatabase m_ProductVisualDatabase = default;
+        [SerializeField] protected ProductVisualDatabaseSO m_ProductVisualDatabase = default;
 
         // =====================================================================
         // OnValidate-serialized fields

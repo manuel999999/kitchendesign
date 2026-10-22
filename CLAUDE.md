@@ -978,6 +978,14 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   Main thread operation timed out after 5000ms" when an `eval` lands on a heavy frame (sign-in
   parsing). It adds 1 to the check scripts' error counts now and then; `menucheck.sh` lists the
   errors after sign-in so it can be told apart.
+- **Two Techobloc floor visuals have an "è" in their path, stored two ways.** The visual assets
+  hold the content address composed (U+00E8, as in the file name); the Addressables entry holds
+  it decomposed (U+0300, as macOS gives paths). `AssetAddress.OnBeforeSerialize` replaces the
+  address with the entry's whenever they differ and logs "Updating stale asset address" (2
+  warnings), once per load of those assets from disk: at editor start and after anything that
+  reloads them (a script rename of their class, for example). The asset files never change, so
+  it repeats. Harmless, but it adds 2 warnings to a run, and any comparison of addresses must
+  normalise them first.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -1054,10 +1062,39 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `ToProductCategory`, …) are in `_projectShared/Common/`.
   - `ProductVisualDatabaseEntry.uxml` names `ProductAnchor` as text
     (`KitchenDesign.Shared.Enums.ProductAnchor, KitchenDesign.Shared`).
+  - The data (B3.2). `ProductInfo` (`_project/Scripts/Server/Data/`, `KitchenDesign.Server`):
+    the server's product record. `id` is the server's insert id and the reliable key; `sku` is
+    human-readable, was the key in old saves and can change on the dashboard (hence
+    `ProductIdRemapDatabaseSO`). `baseProductId` makes a product a variant (the toolbar shows a
+    family as one button). `productSizeInMeters` is used by backings, preset-size authored
+    cabinets and products with `doLayoutUsingProductSize` (a few special cases: Fire Magic's
+    pizza oven, Blaze's griddle), which occupy their product size instead of their cut-out.
+    `doesExistInServerDashboard` is false for the editor's fake products. The copy constructor
+    makes the runtime copies, and an editor-only static constructor asserts the field count (26)
+    so a new field can't be left out of it.
+  - The visual assets, `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`):
+    `ProductVisualSO` (an info plus the address of its content prefab), `ProductVisualInfoSO`
+    (the data that stays loaded: id, thumbnail, anchor, section flags), `ProductVisualDatabaseSO`
+    (the source list; it makes a runtime clone of every visual and info, in `Awake` in builds and
+    on entering play mode in the editor, so building methods and brand catalogs can change the
+    clones and still read the originals). The asset files keep their old names
+    (`ProductVisual_<id>^.asset` for the visual, without `^` for the info and the content prefab);
+    the door lookup builds names from them (`…@<door style>^`), so those names are data. The
+    database's own note: editing prefabs from editor scripts can leave loaded prefab references
+    stale (reporting null) until reloaded, so Domain Reload stays on in play mode.
+    `ProductVisualLookups.FindById` (`_project/Scripts/Products/`) finds a visual in a given list.
+  - Addressables: `AssetAddress<T>` and `AssetAddressData` (`_project/Scripts/Serializables/`) hold
+    an address and, in the editor, the asset; unlike `AssetReferenceT` they own nothing, so
+    passing one around never raises the question of who releases the load. Addresses are asset
+    paths. `IAssetAddress` (for the drawer) and `AddressablesForEditor` (editor-only, find or
+    make an entry, create groups packed separately) are in `_project/Scripts/AddressableContent/`
+    (`KitchenDesign.AddressableContent`: a namespace ending in `.Addressables` would hide Unity's
+    `Addressables` class in our code).
   - Checked with `Tools/Baseline/unity6/visualscensus.cs` (edit mode): every source visual's
     content address and every public value of its info, written to
     `GeminiBaseline/visualscensus-latest.txt` with a hash; it finds the types by name, so it
-    works across the renames. Reference before area 3: 901 entries, hash `E3B8044CE6426AA5`.
+    works across the renames. Reference before area 3: 901 entries, hash `D72B3E9CB18746DF`
+    (output in Unicode NFC, see Gotchas).
 - **App and data assets** (B2.3 of the refactor, 2026-10-22): `AppProfileSO`, `AppOptionsSO`
   (+ its `.Editor` partial), `GroupDatabaseSO`, `ProductIdRemapDatabaseSO` in
   `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`), moved with their `.meta` so every

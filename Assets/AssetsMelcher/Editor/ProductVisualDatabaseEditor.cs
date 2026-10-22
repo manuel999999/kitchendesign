@@ -1,29 +1,30 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using UnityEngine;
     using UnityEditor;
     using System.Collections.Generic;
     using System.Linq;
 
-    [CustomEditor(typeof(ProductVisualDatabase))]
+    [CustomEditor(typeof(ProductVisualDatabaseSO))]
     public class ProductVisualDatabaseEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             if (GUILayout.Button("Open In Product Visual Database Manager"))
             {
-                ProductVisualDatabaseManager.ShowDatabase(target as ProductVisualDatabase);
+                ProductVisualDatabaseManager.ShowDatabase(target as ProductVisualDatabaseSO);
             }
 
             if (GUILayout.Button("Open In Product Visual Database States Manager"))
             {
-                ProductVisualDatabaseStatesManager.ShowDatabase(target as ProductVisualDatabase);
+                ProductVisualDatabaseStatesManager.ShowDatabase(target as ProductVisualDatabaseSO);
             }
 
             if (GUILayout.Button("Open In Product Visual Database Sets Manager"))
             {
-                ProductVisualDatabaseSetsManager.ShowDatabase(target as ProductVisualDatabase);
+                ProductVisualDatabaseSetsManager.ShowDatabase(target as ProductVisualDatabaseSO);
             }
 
             if (GUILayout.Button("Find and Fix Errors..."))
@@ -44,7 +45,7 @@ namespace KitchenDesign
 
                 if (dialogResult != MelcherEditorConst.DialogResult.Cancel)
                 {
-                    (target as ProductVisualDatabase).ErrorCheck(allowFixUp: dialogResult == MelcherEditorConst.DialogResult.Alt);
+                    (target as ProductVisualDatabaseSO).ErrorCheck(allowFixUp: dialogResult == MelcherEditorConst.DialogResult.Alt);
                 }
             }
 
@@ -70,8 +71,8 @@ namespace KitchenDesign
                     return;
                 }
 
-                ProductVisualDatabase productVisualDatabase =
-                    target as ProductVisualDatabase;
+                ProductVisualDatabaseSO productVisualDatabase =
+                    target as ProductVisualDatabaseSO;
 
                 string[] prefabGuids =
                     AssetDatabase.FindAssets(

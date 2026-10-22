@@ -1,6 +1,8 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.AddressableContent;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -19,7 +21,7 @@ namespace KitchenDesign
         public static void FixMissingAddressableGroups()
         {
             AddressableAssetSettings addressableSettings =
-                AddressableEditorUtility.GetAddressableSettingsOrThrow(showPopUp: true);
+                AddressablesForEditor.GetAddressableSettingsOrThrow(showPopUp: true);
 
             List<AddressableAssetGroup> addressableGroups = addressableSettings.groups;
 
@@ -137,7 +139,7 @@ namespace KitchenDesign
         public static void RemoveEmptyAddressableGroups()
         {
             AddressableAssetSettings addressableSettings =
-                AddressableEditorUtility.GetAddressableSettingsOrThrow(showPopUp: true);
+                AddressablesForEditor.GetAddressableSettingsOrThrow(showPopUp: true);
 
             List<AddressableAssetGroup> emptyAddressableGroups = new ();
 
@@ -268,7 +270,7 @@ namespace KitchenDesign
         private static HashSet<string> CollectProductVisualDatabaseAssetGuids()
         {
             string[] databaseGuids =
-                AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabase)}");
+                AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabaseSO)}");
 
             List<string> prefabPaths = new ();
 
@@ -276,10 +278,10 @@ namespace KitchenDesign
             {
                 string databasePath = AssetDatabase.GUIDToAssetPath(databaseGuid);
 
-                ProductVisualDatabase database =
-                    AssetDatabase.LoadAssetAtPath<ProductVisualDatabase>(databasePath);
+                ProductVisualDatabaseSO database =
+                    AssetDatabase.LoadAssetAtPath<ProductVisualDatabaseSO>(databasePath);
 
-                foreach (ProductVisual visual in database.sourceEntries)
+                foreach (ProductVisualSO visual in database.sourceEntries)
                 {
                     if (!visual)
                     {
@@ -342,7 +344,7 @@ namespace KitchenDesign
             }
 
             AddressableAssetSettings addressableSettings =
-                AddressableEditorUtility.GetAddressableSettingsOrThrow();
+                AddressablesForEditor.GetAddressableSettingsOrThrow();
 
             List<string> includedGuids = new (assetGuids.Length);
 
@@ -388,7 +390,7 @@ namespace KitchenDesign
 
             foreach (string guid in filteredGuids)
             {
-                ProFitAddressableEditorUtility.MakeAddressableWithGroupName(guid, addressableGroupName);
+                AddressablesForEditor.MakeAddressableWithGroupName(guid, addressableGroupName);
             }
         }
 
@@ -429,7 +431,7 @@ namespace KitchenDesign
             // Models are added to the same group.
             foreach (string modelGuid in modelGuids)
             {
-                ProFitAddressableEditorUtility.MakeAddressableWithGroupName(modelGuid, modelAddressableGroupName);
+                AddressablesForEditor.MakeAddressableWithGroupName(modelGuid, modelAddressableGroupName);
 
                 string modelPath = AssetDatabase.GUIDToAssetPath(modelGuid);
 
@@ -468,7 +470,7 @@ namespace KitchenDesign
 
             foreach (string textureGuid in textureGuids)
             {
-                ProFitAddressableEditorUtility.MakeAddressableWithGroupName(textureGuid, "Textures");
+                AddressablesForEditor.MakeAddressableWithGroupName(textureGuid, "Textures");
             }
 
             string[] materialGuids =
@@ -526,11 +528,11 @@ namespace KitchenDesign
                 // we refresh the Addressable Groups.
                 string textureAssetPath = AssetDatabase.GetAssetPath(texture);
                 string textureGuid = AssetDatabase.AssetPathToGUID(textureAssetPath);
-                ProFitAddressableEditorUtility.MakeAddressableWithGroupName(textureGuid, "Textures");
+                AddressablesForEditor.MakeAddressableWithGroupName(textureGuid, "Textures");
             }
 
             // Add the material to the materials group.
-            ProFitAddressableEditorUtility.MakeAddressableWithGroupName(materialGuid, materialGroupName);
+            AddressablesForEditor.MakeAddressableWithGroupName(materialGuid, materialGroupName);
         }
 
     }   // class ProFitAddressableGroupMenuCommand

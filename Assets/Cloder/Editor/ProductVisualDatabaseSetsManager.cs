@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -34,7 +35,7 @@ namespace KitchenDesign
             ShowDatabase(null);
         }
 
-        public static void ShowDatabase(ProductVisualDatabase database)
+        public static void ShowDatabase(ProductVisualDatabaseSO database)
         {
             ProductVisualDatabaseSetsManager window =
                 GetWindow<ProductVisualDatabaseSetsManager>(WINDOW_TITLE);
@@ -49,7 +50,7 @@ namespace KitchenDesign
             window.Show();
         }
 
-        public void SetDatabase(ProductVisualDatabase database)
+        public void SetDatabase(ProductVisualDatabaseSO database)
         {
             m_Database = database;
             m_DatabaseField?.SetValueWithoutNotify(database);
@@ -93,7 +94,7 @@ namespace KitchenDesign
             VisualElement root = rootVisualElement;
 
             m_DatabaseField = new ObjectField("Database");
-            m_DatabaseField.objectType = typeof(ProductVisualDatabase);
+            m_DatabaseField.objectType = typeof(ProductVisualDatabaseSO);
             m_DatabaseField.allowSceneObjects = false;
             m_DatabaseField.SetValueWithoutNotify(m_Database);
             m_DatabaseField.RegisterValueChangedCallback(OnDatabaseChanged);
@@ -294,7 +295,7 @@ namespace KitchenDesign
 
         private void OnDatabaseChanged(ChangeEvent<UnityEngine.Object> changeEvent)
         {
-            m_Database = changeEvent.newValue as ProductVisualDatabase;
+            m_Database = changeEvent.newValue as ProductVisualDatabaseSO;
 
             Refresh();
         }
@@ -375,11 +376,11 @@ namespace KitchenDesign
                 return;
             }
 
-            IReadOnlyList<ProductVisual> visuals = m_Database.sourceEntries;
+            IReadOnlyList<ProductVisualSO> visuals = m_Database.sourceEntries;
 
             for (int i = 0; i < visuals.Count; i++)
             {
-                ProductVisual visual = visuals[i];
+                ProductVisualSO visual = visuals[i];
 
                 if (!ProductVisualDatabaseEntryFile.TryGetEntry(visual, out Entry entry))
                 {
@@ -904,7 +905,7 @@ namespace KitchenDesign
             }
 
             HashSet<string> seenGuids = new (m_CurrentGuids);
-            List<ProductVisual> visualsToAppend = new ();
+            List<ProductVisualSO> visualsToAppend = new ();
             List<string> notInProjectNames = new ();
             int alreadyInDatabaseCount = 0;
 
@@ -916,7 +917,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisual visual = ProductVisualDatabaseEntryFile.LoadVisual(entry.guid);
+                ProductVisualSO visual = ProductVisualDatabaseEntryFile.LoadVisual(entry.guid);
 
                 if (visual)
                 {
@@ -1028,7 +1029,7 @@ namespace KitchenDesign
             }
         }
 
-        [SerializeField] private ProductVisualDatabase m_Database = default;
+        [SerializeField] private ProductVisualDatabaseSO m_Database = default;
 
         private readonly List<Row> m_Rows = new ();
         private readonly List<Row> m_DisplayedRows = new ();

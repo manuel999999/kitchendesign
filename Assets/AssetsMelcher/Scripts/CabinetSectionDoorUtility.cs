@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
     using System.Collections.Generic;
 
     public static class CabinetSectionDoorUtility
@@ -10,9 +11,9 @@ namespace KitchenDesign
         // =====================================================================
         // Static Methods
         // =====================================================================
-        public static ProductVisual FindDoorStyleVisual(
-            IReadOnlyList<ProductVisual>    productVisuals,
-            ProductVisual                   cabinetSectionVisual,
+        public static ProductVisualSO FindDoorStyleVisual(
+            IReadOnlyList<ProductVisualSO>    productVisuals,
+            ProductVisualSO                   cabinetSectionVisual,
             BrandCatalog                    brandCatalog,
             string                          doorStyleName)
         {
@@ -57,10 +58,10 @@ namespace KitchenDesign
 
             bool foundAlternative = false;
 
-            ProductVisual doorStyleVisual = null;
-            ProductVisual alternativeDoorStyleVisual = null;
+            ProductVisualSO doorStyleVisual = null;
+            ProductVisualSO alternativeDoorStyleVisual = null;
 
-            foreach (ProductVisual visual in productVisuals)
+            foreach (ProductVisualSO visual in productVisuals)
             {
                 if (visual.info.runtimePrefabCategory != ProductCategorySpecific.CabinetDoor)
                 {

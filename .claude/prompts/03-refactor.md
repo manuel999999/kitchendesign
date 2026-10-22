@@ -678,7 +678,7 @@ across the database, before and after); the database window opens; then the usua
   `CabinetCutOutMode` 0–3), 3 extension classes; 27 files got usings (script in the session
   scratchpad, with a small C# lexer that tells code from comments and strings). Compiles with no
   errors. New check `visualscensus.cs`: identical before and after (901 entries, hash
-  `E3B8044CE6426AA5`). The database, states and sets windows open and close with no console
+  `E3B8044CE6426AA5`; `D72B3E9CB18746DF` since its output is Unicode-normalised, B3.2). The database, states and sets windows open and close with no console
   error; the UXML type string resolves. `rulescheck.cs` 60/0; `coldstart.sh` both the
   reference; `runall.sh` against B2.3: `resave.json` identical, camera noise only, photos within
   0.09/255 (kept as `unity6-after-B3.1-2026-10-22/`); `menucheck.sh` 21 / 21 / 1,268. The sign-in
@@ -704,6 +704,24 @@ across the database, before and after); the database window opens; then the usua
   `Utility.LogFilesForEditor`; `FindAllAssetGuidsInFolder` (a one-line wrapper) inlined.
 - Check: compile (editor and macOS player); every visual, info and database asset loads as the new
   class with the same data (counts, ids, content addresses); no asset file changes; the usual runs.
+- **Done 2026-10-22.** Script in the session scratchpad (moves with `.meta`, renames in code only,
+  comments of the moved files dropped, usings added in 35 files); `ProFitUtility` and the
+  database window's two folder searches edited by hand. Compiles in the editor and as macOS player
+  scripts. All 901 visuals, 901 infos and the database load as `…SO` (main asset type checked);
+  no asset file changed. The census differed only in two content addresses with an "è": the asset
+  files store it composed, the Addressables entries decomposed, and `AssetAddress.OnBeforeSerialize`
+  swaps the in-memory value (an old quirk, logged at every editor start; CLAUDE.md, Gotchas).
+  The census now normalises its output and is identical. Database windows and a visual's inspector
+  open with no error. `rulescheck.cs` 60/0; `coldstart.sh` both the reference (the first showed 6
+  warnings: those 2 address warnings, once, because the renames reloaded the assets); `runall.sh`
+  against B3.1: identical, photos within 0.02/255 (kept as `unity6-after-B3.2-2026-10-22/`); the
+  8 fallback JSON files byte-identical to B3.1's; `menucheck.sh` 22 / 22 / 1,269, the extra one the
+  CLI's own timeout error.
+- **Slip during the checks:** a second `menucheck.sh` was started by mistake after the user's files
+  had been restored, so it ran with the user's ProFit profile and rewrote
+  `ProFit/FallbackJSON/products.json` (the other ProFit files came out identical). It was stopped,
+  and the user's file put back from the copy taken before the restore (same diff against git as
+  at the start of the session). The backup helper now keeps its backup after a restore.
 
 **B3.3 — The content loader as a constructed system, the product rules out of the scene.**
 - `ProductVisualContentStatus` (`_project/Scripts/Products/`): a plain class that does what the

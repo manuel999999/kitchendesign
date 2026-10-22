@@ -5,7 +5,7 @@ if (shelf == null) return "no shelf in the kitchen";
 var info = KitchenDesign.ProFitGlobals.FindRuntimeProductBySku("__SKU__", false);
 if (info == null) return "__SKU__ not in this app's products";
 var dbField = typeof(KitchenDesign.Kitchen).GetField("m_ProductVisualDatabase", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-var db = (KitchenDesign.ProductVisualDatabase)dbField.GetValue(k);
+var db = (KitchenDesign.Scriptables.ProductVisualDatabaseSO)dbField.GetValue(k);
 var visual = db.FindRuntimeVisualByID(info.visualId);
 if (visual == null) return "no visual " + info.visualId;
 async Cysharp.Threading.Tasks.UniTaskVoid Run()

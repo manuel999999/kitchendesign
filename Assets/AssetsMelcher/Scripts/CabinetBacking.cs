@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using System;
     using UnityEngine;

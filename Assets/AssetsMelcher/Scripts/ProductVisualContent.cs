@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using System.Collections.Generic;
     using UnityEngine;
     using TMPro;
@@ -200,7 +202,7 @@ namespace KitchenDesign
         /// measures.
         /// </summary>
         public void SetCutOutMeasurementsPositions(
-            ProductVisualInfo productVisualInfo,
+            ProductVisualInfoSO productVisualInfo,
             Transform cabinetTransform,
             Transform cabinetLocalOccupantOrientation,
             Vector3 cutOutLeftBottomTopCornerInProductSpace,
@@ -324,7 +326,7 @@ namespace KitchenDesign
         ///
         /// All measurements are in the product's local space.
         /// </summary>
-        public void SetCutOutSizeInMeters(ProductVisualInfo productVisualInfo, Vector3 cutOutSizeInMeters, bool notifyListeners = true)
+        public void SetCutOutSizeInMeters(ProductVisualInfoSO productVisualInfo, Vector3 cutOutSizeInMeters, bool notifyListeners = true)
         {
             m_CurrentCutOutSizeInMeters = cutOutSizeInMeters;
 

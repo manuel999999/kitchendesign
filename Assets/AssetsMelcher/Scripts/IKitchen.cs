@@ -1,6 +1,8 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using UnityEngine;
@@ -32,7 +34,7 @@ namespace KitchenDesign
         public CuboidPadding baseCountertopOverhangInMeters { get; }
         public float backPanelDepthInMeters { get; }
 
-        public ProductVisualDatabase productVisualDatabase { get;  }
+        public ProductVisualDatabaseSO productVisualDatabase { get;  }
 
         /// <summary>
         ///     Return <see langword="true"/> if cabinets can display columns
@@ -46,7 +48,7 @@ namespace KitchenDesign
         public bool AreProductsForcedToCenterOfCabinets(Cabinet cabinetForRuleset);
 
         public UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn);
-        public UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisual productVisual, ProductVisualContent productVisualPrefab);
+        public UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisualSO productVisual, ProductVisualContent productVisualPrefab);
 
     }   // interface IKitchen
 

@@ -123,10 +123,10 @@ namespace KitchenDesign
                             static x => x != null && x.category == ProductCategory.CabinetSection
                         ).ToList();
 
-                    List<ProductVisual> cabinetSectionVisuals = new ();
-                    List<ProductVisual> cabinetDoorVisuals = new ();
+                    List<ProductVisualSO> cabinetSectionVisuals = new ();
+                    List<ProductVisualSO> cabinetDoorVisuals = new ();
 
-                    foreach (ProductVisual productVisual in Kitchen.instance.productVisualDatabase.runtimeEntries)
+                    foreach (ProductVisualSO productVisual in Kitchen.instance.productVisualDatabase.runtimeEntries)
                     {
                         if (!productVisual)
                         {

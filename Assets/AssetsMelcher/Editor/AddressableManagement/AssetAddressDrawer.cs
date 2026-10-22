@@ -1,6 +1,8 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Serializables;
+    using KitchenDesign.AddressableContent;
     using System.Collections.Generic;
     using UnityEditor;
     using UnityEditor.AddressableAssets;

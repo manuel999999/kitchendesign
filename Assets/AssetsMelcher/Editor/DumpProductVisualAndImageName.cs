@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using System.Collections.Generic;
     using System.IO;
     using UnityEditor;
@@ -28,9 +29,9 @@ namespace KitchenDesign
 
             // Find the Product Visual Database because we will be exporting its
             // item list
-            string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabase)}");
+            string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabaseSO)}");
             string databasePath = AssetDatabase.GUIDToAssetPath(guids[0]);
-            ProductVisualDatabase database = AssetDatabase.LoadAssetAtPath<ProductVisualDatabase>(databasePath);
+            ProductVisualDatabaseSO database = AssetDatabase.LoadAssetAtPath<ProductVisualDatabaseSO>(databasePath);
 
             Dictionary<string, object> jsonRoot = new Dictionary<string, object>();
 
@@ -41,7 +42,7 @@ namespace KitchenDesign
 
             Dictionary<string, List<object>> categoryNameToEntryList = new Dictionary<string, List<object>>();
 
-            foreach (ProductVisual entry in database.sourceEntries)
+            foreach (ProductVisualSO entry in database.sourceEntries)
             {
                 if (string.IsNullOrEmpty(entry.info.id))
                 {

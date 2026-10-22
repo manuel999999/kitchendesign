@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
     using Unity.Cinemachine;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -145,7 +146,7 @@ namespace KitchenDesign
 
         public List<KitchenExtraFeature> selectedExtraFeatures => m_SelectedExtraFeatures;
 
-        public ProductVisualDatabase productVisualDatabase => m_ProductVisualDatabase;
+        public ProductVisualDatabaseSO productVisualDatabase => m_ProductVisualDatabase;
 
         protected bool canHaveToeKickEntry => selectedBrandCatalog.cabinetManufacturerId != Const.Gemini.ManufactersIds.AgoraBerlinGardens; // Removed berlin gardens toekick PDF entry
         public bool isAgoraBerlinGardens => selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AgoraBerlinGardens;
@@ -334,7 +335,7 @@ namespace KitchenDesign
             // paver or deck
             if (m_SelectedFlooringFinish != null)
             {
-                ProductVisual flooringVisual =
+                ProductVisualSO flooringVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         m_SelectedFlooringFinish.visualId
                     );
@@ -2573,7 +2574,7 @@ namespace KitchenDesign
 
                         if (!string.IsNullOrEmpty(cabinetProductInfo.visualId))
                         {
-                            ProductVisual cabinetVisual =
+                            ProductVisualSO cabinetVisual =
                                 productVisualDatabase.FindRuntimeVisualByID(
                                     cabinetProductInfo.visualId
                                 );
@@ -3019,7 +3020,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                ProductVisual productVisual =
+                ProductVisualSO productVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         productInfo.visualId
                     );
@@ -3533,7 +3534,7 @@ namespace KitchenDesign
                                 this
                             );
 
-                        ProductVisual replacementCabinetVisual =
+                        ProductVisualSO replacementCabinetVisual =
                             productVisualDatabase.FindRuntimeVisualByID(
                                 replacementCabinetInfo.visualId
                             );
@@ -3691,7 +3692,7 @@ namespace KitchenDesign
         /// <param name="productInfo"></param>
         /// <param name="productVisualPrefab"></param>
         /// <returns></returns>
-        public async UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisual productVisual, ProductVisualContent productVisualPrefab)
+        public async UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisualSO productVisual, ProductVisualContent productVisualPrefab)
         {
             // Clone the visual. Add the product to it
             ProductVisualContent visualInstance = Instantiate(productVisualPrefab, m_Transform);
@@ -3753,7 +3754,7 @@ namespace KitchenDesign
 
         public async UniTask<Occupant> TryInstantiateProductAnywhere(
             ProductInfo productInfo,
-            ProductVisual productVisual,
+            ProductVisualSO productVisual,
             ProductVisualContent productVisualPrefab,
             bool showMessageIfFailed)
         {
@@ -4873,7 +4874,7 @@ namespace KitchenDesign
 
             async UniTaskVoid OnTryAddProduct(ProductInfo productInfo)
             {
-                ProductVisual productVisual =
+                ProductVisualSO productVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         productInfo.visualId
                     );
@@ -5015,7 +5016,7 @@ namespace KitchenDesign
                         Vector3 occupantLocalPosition =
                             occupantToClone.GetLocalPositionInVolume();
 
-                        ProductVisual productVisual =
+                        ProductVisualSO productVisual =
                             m_ProductVisualDatabase.FindRuntimeVisualByID(
                                 occupantToClone.productInfo.visualId
                             );
@@ -5082,7 +5083,7 @@ namespace KitchenDesign
 
                 MelcherLog.Log("Trying to add section with product info: " + cabinetSectionProductInfo.name);
 
-                ProductVisual cabinetSectionVisual =
+                ProductVisualSO cabinetSectionVisual =
                     productVisualDatabase.FindRuntimeVisualByID(
                         cabinetSectionProductInfo.visualId
                     );
@@ -6114,7 +6115,7 @@ namespace KitchenDesign
             }
 
             ProductCategory finishCategory = fallbackFinishCategory;
-            ProductVisual finishProductVisual = null;
+            ProductVisualSO finishProductVisual = null;
 
             Material finishMaterial = await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
             FlooringType flooringType = FlooringType.Wood;
@@ -6734,7 +6735,7 @@ namespace KitchenDesign
             if (selectedFinish != null)
             {
                 // Lookup the material in the product catalog
-                ProductVisual finishVisual =
+                ProductVisualSO finishVisual =
                     m_ProductVisualDatabase.FindRuntimeVisualByID(
                         selectedFinish.visualId
                     );
@@ -7312,7 +7313,7 @@ namespace KitchenDesign
 
         [UnityEngine.Serialization.FormerlySerializedAs("m_ProductVisualCatalog")]
         [SerializeField, MelcherAssetField]
-        protected ProductVisualDatabase m_ProductVisualDatabase = null;
+        protected ProductVisualDatabaseSO m_ProductVisualDatabase = null;
 
         [Space]
 

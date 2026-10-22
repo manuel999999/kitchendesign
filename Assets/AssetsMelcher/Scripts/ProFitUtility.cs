@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Scriptables;
     using MEC;
     using System.Collections.Generic;
     using System.Globalization;
@@ -61,88 +62,6 @@ namespace KitchenDesign
             const string Endpoint = "/webgl/privacy-policy.html";
             Application.OpenURL(ProFitGlobals.server.Connection.Host + Endpoint);
         }
-
-        public static ProductVisual FindProductVisual(IReadOnlyList<ProductVisual> productVisuals, string visualId)
-        {
-            if (string.IsNullOrEmpty(visualId))
-            {
-                return null;
-            }
-
-            return MelcherCommon.Find(
-                productVisuals,
-                currentVisual => currentVisual.info.id.Equals(visualId)
-            );
-        }
-
-        /// <summary>
-        ///     Search all product visuals in <paramref name="productVisuals"/>
-        ///     for a <see cref="ProductCategorySpecific.CabinetDoor"/> whose
-        ///     name matches the expected format.
-        /// </summary>
-        /// <remarks>
-        ///     This is a brute force approach to find the requested door
-        ///     style.
-        /// </remarks>
-        public static ProductVisual FindDoorStyleVisual(
-            IReadOnlyList<ProductVisual>    productVisuals,
-            ProductVisual                   cabinetSectionVisual,
-            string                          doorStyleName)
-        {
-            if (productVisuals == null)
-            {
-                throw new System.ArgumentNullException(nameof(productVisuals));
-            }
-
-            if (!cabinetSectionVisual)
-            {
-                throw new System.ArgumentNullException(nameof(cabinetSectionVisual));
-            }
-
-            // This has a '^' suffix.
-            string cabinetSectionVisualName = cabinetSectionVisual.name;
-
-            string expectedDoorStyleVisualName =
-                cabinetSectionVisualName.Substring(0, length: cabinetSectionVisualName.Length - 1) + "@" + doorStyleName + "^";
-
-            ProductVisual doorStyleVisual = null;
-
-            foreach (ProductVisual visual in productVisuals)
-            {
-                if (visual.info.runtimePrefabCategory != ProductCategorySpecific.CabinetDoor)
-                {
-                    continue;
-                }
-
-                if (visual.name != expectedDoorStyleVisualName)
-                {
-                    continue;
-                }
-
-                doorStyleVisual = visual;
-                break;
-            }
-
-            bool foundCabinetDoorVisual = doorStyleVisual;
-
-            if (foundCabinetDoorVisual != cabinetSectionVisual.info.expectingCabinetDoors)
-            {
-                // Warn that finding a door style was or wasn't expected here.
-                // The type of expectation depends on the cabinet section.
-
-                if (cabinetSectionVisual.info.expectingCabinetDoors)
-                {
-                    MelcherLog.LogError($"Could not find a visual with the name {MelcherFormat.ConsoleString(doorStyleName)}");
-                }
-                else
-                {
-                    MelcherLog.LogError($"Found a visual with the name {MelcherFormat.ConsoleString(doorStyleName)} but expected to find none.");
-                }
-            }
-
-            return doorStyleVisual;
-        }
-
 
         /// <summary>
         ///     Calculate a plane suitable for raycasting drag events.
@@ -407,79 +326,6 @@ namespace KitchenDesign
             ProductCategory.FinishCabinet,
             ProductCategory.FinishCountertop,
         };
-
-#if UNITY_EDITOR
-        // ====================================================================
-        // Editor-only
-        // ====================================================================
-        #region Editor-only
-
-        public static class Editor
-        {
-            /// <summary>
-            ///     Creates or overwrites a file in "&lt;UnityProjectRoot&gt;/Logs/ProFit/*"
-            ///     with the content, <paramref name="content"/>. We use this
-            ///     to capture ignorable errors that may otherwise spam the
-            ///     console.
-            /// </summary>
-            /// <returns>
-            ///     The full path of the log file.
-            /// </returns>
-            public static string OverwriteSpecificLogFile(string logFileName, string content)
-            {
-                string logFolderPath =
-                    System.IO.Path.GetFullPath(
-                        System.IO.Path.Combine(
-                            Application.dataPath, "../Logs/ProFit"
-                        )
-                    );
-
-                System.IO.Directory.CreateDirectory(logFolderPath);
-
-                string outputPath =
-                    System.IO.Path.Combine(logFolderPath, logFileName);
-
-                System.IO.File.WriteAllText(outputPath, content);
-
-                return outputPath;
-            }
-
-            /// <summary>
-            ///     Get all asset GUIDs for assets in the requested folder that
-            ///     match the filter. The filter uses the same rules as
-            ///     searching the project window.
-            /// </summary>
-            /// <returns></returns>
-            public static string[] FindAllAssetGuidsInFolder(string assetFilter, string projectRelativePath)
-            {
-                return
-                    UnityEditor.AssetDatabase.FindAssets(
-                        filter: assetFilter,
-                        searchInFolders: new[] { projectRelativePath }
-                    );
-            }
-
-            /// <summary>
-            ///     Get all asset GUIDs for models in the CabinetSectionModels
-            ///     folder.
-            /// </summary>
-            public static string[] FindAllCabinetSectionModelGuids()
-            {
-                string[] guids =
-                    UnityEditor.AssetDatabase.FindAssets(
-                        filter: "t:model",
-                        searchInFolders: new[] { "Assets/AssetsMelcher/CabinetSectionModels" }
-                    );
-
-                return guids;
-            }
-
-        }   // class Editor
-
-
-
-        #endregion  // Editor-only
-#endif  // if UNITY_EDITOR
 
     }   // class ProFitUtility
 

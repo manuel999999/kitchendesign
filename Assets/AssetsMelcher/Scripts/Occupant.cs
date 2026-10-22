@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace KitchenDesign
         ///     the loaded-as-needed <see cref="ProductVisualContent"/> (as an
         ///     asset address).
         /// </summary>
-        public ProductVisual productVisual => m_ProductVisual;
+        public ProductVisualSO productVisual => m_ProductVisual;
 
         /// <summary>
         ///     The instantiated <see cref="ProductVisualContent" /> that is used to
@@ -213,7 +214,7 @@ namespace KitchenDesign
         ///     value.
         /// </param>
         /// <returns></returns>
-        public static Cuboid GetCutOutCuboidInVisualSpace(ProductVisualInfo visualInfo, ProductVisualContent visualContent, Vector3 defaultCutOutSize)
+        public static Cuboid GetCutOutCuboidInVisualSpace(ProductVisualInfoSO visualInfo, ProductVisualContent visualContent, Vector3 defaultCutOutSize)
         {
             Vector3 adjustedCutOutSize = defaultCutOutSize;
 
@@ -317,7 +318,7 @@ namespace KitchenDesign
         /// A unique instantiation of the product visual, specifically for this
         /// product.
         /// </param>
-        public void SetInfo(ProductInfo productInfo, ProductVisual newProductVisual, ProductVisualContent newProductVisualInstance)
+        public void SetInfo(ProductInfo productInfo, ProductVisualSO newProductVisual, ProductVisualContent newProductVisualInstance)
         {
             MelcherLog.LogEditorOnly(nameof(SetInfo), this);
 
@@ -970,7 +971,7 @@ namespace KitchenDesign
         /// <summary>
         ///     The product visual data that represents the this occupant.
         /// </summary>
-        protected ProductVisual m_ProductVisual;
+        protected ProductVisualSO m_ProductVisual;
 
         /// <summary>
         ///     A unique instantiation of the product's content prefab for this

@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Scriptables;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using UnityEngine;
@@ -156,8 +157,8 @@ namespace KitchenDesign
 
         public void PopulateRuntimeData(
             IReadOnlyList<ProductInfo> cabinetSectionProductInfos,
-            IReadOnlyList<ProductVisual> cabinetSectionVisuals,
-            IReadOnlyList<ProductVisual> cabinetDoorVisuals)
+            IReadOnlyList<ProductVisualSO> cabinetSectionVisuals,
+            IReadOnlyList<ProductVisualSO> cabinetDoorVisuals)
         {
             m_DoorStyles.mutable.Clear();
             m_DoorHandleStyles.mutable.Clear();
@@ -180,8 +181,8 @@ namespace KitchenDesign
                         continue;
                     }
 
-                    ProductVisual cabinetSectionVisual =
-                        ProFitUtility.FindProductVisual(
+                    ProductVisualSO cabinetSectionVisual =
+                        Products.ProductVisualLookups.FindById(
                             cabinetSectionVisuals,
                             cabinetSectionProductInfo.visualId
                         );
@@ -208,7 +209,7 @@ namespace KitchenDesign
 
                     bool didRegisterAnyDoors = false;
 
-                    foreach (ProductVisual doorVisual in cabinetDoorVisuals)
+                    foreach (ProductVisualSO doorVisual in cabinetDoorVisuals)
                     {
                         if (doorVisual.info.name.StartsWith(cabinetDoorNamePrefix))
                         {
@@ -225,7 +226,7 @@ namespace KitchenDesign
             }
         }
 
-        protected void RegisterDoorStyle(ProductVisual doorStyleVisual)
+        protected void RegisterDoorStyle(ProductVisualSO doorStyleVisual)
         {
             // Look for an existing door style collection for this style name.
             DoorStyleInfo doorStyleInfo =
@@ -625,7 +626,7 @@ namespace KitchenDesign
             public string name => m_Name;
             public string doorStyleDisplayName => m_DoorStyleDisplayName;
 
-            public ReadOnlyCollection<ProductVisual> visuals => m_Visuals.readOnly;
+            public ReadOnlyCollection<ProductVisualSO> visuals => m_Visuals.readOnly;
 
             public Sprite toolbarButtonSprite => m_ToolbarButtonSprite;
 
@@ -633,7 +634,7 @@ namespace KitchenDesign
             // Methods
             // ====================================================================
 
-            public void AddVisual(ProductVisual productVisual)
+            public void AddVisual(ProductVisualSO productVisual)
             {
                 if (!m_Visuals.readOnly.Contains(productVisual))
                 {
@@ -647,7 +648,7 @@ namespace KitchenDesign
 
             protected string m_Name;
             protected string m_DoorStyleDisplayName;
-            protected MelcherReadWriteList<ProductVisual> m_Visuals = new ();
+            protected MelcherReadWriteList<ProductVisualSO> m_Visuals = new ();
             protected Sprite m_ToolbarButtonSprite;
 
         }   // class DoorStyleInfo

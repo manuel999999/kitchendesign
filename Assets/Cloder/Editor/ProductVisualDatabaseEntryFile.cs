@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using KitchenDesign.Scriptables;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
@@ -83,7 +84,7 @@ namespace KitchenDesign
             }
         }
 
-        public static bool TryGetEntry(ProductVisual visual, out Entry entry)
+        public static bool TryGetEntry(ProductVisualSO visual, out Entry entry)
         {
             if (visual &&
                 AssetDatabase.TryGetGUIDAndLocalFileIdentifier(visual, out string guid, out long _))
@@ -102,33 +103,33 @@ namespace KitchenDesign
 
             return
                 !string.IsNullOrEmpty(assetPath) &&
-                typeof(ProductVisual).IsAssignableFrom(AssetDatabase.GetMainAssetTypeAtPath(assetPath));
+                typeof(ProductVisualSO).IsAssignableFrom(AssetDatabase.GetMainAssetTypeAtPath(assetPath));
         }
 
-        public static ProductVisual LoadVisual(string guid)
+        public static ProductVisualSO LoadVisual(string guid)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);
 
             return string.IsNullOrEmpty(assetPath) ?
                 null :
-                AssetDatabase.LoadAssetAtPath<ProductVisual>(assetPath);
+                AssetDatabase.LoadAssetAtPath<ProductVisualSO>(assetPath);
         }
 
-        public static ProductVisualDatabase FindDefaultDatabase()
+        public static ProductVisualDatabaseSO FindDefaultDatabase()
         {
-            string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabase)}");
+            string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabaseSO)}");
 
             if (guids.Length <= 0)
             {
                 return null;
             }
 
-            return AssetDatabase.LoadAssetAtPath<ProductVisualDatabase>(
+            return AssetDatabase.LoadAssetAtPath<ProductVisualDatabaseSO>(
                 AssetDatabase.GUIDToAssetPath(guids[0])
             );
         }
 
-        public static void RefreshOpenDatabaseManagers(ProductVisualDatabase database)
+        public static void RefreshOpenDatabaseManagers(ProductVisualDatabaseSO database)
         {
             foreach (ProductVisualDatabaseManager manager in Resources.FindObjectsOfTypeAll<ProductVisualDatabaseManager>())
             {

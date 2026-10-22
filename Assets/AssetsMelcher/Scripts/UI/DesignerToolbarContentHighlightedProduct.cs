@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.UI;
@@ -246,7 +248,7 @@ namespace KitchenDesign
             }
 
             ProductInfo productInfo = null;
-            ProductVisual productVisual = null;
+            ProductVisualSO productVisual = null;
 
             if (m_SelectedObject.TryGetComponent(out Occupant selectedOccupant))
             {

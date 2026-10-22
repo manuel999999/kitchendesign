@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using KitchenDesign.Shared.Enums;
+using KitchenDesign.Server;
 
 namespace KitchenDesign.Debugging
 {

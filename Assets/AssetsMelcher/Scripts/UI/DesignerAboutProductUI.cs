@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ namespace KitchenDesign
         // Methods
         // =====================================================================
 
-        public void ShowProductInfo(ProductInfo productInfo, ProductVisual productVisual)
+        public void ShowProductInfo(ProductInfo productInfo, ProductVisualSO productVisual)
         {
             if (!ProFitGlobals.catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
             {
@@ -43,7 +44,7 @@ namespace KitchenDesign
             {
                 Kitchen kitchen = Kitchen.instance;
 
-                ProductVisual cabinetDoorVisual =
+                ProductVisualSO cabinetDoorVisual =
                     CabinetSectionDoorUtility.FindDoorStyleVisual(
                         kitchen.productVisualDatabase.runtimeEntries,
                         productVisual,
@@ -118,7 +119,7 @@ namespace KitchenDesign
 
         [UnityEngine.Serialization.FormerlySerializedAs("m_ProductVisualCatalog")]
         [SerializeField, MelcherAssetField]
-        protected ProductVisualDatabase m_ProductVisualDatabase = null;
+        protected ProductVisualDatabaseSO m_ProductVisualDatabase = null;
 
         [Space]
         [SerializeField] protected MelcherLocalizedText m_NameLabel = null;
@@ -136,7 +137,7 @@ namespace KitchenDesign
         // =====================================================================
 
         private int m_SelectedProductServerId;
-        private ProductVisual m_SelectedProductVisual;
+        private ProductVisualSO m_SelectedProductVisual;
 
     }   // class DesignerAboutProductUI
 

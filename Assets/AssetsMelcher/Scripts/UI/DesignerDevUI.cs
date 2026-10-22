@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
+    using KitchenDesign.Scriptables;
     using Cysharp.Threading.Tasks;
     using System;
     using System.Collections.Generic;
@@ -154,7 +155,7 @@ namespace KitchenDesign
                         continue;
                     }
 
-                    ProductVisual productVisual =
+                    ProductVisualSO productVisual =
                         m_ProductVisualDatabase.FindRuntimeVisualByID(
                             productAtIndex.visualId
                         );
@@ -208,7 +209,7 @@ namespace KitchenDesign
 
                     if (AllowProductInBatch(productAtIndex))
                     {
-                        ProductVisual productVisual =
+                        ProductVisualSO productVisual =
                             m_ProductVisualDatabase.FindRuntimeVisualByID(
                                 productAtIndex.visualId
                             );
@@ -381,7 +382,7 @@ namespace KitchenDesign
 
         [UnityEngine.Serialization.FormerlySerializedAs("m_ProductVisualCatalog")]
         [SerializeField, MelcherAssetField]
-        protected ProductVisualDatabase m_ProductVisualDatabase = null;
+        protected ProductVisualDatabaseSO m_ProductVisualDatabase = null;
 
         // ====================================================================
         // OnValidate-serialized fields

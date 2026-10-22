@@ -644,7 +644,7 @@ namespace KitchenDesign.CatalogData
             int fakeProductNumber = 0;
 
             string[] productVisualDatabaseGuids =
-                UnityEditor.AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabase)}");
+                UnityEditor.AssetDatabase.FindAssets($"t:{nameof(ProductVisualDatabaseSO)}");
 
             MelcherLog.Assert(productVisualDatabaseGuids.Length == 1,
                 "This bit of code assumes there is only one product visual database. Please update the code to select the correct catalog."
@@ -653,8 +653,8 @@ namespace KitchenDesign.CatalogData
             string productVisualDatabasePath =
                 UnityEditor.AssetDatabase.GUIDToAssetPath(productVisualDatabaseGuids[0]);
 
-            ProductVisualDatabase productVisualDatabase =
-                UnityEditor.AssetDatabase.LoadAssetAtPath<ProductVisualDatabase>(productVisualDatabasePath);
+            ProductVisualDatabaseSO productVisualDatabase =
+                UnityEditor.AssetDatabase.LoadAssetAtPath<ProductVisualDatabaseSO>(productVisualDatabasePath);
 
             int defaultManufacturerId = this._appProfile.defaultManufacturerId;
 
@@ -676,7 +676,7 @@ namespace KitchenDesign.CatalogData
 
             stringBuilder.AppendLine("<Visual Name> :: <Visual ID> :: <Category>");
 
-            foreach (ProductVisual visual in productVisualDatabase.runtimeEntries)
+            foreach (ProductVisualSO visual in productVisualDatabase.runtimeEntries)
             {
                 ProductVisualContent visualContent =
                     visual.contentAddress.editorOnlyCachedAsset;
@@ -724,7 +724,7 @@ namespace KitchenDesign.CatalogData
             }
 
             string outPath =
-                ProFitUtility.Editor.OverwriteSpecificLogFile(
+                Utility.LogFilesForEditor.Overwrite(
                     "issues-unused-product-visuals.txt",
                     stringBuilder.ToString()
                 );

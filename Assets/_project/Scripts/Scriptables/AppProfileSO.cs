@@ -2,6 +2,7 @@ namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Serializables;
     using Cysharp.Threading.Tasks;
     using System.Collections.ObjectModel;
     using UnityEngine;
