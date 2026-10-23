@@ -635,8 +635,8 @@ namespace KitchenDesign.Save
             {
                 string finishSquareArea =
                     this._session.UserProfile.activeUnits == MeasurementUnit.FeetAndInches ?
-                        cabinetSquareMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet) + " ft�" :
-                        cabinetSquareMeters + " m�";
+                        cabinetSquareMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet) + " sq. ft." :
+                        cabinetSquareMeters + " sq. m.";
 
                 saveJson["cabinetFinishArea"] = finishSquareArea;
             }

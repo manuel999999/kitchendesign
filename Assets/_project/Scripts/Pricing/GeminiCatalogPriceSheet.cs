@@ -147,7 +147,7 @@ namespace KitchenDesign.Pricing
                         JsonDict transitionPiece =
                             CreateManualPriceSheetEntry(
                                 productSku: "IM-45T-CN",
-                                productName: "OASIS� 45� Transition Piece",
+                                productName: "OASIS\u2122 45\u00b0 Transition Piece",
                                 price: this._session.UserProfile.currency == Currency.CAD ?
                                     99.0f :
                                     109.0f

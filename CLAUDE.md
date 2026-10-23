@@ -986,11 +986,12 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   reloads them (a script rename of their class, for example). The asset files never change, so
   it repeats. Harmless, but it adds 2 warnings to a run, and any comparison of addresses must
   normalise them first.
-- **Three strings sent to the server contain U+FFFD** (an old encoding loss in `Kitchen.cs`,
-  kept as they are): the price-sheet name `"OASIS� 45� Transition Piece"` (Napoleon corners) and the
-  cabinet finish area units `" ft�"` / `" m�"`. The PDF presumably shows the replacement character.
-  Fixing them changes what the server receives, so it is a change for the user to decide, not part
-  of the refactor. Keep source files UTF-8 so they survive moves byte for byte.
+- **Write non-ASCII text in C# strings as `\u` escapes** (`"OASIS\u2122 45\u00b0 ..."`). The old
+  `Kitchen.cs` was saved in Windows-1252; old-repo commit `520d740c9d` (2025-11-26) re-saved it as
+  UTF-8 and every `²`, `°` and `™` became U+FFFD, which the app then sent to the server for months
+  (handover, "Needs attention"). An escape is plain ASCII and survives any re-encoding. Keep source
+  files UTF-8 so they survive moves byte for byte. **The Edit tool turns a typed `\u2122` into the
+  character itself**; write escapes with a script and check the bytes.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -1666,10 +1667,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   (`activeClientId`/`activeQuoteId`, then load `DesignerScene`), photos are taken as F6 does
   (`TakeScreenshots`, which re-centres the ground first), then measured. Scripts:
   `Tools/Baseline/` (notes in `Tools/Baseline/README.md`).
-- **The server's copy of a design has no price inputs.** In the client list, `cabinet_list`,
-  `manual_price_sheet_entries`, `price_changes` and `countertop_area` are absent, and older
-  designs' `islandDimensions` are in the 2024 per-cabinet format. So `resave.json` (what today's
-  app would send) is the price and measurement baseline; `server.json` is only the input.
+- **Older copies of a design on the server have no price inputs.** In the client list, designs
+  saved in October 2024 (27740, 27755, 27763, 27764) have no `cabinet_list`,
+  `manual_price_sheet_entries`, `price_changes` or `countertop_area`, and their `islandDimensions`
+  are in the 2024 per-cabinet format; designs saved from 2025 on have them (70 of the 102 in the
+  Gemini account, checked 2026-10-23). So `resave.json` (what today's app would send) is the price
+  and measurement baseline; `server.json` is only the input.
 - **Driving the old 2022.3 editor from here:** kitwright is only in the old project's
   `Unity/.mcp.json` (`http://127.0.0.1:8765/`, listening only while that editor is open), so it is
   reached over HTTP from Bash rather than added to the old project. Entering play mode there
@@ -1704,13 +1707,27 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   inputs, selections, selection and finishes, widgets and dragging are their own classes; the
   building-method and brand checks are named rules; the model's files are in `_project/Scripts/`.
   Every step matched the run before on the baseline, the menu check and the new edit probe.
-  Open from area 4, for the user: the three strings with U+FFFD sent to the server (Gotchas); the
-  orbit start-yaw race and the intermittent 36449 load (orbit view note above); the rear wall waits
-  for the user and now has to be ported by hand (map in the plan). **Next: area 5, the screens**
-  (85 files): its section in `03-refactor.md` first, as for areas 1–3. It is also where
-  `Kitchen.instance` (26 screen uses), most of `EventBridge.Designer`, the remaining building-method
-  checks (`DesignerToolbarUI` 22) and `DesignerSceneInitializer` taking over the designer's start-up
-  belong.
+  Open from area 4, for the user: the orbit start-yaw race and the intermittent 36449 load (orbit
+  view note above); the rear wall waits for the user and now has to be ported by hand (map in the
+  plan). **Area 5, the screens, has its own plan: `.claude/prompts/05-screens.md`** (written
+  2026-10-23; the user left the design to Claude, each step checked and committed on its own).
+  It takes the scene start-up into the initializers, `EventBridge`, `Kitchen.instance` and the
+  screens' building-method checks.
+- **Needs attention: the U+FFFD strings (fixed here 2026-10-23, the user's decision).** Before
+  old-repo commit `520d740c9d` (2025-11-26) `Kitchen.cs` was Windows-1252 and held `ft²`, `m²` and
+  `OASIS™ 45°`; that commit re-saved it as UTF-8 and they became U+FFFD (Gotchas). The server's
+  stored designs show it: `countertop_area` reads `ft²` up to September 2025, `ft�` from February
+  to May 2026, and `sq. ft.` from August 2026, after the team's fix `875b80d9f2` (2026-06-11),
+  which covered the countertop area only. This project now sends `sq. ft.` / `sq. m.` in
+  `cabinetFinishArea` (ProFit only, the Standard method; the team's wording) and
+  `OASIS™ 45° Transition Piece` on Napoleon corners (Gemini; what the server got before November
+  2025, e.g. designs 31373 and 31642). Nothing in the app reads either string back. Still open:
+  1. The old app still sends the broken text on every team branch (checked up to
+     `feature/model-integration`, 2026-10-22). The same two-line fix is needed there; the user
+     decides whether to tell the team.
+  2. Designs saved since November 2025 keep their broken text until they are saved again.
+  3. How the server's PDF prints `™` and `°` was not checked. The PDFs of 31373 or 31642 would
+     show it (a read-only download; ask first).
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a
