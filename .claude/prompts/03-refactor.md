@@ -169,7 +169,9 @@ Proposed order. The hubs come first because every other area uses them.
    2026-10-23).**
 5. **UI.** The menu screens and the designer screens (85 files, `DesignerToolbarUI` 2,521 lines).
    Still uGUI (project override), but constructed by their scene initializer and talking through
-   events. Most of `EventBridge.Menu` goes here.
+   events. Most of `EventBridge.Menu` goes here. **Its own plan: `05-screens.md`** (2026-10-23),
+   which also takes the scene start-up into the initializers, the rest of `EventBridge`,
+   `Kitchen.instance` and the screens' building-method checks.
 6. **Photos.** `KitchenScreenshotManager` (2,707 lines), `ProductVisualThumbnailCreator`, the
    cameras. The orbit-camera difference (open in the handover) can be fixed here if it hasn't been
    by then.
