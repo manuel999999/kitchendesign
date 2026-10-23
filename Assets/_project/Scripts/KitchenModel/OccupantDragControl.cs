@@ -11,11 +11,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using KitchenDesign.Session;
 
 namespace KitchenDesign.KitchenModel
 {
     public sealed class OccupantDragControl
     {
+        private readonly SessionStatus _session;
         private readonly Kitchen _kitchen;
         private readonly KitchenInteractionState _interaction;
         private readonly PhysicsRaycaster _cameraPhysicsRaycaster;
@@ -26,8 +28,10 @@ namespace KitchenDesign.KitchenModel
             Kitchen kitchen,
             KitchenInteractionState interaction,
             PhysicsRaycaster cameraPhysicsRaycaster,
-            LayerMask productPointerInteractionMask)
+            LayerMask productPointerInteractionMask,
+            SessionStatus session)
         {
+            this._session = session;
             this._kitchen = kitchen;
             this._interaction = interaction;
             this._cameraPhysicsRaycaster = cameraPhysicsRaycaster;
@@ -463,7 +467,7 @@ namespace KitchenDesign.KitchenModel
 
         internal float SnapOccupantToVolumeIncrement(float metersFromVolumeMinX)
         {
-            if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+            if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
             {
                 return Mathf.Round(metersFromVolumeMinX * Units.Meters2Centimeters) * Units.Centimeters2Meters;
             }

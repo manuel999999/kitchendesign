@@ -476,7 +476,7 @@ namespace KitchenDesign
             (Material cabinetMaterial, Material countertopMaterial) =
                 await kitchen.GetFinishMaterials(allowHighlightToReturn: true);
 
-            m_CabinetBacking.OnCabinetMaterialsChanged(
+            m_CabinetBacking.OnCabinetMaterialsChanged(kitchen,
                 cabinetMaterial,
                 countertopMaterial
             );
@@ -1047,7 +1047,7 @@ namespace KitchenDesign
 
             if (m_CabinetBacking && currentHighlightObject != m_CabinetBacking.gameObject)
             {
-                m_CabinetBacking.OnCabinetMaterialsChanged(cabinetMaterial, countertopMaterial);
+                m_CabinetBacking.OnCabinetMaterialsChanged(kitchen, cabinetMaterial, countertopMaterial);
             }
         }
 

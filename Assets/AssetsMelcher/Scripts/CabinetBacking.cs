@@ -97,9 +97,8 @@ namespace KitchenDesign
         ///     This must be called manually because backings are no longer
         ///     <see cref="Occupant"/>s.
         /// </summary>
-        public void OnCabinetMaterialsChanged(Material cabinetMaterial, Material countertopMaterial)
+        public void OnCabinetMaterialsChanged(IKitchen kitchen, Material cabinetMaterial, Material countertopMaterial)
         {
-            Kitchen kitchen = Kitchen.instance;
 
             RiserMaterialMode riserMaterialMode = m_RiserMaterialMode;
 

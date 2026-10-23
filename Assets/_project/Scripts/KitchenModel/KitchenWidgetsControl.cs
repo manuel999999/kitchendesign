@@ -11,11 +11,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using KitchenDesign.Session;
 
 namespace KitchenDesign.KitchenModel
 {
     public sealed class KitchenWidgetsControl
     {
+        private readonly SessionStatus _session;
+        private readonly ClientListStatus _clientList;
         private readonly Kitchen _kitchen;
         private readonly KitchenInteractionState _interaction;
         private readonly KitchenSelections _selections;
@@ -37,8 +40,12 @@ namespace KitchenDesign.KitchenModel
             ButtonWidget inputCabinetSizeWidget,
             ResizerWidget resizeCabinetWidgetPrefab,
             Transform cabinetResizeWidgetRoot,
-            Transform cabinetShelfResizeWidgetRoot)
+            Transform cabinetShelfResizeWidgetRoot,
+            SessionStatus session,
+            ClientListStatus clientList)
         {
+            this._session = session;
+            this._clientList = clientList;
             this._kitchen = kitchen;
             this._interaction = interaction;
             this._selections = selections;
@@ -67,11 +74,11 @@ namespace KitchenDesign.KitchenModel
 
             if (this._selections.layoutPrefab)
             {
-                string combinedClientName = ProFitGlobals.TryGetClientCombinedName();
+                string combinedClientName = this._clientList.TryGetClientCombinedName();
 
                 string countertopThicknessDisplayFormat = "";
 
-                MeasurementUnit units = ProFitGlobals.userProfile.activeUnits;
+                MeasurementUnit units = this._session.UserProfile.activeUnits;
 
                 if (units == MeasurementUnit.Centimeters)
                 {

@@ -37,7 +37,8 @@ namespace KitchenDesign
         {
             get
             {
-                Kitchen kitchen = Kitchen.instance;
+                ICabinet shelfCabinet = occupant != null ? occupant.cabinet : null;
+                IKitchen kitchen = shelfCabinet != null ? shelfCabinet.kitchen : null;
 
                 // For Stoll, the stainless steel burner plunge need to be
                 // resizable it contains no products. Once they have a burner,
@@ -659,7 +660,13 @@ namespace KitchenDesign
         /// <param name="volumeDoingTesting"></param>
         public void OnModifyOccupiedCuboid(ref Cuboid occupiedCuboid, OccupiableVolume volumeDoingTesting)
         {
-            Kitchen kitchen = Kitchen.instance;
+            OccupiableVolume testingCabinet = volumeDoingTesting;
+            while (testingCabinet != null && !(testingCabinet is ICabinet))
+            {
+                testingCabinet = testingCabinet.parentVolume;
+            }
+
+            IKitchen kitchen = ((ICabinet)testingCabinet).kitchen;
 
             occupiedCuboid.yMin -= kitchen.countertopThicknessInMeters;
 

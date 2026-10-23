@@ -1,4 +1,5 @@
 using KitchenDesign.BuildingRules;
+using KitchenDesign.CatalogData;
 using KitchenDesign.Geometry;
 using KitchenDesign.KitchenModel;
 using KitchenDesign.Pricing;
@@ -13,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using KitchenDesign.Session;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;
@@ -21,11 +23,19 @@ namespace KitchenDesign.Save
 {
     public sealed class KitchenSaveWriter
     {
+        private readonly SessionStatus _session;
+        private readonly ClientListStatus _clientList;
+        private readonly IAppRules _appRules;
+        private readonly CatalogDataStatus _catalogData;
         private readonly KitchenSelections _selections;
         private readonly ProductVisualDatabaseSO _productVisualDatabase;
 
-        public KitchenSaveWriter(KitchenSelections selections, ProductVisualDatabaseSO productVisualDatabase)
+        public KitchenSaveWriter(KitchenSelections selections, ProductVisualDatabaseSO productVisualDatabase, SessionStatus session, ClientListStatus clientList, IAppRules appRules, CatalogDataStatus catalogData)
         {
+            this._session = session;
+            this._clientList = clientList;
+            this._appRules = appRules;
+            this._catalogData = catalogData;
             this._selections = selections;
             this._productVisualDatabase = productVisualDatabase;
         }
@@ -36,11 +46,11 @@ namespace KitchenDesign.Save
 
             List<string> dimensions = new List<string>();
 
-            static void AddDimensions(List<string> dimensions, Vector3 sizeInMeters, bool showFraction)
+            void AddDimensions(List<string> dimensions, Vector3 sizeInMeters, bool showFraction)
             {
                 string length, height, depth;
 
-                if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                 {
                     length = Utility.MeasurementFormat.FormatMetersToCentimeters(sizeInMeters.x) + " ";
                     height = Utility.MeasurementFormat.FormatMetersToCentimeters(sizeInMeters.y) + " ";
@@ -58,7 +68,7 @@ namespace KitchenDesign.Save
 
             bool showFraction = false;
 
-            if(ProFitGlobals.appRules.MeasurementFractionsFollowBrandCatalog && this._selections.brandCatalog != null)
+            if(this._appRules.MeasurementFractionsFollowBrandCatalog && this._selections.brandCatalog != null)
             {
                 showFraction = this._selections.brandCatalog.showFractionInMeasurements;
             }
@@ -125,7 +135,7 @@ namespace KitchenDesign.Save
                 ++cabinetSide;
             }
 
-            static void AddLegacyOccupantEntries(OccupiableVolume volume, int cabinetSide, JsonList modelSaveDataJson)
+            void AddLegacyOccupantEntries(OccupiableVolume volume, int cabinetSide, JsonList modelSaveDataJson)
             {
                 foreach (Occupant occupant in volume.occupants)
                 {
@@ -149,7 +159,7 @@ namespace KitchenDesign.Save
                     {
                         string w, h, d;
 
-                        if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                        if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
                             w = Utility.MeasurementFormat.FormatMetersToCentimeters(occupantCutOutSize.x);
                             h = Utility.MeasurementFormat.FormatMetersToCentimeters(occupantCutOutSize.y);
@@ -179,7 +189,7 @@ namespace KitchenDesign.Save
 
             string counterTopHeight;
 
-            if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+            if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
             {
                 counterTopHeight = Utility.MeasurementFormat.FormatMetersToCentimeters(this._selections.countertopThicknessInMeters);
             }
@@ -497,7 +507,7 @@ namespace KitchenDesign.Save
                 countertopAreaInSquareMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet);
 
             string countertopArea =
-                ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
+                this._session.UserProfile.activeUnits == MeasurementUnit.FeetAndInches ?
                     countertopAreaInSquareFeet + " sq. ft." :
                     countertopAreaInSquareMeters + " sq. m.";
 
@@ -508,10 +518,10 @@ namespace KitchenDesign.Save
             JsonList manualPriceSheetEntries = priceSheetInputs.manualPriceSheetEntries;
             Dictionary<int, float> productIdToPriceChangeFactor = priceSheetInputs.productIdToPriceChangeFactor;
 
-            IPriceSheetExtras priceSheetExtras = ProFitGlobals.appRules.PriceSheetExtras switch
+            IPriceSheetExtras priceSheetExtras = this._appRules.PriceSheetExtras switch
             {
                 PriceSheetExtras.StollCustomKitchen => new StollPriceSheet(this._selections),
-                PriceSheetExtras.GeminiCatalog => new GeminiCatalogPriceSheet(this._selections),
+                PriceSheetExtras.GeminiCatalog => new GeminiCatalogPriceSheet(this._selections, this._session, this._catalogData),
                 _ => null
             };
 
@@ -586,9 +596,9 @@ namespace KitchenDesign.Save
                 saveJson.Add("analytics_key", analyticsKey);
             }
 
-            if (ProFitGlobals.activeClientWantsToBeContacted.HasValue)
+            if (this._clientList.ActiveClientWantsToBeContacted.HasValue)
             {
-                saveJson.Add("wants_to_be_contacted", ProFitGlobals.activeClientWantsToBeContacted.Value);
+                saveJson.Add("wants_to_be_contacted", this._clientList.ActiveClientWantsToBeContacted.Value);
             }
 
             string disclaimer = null;
@@ -602,7 +612,7 @@ namespace KitchenDesign.Save
             }
             else
             {
-                disclaimer = ProFitGlobals.appRules.NonCatalogQuoteDisclaimer;
+                disclaimer = this._appRules.NonCatalogQuoteDisclaimer;
             }
 
             if (!string.IsNullOrWhiteSpace(disclaimer))
@@ -613,7 +623,7 @@ namespace KitchenDesign.Save
             if (buildingRules.ReportsCabinetFinishLinearLength)
             {
                 string finishLinearDistance =
-                    ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
+                    this._session.UserProfile.activeUnits == MeasurementUnit.FeetAndInches ?
                         cabinetLinearMeters * Units.Meters2Inches * InchesToFeet + " ft" :
                         cabinetLinearMeters + " m";
 
@@ -622,7 +632,7 @@ namespace KitchenDesign.Save
             else if (cabinetSquareMeters > 0.0f)
             {
                 string finishSquareArea =
-                    ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
+                    this._session.UserProfile.activeUnits == MeasurementUnit.FeetAndInches ?
                         cabinetSquareMeters * (Units.Meters2Inches * Units.Meters2Inches) * (InchesToFeet * InchesToFeet) + " ft�" :
                         cabinetSquareMeters + " m�";
 
@@ -633,7 +643,7 @@ namespace KitchenDesign.Save
                 && this._selections.brandCatalog.rules.PricesToeKicks)
             {
                 string toeKickLinearDistance =
-                    ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?
+                    this._session.UserProfile.activeUnits == MeasurementUnit.FeetAndInches ?
                         Utility.MeasurementFormat.FormatMetersToImperial(toeKickLinearMeters) :
                         Utility.MeasurementFormat.FormatMetersToCentimeters(toeKickLinearMeters);
 

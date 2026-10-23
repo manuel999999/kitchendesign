@@ -16,6 +16,8 @@ namespace KitchenDesign.KitchenModel
 {
     public sealed class KitchenMaterialControl
     {
+        private readonly AppProfileSO _appProfile;
+        private readonly ProductVisualContentStatus _productContent;
         private readonly Kitchen _kitchen;
         private readonly KitchenInteractionState _interaction;
         private readonly KitchenSelections _selections;
@@ -32,8 +34,12 @@ namespace KitchenDesign.KitchenModel
             Transform ground,
             MeshRenderer groundWood,
             MeshRenderer groundStone,
-            ProductVisualDatabaseSO productVisualDatabase)
+            ProductVisualDatabaseSO productVisualDatabase,
+            AppProfileSO appProfile,
+            ProductVisualContentStatus productContent)
         {
+            this._appProfile = appProfile;
+            this._productContent = productContent;
             this._kitchen = kitchen;
             this._interaction = interaction;
             this._selections = selections;
@@ -41,8 +47,8 @@ namespace KitchenDesign.KitchenModel
             this._groundWood = groundWood;
             this._groundStone = groundStone;
             this._productVisualDatabase = productVisualDatabase;
-            this._primaryHighlightMaterial = ProFitGlobals.appOptions.appSkin.primarySelectionMaterial;
-            this._secondaryHighlightMaterial = ProFitGlobals.appOptions.appSkin.secondarySelectionMaterial;
+            this._primaryHighlightMaterial = this._appProfile.appOptions.appSkin.primarySelectionMaterial;
+            this._secondaryHighlightMaterial = this._appProfile.appOptions.appSkin.secondarySelectionMaterial;
         }
 
         internal void Connect(KitchenWidgetsControl widgets)
@@ -129,7 +135,7 @@ namespace KitchenDesign.KitchenModel
                 await GetFinishMaterials(allowHighlightToReturn: false);
 
             Material defaultKitchenMaterial =
-               await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
+               await this._appProfile.GetDefaultKitchenMaterial();
 
             if (highlightObject.TryGetComponent(out Occupant occupant))
             {
@@ -170,7 +176,7 @@ namespace KitchenDesign.KitchenModel
                 Material activeCountertopMaterial =
                     primaryHighlightMaterial ? primaryHighlightMaterial : countertopMaterial;
 
-                backing.OnCabinetMaterialsChanged(
+                backing.OnCabinetMaterialsChanged(this._kitchen,
                     activeCabinetMaterial,
                     activeCountertopMaterial
                 );
@@ -261,14 +267,14 @@ namespace KitchenDesign.KitchenModel
                 {
                     if (!individualCabinet)
                     {
-                        span.backing.OnCabinetMaterialsChanged(
+                        span.backing.OnCabinetMaterialsChanged(this._kitchen,
                             cabinetMaterial,
                             countertopMaterial
                         );
                     }
                     else
                     {
-                        span.backing.OnCabinetMaterialsChanged(
+                        span.backing.OnCabinetMaterialsChanged(this._kitchen,
                             unfocusedCabinetMaterial,
                             unfocusedCountertopMaterial
                         );
@@ -307,7 +313,7 @@ namespace KitchenDesign.KitchenModel
             {
                 if (span.backing)
                 {
-                    span.backing.OnCabinetMaterialsChanged(
+                    span.backing.OnCabinetMaterialsChanged(this._kitchen,
                         cabinetMaterial,
                         countertopMaterial
                     );
@@ -317,7 +323,7 @@ namespace KitchenDesign.KitchenModel
             await this._kitchen.layout.SetCabinetMaterials(
                 cabinetMaterial,
                 countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial(),
+                await this._appProfile.GetDefaultKitchenMaterial(),
                 cutOutMaterial
             );
         }
@@ -335,7 +341,7 @@ namespace KitchenDesign.KitchenModel
             ProductCategory finishCategory = fallbackFinishCategory;
             ProductVisualSO finishProductVisual = null;
 
-            Material finishMaterial = await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
+            Material finishMaterial = await this._appProfile.GetDefaultKitchenMaterial();
             FlooringType flooringType = FlooringType.Wood;
 
             if (finishProduct != null)
@@ -356,7 +362,7 @@ namespace KitchenDesign.KitchenModel
                 else
                 {
                     ProductVisualContent finishVisualContent =
-                        await ProFitGlobals.productContent
+                        await this._productContent
                             .LoadContent(finishProductVisual);
 
                     finishMaterial = finishVisualContent.finishMaterial;
@@ -366,7 +372,7 @@ namespace KitchenDesign.KitchenModel
 
             if (finishCategory == ProductCategory.FinishFloor && !finishProductVisual)
             {
-                finishMaterial = ProFitGlobals.appOptions.appSkin.kitchenDefaultFlooringMaterial;
+                finishMaterial = this._appProfile.appOptions.appSkin.kitchenDefaultFlooringMaterial;
             }
 
             await this._kitchen.UpdateCabinetHeightTransitions();
@@ -422,7 +428,7 @@ namespace KitchenDesign.KitchenModel
                         this._interaction.highlightObject,
                         cabinetMaterial,
                         countertopMaterial,
-                        await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                        await this._appProfile.GetDefaultKitchenMaterial()
                     );
                 }
             }
@@ -434,7 +440,7 @@ namespace KitchenDesign.KitchenModel
         internal async UniTask<Material> GetSelectedOrDefaultFinishMaterial(ProductInfo selectedFinish)
         {
             Material finishMaterial =
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
+                await this._appProfile.GetDefaultKitchenMaterial();
 
             if (selectedFinish != null)
             {
@@ -452,7 +458,7 @@ namespace KitchenDesign.KitchenModel
                 else
                 {
                     ProductVisualContent finishVisualPrefab =
-                        await ProFitGlobals.productContent
+                        await this._productContent
                             .LoadContent(finishVisual);
 
                     if (finishVisualPrefab != null && finishVisualPrefab.finishMaterial != null)

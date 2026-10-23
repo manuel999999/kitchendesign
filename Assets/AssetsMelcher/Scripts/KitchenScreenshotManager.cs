@@ -194,7 +194,7 @@ namespace KitchenDesign
             // A list of measurement pairs. Each occupant has 1 closest
             // neighbour for each 6 ordinal directions (CabinetLocalDirection).
             List<OccupantMeasurementPair> uniqueMeasurementPairs =
-                FindUniqueOccupantMeasurementPairs(occupantToNearestNeighbours);
+                FindUniqueOccupantMeasurementPairs(kitchen, occupantToNearestNeighbours);
 
             List<MeasurementForScreenshot> measuresForScreenshots =
                 PopulateMeasuresForScreenshots(kitchen, uniqueMeasurementPairs);
@@ -856,6 +856,7 @@ namespace KitchenDesign
         /// <param name="occupantToNearestNeighbours"></param>
         /// <returns></returns>
         protected static List<OccupantMeasurementPair> FindUniqueOccupantMeasurementPairs(
+            Kitchen kitchen,
             List<OccupantNearestNeighbours> occupantToNearestNeighbours)
         {
             List<OccupantMeasurementPair> measurementPairs = new ();
@@ -877,7 +878,7 @@ namespace KitchenDesign
 
             return measurementPairs;
 
-            static void RegisterOccupantMeasurementPairIfUnique(
+            void RegisterOccupantMeasurementPairIfUnique(
                 List<OccupantMeasurementPair>   measurementPairs,
                 Occupant                        occupant,
                 OccupantNearestNeighbours       nearestNeighbours,
@@ -942,7 +943,7 @@ namespace KitchenDesign
                     if (occupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Up) &&
                         direction.ToAxis() == MeasurementAxis.Y)
                     {
-                        extraDistanceInMetersForLabelOnly = Kitchen.instance.countertopThicknessInMeters;
+                        extraDistanceInMetersForLabelOnly = kitchen.countertopThicknessInMeters;
                     }
 
                     measurementPairs.Add(
@@ -1077,7 +1078,7 @@ namespace KitchenDesign
             {
                 foreach (CabinetSpan otherSpan in kitchen.layout.spans)
                 {
-                    otherSpan.backing?.OnCabinetMaterialsChanged(
+                    otherSpan.backing?.OnCabinetMaterialsChanged(kitchen,
                         m_MeasurementScreenshotCabinetBackingForTopDownMaterial,
                         m_MeasurementScreenshotCabinetBackingForTopDownMaterial
                     );

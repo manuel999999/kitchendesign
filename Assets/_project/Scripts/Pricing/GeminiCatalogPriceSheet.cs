@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using KitchenDesign.Session;
+using KitchenDesign.CatalogData;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;
@@ -19,10 +21,14 @@ namespace KitchenDesign.Pricing
 {
     public sealed class GeminiCatalogPriceSheet : IPriceSheetExtras
     {
+        private readonly SessionStatus _session;
+        private readonly CatalogDataStatus _catalogData;
         private readonly KitchenSelections _selections;
 
-        public GeminiCatalogPriceSheet(KitchenSelections selections)
+        public GeminiCatalogPriceSheet(KitchenSelections selections, SessionStatus session, CatalogDataStatus catalogData)
         {
+            this._session = session;
+            this._catalogData = catalogData;
             this._selections = selections;
         }
 
@@ -140,7 +146,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: "IM-45T-CN",
                                 productName: "OASIS� 45� Transition Piece",
-                                price: ProFitGlobals.userProfile.currency == Currency.CAD ?
+                                price: this._session.UserProfile.currency == Currency.CAD ?
                                     99.0f :
                                     109.0f
                             );
@@ -475,8 +481,8 @@ namespace KitchenDesign.Pricing
             if (this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Challenger)
             {
                 if (this._selections.countertopFinish != null &&
-                    ProFitGlobals.catalogData.FindManufacturerById(this._selections.countertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer) &&
-                    ProFitGlobals.catalogData.FindManufacturerByName(this._selections.brandCatalog.catalogName, out ManufacturerInfo challengerManufacturer) &&
+                    this._catalogData.FindManufacturerById(this._selections.countertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer) &&
+                    this._catalogData.FindManufacturerByName(this._selections.brandCatalog.catalogName, out ManufacturerInfo challengerManufacturer) &&
                     countertopFinishManufacturer.id == challengerManufacturer.id)
                 {
                     const int ChallengerBrushedStainlessFinishId = 1960;
@@ -750,7 +756,7 @@ namespace KitchenDesign.Pricing
                 };
             }
 
-            bool hasFoundFinishManufacturer = ProFitGlobals.catalogData.FindManufacturerById(this._selections.countertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer);
+            bool hasFoundFinishManufacturer = this._catalogData.FindManufacturerById(this._selections.countertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer);
 
             if (hasFoundFinishManufacturer &&
                 countertopFinishManufacturer.id == this._selections.brandCatalog.cabinetManufacturerId)

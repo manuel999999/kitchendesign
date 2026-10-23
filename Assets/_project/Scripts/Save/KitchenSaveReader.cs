@@ -11,6 +11,9 @@ using Melcher;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using KitchenDesign.Session;
+using KitchenDesign.CatalogData;
+using KitchenDesign.Shared.Interfaces;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;
@@ -19,6 +22,11 @@ namespace KitchenDesign.Save
 {
     public sealed class KitchenSaveReader
     {
+        private readonly ClientListStatus _clientList;
+        private readonly CatalogDataStatus _catalogData;
+        private readonly AppProfileSO _appProfile;
+        private readonly IAppRules _appRules;
+        private readonly ProductVisualContentStatus _productContent;
         private readonly Kitchen _kitchen;
         private readonly KitchenSelections _selections;
         private readonly ProductVisualDatabaseSO _productVisualDatabase;
@@ -36,8 +44,18 @@ namespace KitchenDesign.Save
             Sprite[] cabinetBackingSprites,
             CabinetBacking backsplashPrefab,
             CabinetBacking highBarTopPrefab,
-            CabinetBacking lowBarTopPrefab)
+            CabinetBacking lowBarTopPrefab,
+            ClientListStatus clientList,
+            CatalogDataStatus catalogData,
+            AppProfileSO appProfile,
+            IAppRules appRules,
+            ProductVisualContentStatus productContent)
         {
+            this._clientList = clientList;
+            this._catalogData = catalogData;
+            this._appProfile = appProfile;
+            this._appRules = appRules;
+            this._productContent = productContent;
             this._kitchen = kitchen;
             this._selections = selections;
             this._productVisualDatabase = productVisualDatabase;
@@ -108,7 +126,7 @@ namespace KitchenDesign.Save
             {
                 if (brandCatalogId >= 0)
                 {
-                    foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+                    foreach (BrandCatalogSO brandCatalog in this._catalogData.RuntimeBrandCatalogs)
                     {
                         if (brandCatalog.catalogId == brandCatalogId)
                         {
@@ -121,7 +139,7 @@ namespace KitchenDesign.Save
 
                 if (!this._selections.brandCatalog)
                 {
-                    foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+                    foreach (BrandCatalogSO brandCatalog in this._catalogData.RuntimeBrandCatalogs)
                     {
                         if (brandCatalog.catalogName == brandCatalogName)
                         {
@@ -157,11 +175,11 @@ namespace KitchenDesign.Save
 
             await EventBridge.Designer.onBrandCatalogChanged.InvokeIfNonEmpty(this._selections.brandCatalog);
 
-            this._selections.cabinetFinish = ProFitGlobals.catalogData.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
-            this._selections.countertopFinish = ProFitGlobals.catalogData.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
+            this._selections.cabinetFinish = this._catalogData.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
+            this._selections.countertopFinish = this._catalogData.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
 
             string flooringId = !string.IsNullOrEmpty(deckFinishProductSku) ? deckFinishProductSku : paverFinishProductSku;
-            this._selections.flooringFinish = ProFitGlobals.catalogData.FindProductInfoBySku(flooringId, findCabinetSection: false);
+            this._selections.flooringFinish = this._catalogData.FindProductInfoBySku(flooringId, findCabinetSection: false);
 
             this._selections.baseCabinetDepthInMeters = baseCabinetDepthInMeters;
             this._selections.countertopThicknessInMeters = countertopThicknessInMeters;
@@ -273,7 +291,7 @@ namespace KitchenDesign.Save
                         if (cabinetId > 0)
                         {
                             cabinetProductInfo =
-                                ProFitGlobals.catalogData.FindProductInfoById(
+                                this._catalogData.FindProductInfoById(
                                     cabinetId,
                                     findCabinetSection: true
                                 );
@@ -282,7 +300,7 @@ namespace KitchenDesign.Save
                         if (cabinetProductInfo == null)
                         {
                             cabinetProductInfo =
-                                ProFitGlobals.catalogData.FindProductInfoBySku(
+                                this._catalogData.FindProductInfoBySku(
                                     cabinetSku,
                                     findCabinetSection: true
                                 );
@@ -291,12 +309,12 @@ namespace KitchenDesign.Save
                         if (cabinetProductInfo == null)
                         {
                             int? remappedCabinetId =
-                                ProFitGlobals.appOptions.remappedProductIdDatabase.Lookup(cabinetSku);
+                                this._appProfile.appOptions.remappedProductIdDatabase.Lookup(cabinetSku);
 
                             if (remappedCabinetId.HasValue)
                             {
                                 cabinetProductInfo =
-                                    ProFitGlobals.catalogData.FindProductInfoById(
+                                    this._catalogData.FindProductInfoById(
                                         remappedCabinetId.Value,
                                         findCabinetSection: true
                                     );
@@ -540,14 +558,14 @@ namespace KitchenDesign.Save
             await this._kitchen.layout.SetCabinetMaterials(
                 cabinetMaterial,
                 countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                await this._appProfile.GetDefaultKitchenMaterial()
             );
 
             await this._kitchen.ChangeFinish(this._selections.flooringFinish, ProductCategory.FinishFloor);
 
             this._kitchen.CenterTheGround();
 
-            if(ProFitGlobals.appRules.ReappliesCountertopThicknessAfterLoad)
+            if(this._appRules.ReappliesCountertopThicknessAfterLoad)
             {
                 this._kitchen.SetCountertopThickness(this._selections.countertopThicknessInMeters);
             }
@@ -637,7 +655,7 @@ namespace KitchenDesign.Save
                 if (productId > 0)
                 {
                     productInfo =
-                        ProFitGlobals.catalogData.FindProductInfoById(
+                        this._catalogData.FindProductInfoById(
                             productId,
                             findCabinetSection: false
                         );
@@ -646,20 +664,20 @@ namespace KitchenDesign.Save
                 if (productInfo == null)
                 {
                     productInfo =
-                        ProFitGlobals.catalogData.FindProductInfoBySku(
+                        this._catalogData.FindProductInfoBySku(
                             productSku,
                             findCabinetSection: false
                         );
 
-                    if (productInfo == null && ProFitGlobals.appOptions.remappedProductIdDatabase)
+                    if (productInfo == null && this._appProfile.appOptions.remappedProductIdDatabase)
                     {
                         int? remappedProductId =
-                            ProFitGlobals.appOptions.remappedProductIdDatabase.Lookup(productSku);
+                            this._appProfile.appOptions.remappedProductIdDatabase.Lookup(productSku);
 
                         if (remappedProductId.HasValue)
                         {
                             ProductInfo remappedProductInfo =
-                                ProFitGlobals.catalogData.FindProductInfoById(
+                                this._catalogData.FindProductInfoById(
                                     remappedProductId.Value,
                                     findCabinetSection: false
                                 );
@@ -715,7 +733,7 @@ namespace KitchenDesign.Save
                 }
 
                 ProductVisualContent productVisualPrefab =
-                    await ProFitGlobals.productContent
+                    await this._productContent
                         .LoadContent(productVisual);
 
                 Occupant occupant =
@@ -765,7 +783,7 @@ namespace KitchenDesign.Save
             }
 
             ProductInfo backingProductInfo =
-                ProFitGlobals.catalogData.FindProductInfoBySku(
+                this._catalogData.FindProductInfoBySku(
                     backingProductSku,
                     findCabinetSection: false
                 );
@@ -824,20 +842,20 @@ namespace KitchenDesign.Save
 
         public async UniTask<bool> TryLoadRequestedSave()
         {
-            if (!ProFitGlobals.activeClientId.HasValue ||
-                !ProFitGlobals.activeQuoteId.HasValue)
+            if (!this._clientList.ActiveClientId.HasValue ||
+                !this._clientList.ActiveQuoteId.HasValue)
             {
                 return false;
             }
 
-            int clientId = ProFitGlobals.activeClientId.Value;
-            int quoteId = ProFitGlobals.activeQuoteId.Value;
-            if (!ProFitGlobals.TryGetClientAndQuoteIndex(clientId, quoteId, out int clientIndex, out int quoteIndex))
+            int clientId = this._clientList.ActiveClientId.Value;
+            int quoteId = this._clientList.ActiveQuoteId.Value;
+            if (!this._clientList.TryGetClientAndQuoteIndex(clientId, quoteId, out int clientIndex, out int quoteIndex))
             {
                 return false;
             }
 
-            UserClientQuote quote = ProFitGlobals.userClients[clientIndex].quotes[quoteIndex];
+            UserClientQuote quote = this._clientList.UserClients[clientIndex].quotes[quoteIndex];
 
             using var clearLoadingSpinner =
                 MelcherDeferred.Defer(

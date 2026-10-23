@@ -1218,6 +1218,18 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     exactly as it was, two quirks included: a catalog is never recorded as initialized, so its
     mapping is re-added on every call (an overwrite with the same values), and the lookups are null
     until the first catalog initializes them.
+  - **`Kitchen.instance` and the app systems** (B4.9). No model or photo code uses `Kitchen.instance`
+    any more: `CabinetShelf.isResizable` reaches the kitchen through its occupant's cabinet, the
+    shelf's cuboid callback through the volume testing it (walking up to the cabinet),
+    `CabinetBacking.OnCabinetMaterialsChanged` takes the kitchen from its callers (the span, the
+    material control, the photo manager), and the photo manager passes its kitchen down. The static
+    stays, set in `Kitchen.Awake`, only for the screens (26 uses, area 5). The classes area 4 created
+    (the three controls, the save writer and reader, the Gemini price sheet) take the app systems
+    they read (session, client list, catalog data, app profile, app rules, product content) in their
+    constructors; `Kitchen.Awake` hands them over from `ProFitGlobals`, the same instances
+    `AppInitializer` bound. `Kitchen` itself and the old model files (`Cabinet`, `CabinetLayout`,
+    `Occupant`…) still read `ProFitGlobals` until area 5 builds the designer scene from its
+    initializer.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's

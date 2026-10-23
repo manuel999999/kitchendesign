@@ -1000,13 +1000,13 @@ namespace KitchenDesign
         private void Awake()
         {
             this._interaction = new KitchenInteractionState();
-            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot);
-            this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase);
-            this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask);
+            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot, ProFitGlobals.session, ProFitGlobals.clientList);
+            this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase, ProFitGlobals.appProfile, ProFitGlobals.productContent);
+            this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask, ProFitGlobals.session);
             this._materials.Connect(this._widgets);
             this._drag.Connect(this._widgets);
-            this._saveWriter = new KitchenSaveWriter(this._selections, m_ProductVisualDatabase);
-            this._saveReader = new KitchenSaveReader(this, this._selections, m_ProductVisualDatabase, m_LayoutPrefabs, m_CabinetBackingSprites, m_BacksplashPrefab, m_HighBarTopPrefab, m_LowBarTopPrefab);
+            this._saveWriter = new KitchenSaveWriter(this._selections, m_ProductVisualDatabase, ProFitGlobals.session, ProFitGlobals.clientList, ProFitGlobals.appRules, ProFitGlobals.catalogData);
+            this._saveReader = new KitchenSaveReader(this, this._selections, m_ProductVisualDatabase, m_LayoutPrefabs, m_CabinetBackingSprites, m_BacksplashPrefab, m_HighBarTopPrefab, m_LowBarTopPrefab, ProFitGlobals.clientList, ProFitGlobals.catalogData, ProFitGlobals.appProfile, ProFitGlobals.appRules, ProFitGlobals.productContent);
 
             if (s_KitchenInstance)
             {

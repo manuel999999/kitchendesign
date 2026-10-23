@@ -306,6 +306,18 @@ mapping (`CabinetSectionDoorUtility`) becomes `DoorStyleLookup`, an instance own
 **B4.9 — `Kitchen.instance` and `ProFitGlobals` out of the model.** Decision 4, and the model's
 `ProFitGlobals` reads (product content, app rules, user profile units) become references the kitchen
 hands down where a path exists (`IKitchen`). Whatever is left is listed with its reason.
+- **Done 2026-10-23.** `Kitchen.instance` left `CabinetShelf` (through the occupant's cabinet in
+  `isResizable`; through the testing volume, walked up to its cabinet, in the cuboid callback),
+  `CabinetBacking` (`OnCabinetMaterialsChanged` takes the kitchen; 7 callers pass it) and the photo
+  manager (the kitchen passed down to `FindUniqueOccupantMeasurementPairs`). Two static local
+  functions lost `static` to capture what they now need (the writer's session, the photo manager's
+  kitchen). The classes area 4 created take their app systems in their constructors (a script found
+  each class's `ProFitGlobals` reads: about 55, now none); `Kitchen.Awake` hands over the same
+  instances. Known difference in principle, none in practice: with Sections, `isResizable` on a
+  plunge that is in no cabinet now returns true instead of applying the rule (only reachable for a
+  highlighted plunge, which is always in a cabinet). Checks against B4.8: `rulescheck.cs` 60/0;
+  `coldstart.sh` both the reference; `runall.sh` identical (photos within 0.14/255); fallback JSON
+  identical; `menucheck.sh` 21 / 21 / 1,268; edit probe identical in all three phases.
 
 **B4.10 — File the model.** `git mv` with `.meta` into `_project/Scripts/`: `KitchenModel/`
 (`Kitchen`, `IKitchen`, the parts, the cutout clipping), `Cabinets/` (`Cabinet`, `CabinetSpan`,
