@@ -72,7 +72,7 @@ namespace KitchenDesign
                 // until the fridge is removed.
                 if (m_IsUserResizable &&
                     m_Kitchen != null &&
-                    m_Kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                    m_Kitchen.buildingRules.FridgeCabinetsResizableOnlyWhenEmpty &&
                     m_Occupants.readOnly.Count > 0 &&    // At least one product
                     m_CabinetSectionProductInfo != null &&
                     !string.IsNullOrEmpty(m_CabinetSectionProductInfo.visualId))
@@ -105,7 +105,7 @@ namespace KitchenDesign
                 float standardHeightInMeters = m_InitialSizeInches.y * Units.Inches2Meters;
 
                 if (kitchen != null &&
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                    kitchen.buildingRules.UsesBrandCatalog &&
                     kitchen.selectedBrandCatalog)
                 {
                     standardHeightInMeters = kitchen.selectedBrandCatalog.standardCabinetHeightInMeters;
@@ -156,7 +156,7 @@ namespace KitchenDesign
             {
                 if(cabinetSectionVisual &&
                     cabinetSectionVisual.info.sectionEndPanelSizeInches > 0 &&
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                    kitchen.buildingRules.AppliesMidRunEndPanelPadding)
                 {
                     Vector3 rawSizeInMeters = m_SizeInMeters;
                     rawSizeInMeters.x -= m_AppliedMidOfRunPaddingInMetersLeft + m_AppliedMidOfRunPaddingInMetersRight;
@@ -562,7 +562,7 @@ namespace KitchenDesign
             if (m_CabinetSectionProductInfo != null)
             {
                 string label =
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections ?
+                    kitchen.buildingRules.LabelsCabinetsByProductName ?
                         m_CabinetSectionProductInfo.name :
                         m_CabinetSectionProductInfo.sku;
 
@@ -585,7 +585,7 @@ namespace KitchenDesign
 
             float cornerBaseWidthInMeters = baseDepthInMeters;
 
-            if (kitchen.selectedBuildingMethod is KitchenBuildingMethod.Catalog or KitchenBuildingMethod.Sections &&
+            if (kitchen.buildingRules.CabinetsHaveTheirOwnDepth &&
                 cabinetSectionProductInfo != null)
             {
                 // Override the kitchen's base cabinet depth with the depth
@@ -618,7 +618,7 @@ namespace KitchenDesign
 
                 float backingDepthChangeInMeters =
                     span.backing.GetCabinetInflateDepthInMeters(
-                        kitchen.selectedBuildingMethod
+                        kitchen.buildingRules
                     );
 
                 if (IsYawSimilar(span.orientationAlignedCabinet))
@@ -842,7 +842,7 @@ namespace KitchenDesign
 
                 if (neighbour)
                 {
-                    if (kitchen.selectedBuildingMethod is KitchenBuildingMethod.Catalog or KitchenBuildingMethod.Sections)
+                    if (kitchen.buildingRules.CabinetsHaveTheirOwnDepth)
                     {
                         // Gemini and Stoll have cabinets whose depths differ.
 
@@ -1503,7 +1503,7 @@ namespace KitchenDesign
             }
 
             if (specificOccupant.productVisual.info.runtimePrefabCategory == ProductCategorySpecific.Fridge &&
-                kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                kitchen.buildingRules.UsesBrandCatalog &&
                 kitchen.selectedBrandCatalog.fridgeBackPanelInfos != null)
             {
                 // WeatherStrong has specific fridge panel sizes. Find the
@@ -1556,7 +1556,7 @@ namespace KitchenDesign
         {
             if (cabinetSectionVisual &&
                 cabinetSectionVisual.info.sectionEndPanelSizeInches > 0 &&
-                kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                kitchen.buildingRules.AppliesMidRunEndPanelPadding)
             {
                 kitchen.layout.GetCabinetNeighbours(
                     this,

@@ -114,9 +114,11 @@ and the measures.
    they can already reach) and the photo manager (it is handed the kitchen already). The 26 screen
    uses stay until area 5 constructs the screens; the static stays as their one forward, like
    `ProFitGlobals`, and is listed in CLAUDE.md.
-5. **Building-method rules** go behind `IBuildingMethodRules` (`KitchenDesign.Shared.Interfaces`)
-   with `StandardBuildingRules`, `SectionsBuildingRules`, `CatalogBuildingRules`
-   (`_project/Scripts/BuildingRules/`), picked from the kitchen's selected method. The same pattern
+5. **Building-method rules** go behind `IBuildingMethodRules` (`KitchenDesign.Shared.Interfaces`),
+   implemented by one class, `BuildingMethodRules` (`_project/Scripts/BuildingRules/`), constructed
+   with the kitchen's selected method. (First planned as three classes; changed in B4.7 because the
+   method can be the unset 0 before `Restart`, where every old comparison was false, and one class
+   writing each rule as the expression it replaces is exact for every value.) The same pattern
    as `IAppRules`: code asks the rule, never compares the method. App and building method stay two
    axes (each app has one method today). Model code only; the screens' checks move in area 5.
 6. **Brand rules are code keyed by the catalog's cabinet manufacturer id**, in one `BrandRules`
@@ -271,6 +273,15 @@ all (highlight, drag and resize are only covered there), then the baseline.
 **B4.7 — Building-method rules.** As decision 5, with a table check like `rulescheck.cs`
 (`buildingrulescheck.cs`: every old expression against the new rule for the three methods and,
 where a cabinet takes part, each cabinet prefab).
+- **Done 2026-10-23.** 24 rules, about 50 checks converted by a script of line-anchored edits, each
+  asserting the old text (`Kitchen` 18, `Cabinet` 10, `CabinetLayout` 7, the reader 11, the writer 5,
+  `CabinetBacking`, `CabinetSpan`, `CabinetShelf`, the material control, `RuntimeProductOverrides`).
+  `CabinetBacking.GetCabinetInflateDepthInMeters` takes the rules instead of the method.
+  `CabinetHasMidSpanCabinetNeighbour` lost a branch that computed the same as the other. The cabinet
+  prefabs weren't needed in the table check: no rule depends on a cabinet. `buildingrulescheck.cs`:
+  96 checks, 0 mismatches. Checks against B4.6: `rulescheck.cs` 60/0; `coldstart.sh` both the
+  reference; `runall.sh` identical (photos within 0.14/255); fallback JSON identical;
+  `menucheck.sh` 21 / 21 / 1,268; edit probe identical.
 
 **B4.8 — Brand rules and the door-style lookup.** `BrandRules` as decision 6 (the price inputs'
 brand checks, `RuntimeProductOverrides`' padding numbers, `Const.Gemini`), checked by a table

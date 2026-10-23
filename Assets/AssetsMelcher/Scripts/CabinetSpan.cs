@@ -241,7 +241,7 @@ namespace KitchenDesign
                 // Only apply inflation once.
 
                 backingCutOutInSpanSpace.zMax +=
-                    backing.GetCabinetInflateDepthInMeters(kitchen.selectedBuildingMethod);
+                    backing.GetCabinetInflateDepthInMeters(kitchen.buildingRules);
             }
 
             Cuboid backingCuboidInSpanSpace = backingCutOutInSpanSpace;
@@ -495,7 +495,7 @@ namespace KitchenDesign
         public Vector3 GetCabinetInflateSizeInMetersFromBacking(CabinetBacking backing)
         {
             float inflateCabinetDepthByMeters =
-                backing.GetCabinetInflateDepthInMeters(kitchen.selectedBuildingMethod);
+                backing.GetCabinetInflateDepthInMeters(kitchen.buildingRules);
 
             Vector3 inflateCabinetSizeByMetersInSpanSpace =
                 new Vector3(0.0f, 0.0f, inflateCabinetDepthByMeters);
@@ -632,7 +632,7 @@ namespace KitchenDesign
             // backing is removed.
 
             float inflateCabinetDepthByMeters =
-                m_CabinetBacking.GetCabinetInflateDepthInMeters(kitchen.selectedBuildingMethod);
+                m_CabinetBacking.GetCabinetInflateDepthInMeters(kitchen.buildingRules);
 
             Vector3 inflateCabinetSizeByMetersInSpanSpace =
                 new Vector3(0.0f, 0.0f, inflateCabinetDepthByMeters);
@@ -742,7 +742,7 @@ namespace KitchenDesign
 
             bool allowCountertop = true;
 
-            if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+            if (!kitchen.buildingRules.BacksplashesHaveCountertop &&
                 m_CabinetBacking.info.category == ProductCategory.Backsplash)
             {
                 // Backsplashes in Stoll builds have no countertop.

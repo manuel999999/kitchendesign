@@ -10,6 +10,7 @@ namespace KitchenDesign
     using UnityEngine.EventSystems;
     using KitchenDesign.Geometry;
     using KitchenDesign.Serializables;
+    using KitchenDesign.Shared.Interfaces;
 
     /// <summary>
     ///     This script is attached to the Backsplash and Bar Top prefabs. It
@@ -64,14 +65,12 @@ namespace KitchenDesign
             return m_Transform;
         }
 
-        public float GetCabinetInflateDepthInMeters(KitchenBuildingMethod buildingMethod)
+        public float GetCabinetInflateDepthInMeters(IBuildingMethodRules buildingRules)
         {
             float inches =
-                buildingMethod switch
-                {
-                    KitchenBuildingMethod.Sections => m_InflateCabinetDepthByInches.stoll,
-                    _ => m_InflateCabinetDepthByInches.proFit
-                };
+                buildingRules.UsesStollBuilderDistances ?
+                    m_InflateCabinetDepthByInches.stoll :
+                    m_InflateCabinetDepthByInches.proFit;
 
             return inches * Units.Inches2Meters;
         }
@@ -104,7 +103,7 @@ namespace KitchenDesign
 
             RiserMaterialMode riserMaterialMode = m_RiserMaterialMode;
 
-            if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+            if (kitchen.buildingRules.BackingRiserUsesCabinetMaterial)
             {
                 riserMaterialMode = RiserMaterialMode.UseCabinetMaterial;
             }

@@ -54,7 +54,7 @@ namespace KitchenDesign.KitchenModel
         {
             bool isNewHighlight = highlightObject != this._interaction.highlightObject;
 
-            if (this._selections.buildingMethod != KitchenBuildingMethod.Standard)
+            if (this._kitchen.buildingRules.ReclickingProductSelectsItsVolume)
             {
                 if (!isNewHighlight &&
                     highlightObject &&
@@ -388,7 +388,7 @@ namespace KitchenDesign.KitchenModel
                 case ProductCategory.FinishCabinet:
                     this._selections.cabinetFinish = finishProduct;
 
-                    if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog && this._selections.cabinetFinish.manufacturerId == 140)
+                    if (this._kitchen.buildingRules.UsesBrandCatalog && this._selections.cabinetFinish.manufacturerId == 140)
                     {
                         EventBridge.Designer.showNotification?.Invoke(
                             title: "Deco Grain",

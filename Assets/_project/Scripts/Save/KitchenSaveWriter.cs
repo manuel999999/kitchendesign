@@ -1,3 +1,4 @@
+using KitchenDesign.BuildingRules;
 using KitchenDesign.Geometry;
 using KitchenDesign.KitchenModel;
 using KitchenDesign.Pricing;
@@ -6,6 +7,7 @@ using KitchenDesign.Serializables;
 using KitchenDesign.Server;
 using KitchenDesign.Shared.Common;
 using KitchenDesign.Shared.Enums;
+using KitchenDesign.Shared.Interfaces;
 using Melcher;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +34,8 @@ namespace KitchenDesign.Save
 
         public JsonDict Write(CabinetLayout layout)
         {
+            IBuildingMethodRules buildingRules = new BuildingMethodRules(this._selections.buildingMethod);
+
             List<string> dimensions = new List<string>();
 
             static void AddDimensions(List<string> dimensions, Vector3 sizeInMeters, bool showFraction)
@@ -297,8 +301,7 @@ namespace KitchenDesign.Save
             float cabinetLinearMeters = 0.0f;
             float cabinetSquareMeters = 0.0f;
 
-            if (this._selections.buildingMethod == KitchenBuildingMethod.Standard ||
-                this._selections.buildingMethod == KitchenBuildingMethod.Sections)
+            if (buildingRules.PricesCabinetFinishByArea)
             {
                 bool isSpanConnectedToPreviousSpan = false;
 
@@ -413,7 +416,7 @@ namespace KitchenDesign.Save
                     {
                         int numberOfSides = 2;
 
-                        if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
+                        if (buildingRules.UsesBrandCatalog &&
                             this._selections.brandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong &&
                             cabinet.cabinetSectionVisual &&
                             cabinet.cabinetSectionVisual.info.productCategoriesAllowedInSection.Any(x => x == ProductCategorySpecific.Fridge || x == ProductCategorySpecific.IceBox))
@@ -592,7 +595,7 @@ namespace KitchenDesign.Save
 
             string disclaimer = null;
 
-            if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
+            if (buildingRules.UsesBrandCatalog)
             {
                 if (this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Napoleon)
                 {
@@ -609,7 +612,7 @@ namespace KitchenDesign.Save
                 saveJson.Add("disclaimer", disclaimer);
             }
 
-            if (this._selections.buildingMethod == KitchenBuildingMethod.Sections)
+            if (buildingRules.ReportsCabinetFinishLinearLength)
             {
                 string finishLinearDistance =
                     ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?

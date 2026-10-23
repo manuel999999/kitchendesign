@@ -44,7 +44,7 @@ namespace KitchenDesign
                 // their size is adjusted and the volume cannot be resized
                 // until the burner is removed.
                 if (kitchen != null &&
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+                    kitchen.buildingRules.ShelvesFitWidthToProduct &&
                     m_FitWidthToOccupant &&
                     m_Occupants.readOnly.Count > 0) // At least one product
                 {
@@ -348,7 +348,7 @@ namespace KitchenDesign
 
         public override bool DoesApplyHorizontalPadding(ProductInfo productInfo)
         {
-            if (occupant.cabinet.kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+            if (occupant.cabinet.kitchen.buildingRules.ShelvesFitWidthToProduct &&
                 m_FitWidthToOccupant)
             {
                 return false;

@@ -8,6 +8,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Shared.Interfaces;
 
     /// <summary>
     /// This interface is used by cabinets to request information from the
@@ -16,6 +17,8 @@ namespace KitchenDesign
     public interface IKitchen
     {
         public KitchenBuildingMethod selectedBuildingMethod { get; }
+
+        public IBuildingMethodRules buildingRules { get; }
 
         public BrandCatalogSO selectedBrandCatalog { get; }
 

@@ -1,6 +1,7 @@
 namespace KitchenDesign.Products
 {
     using Melcher;
+    using KitchenDesign.BuildingRules;
     using KitchenDesign.CatalogData;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Serializables;
@@ -56,7 +57,7 @@ namespace KitchenDesign.Products
                         runtimeProductVisual.info
                     );
                 }
-                else if (newBuildingMethod != KitchenBuildingMethod.Catalog)
+                else if (!new BuildingMethodRules(newBuildingMethod).UsesBrandCatalog)
                 {
                     runtimeProductVisual.info.initialInsetFromEdgeInMeters =
                         sourceProductVisual.info.initialInsetFromEdgeInMeters;
@@ -78,7 +79,7 @@ namespace KitchenDesign.Products
             AssetAddress<ProductVisualContent>  address,
             LoadedProductContent                newlyLoadedProductVisualContent)
         {
-            if (selectedBuildingMethod != KitchenBuildingMethod.Catalog && !appRules.AdjustsSmokerCutOutHeight)
+            if (!new BuildingMethodRules(selectedBuildingMethod).UsesBrandCatalog && !appRules.AdjustsSmokerCutOutHeight)
             {
                 return;
             }

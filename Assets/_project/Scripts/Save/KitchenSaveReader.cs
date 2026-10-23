@@ -92,16 +92,11 @@ namespace KitchenDesign.Save
                 this._selections.buildingMethod = KitchenBuildingMethod.Standard;
             }
 
-            float countertopOverhangInMeters = 1.0f * Units.Inches2Meters;
-
-            if (this._selections.buildingMethod == KitchenBuildingMethod.Sections)
-            {
-                countertopOverhangInMeters *= 0.5f;
-            }
+            float countertopOverhangInMeters = this._kitchen.buildingRules.DefaultCountertopOverhangInMeters;
 
             this._selections.brandCatalog = null;
 
-            bool isCatalogMode = this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
+            bool isCatalogMode = this._kitchen.buildingRules.UsesBrandCatalog;
             bool hasCatalogName = !string.IsNullOrEmpty(brandCatalogName);
             if (isCatalogMode != hasCatalogName)
             {
@@ -198,8 +193,7 @@ namespace KitchenDesign.Save
             );
 
             bool remakeCabinets =
-                this._selections.buildingMethod == KitchenBuildingMethod.Sections ||
-                this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
+                this._kitchen.buildingRules.CabinetsAreProducts;
 
             if (string.IsNullOrEmpty(kitchenBuildingMethodName))
             {
@@ -405,7 +399,7 @@ namespace KitchenDesign.Save
                 {
                     sizeInMeters.y = cabinetProductInfo.productSizeInMeters.y;
                 }
-                else if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
+                else if (this._kitchen.buildingRules.UsesBrandCatalog &&
                     cabinet.Is(CabinetType.Corner, CabinetModelType.Procedural))
                 {
                     sizeInMeters.y = this._selections.brandCatalog.standardCabinetHeightInMeters;
@@ -415,7 +409,7 @@ namespace KitchenDesign.Save
                 cabinet.sizeInMeters = sizeInMeters;
 
                 if (cabinet.cabinetType.IsHeightTransition() &&
-                    this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
+                    this._kitchen.buildingRules.UsesBrandCatalog &&
                     this._selections.brandCatalog != null &&
                     this._selections.brandCatalog.cabinetSectionLegStyle)
                 {

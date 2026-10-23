@@ -209,14 +209,7 @@ namespace KitchenDesign
         /// </summary>
         public bool CabinetHasMidSpanCabinetNeighbour(Cabinet cabinet)
         {
-            if (cabinet.kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
-            {
-                if (!cabinet.cabinetType.IsMidSpanCabinetType(kitchen.selectedBuildingMethod))
-                {
-                    return false;
-                }
-            }
-            else if (cabinet.cabinetType != CabinetType.Straight)
+            if (!cabinet.cabinetType.IsMidSpanCabinetType(kitchen.selectedBuildingMethod))
             {
                 return false;
             }
@@ -463,7 +456,7 @@ namespace KitchenDesign
 
                     lastCabinetSpan = cabinetSpan;
 
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+                    if (kitchen.buildingRules.BackingSpansTakeOnlyStandardHeightCabinets &&
                         cabinetSpan.backing &&
                         cabinetSectionProductInfo != null &&
                         !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 36.0f * Units.Inches2Meters, tolerance: 0.001f))
@@ -615,7 +608,7 @@ namespace KitchenDesign
                     // StraightOnRightOfCorner neighbour.
 
                     bool blindCornersCanExist =
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog;
+                        kitchen.buildingRules.HasBlindCorners;
 
                     if (prioritizedCabinetToReplace &&
                         prioritizedCabinetToReplace.cabinetType == CabinetType.Corner)
@@ -1076,7 +1069,7 @@ namespace KitchenDesign
 
                     currentCabinet.element.GetTransform().position = worldPos;
 
-                    if (kitchen.selectedBuildingMethod is KitchenBuildingMethod.Catalog or KitchenBuildingMethod.Sections)
+                    if (kitchen.buildingRules.CabinetsHaveTheirOwnDepth)
                     {
                         float previousCabinetDepthInMeters = previousCabinetCuboid.depth;
 
@@ -1387,10 +1380,10 @@ namespace KitchenDesign
                 cabinetPrefab.cabinetType == CabinetType.Corner;
 
             bool isCabinetSectionProductInfoExpected =
-                (buildingMethod == KitchenBuildingMethod.Catalog || buildingMethod == KitchenBuildingMethod.Sections) && isCabinetSectionProductInfoUsable;
+                kitchen.buildingRules.CabinetsAreProducts && isCabinetSectionProductInfoUsable;
 
             bool isCabinetSectionProductInfoOptional =
-                cabinetPrefab.cabinetType == CabinetType.Corner || buildingMethod == KitchenBuildingMethod.Sections;
+                cabinetPrefab.cabinetType == CabinetType.Corner || kitchen.buildingRules.CabinetProductIsOptional;
 
             if (hasCabinetSectionProductInfo != isCabinetSectionProductInfoExpected &&
                 !isCabinetSectionProductInfoOptional)
@@ -1597,7 +1590,7 @@ namespace KitchenDesign
         public void ModifyCabinetForBuildingMethod(Cabinet cabinet)
         {
             if (cabinet.cabinetType == CabinetType.Straight &&
-                cabinet.kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                cabinet.kitchen.buildingRules.HasCabinetColumns)
             {
                 // Apply the appropriate size limits to the cabinet. This
                 // ensures that Stoll's cabinet sections are restricted to a
@@ -1628,7 +1621,7 @@ namespace KitchenDesign
                 cabinet.occupiablePaddingInMeters = occupiablePaddingInMeters;
             }
 
-            cabinet.SetColumnsVisible(cabinet.kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections);
+            cabinet.SetColumnsVisible(cabinet.kitchen.buildingRules.HasCabinetColumns);
         }
 
         /// <summary>

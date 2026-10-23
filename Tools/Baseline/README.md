@@ -78,6 +78,8 @@ client names; never copy it into a repo.
 - `kitchendatacensus.cs` (2026-10-23, area 4): edit mode. Every serialized value of every brand
   catalog, kitchen template, door / handle / leg style and door editor mapping asset, found by
   type name (old or `…SO`), into `GeminiBaseline/kitchendatacensus-latest.txt` with a hash.
+- `buildingrulescheck.cs` (2026-10-23, B4.7): edit mode. Every building-method rule against the
+  old expression it replaced, for the unset value and the three methods. Must print `mismatches=0`.
 - **None of these scripts take options.** `menucheck.sh --help` runs the whole menu check (it
   happened once, after the user's files had been restored, and rewrote their ProFit fallback
   JSON). Read a script instead of running it to see what it does.

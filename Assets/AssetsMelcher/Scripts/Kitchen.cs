@@ -8,6 +8,8 @@ namespace KitchenDesign
     using KitchenDesign.Products;
     using KitchenDesign.KitchenModel;
     using KitchenDesign.Save;
+    using KitchenDesign.BuildingRules;
+    using KitchenDesign.Shared.Interfaces;
     using Unity.Cinemachine;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
@@ -52,6 +54,19 @@ namespace KitchenDesign
 
         public KitchenBuildingMethod selectedBuildingMethod => this._selections.buildingMethod;
 
+        public IBuildingMethodRules buildingRules
+        {
+            get
+            {
+                if (this._buildingRules == null || this._buildingRules.Method != this._selections.buildingMethod)
+                {
+                    this._buildingRules = new BuildingMethodRules(this._selections.buildingMethod);
+                }
+
+                return this._buildingRules;
+            }
+        }
+
         public BrandCatalogSO selectedBrandCatalog => this._selections.brandCatalog;
 
         public CountertopType selectedCountertopType => this._selections.countertopType;
@@ -79,7 +94,7 @@ namespace KitchenDesign
         public CuboidPadding baseCountertopOverhangInMeters => this._selections.countertopOverhangInMeters;
 
 
-        public bool doCabinetsHaveColumns => this._selections.buildingMethod == KitchenBuildingMethod.Sections;
+        public bool doCabinetsHaveColumns => this.buildingRules.HasCabinetColumns;
 
         // TODO: Do something better than expose this directly. It is exposed
         //       so the ground can be temporarily hidden during screenshots
@@ -185,8 +200,7 @@ namespace KitchenDesign
         {
             return
                 (cabinetForRuleset != null && cabinetForRuleset.forceProductsToCenterBuildingMethods.HasFlag(this._selections.buildingMethod)) ||
-                this._selections.buildingMethod == KitchenBuildingMethod.Sections ||
-                this._selections.buildingMethod == KitchenBuildingMethod.Catalog;
+                this.buildingRules.ProductsCenteredInCabinets;
         }
 
         public void RefreshTickerLabels()
@@ -333,7 +347,7 @@ namespace KitchenDesign
 
                 m_CurrentCabinetLayout.SetKitchen(this);
 
-                if (this._selections.buildingMethod == KitchenBuildingMethod.Standard)
+                if (this.buildingRules.PadsCornersForAdjacentSpans)
                 {
                     // In standard mode, we enforce extra padding in the
                     // corners to prevent objects on adjacent spans from
@@ -373,7 +387,7 @@ namespace KitchenDesign
                         cabinet.occupiablePaddingInMeters = occupiablePaddingInMeters;
                     }
                 }
-                else if (this._selections.buildingMethod == KitchenBuildingMethod.Sections)
+                else if (this.buildingRules.HasCabinetColumns)
                 {
                     // In Sections mode, corners cabinets are flanked with
                     // extra sections that shim in the cabinet columns for the
@@ -482,7 +496,7 @@ namespace KitchenDesign
                     // Apply the cabinet size changes.
                     m_CurrentCabinetLayout.UpdatePositions();
                 }
-                else if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
+                else if (this.buildingRules.UsesBrandCatalog)
                 {
                     this._selections.baseCabinetDepthInMeters = this._selections.brandCatalog.standardCabinetDepthInMeters;
 
@@ -1244,7 +1258,7 @@ namespace KitchenDesign
                 {
                     EventBridge.Designer.showBuildingMethodsUi.Invoke();
                 }
-                else if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
+                else if (this.buildingRules.UsesBrandCatalog)
                 {
                     EventBridge.Designer.showBrandCatalogUi.Invoke();
                 }
@@ -1319,7 +1333,7 @@ namespace KitchenDesign
 
             // Apply brand catalog's default toe kick. Currently, this is only
             // necessary to enforce Napoleon's mandatory toe kick.
-            if (m_CurrentCabinetLayout && this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
+            if (m_CurrentCabinetLayout && this.buildingRules.UsesBrandCatalog)
             {
                 this._selections.toeKickType = this._selections.brandCatalog.defaultToeKickType;
                 EventBridge.Designer.onToeKickTypeChanged?.Invoke(this._selections.toeKickType);
@@ -1328,7 +1342,7 @@ namespace KitchenDesign
             // Ensure the cabinet is the client's intended outside-edge length
             // (at time of writing, that is 15", as set as initial size on
             // straight cabinet prefab)
-            if (m_CurrentCabinetLayout && this._selections.buildingMethod == KitchenBuildingMethod.Standard)
+            if (m_CurrentCabinetLayout && this.buildingRules.SizesStraightCabinetsToOutsideEdge)
             {
                 foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
                 {
@@ -1788,7 +1802,7 @@ namespace KitchenDesign
                     heightTransitionCabinet.normalizedAnchorToPreviousSection = Vector3.zero;
                 }
 
-                if (selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                if (this.buildingRules.UsesBrandCatalog &&
                     selectedBrandCatalog &&
                     selectedBrandCatalog.cabinetSectionLegStyle)
                 {
@@ -1869,7 +1883,7 @@ namespace KitchenDesign
                         RotateCameraToFrontOfCabinet(addedOccupant.cabinet);
                     }
 
-                    if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog &&
+                    if (this.buildingRules.UsesBrandCatalog &&
                         this._selections.brandCatalog != null &&
                         this._selections.brandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong)
                     {
@@ -1941,7 +1955,7 @@ namespace KitchenDesign
             {
                 Cabinet newCabinetTemplateOverride = null;
 
-                if (this._selections.buildingMethod == KitchenBuildingMethod.Catalog)
+                if (this.buildingRules.ClonedSectionsCopyTheirCabinet)
                 {
                     newCabinetTemplateOverride = cabinetToClone;
                 }
@@ -2082,7 +2096,7 @@ namespace KitchenDesign
             {
                 // Nowhere was found to insert a cabinet.
 
-                if (selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+                if (this.buildingRules.BackingSpansTakeOnlyStandardHeightCabinets &&
                     cabinetSectionProductInfo != null &&
                     !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 0.0f, tolerance: 0.001f) &&
                     !MelcherCommon.IsAlmostEqual(cabinetSectionProductInfo.productSizeInMeters.y, 36.0f * Units.Inches2Meters, tolerance: 0.001f) &&
@@ -2260,7 +2274,7 @@ namespace KitchenDesign
 
         private async UniTask OnOccupantAddedToCabinet(Occupant occupant)
         {
-            if (this._selections.buildingMethod != KitchenBuildingMethod.Sections)
+            if (!this.buildingRules.LimitsCabinetSizeToPreventBowing)
             {
                 return;
             }
@@ -2366,7 +2380,7 @@ namespace KitchenDesign
 
         private async UniTask OnOccupantRemovedFromCabinet(Occupant occupant)
         {
-            if (this._selections.buildingMethod == KitchenBuildingMethod.Sections &&
+            if (this.buildingRules.LimitsCabinetSizeToPreventBowing &&
                 ReferenceEquals(occupant.occupiedVolume, occupant.cabinet))
             {
                 // Recover Stoll cabinet's original maximum size. The max size
@@ -2505,8 +2519,7 @@ namespace KitchenDesign
             }
 
             MelcherLog.Assert(
-                this._selections.buildingMethod == KitchenBuildingMethod.Sections ||
-                this._selections.buildingMethod == KitchenBuildingMethod.Catalog,
+                this.buildingRules.CabinetsAreProducts,
                 $"Cabinet reordering is assumed to not work in {this._selections.buildingMethod} building method."
             );
 
@@ -2582,7 +2595,7 @@ namespace KitchenDesign
         protected void TryToggleToeKicks()
         {
             MelcherLog.Breadcrumb($"Building method: {this._selections.buildingMethod}");
-            if (this._selections.buildingMethod != KitchenBuildingMethod.Catalog)
+            if (!this.buildingRules.CanToggleToeKicks)
             {
                 return;
             }
@@ -3001,6 +3014,7 @@ namespace KitchenDesign
         /// </summary>
         private readonly KitchenSelections _selections = new KitchenSelections();
         private KitchenSaveWriter _saveWriter;
+        private BuildingMethodRules _buildingRules;
         private KitchenSaveReader _saveReader;
         private KitchenInteractionState _interaction;
         private KitchenWidgetsControl _widgets;

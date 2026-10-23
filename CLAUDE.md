@@ -1161,6 +1161,37 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
       few follow the client's table, then one per 96"; WeatherStrong: front + back + 54" for the
       ends, divided by 96, rounded up); WeatherStrong end vents; no toe kick line for Agora.
     The brand checks inside are still manufacturer-id comparisons until B4.8.
+  - **Building-method rules** (B4.7): `IBuildingMethodRules` (`KitchenDesign.Shared.Interfaces`)
+    and `BuildingMethodRules` (`_project/Scripts/BuildingRules/`, `KitchenDesign.BuildingRules`): one
+    class constructed with the method, each rule written as the expression it replaced, so it is
+    exact for every value, including the unset 0 the kitchen holds before `Restart` (every old
+    comparison was false then). Model code asks `kitchen.buildingRules` (on `IKitchen`; `Kitchen`
+    keeps one instance per selected method); the save writer and `RuntimeProductOverrides`
+    construct one. **No model code compares the building method any more**; the screens (area 5)
+    and the photo manager (area 6) still do. `CabinetTypeExtensions.IsBlindCorner` /
+    `IsMidSpanCabinetType` still take the method: they are Shared helpers the screens use too, and
+    they encode the same rule as `HasBlindCorners`. `CabinetLayout.CabinetHasMidSpanCabinetNeighbour`
+    lost its building-method branch: both branches computed the same thing. The rules
+    (Standard / Sections / Catalog):
+    - Catalog only: `UsesBrandCatalog` (the catalog sets cabinet height and depth, the default toe
+      kick, legs under height transitions, fridge back panels and the procedural corner height; the
+      brand catalog screen comes first; the Deco Grain notice; the catalog-adjusted product inset and
+      smoker cut-out height are kept), `CanToggleToeKicks`, `FridgeCabinetsResizableOnlyWhenEmpty`
+      (Gemini's fridge panels), `AppliesMidRunEndPanelPadding`, `HasBlindCorners`,
+      `ClonedSectionsCopyTheirCabinet`.
+    - Sections only (Stoll): `HasCabinetColumns` (columns, column-based size limits, corner shims),
+      `LimitsCabinetSizeToPreventBowing`, `LabelsCabinetsByProductName` (others show the SKU),
+      `BackingRiserUsesCabinetMaterial`, `UsesStollBuilderDistances`, `ShelvesFitWidthToProduct`
+      (plunges sized to their burner and locked while full), `BackingSpansTakeOnlyStandardHeightCabinets`
+      (36"), `ReportsCabinetFinishLinearLength`, `CabinetProductIsOptional`; and
+      `BacksplashesHaveCountertop` false; `DefaultCountertopOverhangInMeters` ½" (else 1").
+    - Standard only (ProFit): `PadsCornersForAdjacentSpans`, `SizesStraightCabinetsToOutsideEdge`
+      (15" outside edge on a new kitchen); and `ReclickingProductSelectsItsVolume` false.
+    - Sections and Catalog: `CabinetsHaveTheirOwnDepth`, `CabinetsAreProducts` (cabinets come from
+      cabinet-section products and a load rebuilds them), `ProductsCenteredInCabinets`.
+    - Standard and Sections: `PricesCabinetFinishByArea`.
+    Checked with `Tools/Baseline/unity6/buildingrulescheck.cs` (every rule against the old
+    expression for the four values: 96 checks).
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
