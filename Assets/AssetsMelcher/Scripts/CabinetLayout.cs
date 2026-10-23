@@ -1467,7 +1467,7 @@ namespace KitchenDesign
                     {
                         // Now find the door from the currently selected door style.
                         ProductVisualSO cabinetDoorVisual =
-                            CabinetSectionDoorUtility.FindDoorStyleVisual(
+                            ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
                                 kitchen.productVisualDatabase.runtimeEntries,
                                 cabinetSectionVisual,
                                 kitchen.selectedBrandCatalog,

@@ -1,3 +1,4 @@
+using KitchenDesign.Brands;
 using KitchenDesign.Geometry;
 using KitchenDesign.KitchenModel;
 using KitchenDesign.Scriptables;
@@ -25,10 +26,7 @@ namespace KitchenDesign.Pricing
             this._selections = selections;
         }
 
-        private bool canHaveToeKickEntry => this._selections.brandCatalog.cabinetManufacturerId != Const.Gemini.ManufactersIds.AgoraBerlinGardens;
-        private bool isAgoraBerlinGardens => this._selections.brandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AgoraBerlinGardens;
-        private bool isEndura => this._selections.brandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Endura;
-        private bool isToppin => this._selections.brandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Toppin;
+        private BrandRules brandRules => this._selections.brandCatalog.rules;
 
         public void AddTo(PriceSheetInputs inputs, CabinetLayout layout, float toeKickLinearMeters)
         {
@@ -150,7 +148,7 @@ namespace KitchenDesign.Pricing
                         manualPriceSheetEntries.Add(transitionPiece);
                     }
 
-                    if (isAgoraBerlinGardens &&
+                    if (brandRules.PricesCornersAsOwnProduct &&
                         cabinet.Is(CabinetType.Corner))
                     {
                         JsonDict transitionPiece =
@@ -163,7 +161,7 @@ namespace KitchenDesign.Pricing
                     }
                 }
 
-                if(isAgoraBerlinGardens &&
+                if(brandRules.ForcesKamadoGrillEndPanels &&
                     cabinet.cabinetSectionProductInfo != null &&
                     cabinet.cabinetSectionProductInfo.sku != null &&
                     (cabinet.cabinetSectionProductInfo.sku is "GADB" or "GADA"))
@@ -366,7 +364,7 @@ namespace KitchenDesign.Pricing
                             fridge.productInfo.productSizeInMeters.x
                         );
 
-                    bool canAddFridgeBackPanel = CanAddFridgeBackPanelToPriceSheet();
+                    bool canAddFridgeBackPanel = brandRules.PricesFridgeBackPanels;
 
                     if(this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Napoleon && fridgeEndPanelCount > 0)
                     {
@@ -383,7 +381,7 @@ namespace KitchenDesign.Pricing
 
                         if (fridgePanel.specificPanelWidthInMeters > 0.0f)
                         {
-                            if(isAgoraBerlinGardens)
+                            if(brandRules.FridgePanelSkuIncludesCabinetSize)
                             {
                                 fridgeWidthInInches += 1.5f;
                                 productId = $"{fridgePanel.productId}x{cabinet.sizeInMeters.z * Units.Meters2Inches}x{cabinet.sizeInMeters.y * Units.Meters2Inches}";
@@ -409,7 +407,7 @@ namespace KitchenDesign.Pricing
                 }
 
                 {
-                    if(isAgoraBerlinGardens || isToppin)
+                    if(!brandRules.PricesFridgeEndPanels)
                     {
                         fridgeEndPanelCount = 0;
                     }
@@ -464,7 +462,7 @@ namespace KitchenDesign.Pricing
                 }
             }
 
-            if(isAgoraBerlinGardens)
+            if(brandRules.PricesCountertopsFromCatalog)
             {
                 JsonDict countertopPricing = TryGetCountertopPricing(layout);
 
@@ -652,7 +650,7 @@ namespace KitchenDesign.Pricing
                 }
 
                 if (toeKickLinearMeters > 0.0f
-                    && canHaveToeKickEntry)
+                    && brandRules.PricesToeKicks)
                 {
                     float toeKickLinearInches = toeKickLinearMeters * Units.Meters2Inches;
 
@@ -684,7 +682,7 @@ namespace KitchenDesign.Pricing
             if (this._selections.brandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong &&
                 this._selections.cabinetFinish != null)
             {
-                if(this._selections.brandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AmericanOutdoorCabinets)
+                if(brandRules.PricesAmericanOutdoorBaseEnds)
                 {
                     manualPriceSheetEntries.Add(
                         CreateManualPriceSheetEntry(
@@ -694,9 +692,7 @@ namespace KitchenDesign.Pricing
                         )
                     );
                 }
-                else if(this._selections.brandCatalog.cabinetManufacturerId is
-                    Const.Gemini.ManufactersIds.Endura or
-                    Const.Gemini.ManufactersIds.AgoraBerlinGardens)
+                else if(!brandRules.PricesBaseEnds)
                 {
                 }
                 else
@@ -716,7 +712,7 @@ namespace KitchenDesign.Pricing
                 int numberOfToeKicks =
                     Mathf.CeilToInt(toeKickLinearMeters / WeatherStrongToeKickLengthInMeters);
 
-                if(isAgoraBerlinGardens)
+                if(!brandRules.PricesToeKicks)
                 {
                     numberOfToeKicks = 0;
                 }
@@ -728,7 +724,7 @@ namespace KitchenDesign.Pricing
                         price: 483.0f
                     );
 
-                if(isEndura)
+                if(brandRules.UsesEnduraToeKick)
                 {
                     toeKickEntry = CreateManualPriceSheetEntry(
                         productSku: $"EN-TK96",
@@ -742,15 +738,6 @@ namespace KitchenDesign.Pricing
                     manualPriceSheetEntries.Add(toeKickEntry);
                 }
             }
-        }
-
-        private bool CanAddFridgeBackPanelToPriceSheet()
-        {
-            return new int[]{
-                Const.Gemini.ManufactersIds.AmericanOutdoorCabinets
-                ,Const.Gemini.ManufactersIds.Endura
-                }
-                .Contains(this._selections.brandCatalog.cabinetManufacturerId) == false;
         }
 
         private JsonDict TryGetCountertopPricing(CabinetLayout layout)

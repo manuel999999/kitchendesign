@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.CatalogData
 {
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -6,13 +6,10 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using KitchenDesign.Serializables;
 
-    public static class CabinetSectionDoorUtility
+    public sealed class DoorStyleLookup
     {
-#region Methods
-        // =====================================================================
-        // Static Methods
-        // =====================================================================
-        public static ProductVisualSO FindDoorStyleVisual(
+
+        public ProductVisualSO FindDoorStyleVisual(
             IReadOnlyList<ProductVisualSO>    productVisuals,
             ProductVisualSO                   cabinetSectionVisual,
             BrandCatalogSO                    brandCatalog,
@@ -35,7 +32,6 @@ namespace KitchenDesign
                 throw new System.ArgumentNullException(nameof(cabinetSectionVisual));
             }
 
-            // This has a '^' suffix.
             string cabinetSectionVisualName;
 
             string alternativeVisualName = FindMappedDoorId(cabinetSectionVisual.info.id);
@@ -46,7 +42,7 @@ namespace KitchenDesign
             else
             {
                 string usedName = cabinetSectionVisual.name;
-                
+
                 cabinetSectionVisualName =
                     usedName.Substring(0, length: usedName.Length - 1);
             }
@@ -54,7 +50,7 @@ namespace KitchenDesign
             string expectedDoorStyleVisualName =
                 cabinetSectionVisualName + "@" + doorStyleName + "^";
 
-            string alternativeDoorStyleVisualName = 
+            string alternativeDoorStyleVisualName =
                 cabinetSectionVisualName + "@" + brandCatalog.defaultCabinetSectionDoorStyleName + "^";
 
             bool foundAlternative = false;
@@ -91,9 +87,6 @@ namespace KitchenDesign
 
             if (foundCabinetDoorVisual != cabinetSectionVisual.info.expectingCabinetDoors)
             {
-                // Warn that finding a door style was or wasn't expected here.
-                // The type of expectation depends on the cabinet section.
-
                 if (cabinetSectionVisual.info.expectingCabinetDoors)
                 {
                     MelcherLog.LogError($"Could not find a visual with the name {MelcherFormat.ConsoleString(doorStyleName)}");
@@ -120,7 +113,7 @@ namespace KitchenDesign
             }
         }
 
-        public static void TryInitialize(BrandCatalogSO catalog)
+        public void TryInitialize(BrandCatalogSO catalog)
         {
             if(m_IsCollectionsInitialized == false)
             {
@@ -150,7 +143,7 @@ namespace KitchenDesign
             AddToDoorMapping(catalog.cabinetSectionDoorStyle.mapping);
         }
 
-        private static void AddToDoorMapping(CabinetSectionDoorData[] catalogMapping)
+        private void AddToDoorMapping(CabinetSectionDoorData[] catalogMapping)
         {
             for(int i = 0; i < catalogMapping.Length; i++)
             {
@@ -159,25 +152,17 @@ namespace KitchenDesign
             }
         }
 
-        public static string FindMappedDoorId(string cabinetId)
+        public string FindMappedDoorId(string cabinetId)
         {
-            return m_DoorMapping.ContainsKey(cabinetId) ? 
+            return m_DoorMapping.ContainsKey(cabinetId) ?
                     m_DoorMapping[cabinetId] :
                     string.Empty;
         }
-#endregion /Methods
 
-#region Fields
-        // =====================================================================
-        // Static Fields
-        // =====================================================================
-
-        private static HashSet<int> m_InitializedCatalogsCollection;
-        private static HashSet<int> m_RejectedCatalogsCollection;
-        private static bool m_IsCollectionsInitialized = false;
-        private static Dictionary<string, string> m_DoorMapping;
-#endregion /Fields
-    }   // class CabinetSectionDoorUtility
-
-}   // namespace KitchenDesign
+        private HashSet<int> m_InitializedCatalogsCollection;
+        private HashSet<int> m_RejectedCatalogsCollection;
+        private bool m_IsCollectionsInitialized = false;
+        private Dictionary<string, string> m_DoorMapping;
+    }
+}
 

@@ -1,6 +1,7 @@
 namespace KitchenDesign.Products
 {
     using Melcher;
+    using KitchenDesign.Brands;
     using KitchenDesign.BuildingRules;
     using KitchenDesign.CatalogData;
     using KitchenDesign.Scriptables;
@@ -160,7 +161,7 @@ namespace KitchenDesign.Products
                         }
                         else if (runtimeProductVisual.info.runtimePrefabCategory != ProductCategorySpecific.Smoker)
                         {
-                            paddingInMeters = Const.Gemini.Challenger.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
+                            paddingInMeters = BrandRules.ChallengerOccupantMinimumHorizontalPaddingInMeters * 0.5f;
                         }
                     }
 
@@ -186,36 +187,14 @@ namespace KitchenDesign.Products
 
                     if (isHeatedOrBurnerProduct)
                     {
-                        if (selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AgoraBerlinGardens)
+                        float? brandPaddingInMeters =
+                            selectedBrandCatalog.rules.HeatedOrBurnerProductSidePaddingInMeters(
+                                isSmoker: runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker
+                            );
+
+                        if (brandPaddingInMeters.HasValue)
                         {
-                            if (runtimeProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker)
-                            {
-                                paddingInMeters = 0f;
-                            }
-                            else
-                            {
-                                paddingInMeters = 2.25f * Units.Inches2Meters;
-                            }
-                        }
-                        else if (selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Toppin)
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if (selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Endura)
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if (selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.WeatherStrong)
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if (selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.WeatherStrongSelect)
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
-                        }
-                        else if (selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Naturekast)
-                        {
-                            paddingInMeters = 3f * Units.Inches2Meters;
+                            paddingInMeters = brandPaddingInMeters.Value;
                         }
                     }
                 }

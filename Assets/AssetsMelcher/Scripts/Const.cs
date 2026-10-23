@@ -117,40 +117,6 @@ namespace KitchenDesign
         }
 
         // ====================================================================
-        // Gemini
-        // ====================================================================
-
-        public static class Gemini
-        {
-            public const float FridgePanelWidthInMeters = 1.375f * Units.Inches2Meters;   // A fridge panel is 1 3/8"
-
-            public static class Challenger
-            {
-
-                /// <summary>
-                ///     An override for Challenger. They require more padding
-                ///     than other products.
-                ///     <br /><br />
-                ///
-                ///     <inheritdoc cref="Const.OccupantMinimumHorizontalPaddingInMeters"/>
-                /// </summary>
-                public const float OccupantMinimumHorizontalPaddingInMeters = 4.0f * Units.Inches2Meters;
-            }
-
-            public static class ManufactersIds
-            {
-                public const int AgoraBerlinGardens = 109;
-                public const int Endura = 100;
-                public const int AmericanOutdoorCabinets = 112;
-                public const int Toppin = 114;
-                public const int WeatherStrong = 92;
-                public const int WeatherStrongSelect = 141;
-                public const int Naturekast = 134;
-            }
-
-        }
-
-        // ====================================================================
         // Unity Editor
         // ====================================================================
         #region Unity Editor

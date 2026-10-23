@@ -42,8 +42,9 @@ sb.Append("occupants=" + occCount + " renderers=" + rend + "\n");
 string text = sb.ToString();
 if (name != "")
 {
-    System.IO.Directory.CreateDirectory(outDir);
-    System.IO.File.WriteAllText(System.IO.Path.Combine(outDir, name + ".txt"), text);
+    string sigPath = System.IO.Path.Combine(outDir, name + ".txt");
+    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(sigPath));
+    System.IO.File.WriteAllText(sigPath, text);
 }
 uint h = 2166136261; foreach (char ch in text) { h = (h ^ ch) * 16777619; }
 return "sig=" + h.ToString("X8") + " occupants=" + occCount + " renderers=" + rend;

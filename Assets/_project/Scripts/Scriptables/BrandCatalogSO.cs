@@ -9,6 +9,8 @@ namespace KitchenDesign.Scriptables
     using System.Collections.ObjectModel;
     using UnityEngine;
     using KitchenDesign.Serializables;
+    using KitchenDesign.Brands;
+    using KitchenDesign.CatalogData;
 
     /// <summary>
     ///     This is the app-local information about a Brand Catalog. Not to be
@@ -41,6 +43,8 @@ namespace KitchenDesign.Scriptables
         public BrandCatalogRuleset ruleset => m_Ruleset.value;
 
         public int cabinetManufacturerId => m_CabinetManufacturerId;
+
+        public BrandRules rules => new BrandRules(m_CabinetManufacturerId);
 
         public Sprite BrandCatalogLoadingImage => m_BrandCatalogLoadingImage;
 
@@ -160,13 +164,14 @@ namespace KitchenDesign.Scriptables
         public void PopulateRuntimeData(
             IReadOnlyList<ProductInfo> cabinetSectionProductInfos,
             IReadOnlyList<ProductVisualSO> cabinetSectionVisuals,
-            IReadOnlyList<ProductVisualSO> cabinetDoorVisuals)
+            IReadOnlyList<ProductVisualSO> cabinetDoorVisuals,
+            DoorStyleLookup doorStyles)
         {
             m_DoorStyles.mutable.Clear();
             m_DoorHandleStyles.mutable.Clear();
 
             RegisterDoorHandleStyles();
-            CabinetSectionDoorUtility.TryInitialize(this);
+            doorStyles.TryInitialize(this);
 
             foreach (ProductInfo cabinetSectionProductInfo in cabinetSectionProductInfos)
             {
@@ -202,7 +207,7 @@ namespace KitchenDesign.Scriptables
 
                     string cabinetDoorNamePrefix = cabinetSectionVisual.info.name + "@";
 
-                    string usedCustomDoorId = CabinetSectionDoorUtility.FindMappedDoorId(cabinetSectionVisual.info.id);
+                    string usedCustomDoorId = doorStyles.FindMappedDoorId(cabinetSectionVisual.info.id);
 
                     if(usedCustomDoorId != string.Empty && cabinetSectionDoorStyle != null)
                     {

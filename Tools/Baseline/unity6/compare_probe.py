@@ -1,6 +1,6 @@
 """Compare two edit probe runs (editprobe.sh): python3 -I compare_probe.py <ref> <new>
 (folder names under GeminiBaseline/). Snapshots, log.txt and resave.json must be identical;
-measured.json may differ only under "cameras" (the idle photo vcam keeps its last pose, the orbit
+measured.json may differ only under "cameras" (plunge/ is compared only when both runs have it) (the idle photo vcam keeps its last pose, the orbit
 camera varies slightly between runs)."""
 import json, os, sys
 
@@ -20,7 +20,10 @@ def walk(a, b, path, out):
 
 ref, new = (os.path.join(BASE, x) for x in sys.argv[1:3])
 problems = []
-for sub in ['.', 'standard']:
+for sub in ['.', 'standard', 'plunge']:
+    if sub == 'plunge' and not (os.path.isdir(os.path.join(ref, sub)) and os.path.isdir(os.path.join(new, sub))):
+        print('plunge phase skipped (not in both runs)')
+        continue
     r, n = os.path.join(ref, sub), os.path.join(new, sub)
     files = sorted(set(os.listdir(r)) | set(os.listdir(n)))
     for f in files:

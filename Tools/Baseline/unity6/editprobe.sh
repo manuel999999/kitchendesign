@@ -7,7 +7,8 @@
 # GeminiBaseline/editprobe/ (deleted first; copy it to a named folder to keep it). Compare two runs
 # with diff -r. A second phase then builds a new Standard (ProFit-style) L kitchen in the same session
 # and repeats the edits there (free placement, dragging and the resize widgets, which Catalog
-# designs refuse); its measured.json and resave.json are in standard/. Back up the user's files first (see README); editor open, not playing. No options.
+# designs refuse); its measured.json and resave.json are in standard/. A third phase adds a plunge,
+# resizes it with its widget, adds a burner and drags it into the plunge (plunge/). Back up the user's files first (see README); editor open, not playing. No options.
 D=$(dirname "$0"); P=/Users/emmanuel/Documents/Unity/kitchendesign; OUT=/Users/emmanuel/Documents/Unity/GeminiBaseline/editprobe; cd $P
 ev() { unity command eval_file --file "$1" --json --no-banner --timeout 120 2>&1 | python3 -I -c "import json,sys; d=json.load(sys.stdin); r=(d.get('data') or {}).get('result') or {}; print(r.get('result') if d.get('success') and r.get('success') else json.dumps(d)[:800])"; }
 sig() { sed "s#__OUTDIR__#$OUT#; s#__NAME__#$1#" $D/editsig.tmpl > $D/editsig.cs; ev $D/editsig.cs; }
@@ -33,5 +34,12 @@ for s in new_standard add_grill add_drawer hl_occ nudge nudge_up center clone_oc
 done
 sed "s#__OUTDIR__#$OUT/standard#; s/__QUOTE__/0/" $D/measure.tmpl > $D/measure.cs
 echo "measured standard: $(ev $D/measure.cs)"
+n0=$(grep -c "" $OUT/log.txt); mkdir -p $OUT/plunge
+for s in add_plunge hl_plunge plunge_resize_begin plunge_resize_move plunge_resize_end add_burner burner_drag_begin burner_drag_move burner_drag_end hl_none; do
+  step plunge/$(printf %02d $n) $s; n=$((n+1))
+done
+sed "s#__OUTDIR__#$OUT/plunge#; s/__QUOTE__/0/" $D/measure.tmpl > $D/measure.cs
+echo "measured plunge: $(ev $D/measure.cs)"
+tail -n +$((n0+1)) $OUT/log.txt > $OUT/plunge/log.txt; head -n $n0 $OUT/log.txt > $OUT/log.tmp; mv $OUT/log.tmp $OUT/log.txt
 grep -c "" $OUT/log.txt | sed 's/^/log lines: /'
 unity command editor_stop --json --no-banner >/dev/null 2>&1

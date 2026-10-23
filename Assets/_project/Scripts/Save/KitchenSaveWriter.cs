@@ -30,8 +30,6 @@ namespace KitchenDesign.Save
             this._productVisualDatabase = productVisualDatabase;
         }
 
-        private bool canHaveToeKickEntry => this._selections.brandCatalog.cabinetManufacturerId != Const.Gemini.ManufactersIds.AgoraBerlinGardens;
-
         public JsonDict Write(CabinetLayout layout)
         {
             IBuildingMethodRules buildingRules = new BuildingMethodRules(this._selections.buildingMethod);
@@ -632,7 +630,7 @@ namespace KitchenDesign.Save
             }
 
             if (toeKickLinearMeters > 0.0f
-                && canHaveToeKickEntry)
+                && this._selections.brandCatalog.rules.PricesToeKicks)
             {
                 string toeKickLinearDistance =
                     ProFitGlobals.userProfile.activeUnits == MeasurementUnit.FeetAndInches ?

@@ -34,6 +34,7 @@ namespace KitchenDesign.CatalogData
         public List<CabinetSectionCategoryInfo> CabinetSectionCategories { get; set; } = new(capacity: 0);
         public List<BrandCatalogInfo> ServerBrandCatalogs { get; set; } = new(capacity: 0);
         public List<BrandCatalogSO> RuntimeBrandCatalogs { get; set; } = new();
+        public DoorStyleLookup DoorStyles { get; } = new DoorStyleLookup();
         public List<ManufacturerInfo> Manufacturers { get; set; } = new(capacity: 0);
         public List<ProductGroupInfo> ProductGroups { get; set; } = new(capacity: 0);
         public List<ProductTagInfo> ProductTags { get; set; } = new(capacity: 0);

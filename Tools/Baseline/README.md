@@ -74,12 +74,20 @@ client names; never copy it into a repo.
   `resave.json` (top level, then `standard/`). Output in `GeminiBaseline/editprobe/` (deleted
   first). Compare with `python3 -I compare_probe.py <ref> <new>`: everything identical except
   `measured.json`'s `cameras` (the idle cover-photo vcam keeps its last pose, so it differs by
-  degrees between runs). About 10 minutes. Reference before area 4: `editprobe-HEAD-2026-10-23`.
+  degrees between runs). A third phase (B4.8) adds a plunge (`Shelf:Top`), drags its widget,
+  adds a burner (`60008LP/60009NG`) and drags it into the plunge; its snapshots, log, `measured.json`
+  and `resave.json` are in `plunge/`, which `compare_probe.py` compares only when both runs have it
+  (the app refuses the plunge resize; the step still runs the widget and `isResizable`). About 13
+  minutes. References: `editprobe-HEAD-2026-10-23` (before area 4), `editprobe-B4.7-plunge2` (first
+  with the plunge phase).
 - `kitchendatacensus.cs` (2026-10-23, area 4): edit mode. Every serialized value of every brand
   catalog, kitchen template, door / handle / leg style and door editor mapping asset, found by
   type name (old or `…SO`), into `GeminiBaseline/kitchendatacensus-latest.txt` with a hash.
 - `buildingrulescheck.cs` (2026-10-23, B4.7): edit mode. Every building-method rule against the
   old expression it replaced, for the unset value and the three methods. Must print `mismatches=0`.
+- `brandrulescheck.cs` (2026-10-23, B4.8): edit mode. Every brand rule against the old
+  manufacturer-id expression, for every id in the old constants and every brand catalog asset.
+  Must print `mismatches=0`.
 - **None of these scripts take options.** `menucheck.sh --help` runs the whole menu check (it
   happened once, after the user's files had been restored, and rewrote their ProFit fallback
   JSON). Read a script instead of running it to see what it does.

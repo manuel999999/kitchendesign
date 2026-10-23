@@ -37,7 +37,7 @@ namespace KitchenDesign
             }      
 
             // TODO: DOOR HANDLES: Try requesting a door handle using the cabinet door id instead of cabinet base id
-            string customUsedId = CabinetSectionDoorUtility.FindMappedDoorId(usedCabinetVisualId);
+            string customUsedId = ProFitGlobals.catalogData.DoorStyles.FindMappedDoorId(usedCabinetVisualId);
 
             if(customUsedId != string.Empty)
             {

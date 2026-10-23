@@ -14,7 +14,12 @@ KitchenDesign.Occupant OccA()
 KitchenDesign.Occupant LastWithSku(string sku)
 {
     KitchenDesign.Occupant found = null;
-    foreach (var c in cabs) foreach (var o in c.occupants) { if (o.productInfo != null && o.productInfo.sku == sku) found = o; }
+    foreach (var c in cabs) foreach (var o in c.occupants)
+    {
+        if (o.productInfo != null && o.productInfo.sku == sku) found = o;
+        var shelf = o.GetComponent<KitchenDesign.CabinetShelf>();
+        if (shelf != null) foreach (var n in shelf.occupants) { if (n.productInfo != null && n.productInfo.sku == sku) found = n; }
+    }
     return found;
 }
 KitchenDesign.Cabinet CabC()
@@ -46,7 +51,7 @@ UnityEngine.Vector3 TopCenter(KitchenDesign.Cabinet c)
     var cu = c.resizerCuboid;
     return c.GetTransform().TransformPoint(new UnityEngine.Vector3(cu.center.x, cu.max.y, cu.center.z));
 }
-KitchenDesign.ResizerWidget Resizer(KitchenDesign.Cabinet c)
+KitchenDesign.ResizerWidget Resizer(KitchenDesign.OccupiableVolume c)
 {
     foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.ResizerWidget>(UnityEngine.FindObjectsSortMode.None))
     {
@@ -199,6 +204,54 @@ switch (step)
         if (pi == null) return "product not found";
         KitchenDesign.EventBridge.Designer.onTryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
         return "add " + pi.sku;
+    }
+    case "add_plunge":
+    case "add_burner":
+    {
+        var pi = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku(step == "add_plunge" ? "Shelf:Top" : "60008LP/60009NG", false);
+        if (pi == null) return "product not found";
+        KitchenDesign.EventBridge.Designer.onTryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
+        return "add " + pi.sku;
+    }
+    case "hl_plunge":
+    {
+        var o = LastWithSku("Shelf:Top"); if (o == null) return "no plunge";
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(o.gameObject));
+        return "highlight plunge";
+    }
+    case "plunge_resize_begin":
+    case "plunge_resize_move":
+    case "plunge_resize_end":
+    {
+        var o = LastWithSku("Shelf:Top"); if (o == null) return "no plunge";
+        var shelf = o.GetComponent<KitchenDesign.CabinetShelf>();
+        var w = Resizer(shelf); if (w == null) return "no plunge resizer";
+        var cu = shelf.resizerCuboid;
+        var t = shelf.transform;
+        UnityEngine.Vector3 p0 = t.TransformPoint(new UnityEngine.Vector3(cu.max.x, cu.max.y, cu.center.z));
+        UnityEngine.Vector3 p1 = p0 - t.right * 2f * 0.0254f;
+        UnityEngine.Vector3 s0 = w.worldCamera.WorldToScreenPoint(p0), s1 = w.worldCamera.WorldToScreenPoint(p1);
+        var ev = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+        ev.position = step == "plunge_resize_begin" ? new UnityEngine.Vector2(s0.x, s0.y) : new UnityEngine.Vector2(s1.x, s1.y);
+        if (step == "plunge_resize_begin") w.OnBeginDrag(ev);
+        else if (step == "plunge_resize_move") w.OnDrag(ev);
+        else w.OnEndDrag(ev);
+        return step + " " + w.name;
+    }
+    case "burner_drag_begin":
+    case "burner_drag_move":
+    case "burner_drag_end":
+    {
+        var b = LastWithSku("60008LP/60009NG"); if (b == null) return "no burner";
+        var o = LastWithSku("Shelf:Top"); if (o == null) return "no plunge";
+        var shelf = o.GetComponent<KitchenDesign.CabinetShelf>();
+        var cu = shelf.resizerCuboid;
+        UnityEngine.Vector3 top = shelf.transform.TransformPoint(new UnityEngine.Vector3(cu.center.x, cu.max.y, cu.center.z));
+        var ev = Pointer(step == "burner_drag_begin" ? b.transform.position : top);
+        if (step == "burner_drag_begin") KitchenDesign.EventBridge.Designer.onOccupantDragBegin(b, ev);
+        else if (step == "burner_drag_move") KitchenDesign.EventBridge.Designer.onOccupantDrag(b, ev);
+        else Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onOccupantDragEnd.Invoke((b, ev)));
+        return step;
     }
     case "hl_none":
         Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(null));

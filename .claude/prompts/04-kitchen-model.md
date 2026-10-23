@@ -289,6 +289,19 @@ snippet over every manufacturer id in `Const.Gemini` and every brand catalog ass
 mapping (`CabinetSectionDoorUtility`) becomes `DoorStyleLookup`, an instance owned by
 `CatalogDataStatus` and filled when it populates the runtime brand catalogs (today the first
 `PopulateRuntimeData` fills the static); old code reaches it through `ProFitGlobals.catalogData`.
+- **Done 2026-10-23.** Scope decision: the `BrandCatalogRuleset` checks stay; only the hard-coded
+  manufacturer ids (`Const.Gemini`, gone) became named `BrandRules` (a readonly struct, so asking
+  allocates nothing and a runtime catalog clone can't hold a stale copy). 11 rules plus the padding
+  function and the Challenger constant; Kitchen's four now-unused brand properties went. The door
+  lookup is a mechanical copy of the static class (both quirks kept: catalogs never marked
+  initialized; lookups null until the first initialization). `brandrulescheck.cs`: 169 checks over
+  14 manufacturer ids (the old constants and every catalog asset), 0 mismatches. The baseline can't
+  run the Agora branches (no usable Agora design). Before this step the edit probe gained a third
+  phase (a plunge, its widget resize, a burner dragged into it), recorded on B4.7's code
+  (`editprobe-B4.7-plunge2`): needed for B4.9, which changes `CabinetShelf`. Checks against B4.7:
+  `rulescheck.cs` 60/0; `coldstart.sh` both the reference; `runall.sh` identical (photos within
+  0.14/255); fallback JSON identical; `menucheck.sh` 21 / 21 / 1,268; edit probe identical in all
+  three phases (so the plunge phase repeats exactly).
 
 **B4.9 — `Kitchen.instance` and `ProFitGlobals` out of the model.** Decision 4, and the model's
 `ProFitGlobals` reads (product content, app rules, user profile units) become references the kitchen

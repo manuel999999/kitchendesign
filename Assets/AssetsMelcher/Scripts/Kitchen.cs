@@ -168,10 +168,6 @@ namespace KitchenDesign
 
         public ProductVisualDatabaseSO productVisualDatabase => m_ProductVisualDatabase;
 
-        protected bool canHaveToeKickEntry => selectedBrandCatalog.cabinetManufacturerId != Const.Gemini.ManufactersIds.AgoraBerlinGardens; // Removed berlin gardens toekick PDF entry
-        public bool isAgoraBerlinGardens => selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.AgoraBerlinGardens;
-        public bool isEndura => selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Endura;
-        public bool isToppin => selectedBrandCatalog.cabinetManufacturerId == Const.Gemini.ManufactersIds.Toppin;
 
         public string analyticsKey
         {

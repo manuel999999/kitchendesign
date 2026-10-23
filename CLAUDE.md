@@ -1160,7 +1160,6 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
       length and depth band (corners counted once, high bar tops separately); toe kicks (the first
       few follow the client's table, then one per 96"; WeatherStrong: front + back + 54" for the
       ends, divided by 96, rounded up); WeatherStrong end vents; no toe kick line for Agora.
-    The brand checks inside are still manufacturer-id comparisons until B4.8.
   - **Building-method rules** (B4.7): `IBuildingMethodRules` (`KitchenDesign.Shared.Interfaces`)
     and `BuildingMethodRules` (`_project/Scripts/BuildingRules/`, `KitchenDesign.BuildingRules`): one
     class constructed with the method, each rule written as the expression it replaced, so it is
@@ -1192,6 +1191,33 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     - Standard and Sections: `PricesCabinetFinishByArea`.
     Checked with `Tools/Baseline/unity6/buildingrulescheck.cs` (every rule against the old
     expression for the four values: 96 checks).
+  - **Brand rules** (B4.8): `BrandRules` (`_project/Scripts/Brands/`, `KitchenDesign.Brands`), a
+    readonly struct built from a catalog's cabinet manufacturer id (`brandCatalog.rules`; a struct so
+    asking costs nothing and a runtime clone of a catalog can't hold a stale copy). It replaces every
+    `Const.Gemini.ManufactersIds` comparison (`Const.Gemini` is gone). Pricing: `PricesToeKicks` (not
+    Agora Berlin Gardens), `PricesFridgeBackPanels` (not American Outdoor Cabinets or Endura),
+    `PricesFridgeEndPanels` (not Agora or Toppin), `PricesCountertopsFromCatalog`,
+    `PricesCornersAsOwnProduct`, `ForcesKamadoGrillEndPanels` (GADA/GADB cabinets),
+    `FridgePanelSkuIncludesCabinetSize` (all four Agora), `PricesAmericanOutdoorBaseEnds`,
+    `PricesBaseEnds` (not Endura or Agora), `UsesEnduraToeKick`. Products:
+    `HeatedOrBurnerProductSidePaddingInMeters(isSmoker)` (Agora 2¼", smokers 0; Toppin, Endura,
+    WeatherStrong, WeatherStrong Select, NatureKast 3"; otherwise unchanged) and the Challenger
+    occupant padding constant (4"). The `BrandCatalogRuleset` checks (`Challenger`, `Napoleon`,
+    `WeatherStrong`) stay as they are: the ruleset is the catalog's own serialized rule key, which
+    the original author designed for this; the manufacturer ids were the workaround, used because
+    American Outdoor, Endura and Agora catalogs share the WeatherStrong ruleset. Deco Grain is a
+    finish manufacturer (140), not a cabinet brand, and stays where it is. The values are code, not
+    asset data (plan, decision 6). Checked with `Tools/Baseline/unity6/brandrulescheck.cs` (every
+    rule against the old expression for every id in the old constants and every catalog asset).
+  - `DoorStyleLookup` (B4.8, `_project/Scripts/CatalogData/`): the door-style lookup that was the
+    static `CabinetSectionDoorUtility`, now an instance owned by `CatalogDataStatus` (`DoorStyles`);
+    the brand catalog screen hands it to `BrandCatalogSO.PopulateRuntimeData`, other old code reaches
+    it through `ProFitGlobals.catalogData`. It maps a cabinet section id to the visual id whose doors
+    it uses, from every catalog's `CabinetSectionDoorStyleSO`, and finds a door visual by name
+    (`ProductVisual_<cabinet>@<door style>^`, falling back to the catalog's default style). Kept
+    exactly as it was, two quirks included: a catalog is never recorded as initialized, so its
+    mapping is re-added on every call (an overwrite with the same values), and the lookups are null
+    until the first catalog initializes them.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's

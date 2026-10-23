@@ -1150,7 +1150,7 @@ namespace KitchenDesign
                 if (sectionVisual)
                 {
                     doorStyleVisual =
-                        CabinetSectionDoorUtility.FindDoorStyleVisual(
+                        ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
                             kitchen.productVisualDatabase.runtimeEntries,
                             sectionVisual,
                             kitchen.selectedBrandCatalog,
@@ -1396,7 +1396,7 @@ namespace KitchenDesign
 
                             string usedDoorStyleVisualName = cabinet.cabinetSectionName;
 
-                            string usedCustomDoorId = CabinetSectionDoorUtility.FindMappedDoorId(cabinet.cabinetSectionVisual.info.id);
+                            string usedCustomDoorId = ProFitGlobals.catalogData.DoorStyles.FindMappedDoorId(cabinet.cabinetSectionVisual.info.id);
 
                             if(usedCustomDoorId != string.Empty && kitchen.selectedBrandCatalog.cabinetSectionDoorStyle != null)
                             {

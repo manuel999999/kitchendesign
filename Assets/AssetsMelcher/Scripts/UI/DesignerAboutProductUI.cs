@@ -45,7 +45,7 @@ namespace KitchenDesign
                 Kitchen kitchen = Kitchen.instance;
 
                 ProductVisualSO cabinetDoorVisual =
-                    CabinetSectionDoorUtility.FindDoorStyleVisual(
+                    ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
                         kitchen.productVisualDatabase.runtimeEntries,
                         productVisual,
                         kitchen.selectedBrandCatalog,

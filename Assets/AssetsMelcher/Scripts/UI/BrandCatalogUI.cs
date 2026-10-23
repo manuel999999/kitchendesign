@@ -153,7 +153,8 @@ namespace KitchenDesign
                         brandCatalog.PopulateRuntimeData(
                             cabinetSectionProductInfos,
                             cabinetSectionVisuals,
-                            cabinetDoorVisuals
+                            cabinetDoorVisuals,
+                            ProFitGlobals.catalogData.DoorStyles
                         );
                     }
                 }
