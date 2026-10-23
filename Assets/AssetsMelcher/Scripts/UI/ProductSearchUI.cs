@@ -8,6 +8,7 @@ namespace KitchenDesign
     using Cysharp.Threading.Tasks;
     using TMPro;
     using UnityEngine;
+    using KitchenDesign.KitchenModel;
 
     public class ProductSearchUI : MelcherUI
     {

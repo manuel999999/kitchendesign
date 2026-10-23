@@ -13,6 +13,8 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using MEC;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.Products;
 
     /// <summary>
     ///     These functions were originally defined in <see

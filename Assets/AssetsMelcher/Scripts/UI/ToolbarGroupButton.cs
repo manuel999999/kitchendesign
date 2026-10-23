@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using System;
     using UnityEngine;
+    using KitchenDesign.Cabinets;
 
     [RequireComponent(typeof(MelcherButton))]
     public class ToolbarGroupButton : ToolbarButton

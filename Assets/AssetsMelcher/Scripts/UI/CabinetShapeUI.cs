@@ -9,6 +9,8 @@ namespace KitchenDesign
     using UnityEngine;
     using KitchenDesign.Geometry;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
 
     public class CabinetShapeUI : MelcherUI
     {

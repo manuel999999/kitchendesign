@@ -12,6 +12,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using KitchenDesign.Session;
+using KitchenDesign.Cabinets;
+using KitchenDesign.Occupancy;
+using KitchenDesign.Widgets;
 
 namespace KitchenDesign.KitchenModel
 {

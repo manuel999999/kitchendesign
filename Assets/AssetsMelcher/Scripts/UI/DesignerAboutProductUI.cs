@@ -6,6 +6,7 @@ namespace KitchenDesign
     using KitchenDesign.Scriptables;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.KitchenModel;
 
     /// <summary>
     /// A prompt for the designer scene to ensure a user fully intends an

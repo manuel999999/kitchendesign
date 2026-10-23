@@ -4,6 +4,7 @@ namespace KitchenDesign
     using Unity.Cinemachine;
     using DG.Tweening;
     using UnityEngine;
+    using KitchenDesign.Cabinets;
 
     /// <summary>
     ///     The main camera used by the design scene. This camera can rotate

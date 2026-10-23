@@ -7,6 +7,9 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Occupancy;
 
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
     using Cysharp.Threading.Tasks;

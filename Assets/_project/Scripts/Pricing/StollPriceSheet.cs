@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using KitchenDesign.Cabinets;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;

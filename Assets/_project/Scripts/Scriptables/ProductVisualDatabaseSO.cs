@@ -6,6 +6,8 @@ namespace KitchenDesign.Scriptables
     using KitchenDesign.AddressableContent;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.Products;
 
 #if UNITY_EDITOR
     using UnityEditor;

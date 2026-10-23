@@ -7,6 +7,7 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.KitchenModel;
 
     /// <summary>
     ///     Allows the user to select a default kitchen design. This is used by

@@ -1,4 +1,5 @@
 using UnityEngine;
+using KitchenDesign.Occupancy;
 
 namespace KitchenDesign.KitchenModel
 {

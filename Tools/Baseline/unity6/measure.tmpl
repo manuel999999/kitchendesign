@@ -40,7 +40,7 @@ object DrawnBoundsIn(UnityEngine.Transform space, UnityEngine.Renderer[] rs)
 }
 
 string outDir = "__OUTDIR__";
-var k = KitchenDesign.Kitchen.instance;
+var k = KitchenDesign.KitchenModel.Kitchen.instance;
 var layout = k.layout;
 var root = new System.Collections.Generic.Dictionary<string, object>();
 root["quote_id"] = __QUOTE__;
@@ -96,7 +96,7 @@ foreach (var e in layout.EnumerateCabinets())
 }
 root["cabinets"] = cabs;
 
-var occList = new System.Collections.Generic.List<KitchenDesign.Occupant>(UnityEngine.Object.FindObjectsByType<KitchenDesign.Occupant>(UnityEngine.FindObjectsSortMode.None));
+var occList = new System.Collections.Generic.List<KitchenDesign.Occupancy.Occupant>(UnityEngine.Object.FindObjectsByType<KitchenDesign.Occupancy.Occupant>(UnityEngine.FindObjectsSortMode.None));
 occList.Sort((a, b) => { int cx = a.transform.position.x.CompareTo(b.transform.position.x); return cx != 0 ? cx : a.transform.position.z.CompareTo(b.transform.position.z); });
 var occs = new System.Collections.Generic.List<object>();
 foreach (var o in occList)

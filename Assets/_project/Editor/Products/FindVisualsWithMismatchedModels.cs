@@ -4,6 +4,7 @@ namespace KitchenDesign.ProductsEditor
     using System.Linq;
     using UnityEngine;
     using UnityEditor;
+    using KitchenDesign.Products;
 
     /// <summary>
     ///     This identifies <see cref="ProductVisualContent"/>s whose model prefab

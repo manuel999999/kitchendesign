@@ -20,6 +20,7 @@ namespace KitchenDesign.ProductsEditor
     using UnityEngine.UIElements;
     using System.Threading.Tasks;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Products;
     /// <summary>
     ///     The <see cref="ProductVisualDatabaseManager"/> is an editor window
     ///     for managing the kitchen models and visual product data in the

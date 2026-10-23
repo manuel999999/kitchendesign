@@ -13,6 +13,8 @@ namespace KitchenDesign
     using UnityEngine.EventSystems;
     using UnityEngine.Rendering.Universal;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.Occupancy;
 
     using Conditional = System.Diagnostics.ConditionalAttribute;
 

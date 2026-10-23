@@ -165,7 +165,8 @@ Proposed order. The hubs come first because every other area uses them.
    The largest area; it gets its own plan (`04-…`) after area 3, splitting `Kitchen` into the
    systems it really is (layout building, selection, save/load, pricing inputs, highlight…) and
    replacing `Kitchen.instance`. Inside it: spans and layouts, then cabinets, then occupancy and
-   products, as the old plan listed.
+   products, as the old plan listed. **Planned and done in `04-kitchen-model.md` (B4.0–B4.10,
+   2026-10-23).**
 5. **UI.** The menu screens and the designer screens (85 files, `DesignerToolbarUI` 2,521 lines).
    Still uGUI (project override), but constructed by their scene initializer and talking through
    events. Most of `EventBridge.Menu` goes here.

@@ -4,6 +4,8 @@ namespace KitchenDesign
     using KitchenDesign.Shared.Enums;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
+    using KitchenDesign.Measures;
+    using KitchenDesign.Occupancy;
 
     public class DesignerNavigationUI : MelcherUI
     {

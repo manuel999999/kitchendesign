@@ -1,7 +1,7 @@
-var k = KitchenDesign.Kitchen.instance;
+var k = KitchenDesign.KitchenModel.Kitchen.instance;
 if (k == null || k.layout == null) return "no kitchen";
 var set = new KitchenDesign.Cutouts.CutoutClipSet();
-var extraField = typeof(KitchenDesign.ProductVisualContent).GetField("m_AdditionalCabinetRenderMaskMeshes", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+var extraField = typeof(KitchenDesign.Products.ProductVisualContent).GetField("m_AdditionalCabinetRenderMaskMeshes", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 int slot = 0;
 int renderers = 0;
 string log = "";
@@ -14,7 +14,7 @@ void SetSlot(UnityEngine.Renderer r, int s)
     renderers++;
 }
 
-void AddCutOut(KitchenDesign.CabinetCutOut c, int s, string label)
+void AddCutOut(KitchenDesign.Cabinets.CabinetCutOut c, int s, string label)
 {
     if (c == null) return;
     foreach (var r in c.interiorRoot.GetComponentsInChildren<UnityEngine.MeshRenderer>(true)) SetSlot(r, s);
@@ -48,7 +48,7 @@ void AddCutOut(KitchenDesign.CabinetCutOut c, int s, string label)
     log += "\n  slot " + s + " " + label + (c.isCountertop ? " countertop" : " cabinet") + " size=" + size.ToString("F3") + " open=" + open + (added ? "" : " DROPPED");
 }
 
-void AddOccupant(KitchenDesign.Occupant occ, int s, string prefix)
+void AddOccupant(KitchenDesign.Occupancy.Occupant occ, int s, string prefix)
 {
     var pvc = occ.productVisualContentInstance;
     if (pvc == null) return;
@@ -56,7 +56,7 @@ void AddOccupant(KitchenDesign.Occupant occ, int s, string prefix)
     if (extra != null) foreach (var r in extra) SetSlot(r as UnityEngine.Renderer, s);
     AddCutOut(pvc.cabinetCutOut, s, prefix + occ.name);
     AddCutOut(pvc.countertopCutOut, s, prefix + occ.name);
-    if (occ.TryGetComponent(out KitchenDesign.CabinetShelf shelf))
+    if (occ.TryGetComponent(out KitchenDesign.Cabinets.CabinetShelf shelf))
     {
         foreach (var nested in shelf.occupants) AddOccupant(nested, s, prefix + occ.name + "/");
     }

@@ -2,27 +2,27 @@ string outDir = "__OUTDIR__";
 string step = "__STEP__";
 string logPath = System.IO.Path.Combine(outDir, "log.txt");
 void Log(string s) { System.IO.File.AppendAllText(logPath, s + "\n"); }
-var k = KitchenDesign.Kitchen.instance;
+var k = KitchenDesign.KitchenModel.Kitchen.instance;
 if (k == null || k.layout == null) return "kitchen=none";
-var cabs = new System.Collections.Generic.List<KitchenDesign.Cabinet>();
+var cabs = new System.Collections.Generic.List<KitchenDesign.Cabinets.Cabinet>();
 foreach (var e in k.layout.EnumerateCabinets()) cabs.Add(e.element);
-KitchenDesign.Occupant OccA()
+KitchenDesign.Occupancy.Occupant OccA()
 {
-    foreach (var c in cabs) foreach (var o in c.occupants) { if (o.GetComponent<KitchenDesign.CabinetShelf>() == null) return o; }
+    foreach (var c in cabs) foreach (var o in c.occupants) { if (o.GetComponent<KitchenDesign.Cabinets.CabinetShelf>() == null) return o; }
     return null;
 }
-KitchenDesign.Occupant LastWithSku(string sku)
+KitchenDesign.Occupancy.Occupant LastWithSku(string sku)
 {
-    KitchenDesign.Occupant found = null;
+    KitchenDesign.Occupancy.Occupant found = null;
     foreach (var c in cabs) foreach (var o in c.occupants)
     {
         if (o.productInfo != null && o.productInfo.sku == sku) found = o;
-        var shelf = o.GetComponent<KitchenDesign.CabinetShelf>();
+        var shelf = o.GetComponent<KitchenDesign.Cabinets.CabinetShelf>();
         if (shelf != null) foreach (var n in shelf.occupants) { if (n.productInfo != null && n.productInfo.sku == sku) found = n; }
     }
     return found;
 }
-KitchenDesign.Cabinet CabC()
+KitchenDesign.Cabinets.Cabinet CabC()
 {
     for (int i = 1; i < cabs.Count; i++)
     {
@@ -31,9 +31,9 @@ KitchenDesign.Cabinet CabC()
     }
     return null;
 }
-KitchenDesign.Cabinet DragTarget()
+KitchenDesign.Cabinets.Cabinet DragTarget()
 {
-    KitchenDesign.Cabinet found = null;
+    KitchenDesign.Cabinets.Cabinet found = null;
     foreach (var c in cabs) { if (c != null && c.cabinetType == KitchenDesign.Shared.Enums.CabinetType.Straight && c.canHaveProducts) found = c; }
     return found;
 }
@@ -46,23 +46,23 @@ UnityEngine.EventSystems.PointerEventData Pointer(UnityEngine.Vector3 world)
     ev.pressPosition = ev.position;
     return ev;
 }
-UnityEngine.Vector3 TopCenter(KitchenDesign.Cabinet c)
+UnityEngine.Vector3 TopCenter(KitchenDesign.Cabinets.Cabinet c)
 {
     var cu = c.resizerCuboid;
     return c.GetTransform().TransformPoint(new UnityEngine.Vector3(cu.center.x, cu.max.y, cu.center.z));
 }
-KitchenDesign.ResizerWidget Resizer(KitchenDesign.OccupiableVolume c)
+KitchenDesign.Widgets.ResizerWidget Resizer(KitchenDesign.Occupancy.OccupiableVolume c)
 {
-    foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.ResizerWidget>(UnityEngine.FindObjectsSortMode.None))
+    foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.Widgets.ResizerWidget>(UnityEngine.FindObjectsSortMode.None))
     {
         if (w.isVisible && w.target == c && w.affectExtent == KitchenDesign.Shared.Enums.Extent.Max) return w;
     }
     return null;
 }
 
-string Sku(KitchenDesign.Cabinet c) { return c == null ? "none" : c.cabinetSectionProductInfo != null ? c.cabinetSectionProductInfo.sku : c.name; }
-KitchenDesign.Occupant a = OccA();
-KitchenDesign.Cabinet cc = CabC();
+string Sku(KitchenDesign.Cabinets.Cabinet c) { return c == null ? "none" : c.cabinetSectionProductInfo != null ? c.cabinetSectionProductInfo.sku : c.name; }
+KitchenDesign.Occupancy.Occupant a = OccA();
+KitchenDesign.Cabinets.Cabinet cc = CabC();
 switch (step)
 {
     case "setup":
@@ -186,7 +186,7 @@ switch (step)
         return "add " + a.productInfo.sku;
     case "new_standard":
     {
-        var layoutPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/AssetsMelcher/KitchenLayouts/StyleL.prefab").GetComponent<KitchenDesign.CabinetLayout>();
+        var layoutPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/AssetsMelcher/KitchenLayouts/StyleL.prefab").GetComponent<KitchenDesign.Cabinets.CabinetLayout>();
         KitchenDesign.EventBridge.Designer.setBuildingMethod(KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard);
         KitchenDesign.EventBridge.Designer.setCabinetLayout(layoutPrefab);
         KitchenDesign.EventBridge.Designer.setKitchenTemplate(null);
@@ -224,7 +224,7 @@ switch (step)
     case "plunge_resize_end":
     {
         var o = LastWithSku("Shelf:Top"); if (o == null) return "no plunge";
-        var shelf = o.GetComponent<KitchenDesign.CabinetShelf>();
+        var shelf = o.GetComponent<KitchenDesign.Cabinets.CabinetShelf>();
         var w = Resizer(shelf); if (w == null) return "no plunge resizer";
         var cu = shelf.resizerCuboid;
         var t = shelf.transform;
@@ -244,7 +244,7 @@ switch (step)
     {
         var b = LastWithSku("60008LP/60009NG"); if (b == null) return "no burner";
         var o = LastWithSku("Shelf:Top"); if (o == null) return "no plunge";
-        var shelf = o.GetComponent<KitchenDesign.CabinetShelf>();
+        var shelf = o.GetComponent<KitchenDesign.Cabinets.CabinetShelf>();
         var cu = shelf.resizerCuboid;
         UnityEngine.Vector3 top = shelf.transform.TransformPoint(new UnityEngine.Vector3(cu.center.x, cu.max.y, cu.center.z));
         var ev = Pointer(step == "burner_drag_begin" ? b.transform.position : top);

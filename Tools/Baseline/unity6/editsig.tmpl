@@ -2,7 +2,7 @@ double R(float v) { return System.Math.Round((double)v, 4); }
 string V(UnityEngine.Vector3 v) { return R(v.x) + "," + R(v.y) + "," + R(v.z); }
 string outDir = "__OUTDIR__";
 string name = "__NAME__";
-var k = KitchenDesign.Kitchen.instance;
+var k = KitchenDesign.KitchenModel.Kitchen.instance;
 if (k == null || k.layout == null) return "kitchen=none";
 var sb = new System.Text.StringBuilder();
 sb.Append("method=" + k.selectedBuildingMethod + " toekick=" + k.selectedToeKickType + " door=" + k.selectedDoorStyleName + " handle=" + k.selectedDoorHandleStyleName + "\n");
@@ -24,19 +24,19 @@ foreach (var e in k.layout.EnumerateCabinets())
     foreach (var o in c.occupants)
     {
         sb.Append("  occ " + (o.productInfo != null ? o.productInfo.sku : "-") + " x=" + R(o.metersFromVolumeMinX) + " pos=" + V(o.transform.position) + " vol=" + (o.occupiedVolume != null ? o.occupiedVolume.name : "-") + "\n");
-        var shelf = o.GetComponent<KitchenDesign.OccupiableVolume>();
+        var shelf = o.GetComponent<KitchenDesign.Occupancy.OccupiableVolume>();
         if (shelf != null) { foreach (var so in shelf.occupants) sb.Append("    nested " + (so.productInfo != null ? so.productInfo.sku : "-") + " x=" + R(so.metersFromVolumeMinX) + " pos=" + V(so.transform.position) + "\n"); }
     }
 }
 var widgets = new System.Collections.Generic.List<string>();
-foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.KitchenWidget>(UnityEngine.FindObjectsSortMode.None))
+foreach (var w in UnityEngine.Object.FindObjectsByType<KitchenDesign.Widgets.KitchenWidget>(UnityEngine.FindObjectsSortMode.None))
 {
     if (!w.isVisible) continue;
     widgets.Add(w.name + "->" + (w.target != null ? w.target.name : "-"));
 }
 widgets.Sort(System.StringComparer.Ordinal);
 sb.Append("widgets " + string.Join(" ", widgets) + "\n");
-int occCount = UnityEngine.Object.FindObjectsByType<KitchenDesign.Occupant>(UnityEngine.FindObjectsSortMode.None).Length;
+int occCount = UnityEngine.Object.FindObjectsByType<KitchenDesign.Occupancy.Occupant>(UnityEngine.FindObjectsSortMode.None).Length;
 int rend = k.GetComponentsInChildren<UnityEngine.Renderer>(false).Length;
 sb.Append("occupants=" + occCount + " renderers=" + rend + "\n");
 string text = sb.ToString();

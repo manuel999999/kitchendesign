@@ -4,6 +4,7 @@ namespace KitchenDesign.ProductsEditor
     using KitchenDesign.Shared.Enums;
     using UnityEditor;
     using UnityEngine;
+    using KitchenDesign.Products;
 
     public static class ProductVisualEditorHelp
     {

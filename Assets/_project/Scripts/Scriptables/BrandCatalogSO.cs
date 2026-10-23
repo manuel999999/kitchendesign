@@ -11,6 +11,7 @@ namespace KitchenDesign.Scriptables
     using KitchenDesign.Serializables;
     using KitchenDesign.Brands;
     using KitchenDesign.CatalogData;
+    using KitchenDesign.Cabinets;
 
     /// <summary>
     ///     This is the app-local information about a Brand Catalog. Not to be

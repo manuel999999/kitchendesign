@@ -6,6 +6,7 @@ namespace KitchenDesign.ProductsEditor
     using System.Linq;
     using UnityEngine;
     using UnityEditor;
+    using KitchenDesign.Products;
 
     /// <summary>
     /// </summary>

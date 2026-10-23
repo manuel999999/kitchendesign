@@ -14,6 +14,9 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.SceneManagement;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Occupancy;
 
     /// <summary>
     ///     Contains the "root" logic of the DesignerScene. It knows about the

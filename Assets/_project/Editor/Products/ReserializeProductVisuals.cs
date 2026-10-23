@@ -3,6 +3,7 @@ namespace KitchenDesign.ProductsEditor
     using Melcher;
     using UnityEngine;
     using UnityEditor;
+    using KitchenDesign.Products;
 
     /// <summary>
     ///     This class adds a menu item to dirty and re-save all <see

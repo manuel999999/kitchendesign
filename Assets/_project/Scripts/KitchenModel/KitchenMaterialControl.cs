@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using KitchenDesign.Cabinets;
+using KitchenDesign.Occupancy;
 
 namespace KitchenDesign.KitchenModel
 {

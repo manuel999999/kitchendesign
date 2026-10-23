@@ -8,6 +8,9 @@ namespace KitchenDesign
     using System.Text.RegularExpressions;
     using TMPro;
     using UnityEngine;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Occupancy;
 
     /// <summary>
     ///     A dialog with a textbox where the user can type a measurement for

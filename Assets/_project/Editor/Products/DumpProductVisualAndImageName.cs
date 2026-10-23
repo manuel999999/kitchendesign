@@ -5,6 +5,7 @@ namespace KitchenDesign.ProductsEditor
     using System.Collections.Generic;
     using System.IO;
     using UnityEditor;
+    using KitchenDesign.Products;
 
     /// <summary>
     /// Creates a menu item that allows for generating a JSON file containing

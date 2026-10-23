@@ -9,6 +9,7 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using TMPro;
     using MEC;
+    using KitchenDesign.KitchenModel;
 
     using Random = UnityEngine.Random;
     using System.Text;

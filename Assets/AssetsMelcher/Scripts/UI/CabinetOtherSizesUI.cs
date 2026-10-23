@@ -7,6 +7,8 @@ namespace KitchenDesign
     using System.Linq;
     using UnityEngine;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
 
     public class CabinetOtherSizesUI : MelcherUI
     {

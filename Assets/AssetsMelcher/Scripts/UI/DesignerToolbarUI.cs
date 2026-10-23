@@ -17,6 +17,9 @@ namespace KitchenDesign
     using System;
     using Cysharp.Threading.Tasks;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Occupancy;
 
     /// <summary>
     ///     Manages the full toolbar state.

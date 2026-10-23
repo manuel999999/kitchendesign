@@ -5,6 +5,7 @@ namespace KitchenDesign
     using System.Linq;
     using UnityEngine;
     using MEC;
+    using KitchenDesign.Measures;
 
     /// <summary>
     /// This class is used to display <see cref="Measure"/>s measurement label

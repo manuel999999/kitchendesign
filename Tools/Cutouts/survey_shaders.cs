@@ -28,7 +28,7 @@ int sections = 0;
 foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/AssetsMelcher/ProductVisuals" }))
 {
     var go = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
-    var pvc = go == null ? null : go.GetComponent<KitchenDesign.ProductVisualContent>();
+    var pvc = go == null ? null : go.GetComponent<KitchenDesign.Products.ProductVisualContent>();
     if (pvc == null) continue;
     Add(pvc.sectionMaterialOverride, "sectionOverride");
     if (pvc.sectionModelPrefab != null)

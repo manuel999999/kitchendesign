@@ -14,6 +14,8 @@ using UnityEngine;
 using KitchenDesign.Session;
 using KitchenDesign.CatalogData;
 using KitchenDesign.Shared.Interfaces;
+using KitchenDesign.Cabinets;
+using KitchenDesign.Occupancy;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;

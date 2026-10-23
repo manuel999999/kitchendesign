@@ -11,6 +11,9 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Occupancy;
 
     public class DesignerDevUI : MelcherUI
     {

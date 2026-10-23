@@ -8,6 +8,11 @@ namespace KitchenDesign
     using TMPro;
     using UnityEngine;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Measures;
+    using KitchenDesign.Occupancy;
+    using KitchenDesign.Products;
 
     /// <summary>
     ///     This class is responsible for taking screenshots of the kitchen to

@@ -12,6 +12,8 @@ namespace KitchenDesign
     using UnityEngine.EventSystems;
     using UnityEngine.SceneManagement;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.Occupancy;
 
     /// <summary>
     ///     A static group of events which allow scripts to communicate with

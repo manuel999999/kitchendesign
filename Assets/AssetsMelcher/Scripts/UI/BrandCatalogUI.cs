@@ -8,6 +8,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using KitchenDesign.KitchenModel;
 
     /// <summary>
     ///     Prompts the user to choose a brand catalog at the start of the app.

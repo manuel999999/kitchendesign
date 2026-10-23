@@ -1,6 +1,6 @@
-var k = KitchenDesign.Kitchen.instance;
-KitchenDesign.Occupant target = null;
-KitchenDesign.Cabinet cab = null;
+var k = KitchenDesign.KitchenModel.Kitchen.instance;
+KitchenDesign.Occupancy.Occupant target = null;
+KitchenDesign.Cabinets.Cabinet cab = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (target == null && occ.name.Contains("__NAME__")) { target = occ; cab = entry.element; }
 if (target == null) return "no occupant matching __NAME__";
 var root = target.productVisualContentInstance.cabinetCutOut.stencilRoot;

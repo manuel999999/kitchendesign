@@ -329,6 +329,26 @@ and leg components), `Occupancy/` (`Occupant`, `OccupiableVolume`, `VolumeOccupa
 folders; usings by script; the `Tools/Baseline` and `Tools/Cutouts` snippets follow the new names.
 Comments stay in files that only moved (decision 7). Check: as B3.2 plus the probe; scenes and
 prefabs unchanged (scripts bind by GUID).
+- **Done 2026-10-23.** 30 files (35 types) moved with their `.meta` by a script that changes the
+  namespace and adds usings where a moved type is used; 92 files changed, including the Baseline and
+  Cutouts snippets' qualified names. One wrong using (a Shared enum has a value named like a moved
+  type, and Shared can't reference the main assembly) was reverted. The emptied
+  `OccupantEventHandlers` folder went with its `.meta`. Compiles in the editor and as macOS player
+  scripts; only four new folder `.meta` files, no asset file changed. Checks against B4.9: `rulescheck.cs` 60/0; `coldstart.sh` both the reference;
+  `runall.sh` identical (photos within 0.14/255); fallback JSON identical; `menucheck.sh` 21 / 21 /
+  1,268; edit probe identical in all three phases.
+
+**Area 4 is done.** In short: `Kitchen.cs` 7,565 → about 3,040 lines; the parts it was are classes
+of their own (`KitchenSelections`, `KitchenSaveWriter`/`Reader`, the price sheets, the three
+controls with `KitchenInteractionState`); every building-method check in the model and every
+manufacturer-id check is a named rule; the door lookup is an instance; `Kitchen.instance` is only
+used by the screens; the model's files are filed by what they are. No step changed the baseline
+saves, measurements or photos, the menu check or the edit probe. Not done here, by plan: the
+screens' building-method checks and `Kitchen.instance` uses, `EventBridge.Designer`, `Kitchen`'s own
+`ProFitGlobals` reads and its remaining layout building and editing commands (area 5 builds the
+designer scene from its initializer), and splitting `ProductVisualContent` (filed in `Products/`,
+not split: no step here needed its parts apart, and its cut-out, measure and label parts are also
+what the photo code (area 6) reads, so it is split when that area changes them).
 
 ## Checks for every step
 As area 3, plus the probe:
@@ -343,4 +363,17 @@ As area 3, plus the probe:
   staged.
 
 ## Where the rear wall will land (for porting `77f53840ee` by hand)
-Filled in as the steps land.
+Paths after B4.10. Line numbers in the old commit are approximate.
+- `BrandCatalog.cs` (`hasRearWall`, `m_HasRearWall`): `_project/Scripts/Scriptables/BrandCatalogSO.cs`.
+  `BrandCatalog_Toppin.asset`'s `m_HasRearWall` is missing from the commit; set it through the editor.
+- `CabinetWall.cs` (new): `_project/Scripts/Cabinets/` (`KitchenDesign.Cabinets`). If it compares the
+  building method or a manufacturer id, add a rule (`IBuildingMethodRules`, `BrandRules`) instead.
+- `CabinetSpan.cs` (+121) and `CabinetLayout.cs` (+2): `_project/Scripts/Cabinets/`.
+- `Kitchen.cs` hunks, by method: `SetBaseCabinetDepth`, `SetCountertopThickness`,
+  `TryInstantiateProductAnywhere`, `TryToFitCabinetToOccupant`, `TryRepositionProduct`,
+  `TryCenterOccupantInVolume` stay in `_project/Scripts/KitchenModel/Kitchen.cs`;
+  `OnOccupantDragBegin` (the `cabinet is not Cabinet` guard) is in `OccupantDragControl`;
+  `TryHighlightObject` (the `CabinetWall` exception) is in `KitchenMaterialControl`.
+- `DesignerToolbarUI.cs`: unchanged location (area 5). The `RearWallButton` in `DesignerScene` is
+  rebuilt in the editor.
+- The commit's `TEMP` block that adds 48" to the high bar top riser should not come over.

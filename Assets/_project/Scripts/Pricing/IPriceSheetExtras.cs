@@ -1,4 +1,5 @@
 using KitchenDesign.KitchenModel;
+using KitchenDesign.Cabinets;
 
 namespace KitchenDesign.Pricing
 {

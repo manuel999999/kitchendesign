@@ -10,6 +10,7 @@ namespace KitchenDesign.ProductsEditor
     using UnityEditor.AddressableAssets.Settings;
     using UnityEditor.AddressableAssets.Settings.GroupSchemas;
     using UnityEngine;
+    using KitchenDesign.Products;
 
     /// <summary>
     ///     Provides menu items to process the project's assets into their

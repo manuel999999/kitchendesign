@@ -1230,6 +1230,19 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `AppInitializer` bound. `Kitchen` itself and the old model files (`Cabinet`, `CabinetLayout`,
     `Occupant`…) still read `ProFitGlobals` until area 5 builds the designer scene from its
     initializer.
+  - **Where the model's files are** (B4.10, `_project/Scripts/`, namespaces follow the folders):
+    `KitchenModel/` (`Kitchen`, `IKitchen`, `KitchenCutoutClipping`, `KitchenSelections`,
+    `KitchenInteractionState`, the three controls), `Cabinets/` (`Cabinet`, `CabinetSpan`,
+    `CabinetLayout`, `CabinetBacking`, `CabinetShelf`, `CabinetCutOut`, `ICabinet`,
+    `CabinetSectionDoorHandle`, `CabinetSectionInfo`, `CabinetSectionLeg`), `Occupancy/`
+    (`Occupant`, `OccupiableVolume`, `VolumeOccupantResult`, `IOccupantListener` and the three handler
+    interfaces, the two cuboid visualisations), `Measures/` (`Measure`, `MeasurementOverlayManager`),
+    `Widgets/` (`KitchenWidget`, `ResizerWidget`, `ButtonWidget`), `Products/`
+    (`ProductVisualContent` and its editor partial), `Geometry/` (`SlicedMesh` with the structs),
+    `Save/`, `Pricing/`, `BuildingRules/`, `Brands/`, `CatalogData/DoorStyleLookup`. Moved with their
+    `.meta` (scenes and prefabs bind by GUID, so no asset changed); comments kept in files that only
+    moved. Still in `AssetsMelcher/Scripts` from this area's list: nothing; what remains there is
+    other areas' (screens, scenes, photos, `EventBridge`, `ProFitGlobals`, `Const`, small helpers).
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
@@ -1481,7 +1494,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     default) never clips. **Any new material that can land on a cabinet or countertop needs one
     of these shaders**, and a graph that allows material overrides (like `PosterizeGraph`) also
     needs `_AlphaClip` on in each material. URP Lit and Simple Lit don't clip.
-  - `KitchenDesign.KitchenCutoutClipping` (`AssetsMelcher/Scripts/`, owned by `Kitchen`): rebuilds
+  - `KitchenDesign.KitchenModel.KitchenCutoutClipping` (`_project/Scripts/KitchenModel/`, owned by `Kitchen`): rebuilds
     slots and boxes before every render (`RenderPipelineManager.beginContextRendering`). Why:
     every change path (load, drag, resize, inset, shelf, highlight, the photos' manual renders)
     is covered without hooking each one; 0.03 ms per refresh. `CabinetCutOut.TryGetClipBox`
@@ -1686,7 +1699,18 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   own plan: `.claude/prompts/04-kitchen-model.md`** (written 2026-10-23; the user left the design
   and the details to Claude and wants each step checked and committed on its own). The old repo
   has nothing to bring over first except the rear wall, which still waits for the user (checked
-  2026-10-23, details in the plan). Steps B4.0–B4.10; progress is recorded in the plan.
+  2026-10-23, details in the plan). **Area 4 is done and committed (B4.0–B4.10, 2026-10-23;
+  results in the plan).** `Kitchen.cs` went from 7,565 to about 3,040 lines: save, load, price
+  inputs, selections, selection and finishes, widgets and dragging are their own classes; the
+  building-method and brand checks are named rules; the model's files are in `_project/Scripts/`.
+  Every step matched the run before on the baseline, the menu check and the new edit probe.
+  Open from area 4, for the user: the three strings with U+FFFD sent to the server (Gotchas); the
+  orbit start-yaw race and the intermittent 36449 load (orbit view note above); the rear wall waits
+  for the user and now has to be ported by hand (map in the plan). **Next: area 5, the screens**
+  (85 files): its section in `03-refactor.md` first, as for areas 1–3. It is also where
+  `Kitchen.instance` (26 screen uses), most of `EventBridge.Designer`, the remaining building-method
+  checks (`DesignerToolbarUI` 22) and `DesignerSceneInitializer` taking over the designer's start-up
+  belong.
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

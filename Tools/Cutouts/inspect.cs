@@ -1,4 +1,4 @@
-var k = KitchenDesign.Kitchen.instance;
+var k = KitchenDesign.KitchenModel.Kitchen.instance;
 string r = "";
 var shaders = new System.Collections.Generic.Dictionary<string, int>();
 int ci = 0;

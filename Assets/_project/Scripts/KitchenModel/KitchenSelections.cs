@@ -3,6 +3,7 @@ using KitchenDesign.Scriptables;
 using KitchenDesign.Server;
 using KitchenDesign.Shared.Enums;
 using System.Collections.Generic;
+using KitchenDesign.Cabinets;
 
 namespace KitchenDesign.KitchenModel
 {

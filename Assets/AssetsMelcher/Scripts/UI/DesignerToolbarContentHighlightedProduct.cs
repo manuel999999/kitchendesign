@@ -9,6 +9,9 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using KitchenDesign.Geometry;
+    using KitchenDesign.Cabinets;
+    using KitchenDesign.KitchenModel;
+    using KitchenDesign.Occupancy;
 
     /// <summary>
     /// Manages the UI for the highlighted product in the toolbar.
