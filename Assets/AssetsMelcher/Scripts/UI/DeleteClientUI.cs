@@ -5,6 +5,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using MEC;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// The prompt that shows up to confirm the user wants to delete a client.
@@ -66,7 +67,7 @@ namespace KitchenDesign
         {
             // Lock-out the UI until the web request returns
             m_CanvasGroup.interactable = false;
-            EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
             m_MessageBox.Clear();
 
             ProFitGlobals.server.Clients.DeleteClient(
@@ -74,7 +75,7 @@ namespace KitchenDesign
                 m_ClientId,
                 onSuccess: () =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
                     ProFitGlobals.activeClientId = null; // TODO: Necessary anymore? Maybe let the ClientListUI clear the activeClientId
 
@@ -85,11 +86,11 @@ namespace KitchenDesign
                         ProFitGlobals.userClients.RemoveAt(clientIndex);
                     }
 
-                    EventBridge.Menu.showClientListUi.Invoke();
+                    EventMenu.OnClientListRequested.Raise();
                 },
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
                     m_CanvasGroup.interactable = true;
 

@@ -7,6 +7,7 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using TMPro;
+    using KitchenDesign.Events;
 
     public class ClientProfileUI : Menu
     {
@@ -204,14 +205,14 @@ namespace KitchenDesign
 
         protected void UpdateProfile(UserClient newProfile)
         {
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             ProFitGlobals.server.Clients.UpdateClient(
                 ProFitGlobals.user,
                 newProfile,
                 onSuccess: userClient =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
                     if (!ProFitGlobals.TryGetClientIndex(m_ClientId, out int clientIndex))
                     {
@@ -226,7 +227,7 @@ namespace KitchenDesign
                 },
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
                     EventBridge.Menu.setEditUserProfileError.Invoke(error.Message);
                 }
@@ -235,7 +236,7 @@ namespace KitchenDesign
 
         protected void PushDeleteClientUI(MelcherButton caller)
         {
-            EventBridge.Menu.showDeleteClientUi?.Invoke(m_ClientId);
+            EventMenu.OnDeleteClientRequested.Raise(new ClientInfo(m_ClientId));
         }
 
         protected void Email(MelcherButton caller)

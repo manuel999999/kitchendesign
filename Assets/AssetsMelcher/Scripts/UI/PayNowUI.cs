@@ -6,6 +6,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using MEC;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// The prompt that shows up when a new user signs in.
@@ -106,7 +107,7 @@ namespace KitchenDesign
             if (userProfile.IsSubscriptionOrTrialActive())
             {
                 ProFitGlobals.userProfile = userProfile;
-                EventBridge.Menu.showLogInUiAndSignIn.Invoke(m_Email, m_Password);
+                EventMenu.OnSignInRequested.Raise(new CredentialsInfo(m_Email, m_Password));
             }
         }
 
@@ -124,7 +125,7 @@ namespace KitchenDesign
 
         protected void OnClickDeleteAccountButton(MelcherButton caller)
         {
-            EventBridge.Menu.showDeleteAccountUi.Invoke();
+            EventMenu.OnDeleteAccountRequested.Raise();
         }
 
         protected void OnPostProcessMessage(MelcherLocalizedText caller, ref string phrase)

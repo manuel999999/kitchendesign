@@ -9,6 +9,7 @@ namespace KitchenDesign
     using System.Linq;
     using TMPro;
     using UnityEngine;
+    using KitchenDesign.Events;
 
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 
@@ -35,7 +36,7 @@ namespace KitchenDesign
                 return;
             }
 
-            EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             bool offlineMode =
                 m_EmailField.text.Equals("guest", StringComparison.OrdinalIgnoreCase) &&
@@ -53,7 +54,7 @@ namespace KitchenDesign
             {
                 ProFitGlobals.user = user;
 
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting User Profile");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting User Profile"));
 
                 // Get the user's profile
                 ProFitGlobals.server.Accounts.GetProfile(
@@ -101,8 +102,8 @@ namespace KitchenDesign
                 // Show the Pay Now prompt if the user isn't valid
                 if (!userProfile.IsSubscriptionOrTrialActive())
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
-                    EventBridge.Menu.showPayNowPrompt.Invoke(m_EmailField.text, m_PasswordField.text);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
+                    EventMenu.OnPayNowRequested.Raise(new CredentialsInfo(m_EmailField.text, m_PasswordField.text));
                     return;
                 }
 
@@ -144,8 +145,8 @@ namespace KitchenDesign
                 // (either a hardcoded domain or one set specifically for the user)
                 if (!isWhitelisted && !isAuthorized)
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
-                    EventBridge.Menu.showUnauthorizedDomainPrompt.Invoke(authorizedDomain);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
+                    EventMenu.OnUnauthorizedDomainRequested.Raise(new UnauthorizedDomainInfo(authorizedDomain));
                     return;
                 }
             }
@@ -211,20 +212,20 @@ namespace KitchenDesign
 
         protected void OnForgotPassword(MelcherButton caller)
         {
-            EventBridge.Menu.pushResetPasswordUi?.Invoke(m_EmailField.text);
+            EventMenu.OnResetPasswordRequested.Raise(new ResetPasswordInfo(m_EmailField.text));
         }
 
 
         protected void QuickLogIn(string email, string password)
         {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            EventBridge.Menu.showLogInUiAndSignIn.Invoke(email, password);
+            EventMenu.OnSignInRequested.Raise(new CredentialsInfo(email, password));
 #endif  // if UNITY_EDITOR || DEVELOPMENT_BUILD
         }
 
         private void ErrorHandler(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
         {
-            EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
             m_MessageBox.ErrorFromWebRequest(builder, error, jsonValue);
         }
 

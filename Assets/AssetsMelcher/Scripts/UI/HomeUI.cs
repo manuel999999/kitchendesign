@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.Events;
 
     public class HomeUI : Menu
     {
@@ -36,7 +37,7 @@ namespace KitchenDesign
 
         protected void OnStartCustomizing(MelcherButton caller)
         {
-            EventBridge.Menu.pushCreateClientUi();
+            EventMenu.OnCreateClientRequested.Raise();
 
             //EventBridge.Menu.hideMainUi.Invoke();
         }

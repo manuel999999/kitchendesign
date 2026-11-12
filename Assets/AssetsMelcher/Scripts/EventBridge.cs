@@ -40,110 +40,16 @@ namespace KitchenDesign
     //         methods in the relevant script rather than global-globals. -Ryan
     public static class EventBridge
     {
-        public delegate void ShowSpinner(bool show);
         public delegate void SetSpinnerStatusMessage(string statusMessage);
 
         public static class Menu
         {
-            public static Action showMainUi;
-            public static Action hideMainUi;
-
-            /// <summary>
-            ///     Show or hide the <see cref="LoadingUI"/> canvas that
-            ///     covers the whole screen and shows a loading spinner. The
-            ///     spinner's status message will be cleared when the spinner
-            ///     is hidden.
-            /// </summary>
-            public static ShowSpinner showFullScreenSpinner;
-
-            /// <summary>
-            ///     Show or hide the <see cref="LoadingUI"/> canvas that
-            ///     is intended to show background operations happening. We use
-            ///     this to improve up the log in process by allowing the user
-            ///     to navigate the menu's while the app continues downloading
-            ///     data.
-            /// </summary>
-            public static ShowSpinner showBackgroundSpinner;
-
-            /// <summary>
-            ///     Set the status message that is shown below <see
-            ///     cref="LoadingUI"/>'s spinner.
-            /// </summary>
-            public static SetSpinnerStatusMessage setSpinnerStatusMessage;
-
-            public delegate void ShowWelcomeUI(MelcherUITransitionStyle transitionStyle);
-            public static ShowWelcomeUI showWelcomeUi;
-
-            public delegate void PushSignUpUI(UserType userType);
-            public static PushSignUpUI pushSignUpUi;
-
-            public static Action pushLogInUi;
-
-            public delegate void ShowLogInUIAndSignIn(string email, string password);
-            /// <summary>
-            /// Jump to the log in page and try to sign in with the provided
-            /// credentials.
-            /// </summary>
-            public static ShowLogInUIAndSignIn showLogInUiAndSignIn;
-
-            /// <summary>
-            /// Show the "delete my account" prompt.
-            /// </summary>
-            public static Action showDeleteAccountUi;
-
-            public delegate void PushResetPasswordUI(string email);
-            public static PushResetPasswordUI pushResetPasswordUi;
-
-            public delegate void ShowPayNowPrompt(string email, string password);
-            public static ShowPayNowPrompt showPayNowPrompt;
-
-            public delegate void ShowUnauthorizedDomainPromptHandler(string authorizedDomain);
-            public static ShowUnauthorizedDomainPromptHandler showUnauthorizedDomainPrompt;
-
-            public delegate void ShowUserKickedPrompt(string kickReason);
-            public static ShowUserKickedPrompt showUserKickedPrompt;
-
-            /// <summary>
-            /// Show the trial countdown overlay.
-            /// </summary>
-            public static Action showTrialCountdownUi;
-
-            /// <summary>
-            /// Hide the trial countdown overlay.
-            /// </summary>
-            public static Action hideTrialCountdownUi;
-
-            public static Action showHomeUi;
-
-            public static Action pushCreateClientUi;
-
-            public static Action showClientListUi;
-
             public delegate void ShowSortModeHandler(Action<ListControllerSortMode> onChoose);
             public static ShowSortModeHandler showSortModeUi;
 
             public delegate void OnMultipleChoiceSelected(int? selectedIndex);
             public delegate void ShowMultipleChoiceHandler(IEnumerable<string> choices, OnMultipleChoiceSelected onChoice, string title = "Choice");
             public static ShowMultipleChoiceHandler showMultipleChoiceUi;
-
-            public delegate void GetSortModeLabelHandler(ListControllerSortMode sortMode, ref string label);
-            public static GetSortModeLabelHandler getSortModeLabel;
-
-            public delegate void PushClientInfoUI(int clientId);
-            public static PushClientInfoUI pushClientInfoUi;
-
-            public delegate void ShowDeleteClientUI(int clientId);
-            public static ShowDeleteClientUI showDeleteClientUi;
-
-            public static Action pushClientQuoteListUi;
-            public static Action refreshClientQuoteListUi;
-
-            public delegate void QuoteHandler(int clientId, int quoteId);
-            public static QuoteHandler showQuoteInfoUi;
-            public static QuoteHandler showDeleteQuoteUi;
-
-            public static Action showUserProfileUi;
-
 
             public delegate void ShowEditUserProfileUI(
                 string title,
@@ -159,19 +65,6 @@ namespace KitchenDesign
             public static Action<string> setEditUserProfileError;
 
             public static Action hideEditUserProfileUi;
-
-            public static Action pushManufacturerWhitelistUi;
-
-            /// <summary>
-            /// Show a pop-up asking if the user is sure they want to sign out.
-            /// This may result in the user returning to the welcome UI if
-            /// they accept.
-            /// </summary>
-            public static Action showUserLogOutPrompt;
-
-            public static Action navigateBackward;
-
-            public static Action toggleScreenOrientation;
 
             public delegate void KioskKeypadSuccessHandler(Action onSuccess);
 
@@ -193,8 +86,6 @@ namespace KitchenDesign
             ///     should be prompted before it is closed).
             /// </summary>
             public static SetMenuHasPendingChangesHandler setMenuHasPendingChanges;
-
-            public static Action showQuitPrompt;
 
         }   // class Menu
 

@@ -8,6 +8,7 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using TMPro;
     using System.Linq;
+    using KitchenDesign.Events;
 
     public class UserProfileUI : Menu
     {
@@ -333,12 +334,12 @@ namespace KitchenDesign
 
         protected void ShowDeleteAccountPrompt(MelcherButton caller)
         {
-            EventBridge.Menu.showDeleteAccountUi.Invoke();
+            EventMenu.OnDeleteAccountRequested.Raise();
         }
 
         protected void UpdateProfile(UserProfile newProfile, string password = null, string confirmPassword = null)
         {
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             ProFitGlobals.server.Accounts.UpdateProfile(
                 ProFitGlobals.user,
@@ -347,7 +348,7 @@ namespace KitchenDesign
                 confirmPassword,
                 onSuccess: userProfile =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
                     ProFitGlobals.userProfile = newProfile;
                     Refresh();
@@ -356,7 +357,7 @@ namespace KitchenDesign
                 },
                 onError: (request, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
                     EventBridge.Menu.setEditUserProfileError.Invoke(error.Message);
                 }
@@ -365,12 +366,12 @@ namespace KitchenDesign
 
         protected void PushManufacturerWhitelistUI(MelcherButton caller)
         {
-            EventBridge.Menu.pushManufacturerWhitelistUi.Invoke();
+            EventMenu.OnManufacturerWhitelistRequested.Raise();
         }
 
         protected void LogOut(MelcherButton caller)
         {
-            EventBridge.Menu.showUserLogOutPrompt.Invoke();
+            EventMenu.OnLogOutPromptRequested.Raise();
         }
 
         // =====================================================================

@@ -4,6 +4,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using MEC;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// The prompt that shows up to confirm the user wants to delete a quote.
@@ -64,14 +65,14 @@ namespace KitchenDesign
             // Lock-out the UI until the web request returns
             m_CanvasGroup.interactable = false;
             m_MessageBox.Clear();
-            EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             ProFitGlobals.server.Quotes.DeleteQuote(
                 ProFitGlobals.user,
                 m_QuoteId,
                 onSuccess: () =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
                     Hide();
@@ -85,11 +86,11 @@ namespace KitchenDesign
                     ProFitGlobals.userClients[clientIndex].quotes.RemoveAt(quoteIndex);
                     // Refresh the client list
                     MelcherLog.LogEditorOnly($"Removed quote ID {m_QuoteId} from client #{m_ClientId}");
-                    EventBridge.Menu.refreshClientQuoteListUi?.Invoke();
+                    EventMenu.OnClientQuoteListRefreshRequested.Raise();
                 },
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
                     m_MessageBox.Error(error.Message);

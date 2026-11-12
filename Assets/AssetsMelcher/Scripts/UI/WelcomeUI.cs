@@ -3,6 +3,7 @@ namespace KitchenDesign
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using UnityEngine;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// This is the log-in / sign-up welcome screen. It is the main landing
@@ -51,17 +52,17 @@ namespace KitchenDesign
 
         protected void ShowTrialSignUp(MelcherButton caller)
         {
-            EventBridge.Menu.pushSignUpUi(UserType.Trial);
+            EventMenu.OnSignUpRequested.Raise(new SignUpInfo(UserType.Trial));
         }
 
         protected void ShowDealerSignUp(MelcherButton caller)
         {
-            EventBridge.Menu.pushSignUpUi(UserType.Dealer);
+            EventMenu.OnSignUpRequested.Raise(new SignUpInfo(UserType.Dealer));
         }
 
         protected void ShowLogInScreen(MelcherButton caller)
         {
-            EventBridge.Menu.pushLogInUi();
+            EventSession.OnLogInRequested.Raise();
         }
 
         protected void SetUserRegistrationAllowed(bool isAllowed)

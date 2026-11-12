@@ -7,6 +7,7 @@ namespace KitchenDesign
     using System.Linq;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// Displays a manufacturer list for a dealer user to whitelist specific
@@ -321,7 +322,7 @@ namespace KitchenDesign
 
         protected void ApplySelection(MelcherButton caller)
         {
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
             m_CanvasGroup.interactable = false;
             m_MessageBox.Clear();
 
@@ -372,7 +373,7 @@ namespace KitchenDesign
                 confirmPassword: null,
                 onSuccess: (newUserProfile) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
                     ProFitGlobals.userProfile = newUserProfile;
@@ -383,11 +384,11 @@ namespace KitchenDesign
 
                     EventBridge.Menu.setMenuHasPendingChanges(this, hasPendingChanges: false);
 
-                    EventBridge.Menu.navigateBackward.Invoke();
+                    EventMenu.OnBackRequested.Raise();
                 },
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
                     m_MessageBox.ErrorFromWebRequest(builder, error, jsonValue);

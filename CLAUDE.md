@@ -1072,6 +1072,23 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `OnMenuSceneRequested` (`MenuSceneRequestInfo`, an optional `System.Action` run once the menu
     scene has loaded): a kick while the menu isn't loaded; the designer goes back to the menu and
     the callback asks for the kick prompt there.
+  Screens raise the same events where they ask the same thing (B5.3a): the full-screen spinner
+  (every server request a menu screen makes; hiding it clears the status text), the background
+  spinner (the sign-in downloads go on while the user moves around the menu), the status
+  message, welcome, log in, home.
+- `EventMenu` (B5.3a, `_projectEvents/Events/`): what the menu's screens ask of the menu's
+  navigation (`MenuScene`, which listens in `OnEnable`/`OnDisable`): sign up (`SignUpInfo`),
+  sign in with given credentials (`CredentialsInfo`: sign-up, pay-now and the editor's quick
+  sign-in jump to the log-in screen and sign in), delete account, reset password
+  (`ResetPasswordInfo`), pay now (`CredentialsInfo`), unauthorized domain (WebGL players only,
+  `UnauthorizedDomainInfo`), create client, client list, client info and delete client
+  (`ClientInfo`), client quote list (the client goes through `ClientListStatus`), its refresh,
+  quote info and delete quote (`ClientQuoteInfo`), user profile, manufacturer whitelist, log-out
+  prompt, back, screen orientation (mobile only), quit prompt (standalone only). One listener
+  each. `MenuScene`'s own start-up calls its handlers directly instead of raising.
+- `EventBridge.Menu` keeps only the prompts that answer through a callback (sort mode, multiple
+  choice, edit profile field with its error and hide replies, kiosk keypad and permission) and
+  `setMenuHasPendingChanges`, until B5.3c hands them to the screens that use them.
 - Everything else still goes through the old `EventBridge`.
 
 ## Key systems

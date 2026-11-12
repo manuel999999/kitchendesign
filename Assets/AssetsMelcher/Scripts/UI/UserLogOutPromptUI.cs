@@ -2,6 +2,7 @@ namespace KitchenDesign
 {
     using Melcher;
     using UnityEngine;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// The prompt that appears when confirming if the user wants to sign out.
@@ -39,7 +40,7 @@ namespace KitchenDesign
 
             ProFitGlobals.LogOut();
 
-            EventBridge.Menu.showWelcomeUi.Invoke(MelcherUITransitionStyle.Regress);
+            EventSession.OnWelcomeRequested.Raise();
         }
 
         // =====================================================================

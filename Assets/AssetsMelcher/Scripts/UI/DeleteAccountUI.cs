@@ -5,6 +5,7 @@ namespace KitchenDesign
     using UnityEngine;
     using TMPro;
     using MEC;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// The prompt that shows up to confirm the user wants to delete their
@@ -62,24 +63,24 @@ namespace KitchenDesign
             // Lock-out the UI until the web request returns
             m_CanvasGroup.interactable = false;
             m_MessageBox.Clear();
-            EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             ProFitGlobals.server.Accounts.DeleteAccount(
                 ProFitGlobals.user,
                 m_PasswordInput.text,
                 onSuccess: () =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
                     Hide();
 
                     ProFitGlobals.LogOut();
-                    EventBridge.Menu.showWelcomeUi?.Invoke(MelcherUITransitionStyle.Regress);
+                    EventSession.OnWelcomeRequested.Raise();
                 },
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
                     m_MessageBox.Error(error.Message);

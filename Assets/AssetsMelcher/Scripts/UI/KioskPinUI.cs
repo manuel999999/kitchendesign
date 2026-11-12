@@ -6,6 +6,7 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using System;
     using System.Collections.Generic;
+    using KitchenDesign.Events;
 
     /// <summary>
     ///     The prompt that shows up to gate access to sensitive app screens.
@@ -149,12 +150,12 @@ namespace KitchenDesign
                             () =>
                             {
                                 m_CanvasGroup.interactable = true;
-                                EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                             }
                         );
 
                     m_CanvasGroup.interactable = false;
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
                     yield return Timing.WaitForSeconds(m_NumberOfConsecutiveWrongPinAttempts);
                 }

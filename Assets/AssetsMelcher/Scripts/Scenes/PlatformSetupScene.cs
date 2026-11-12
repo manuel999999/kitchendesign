@@ -25,13 +25,11 @@ namespace KitchenDesign
 
         private void OnEnable()
         {
-            EventBridge.Menu.setSpinnerStatusMessage += OnSetSpinnerStatusMessage;
             EventSession.OnSpinnerMessageRequested.AddListener(this.OnSpinnerMessageRequested);
         }
 
         private void OnDisable()
         {
-            EventBridge.Menu.setSpinnerStatusMessage -= OnSetSpinnerStatusMessage;
             EventSession.OnSpinnerMessageRequested.RemoveListener(this.OnSpinnerMessageRequested);
         }
 

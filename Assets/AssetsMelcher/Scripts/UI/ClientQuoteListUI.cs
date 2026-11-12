@@ -10,6 +10,7 @@ namespace KitchenDesign
     using UnityEngine;
     using TMPro;
     using MEC;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// Handles displaying the list of client's quotes/designs.
@@ -87,7 +88,7 @@ namespace KitchenDesign
 
         protected void FetchList(MelcherButton caller)
         {
-            EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             int clientId = ProFitGlobals.activeClientId.Value;
 
@@ -98,13 +99,13 @@ namespace KitchenDesign
                 onSuccess: OnSuccess,
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                 }
             );
 
             void OnSuccess(UserClient client)
             {
-                EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
                 int clientIndex = ProFitGlobals.userClients.FindIndex(x => x.id == clientId);
                 if (clientIndex < 0)
@@ -254,8 +255,8 @@ namespace KitchenDesign
 
             IEnumerator<float> CreateNewDesignAsync()
             {
-                EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
-                EventBridge.Menu.showBackgroundSpinner?.Invoke(false);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
+                EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(false));
 
                 while (ProFitGlobals.logInCoroutineState != LogInState.Finished)
                 {
@@ -286,7 +287,7 @@ namespace KitchenDesign
         {
             if (row == m_ClientRow)
             {
-                EventBridge.Menu.pushClientInfoUi.Invoke(ProFitGlobals.activeClientId.Value);
+                EventMenu.OnClientInfoRequested.Raise(new ClientInfo(ProFitGlobals.activeClientId.Value));
             }
         }
 
@@ -294,7 +295,7 @@ namespace KitchenDesign
         {
             int quoteIndex = m_FilteredQuoteIndices[row.index];
             int quoteId = m_ActiveClientQuotes[quoteIndex].id;
-            EventBridge.Menu.showQuoteInfoUi?.Invoke(ProFitGlobals.activeClientId.Value, quoteId);
+            EventMenu.OnQuoteInfoRequested.Raise(new ClientQuoteInfo(ProFitGlobals.activeClientId.Value, quoteId));
         }
 
         protected void OpenPdf(QuoteListRow row)
@@ -317,8 +318,8 @@ namespace KitchenDesign
 
             IEnumerator<float> LoadDesignAsync()
             {
-                EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
-                EventBridge.Menu.showBackgroundSpinner?.Invoke(false);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
+                EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(false));
 
                 while (ProFitGlobals.logInCoroutineState != LogInState.Finished)
                 {
@@ -333,7 +334,7 @@ namespace KitchenDesign
                     MelcherSceneLoadMode.Single
                 );
 
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Loading Design");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Loading Design"));
             }
         }
 

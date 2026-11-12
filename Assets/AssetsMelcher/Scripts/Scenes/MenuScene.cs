@@ -26,7 +26,7 @@ namespace KitchenDesign
                 if (ProFitGlobals.userProfile.IsTrialActive())
                 {
                     // Trial users see a countdown
-                    EventBridge.Menu.showTrialCountdownUi.Invoke();
+                    this.ShowTrialUI();
                 }
 
                 // If the user is returning to the main menu from elsewhere
@@ -46,7 +46,7 @@ namespace KitchenDesign
                 return;
             }
 
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+            this.ShowFullScreenSpinner(true);
             ProFitGlobals.ExecuteWhenReady(TryLogInWithSavedToken);
 
             void TryLogInWithSavedToken()
@@ -54,7 +54,7 @@ namespace KitchenDesign
                 // Try to log in with old token. If this fails, fallback to sign up/
                 // log in screen
                 MelcherLog.LogEditorOnly("Trying to log in with session in PlayerPrefs");
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting User Profile");
+                this.SetSpinnerStatusMessage("Requesting User Profile");
                 ProFitGlobals.server.Accounts.GetProfile(
                     apiToken,
                     isOffline: false,
@@ -86,7 +86,7 @@ namespace KitchenDesign
 
             void OnError(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                this.ShowFullScreenSpinner(false);
                 ShowWelcome(MelcherUITransitionStyle.Progress);
             }
         }
@@ -116,39 +116,8 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            EventBridge.Menu.showMainUi             += ShowMenu;
-            EventBridge.Menu.hideMainUi             += HideMenu;
-            EventBridge.Menu.showFullScreenSpinner  += ShowFullScreenSpinner;
-            EventBridge.Menu.showBackgroundSpinner  += ShowBackgroundSpinner;
-            EventBridge.Menu.setSpinnerStatusMessage+= SetSpinnerStatusMessage;
-            EventBridge.Menu.showWelcomeUi          += ShowWelcome;
-            EventBridge.Menu.pushSignUpUi           += PushSignUpUI;
-            EventBridge.Menu.pushLogInUi            += PushLogInUI;
-            EventBridge.Menu.showLogInUiAndSignIn   += ShowLogInAndSignIn;
-            EventBridge.Menu.showDeleteAccountUi    += ShowDeleteAccountUI;
-            EventBridge.Menu.pushResetPasswordUi    += PushResetPasswordUI;
-            EventBridge.Menu.showPayNowPrompt       += ShowPayNowPrompt;
-            EventBridge.Menu.showUnauthorizedDomainPrompt += ShowUnauthorizedDomainPrompt;
-            EventBridge.Menu.showUserKickedPrompt   += ShowUserKickedPrompt;
-            EventBridge.Menu.showTrialCountdownUi   += ShowTrialUI;
-            EventBridge.Menu.hideTrialCountdownUi   += HideTrialUI;
-            EventBridge.Menu.showHomeUi             += ShowHome;
-            EventBridge.Menu.pushCreateClientUi     += PushCreateClientUI;
-            EventBridge.Menu.showClientListUi       += ShowClientListUI;
-            EventBridge.Menu.pushClientInfoUi       += PushClientProfileUI;
-            EventBridge.Menu.showDeleteClientUi     += ShowDeleteClientUi;
-            EventBridge.Menu.showQuoteInfoUi        += ShowQuoteInfoUI;
-            EventBridge.Menu.showDeleteQuoteUi      += ShowDeleteQuoteUI;
-            EventBridge.Menu.pushClientQuoteListUi  += PushClientQuoteListUI;
-            EventBridge.Menu.refreshClientQuoteListUi += RefreshClientQuoteListUI;
-            EventBridge.Menu.showUserProfileUi      += ShowUserProfileUI;
-            EventBridge.Menu.pushManufacturerWhitelistUi += PushManufacturerWhitelistUI;
-            EventBridge.Menu.showUserLogOutPrompt   += ShowUserLogOutPrompt;
             EventBridge.Menu.setMenuHasPendingChanges += SetMenuHasPendingChanges;
 
-            EventBridge.Menu.navigateBackward += PopMenu;
-            EventBridge.Menu.toggleScreenOrientation += ToggleScreenOrientation;
-            EventBridge.Menu.showQuitPrompt += ShowQuitPrompt;
 
             EventSession.OnSpinnerMessageRequested.AddListener(this.OnSpinnerMessageRequested);
             EventSession.OnFullScreenSpinnerRequested.AddListener(this.OnFullScreenSpinnerRequested);
@@ -160,43 +129,33 @@ namespace KitchenDesign
             EventSession.OnLoggedOut.AddListener(this.HideTrialUI);
             EventSession.OnSubscriptionActivated.AddListener(this.HideTrialUI);
             EventSession.OnUserKickedPromptRequested.AddListener(this.OnUserKickedPromptRequested);
+
+            EventMenu.OnSignUpRequested.AddListener(this.OnSignUpRequested);
+            EventMenu.OnSignInRequested.AddListener(this.OnSignInRequested);
+            EventMenu.OnDeleteAccountRequested.AddListener(this.ShowDeleteAccountUI);
+            EventMenu.OnResetPasswordRequested.AddListener(this.OnResetPasswordRequested);
+            EventMenu.OnPayNowRequested.AddListener(this.OnPayNowRequested);
+            EventMenu.OnUnauthorizedDomainRequested.AddListener(this.OnUnauthorizedDomainRequested);
+            EventMenu.OnCreateClientRequested.AddListener(this.PushCreateClientUI);
+            EventMenu.OnClientListRequested.AddListener(this.ShowClientListUI);
+            EventMenu.OnClientInfoRequested.AddListener(this.OnClientInfoRequested);
+            EventMenu.OnDeleteClientRequested.AddListener(this.OnDeleteClientRequested);
+            EventMenu.OnClientQuoteListRequested.AddListener(this.PushClientQuoteListUI);
+            EventMenu.OnClientQuoteListRefreshRequested.AddListener(this.RefreshClientQuoteListUI);
+            EventMenu.OnQuoteInfoRequested.AddListener(this.OnQuoteInfoRequested);
+            EventMenu.OnDeleteQuoteRequested.AddListener(this.OnDeleteQuoteRequested);
+            EventMenu.OnUserProfileRequested.AddListener(this.ShowUserProfileUI);
+            EventMenu.OnManufacturerWhitelistRequested.AddListener(this.PushManufacturerWhitelistUI);
+            EventMenu.OnLogOutPromptRequested.AddListener(this.ShowUserLogOutPrompt);
+            EventMenu.OnBackRequested.AddListener(this.PopMenu);
+            EventMenu.OnScreenOrientationToggleRequested.AddListener(this.ToggleScreenOrientation);
+            EventMenu.OnQuitPromptRequested.AddListener(this.ShowQuitPrompt);
         }
 
         protected void OnDisable()
         {
-            EventBridge.Menu.showMainUi             -= ShowMenu;
-            EventBridge.Menu.hideMainUi             -= HideMenu;
-            EventBridge.Menu.showFullScreenSpinner  -= ShowFullScreenSpinner;
-            EventBridge.Menu.showBackgroundSpinner  -= ShowBackgroundSpinner;
-            EventBridge.Menu.setSpinnerStatusMessage-= SetSpinnerStatusMessage;
-            EventBridge.Menu.showWelcomeUi          -= ShowWelcome;
-            EventBridge.Menu.pushSignUpUi           -= PushSignUpUI;
-            EventBridge.Menu.pushLogInUi            -= PushLogInUI;
-            EventBridge.Menu.showLogInUiAndSignIn   -= ShowLogInAndSignIn;
-            EventBridge.Menu.showDeleteAccountUi    -= ShowDeleteAccountUI;
-            EventBridge.Menu.pushResetPasswordUi    -= PushResetPasswordUI;
-            EventBridge.Menu.showPayNowPrompt       -= ShowPayNowPrompt;
-            EventBridge.Menu.showUnauthorizedDomainPrompt -= ShowUnauthorizedDomainPrompt;
-            EventBridge.Menu.showUserKickedPrompt   -= ShowUserKickedPrompt;
-            EventBridge.Menu.showTrialCountdownUi   -= ShowTrialUI;
-            EventBridge.Menu.hideTrialCountdownUi   -= HideTrialUI;
-            EventBridge.Menu.showHomeUi             -= ShowHome;
-            EventBridge.Menu.pushCreateClientUi     -= PushCreateClientUI;
-            EventBridge.Menu.showClientListUi       -= ShowClientListUI;
-            EventBridge.Menu.pushClientInfoUi       -= PushClientProfileUI;
-            EventBridge.Menu.showDeleteClientUi     -= ShowDeleteClientUi;
-            EventBridge.Menu.showQuoteInfoUi        -= ShowQuoteInfoUI;
-            EventBridge.Menu.showDeleteQuoteUi      -= ShowDeleteQuoteUI;
-            EventBridge.Menu.pushClientQuoteListUi  -= PushClientQuoteListUI;
-            EventBridge.Menu.refreshClientQuoteListUi -= RefreshClientQuoteListUI;
-            EventBridge.Menu.showUserProfileUi      -= ShowUserProfileUI;
-            EventBridge.Menu.pushManufacturerWhitelistUi -= PushManufacturerWhitelistUI;
-            EventBridge.Menu.showUserLogOutPrompt   -= ShowUserLogOutPrompt;
             EventBridge.Menu.setMenuHasPendingChanges -= SetMenuHasPendingChanges;
 
-            EventBridge.Menu.navigateBackward -= PopMenu;
-            EventBridge.Menu.toggleScreenOrientation -= ToggleScreenOrientation;
-            EventBridge.Menu.showQuitPrompt -= ShowQuitPrompt;
 
             EventSession.OnSpinnerMessageRequested.RemoveListener(this.OnSpinnerMessageRequested);
             EventSession.OnFullScreenSpinnerRequested.RemoveListener(this.OnFullScreenSpinnerRequested);
@@ -208,16 +167,72 @@ namespace KitchenDesign
             EventSession.OnLoggedOut.RemoveListener(this.HideTrialUI);
             EventSession.OnSubscriptionActivated.RemoveListener(this.HideTrialUI);
             EventSession.OnUserKickedPromptRequested.RemoveListener(this.OnUserKickedPromptRequested);
+
+            EventMenu.OnSignUpRequested.RemoveListener(this.OnSignUpRequested);
+            EventMenu.OnSignInRequested.RemoveListener(this.OnSignInRequested);
+            EventMenu.OnDeleteAccountRequested.RemoveListener(this.ShowDeleteAccountUI);
+            EventMenu.OnResetPasswordRequested.RemoveListener(this.OnResetPasswordRequested);
+            EventMenu.OnPayNowRequested.RemoveListener(this.OnPayNowRequested);
+            EventMenu.OnUnauthorizedDomainRequested.RemoveListener(this.OnUnauthorizedDomainRequested);
+            EventMenu.OnCreateClientRequested.RemoveListener(this.PushCreateClientUI);
+            EventMenu.OnClientListRequested.RemoveListener(this.ShowClientListUI);
+            EventMenu.OnClientInfoRequested.RemoveListener(this.OnClientInfoRequested);
+            EventMenu.OnDeleteClientRequested.RemoveListener(this.OnDeleteClientRequested);
+            EventMenu.OnClientQuoteListRequested.RemoveListener(this.PushClientQuoteListUI);
+            EventMenu.OnClientQuoteListRefreshRequested.RemoveListener(this.RefreshClientQuoteListUI);
+            EventMenu.OnQuoteInfoRequested.RemoveListener(this.OnQuoteInfoRequested);
+            EventMenu.OnDeleteQuoteRequested.RemoveListener(this.OnDeleteQuoteRequested);
+            EventMenu.OnUserProfileRequested.RemoveListener(this.ShowUserProfileUI);
+            EventMenu.OnManufacturerWhitelistRequested.RemoveListener(this.PushManufacturerWhitelistUI);
+            EventMenu.OnLogOutPromptRequested.RemoveListener(this.ShowUserLogOutPrompt);
+            EventMenu.OnBackRequested.RemoveListener(this.PopMenu);
+            EventMenu.OnScreenOrientationToggleRequested.RemoveListener(this.ToggleScreenOrientation);
+            EventMenu.OnQuitPromptRequested.RemoveListener(this.ShowQuitPrompt);
         }
 
-        protected void ShowMenu()
+        private void OnSignUpRequested(SignUpInfo info)
         {
-            m_MainUi.Show();
+            this.PushSignUpUI(info.UserType);
         }
 
-        protected void HideMenu()
+        private void OnSignInRequested(CredentialsInfo info)
         {
-            m_MainUi.Hide();
+            this.ShowLogInAndSignIn(info.Email, info.Password);
+        }
+
+        private void OnResetPasswordRequested(ResetPasswordInfo info)
+        {
+            this.PushResetPasswordUI(info.Email);
+        }
+
+        private void OnPayNowRequested(CredentialsInfo info)
+        {
+            this.ShowPayNowPrompt(info.Email, info.Password);
+        }
+
+        private void OnUnauthorizedDomainRequested(UnauthorizedDomainInfo info)
+        {
+            this.ShowUnauthorizedDomainPrompt(info.AuthorizedDomain);
+        }
+
+        private void OnClientInfoRequested(ClientInfo info)
+        {
+            this.PushClientProfileUI(info.ClientId);
+        }
+
+        private void OnDeleteClientRequested(ClientInfo info)
+        {
+            this.ShowDeleteClientUi(info.ClientId);
+        }
+
+        private void OnQuoteInfoRequested(ClientQuoteInfo info)
+        {
+            this.ShowQuoteInfoUI(info.ClientId, info.QuoteId);
+        }
+
+        private void OnDeleteQuoteRequested(ClientQuoteInfo info)
+        {
+            this.ShowDeleteQuoteUI(info.ClientId, info.QuoteId);
         }
 
         private void OnSpinnerMessageRequested(SpinnerMessageInfo info)

@@ -7,6 +7,7 @@ namespace KitchenDesign
     using System.Linq;
     using UnityEngine;
     using TMPro;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// Handles displaying the list of client entries.
@@ -57,20 +58,20 @@ namespace KitchenDesign
 
         protected void FetchList(MelcherButton caller)
         {
-            EventBridge.Menu.showFullScreenSpinner.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             ProFitGlobals.server.Clients.GetClientList(
                 ProFitGlobals.user,
                 onSuccess: OnSuccess,
                 onError: (request, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                 }
             );
 
             void OnSuccess(List<UserClient> clientList)
             {
-                EventBridge.Menu.showFullScreenSpinner.Invoke(false);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                 ProFitGlobals.userClients = clientList;
 
                 FilterList();
@@ -199,7 +200,7 @@ namespace KitchenDesign
         /// </summary>
         protected void AddClient(MelcherButton caller)
         {
-            EventBridge.Menu.pushCreateClientUi.Invoke();
+            EventMenu.OnCreateClientRequested.Raise();
         }
 
         protected void BindItem(RecyclingListViewItem item, int itemIndex)
@@ -218,7 +219,7 @@ namespace KitchenDesign
             {
                 int clientIndex = m_FilteredClientList[row.rowIndex];
                 int clientId = ProFitGlobals.userClients[clientIndex].id;
-                EventBridge.Menu.pushClientInfoUi.Invoke(clientId);
+                EventMenu.OnClientInfoRequested.Raise(new ClientInfo(clientId));
             }
         }
 
@@ -229,7 +230,7 @@ namespace KitchenDesign
                 int clientIndex = m_FilteredClientList[row.rowIndex];
                 int clientId = ProFitGlobals.userClients[clientIndex].id;
                 ProFitGlobals.activeClientId = clientId;
-                EventBridge.Menu.pushClientQuoteListUi.Invoke();
+                EventMenu.OnClientQuoteListRequested.Raise();
             }
         }
 

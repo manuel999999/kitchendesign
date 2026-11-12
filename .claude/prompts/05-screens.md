@@ -232,6 +232,45 @@ designer's scene scripts listen instead of subscribing to those `EventBridge` de
 `EventBridge.Menu` → `EventMenu` requests and prompts handed over (decision 3). Every menu screen
 gets an `Initialize` with what it uses and stops reading `ProFitGlobals` (decision 6 aside).
 `EventBridge.Menu` is deleted.
+- **Split on 2026-11-12** (too large to check as one):
+  - **B5.3a — the menu's requests as events.** Requests the app systems also make (spinners,
+    status message, welcome, log in, home) raise the `EventSession` event from the screens too; the
+    others become `EventMenu`. `MenuScene`'s own start-up calls its handlers directly. The
+    callback prompts and `setMenuHasPendingChanges` stay on `EventBridge.Menu`. The unused
+    `showMainUi`, `hideMainUi` (and `MenuScene.ShowMenu`/`HideMenu`) and `getSortModeLabel` go.
+  - **B5.3b — the menu-side scenes' start-up into their scene initializers**, `MenuScene` →
+    `MenuNavigationControl`, the scene scripts stop being state-machine states.
+  - **B5.3c — every menu screen gets an `Initialize`** with what it uses (app systems, the prompts
+    it opens, the pending-changes callback) and stops reading `ProFitGlobals` (decision 6 aside);
+    `EventBridge.Menu` is deleted.
+- **B5.3a done 2026-11-12.** `EventMenu` (20 events) and six payloads in `KitchenDesign.Events`;
+  93 raises converted by a script (19 screens, `MenuScene`, the menu check snippets), each
+  checked for its old argument list (every welcome raise passed `Regress`). `EventBridge.Menu`
+  keeps 8 delegates. Compiles in the editor and as WebGL player scripts (the unauthorized-domain
+  prompt is WebGL-only code).
+- **Found while mapping the menu (2026-11-12), kept as they are (decision 8):**
+  1. A kick while in the designer never shows its prompt: the callback runs when the intermediate
+     scene has loaded, before the menu exists, so nothing listens (`SessionStatus.KickUser`).
+  2. The sign-in error path with no menu loaded (white-label sign-in in `PlatformSetupScene`, or
+     the designer opened through Create Client before the download ended, since
+     `CreateClientUI` doesn't wait for `LogInState`) threw a `NullReferenceException` until B5.2;
+     see B5.2's note.
+  3. A trial user who subscribes while in the designer keeps the trial countdown until the scene
+     changes (only the menu listens to the subscription check).
+  4. The kiosk PIN is `3030` for every user (`KioskPinUI`).
+  5. `ManufacturerWhitelistUI.OnDisable` adds the toggle handler again (`+=` where `-=` was meant).
+  6. `ClientListUI.OnDisable` doesn't remove its search and sort handlers (harmless: it only runs
+     at unload).
+  7. `ClientProfileUI.UpdateProfile` returns before hiding the edit prompt when the client is gone,
+     leaving the prompt open and not interactable.
+  8. `UserProfileUI.UpdateProfile` also serves the units choice, so a failed units change sends its
+     error to the hidden edit prompt and the user sees nothing.
+  9. `CatalogRequests.GetTags` has no `return` after `onError`, so a failed tags request still
+     writes the fallback file and calls `onSuccess`.
+  10. `MenuScene.HidePayNowPrompt` is never called (the pay-now screen hides itself), and
+      `ListController` has a `[SerializeField]` of `ListControllerSortMode`, a class Unity doesn't
+      serialize.
+
 
 **B5.4 — The designer's start-up and screens get their references.** `DesignerScene` start-up into
 `DesignerSceneInitializer`, which initializes `Kitchen` with the app systems and then the designer

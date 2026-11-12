@@ -5,6 +5,7 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using DG.Tweening;
     using KitchenDesign.Scriptables;
+    using KitchenDesign.Events;
 
     public class MainUI : Menu
     {
@@ -102,24 +103,24 @@ namespace KitchenDesign
 
         protected void NavigateBackward(MelcherButton caller)
         {
-            EventBridge.Menu.navigateBackward.Invoke();
+            EventMenu.OnBackRequested.Raise();
         }
 
         protected void ChangeScreenOrientation(MelcherButton caller)
         {
-            EventBridge.Menu.toggleScreenOrientation.Invoke();
+            EventMenu.OnScreenOrientationToggleRequested.Raise();
         }
 
         protected void ShowQuitPrompt(MelcherButton caller)
         {
-            EventBridge.Menu.showQuitPrompt.Invoke();
+            EventMenu.OnQuitPromptRequested.Raise();
         }
 
         private void OnHomeToggleChanged(IMelcherToggle toggle)
         {
             if (toggle.isOn && m_Footer.gameObject.activeSelf)
             {
-                EventBridge.Menu.showHomeUi?.Invoke();
+                EventSession.OnHomeRequested.Raise();
             }
         }
 
@@ -127,7 +128,7 @@ namespace KitchenDesign
         {
             if (toggle.isOn && m_Footer.gameObject.activeSelf)
             {
-                EventBridge.Menu.showClientListUi?.Invoke();
+                EventMenu.OnClientListRequested.Raise();
             }
         }
 
@@ -135,7 +136,7 @@ namespace KitchenDesign
         {
             if (toggle.isOn && m_Footer.gameObject.activeSelf)
             {
-                EventBridge.Menu.showUserProfileUi?.Invoke();
+                EventMenu.OnUserProfileRequested.Raise();
             }
         }
 

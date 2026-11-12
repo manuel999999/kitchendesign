@@ -7,6 +7,7 @@ namespace KitchenDesign
     using UnityEngine.Networking;
     using UnityEngine.UI;
     using TMPro;
+    using KitchenDesign.Events;
 
     public class SignUpUI : Menu
     {
@@ -203,10 +204,8 @@ namespace KitchenDesign
             void OnSuccess()
             {
                 // Try to sign in as the new user
-                EventBridge.Menu.showLogInUiAndSignIn?.Invoke(
-                    m_SignInEmailField.text,
-                    m_PasswordField.text
-                );
+                EventMenu.OnSignInRequested.Raise(new CredentialsInfo(m_SignInEmailField.text,
+                    m_PasswordField.text));
 
                 ClearForm();
             }

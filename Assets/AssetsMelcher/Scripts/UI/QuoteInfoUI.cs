@@ -4,6 +4,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using UnityEngine;
     using TMPro;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// The prompt that shows up when a user tries to rename a quote.
@@ -58,7 +59,7 @@ namespace KitchenDesign
         protected void OnClickDelete(MelcherButton caller)
         {
             Hide();
-            EventBridge.Menu.showDeleteQuoteUi?.Invoke(m_ClientId, m_QuoteId);
+            EventMenu.OnDeleteQuoteRequested.Raise(new ClientQuoteInfo(m_ClientId, m_QuoteId));
         }
 
         protected void OnClickCancel(MelcherButton caller)
@@ -82,7 +83,7 @@ namespace KitchenDesign
 
             UserClientQuote quote = ProFitGlobals.userClients[clientIndex].quotes[quoteIndex];
 
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
             ProFitGlobals.server.Quotes.UpdateQuote(
                 ProFitGlobals.user,
                 m_ClientId,
@@ -97,7 +98,7 @@ namespace KitchenDesign
                 frontPlanPhotos: null,
                 onSuccess: (newQuote) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_MessageBox.Clear();
 
                     if (!ProFitGlobals.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
@@ -111,7 +112,7 @@ namespace KitchenDesign
                 },
                 onError: (builder, error, jsonValue) =>
                 {
-                    EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                    EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_MessageBox.Error($"Did not find quote with ID {m_QuoteId}");
                 }
             );

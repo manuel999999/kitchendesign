@@ -8,6 +8,7 @@ namespace KitchenDesign
     using UnityEngine.Networking;
     using UnityEngine.UI;
     using TMPro;
+    using KitchenDesign.Events;
 
     /// <summary>
     /// This manages the UI state of the Create Client page. This is the page
@@ -113,7 +114,7 @@ namespace KitchenDesign
         protected void TryCreateClient(MelcherButton caller)
         {
             m_MessageBox.Clear();
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
             foreach (var kv in m_NameToSelectable)
             {
@@ -137,7 +138,7 @@ namespace KitchenDesign
 
             void OnSuccess(UserClient client)
             {
-                EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                 ClearForm();
 
                 // Mark the new client as active so any quotes will belong to
@@ -151,12 +152,12 @@ namespace KitchenDesign
                     MelcherSceneLoadMode.Single
                 );
 
-                EventBridge.Menu.showFullScreenSpinner?.Invoke(true);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
             }
 
             void OnError(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
+                EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                 MelcherLog.LogError(error);
 
                 if (!jsonValue.isObject)
