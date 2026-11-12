@@ -143,6 +143,25 @@ Each step: compile (editor, and macOS player scripts when `#if` code moves), the
 CLAUDE.md updated, one commit. A step that turns out too large to check as one is split, and the
 split is written here.
 
+**Changed on 2026-11-12 (user): the checks run once, at the end of the area**, "so we can get more
+progress". Each step still compiles (editor, and WebGL player scripts: the editor's active target
+is WebGL since the user installed the module; a macOS player compile now fails on the core
+package's `MelcherUnicodeDictionary`, whose field type depends on `MELCHER_CORE_USE_TEXTCORE`,
+defined for WebGL, iOS and Android but not Standalone) and is committed on its own, so a
+difference found at the end can be bisected. The end-of-area run compares the commit before B5.1
+(`3d25da55`, the team ports included) with the last step, both on the same day, because the
+server's data changes between days (a cold start already rewrites `brandCatalogs.json` and
+`manufacturers.json`). Recorded on 2026-11-12 before any area 5 change:
+`GeminiBaseline/listenerorder-menu-before-area5.txt` and `listenerorder-designer-before-area5.txt`
+(menu signed in; designer with 27755 open), the input for B5.5's subscription order.
+
+**Before B5.1 (2026-11-12): the team's later code was ported** (commit `3d25da55`): the brand
+catalog tag (`c186aad175`) and the Challenger countertop pricing and `OASIS®` string
+(`dbd1a82fdb`); `b2db7bd680` was already here. The rear wall (the user's `____localXXX/IN-PROGRESS`
+branch, seven commits up to 2026-11-10) still waits for the user. Content commits on
+`feature/model-integration` since the copy (new products, `TriplanarGraphOffsetY.shadergraph`)
+are not code and come with a content update; a new finish graph needs the cutout function first.
+
 **B5.0 — A screen probe and a listener-order dump.** Area 5 changes the wiring between buttons and
 the code behind them, which no current check exercises.
 - `screenprobe.sh`: plays from `MenuScene` and drives the app **through the screens' own
@@ -173,6 +192,13 @@ values equal to today's (several are serialized as ints in scenes and prefabs): 
 `DesignerLoadingMode` (`LoadingUIMode`), `RepositionSnapMode`, `ListControllerSortMode`.
 `AppSkin` → `AppSkinSO`, `ButtonStyle` → `ButtonStyleSO` (`Scriptables/`); `FontStyleOverride`
 (`Serializables/`) with its drawer in an editor assembly; the nested structs into their own files.
+- **Done 2026-11-12.** As listed, with three corrections: `ListControllerSortMode` is a class of
+  static instances carrying display text, not an enum, so it is filed with the screens' helpers in
+  B5.7; `FontStyleOverride`'s drawer was all commented out, so it was not carried over (no editor
+  assembly needed); `MenuScene.PlayerPref` goes with `MenuScene` in B5.3. The nested structs are
+  `CabinetSizeOption`, `WhitelistRowEntry` and `ActiveMeasure`, next to their screens until B5.7.
+  A script renamed in code and `cref`s only (string literals untouched): 31 files plus two tool
+  snippets. Compiles in the editor and as WebGL player scripts; no asset file changed.
 Check: as B4.1/B4.2 (no asset file changes; a census of the skin and button style assets).
 
 **B5.2 — `AppSystems` and the app systems' requests as events.** `AppSystems` and

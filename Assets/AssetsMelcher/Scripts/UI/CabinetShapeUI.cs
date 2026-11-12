@@ -175,13 +175,13 @@ namespace KitchenDesign
                     }
                 }
 
-                EventBridge.Designer.showCabinetDetailsUi.Invoke(CabinetOtherSizesUI.Mode.InitialCabinetSetup);
+                EventBridge.Designer.showCabinetDetailsUi.Invoke(CabinetSizesMode.InitialCabinetSetup);
             }
         }
 
         protected void CreateKitchenWithCustomCountertopThickness(float thicknessInInches)
         {
-            CabinetOtherSizeControl.Option countertopThickness = new CabinetOtherSizeControl.Option(thicknessInInches);
+            CabinetSizeOption countertopThickness = new CabinetSizeOption(thicknessInInches);
 
             float countertopThicknessInMeters = countertopThickness.sizeInMeters;
             CountertopType countertopType = CountertopType.Default;

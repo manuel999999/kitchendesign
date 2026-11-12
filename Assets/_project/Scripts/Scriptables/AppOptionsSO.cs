@@ -14,7 +14,7 @@ namespace KitchenDesign.Scriptables
 
         public string versionSuffix => m_VersionSuffix;
 
-        public AppSkin appSkin => m_AppSkin;
+        public AppSkinSO appSkin => m_AppSkin;
 
         public UserFilter userFilter => m_UserFilter;
 
@@ -123,7 +123,7 @@ namespace KitchenDesign.Scriptables
 
         [Tooltip("What type of UI theme should be used.")]
         [SerializeField]
-        protected AppSkin m_AppSkin = default;
+        protected AppSkinSO m_AppSkin = default;
 
         [Tooltip("This controls how new users are tagged to be filtered " +
             "in the dashboard. This value should match whichever site " +

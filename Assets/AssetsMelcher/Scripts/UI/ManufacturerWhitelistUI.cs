@@ -87,12 +87,12 @@ namespace KitchenDesign
                 if (manufacturerGroup.Key.HasValue)
                 {
                     // Start each product category with a header.
-                    m_ManufacturerListEntries.Add(new RowEntry(manufacturerGroup.Key.Value));
+                    m_ManufacturerListEntries.Add(new WhitelistRowEntry(manufacturerGroup.Key.Value));
                 }
 
                 foreach (ManufacturerInfo manufacturer in manufacturerGroup)
                 {
-                    m_ManufacturerListEntries.Add(new RowEntry(manufacturer));
+                    m_ManufacturerListEntries.Add(new WhitelistRowEntry(manufacturer));
                 }
             }
 
@@ -178,9 +178,9 @@ namespace KitchenDesign
                 return;
             }
 
-            RowEntry rowData = m_ManufacturerListEntries[itemIndex];
+            WhitelistRowEntry rowData = m_ManufacturerListEntries[itemIndex];
 
-            if (rowData.rowType == RowType.Header)
+            if (rowData.rowType == WhitelistRowType.Header)
             {
                 row.SetManufacturerGroupHeadingFields(rowData.manufacturerProductCategory);
                 return;
@@ -435,59 +435,9 @@ namespace KitchenDesign
         ///     manufacturer that the user can choose to filter.
         ///     This is the list the recyclable ListView is bound to.
         /// </summary>
-        protected List<RowEntry> m_ManufacturerListEntries = new List<RowEntry>();
+        protected List<WhitelistRowEntry> m_ManufacturerListEntries = new List<WhitelistRowEntry>();
 
         protected Dictionary<int, decimal> m_ManufacturerIdToMarkupPercentages = new ();
-
-        // =====================================================================
-        // Nested types
-        // =====================================================================
-
-        /// <summary>
-        ///     Represents a row in the RecyclableList used for the manufacturer
-        ///     white list. This is how we remember what to show in a given row.
-        ///     I.e., whether to show a toggle or a header.
-        /// </summary>
-        protected readonly struct RowEntry
-        {
-            public RowEntry(ProductCategory productCategory)
-            {
-                rowType = RowType.Header;
-                manufacturerProductCategory = productCategory;
-                manufacturerId = -1;
-            }
-
-            public RowEntry(ManufacturerInfo manufacturer)
-            {
-                rowType = RowType.ManufacturerToggle;
-                manufacturerProductCategory = default;
-                manufacturerId = manufacturer.id;
-            }
-
-            public readonly RowType rowType;
-
-            /// <summary>
-            ///     The product category this header represents. This is only
-            ///     valid when <see cref="rowType"/> is <see
-            ///     cref="RowType.Header"/>.
-            /// </summary>
-            public readonly ProductCategory manufacturerProductCategory;
-
-            /// <summary>
-            ///     The index of the manufacturer. This is only valid when <see
-            ///     cref="rowType"/> is <see
-            ///     cref="RowType.ManufacturerToggle"/>.
-            /// </summary>
-            public readonly int manufacturerId;
-
-        }   // struct RowEntry
-
-        protected enum RowType
-        {
-            Header,
-            ManufacturerToggle
-
-        }   // enum RowType
 
     }   // class ClientListUI
 

@@ -16,7 +16,7 @@ namespace KitchenDesign
         // Methods
         // =====================================================================
 
-        public void SetMode(Mode mode, CabinetLayout layout)
+        public void SetMode(CabinetSizesMode mode, CabinetLayout layout)
         {
             if (layout == null)
             {
@@ -47,7 +47,7 @@ namespace KitchenDesign
 
             bool displayCabinetDepthOption =
                 buildingMethod == KitchenBuildingMethod.Standard &&
-                (mode == Mode.InitialCabinetSetup || cornerCabinetCount < 1);
+                (mode == CabinetSizesMode.InitialCabinetSetup || cornerCabinetCount < 1);
 
             // Hide the cabinet depth control when Section mode is enabled.
             // This was requested by Stoll.
@@ -55,7 +55,7 @@ namespace KitchenDesign
 
             m_CurrentKitchen = null;
 
-            if (m_Mode == Mode.ModifyExistingCabinet)
+            if (m_Mode == CabinetSizesMode.ModifyExistingCabinet)
             {
                 // Make the sliders display the kitchen's current size.
 
@@ -119,7 +119,7 @@ namespace KitchenDesign
 
         protected override void DoShow()
         {
-            if (m_Mode == Mode.InitialCabinetSetup)
+            if (m_Mode == CabinetSizesMode.InitialCabinetSetup)
             {
                 // It was requested that the other sizes UI (cabinet depth and
                 // countertop thickness) be skipped during initial setup.
@@ -151,7 +151,7 @@ namespace KitchenDesign
         {
             Hide();
 
-            if (m_Mode == Mode.InitialCabinetSetup)
+            if (m_Mode == CabinetSizesMode.InitialCabinetSetup)
             {
                 EventBridge.Designer.showCabinetShapeUi.Invoke();
             }
@@ -169,7 +169,7 @@ namespace KitchenDesign
         {
             Hide();
 
-            if (m_Mode == Mode.InitialCabinetSetup)
+            if (m_Mode == CabinetSizesMode.InitialCabinetSetup)
             {
                 float countertopThicknessInMeters =
                     m_CountertopThicknessControl.value.sizeInMeters;
@@ -270,18 +270,18 @@ namespace KitchenDesign
                 m_DefaultCountertopThicknessOptionIndex =
                     m_CountertopThicknessControl.SetOptions(
                         defaultIndex: 3,
-                        new CabinetOtherSizeControl.Option(0.25f),
-                        new CabinetOtherSizeControl.Option(0.50f),
-                        new CabinetOtherSizeControl.Option(0.75f),
-                        new CabinetOtherSizeControl.Option(1.00f),
-                        new CabinetOtherSizeControl.Option(1.25f),
-                        new CabinetOtherSizeControl.Option(1.50f),
-                        new CabinetOtherSizeControl.Option(1.75f),
-                        new CabinetOtherSizeControl.Option(2.00f),
-                        new CabinetOtherSizeControl.Option(3.25f),
-                        new CabinetOtherSizeControl.Option(3.50f),
-                        new CabinetOtherSizeControl.Option(3.75f),
-                        new CabinetOtherSizeControl.Option(4.00f)
+                        new CabinetSizeOption(0.25f),
+                        new CabinetSizeOption(0.50f),
+                        new CabinetSizeOption(0.75f),
+                        new CabinetSizeOption(1.00f),
+                        new CabinetSizeOption(1.25f),
+                        new CabinetSizeOption(1.50f),
+                        new CabinetSizeOption(1.75f),
+                        new CabinetSizeOption(2.00f),
+                        new CabinetSizeOption(3.25f),
+                        new CabinetSizeOption(3.50f),
+                        new CabinetSizeOption(3.75f),
+                        new CabinetSizeOption(4.00f)
                     );
             }
             else
@@ -289,13 +289,13 @@ namespace KitchenDesign
                 m_DefaultCountertopThicknessOptionIndex =
                     m_CountertopThicknessControl.SetOptions(
                         defaultIndex: 3,
-                        new CabinetOtherSizeControl.Option(0.5f),
-                        new CabinetOtherSizeControl.Option(0.75f),
-                        new CabinetOtherSizeControl.Option(1.0f),
-                        new CabinetOtherSizeControl.Option(1.25f),
-                        new CabinetOtherSizeControl.Option(1.5f),
-                        new CabinetOtherSizeControl.Option(1.75f),
-                        new CabinetOtherSizeControl.Option(2.0f)
+                        new CabinetSizeOption(0.5f),
+                        new CabinetSizeOption(0.75f),
+                        new CabinetSizeOption(1.0f),
+                        new CabinetSizeOption(1.25f),
+                        new CabinetSizeOption(1.5f),
+                        new CabinetSizeOption(1.75f),
+                        new CabinetSizeOption(2.0f)
                     );
             }
 
@@ -308,10 +308,10 @@ namespace KitchenDesign
             m_DefaultStollCountertopThicknessOptionIndex =
                 m_StollCountertopThicknessControl.SetOptions(
                     defaultIndex: 3,
-                    new CabinetOtherSizeControl.Option(1.25f),
-                    new CabinetOtherSizeControl.Option(2.0f),
-                    new CabinetOtherSizeControl.Option(3.0f),
-                    new CabinetOtherSizeControl.Option(4.0f)
+                    new CabinetSizeOption(1.25f),
+                    new CabinetSizeOption(2.0f),
+                    new CabinetSizeOption(3.0f),
+                    new CabinetSizeOption(4.0f)
                 );
 
             ClearForm();
@@ -342,9 +342,9 @@ namespace KitchenDesign
             EventBridge.Designer.setCountertopThickness(countertopThicknessInMeters);
         }
 
-        protected void OnCountertopThicknessChanged(CabinetOtherSizeControl.Option selectedOption)
+        protected void OnCountertopThicknessChanged(CabinetSizeOption selectedOption)
         {
-            if (m_Mode == Mode.ModifyExistingCabinet)
+            if (m_Mode == CabinetSizesMode.ModifyExistingCabinet)
             {
                 MelcherLog.Breadcrumb("Cabinet countertop thickness changed to: " + selectedOption.displayLabel);
 
@@ -352,9 +352,9 @@ namespace KitchenDesign
             }
         }
 
-        protected void OnCabinetDepthChanged(CabinetOtherSizeControl.Option selectedOption)
+        protected void OnCabinetDepthChanged(CabinetSizeOption selectedOption)
         {
-            if (m_Mode == Mode.ModifyExistingCabinet)
+            if (m_Mode == CabinetSizesMode.ModifyExistingCabinet)
             {
                 MelcherLog.Log("Cabinet depth changed to: " + selectedOption.displayLabel);
 
@@ -392,19 +392,19 @@ namespace KitchenDesign
         // Non-serialized fields
         // =====================================================================
 
-        protected Mode m_Mode;
+        protected CabinetSizesMode m_Mode;
 
         protected Kitchen m_CurrentKitchen;
 
         /// <summary>
         ///     The depth of the cabinet when this UI was displayed. Only valid
-        ///     when the UI was displayed with <see cref="Mode.ModifyExistingCabinet"/>.
+        ///     when the UI was displayed with <see cref="CabinetSizesMode.ModifyExistingCabinet"/>.
         /// </summary>
         protected float m_CurrentCabinetDepthInMeters;
 
         /// <summary>
         ///     The thickness of the countertop when this UI was displayed. Only
-        ///     valid when the UI was displayed with <see cref="Mode.ModifyExistingCabinet"/>.
+        ///     valid when the UI was displayed with <see cref="CabinetSizesMode.ModifyExistingCabinet"/>.
         /// </summary>
         protected float m_CurrentCountertopThicknessInMeters;
 
@@ -415,18 +415,6 @@ namespace KitchenDesign
         protected int m_DefaultCountertopThicknessOptionIndex;
 
         protected int m_DefaultStollCountertopThicknessOptionIndex;
-
-        // =====================================================================
-        // Nested types
-        // =====================================================================
-
-        public enum Mode
-        {
-            InitialCabinetSetup,
-
-            ModifyExistingCabinet,
-
-        }   // enum Mode
 
     }   // class CabinetOtherSizesUI
 

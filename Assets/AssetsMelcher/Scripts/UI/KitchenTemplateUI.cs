@@ -145,7 +145,7 @@ namespace KitchenDesign
             if (m_TemplateToggleGroup.IsAnyToggleOn())
             {
                 Hide();
-                EventBridge.Designer.showCabinetDetailsUi.Invoke(CabinetOtherSizesUI.Mode.InitialCabinetSetup);
+                EventBridge.Designer.showCabinetDetailsUi.Invoke(CabinetSizesMode.InitialCabinetSetup);
             }
         }
 

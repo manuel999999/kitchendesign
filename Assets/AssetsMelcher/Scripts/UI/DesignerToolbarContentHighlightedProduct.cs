@@ -345,7 +345,7 @@ namespace KitchenDesign
             EventBridge.Designer.onTryRepositionOccupant?.Invoke(
                 occupantToMove: occupant,
                 newPosition: newPosition,
-                snapMode: EventBridge.Designer.RepositionSnapMode.None,
+                snapMode: RepositionSnapMode.None,
                 ref didMove
             );
 
@@ -387,7 +387,7 @@ namespace KitchenDesign
             EventBridge.Designer.onTryRepositionOccupant?.Invoke(
                 occupantToMove: occupant,
                 newPosition: newPosition,
-                snapMode: EventBridge.Designer.RepositionSnapMode.None,
+                snapMode: RepositionSnapMode.None,
                 ref didMove
             );
 

@@ -7,6 +7,7 @@ namespace KitchenDesign.Widgets
     using UnityEngine.EventSystems;
     using DG.Tweening;
     using Cysharp.Threading.Tasks;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     A script for a world space UI object that can be dragged by the
@@ -93,7 +94,7 @@ namespace KitchenDesign.Widgets
         {
             m_WasErrorState = isError;
 
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
             Color foregroundColor = currentSkin.resizerWidgetForegroundColor;
             Color backgroundColor = currentSkin.resizerWidgetBackgroundColor;

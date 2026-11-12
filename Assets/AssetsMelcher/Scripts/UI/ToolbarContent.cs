@@ -4,6 +4,7 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Shared.Enums;
 
     public class ToolbarContent : MelcherMonoBehaviour
     {
@@ -13,7 +14,7 @@ namespace KitchenDesign
         // Properties
         // =====================================================================
 
-        public Visibility visibility => m_LastVisibility;
+        public ToolbarContentVisibility visibility => m_LastVisibility;
 
         // =====================================================================
         // Methods
@@ -34,7 +35,7 @@ namespace KitchenDesign
             m_ScrollView.horizontalNormalizedPosition = 0.0f;
         }
 
-        public void SetVisibility(Visibility visibility, Duration duration)
+        public void SetVisibility(ToolbarContentVisibility visibility, ToolbarContentDuration duration)
         {
             m_LastVisibility = visibility;
 
@@ -51,19 +52,19 @@ namespace KitchenDesign
 
             switch (visibility)
             {
-            case Visibility.Collapsed:
+            case ToolbarContentVisibility.Collapsed:
                 rootInteractable = false;
                 offsetMin.y = -m_RectTransform.rect.height - ExtraVerticalOffsetWhenHidden;
                 offsetMax.y = -m_RectTransform.rect.height - ExtraVerticalOffsetWhenHidden;
                 break;
 
-            case Visibility.InForeground:
+            case ToolbarContentVisibility.InForeground:
                 listInteractable = true;
                 offsetEase = Ease.OutQuad;
                 alphaEase = Ease.InQuad;
                 break;
 
-            case Visibility.InBackground:
+            case ToolbarContentVisibility.InBackground:
                 tintAlpha = 1.0f;
                 break;
             }
@@ -71,7 +72,7 @@ namespace KitchenDesign
             m_CanvasGroup.interactable = rootInteractable;
             m_ListCanvasGroup.interactable = listInteractable;
 
-            if (duration == Duration.Immediate)
+            if (duration == ToolbarContentDuration.Immediate)
             {
                 m_VisibilityTween.KillIfActive();
                 m_RectTransform.offsetMin = offsetMin;
@@ -154,37 +155,7 @@ namespace KitchenDesign
 
         protected RecyclableTween<Sequence> m_VisibilityTween = new RecyclableTween<Sequence>();
 
-        protected Visibility m_LastVisibility;
-
-        // =====================================================================
-        // Nested types
-        // =====================================================================
-
-        public enum Visibility
-        {
-            /// <summary>
-            ///     Hidden.
-            /// </summary>
-            Collapsed,
-
-            /// <summary>
-            ///     The active toolbar.
-            /// </summary>
-            InForeground,
-
-            /// <summary>
-            ///     Dimmed and in the background.
-            /// </summary>
-            InBackground
-
-        }   // enum Visibility
-
-        public enum Duration
-        {
-            Immediate,
-            Tween,
-
-        }   // enum Duration
+        protected ToolbarContentVisibility m_LastVisibility;
 
     }   // class ToolbarContent
 

@@ -421,9 +421,9 @@ namespace KitchenDesign
             SetCabinetBeingSwapped(null);
         }
 
-        protected void ShowLoadingUI(EventBridge.Designer.LoadingUIMode mode)
+        protected void ShowLoadingUI(DesignerLoadingMode mode)
         {
-            if (mode == EventBridge.Designer.LoadingUIMode.Hide)
+            if (mode == DesignerLoadingMode.Hide)
             {
                 m_LoadingUi.Hide();
             }
@@ -432,7 +432,7 @@ namespace KitchenDesign
                 // When loading, we display a static image. When saving, we
                 // show a spinner.
                 m_LoadingUi.loadingSprite =
-                    mode == EventBridge.Designer.LoadingUIMode.Load ?
+                    mode == DesignerLoadingMode.Load ?
                         GetLoadingImage(m_Kitchen.selectedBrandCatalog) :
                         null;
 
@@ -495,11 +495,11 @@ namespace KitchenDesign
             m_KitchenTemplateUi.Show();
         }
 
-        protected void ShowCabinetOtherSizesUI(CabinetOtherSizesUI.Mode mode)
+        protected void ShowCabinetOtherSizesUI(CabinetSizesMode mode)
         {
             CabinetLayout layout = m_Kitchen.selectedCabinetLayout;
 
-            if (mode != CabinetOtherSizesUI.Mode.ModifyExistingCabinet)
+            if (mode != CabinetSizesMode.ModifyExistingCabinet)
             {
                 layout = m_Kitchen.selectedCabinetLayout;
             }

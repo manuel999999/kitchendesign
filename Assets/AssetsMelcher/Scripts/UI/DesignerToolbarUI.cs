@@ -53,17 +53,17 @@ namespace KitchenDesign
             // Update the toolbars to show the available cabinets. Hide the
             // selected object toolbar as it otherwise renders over the
             // cabinet list toolbar.
-            m_CategoryToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Immediate);
-            m_ManufacturerToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Immediate);
-            m_ProductToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
-            m_ProductSearchToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
-            m_ProductActionToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
+            m_CategoryToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Immediate);
+            m_ManufacturerToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Immediate);
+            m_ProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
+            m_ProductSearchToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
+            m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
 
-            m_SelectedProductToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
+            m_SelectedProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
 
             // Ensure the toolbar (that contains the cabinet products) is
             // visible.
-            SetToolbarVisibility(true, ToolbarContent.Duration.Tween);
+            SetToolbarVisibility(true, ToolbarContentDuration.Tween);
             m_ToolbarToggleButton.SetIsOnWithoutNotify(true);
 
             m_ToolbarCabinetProductPredicate = predicate;
@@ -323,20 +323,20 @@ namespace KitchenDesign
 
         protected void ToggleToolbar(IMelcherToggle caller)
         {
-            if (m_SelectedProductToolbar.visibility == ToolbarContent.Visibility.InForeground)
+            if (m_SelectedProductToolbar.visibility == ToolbarContentVisibility.InForeground)
             {
                 // Clear the highlight
                 EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null).Forget();
                 return;
             }
 
-            SetToolbarVisibility(caller.isOn, ToolbarContent.Duration.Tween);
+            SetToolbarVisibility(caller.isOn, ToolbarContentDuration.Tween);
 
             TMP_Text toggleText = m_ToolbarToggleButton.GetComponentInChildren<TMP_Text>();
             toggleText.text = caller.isOn ? "Close" : "Add Product";
         }
 
-        protected void SetToolbarVisibility(bool visible, ToolbarContent.Duration duration)
+        protected void SetToolbarVisibility(bool visible, ToolbarContentDuration duration)
         {
             Ease offsetEase = Ease.InQuad;
 
@@ -345,7 +345,7 @@ namespace KitchenDesign
                 offsetEase = Ease.OutQuad;
             }
 
-            if (duration == ToolbarContent.Duration.Immediate)
+            if (duration == ToolbarContentDuration.Immediate)
             {
                 // Immediately snap to the requested position
                 m_ToolbarAccordion.Snap(visible);
@@ -361,10 +361,10 @@ namespace KitchenDesign
 
         protected void ShowCategoryToolbar()
         {
-            m_CategoryToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Tween);
-            m_ManufacturerToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
-            m_ProductToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
-            m_ProductActionToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
+            m_CategoryToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Tween);
+            m_ManufacturerToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
+            m_ProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
+            m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
         }
 
         /// <summary>
@@ -460,10 +460,10 @@ namespace KitchenDesign
                 m_CategoryBreadcrumb.category = caller.category;
             }
 
-            m_CategoryToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Tween);
-            m_ManufacturerToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Tween);
-            m_ProductToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
-            m_ProductActionToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
+            m_CategoryToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Tween);
+            m_ManufacturerToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Tween);
+            m_ProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
+            m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
 
             if (!s_BreadcrumbButtonHintTaught && !m_BreadcrumbButtonQuickHint.isVisible)
             {
@@ -528,7 +528,7 @@ namespace KitchenDesign
             else if (caller.category == ProductCategory.CabinetBackPanels)
             {
                 // Toggle Back Panels
-                CreateToolbarButton(m_ManufacturerToolbar.GetScrollContent(), "BackPanelButton", "Back Panel", 0, ToolbarGroupButton.IdType.CabinetBackPanels);
+                CreateToolbarButton(m_ManufacturerToolbar.GetScrollContent(), "BackPanelButton", "Back Panel", 0, ToolbarGroupIdType.CabinetBackPanels);
                 return;
             }
             else if (caller.category.IsBacking())
@@ -592,7 +592,7 @@ namespace KitchenDesign
                 AddButtonsForIds(
                     buttonParent:           scrollContent,
                     buttonPrefab:           m_ManufacturerButtonPrefab,
-                    idType:                 ToolbarGroupButton.IdType.ProductGroup,
+                    idType:                 ToolbarGroupIdType.ProductGroup,
                     ids:                    productGroupIdsInCategory,
                     appLocalDatabase:        ProFitGlobals.appProfile.productGroupDatabase,
                     findServerDataIndex:    id => ProFitGlobals.productGroups.FindIndex(productGroup => productGroup.id == id),
@@ -702,7 +702,7 @@ namespace KitchenDesign
                 AddButtonsForIds(
                     buttonParent:           scrollContent,
                     buttonPrefab:           m_ManufacturerButtonPrefab,
-                    idType:                 ToolbarGroupButton.IdType.Manufacturer,
+                    idType:                 ToolbarGroupIdType.Manufacturer,
                     ids:                    manufacturerIdsInCategory,
                     appLocalDatabase:        ProFitGlobals.appProfile.manufacturerDatabase,
                     findServerDataIndex:    id => ProFitGlobals.manufacturers.FindIndex(manufacturer => manufacturer.id == id),
@@ -719,7 +719,7 @@ namespace KitchenDesign
                 ToolbarGroupButton premiumFinishButton = Instantiate(m_ManufacturerButtonPrefab, scrollContent);
                 premiumFinishButton.name = "ChallengerPremiumFinishButton";
                 premiumFinishButton.targetId = 0;
-                premiumFinishButton.targetIdType = ToolbarGroupButton.IdType.ChallengerPremiumCabinetFinish;
+                premiumFinishButton.targetIdType = ToolbarGroupIdType.ChallengerPremiumCabinetFinish;
 
                 UpdateChallengerPremiumCabinetFinishPackageButtonLabel(
                     premiumFinishButton,
@@ -733,7 +733,7 @@ namespace KitchenDesign
                 ToolbarGroupButton clearCabinetButton = Instantiate(m_ManufacturerButtonPrefab, scrollContent);
                 clearCabinetButton.name = "ClearCabinetFinishButton";
                 clearCabinetButton.targetId = 0;
-                clearCabinetButton.targetIdType = ToolbarGroupButton.IdType.ResetCabinet;
+                clearCabinetButton.targetIdType = ToolbarGroupIdType.ResetCabinet;
                 clearCabinetButton.phrase = "Clear Cabinet Finish";
             }
 
@@ -742,7 +742,7 @@ namespace KitchenDesign
                 ToolbarGroupButton clearCountertopButton = Instantiate(m_ManufacturerButtonPrefab, scrollContent);
                 clearCountertopButton.name = "ClearCountertopFinishButton";
                 clearCountertopButton.targetId = 0;
-                clearCountertopButton.targetIdType = ToolbarGroupButton.IdType.ResetCountertop;
+                clearCountertopButton.targetIdType = ToolbarGroupIdType.ResetCountertop;
                 clearCountertopButton.phrase = "Clear Countertop Finish";
             }
 
@@ -751,7 +751,7 @@ namespace KitchenDesign
                 ToolbarGroupButton clearFlooringButton = Instantiate(m_ManufacturerButtonPrefab, scrollContent);
                 clearFlooringButton.name = "ClearFlooringFinishButton";
                 clearFlooringButton.targetId = 0;
-                clearFlooringButton.targetIdType = ToolbarGroupButton.IdType.ResetFlooring;
+                clearFlooringButton.targetIdType = ToolbarGroupIdType.ResetFlooring;
                 clearFlooringButton.phrase = "Clear Flooring Finish";
             }
 
@@ -762,8 +762,8 @@ namespace KitchenDesign
             /// </summary>
             /// <param name="idType">
             ///     The type of button to create. It should only be <see
-            ///     cref="ToolbarGroupButton.IdType.Manufacturer"/> or
-            ///     <see cref="ToolbarGroupButton.IdType.ProductGroup"/>.
+            ///     cref="ToolbarGroupIdType.Manufacturer"/> or
+            ///     <see cref="ToolbarGroupIdType.ProductGroup"/>.
             ///     This affects the fallback name used if an ID is not known
             ///     by the database or the server.
             /// </param>
@@ -808,7 +808,7 @@ namespace KitchenDesign
             void AddButtonsForIds(
                 RectTransform               buttonParent,
                 ToolbarGroupButton          buttonPrefab,
-                ToolbarGroupButton.IdType   idType,
+                ToolbarGroupIdType   idType,
                 IEnumerable<int>            ids,
                 GroupDatabaseSO               appLocalDatabase,
                 Func<int /* id */, int>     findServerDataIndex,
@@ -955,7 +955,7 @@ namespace KitchenDesign
                 button.name = $"{nameof(ProductCategory.CabinetSection)}_{buttonLabel}_Button";
                 button.phrase = buttonLabel;
                 button.sprite = null;
-                button.targetIdType = ToolbarGroupButton.IdType.CabinetSectionType;
+                button.targetIdType = ToolbarGroupIdType.CabinetSectionType;
                 button.targetId = cabinetSectionCategory.id;
             }
         }
@@ -1030,7 +1030,7 @@ namespace KitchenDesign
                 button.name = $"{caller.category}_{cabinetSectionType}_Button";
                 button.phrase = cabinetSectionType;
                 button.sprite = null;
-                button.targetIdType = ToolbarGroupButton.IdType.CabinetSectionType;
+                button.targetIdType = ToolbarGroupIdType.CabinetSectionType;
                 button.targetId = cabinetSectionCategory.id;
             }
         }
@@ -1197,7 +1197,7 @@ namespace KitchenDesign
                 button.name = caller.category + doorStyleInfo.name + "Button";
                 button.phrase = doorStyleInfo.doorStyleDisplayName;
                 button.sprite = doorStyleInfo.toolbarButtonSprite;
-                button.targetIdType = ToolbarGroupButton.IdType.CabinetDoorStyle;
+                button.targetIdType = ToolbarGroupIdType.CabinetDoorStyle;
                 button.targetId = i;
             }
         }
@@ -1223,7 +1223,7 @@ namespace KitchenDesign
                 button.name = caller.category + doorHandleStyleInfo.name + "Button";
                 button.phrase = System.Text.RegularExpressions.Regex.Replace(doorHandleStyleInfo.name, "(?<!^)([A-Z])", " $1");
                 button.sprite = doorHandleStyleInfo.toolbarButtonSprite;
-                button.targetIdType = ToolbarGroupButton.IdType.CabinetDoorHandleStyle;
+                button.targetIdType = ToolbarGroupIdType.CabinetDoorHandleStyle;
                 button.targetId = i;
             }
         }
@@ -1235,11 +1235,11 @@ namespace KitchenDesign
             RectTransform scrollContent =
                 m_ManufacturerToolbar.GetScrollContent();
 
-            CreateToolbarButton(scrollContent, "leftEndPanel", "Left End Panel", 0, ToolbarGroupButton.IdType.CabinetEndPanels);
-            CreateToolbarButton(scrollContent, "rightEndPanel", "Right End Panel", 1, ToolbarGroupButton.IdType.CabinetEndPanels);
+            CreateToolbarButton(scrollContent, "leftEndPanel", "Left End Panel", 0, ToolbarGroupIdType.CabinetEndPanels);
+            CreateToolbarButton(scrollContent, "rightEndPanel", "Right End Panel", 1, ToolbarGroupIdType.CabinetEndPanels);
         }
 
-        protected void CreateToolbarButton(RectTransform scrollContent, string buttonName, string buttonPhrase, int targetId, ToolbarGroupButton.IdType idType)
+        protected void CreateToolbarButton(RectTransform scrollContent, string buttonName, string buttonPhrase, int targetId, ToolbarGroupIdType idType)
         {
             ToolbarGroupButton button =
                     Instantiate(m_ManufacturerButtonPrefab, scrollContent);
@@ -1286,7 +1286,7 @@ namespace KitchenDesign
 
                     switch (caller.targetIdType)
                     {
-                        case ToolbarGroupButton.IdType.ResetCabinet:
+                        case ToolbarGroupIdType.ResetCabinet:
                             resetFinishCategory = ProductCategory.FinishCabinet;
 
                             kitchen.selectedExtraFeatures.Remove(KitchenExtraFeature.ChallengerPremiumCabinetFinish);
@@ -1296,7 +1296,7 @@ namespace KitchenDesign
                             foreach (Transform child in scrollContent)
                             {
                                 if (child.TryGetComponent(out ToolbarGroupButton button) &&
-                                    button.targetIdType == ToolbarGroupButton.IdType.ChallengerPremiumCabinetFinish)
+                                    button.targetIdType == ToolbarGroupIdType.ChallengerPremiumCabinetFinish)
                                 {
                                     UpdateChallengerPremiumCabinetFinishPackageButtonLabel(button, hasPremiumFinish: false);
                                     break;
@@ -1305,15 +1305,15 @@ namespace KitchenDesign
 
                             break;
 
-                        case ToolbarGroupButton.IdType.ResetCountertop:
+                        case ToolbarGroupIdType.ResetCountertop:
                             resetFinishCategory = ProductCategory.FinishCountertop;
                             break;
 
-                        case ToolbarGroupButton.IdType.ResetFlooring:
+                        case ToolbarGroupIdType.ResetFlooring:
                             resetFinishCategory = ProductCategory.FinishFloor;
                             break;
 
-                        case ToolbarGroupButton.IdType.ChallengerPremiumCabinetFinish:
+                        case ToolbarGroupIdType.ChallengerPremiumCabinetFinish:
                             bool hasPremiumFinish = false;
 
                             if (!kitchen.selectedExtraFeatures.Remove(KitchenExtraFeature.ChallengerPremiumCabinetFinish))
@@ -1352,7 +1352,7 @@ namespace KitchenDesign
                         return;
                     }
 
-                    if (caller.targetIdType == ToolbarGroupButton.IdType.CabinetDoorStyle)
+                    if (caller.targetIdType == ToolbarGroupIdType.CabinetDoorStyle)
                     {
                         // This is a button to change the door style.
 
@@ -1449,7 +1449,7 @@ namespace KitchenDesign
                         return;
                     }
 
-                    if(caller.targetIdType == ToolbarGroupButton.IdType.CabinetDoorHandleStyle)
+                    if(caller.targetIdType == ToolbarGroupIdType.CabinetDoorHandleStyle)
                     {
                         // This is a button to change the door handle style.
 
@@ -1467,7 +1467,7 @@ namespace KitchenDesign
                     }
 
                     // MARK: END PANELS
-                    if(caller.targetIdType == ToolbarGroupButton.IdType.CabinetEndPanels)
+                    if(caller.targetIdType == ToolbarGroupIdType.CabinetEndPanels)
                     {
                         // This is a button to toggle end panels.
                         KitchenExtraFeature feature =
@@ -1519,7 +1519,7 @@ namespace KitchenDesign
                     }
 
                     // MARK: BACK PANELS
-                    if(caller.targetIdType == ToolbarGroupButton.IdType.CabinetBackPanels)
+                    if(caller.targetIdType == ToolbarGroupIdType.CabinetBackPanels)
                     {
                         float backPanelDepthInMeters =
                             kitchen.selectedBrandCatalog.cabinetRuntimeBackPanelInfo.panelDepthInMeters;
@@ -1666,7 +1666,7 @@ namespace KitchenDesign
                         return;
                     }
 
-                    if (caller.targetIdType == ToolbarGroupButton.IdType.CabinetSectionType &&
+                    if (caller.targetIdType == ToolbarGroupIdType.CabinetSectionType &&
                         Kitchen.instance.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
                         caller.targetId == 0)
                     {
@@ -1683,10 +1683,10 @@ namespace KitchenDesign
                     }
                 }
 
-                m_CategoryToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Tween);
-                m_ManufacturerToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Tween);
-                m_ProductToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Tween);
-                m_ProductActionToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
+                m_CategoryToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Tween);
+                m_ManufacturerToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Tween);
+                m_ProductToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Tween);
+                m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
 
                 // Early exit if caller is null. This means we're returning to the
                 // toolbar from elsewhere and its current contents are good
@@ -1698,7 +1698,7 @@ namespace KitchenDesign
                 // Clear the product toolbar
                 m_ProductToolbar.DestroyScrollContent();
 
-                if (caller.targetIdType == ToolbarGroupButton.IdType.CabinetSectionType)
+                if (caller.targetIdType == ToolbarGroupIdType.CabinetSectionType)
                 {
                     // This is a button to choose a cabinet section category.
                     PopulateCabinetSectionsToolbar(caller.targetId);
@@ -1710,7 +1710,7 @@ namespace KitchenDesign
 
                 switch (caller.targetIdType)
                 {
-                    case ToolbarGroupButton.IdType.Manufacturer:
+                    case ToolbarGroupIdType.Manufacturer:
                         productsToDisplay =
                             productsToDisplay.Where(
                                 productInfo =>
@@ -1720,7 +1720,7 @@ namespace KitchenDesign
                                 );
                         break;
 
-                    case ToolbarGroupButton.IdType.ProductGroup:
+                    case ToolbarGroupIdType.ProductGroup:
                         productsToDisplay =
                             productsToDisplay.Where(
                                 productInfo =>
@@ -1828,10 +1828,10 @@ namespace KitchenDesign
                 }
             }
 
-            m_CategoryToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Tween);
-            m_ManufacturerToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Tween);
-            m_ProductToolbar.SetVisibility(ToolbarContent.Visibility.InBackground, ToolbarContent.Duration.Tween);
-            m_ProductActionToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Tween);
+            m_CategoryToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Tween);
+            m_ManufacturerToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Tween);
+            m_ProductToolbar.SetVisibility(ToolbarContentVisibility.InBackground, ToolbarContentDuration.Tween);
+            m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Tween);
 
             // TODO: Show valid placement locations on the cabinets
         }
@@ -1992,15 +1992,15 @@ namespace KitchenDesign
 
         protected void ResetToolbar()
         {
-            SetToolbarVisibility(visible: false, ToolbarContent.Duration.Immediate);
+            SetToolbarVisibility(visible: false, ToolbarContentDuration.Immediate);
 
-            m_CategoryToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Immediate);
-            m_ManufacturerToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
-            m_ProductToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
-            m_ProductSearchToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
-            m_ProductActionToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
+            m_CategoryToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Immediate);
+            m_ManufacturerToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
+            m_ProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
+            m_ProductSearchToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
+            m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
 
-            m_SelectedProductToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Immediate);
+            m_SelectedProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Immediate);
 
             // Reset/forget the toolbar button highlights
             ToolbarCategoryButton.ForgetHighlight();
@@ -2032,14 +2032,14 @@ namespace KitchenDesign
             // Expand the toolbar if it's not open
             if (isObjectWithDetails && !isToolbarOpen)
             {
-                SetToolbarVisibility(visible: true, ToolbarContent.Duration.Tween);
+                SetToolbarVisibility(visible: true, ToolbarContentDuration.Tween);
             }
 
-            ToolbarContent.Visibility visibility =
-                isObjectWithDetails ? ToolbarContent.Visibility.InForeground : ToolbarContent.Visibility.Collapsed;
+            ToolbarContentVisibility visibility =
+                isObjectWithDetails ? ToolbarContentVisibility.InForeground : ToolbarContentVisibility.Collapsed;
 
-            ToolbarContent.Duration duration =
-                isToolbarOpen ? ToolbarContent.Duration.Tween : ToolbarContent.Duration.Immediate;
+            ToolbarContentDuration duration =
+                isToolbarOpen ? ToolbarContentDuration.Tween : ToolbarContentDuration.Immediate;
 
             // Show the selected product toolbar content
             m_SelectedProductToolbar.SetVisibility(visibility, duration);
@@ -2047,19 +2047,19 @@ namespace KitchenDesign
             if (isObjectWithDetails)
             {
                 // Set the toolbars up in background if visible
-                if (m_ProductActionToolbar.visibility == ToolbarContent.Visibility.InForeground)
+                if (m_ProductActionToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
                     m_ToolbarBeforeHighlight = m_ProductActionToolbar;
                 }
-                else if (m_ProductToolbar.visibility == ToolbarContent.Visibility.InForeground)
+                else if (m_ProductToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
                     m_ToolbarBeforeHighlight = m_ProductToolbar;
                 }
-                else if (m_ManufacturerToolbar.visibility == ToolbarContent.Visibility.InForeground)
+                else if (m_ManufacturerToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
                     m_ToolbarBeforeHighlight = m_ManufacturerToolbar;
                 }
-                else if (m_CategoryToolbar.visibility == ToolbarContent.Visibility.InForeground)
+                else if (m_CategoryToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
                     m_ToolbarBeforeHighlight = m_CategoryToolbar;
                 }
@@ -2068,14 +2068,14 @@ namespace KitchenDesign
 
 
                 m_ToolbarBeforeHighlight?.SetVisibility(
-                    ToolbarContent.Visibility.InBackground,
+                    ToolbarContentVisibility.InBackground,
                     duration
                 );
             }
             else
             {
                 // Restore the last toolbar's visibility
-                m_ToolbarBeforeHighlight?.SetVisibility(ToolbarContent.Visibility.InForeground, duration);
+                m_ToolbarBeforeHighlight?.SetVisibility(ToolbarContentVisibility.InForeground, duration);
             }
 
             await UniTask.CompletedTask;

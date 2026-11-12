@@ -146,7 +146,7 @@ namespace KitchenDesign
             
             if(hasItems)
             {
-                m_ProductSearchToolbar.SetVisibility(ToolbarContent.Visibility.InForeground, ToolbarContent.Duration.Tween);
+                m_ProductSearchToolbar.SetVisibility(ToolbarContentVisibility.InForeground, ToolbarContentDuration.Tween);
                 m_DesignerToolbarToggle.isOn = true;
                 DoHide();
             }
@@ -178,7 +178,7 @@ namespace KitchenDesign
         
         private void OnClickToolbarClose(MelcherButton button)
         {
-            m_ProductSearchToolbar.SetVisibility(ToolbarContent.Visibility.Collapsed, ToolbarContent.Duration.Tween);
+            m_ProductSearchToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
         }
 
         private void OnClickSearchCancel(MelcherButton button)

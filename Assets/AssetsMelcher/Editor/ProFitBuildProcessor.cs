@@ -12,7 +12,7 @@ namespace KitchenDesign
 
     /// <summary>
     ///     Sets the app's background colour for the splash screen to match the
-    ///     selected <see cref="AppSkin"/>. This is relevant in WebGL where the
+    ///     selected <see cref="AppSkinSO"/>. This is relevant in WebGL where the
     ///     splash screen background color is shown during the loading phase.
     /// </summary>
     public class ProFitBuildProcessor

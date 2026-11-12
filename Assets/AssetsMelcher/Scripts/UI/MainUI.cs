@@ -4,6 +4,7 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Scriptables;
 
     public class MainUI : Menu
     {
@@ -48,7 +49,7 @@ namespace KitchenDesign
         {
             base.Awake();
 
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
             m_HeaderBackground.color = currentSkin.primaryColor;
 

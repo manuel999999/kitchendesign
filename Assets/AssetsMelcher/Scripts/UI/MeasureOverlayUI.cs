@@ -199,30 +199,6 @@ namespace KitchenDesign
 
         protected CoroutineHandle m_UpdateCoroutine;
 
-        // ====================================================================
-        // Nested types
-        // ====================================================================
-
-        protected struct ActiveMeasure
-        {
-            public ActiveMeasure(Measure measure, Vector2 canvasLabelPivot)
-            {
-                this.measure = measure;
-                this.canvasLabelPivot = canvasLabelPivot;
-            }
-
-            public Measure measure;
-
-            /// <summary>
-            /// The pivot that will be assigned to the canvas label. The
-            /// default value is (0.5, 0.5). This is set when we'd like to
-            /// shift the label to avoid it overlapping with other labels in
-            /// a way that is independent of the screen's resolution.
-            /// </summary>
-            public Vector2 canvasLabelPivot;
-
-        }   // struct ActiveMeasure
-
     }   // class MeasureOverlayUI
 
 }   // namespace KitchenDesign

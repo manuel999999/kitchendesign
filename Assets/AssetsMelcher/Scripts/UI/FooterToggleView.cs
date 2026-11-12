@@ -4,6 +4,8 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     Handles the transition effects of a toggle that appears on the main
@@ -40,9 +42,9 @@ namespace KitchenDesign
 
         protected void HandleAppearanceTransition(MelcherSelectable.Appearance appearance, bool instant)
         {
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
-            ButtonStyle buttonStyle =
+            ButtonStyleSO buttonStyle =
                 currentSkin.GetButtonStyleFromName(m_ButtonStyleName);
 
             (Color foreground, Color background) =
@@ -72,7 +74,7 @@ namespace KitchenDesign
 
         [SerializeField] protected Graphic m_Label = null;
 
-        [SerializeField] protected AppSkin.ButtonStyleName m_ButtonStyleName = default;
+        [SerializeField] protected ButtonStyleName m_ButtonStyleName = default;
 
         // =====================================================================
         // OnValidate-serialized fields

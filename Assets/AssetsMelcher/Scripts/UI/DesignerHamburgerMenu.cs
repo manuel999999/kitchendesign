@@ -10,6 +10,7 @@ namespace KitchenDesign
     using KitchenDesign.Cabinets;
     using KitchenDesign.KitchenModel;
     using KitchenDesign.Occupancy;
+    using KitchenDesign.Shared.Enums;
 
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
     using Cysharp.Threading.Tasks;
@@ -151,7 +152,7 @@ namespace KitchenDesign
         {
             ClosePanel();
 
-            EventBridge.Designer.showCabinetDetailsUi?.Invoke(CabinetOtherSizesUI.Mode.ModifyExistingCabinet);
+            EventBridge.Designer.showCabinetDetailsUi?.Invoke(CabinetSizesMode.ModifyExistingCabinet);
         }
 
         protected void ShowSavePrompt(MelcherButton caller)
@@ -224,11 +225,11 @@ namespace KitchenDesign
             );
 
             // Show the loading UI for better user feedback
-            EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Save);
+            EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Save);
 
             using var loadingUiHider =
                 MelcherDeferred.Defer(
-                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Hide)
+                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Hide)
                 );
 
             // Clear the user's selection so our screenshots are not tinted.

@@ -3,6 +3,8 @@ namespace KitchenDesign
     using Melcher;
     using UnityEngine;
     using UnityEngine.UI;
+    using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     Changes a graphic's colour to match the app theme. This is used on
@@ -16,9 +18,9 @@ namespace KitchenDesign
 
         protected void Awake()
         {
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
-            ButtonStyle backgroundStyle =
+            ButtonStyleSO backgroundStyle =
                 currentSkin.GetButtonStyleFromName(backgroundStyleName);
 
             m_Graphic.color = backgroundStyle.normalBackgroundColor;
@@ -29,7 +31,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField]
-        protected AppSkin.ButtonStyleName backgroundStyleName = default;
+        protected ButtonStyleName backgroundStyleName = default;
 
         // ====================================================================
         // OnValidate-serialized fields

@@ -6,9 +6,9 @@ void Add(UnityEngine.Material m, string source)
     if (!byShader.TryGetValue(key, out var set)) byShader[key] = set = new System.Collections.Generic.HashSet<string>();
     set.Add(source + ":" + m.name);
 }
-foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:AppSkin"))
+foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:AppSkinSO"))
 {
-    var s = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.AppSkin>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
+    var s = UnityEditor.AssetDatabase.LoadAssetAtPath<KitchenDesign.Scriptables.AppSkinSO>(UnityEditor.AssetDatabase.GUIDToAssetPath(g));
     Add(s.primarySelectionMaterial, "skin " + s.name + " primary");
     Add(s.secondarySelectionMaterial, "skin " + s.name + " secondary");
 }

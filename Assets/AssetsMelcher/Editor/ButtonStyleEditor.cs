@@ -3,8 +3,9 @@ namespace KitchenDesign
     using Melcher;
     using UnityEngine;
     using UnityEditor;
+    using KitchenDesign.Scriptables;
 
-    [CustomEditor(typeof(ButtonStyle))]
+    [CustomEditor(typeof(ButtonStyleSO))]
     public class ButtonStyleEditor : Editor
     {
         public void OnEnable()
@@ -30,7 +31,7 @@ namespace KitchenDesign
                         transparencyBackgroundImagePath
                     );
             }
-            ButtonStyle buttonStyleToReplicate = (ButtonStyle)target;
+            ButtonStyleSO buttonStyleToReplicate = (ButtonStyleSO)target;
 
             m_PreviewButtonStyle = new GUIStyle(GUI.skin.button);
             m_PreviewButtonStyle.fontStyle |= FontStyle.Bold;

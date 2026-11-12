@@ -6,6 +6,7 @@ namespace KitchenDesign.Widgets
     using DG.Tweening;
     using KitchenDesign.Geometry;
     using KitchenDesign.Occupancy;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     ///     A base class for a world space UI object that anchor to the
@@ -81,7 +82,7 @@ namespace KitchenDesign.Widgets
 
             m_CanvasLocalScaleWhenVisible = m_CanvasRoot.localScale.x;
 
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
             m_Glyph.textMesh.color = currentSkin.resizerWidgetForegroundColor;
             m_Border.color = currentSkin.resizerWidgetForegroundColor;

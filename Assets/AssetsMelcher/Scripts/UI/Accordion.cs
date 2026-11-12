@@ -5,6 +5,7 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Shared.Enums;
 
     /// <summary>
     /// An <see cref="Accordion"/> is a series of nested layout groups that
@@ -116,7 +117,7 @@ namespace KitchenDesign
             );
         }
 
-        private Vector4 GetIdealPadding(bool isExpanded, Edge edge)
+        private Vector4 GetIdealPadding(bool isExpanded, AccordionEdge edge)
         {
             Vector4 padding = Vector4.zero;
 
@@ -130,17 +131,17 @@ namespace KitchenDesign
             return padding;
         }
 
-        public static bool IsVerticalEdge(Edge edge)
+        public static bool IsVerticalEdge(AccordionEdge edge)
         {
-            return edge == Edge.Top || edge == Edge.Bottom;
+            return edge == AccordionEdge.Top || edge == AccordionEdge.Bottom;
         }
 
         private static void AssignRectOffset(RectOffset offset, Vector4 vector)
         {
-            offset.top      = Mathf.RoundToInt(vector[(int)Edge.Top]);
-            offset.bottom   = Mathf.RoundToInt(vector[(int)Edge.Bottom]);
-            offset.left     = Mathf.RoundToInt(vector[(int)Edge.Left]);
-            offset.right    = Mathf.RoundToInt(vector[(int)Edge.Right]);
+            offset.top      = Mathf.RoundToInt(vector[(int)AccordionEdge.Top]);
+            offset.bottom   = Mathf.RoundToInt(vector[(int)AccordionEdge.Bottom]);
+            offset.left     = Mathf.RoundToInt(vector[(int)AccordionEdge.Left]);
+            offset.right    = Mathf.RoundToInt(vector[(int)AccordionEdge.Right]);
         }
 
 
@@ -172,7 +173,7 @@ namespace KitchenDesign
         [Tooltip("The padding edge to modify on the mask as the accordion " +
             "is collapsed. This affects the visual animation of the collapse " +
             "and expand.")]
-        [SerializeField] protected Edge m_ShrinkFromEdge = Edge.Bottom;
+        [SerializeField] protected AccordionEdge m_ShrinkFromEdge = AccordionEdge.Bottom;
 
         [Tooltip("When enabled, the accordion's root layout will resize its " +
             "padding to ensure the accordion as whole occupies the same " +
@@ -182,7 +183,7 @@ namespace KitchenDesign
         [Tooltip("This determines which edge's padding is counter-offset " +
             "to preserve the accordion's root size. Only used when Preserve " +
             "Root Size is enabled.")]
-        [SerializeField] protected Edge m_ExpandFromEdge = Edge.Top;
+        [SerializeField] protected AccordionEdge m_ExpandFromEdge = AccordionEdge.Top;
 
 
         // ====================================================================
@@ -201,23 +202,6 @@ namespace KitchenDesign
         protected RecyclableTween<Sequence> m_Sequence = new RecyclableTween<Sequence>();
 
         protected bool m_IsExpanded;
-
-        // ====================================================================
-        // Nested types
-        // ====================================================================
-
-        /// <remarks>
-        /// This order is important as it lines up with how Unity internally
-        /// indexes a RectOffset using a Vector4:
-        /// left=x, right=y, top=z, bottom=w
-        /// </remarks>
-        public enum Edge
-        {
-            Left,
-            Right,
-            Top,
-            Bottom
-        }   // enum Edge
 
         // ====================================================================
         // Editor
@@ -271,8 +255,8 @@ namespace KitchenDesign
             accordion.m_RootLayout = AddVerticalLayout(accordionRoot);
             accordion.m_MaskLayout = AddVerticalLayout(accordionMask);
             accordion.m_ContentLayout = AddVerticalLayout(accordionContent);
-            accordion.m_ShrinkFromEdge = Edge.Bottom;
-            accordion.m_ExpandFromEdge = Edge.Top;
+            accordion.m_ShrinkFromEdge = AccordionEdge.Bottom;
+            accordion.m_ExpandFromEdge = AccordionEdge.Top;
         }
 
         [UnityEditor.MenuItem("GameObject/UI/Accordion (Horizontal)")]
@@ -304,8 +288,8 @@ namespace KitchenDesign
             accordion.m_RootLayout = AddVerticalLayout(accordionRoot);
             accordion.m_MaskLayout = AddVerticalLayout(accordionMask);
             accordion.m_ContentLayout = AddVerticalLayout(accordionContent);
-            accordion.m_ShrinkFromEdge = Edge.Left;
-            accordion.m_ExpandFromEdge = Edge.Right;
+            accordion.m_ShrinkFromEdge = AccordionEdge.Left;
+            accordion.m_ExpandFromEdge = AccordionEdge.Right;
         }
 
         private static void CreateAccordion(

@@ -4,6 +4,7 @@ namespace KitchenDesign
     using System;
     using UnityEngine;
     using KitchenDesign.Cabinets;
+    using KitchenDesign.Shared.Enums;
 
     [RequireComponent(typeof(MelcherButton))]
     public class ToolbarGroupButton : ToolbarButton
@@ -18,7 +19,7 @@ namespace KitchenDesign
         // Properties
         // =====================================================================
 
-        public IdType targetIdType
+        public ToolbarGroupIdType targetIdType
         {
             get => m_TargetIdType;
             set => m_TargetIdType = value;
@@ -91,7 +92,7 @@ namespace KitchenDesign
         // Non-serialized fields
         // =====================================================================
 
-        protected IdType m_TargetIdType;
+        protected ToolbarGroupIdType m_TargetIdType;
 
         protected int m_TargetId;
 
@@ -102,72 +103,6 @@ namespace KitchenDesign
         // =====================================================================
 
         protected static ToolbarButton s_HighlightedManufacturerButton;
-
-        // ====================================================================
-        // Nested types
-        // ====================================================================
-
-        public enum IdType
-        {
-            /// <summary>
-            /// The ID corresponds to a manufacturer's ID.
-            /// </summary>
-            Manufacturer,
-
-            /// <summary>
-            /// The ID corresponds to a product group's ID.
-            /// </summary>
-            ProductGroup,
-
-            /// <summary>
-            /// The button will reset the cabinet finish to its default.
-            /// </summary>
-            ResetCabinet,
-
-            /// <summary>
-            /// The button will reset the countertop finish to its default.
-            /// </summary>
-            ResetCountertop,
-
-            /// <summary>
-            /// The button will reset the kitchen flooring to its default.
-            /// </summary>
-            ResetFlooring,
-
-            /// <summary>
-            ///     The ID corresponds to the index of a door style in the
-            ///     currently selected <see cref="BrandCatalog"/>'s door styles
-            ///     list.
-            /// </summary>
-            CabinetSectionType,
-
-            /// <summary>
-            ///     The ID corresponds to the index of a door style in the
-            ///     currently selected <see cref="BrandCatalog"/>'s door styles
-            ///     list.
-            /// </summary>
-            CabinetDoorStyle,
-
-            /// <summary>
-            ///     The ID corresponds to the index of a door handle style in the
-            ///     currently selected <see cref="BrandCatalog"/>'s door styles
-            ///     list.
-            /// </summary>
-            CabinetDoorHandleStyle,
-
-            /// <summary>
-            ///     The button will toggle Challenger's premium finishes on/off.
-            /// </summary>
-            ChallengerPremiumCabinetFinish,
-
-            /// <summary>
-            ///     The ID corresponds to which end panel to be added
-            ///     0 is to left, 1 is to right.
-            /// </summary>
-            CabinetEndPanels,
-            CabinetBackPanels,
-
-        }   // enum IdType
 
     }   // class ToolbarGroupButton
 

@@ -116,7 +116,7 @@ namespace KitchenDesign
             m_ConfirmButton.onClick -= OnClickConfirm;
         }
 
-        protected void OnCabinetDepthChanged(CabinetOtherSizeControl.Option selectedOption)
+        protected void OnCabinetDepthChanged(CabinetSizeOption selectedOption)
         {
             if (m_TargetVolume is Cabinet cabinet)
             {

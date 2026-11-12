@@ -18,15 +18,15 @@ namespace KitchenDesign
         // Events
         // =====================================================================
 
-        public event Action<Option> onValueChanged;
+        public event Action<CabinetSizeOption> onValueChanged;
 
         // =====================================================================
         // Properties
         // =====================================================================
 
-        public Option value => m_Options[(int)m_ValueSlider.value];
+        public CabinetSizeOption value => m_Options[(int)m_ValueSlider.value];
 
-        public IEnumerable<Option> options => m_Options;
+        public IEnumerable<CabinetSizeOption> options => m_Options;
 
         public bool useIsEnabledToggle
         {
@@ -58,13 +58,13 @@ namespace KitchenDesign
             }
             else
             {
-                Option selectedOption = m_Options[index];
+                CabinetSizeOption selectedOption = m_Options[index];
 
                 UpdateLabel(selectedOption);
             }
         }
 
-        public int SetOptions(int defaultIndex, params Option[] options)
+        public int SetOptions(int defaultIndex, params CabinetSizeOption[] options)
         {
             if (options == null)
             {
@@ -81,7 +81,7 @@ namespace KitchenDesign
                 throw new ArgumentOutOfRangeException("Must be within 0 and options.Length", nameof(defaultIndex));
             }
 
-            m_Options = new Option[options.Length];
+            m_Options = new CabinetSizeOption[options.Length];
             Array.Copy(options, m_Options, options.Length);
             m_ValueSlider.maxValue = m_Options.Length - 1;
 
@@ -107,14 +107,14 @@ namespace KitchenDesign
 
         protected void OnValueChanged(float sliderValue)
         {
-            Option selectedOption = m_Options[(int)sliderValue];
+            CabinetSizeOption selectedOption = m_Options[(int)sliderValue];
 
             UpdateLabel(selectedOption);
 
             onValueChanged?.Invoke(selectedOption);
         }
 
-        protected void UpdateLabel(Option selectedOption)
+        protected void UpdateLabel(CabinetSizeOption selectedOption)
         {
             if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
             {
@@ -153,7 +153,7 @@ namespace KitchenDesign
         // Static functions
         // ====================================================================
 
-        public static bool IsSizeAlmostEqualToSizeOption(float meters, Option option)
+        public static bool IsSizeAlmostEqualToSizeOption(float meters, CabinetSizeOption option)
         {
             return MelcherCommon.IsAlmostEqual(meters, option.sizeInMeters, tolerance: 0.001f);
         }
@@ -174,7 +174,7 @@ namespace KitchenDesign
                 return
                     control.SetOptions(
                         defaultIndex: 0,
-                        new Option(29.0f)
+                        new CabinetSizeOption(29.0f)
                     );
             }
             else
@@ -182,13 +182,13 @@ namespace KitchenDesign
                 return
                     control.SetOptions(
                         defaultIndex: 2,
-                        new Option(24.0f),
-                        new Option(26.0f),
-                        new Option(28.0f),
-                        new Option(30.0f),
-                        new Option(32.0f),
-                        new Option(34.0f),
-                        new Option(36.0f)
+                        new CabinetSizeOption(24.0f),
+                        new CabinetSizeOption(26.0f),
+                        new CabinetSizeOption(28.0f),
+                        new CabinetSizeOption(30.0f),
+                        new CabinetSizeOption(32.0f),
+                        new CabinetSizeOption(34.0f),
+                        new CabinetSizeOption(36.0f)
                     );
             }
         }
@@ -205,7 +205,7 @@ namespace KitchenDesign
         public static bool SelectOptionMatchingCurrentSize(CabinetOtherSizeControl control, float currentSizeInMeters)
         {
             int optionIndex = -1;
-            foreach (Option sizeOption in control.options)
+            foreach (CabinetSizeOption sizeOption in control.options)
             {
                 ++optionIndex;
 
@@ -249,24 +249,7 @@ namespace KitchenDesign
         // Non-serialized fields
         // =====================================================================
 
-        protected Option[] m_Options;
-
-        // =====================================================================
-        // Nested types
-        // =====================================================================
-
-        public readonly struct Option
-        {
-            public Option(float sizeInInches)
-            {
-                ImperialUnit unit = ImperialUnit.FromTotalInches(sizeInInches);
-                displayLabel = unit.ToString();
-                sizeInMeters = (float)unit.totalMeters;
-            }
-
-            public readonly string displayLabel;
-            public readonly float sizeInMeters;
-        }   // struct Option
+        protected CabinetSizeOption[] m_Options;
 
     }   // class CabinetOtherSizeControl
 

@@ -4,6 +4,8 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using DG.Tweening;
+    using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     /// Handles the visuals of a <see cref="MelcherToggle"/>.
@@ -39,7 +41,7 @@ namespace KitchenDesign
 
         protected void HandleAppearanceTransition(MelcherSelectable.Appearance appearance, bool instant)
         {
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
             if (m_Checkmark)
             {
@@ -65,7 +67,7 @@ namespace KitchenDesign
                         .WithAlpha(m_Checkmark.color.a);
             }
 
-            ButtonStyle buttonStyle =
+            ButtonStyleSO buttonStyle =
                 currentSkin.GetButtonStyleFromName(m_ButtonStyleName);
 
             (Color foregroundColor, Color backgroundColor) =
@@ -198,7 +200,7 @@ namespace KitchenDesign
         [SerializeField] protected Graphic[] m_ForegroundGraphics = null;
         [SerializeField] protected Graphic[] m_BackgroundGraphics = null;
 
-        [SerializeField] protected AppSkin.ButtonStyleName m_ButtonStyleName = default;
+        [SerializeField] protected ButtonStyleName m_ButtonStyleName = default;
 
         [Space]
 

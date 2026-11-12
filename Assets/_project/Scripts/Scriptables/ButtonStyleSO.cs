@@ -1,12 +1,13 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using System;
     using TMPro;
     using UnityEngine;
+    using KitchenDesign.Serializables;
 
     [CreateAssetMenu(fileName = "ButtonStyle", menuName = "Melcher Studios/Pro-Fit/Button Style")]
-    public class ButtonStyle : MelcherScriptableObject
+    public class ButtonStyleSO : MelcherScriptableObject
     {
         // ====================================================================
         // Properties

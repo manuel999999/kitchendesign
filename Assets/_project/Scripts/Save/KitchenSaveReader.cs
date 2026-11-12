@@ -861,10 +861,10 @@ namespace KitchenDesign.Save
 
             using var clearLoadingSpinner =
                 MelcherDeferred.Defer(
-                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Hide)
+                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Hide)
                 );
 
-            EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Load);
+            EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Load);
 
             EventBridge.Designer.setSpinnerStatusMessage?.Invoke($"Preparing {quote.saveName}");
 

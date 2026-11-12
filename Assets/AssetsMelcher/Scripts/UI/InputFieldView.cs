@@ -4,14 +4,16 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using TMPro;
+    using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
 
     public class InputFieldView : MelcherMonoBehaviour
     {
         protected void Awake()
         {
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
-            ButtonStyle buttonStyle =
+            ButtonStyleSO buttonStyle =
                 currentSkin.GetButtonStyleFromName(m_ButtonStyleName);
 
             ColorBlock controlColors = m_InputField.colors;
@@ -33,7 +35,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField]
-        protected AppSkin.ButtonStyleName m_ButtonStyleName = default;
+        protected ButtonStyleName m_ButtonStyleName = default;
 
         // ====================================================================
         // OnValidate-serialized fields

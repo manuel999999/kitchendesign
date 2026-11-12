@@ -81,7 +81,7 @@ switch (step)
     {
         UnityEngine.Vector3 p = a.productVisualContentInstance.GetTransform().localPosition + UnityEngine.Vector3.right * 2f * 0.0254f;
         bool moved = false;
-        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.EventBridge.Designer.RepositionSnapMode.None, ref moved);
+        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.Shared.Enums.RepositionSnapMode.None, ref moved);
         Log("nudge moved=" + moved);
         return "nudge moved=" + moved;
     }
@@ -90,7 +90,7 @@ switch (step)
         var drawer = LastWithSku("TEWD30-C"); if (drawer != null) a = drawer;
         UnityEngine.Vector3 p = a.productVisualContentInstance.GetTransform().localPosition + UnityEngine.Vector3.up * 0.0254f;
         bool moved = false;
-        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.EventBridge.Designer.RepositionSnapMode.None, ref moved);
+        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.Shared.Enums.RepositionSnapMode.None, ref moved);
         Log("nudge_up moved=" + moved);
         return "nudge_up moved=" + moved;
     }

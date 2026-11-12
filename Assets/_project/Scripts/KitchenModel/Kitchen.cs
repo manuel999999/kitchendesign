@@ -1278,10 +1278,10 @@ namespace KitchenDesign.KitchenModel
         {
             using var clearLoadingSpinner =
                 MelcherDeferred.Defer(
-                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Hide)
+                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Hide)
                 );
 
-            EventBridge.Designer.showLoadingUi?.Invoke(EventBridge.Designer.LoadingUIMode.Load);
+            EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Load);
 
             // Assume the default material is selected for each surface type
             if (this._selections.kitchenTemplate)
@@ -2458,7 +2458,7 @@ namespace KitchenDesign.KitchenModel
         protected void TryRepositionProduct(
             Occupant occupantToMove,
             Vector3 newVolumePosition,
-            EventBridge.Designer.RepositionSnapMode snapMode,
+            RepositionSnapMode snapMode,
             ref bool didMove)
         {
             OccupiableVolume occupiableVolume = occupantToMove.occupiedVolume;

@@ -7,6 +7,9 @@ namespace KitchenDesign
     using TMPro;
     using System.Collections.Generic;
     using System.Linq;
+    using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Serializables;
 
     /// <summary>
     /// Handles the visuals of a <see cref="MelcherButton"/>.
@@ -45,9 +48,9 @@ namespace KitchenDesign
 
         protected void HandleAppearanceTransition(MelcherSelectable.Appearance appearance, bool instant)
         {
-            AppSkin currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
 
-            ButtonStyle buttonStyle =
+            ButtonStyleSO buttonStyle =
                 currentSkin.GetButtonStyleFromName(m_ButtonStyleName);
 
             FontStyleOverride fontStyleOverride =
@@ -148,7 +151,7 @@ namespace KitchenDesign
         // ====================================================================
 
         [SerializeField] protected float m_TweenDuration = 0.1f;
-        [SerializeField] protected AppSkin.ButtonStyleName m_ButtonStyleName = default;
+        [SerializeField] protected ButtonStyleName m_ButtonStyleName = default;
         [SerializeField] protected Graphic[] m_ForegroundGraphics = null;
         [SerializeField] protected Graphic[] m_BackgroundGraphics = null;
 

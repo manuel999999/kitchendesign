@@ -283,7 +283,7 @@ namespace KitchenDesign
             /// Show UI to select the cabinet's other dimensions (depth &
             /// countertop thickness)
             /// </summary>
-            public static Action<CabinetOtherSizesUI.Mode> showCabinetDetailsUi;
+            public static Action<CabinetSizesMode> showCabinetDetailsUi;
 
             public delegate void ShowNotificationHandler(string title, string message, Action onDismiss);
             public static ShowNotificationHandler showNotification;
@@ -317,14 +317,7 @@ namespace KitchenDesign
 
             // --
 
-            public delegate void ShowLoadingUI(LoadingUIMode mode);
-
-            public enum LoadingUIMode
-            {
-                Hide,
-                Load,
-                Save,
-            }
+            public delegate void ShowLoadingUI(DesignerLoadingMode mode);
 
             /// <summary>
             ///     Show or hide <see cref="LoadingUI"/>; the canvas that
@@ -530,14 +523,6 @@ namespace KitchenDesign
             ///     event may not be hooked.
             /// </param>
             public delegate void TryRepositionOccupantHandler(Occupant occupantToMove, Vector3 newPosition, RepositionSnapMode snapMode, ref bool didMove);
-
-            [Flags]
-            public enum RepositionSnapMode : byte
-            {
-                None = 0,
-                SnapHorizontal  = 1 << 0,
-                SnapVertical    = 1 << 1,
-            }   // enum RepositionSnapMode
 
             /// <inheritdoc cref="TryRepositionOccupantHandler" />
             public static TryRepositionOccupantHandler onTryRepositionOccupant;

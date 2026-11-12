@@ -1566,7 +1566,29 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     uses either.
   - Still to measure: the uniform budget on WebGL 2 and the cost of `discard` on tile-based
     mobile GPUs.
-- Screens: none yet.
+- **Screens** (area 5 of the refactor, from 2026-11-12; plan: `.claude/prompts/05-screens.md`).
+  All screens are still uGUI (`MelcherUI`); none is on UI Toolkit yet.
+  - Small types (B5.1), enums in `_projectShared/Enums/` with their old values: `AccordionEdge`
+    (its order is how Unity indexes a `RectOffset` as a `Vector4`: left = x, right = y, top = z,
+    bottom = w, so `Accordion` indexes padding vectors with it), `ButtonStyleName` (serialized as
+    an int in prefabs and scenes, `m_ButtonStyleName`: append only), `CabinetSizesMode` (the
+    cabinet depth and countertop thickness screen opened for a new kitchen or for an existing
+    cabinet), `FontFlagOverride`, `WhitelistRowType`, `ToolbarContentVisibility` (`Collapsed`
+    hidden, `InForeground` the active toolbar, `InBackground` dimmed behind it),
+    `ToolbarContentDuration`, `ToolbarGroupIdType` (what a toolbar group button's id is: a
+    manufacturer id, a product group id, an index into the selected catalog's door styles or door
+    handle styles, the end panel side (0 left, 1 right); or the button resets the cabinet,
+    countertop or floor finish, or toggles Challenger's premium finishes), `DesignerLoadingMode`,
+    `RepositionSnapMode` (flags). `AppSkinSO` (one per app: the `ButtonStyleSO`s and colours that
+    make its colour theme) and `ButtonStyleSO` are in `Scriptables/` (moved with their `.meta`;
+    their create menus keep the default file names `AppSkin` and `ButtonStyle`).
+    `FontStyleOverride` (`Serializables/`) lets a button style force a font style flag on or off,
+    or leave it as the text has it; its property drawer was commented out in the old code and was
+    not carried over. Value types next to their screens: `CabinetSizeOption` (a size and its
+    imperial label), `WhitelistRowEntry` (a whitelist row: a product category header or a
+    manufacturer toggle), `ActiveMeasure` (a measure and its label pivot, (0.5, 0.5) unless shifted
+    to keep labels from overlapping, independent of the screen resolution). No asset file changed
+    (scripts bind by GUID, the enums are stored as ints).
 
 ## Tools
 - `Tools/Baseline/`: records the old app's baseline and compares this project against it

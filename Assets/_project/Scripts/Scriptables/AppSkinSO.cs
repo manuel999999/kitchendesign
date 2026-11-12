@@ -1,15 +1,16 @@
-namespace KitchenDesign
+namespace KitchenDesign.Scriptables
 {
     using Melcher;
     using UnityEngine;
+    using KitchenDesign.Shared.Enums;
 
     /// <summary>
-    ///     Collects many different <see cref="ButtonStyle"/>s into one
+    ///     Collects many different <see cref="ButtonStyleSO"/>s into one
     ///     "skin" which can then be swapped out to have different app
     ///     appearances (color themes).
     /// </summary>
     [CreateAssetMenu(fileName = "AppSkin", menuName = "Melcher Studios/Pro-Fit/App Skin")]
-    public class AppSkin : MelcherScriptableObject
+    public class AppSkinSO : MelcherScriptableObject
     {
         // ====================================================================
         // Properties
@@ -48,7 +49,7 @@ namespace KitchenDesign
         // Methods
         // ====================================================================
 
-        public ButtonStyle GetButtonStyleFromName(ButtonStyleName mode)
+        public ButtonStyleSO GetButtonStyleFromName(ButtonStyleName mode)
         {
             switch (mode)
             {
@@ -182,106 +183,52 @@ namespace KitchenDesign
         [Space]
 
         [SerializeField]
-        protected ButtonStyle m_BlackOnWhite = default;
+        protected ButtonStyleSO m_BlackOnWhite = default;
 
         [Space]
 
         [SerializeField]
-        protected ButtonStyle m_PrimaryOnTransparent = default;
+        protected ButtonStyleSO m_PrimaryOnTransparent = default;
 
         [SerializeField]
-        protected ButtonStyle m_PrimaryOnWhite = default;
+        protected ButtonStyleSO m_PrimaryOnWhite = default;
 
         [Space]
 
         [SerializeField]
-        protected ButtonStyle m_WhiteOnDanger = default;
+        protected ButtonStyleSO m_WhiteOnDanger = default;
 
         [SerializeField]
-        protected ButtonStyle m_WhiteOnPrimary = default;
+        protected ButtonStyleSO m_WhiteOnPrimary = default;
 
         [SerializeField]
-        protected ButtonStyle m_WhiteOnSecondary = default;
+        protected ButtonStyleSO m_WhiteOnSecondary = default;
 
         [Space]
 
         [SerializeField]
-        protected ButtonStyle m_InputField = default;
+        protected ButtonStyleSO m_InputField = default;
 
         [SerializeField]
-        protected ButtonStyle m_MainMenuFooterButton = default;
+        protected ButtonStyleSO m_MainMenuFooterButton = default;
 
         [SerializeField]
-        protected ButtonStyle m_ToolbarButton = default;
+        protected ButtonStyleSO m_ToolbarButton = default;
 
         [SerializeField]
-        protected ButtonStyle m_KitchenSetupToggle = default;
+        protected ButtonStyleSO m_KitchenSetupToggle = default;
 
         [SerializeField]
-        protected ButtonStyle m_DesignerZoomButton = default;
+        protected ButtonStyleSO m_DesignerZoomButton = default;
 
         [SerializeField]
-        protected ButtonStyle m_DesignerToolbarButtonBorder = default;
+        protected ButtonStyleSO m_DesignerToolbarButtonBorder = default;
 
         [SerializeField]
-        protected ButtonStyle m_DesignerBrandCatalogToggle = default;
+        protected ButtonStyleSO m_DesignerBrandCatalogToggle = default;
 
         [SerializeField]
-        protected ButtonStyle m_DesignerCabinetDetailImage = default;
-
-        // ====================================================================
-        // Types
-        // ====================================================================
-
-        // TODO: Replace all serialized instances of this enum with a
-        //       MelcherStableEnum. Otherwise, add new entries to the end of
-        //       the enum.
-        public enum ButtonStyleName
-        {
-            None,
-
-            PrimaryOnWhite,
-            PrimaryOnTransparent,
-
-            BlackOnWhite,
-
-            WhiteOnDanger,
-            WhiteOnPrimary,
-            WhiteOnSecondary,
-
-            InputField,
-            ToolbarButton,
-
-            /// <summary>
-            ///     A big radio button that appears on the pop-ups when a new
-            ///     kitchen is created.
-            ///     <br /><br />
-            ///
-            ///     Kitchen layout: straight, L, U, etc.
-            ///     Building method: standard or sections.
-            /// </summary>
-            KitchenSetupToggle,
-
-            MainMenuFooterButton,
-
-            /// <summary>
-            ///     The +/- zoom buttons used in the designer scene.
-            /// </summary>
-            DesignerZoomButton,
-
-            DesignerToolbarButtonBorder,
-
-            DesignerBrandCatalogToggle,
-
-            /// <summary>
-            ///     The images that appear during the cabinet setup phase. This
-            ///     colour is used to tint the lines that appear within the
-            ///     images that depict the cabinet depth, countertop thickness,
-            ///     etc.
-            /// </summary>
-            DesignerCabinetDetailImage,
-
-        }   // enum ButtonStyleName
+        protected ButtonStyleSO m_DesignerCabinetDetailImage = default;
 
     }   // class AppSkin
 

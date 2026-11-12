@@ -2025,7 +2025,7 @@ namespace KitchenDesign.Cabinets
 
             Material cabinetMaterialExclusive = cabinetMaterial;
 
-            AppSkin appSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO appSkin = ProFitGlobals.appOptions.appSkin;
 
             bool isCabinetHighlighting =
                 cabinetMaterial == appSkin.primarySelectionMaterial ||
