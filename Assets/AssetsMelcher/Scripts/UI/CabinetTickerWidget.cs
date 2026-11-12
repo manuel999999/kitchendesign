@@ -18,6 +18,13 @@ namespace KitchenDesign
     /// </summary>
     public class CabinetTickerWidget : MelcherMonoBehaviour
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Properties
         // =====================================================================
@@ -44,7 +51,7 @@ namespace KitchenDesign
             // class represents the inside edge). We need to find the cabinet's
             // neighbours and add their size to ours
 
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             CuboidPadding cabinetOverhangInMeters =
                 kitchen.baseCountertopOverhangInMeters;

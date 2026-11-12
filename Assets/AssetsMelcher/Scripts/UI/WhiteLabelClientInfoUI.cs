@@ -21,6 +21,13 @@ namespace KitchenDesign
     /// </summary>
     public class WhiteLabelClientInfoUI : MelcherUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -250,7 +257,7 @@ namespace KitchenDesign
                 {
                     EventBridge.Designer.showBuildingMethodsUi.Invoke();
                 }
-                else if (Kitchen.instance.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                else if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
                 {
                     EventBridge.Designer.showBrandCatalogUi.Invoke();
                 }

@@ -1304,8 +1304,13 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     any more: `CabinetShelf.isResizable` reaches the kitchen through its occupant's cabinet, the
     shelf's cuboid callback through the volume testing it (walking up to the cabinet),
     `CabinetBacking.OnCabinetMaterialsChanged` takes the kitchen from its callers (the span, the
-    material control, the photo manager), and the photo manager passes its kitchen down. The static
-    stays, set in `Kitchen.Awake`, only for the screens (26 uses, area 5). The classes area 4 created
+    material control, the photo manager), and the photo manager passes its kitchen down. **The static
+    is gone since B5.4c (2026-11-12):** `DesignerScreensControl.Initialize` hands the kitchen to the
+    toolbar, the setup wizard's shape, template and sizes screens, the white-label client info, the
+    product search and the about-product prompt; `KitchenWidgetsControl` hands it to each cabinet
+    ticker it creates; `BrandCatalogUI` reads the product visual database through its own
+    serialized reference to the same asset (its use runs in `Awake`, before any initializer). Tool
+    snippets find the kitchen with `FindFirstObjectByType`. The classes area 4 created
     (the three controls, the save writer and reader, the Gemini price sheet) take the app systems
     they read (session, client list, catalog data, app profile, app rules, product content) in their
     constructors; `Kitchen.Awake` hands them over from `ProFitGlobals`, the same instances

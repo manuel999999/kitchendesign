@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 KitchenDesign.Occupancy.Occupant target = null;
 KitchenDesign.Cabinets.Cabinet cab = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (target == null && occ.name.Contains("__NAME__")) { target = occ; cab = entry.element; }

@@ -15,6 +15,13 @@ namespace KitchenDesign
     /// </summary>
     public class KitchenTemplateUI : MelcherUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -50,7 +57,7 @@ namespace KitchenDesign
         {
             base.DoShow();
 
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
             KitchenStyle kitchenStyle = kitchen.selectedCabinetLayout.style;
 
             m_Title.phrase = $"{kitchenStyle}-Shape Templates";
@@ -118,7 +125,7 @@ namespace KitchenDesign
             MelcherToggle toggleComponent = (toggle as MelcherToggle);
             int toggleIndex = toggleComponent.transform.GetSiblingIndex();
 
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             KitchenStyle selectedStyle = kitchen.selectedCabinetLayout.style;
 

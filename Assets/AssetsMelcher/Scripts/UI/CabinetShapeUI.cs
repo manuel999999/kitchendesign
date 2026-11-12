@@ -14,6 +14,13 @@ namespace KitchenDesign
 
     public class CabinetShapeUI : MelcherUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -114,7 +121,7 @@ namespace KitchenDesign
         {
             m_CanvasGroup.interactable = false;
 
-            if (Kitchen.instance.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+            if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
             {
                 Hide();
 
@@ -140,7 +147,7 @@ namespace KitchenDesign
 
         protected void OnNextButtonClicked(MelcherButton caller)
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
             BrandCatalogSO brandCatalog = kitchen.selectedBrandCatalog;
 
             if (m_ShapeToggleGroup.IsAnyToggleOn())
@@ -186,7 +193,7 @@ namespace KitchenDesign
             float countertopThicknessInMeters = countertopThickness.sizeInMeters;
             CountertopType countertopType = CountertopType.Default;
             CuboidPadding countertopOverhangInInches = CuboidPadding.one;
-            float baseCabinetDepthInMeters = Kitchen.instance.selectedBrandCatalog.standardCabinetDepthInMeters;
+            float baseCabinetDepthInMeters = this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters;
 
             EventBridge.Designer.setCountertopType?.Invoke(countertopType);
             EventBridge.Designer.setBaseCabinetDepth.Invoke(baseCabinetDepthInMeters);

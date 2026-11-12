@@ -12,6 +12,13 @@ namespace KitchenDesign
 
     public class ProductSearchUI : MelcherUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
                 // =====================================================================
         // Properties
         // =====================================================================
@@ -102,7 +109,7 @@ namespace KitchenDesign
                     ProductVisualSO doorStyleVisual = null;
                     if(ProFitGlobals.appRules.RequiresBrandCatalog)
                     {
-                        Kitchen kitchen = Kitchen.instance;
+                        Kitchen kitchen = this._kitchen;
 
                         if(productInfo.cabinetSectionCategoryId > 0 && productInfo.manufacturerId != kitchen.selectedBrandCatalog.cabinetManufacturerId)
                         {

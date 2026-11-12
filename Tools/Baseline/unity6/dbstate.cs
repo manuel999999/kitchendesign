@@ -5,6 +5,6 @@ foreach (var db in dbs) {
   var d = (System.Collections.IDictionary)f.GetValue(db);
   r += " | " + db.name + " source=" + db.sourceEntries.Count + " runtime=" + d.Count + " filler=" + (db.FindRuntimeVisualByID("CabinetSection_Filler_Generic_Filler") != null);
 }
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 r += " | kitchen db=" + (k != null && k.productVisualDatabase != null ? k.productVisualDatabase.name : "none");
 return r;

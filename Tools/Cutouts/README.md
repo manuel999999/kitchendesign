@@ -9,10 +9,10 @@ qualified names, no `using`s, no classes), with `__PLACEHOLDERS__` filled in by 
   `Tools/Baseline/unity6/`, and writes its generated `load.cs`, so `git checkout` that file
   afterwards). **Signing in rewrites `Resources/<App>/FallbackJSON/*.json`**: back those up first.
 - `run.sh <snippet.cs> [sed expressions]`: runs a snippet after substituting placeholders.
-- Since step 2 the app does this itself (`Kitchen.instance.cutoutClipping`, refreshed before every
+- Since step 2 the app does this itself (`kitchen.cutoutClipping`, the kitchen found with `FindFirstObjectByType`, refreshed before every
   render; `LastSlotCount`, `LastBoxCount`, `LastDroppedBoxCount` for checks), and it overwrites
   whatever `apply.cs` or `shadow_test.cs` set on the next frame. For an isolated test, call
-  `Kitchen.instance.cutoutClipping.Detach()` first and `Attach(Kitchen.instance)` afterwards.
+  `kitchen.cutoutClipping.Detach()` first and `Attach(kitchen)` afterwards.
   `make_cam.cs` (`__SHOW__`) creates `CutoutTestCam` without touching the finish; `highlight.cs`
   applies the skin's primary selection material to the first occupied cabinet.
 - `compare_lit.cs` (`__PATHS__`): renders a sphere and cube with each material and with a

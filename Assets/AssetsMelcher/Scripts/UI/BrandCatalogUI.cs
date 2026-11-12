@@ -22,6 +22,8 @@ namespace KitchenDesign
     /// </summary>
     public class BrandCatalogUI : MelcherUI
     {
+        [SerializeField] private ProductVisualDatabaseSO productVisualDatabase;
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -127,7 +129,7 @@ namespace KitchenDesign
                     List<ProductVisualSO> cabinetSectionVisuals = new ();
                     List<ProductVisualSO> cabinetDoorVisuals = new ();
 
-                    foreach (ProductVisualSO productVisual in Kitchen.instance.productVisualDatabase.runtimeEntries)
+                    foreach (ProductVisualSO productVisual in this.productVisualDatabase.runtimeEntries)
                     {
                         if (!productVisual)
                         {

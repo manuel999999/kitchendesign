@@ -12,6 +12,13 @@ namespace KitchenDesign
 
     public class CabinetOtherSizesUI : MelcherUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -59,7 +66,7 @@ namespace KitchenDesign
             {
                 // Make the sliders display the kitchen's current size.
 
-                m_CurrentKitchen = Kitchen.instance;
+                m_CurrentKitchen = this._kitchen;
 
                 m_CurrentCabinetDepthInMeters = m_CurrentKitchen.baseCabinetDepthInMeters;
                 m_CurrentCountertopThicknessInMeters = m_CurrentKitchen.countertopThicknessInMeters;
@@ -188,9 +195,9 @@ namespace KitchenDesign
                 }
 
                 float baseCabinetDepthInMeters = m_CabinetDepthControl.value.sizeInMeters;
-                if (Kitchen.instance.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
                 {
-                    baseCabinetDepthInMeters = Kitchen.instance.selectedBrandCatalog.standardCabinetDepthInMeters;
+                    baseCabinetDepthInMeters = this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters;
                 }
 
                 EventBridge.Designer.setBaseCabinetDepth.Invoke(baseCabinetDepthInMeters);
@@ -319,7 +326,7 @@ namespace KitchenDesign
 
         protected KitchenBuildingMethod GetKitchenBuildingMethod()
         {
-            return Kitchen.instance.selectedBuildingMethod;
+            return this._kitchen.selectedBuildingMethod;
         }
 
         protected void OnCountertopTypeChanged(MelcherToggleGroup group, IMelcherToggle toggle)

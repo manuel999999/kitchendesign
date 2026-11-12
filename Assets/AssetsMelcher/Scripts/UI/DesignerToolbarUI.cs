@@ -31,6 +31,13 @@ namespace KitchenDesign
     /// </remarks>
     public class DesignerToolbarUI : MelcherUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -109,7 +116,7 @@ namespace KitchenDesign
 
         protected void SetupCategoryToolbar()
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             // Populate the category toolbar. Find categories that we have
             // access to
@@ -405,7 +412,7 @@ namespace KitchenDesign
         /// </summary>
         protected void OnProductCategoryButtonClicked(ToolbarCategoryButton caller)
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             if (caller && caller == m_CategoryBreadcrumb)
             {
@@ -490,7 +497,7 @@ namespace KitchenDesign
                 m_ToolbarCabinetProductPredicate = null;
 
 
-                KitchenBuildingMethod buildingMethod = Kitchen.instance.selectedBuildingMethod;
+                KitchenBuildingMethod buildingMethod = this._kitchen.selectedBuildingMethod;
 
                 if (buildingMethod == KitchenBuildingMethod.Sections)
                 {
@@ -862,7 +869,7 @@ namespace KitchenDesign
 
         protected IEnumerable<ProductInfo> GetAvailableCabinetSections(Func<ProductInfo, bool> predicate)
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
             IEnumerable<ProductInfo> availableCabinetSections;
 
             availableCabinetSections =
@@ -1042,7 +1049,7 @@ namespace KitchenDesign
 
             const ProductCategory Category = ProductCategory.CabinetSection;
 
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             RectTransform scrollContent =
                 m_ProductToolbar.GetScrollContent();
@@ -1060,7 +1067,7 @@ namespace KitchenDesign
             // to the back of the list.
             Array.Sort(
                 cabinetsMatchingType,
-                static (a, b) =>
+                (a, b) =>
                 {
                     if (a.sortOrder >= 0 && b.sortOrder >= 0)
                     {
@@ -1101,16 +1108,16 @@ namespace KitchenDesign
 
                     return productSizeInMetersA.z.CompareTo(productSizeInMetersB.z);
 
-                    static bool IsStandardDepth(float cabinetDepthInMeters)
+                    bool IsStandardDepth(float cabinetDepthInMeters)
                     {
                         KitchenBuildingMethod buildingMethod =
-                            Kitchen.instance.selectedBuildingMethod;
+                            this._kitchen.selectedBuildingMethod;
 
                         float standardCabinetDepthInMeters =
                             buildingMethod switch
                             {
                                 KitchenBuildingMethod.Sections => Const.Stoll.DefaultCabinetDepth,
-                                KitchenBuildingMethod.Catalog => Kitchen.instance.selectedBrandCatalog.standardCabinetDepthInMeters,
+                                KitchenBuildingMethod.Catalog => this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters,
                                 _ => throw new Exception("Unhandled building method.")
                             };
 
@@ -1174,7 +1181,7 @@ namespace KitchenDesign
 
         protected void OnCabinetDoorButtonClicked(ToolbarCategoryButton caller)
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             RectTransform scrollContent =
                 m_ManufacturerToolbar.GetScrollContent();
@@ -1204,7 +1211,7 @@ namespace KitchenDesign
 
         protected void OnCabinetDoorHandleButtonClicked(ToolbarCategoryButton caller)
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             RectTransform scrollContent =
                 m_ManufacturerToolbar.GetScrollContent();
@@ -1230,7 +1237,7 @@ namespace KitchenDesign
 
         protected void OnCabinetEndPanelsClicked(ToolbarCategoryButton caller)
         {
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             RectTransform scrollContent =
                 m_ManufacturerToolbar.GetScrollContent();
@@ -1272,7 +1279,7 @@ namespace KitchenDesign
 
                 if (caller)
                 {
-                    Kitchen kitchen = Kitchen.instance;
+                    Kitchen kitchen = this._kitchen;
 
                     m_ProductToolbar.ResetScrollToStart();
 
@@ -1667,7 +1674,7 @@ namespace KitchenDesign
                     }
 
                     if (caller.targetIdType == ToolbarGroupIdType.CabinetSectionType &&
-                        Kitchen.instance.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+                        this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
                         caller.targetId == 0)
                     {
                         // Special case cabinet in Stoll. Try to add a procedural cabinet.
@@ -2135,7 +2142,7 @@ namespace KitchenDesign
             // can vary greatly between kitchens.
             m_AvailableProductsByProductCategory.Clear();
 
-            Kitchen kitchen = Kitchen.instance;
+            Kitchen kitchen = this._kitchen;
 
             BrandCatalogSO selectedBrandCatalog = kitchen.selectedBrandCatalog;
 

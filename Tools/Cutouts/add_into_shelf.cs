@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 KitchenDesign.Cabinets.CabinetShelf shelf = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (shelf == null && occ.TryGetComponent(out KitchenDesign.Cabinets.CabinetShelf s)) shelf = s;
 if (shelf == null) return "no shelf in the kitchen";

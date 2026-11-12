@@ -40,7 +40,7 @@ object DrawnBoundsIn(UnityEngine.Transform space, UnityEngine.Renderer[] rs)
 }
 
 string outDir = "/Users/emmanuel/Documents/Unity/GeminiBaseline/unity6/36449";
-var k = KitchenDesign.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 var layout = k.layout;
 var root = new System.Collections.Generic.Dictionary<string, object>();
 root["quote_id"] = 36449;

@@ -14,6 +14,13 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerAboutProductUI : BasePromptUI
     {
+        private Kitchen _kitchen;
+
+        public void Initialize(Kitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -43,7 +50,7 @@ namespace KitchenDesign
             Sprite overlaySprite = null;
             if (productInfo.category == ProductCategory.CabinetSection)
             {
-                Kitchen kitchen = Kitchen.instance;
+                Kitchen kitchen = this._kitchen;
 
                 ProductVisualSO cabinetDoorVisual =
                     ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(

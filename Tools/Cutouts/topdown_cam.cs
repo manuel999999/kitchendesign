@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 KitchenDesign.Cabinets.Cabinet target = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (target == null) target = entry.element;
 var t = target.GetTransform();

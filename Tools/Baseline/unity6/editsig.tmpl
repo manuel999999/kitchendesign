@@ -2,7 +2,7 @@ double R(float v) { return System.Math.Round((double)v, 4); }
 string V(UnityEngine.Vector3 v) { return R(v.x) + "," + R(v.y) + "," + R(v.z); }
 string outDir = "__OUTDIR__";
 string name = "__NAME__";
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 if (k == null || k.layout == null) return "kitchen=none";
 var sb = new System.Text.StringBuilder();
 sb.Append("method=" + k.selectedBuildingMethod + " toekick=" + k.selectedToeKickType + " door=" + k.selectedDoorStyleName + " handle=" + k.selectedDoorHandleStyleName + "\n");

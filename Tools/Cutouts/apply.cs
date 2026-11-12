@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 if (k == null || k.layout == null) return "no kitchen";
 var set = new KitchenDesign.Cutouts.CutoutClipSet();
 var extraField = typeof(KitchenDesign.Products.ProductVisualContent).GetField("m_AdditionalCabinetRenderMaskMeshes", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);

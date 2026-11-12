@@ -39,12 +39,6 @@ namespace KitchenDesign.KitchenModel
         // Static properties
         // =====================================================================
 
-        /// <summary>
-        ///     This static property is intended to replace the need to call
-        ///     `FindObjectOfType` to locate the kitchen. The property's value
-        ///     is assigned in `Kitchen.Awake()`.
-        /// </summary>
-        public static Kitchen instance => s_KitchenInstance;
 
         // =====================================================================
         // Properties
@@ -1011,17 +1005,6 @@ namespace KitchenDesign.KitchenModel
             this._drag.Connect(this._widgets);
             this._saveWriter = new KitchenSaveWriter(this._selections, m_ProductVisualDatabase, ProFitGlobals.session, ProFitGlobals.clientList, ProFitGlobals.appRules, ProFitGlobals.catalogData);
             this._saveReader = new KitchenSaveReader(this, this._selections, m_ProductVisualDatabase, m_LayoutPrefabs, m_CabinetBackingSprites, m_BacksplashPrefab, m_HighBarTopPrefab, m_LowBarTopPrefab, ProFitGlobals.clientList, ProFitGlobals.catalogData, ProFitGlobals.appProfile, ProFitGlobals.appRules, ProFitGlobals.productContent);
-
-            if (s_KitchenInstance)
-            {
-                MelcherLog.LogError(
-                    $"A kitchen instance already exists but another is coming online. " +
-                    $"The newer one will take priority for {MelcherFormat.ConsoleFieldName(nameof(instance))}.",
-                    s_KitchenInstance
-                );
-            }
-
-            s_KitchenInstance = this;
 
             m_Ground.gameObject.SetActive(false);
 
@@ -3027,8 +3010,6 @@ namespace KitchenDesign.KitchenModel
         // =====================================================================
         // Static fields
         // =====================================================================
-
-        protected static Kitchen s_KitchenInstance = default;
 
         // ====================================================================
         // Nested types

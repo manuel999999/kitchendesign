@@ -27,12 +27,23 @@ namespace KitchenDesign
     [DefaultExecutionOrder(-10)]
     public class DesignerScreensControl : MelcherMonoBehaviour
     {
+        [SerializeField] private ProductSearchUI productSearch;
+        [SerializeField] private DesignerAboutProductUI aboutProductPrompt;
+
         // ====================================================================
         // Methods
         // ====================================================================
 
         public void Initialize(AppSystems systems)
         {
+            m_ToolbarUi.Initialize(m_Kitchen);
+            m_CabinetShapeUi.Initialize(m_Kitchen);
+            m_KitchenTemplateUi.Initialize(m_Kitchen);
+            m_CabinetOtherSizesUi.Initialize(m_Kitchen);
+            m_WhiteLabelClientInfoUi.Initialize(m_Kitchen);
+            this.productSearch.Initialize(m_Kitchen);
+            this.aboutProductPrompt.Initialize(m_Kitchen);
+
             // Hide the debug cuboid visualizations by default
             OccupantOccupiedCuboidVisualization.isVisible = false;
 

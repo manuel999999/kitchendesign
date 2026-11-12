@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 string sc = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 if (k == null || k.layout == null) return sc + " kitchen=none";
 int cabs = 0; foreach (var e in k.layout.EnumerateCabinets()) cabs++;

@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 string r = "";
 var shaders = new System.Collections.Generic.Dictionary<string, int>();
 int ci = 0;

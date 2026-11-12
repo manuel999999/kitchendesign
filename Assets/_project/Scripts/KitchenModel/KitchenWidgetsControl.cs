@@ -232,6 +232,7 @@ namespace KitchenDesign.KitchenModel
                             this._tickerDimensionsRoot
                         );
 
+                    widget.Initialize(this._kitchen);
                     widget.targetCabinetSpan = span.index;
                     widget.RefreshLabel();
 

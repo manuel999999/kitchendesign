@@ -41489,6 +41489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80736ffeba6214473b7089e2ba4793d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  productSearch: {fileID: 251469615}
+  aboutProductPrompt: {fileID: 424268791}
   m_ProductVisualDatabase: {fileID: 11400000, guid: 4af6daf38d0950a4c9c3a02de0fc651b, type: 2}
   m_Kitchen: {fileID: 1168655925}
   m_WhiteLabelClientInfoUi: {fileID: 2127339067}
@@ -62078,6 +62080,7 @@ MonoBehaviour:
   m_Canvas: {fileID: 2079580497}
   m_CanvasGroup: {fileID: 2079580495}
   m_Raycaster: {fileID: 2079580496}
+  productVisualDatabase: {fileID: 11400000, guid: 4af6daf38d0950a4c9c3a02de0fc651b, type: 2}
   m_BrandCatalogToggleGroup: {fileID: 934734801}
   m_BackButton: {fileID: 814539000}
   m_NextButton: {fileID: 610034043}

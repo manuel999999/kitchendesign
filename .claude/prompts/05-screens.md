@@ -316,6 +316,11 @@ selection component. **`Kitchen.instance` is deleted** (the probes find the kitc
   line), `OnStateEvent`'s Update and LateUpdate branches → `Update`/`LateUpdate` with
   `[DefaultExecutionOrder(-10)]`. Compiles in the editor and as WebGL player scripts.
 
+- **B5.4c done 2026-11-12** (before b, which is independent). `Kitchen.instance` deleted; who gets
+  the kitchen instead is in CLAUDE.md (B4.9 note). Two lambdas in `DesignerToolbarUI`'s cabinet
+  section sort lost `static` because they now read the kitchen field. Three references set in
+  DesignerScene through the editor (+3 lines). Compiles in the editor and as WebGL player scripts.
+
 **B5.5 — `EventBridge.Designer` goes.** `KitchenEvents` (notifications), kitchen methods
 (commands), `EventDesigner` (screen requests), prompts handed over, per decision 3; the model,
 the screens, the cameras and the photo manager move to them. `EventBridge.cs` is deleted; the

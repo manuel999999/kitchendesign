@@ -2,7 +2,7 @@ string outDir = "__OUTDIR__";
 string step = "__STEP__";
 string logPath = System.IO.Path.Combine(outDir, "log.txt");
 void Log(string s) { System.IO.File.AppendAllText(logPath, s + "\n"); }
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 if (k == null || k.layout == null) return "kitchen=none";
 var cabs = new System.Collections.Generic.List<KitchenDesign.Cabinets.Cabinet>();
 foreach (var e in k.layout.EnumerateCabinets()) cabs.Add(e.element);

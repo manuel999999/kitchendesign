@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 var cabMat = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Material>("Assets/AssetsMelcher/Finishes/Cabinet_Endura_WhiteOak.mat");
 var topMat = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Material>("Assets/AssetsMelcher/Finishes/Countertop_Challenger_SilverVein.mat");
 Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.layout.SetCabinetMaterials(cabMat, topMat, null));

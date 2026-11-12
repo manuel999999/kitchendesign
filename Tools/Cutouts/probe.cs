@@ -1,4 +1,4 @@
-var k = KitchenDesign.KitchenModel.Kitchen.instance;
+var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
 KitchenDesign.Occupancy.Occupant sink = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (occ.name.Contains("__NAME__")) sink = occ;
 var c = sink.productVisualContentInstance.countertopCutOut.stencilRoot;
