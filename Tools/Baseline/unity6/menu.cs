@@ -1,7 +1,7 @@
-var ms = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.MenuScene>();
-if (ms == null) return "step=state scene=" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " no MenuScene";
+var ms = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.MenuNavigationControl>();
+if (ms == null) return "step=state scene=" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " no MenuNavigationControl";
 var bf = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-object F(string n) { return typeof(KitchenDesign.MenuScene).GetField(n, bf).GetValue(ms); }
+object F(string n) { return typeof(KitchenDesign.MenuNavigationControl).GetField(n, bf).GetValue(ms); }
 string Top() { foreach (var h in (System.Collections.IEnumerable)F("m_MenuHistory")) { return ((UnityEngine.Object)h).name; } return "none"; }
 bool Up(string n) { return ((Melcher.MelcherUI)F(n)).IsVisible(); }
 string step = "state";

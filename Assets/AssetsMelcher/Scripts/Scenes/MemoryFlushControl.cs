@@ -10,12 +10,10 @@ namespace KitchenDesign
     ///     menu scene. This was added because we were running out of memory
     ///     on iPhone SE's.
     /// </summary>
-    public class IntermediateDesignerToMenuScene : MelcherStateMachineState
+    public class MemoryFlushControl : MelcherMonoBehaviour
     {
-        public override void OnStateAdded(IMelcherStateMachineState fromState)
+        public void Initialize()
         {
-            base.OnStateAdded(fromState);
-
             Resources.UnloadUnusedAssets();
 
             GC.Collect();
@@ -33,7 +31,7 @@ namespace KitchenDesign
                 }
             );
         }
-    }   // class IntermediateDesignerToMenuScene
+    }   // class MemoryFlushControl
 
 }   // namespace KitchenDesign
 

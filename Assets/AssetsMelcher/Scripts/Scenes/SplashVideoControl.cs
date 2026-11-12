@@ -10,13 +10,13 @@ namespace KitchenDesign
     /// <summary>
     /// Plays our splash movie and then loads the next scene.
     /// </summary>
-    public class SplashScene : MelcherStateMachineState
+    public class SplashVideoControl : MelcherMonoBehaviour
     {
         // ====================================================================
         // Methods
         // ====================================================================
 
-        public override void OnStateAdded(IMelcherStateMachineState fromState)
+        public void Initialize()
         {
             try
             {
@@ -178,6 +178,6 @@ namespace KitchenDesign
 
         private AsyncOperation m_SceneLoadOperation;
 
-    }   // class SplashScene
+    }   // class SplashVideoControl
 
 }   // namespace KitchenDesign

@@ -1012,8 +1012,17 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 - `_projectAssets/Scenes/BootScene.unity`: one root, `AppInitializer` (an instance of
   `_projectAssets/Prefabs/AppInitializer.prefab`, `AppInitializer` component, `appProfile` →
   `Resources/AppProfile.asset`). Moves itself to `DontDestroyOnLoad`.
-- `MenuScene`: root `MenuSceneInitializer` (first sibling). `DesignerScene`: root
-  `DesignerSceneInitializer` (first sibling). The rest of both scenes is the old app's, except
+- Every scene has its `<Scene>SceneInitializer` on the first root (B5.3b, `_project/Scripts/Game/`),
+  holding a serialized reference to the scene's control and calling its `Initialize`:
+  `SplashScene` → `SplashVideoControl` (the splash video, then the next build index),
+  `PlatformSetupScene` → `PlatformSetupControl` (white-label check, then the menu or the
+  designer), `IntermediateDesignerToMenuScene` → `MemoryFlushControl` (unloads unused assets and
+  collects garbage, then loads the menu: low-memory iPhones ran out of memory going straight from
+  the designer), `MenuScene` → `MenuNavigationControl` (`navigation`: every menu screen, the
+  history, the prompts, screen orientation). The controls are the old scene scripts renamed in
+  place (same GUID), on `MelcherMonoBehaviour` for the editor's `[MelcherFindComponent]` fill.
+  `DesignerScene`: root `DesignerSceneInitializer`; `DesignerScene` is still a state-machine
+  state until B5.4. The rest of both scenes is the old app's, except
   that `DesignerScene`'s root `Product Visual Content Loader` object is gone (B3.3; its job is
   `ProductVisualContentStatus`).
 - In the editor, playing any other build-list scene gets an `AppInitializer` from the prefab at
@@ -1045,8 +1054,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    one constructor instead of every initializer's signature. `DesignerSceneInitializer`
    purges the content status in its `OnDestroy`, when the designer scene goes: the moment the old
    loader component released its Addressables handles. This runs after the old scene script's
-   `OnStateAdded` (the core package's state machine is subscribed first), so the old scene
-   scripts can't use what the initializer receives yet; they keep using `ProFitGlobals`.
+   `OnStateAdded` (the core package's state machine is subscribed first). Since B5.3b the
+   menu-side scenes have no state: their start-up is the control's `Initialize`, called from the
+   scene initializer, so it now runs after the load request's `onLoaded` callbacks (only the kick
+   prompt uses one, on the intermediate scene, with nothing listening either way). The designer's
+   start-up is still `DesignerScene.OnStateAdded` until B5.4.
 
 ## Events
 - `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's
@@ -1644,6 +1656,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     manufacturer toggle), `ActiveMeasure` (a measure and its label pivot, (0.5, 0.5) unless shifted
     to keep labels from overlapping, independent of the screen resolution). No asset file changed
     (scripts bind by GUID, the enums are stored as ints).
+  - `MenuPreferenceKeys` (B5.3b): the `PlayerPrefs` key for "always landscape on mobile",
+    written as the literal `"MainUI.AlwaysLandscapeOnMobile"` (it was `nameof(MainUI) + …`):
+    devices already store it under that name, so it must not follow a class rename.
 
 ## Tools
 - `Tools/Baseline/`: records the old app's baseline and compares this project against it

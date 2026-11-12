@@ -24724,6 +24724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a391e1f77b0224543968225e8790c751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: KitchenDesign::KitchenDesign.MenuSceneInitializer
+  navigation: {fileID: 888014506}
 --- !u!4 &871059899
 Transform:
   m_ObjectHideFlags: 0
@@ -28622,7 +28623,7 @@ MonoBehaviour:
   m_RightDock: {fileID: 0}
   m_TopDock: {fileID: 0}
   m_BottomDock: {fileID: 0}
-  m_AnchoredSize: -25.000122
+  m_AnchoredSize: -28.000122
 --- !u!1 &1037386542
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,13 +12,13 @@ namespace KitchenDesign
     ///     <see cref="PlatformSetupScene"/> handles loading the proper scene
     ///     according to whether the user is white labeled.
     /// </summary>
-    public class PlatformSetupScene : MelcherStateMachineState
+    public class PlatformSetupControl : MelcherMonoBehaviour
     {
         // ====================================================================
         // Methods
         // ====================================================================
 
-        public override void OnStateAdded(IMelcherStateMachineState fromState)
+        public void Initialize(AppSystems systems)
         {
             ProFitGlobals.ExecuteWhenReady(OnGlobalsReady);
         }
@@ -215,7 +215,7 @@ namespace KitchenDesign
                 }
 
                 MelcherLog.Log(
-                    $"{nameof(PlatformSetupScene)} will load scene {sceneNameToLoad}",
+                    $"{nameof(PlatformSetupControl)} will load scene {sceneNameToLoad}",
                     severity: MelcherLogSeverity.Verbose
                 );
 
@@ -237,7 +237,7 @@ namespace KitchenDesign
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
         protected LoadingUI m_LoadingUi = default;
 
-    }   // class PlatformSetupScene
+    }   // class PlatformSetupControl
 
 }   // namespace KitchenDesign
 

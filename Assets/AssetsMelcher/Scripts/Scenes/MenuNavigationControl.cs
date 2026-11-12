@@ -7,13 +7,13 @@ namespace KitchenDesign
     using UnityEngine;
     using KitchenDesign.Events;
 
-    public class MenuScene : MelcherStateMachineState
+    public class MenuNavigationControl : MelcherMonoBehaviour
     {
         // =====================================================================
         // Methods
         // =====================================================================
 
-        public override void OnStateAdded(IMelcherStateMachineState fromState)
+        public void Initialize(AppSystems systems)
         {
             // Reset the last selected user and quote to avoid dangling
             // references to users who may not exist or be our own
@@ -98,7 +98,7 @@ namespace KitchenDesign
             if (Application.isMobilePlatform)
             {
                 m_UseLandscapeOrientation =
-                    PlayerPrefs.GetInt(PlayerPref.AlwaysLandscapeOnMobile) != 0;
+                    PlayerPrefs.GetInt(MenuPreferenceKeys.AlwaysLandscapeOnMobile) != 0;
             }
 
             RefreshScreenOrientation();
@@ -595,7 +595,7 @@ namespace KitchenDesign
         {
             m_UseLandscapeOrientation = !m_UseLandscapeOrientation;
 
-            PlayerPrefs.SetInt(PlayerPref.AlwaysLandscapeOnMobile, m_UseLandscapeOrientation ? 1 : 0);
+            PlayerPrefs.SetInt(MenuPreferenceKeys.AlwaysLandscapeOnMobile, m_UseLandscapeOrientation ? 1 : 0);
             PlayerPrefs.Save();
 
             RefreshScreenOrientation();
@@ -758,17 +758,8 @@ namespace KitchenDesign
         /// </summary>
         protected bool m_UseLandscapeOrientation;
 
-        // ====================================================================
-        // Nested types
-        // ====================================================================
 
-        public static class PlayerPref
-        {
-            public const string AlwaysLandscapeOnMobile = nameof(MainUI) + "." + nameof(AlwaysLandscapeOnMobile);
-        }   // class PlayerPref
-
-
-    }   // class MenuScene
+    }   // class MenuNavigationControl
 
 }   // namespace KitchenDesign
 
