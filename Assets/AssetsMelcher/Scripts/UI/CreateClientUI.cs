@@ -9,6 +9,7 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using TMPro;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     /// <summary>
     /// This manages the UI state of the Create Client page. This is the page
@@ -17,6 +18,17 @@ namespace KitchenDesign
     /// </summary>
     public class CreateClientUI : Menu
     {
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
+
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server)
+        {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -121,8 +133,8 @@ namespace KitchenDesign
                 kv.Value.colors = m_FieldColorBlockDefault;
             }
 
-            ProFitGlobals.server.Clients.CreateClient(
-                ProFitGlobals.user,
+            this._server.Clients.CreateClient(
+                this._session.User,
                 m_FirstNameField.text,
                 m_LastNameField.text,
                 m_EmailField.text,
@@ -143,9 +155,9 @@ namespace KitchenDesign
 
                 // Mark the new client as active so any quotes will belong to
                 // them
-                ProFitGlobals.userClients.Add(client);
-                ProFitGlobals.activeClientId = client.id;
-                ProFitGlobals.activeQuoteId = null;
+                this._clientList.UserClients.Add(client);
+                this._clientList.ActiveClientId = client.id;
+                this._clientList.ActiveQuoteId = null;
 
                 MelcherSceneManager.LoadSceneAsync(
                     MelcherSceneRequest.FromName("DesignerScene"),

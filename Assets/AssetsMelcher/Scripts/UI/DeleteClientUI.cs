@@ -6,12 +6,24 @@ namespace KitchenDesign
     using UnityEngine;
     using MEC;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     /// <summary>
     /// The prompt that shows up to confirm the user wants to delete a client.
     /// </summary>
     public class DeleteClientUI : MelcherUI
     {
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
+
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server)
+        {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -43,9 +55,9 @@ namespace KitchenDesign
 
             string clientName = "Unknown";
 
-            if (ProFitGlobals.TryGetClientIndex(m_ClientId, out int clientIndex))
+            if (this._clientList.TryGetClientIndex(m_ClientId, out int clientIndex))
             {
-                UserClient client = ProFitGlobals.userClients[clientIndex];
+                UserClient client = this._clientList.UserClients[clientIndex];
 
                 clientName = string.Join(" ", client.firstName, client.lastName);
             }
@@ -70,20 +82,20 @@ namespace KitchenDesign
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
             m_MessageBox.Clear();
 
-            ProFitGlobals.server.Clients.DeleteClient(
-                ProFitGlobals.user,
+            this._server.Clients.DeleteClient(
+                this._session.User,
                 m_ClientId,
                 onSuccess: () =>
                 {
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
-                    ProFitGlobals.activeClientId = null; // TODO: Necessary anymore? Maybe let the ClientListUI clear the activeClientId
+                    this._clientList.ActiveClientId = null; // TODO: Necessary anymore? Maybe let the ClientListUI clear the activeClientId
 
                     Hide();
 
-                    if (ProFitGlobals.TryGetClientIndex(m_ClientId, out int clientIndex))
+                    if (this._clientList.TryGetClientIndex(m_ClientId, out int clientIndex))
                     {
-                        ProFitGlobals.userClients.RemoveAt(clientIndex);
+                        this._clientList.UserClients.RemoveAt(clientIndex);
                     }
 
                     EventMenu.OnClientListRequested.Raise();

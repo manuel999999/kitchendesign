@@ -8,9 +8,20 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using TMPro;
     using KitchenDesign.Events;
+    using KitchenDesign.Server;
+    using KitchenDesign.Scriptables;
 
     public class SignUpUI : Menu
     {
+        private ServerClient _server;
+        private AppOptionsSO _options;
+
+        public void Initialize(ServerClient server, AppOptionsSO options)
+        {
+            this._server = server;
+            this._options = options;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -178,9 +189,9 @@ namespace KitchenDesign
                 contactUrl = contactInfo;
             }
 
-            ProFitGlobals.server.Accounts.SignUp(
+            this._server.Accounts.SignUp(
                 userType:           m_SignUpUserType,
-                userFilter:         ProFitGlobals.appOptions.userFilter,
+                userFilter:         this._options.userFilter,
                 businessName:       m_BusinessNameField.text,
                 contactFirstName:   m_FirstNameField.text,
                 contactLastName:    m_LastNameField.text,

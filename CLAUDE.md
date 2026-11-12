@@ -1661,6 +1661,14 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     manufacturer toggle), `ActiveMeasure` (a measure and its label pivot, (0.5, 0.5) unless shifted
     to keep labels from overlapping, independent of the screen resolution). No asset file changed
     (scripts bind by GUID, the enums are stored as ints).
+  - **Menu screens get their systems** (B5.3c2): `MenuNavigationControl.Initialize` first hands
+    every screen it holds only the systems it reads (session, client list, catalog data, server,
+    options, rules) plus its prompts, then runs the menu's start-up; `PlatformSetupControl` uses
+    the `AppSystems` it is given. Still on `ProFitGlobals` in the menu, on purpose: reads in
+    `Awake`/`OnEnable` (the skin in `MainUI`, `HomeUI`, `WelcomeUI` and the views: they run before
+    any initializer; they go with the UI Toolkit rewrite), `ClientListUI`'s row-count property,
+    `ManufacturerWhitelistRow` (rows made at runtime), `QuickLogInWidget` (editor sign-in helper,
+    not held by the navigation) and `TrialCountdownUI` (also in the designer, B5.4).
   - `MenuPreferenceKeys` (B5.3b): the `PlayerPrefs` key for "always landscape on mobile",
     written as the literal `"MainUI.AlwaysLandscapeOnMobile"` (it was `nameof(MainUI) + …`):
     devices already store it under that name, so it must not follow a class rename.

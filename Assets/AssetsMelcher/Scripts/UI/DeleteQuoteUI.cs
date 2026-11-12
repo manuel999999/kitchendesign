@@ -5,12 +5,25 @@ namespace KitchenDesign
     using UnityEngine;
     using MEC;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
+    using KitchenDesign.Server;
 
     /// <summary>
     /// The prompt that shows up to confirm the user wants to delete a quote.
     /// </summary>
     public class DeleteQuoteUI : MelcherUI
     {
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
+
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server)
+        {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -41,12 +54,12 @@ namespace KitchenDesign
         {
             base.DoShow();
 
-            if (!ProFitGlobals.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
+            if (!this._clientList.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
             {
                 return;
             }
 
-            string quoteName = ProFitGlobals.userClients[clientIndex].quotes[quoteIndex].saveName;
+            string quoteName = this._clientList.UserClients[clientIndex].quotes[quoteIndex].saveName;
             m_QuoteNameLabel.phrase = quoteName;
             m_MessageBox.Clear();
 
@@ -67,8 +80,8 @@ namespace KitchenDesign
             m_MessageBox.Clear();
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-            ProFitGlobals.server.Quotes.DeleteQuote(
-                ProFitGlobals.user,
+            this._server.Quotes.DeleteQuote(
+                this._session.User,
                 m_QuoteId,
                 onSuccess: () =>
                 {
@@ -77,13 +90,13 @@ namespace KitchenDesign
 
                     Hide();
 
-                    if (!ProFitGlobals.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
+                    if (!this._clientList.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
                     {
                         return;
                     }
 
                     // Remove the quote from the client's quote list
-                    ProFitGlobals.userClients[clientIndex].quotes.RemoveAt(quoteIndex);
+                    this._clientList.UserClients[clientIndex].quotes.RemoveAt(quoteIndex);
                     // Refresh the client list
                     MelcherLog.LogEditorOnly($"Removed quote ID {m_QuoteId} from client #{m_ClientId}");
                     EventMenu.OnClientQuoteListRefreshRequested.Raise();

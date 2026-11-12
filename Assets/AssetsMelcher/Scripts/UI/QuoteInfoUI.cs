@@ -5,12 +5,24 @@ namespace KitchenDesign
     using UnityEngine;
     using TMPro;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     /// <summary>
     /// The prompt that shows up when a user tries to rename a quote.
     /// </summary>
     public class QuoteInfoUI : MelcherUI
     {
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
+
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server)
+        {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -44,12 +56,12 @@ namespace KitchenDesign
             // Clear the old messages
             m_MessageBox.Clear();
 
-            if (!ProFitGlobals.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
+            if (!this._clientList.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
             {
                 return;
             }
 
-            UserClientQuote quote = ProFitGlobals.userClients[clientIndex].quotes[quoteIndex];
+            UserClientQuote quote = this._clientList.UserClients[clientIndex].quotes[quoteIndex];
 
             m_QuoteNameField.text = quote.saveName;
 
@@ -68,7 +80,7 @@ namespace KitchenDesign
 
             // TODO: it would be better if this class and DeleteQuoteUI didn't
             // access the globals
-            ProFitGlobals.activeQuoteId = null;
+            this._clientList.ActiveQuoteId = null;
         }
 
         protected void OnClickRename(MelcherButton caller)
@@ -76,16 +88,16 @@ namespace KitchenDesign
             m_MessageBox.Clear();
 
 
-            if (!ProFitGlobals.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
+            if (!this._clientList.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
             {
                 return;
             }
 
-            UserClientQuote quote = ProFitGlobals.userClients[clientIndex].quotes[quoteIndex];
+            UserClientQuote quote = this._clientList.UserClients[clientIndex].quotes[quoteIndex];
 
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
-            ProFitGlobals.server.Quotes.UpdateQuote(
-                ProFitGlobals.user,
+            this._server.Quotes.UpdateQuote(
+                this._session.User,
                 m_ClientId,
                 m_QuoteId,
                 m_QuoteNameField.text,
@@ -101,12 +113,12 @@ namespace KitchenDesign
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_MessageBox.Clear();
 
-                    if (!ProFitGlobals.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
+                    if (!this._clientList.TryGetClientAndQuoteIndex(m_ClientId, m_QuoteId, out int clientIndex, out int quoteIndex))
                     {
                         return;
                     }
 
-                    ProFitGlobals.userClients[clientIndex].quotes[quoteIndex] = newQuote;
+                    this._clientList.UserClients[clientIndex].quotes[quoteIndex] = newQuote;
 
                     Hide();
                 },

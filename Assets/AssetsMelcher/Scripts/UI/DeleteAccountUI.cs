@@ -6,6 +6,8 @@ namespace KitchenDesign
     using TMPro;
     using MEC;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
+    using KitchenDesign.Server;
 
     /// <summary>
     /// The prompt that shows up to confirm the user wants to delete their
@@ -13,6 +15,15 @@ namespace KitchenDesign
     /// </summary>
     public class DeleteAccountUI : MelcherUI
     {
+        private SessionStatus _session;
+        private ServerClient _server;
+
+        public void Initialize(SessionStatus session, ServerClient server)
+        {
+            this._session = session;
+            this._server = server;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -47,7 +58,7 @@ namespace KitchenDesign
             // Disable the delete button until the user enters some kind of password
             m_DeleteButton.interactable = false;
 
-            m_AccountEmailLabel.phrase = ProFitGlobals.userProfile.signInEmail;
+            m_AccountEmailLabel.phrase = this._session.UserProfile.signInEmail;
             m_MessageBox.Clear();
         }
 
@@ -65,8 +76,8 @@ namespace KitchenDesign
             m_MessageBox.Clear();
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-            ProFitGlobals.server.Accounts.DeleteAccount(
-                ProFitGlobals.user,
+            this._server.Accounts.DeleteAccount(
+                this._session.User,
                 m_PasswordInput.text,
                 onSuccess: () =>
                 {
@@ -75,7 +86,7 @@ namespace KitchenDesign
 
                     Hide();
 
-                    ProFitGlobals.LogOut();
+                    this._session.LogOut();
                     EventSession.OnWelcomeRequested.Raise();
                 },
                 onError: (builder, error, jsonValue) =>

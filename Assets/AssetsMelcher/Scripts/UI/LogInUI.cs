@@ -10,11 +10,24 @@ namespace KitchenDesign
     using TMPro;
     using UnityEngine;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
+    using KitchenDesign.Scriptables;
 
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 
     public class LogInUI : Menu
     {
+        private SessionStatus _session;
+        private ServerClient _server;
+        private AppOptionsSO _options;
+
+        public void Initialize(SessionStatus session, ServerClient server, AppOptionsSO options)
+        {
+            this._session = session;
+            this._server = server;
+            this._options = options;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -28,7 +41,7 @@ namespace KitchenDesign
         {
             m_MessageBox.Clear();
 
-            if (ProFitGlobals.logInCoroutineState == LogInState.Running)
+            if (this._session.LogInState == LogInState.Running)
             {
                 // The previous log in attempt still has a background task
                 // running.
@@ -42,7 +55,7 @@ namespace KitchenDesign
                 m_EmailField.text.Equals("guest", StringComparison.OrdinalIgnoreCase) &&
                 m_PasswordField.text.Equals("guest", StringComparison.OrdinalIgnoreCase);
 
-            ProFitGlobals.server.Accounts.LogIn(
+            this._server.Accounts.LogIn(
                 m_EmailField.text,
                 m_PasswordField.text,
                 offlineMode,
@@ -52,12 +65,12 @@ namespace KitchenDesign
 
             void OnLogInSuccess(User user)
             {
-                ProFitGlobals.user = user;
+                this._session.User = user;
 
                 EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting User Profile"));
 
                 // Get the user's profile
-                ProFitGlobals.server.Accounts.GetProfile(
+                this._server.Accounts.GetProfile(
                     user.apiToken,
                     offlineMode,
                     OnProfileSuccess,
@@ -79,7 +92,7 @@ namespace KitchenDesign
                     return;
                 }
 
-                if (userProfile.userFilter != ProFitGlobals.appOptions.userFilter)
+                if (userProfile.userFilter != this._options.userFilter)
                 {
                     ErrorHandler(
                         builder: null,
@@ -93,11 +106,11 @@ namespace KitchenDesign
                 // Copy the User Type back into the user object. This is
                 // convenient because then we can just pass our user object
                 // to web API calls and are able to handle guests.
-                User user = ProFitGlobals.user;
+                User user = this._session.User;
                 user.userType = userProfile.userType;
-                ProFitGlobals.user = user;
+                this._session.User = user;
 
-                ProFitGlobals.userProfile = userProfile;
+                this._session.UserProfile = userProfile;
 
                 // Show the Pay Now prompt if the user isn't valid
                 if (!userProfile.IsSubscriptionOrTrialActive())
@@ -117,7 +130,7 @@ namespace KitchenDesign
             // Verify the user has permission to use the app from the current
             // host
             string authorizedDomain =
-                Utility.UrlUtility.GetBaseDomain(ProFitGlobals.userProfile.authorizedDomain);
+                Utility.UrlUtility.GetBaseDomain(this._session.UserProfile.authorizedDomain);
 
             //MelcherLog.Log("user's authorized domain is: " + authorizedDomain, logLevel: MelcherLog.LogLevel.Always);
 
@@ -132,7 +145,7 @@ namespace KitchenDesign
                 //MelcherLog.Log("host is: " + host);
 
                 bool isWhitelisted =
-                    ProFitGlobals.server.Connection.WhitelistedEmbedDomains.Any(whitelistedDomain => host.EndsWith(whitelistedDomain, StringComparison.OrdinalIgnoreCase));
+                    this._server.Connection.WhitelistedEmbedDomains.Any(whitelistedDomain => host.EndsWith(whitelistedDomain, StringComparison.OrdinalIgnoreCase));
                 //MelcherLog.Log("is whitelisted: " + isWhitelisted, logLevel: MelcherLog.LogLevel.Always);
 
                 bool hasAuthorizedDomain = !string.IsNullOrEmpty(authorizedDomain);
@@ -152,7 +165,7 @@ namespace KitchenDesign
             }
 #endif  // if UNITY_WEBGL && !UNITY_EDITOR
 
-            Timing.RunCoroutine(ProFitGlobals.session.FinishLogInCoroutine(rememberMe, fetchClients: true, ErrorHandler));
+            Timing.RunCoroutine(this._session.FinishLogInCoroutine(rememberMe, fetchClients: true, ErrorHandler));
         }
 
         public void ClearForm()

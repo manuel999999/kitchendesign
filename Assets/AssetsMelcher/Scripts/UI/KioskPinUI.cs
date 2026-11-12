@@ -7,12 +7,20 @@ namespace KitchenDesign
     using System;
     using System.Collections.Generic;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     /// <summary>
     ///     The prompt that shows up to gate access to sensitive app screens.
     /// </summary>
     public class KioskPinUI : MelcherUI
     {
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         // ====================================================================
         // Constants
         // ====================================================================
@@ -181,7 +189,7 @@ namespace KitchenDesign
 
         public void VerifyKioskPermission(Action onSuccess)
         {
-            if (!ProFitGlobals.isKioskModeEnabled)
+            if (!this._session.IsKioskModeEnabled)
             {
                 onSuccess?.Invoke();
                 return;

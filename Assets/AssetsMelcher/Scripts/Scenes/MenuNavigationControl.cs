@@ -9,6 +9,8 @@ namespace KitchenDesign
 
     public class MenuNavigationControl : MelcherMonoBehaviour
     {
+        private AppSystems _systems;
+
         [SerializeField] private SortModeUI sortModePrompt;
         [SerializeField] private KioskPinUI kioskPinPrompt;
         [SerializeField] private EditUserProfileUI editProfilePrompt;
@@ -20,21 +22,34 @@ namespace KitchenDesign
 
         public void Initialize(AppSystems systems)
         {
-            m_ClientListUi.Initialize(this.sortModePrompt);
-            m_ClientQuoteListUi.Initialize(this.sortModePrompt);
-            m_ClientProfileUi.Initialize(this.editProfilePrompt);
-            m_UserProfileUi.Initialize(this.editProfilePrompt, this.multipleChoicePrompt, this.kioskPinPrompt);
-            m_ManufacturerWhitelistUi.Initialize(hasPendingChanges => this.SetMenuHasPendingChanges(m_ManufacturerWhitelistUi, hasPendingChanges));
+            this._systems = systems;
+
+            m_SignUpUi.Initialize(systems.Server, systems.Options);
+            m_LogInUi.Initialize(systems.Session, systems.Server, systems.Options);
+            m_ResetPasswordUi.Initialize(systems.Server);
+            m_DeleteAccountUi.Initialize(systems.Session, systems.Server);
+            m_PayNowUi.Initialize(systems.Session, systems.Server, systems.Options);
+            m_CreateClientUi.Initialize(systems.Session, systems.ClientList, systems.Server);
+            m_ClientListUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.sortModePrompt);
+            m_ClientProfileUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.editProfilePrompt);
+            m_DeleteClientUi.Initialize(systems.Session, systems.ClientList, systems.Server);
+            m_ClientQuoteListUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.sortModePrompt);
+            m_QuoteInfoUi.Initialize(systems.Session, systems.ClientList, systems.Server);
+            m_DeleteQuoteUi.Initialize(systems.Session, systems.ClientList, systems.Server);
+            m_UserProfileUi.Initialize(systems.Session, systems.Server, this.editProfilePrompt, this.multipleChoicePrompt, this.kioskPinPrompt);
+            m_ManufacturerWhitelistUi.Initialize(systems.Session, systems.CatalogData, systems.Server, systems.Options, systems.Rules, hasPendingChanges => this.SetMenuHasPendingChanges(m_ManufacturerWhitelistUi, hasPendingChanges));
+            m_UserLogOutPromptUi.Initialize(systems.Session);
+            this.kioskPinPrompt.Initialize(systems.Session);
 
             // Reset the last selected user and quote to avoid dangling
             // references to users who may not exist or be our own
-            ProFitGlobals.activeClientId = null;
-            ProFitGlobals.activeQuoteId = null;
-            ProFitGlobals.activeClientWantsToBeContacted = null;
+            this._systems.ClientList.ActiveClientId = null;
+            this._systems.ClientList.ActiveQuoteId = null;
+            this._systems.ClientList.ActiveClientWantsToBeContacted = null;
 
-            if (!string.IsNullOrEmpty(ProFitGlobals.user.apiToken))
+            if (!string.IsNullOrEmpty(this._systems.Session.User.apiToken))
             {
-                if (ProFitGlobals.userProfile.IsTrialActive())
+                if (this._systems.Session.UserProfile.IsTrialActive())
                 {
                     // Trial users see a countdown
                     this.ShowTrialUI();
@@ -58,7 +73,7 @@ namespace KitchenDesign
             }
 
             this.ShowFullScreenSpinner(true);
-            ProFitGlobals.ExecuteWhenReady(TryLogInWithSavedToken);
+            this._systems.CatalogData.ExecuteWhenLoaded(TryLogInWithSavedToken);
 
             void TryLogInWithSavedToken()
             {
@@ -66,7 +81,7 @@ namespace KitchenDesign
                 // log in screen
                 MelcherLog.LogEditorOnly("Trying to log in with session in PlayerPrefs");
                 this.SetSpinnerStatusMessage("Requesting User Profile");
-                ProFitGlobals.server.Accounts.GetProfile(
+                this._systems.Server.Accounts.GetProfile(
                     apiToken,
                     isOffline: false,
                     onSuccess: userProfile =>
@@ -80,14 +95,14 @@ namespace KitchenDesign
 
                         if (!userProfile.IsSubscriptionOrTrialActive())
                         {
-                            ProFitGlobals.ForgetRememberMeData();
+                            this._systems.Session.ForgetRememberMeData();
 
                             OnError(builder: null, new System.Exception("User is pending or isn't valid."), jsonValue: default);
                             return;
                         }
 
-                        ProFitGlobals.user = user;
-                        ProFitGlobals.userProfile = userProfile;
+                        this._systems.Session.User = user;
+                        this._systems.Session.UserProfile = userProfile;
 
                         m_LogInUi.FinishLogIn(rememberMe: true);
                     },
@@ -114,14 +129,14 @@ namespace KitchenDesign
 
             RefreshScreenOrientation();
 
-            ProFitGlobals.ExecuteWhenReady(OnGameDataReady);
+            this._systems.CatalogData.ExecuteWhenLoaded(OnGameDataReady);
         }
 
         protected void OnGameDataReady()
         {
 #if UNITY_EDITOR
             MelcherLog.LogWarningEditorOnly("Forcing white label mode to be off this session because the user is in the menu scene.");
-            ProFitGlobals.appOptions.simulateWhiteLabelMode = false;
+            this._systems.Options.simulateWhiteLabelMode = false;
 #endif  // if UNITY_EDITOR
         }
 

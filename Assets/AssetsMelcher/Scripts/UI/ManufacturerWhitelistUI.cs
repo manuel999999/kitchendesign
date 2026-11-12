@@ -8,6 +8,10 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.UI;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
+    using KitchenDesign.CatalogData;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Shared.Interfaces;
 
     /// <summary>
     /// Displays a manufacturer list for a dealer user to whitelist specific
@@ -17,10 +21,20 @@ namespace KitchenDesign
     /// </summary>
     public class ManufacturerWhitelistUI : Menu
     {
+        private SessionStatus _session;
+        private CatalogDataStatus _catalogData;
+        private ServerClient _server;
+        private AppOptionsSO _options;
+        private IAppRules _rules;
         private System.Action<bool> _setHasPendingChanges;
 
-        public void Initialize(System.Action<bool> setHasPendingChanges)
+        public void Initialize(SessionStatus session, CatalogDataStatus catalogData, ServerClient server, AppOptionsSO options, IAppRules rules, System.Action<bool> setHasPendingChanges)
         {
+            this._session = session;
+            this._catalogData = catalogData;
+            this._server = server;
+            this._options = options;
+            this._rules = rules;
             this._setHasPendingChanges = setHasPendingChanges;
         }
 
@@ -39,8 +53,8 @@ namespace KitchenDesign
             m_SelectedManufacturerIds.Clear();
             m_ManufacturerListEntries.Clear();
 
-            List<ManufacturerInfo> allManufactures = ProFitGlobals.manufacturers;
-            List<int> currentWhitelistIds = ProFitGlobals.userProfile.dealerSelectedManufacturerIds;
+            List<ManufacturerInfo> allManufactures = this._catalogData.Manufacturers;
+            List<int> currentWhitelistIds = this._session.UserProfile.dealerSelectedManufacturerIds;
 
             // Find mandatory options that are used for backsplash, bartop,
             // etc. and place into one list. (They are identified by having no
@@ -67,11 +81,11 @@ namespace KitchenDesign
             IEnumerable<ManufacturerInfo> availableManufacturers =
                 allManufactures.Where(x => !string.IsNullOrEmpty(x.name));
 
-            if (!ProFitGlobals.appRules.IncludesStollManufacturer)
+            if (!this._rules.IncludesStollManufacturer)
             {
                 // Find the manufacturer ID of Stoll as it may be filtered out from
                 // the list of all manufacturers in the next step.
-                if (ProFitGlobals.catalogData.FindManufacturerByName("Stoll", out ManufacturerInfo stoll))
+                if (this._catalogData.FindManufacturerByName("Stoll", out ManufacturerInfo stoll))
                 {
                     availableManufacturers =
                         availableManufacturers.Where(x => x.id != stoll.id);
@@ -108,13 +122,13 @@ namespace KitchenDesign
 
             m_ManufacturerIdToMarkupPercentages.Clear();
 
-            foreach (ManufacturerInfo manufacturer in ProFitGlobals.manufacturers)
+            foreach (ManufacturerInfo manufacturer in this._catalogData.Manufacturers)
             {
                 m_ManufacturerIdToMarkupPercentages[manufacturer.id] =
-                    ProFitGlobals.userProfile.GetMarkupPercentageForManufacturerId(manufacturer.id);
+                    this._session.UserProfile.GetMarkupPercentageForManufacturerId(manufacturer.id);
             }
 
-            m_SetMarkupForAllButton.gameObject.SetActive(ProFitGlobals.appOptions.allowDealerMarkupPercentChanges);
+            m_SetMarkupForAllButton.gameObject.SetActive(this._options.allowDealerMarkupPercentChanges);
 
             // We need to refresh the layout to ensure the accordion fills
             // the space left by the Set Markup For All button.
@@ -197,7 +211,7 @@ namespace KitchenDesign
             int manufacturerId = rowData.manufacturerId;
 
             IReadOnlyList<int> adminSelectedManufacturerIds =
-                ProFitGlobals.userProfile.adminSelectedManufacturerIds;
+                this._session.UserProfile.adminSelectedManufacturerIds;
 
             bool isRowInteractable = true;
 
@@ -209,7 +223,7 @@ namespace KitchenDesign
             }
 
             string manufacturerName = "<unknown>";
-            if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
+            if (this._catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
             {
                 manufacturerName = manufacturer.name;
             }
@@ -251,7 +265,7 @@ namespace KitchenDesign
             int manufacturerId =
                 m_ManufacturerListEntries[row.index].manufacturerId;
 
-            ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo);
+            this._catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo);
 
             decimal markupPercentage = 0.0m;
             m_ManufacturerIdToMarkupPercentages.TryGetValue(manufacturerId, out markupPercentage);
@@ -277,7 +291,7 @@ namespace KitchenDesign
                 markupPercentage: 0.0m,
                 newMarkupPercentage =>
                 {
-                    foreach (ManufacturerInfo manufacturer in ProFitGlobals.manufacturers)
+                    foreach (ManufacturerInfo manufacturer in this._catalogData.Manufacturers)
                     {
                         m_ManufacturerIdToMarkupPercentages[manufacturer.id] = newMarkupPercentage;
                     }
@@ -334,14 +348,14 @@ namespace KitchenDesign
             m_MessageBox.Clear();
 
             // Copy the current profile but override the manufacturer whitelist
-            UserProfile profileCopy = ProFitGlobals.userProfile;
+            UserProfile profileCopy = this._session.UserProfile;
             profileCopy.dealerSelectedManufacturerIds = new List<int>();
 
             // If a user selects no toggles we will treat that as allowing all
             // of them. This behaviour occurs elsewhere in the app (ToolbarUI)
             if (!m_AllowAllManufacturersToggle.isOn && m_SelectedManufacturerIds.Count > 0)
             {
-                List<ManufacturerInfo> allManufactures = ProFitGlobals.manufacturers;
+                List<ManufacturerInfo> allManufactures = this._catalogData.Manufacturers;
 
                 // First, add all the mandatory IDs
                 foreach (int id in m_MandatoryManufacturerIds)
@@ -373,8 +387,8 @@ namespace KitchenDesign
                 );
             }
 
-            ProFitGlobals.server.Accounts.UpdateProfile(
-                ProFitGlobals.user,
+            this._server.Accounts.UpdateProfile(
+                this._session.User,
                 profileCopy,
                 password: null,
                 confirmPassword: null,
@@ -383,11 +397,11 @@ namespace KitchenDesign
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
                     m_CanvasGroup.interactable = true;
 
-                    ProFitGlobals.userProfile = newUserProfile;
+                    this._session.UserProfile = newUserProfile;
 
-                    User user = ProFitGlobals.user;
+                    User user = this._session.User;
                     user.userType = newUserProfile.userType;
-                    ProFitGlobals.user = user;
+                    this._session.User = user;
 
                     this._setHasPendingChanges(false);
 

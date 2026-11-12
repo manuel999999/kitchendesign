@@ -11,14 +11,21 @@ namespace KitchenDesign
     using TMPro;
     using MEC;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     /// <summary>
     /// Handles displaying the list of client's quotes/designs.
     /// </summary>
     public class ClientQuoteListUI : Menu
     {
-        public void Initialize(SortModeUI sortModePrompt)
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server, SortModeUI sortModePrompt)
         {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
             m_QuoteList.Initialize(sortModePrompt);
         }
 
@@ -81,25 +88,25 @@ namespace KitchenDesign
         {
             base.DoShow();
 
-            int clientId = ProFitGlobals.activeClientId.Value;
-            int clientIndex = ProFitGlobals.userClients.FindIndex(
+            int clientId = this._clientList.ActiveClientId.Value;
+            int clientIndex = this._clientList.UserClients.FindIndex(
                 x => x.id == clientId
             );
 
             // Use a row index of -1 to avoid the ClientListUI handling our
             // row's onInfoClick events
-            m_ClientRow.SetFields(ProFitGlobals.userClients[clientIndex], rowIndex: -1);
+            m_ClientRow.SetFields(this._clientList.UserClients[clientIndex], rowIndex: -1);
         }
 
         protected void FetchList(MelcherButton caller)
         {
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-            int clientId = ProFitGlobals.activeClientId.Value;
+            int clientId = this._clientList.ActiveClientId.Value;
 
             // Refetch the client to get their quote list
-            ProFitGlobals.server.Clients.GetClient(
-                ProFitGlobals.user,
+            this._server.Clients.GetClient(
+                this._session.User,
                 clientId,
                 onSuccess: OnSuccess,
                 onError: (builder, error, jsonValue) =>
@@ -112,13 +119,13 @@ namespace KitchenDesign
             {
                 EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                int clientIndex = ProFitGlobals.userClients.FindIndex(x => x.id == clientId);
+                int clientIndex = this._clientList.UserClients.FindIndex(x => x.id == clientId);
                 if (clientIndex < 0)
                 {
                     return;
                 }
 
-                ProFitGlobals.userClients[clientIndex] = client;
+                this._clientList.UserClients[clientIndex] = client;
 
                 FilterList();
 
@@ -151,13 +158,13 @@ namespace KitchenDesign
             m_ActiveClientQuotes = null;
             m_ActiveClientQuoteDateTimes.Clear();
 
-            int clientId = ProFitGlobals.activeClientId.Value;
-            int clientIndex = ProFitGlobals.userClients.FindIndex(
+            int clientId = this._clientList.ActiveClientId.Value;
+            int clientIndex = this._clientList.UserClients.FindIndex(
                 x => x.id == clientId
             );
             if (clientIndex >= 0)
             {
-                m_ActiveClientQuotes = ProFitGlobals.userClients[clientIndex].quotes;
+                m_ActiveClientQuotes = this._clientList.UserClients[clientIndex].quotes;
             }
 
             if (m_ActiveClientQuotes != null)
@@ -263,7 +270,7 @@ namespace KitchenDesign
                 EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
                 EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                while (ProFitGlobals.logInCoroutineState != LogInState.Finished)
+                while (this._session.LogInState != LogInState.Finished)
                 {
                     yield return Timing.WaitForOneFrame;
                 }
@@ -292,7 +299,7 @@ namespace KitchenDesign
         {
             if (row == m_ClientRow)
             {
-                EventMenu.OnClientInfoRequested.Raise(new ClientInfo(ProFitGlobals.activeClientId.Value));
+                EventMenu.OnClientInfoRequested.Raise(new ClientInfo(this._clientList.ActiveClientId.Value));
             }
         }
 
@@ -300,17 +307,17 @@ namespace KitchenDesign
         {
             int quoteIndex = m_FilteredQuoteIndices[row.index];
             int quoteId = m_ActiveClientQuotes[quoteIndex].id;
-            EventMenu.OnQuoteInfoRequested.Raise(new ClientQuoteInfo(ProFitGlobals.activeClientId.Value, quoteId));
+            EventMenu.OnQuoteInfoRequested.Raise(new ClientQuoteInfo(this._clientList.ActiveClientId.Value, quoteId));
         }
 
         protected void OpenPdf(QuoteListRow row)
         {
             int quoteIndex = m_FilteredQuoteIndices[row.index];
             string pdfEndpoint = m_ActiveClientQuotes[quoteIndex].pdfEndpoint;
-            string pdfUrl = ProFitGlobals.server.Connection.Host + pdfEndpoint;
+            string pdfUrl = this._server.Connection.Host + pdfEndpoint;
             MelcherLog.LogVerbose(
                 $"Opening PDF url: {pdfUrl}\n" +
-                $"Host: {ProFitGlobals.server.Connection.Host}\n" +
+                $"Host: {this._server.Connection.Host}\n" +
                 $"Endpoint: {m_ActiveClientQuotes[quoteIndex].pdfEndpoint}"
             );
             pdfUrl = Uri.EscapeUriString(pdfUrl);
@@ -326,13 +333,13 @@ namespace KitchenDesign
                 EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
                 EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                while (ProFitGlobals.logInCoroutineState != LogInState.Finished)
+                while (this._session.LogInState != LogInState.Finished)
                 {
                     yield return Timing.WaitForOneFrame;
                 }
 
                 int quoteIndex = m_FilteredQuoteIndices[row.index];
-                ProFitGlobals.activeQuoteId = m_ActiveClientQuotes[quoteIndex].id;
+                this._clientList.ActiveQuoteId = m_ActiveClientQuotes[quoteIndex].id;
 
                 MelcherSceneManager.LoadSceneAsync(
                     MelcherSceneRequest.FromName("DesignerScene"),

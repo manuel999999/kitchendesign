@@ -8,14 +8,21 @@ namespace KitchenDesign
     using UnityEngine;
     using TMPro;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     /// <summary>
     /// Handles displaying the list of client entries.
     /// </summary>
     public class ClientListUI : Menu
     {
-        public void Initialize(SortModeUI sortModePrompt)
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server, SortModeUI sortModePrompt)
         {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
             m_ClientList.Initialize(sortModePrompt);
         }
 
@@ -65,8 +72,8 @@ namespace KitchenDesign
         {
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-            ProFitGlobals.server.Clients.GetClientList(
-                ProFitGlobals.user,
+            this._server.Clients.GetClientList(
+                this._session.User,
                 onSuccess: OnSuccess,
                 onError: (request, error, jsonValue) =>
                 {
@@ -77,7 +84,7 @@ namespace KitchenDesign
             void OnSuccess(List<UserClient> clientList)
             {
                 EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
-                ProFitGlobals.userClients = clientList;
+                this._clientList.UserClients = clientList;
 
                 FilterList();
 
@@ -107,7 +114,7 @@ namespace KitchenDesign
                 .Where(word => !string.IsNullOrEmpty(word))
                 .ToArray();
 
-            List<UserClient> allClients = ProFitGlobals.userClients;
+            List<UserClient> allClients = this._clientList.UserClients;
 
             bool HasSubstring(string haystack, string needle)
             {
@@ -165,8 +172,8 @@ namespace KitchenDesign
         protected int AscendingNameSort(int index1, int index2)
         {
             int compare = string.Compare(
-                ProFitGlobals.userClients[index1].lastName,
-                ProFitGlobals.userClients[index2].lastName,
+                this._clientList.UserClients[index1].lastName,
+                this._clientList.UserClients[index2].lastName,
                 System.StringComparison.OrdinalIgnoreCase
             );
             if (compare != 0)
@@ -175,8 +182,8 @@ namespace KitchenDesign
             }
 
             compare = string.Compare(
-                ProFitGlobals.userClients[index1].firstName,
-                ProFitGlobals.userClients[index2].firstName,
+                this._clientList.UserClients[index1].firstName,
+                this._clientList.UserClients[index2].firstName,
                 System.StringComparison.OrdinalIgnoreCase
             );
             if (compare != 0)
@@ -185,16 +192,16 @@ namespace KitchenDesign
             }
 
             return string.Compare(
-                ProFitGlobals.userClients[index1].email,
-                ProFitGlobals.userClients[index2].email,
+                this._clientList.UserClients[index1].email,
+                this._clientList.UserClients[index2].email,
                 System.StringComparison.OrdinalIgnoreCase
             );
         }
 
         protected int AscendingDateSort(int index1, int index2)
         {
-            int id1 = ProFitGlobals.userClients[index1].id;
-            int id2 = ProFitGlobals.userClients[index2].id;
+            int id1 = this._clientList.UserClients[index1].id;
+            int id2 = this._clientList.UserClients[index2].id;
             return id1.CompareTo(id2);
         }
 
@@ -213,7 +220,7 @@ namespace KitchenDesign
             if (item.TryGetComponent(out ClientListRow row))
             {
                 int clientIndex = m_FilteredClientList[itemIndex];
-                row.SetFields(ProFitGlobals.userClients[clientIndex], itemIndex);
+                row.SetFields(this._clientList.UserClients[clientIndex], itemIndex);
             }
         }
 
@@ -223,7 +230,7 @@ namespace KitchenDesign
             if (row.rowIndex >= 0)
             {
                 int clientIndex = m_FilteredClientList[row.rowIndex];
-                int clientId = ProFitGlobals.userClients[clientIndex].id;
+                int clientId = this._clientList.UserClients[clientIndex].id;
                 EventMenu.OnClientInfoRequested.Raise(new ClientInfo(clientId));
             }
         }
@@ -233,8 +240,8 @@ namespace KitchenDesign
             if (row.rowIndex >= 0)
             {
                 int clientIndex = m_FilteredClientList[row.rowIndex];
-                int clientId = ProFitGlobals.userClients[clientIndex].id;
-                ProFitGlobals.activeClientId = clientId;
+                int clientId = this._clientList.UserClients[clientIndex].id;
+                this._clientList.ActiveClientId = clientId;
                 EventMenu.OnClientQuoteListRequested.Raise();
             }
         }

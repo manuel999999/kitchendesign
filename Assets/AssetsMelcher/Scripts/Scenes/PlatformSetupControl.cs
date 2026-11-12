@@ -14,13 +14,17 @@ namespace KitchenDesign
     /// </summary>
     public class PlatformSetupControl : MelcherMonoBehaviour
     {
+        private AppSystems _systems;
+
         // ====================================================================
         // Methods
         // ====================================================================
 
         public void Initialize(AppSystems systems)
         {
-            ProFitGlobals.ExecuteWhenReady(OnGlobalsReady);
+            this._systems = systems;
+
+            this._systems.CatalogData.ExecuteWhenLoaded(OnGlobalsReady);
         }
 
         private void OnEnable()
@@ -64,7 +68,7 @@ namespace KitchenDesign
                 // To make development easier, there is an option to simulate
                 // white label mode in the editor set in ProFitAppOptions.
 
-                string webDomainOfApp = ProFitGlobals.launchOptions.GetWebDomainOfApp();
+                string webDomainOfApp = this._systems.LaunchOptions.GetWebDomainOfApp();
 
                 MelcherLog.Log(
                     "webDomainOfApp: " + webDomainOfApp,
@@ -72,7 +76,7 @@ namespace KitchenDesign
                 );
 
                 string distributorUrlParameter =
-                    ProFitGlobals.launchOptions.GetDistributorUrlParameter();
+                    this._systems.LaunchOptions.GetDistributorUrlParameter();
 
                 MelcherLog.Log(
                     "distributorUrlParameter: " + distributorUrlParameter,
@@ -84,7 +88,7 @@ namespace KitchenDesign
                     // Check if the distributor is setup for white labeling.
 
                     MelcherWebCoroutine request =
-                        ProFitGlobals.server.Accounts.CheckWhiteLabelAuthorization(
+                        this._systems.Server.Accounts.CheckWhiteLabelAuthorization(
                             webDomainOfApp,
                             distributorUrlParameter,
                             onSuccess: newUser =>
@@ -109,18 +113,18 @@ namespace KitchenDesign
                     // Bypass authorization by simulating offline mode
 
                     string fieldName =
-                        $"{nameof(ProFitGlobals)}.{nameof(ProFitGlobals.appOptions)}";
+                        $"{nameof(ProFitGlobals)}.{nameof(this._systems.Options)}";
 
                     MelcherLog.LogWarning(
                         $"The simulated white label options provided in " +
                         $"{MelcherFormat.ConsoleFieldName(fieldName)} are" +
                         $"out-of-date. White label mode will still be " +
                         $"simulated using an offline user.",
-                        context: ProFitGlobals.appOptions
+                        context: this._systems.Options
                     );
 
                     MelcherWebCoroutine request =
-                        ProFitGlobals.server.Accounts.LogIn(
+                        this._systems.Server.Accounts.LogIn(
                             signInEmail: "",
                             password: "",
                             isOffline: true,
@@ -146,7 +150,7 @@ namespace KitchenDesign
                     m_LoadingUi.Show();
 
                     MelcherWebCoroutine request =
-                        ProFitGlobals.server.Accounts.GetProfile(
+                        this._systems.Server.Accounts.GetProfile(
                             pendingUser.Value.apiToken,
                             isOffline: pendingUser.Value.userType == UserType.Offline,
                             onSuccess: newUserProfile =>
@@ -165,20 +169,20 @@ namespace KitchenDesign
 
                     string userPref = "User/{pendingUser.Value.id}/isKioskModeEnabled";
 
-                    ProFitGlobals.isKioskModeEnabled = PlayerPrefs.GetInt(userPref) != 0;
+                    this._systems.Session.IsKioskModeEnabled = PlayerPrefs.GetInt(userPref) != 0;
 
                     yield return Timing.WaitUntilDone(request);
                 }
 
 #if UNITY_EDITOR
                 if (pendingUserProfile.HasValue &&
-                    ProFitGlobals.appOptions.simulateWhiteLabelMode &&
+                    this._systems.Options.simulateWhiteLabelMode &&
                     pendingUserProfile.Value.isWhiteLabeled == false)
                 {
                     MelcherLog.LogWarning(
                         $"Forcing white mode on as it is requested in the" +
                         $"app options.",
-                        context: ProFitGlobals.appOptions
+                        context: this._systems.Options
                     );
 
                     UserProfile profileCopy = pendingUserProfile.Value;
@@ -194,21 +198,21 @@ namespace KitchenDesign
 
                 string sceneNameToLoad = "MenuScene";
 
-                ProFitGlobals.useWhiteLabelMode =
+                this._systems.Session.UseWhiteLabelMode =
                     pendingUser.HasValue &&
                     pendingUserProfile.HasValue &&
                     pendingUserProfile.Value.isActive &&
                     pendingUserProfile.Value.isWhiteLabeled;
 
-                if (ProFitGlobals.useWhiteLabelMode)
+                if (this._systems.Session.UseWhiteLabelMode)
                 {
-                    ProFitGlobals.user = pendingUser.Value;
-                    ProFitGlobals.userProfile = pendingUserProfile.Value;
+                    this._systems.Session.User = pendingUser.Value;
+                    this._systems.Session.UserProfile = pendingUserProfile.Value;
 
                     sceneNameToLoad = "DesignerScene";
 
                     yield return Timing.WaitUntilDone(
-                        Timing.RunCoroutine(ProFitGlobals.session.FinishLogInCoroutine(rememberMe: false, fetchClients: false, ErrorHandler))
+                        Timing.RunCoroutine(this._systems.Session.FinishLogInCoroutine(rememberMe: false, fetchClients: false, ErrorHandler))
                     );
 
                     EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Loading 3D Designer"));

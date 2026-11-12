@@ -250,6 +250,12 @@ gets an `Initialize` with what it uses and stops reading `ProFitGlobals` (decisi
   prompt is WebGL-only code).
 - **B5.3c split (2026-11-12):** c1 hands the prompts over and deletes `EventBridge.Menu`; c2
   replaces the menu screens' `ProFitGlobals` reads with the systems handed in.
+- **B5.3c2 done 2026-11-12.** A script rewrote the reads of the 19 screens the navigation holds
+  (and the navigation's and `PlatformSetupControl`'s own), skipping `Awake`/`OnEnable`, and
+  generated each screen's `Initialize` parameters from what it reads; the navigation's calls are
+  generated too. What stays on `ProFitGlobals` is listed in CLAUDE.md ("Screens"). An editor-only
+  warning in `PlatformSetupControl` built from `nameof` now says `Options` for `appOptions`.
+  Compiles in the editor and as WebGL player scripts. **B5.3 is done.**
 - **B5.3c1 done 2026-11-12.** As in CLAUDE.md, "Events". Prompt screens lost their
   `EventBridge` subscriptions; `Finished`, `ShowKioskKeypad` and `VerifyKioskPermission` became
   public; the multiple-choice callback type is `Action<int?>`. Four references set on

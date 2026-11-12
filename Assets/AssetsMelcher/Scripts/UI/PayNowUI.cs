@@ -7,12 +7,25 @@ namespace KitchenDesign
     using UnityEngine;
     using MEC;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
+    using KitchenDesign.Scriptables;
 
     /// <summary>
     /// The prompt that shows up when a new user signs in.
     /// </summary>
     public class PayNowUI : MelcherUI
     {
+        private SessionStatus _session;
+        private ServerClient _server;
+        private AppOptionsSO _options;
+
+        public void Initialize(SessionStatus session, ServerClient server, AppOptionsSO options)
+        {
+            this._session = session;
+            this._server = server;
+            this._options = options;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -77,7 +90,7 @@ namespace KitchenDesign
             {
                 yield return Timing.WaitForSeconds(3.0f);
 
-                if (ProFitGlobals.user.userType == UserType.None)
+                if (this._session.User.userType == UserType.None)
                 {
                     // Break out. The user can delete their account on the
                     // Pay Now page so we need to hide it if that happens
@@ -85,9 +98,9 @@ namespace KitchenDesign
                 }
 
                 var getProfileRequest =
-                    ProFitGlobals.server.Accounts.GetProfile(
-                        ProFitGlobals.user.apiToken,
-                        isOffline: ProFitGlobals.user.userType == UserType.Offline,
+                    this._server.Accounts.GetProfile(
+                        this._session.User.apiToken,
+                        isOffline: this._session.User.userType == UserType.Offline,
                         onSuccess: (newUserProfile) =>
                         {
                             userProfile = newUserProfile;
@@ -106,7 +119,7 @@ namespace KitchenDesign
 
             if (userProfile.IsSubscriptionOrTrialActive())
             {
-                ProFitGlobals.userProfile = userProfile;
+                this._session.UserProfile = userProfile;
                 EventMenu.OnSignInRequested.Raise(new CredentialsInfo(m_Email, m_Password));
             }
         }
@@ -130,7 +143,7 @@ namespace KitchenDesign
 
         protected void OnPostProcessMessage(MelcherLocalizedText caller, ref string phrase)
         {
-            string appName = ProFitGlobals.appOptions.appDisplayName;
+            string appName = this._options.appDisplayName;
 
             phrase = phrase.Replace("%APPNAME%", appName);
         }

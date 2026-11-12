@@ -9,15 +9,20 @@ namespace KitchenDesign
     using TMPro;
     using System.Linq;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     public class UserProfileUI : Menu
     {
+        private SessionStatus _session;
+        private ServerClient _server;
         private EditUserProfileUI _editProfilePrompt;
         private EditUserProfileMultipleChoiceUI _multipleChoicePrompt;
         private KioskPinUI _kioskPinPrompt;
 
-        public void Initialize(EditUserProfileUI editProfilePrompt, EditUserProfileMultipleChoiceUI multipleChoicePrompt, KioskPinUI kioskPinPrompt)
+        public void Initialize(SessionStatus session, ServerClient server, EditUserProfileUI editProfilePrompt, EditUserProfileMultipleChoiceUI multipleChoicePrompt, KioskPinUI kioskPinPrompt)
         {
+            this._session = session;
+            this._server = server;
             this._editProfilePrompt = editProfilePrompt;
             this._multipleChoicePrompt = multipleChoicePrompt;
             this._kioskPinPrompt = kioskPinPrompt;
@@ -31,7 +36,7 @@ namespace KitchenDesign
         {
             //m_ScrollView.verticalNormalizedPosition = 1.0f; // Top
 
-            UserProfile userProfile = ProFitGlobals.userProfile;
+            UserProfile userProfile = this._session.UserProfile;
 
             // Only display the measurement units option when the user is not
             // forced to use inches.
@@ -52,7 +57,7 @@ namespace KitchenDesign
             m_StateLabel.phrase                 = userProfile.state;
             m_ZipCodeLabel.phrase               = userProfile.zipCode;
 
-            m_KioskModeToggle.SetIsOnWithoutNotify(ProFitGlobals.isKioskModeEnabled);
+            m_KioskModeToggle.SetIsOnWithoutNotify(this._session.IsKioskModeEnabled);
         }
 
         protected override void Awake()
@@ -128,8 +133,8 @@ namespace KitchenDesign
         {
             // Only show the dealers' controls if the user is a dealer
             m_DealerOnlyControls.gameObject.SetActive(
-                ProFitGlobals.user.userType == UserType.Dealer ||
-                    ProFitGlobals.user.userType == UserType.Offline
+                this._session.User.userType == UserType.Dealer ||
+                    this._session.User.userType == UserType.Offline
             );
 
             base.DoShow();
@@ -151,7 +156,7 @@ namespace KitchenDesign
                     {
                         MeasurementUnit chosenUnit = unitChoices[index.Value];
 
-                        UserProfile newProfile = ProFitGlobals.userProfile;
+                        UserProfile newProfile = this._session.UserProfile;
 
                         newProfile.preferredUnits = chosenUnit;
 
@@ -167,10 +172,10 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit business name?",
                 "Business Name",
-                ProFitGlobals.userProfile.businessName,
+                this._session.UserProfile.businessName,
                 onAccept: (newBusinessName, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.businessName = newBusinessName;
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -183,12 +188,12 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit contact's name?",
                 "Contact's First Name",
-                ProFitGlobals.userProfile.contactFirstName,
+                this._session.UserProfile.contactFirstName,
                 "Contact's Last Name",
-                ProFitGlobals.userProfile.contactLastName,
+                this._session.UserProfile.contactLastName,
                 onAccept: (newFirstName, newLastName) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.contactFirstName = newFirstName;
                     newProfile.contactLastName = newLastName;
 
@@ -202,11 +207,11 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit contact's name?",
                 "Contact's Phone Number",
-                PhoneNumber.Format(ProFitGlobals.userProfile.contactPhoneNumber),
+                PhoneNumber.Format(this._session.UserProfile.contactPhoneNumber),
                 contentType: TMP_InputField.ContentType.Custom,
                 onAccept: (newFormattedPhoneNumber, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.contactPhoneNumber = PhoneNumber.Unformat(newFormattedPhoneNumber);
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -219,11 +224,11 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 title: "Edit contact email or website?",
                 header1: "Contact Email or Website",
-                value1: ProFitGlobals.userProfile.contactInfo,
+                value1: this._session.UserProfile.contactInfo,
                 contentType: TMP_InputField.ContentType.EmailAddress,
                 onAccept: (newInfo, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
 
                     newProfile.contactInfo = newInfo;
 
@@ -237,11 +242,11 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit sign in email?",
                 "Sign In Email",
-                ProFitGlobals.userProfile.signInEmail,
+                this._session.UserProfile.signInEmail,
                 contentType: TMP_InputField.ContentType.EmailAddress,
                 onAccept: (newEmail, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.signInEmail = newEmail;
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -260,7 +265,7 @@ namespace KitchenDesign
                 contentType: TMP_InputField.ContentType.Password,
                 onAccept: (password, confirmPassword) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     UpdateProfile(newProfile, password, confirmPassword);
                 }
             );
@@ -271,10 +276,10 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit address?",
                 "Address",
-                ProFitGlobals.userProfile.address,
+                this._session.UserProfile.address,
                 onAccept: (newAddress, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.address = newAddress;
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -287,10 +292,10 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit city?",
                 "City",
-                ProFitGlobals.userProfile.city,
+                this._session.UserProfile.city,
                 onAccept: (newCity, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.city = newCity;
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -303,10 +308,10 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit state?",
                 "State",
-                ProFitGlobals.userProfile.state,
+                this._session.UserProfile.state,
                 onAccept: (newState, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.state = newState;
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -319,10 +324,10 @@ namespace KitchenDesign
             this._editProfilePrompt.SetContent(
                 "Edit zip code?",
                 "Zip Code",
-                ProFitGlobals.userProfile.zipCode,
+                this._session.UserProfile.zipCode,
                 onAccept: (newZipCode, _) =>
                 {
-                    UserProfile newProfile = ProFitGlobals.userProfile;
+                    UserProfile newProfile = this._session.UserProfile;
                     newProfile.zipCode = newZipCode;
 
                     UpdateProfile(newProfile, password: null, confirmPassword: null);
@@ -332,13 +337,13 @@ namespace KitchenDesign
 
         protected void ToggleKioskMode(IMelcherToggle caller)
         {
-            m_KioskModeToggle.SetIsOnWithoutNotify(ProFitGlobals.isKioskModeEnabled);
+            m_KioskModeToggle.SetIsOnWithoutNotify(this._session.IsKioskModeEnabled);
 
             this._kioskPinPrompt.ShowKioskKeypad(
                 onSuccess: () =>
                 {
-                    ProFitGlobals.isKioskModeEnabled = !ProFitGlobals.isKioskModeEnabled;
-                    m_KioskModeToggle.SetIsOnWithoutNotify(ProFitGlobals.isKioskModeEnabled);
+                    this._session.IsKioskModeEnabled = !this._session.IsKioskModeEnabled;
+                    m_KioskModeToggle.SetIsOnWithoutNotify(this._session.IsKioskModeEnabled);
                 }
             );
         }
@@ -352,8 +357,8 @@ namespace KitchenDesign
         {
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-            ProFitGlobals.server.Accounts.UpdateProfile(
-                ProFitGlobals.user,
+            this._server.Accounts.UpdateProfile(
+                this._session.User,
                 newProfile,
                 password,
                 confirmPassword,
@@ -361,7 +366,7 @@ namespace KitchenDesign
                 {
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                    ProFitGlobals.userProfile = newProfile;
+                    this._session.UserProfile = newProfile;
                     Refresh();
 
                     this._editProfilePrompt.Finished();

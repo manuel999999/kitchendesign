@@ -4,9 +4,17 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.Networking;
     using TMPro;
+    using KitchenDesign.Server;
 
     public class ResetPasswordUI : Menu
     {
+        private ServerClient _server;
+
+        public void Initialize(ServerClient server)
+        {
+            this._server = server;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -32,7 +40,7 @@ namespace KitchenDesign
 
         protected void TryResetPassword(MelcherButton caller)
         {
-            ProFitGlobals.server.Accounts.ResetPassword(
+            this._server.Accounts.ResetPassword(
                 m_EmailField.text,
                 OnSuccess,
                 OnError

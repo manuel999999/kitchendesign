@@ -8,13 +8,20 @@ namespace KitchenDesign
     using UnityEngine.UI;
     using TMPro;
     using KitchenDesign.Events;
+    using KitchenDesign.Session;
 
     public class ClientProfileUI : Menu
     {
+        private SessionStatus _session;
+        private ClientListStatus _clientList;
+        private ServerClient _server;
         private EditUserProfileUI _editProfilePrompt;
 
-        public void Initialize(EditUserProfileUI editProfilePrompt)
+        public void Initialize(SessionStatus session, ClientListStatus clientList, ServerClient server, EditUserProfileUI editProfilePrompt)
         {
+            this._session = session;
+            this._clientList = clientList;
+            this._server = server;
             this._editProfilePrompt = editProfilePrompt;
         }
 
@@ -31,9 +38,9 @@ namespace KitchenDesign
 
         public void Refresh()
         {
-            if (ProFitGlobals.TryGetClientIndex(m_ClientId, out int clientIndex))
+            if (this._clientList.TryGetClientIndex(m_ClientId, out int clientIndex))
             {
-                m_ClientProfile = ProFitGlobals.userClients[clientIndex];
+                m_ClientProfile = this._clientList.UserClients[clientIndex];
             }
             else
             {
@@ -214,19 +221,19 @@ namespace KitchenDesign
         {
             EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-            ProFitGlobals.server.Clients.UpdateClient(
-                ProFitGlobals.user,
+            this._server.Clients.UpdateClient(
+                this._session.User,
                 newProfile,
                 onSuccess: userClient =>
                 {
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                    if (!ProFitGlobals.TryGetClientIndex(m_ClientId, out int clientIndex))
+                    if (!this._clientList.TryGetClientIndex(m_ClientId, out int clientIndex))
                     {
                         return;
                     }
 
-                    ProFitGlobals.userClients[clientIndex] = userClient;
+                    this._clientList.UserClients[clientIndex] = userClient;
 
                     Refresh();
 
