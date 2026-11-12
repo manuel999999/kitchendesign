@@ -1021,8 +1021,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   the designer), `MenuScene` → `MenuNavigationControl` (`navigation`: every menu screen, the
   history, the prompts, screen orientation). The controls are the old scene scripts renamed in
   place (same GUID), on `MelcherMonoBehaviour` for the editor's `[MelcherFindComponent]` fill.
-  `DesignerScene`: root `DesignerSceneInitializer`; `DesignerScene` is still a state-machine
-  state until B5.4. The rest of both scenes is the old app's, except
+  `DesignerScene` → `DesignerScreensControl` (`screens`: the setup wizard, toolbar, navigation
+  and loading screens, the cabinet swap, back to the menu, the product overrides; B5.4a). No scene
+  uses the core package's state machine any more. `DesignerScreensControl` does the designer's
+  frame work in its own `Update` (the 3D selection click, the debug keys) and `LateUpdate`
+  (`Kitchen.LateTick`) with `[DefaultExecutionOrder(-10)]`, the order the state machine forwarded
+  them at, so they still run before ordinary scripts. The rest of both scenes is the old app's, except
   that `DesignerScene`'s root `Product Visual Content Loader` object is gone (B3.3; its job is
   `ProductVisualContentStatus`).
 - In the editor, playing any other build-list scene gets an `AppInitializer` from the prefab at
@@ -1057,8 +1061,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    `OnStateAdded` (the core package's state machine is subscribed first). Since B5.3b the
    menu-side scenes have no state: their start-up is the control's `Initialize`, called from the
    scene initializer, so it now runs after the load request's `onLoaded` callbacks (only the kick
-   prompt uses one, on the intermediate scene, with nothing listening either way). The designer's
-   start-up is still `DesignerScene.OnStateAdded` until B5.4.
+   prompt uses one, on the intermediate scene, with nothing listening either way). The designer
+   followed in B5.4a: `DesignerSceneInitializer` calls `DesignerScreensControl.Initialize`.
 
 ## Events
 - `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's

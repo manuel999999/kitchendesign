@@ -17148,6 +17148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5344002a5031d45508250806ac445a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: KitchenDesign::KitchenDesign.DesignerSceneInitializer
+  screens: {fileID: 1519661572}
 --- !u!4 &639643568
 Transform:
   m_ObjectHideFlags: 0

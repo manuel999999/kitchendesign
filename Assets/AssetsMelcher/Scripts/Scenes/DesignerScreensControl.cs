@@ -24,13 +24,14 @@ namespace KitchenDesign
     ///     kitchen and other components, and works to pass events between
     ///     them.
     /// </summary>
-    public class DesignerScene : MelcherStateMachineState
+    [DefaultExecutionOrder(-10)]
+    public class DesignerScreensControl : MelcherMonoBehaviour
     {
         // ====================================================================
         // Methods
         // ====================================================================
 
-        public override void OnStateAdded(IMelcherStateMachineState fromState)
+        public void Initialize(AppSystems systems)
         {
             // Hide the debug cuboid visualizations by default
             OccupantOccupiedCuboidVisualization.isVisible = false;
@@ -44,9 +45,8 @@ namespace KitchenDesign
             ProFitGlobals.ExecuteWhenReady(OnGameDataReady);
         }
 
-        public override MelcherEventChainResult OnStateEvent(object eventData)
+        private void Update()
         {
-            if (eventData == MelcherStateMachineBuiltInEvent.UnityUpdate)
             {
                 // Ensure there is only one async instance of this function at
                 // a time because it was originally synchronous and untested
@@ -97,12 +97,6 @@ namespace KitchenDesign
                 }
 #endif  // if UNITY_EDITOR
             }
-            else if (eventData == MelcherStateMachineBuiltInEvent.UnityLateUpdate)
-            {
-                m_Kitchen.LateTick();
-            }
-
-            return MelcherEventChainResult.Continue;
 
             static bool CheckKeyCombo(KeyCode key1, KeyCode key2)
             {
@@ -110,6 +104,11 @@ namespace KitchenDesign
                     (Input.GetKeyDown(key1) && Input.GetKey(key2)) ||
                     (Input.GetKeyDown(key2) && Input.GetKey(key1));
             }
+        }
+
+        private void LateUpdate()
+        {
+            m_Kitchen.LateTick();
         }
 
         private void Awake()
@@ -772,7 +771,7 @@ namespace KitchenDesign
 
         private UniTask? m_HandleOtherKitchenSelectionsTask;
 
-    }   // class DesignerScene
+    }   // class DesignerScreensControl
 
 }   // namespace KitchenDesign
 

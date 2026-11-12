@@ -308,6 +308,14 @@ gets an `Initialize` with what it uses and stops reading `ProFitGlobals` (decisi
 screens with the kitchen and what else they use; `DesignerScene` → `DesignerScreensControl` and the
 selection component. **`Kitchen.instance` is deleted** (the probes find the kitchen by type).
 
+- **B5.4 split (2026-11-12):** a, the start-up and frame work out of the state machine; b, the
+  selection click into its own component; c, the designer screens get `Initialize` with the kitchen
+  and their systems, and `Kitchen.instance` goes.
+- **B5.4a done 2026-11-12.** `DesignerScene` → `DesignerScreensControl` (same GUID), `OnStateAdded`
+  → `Initialize` (from `DesignerSceneInitializer`, reference set through the editor, +1 scene
+  line), `OnStateEvent`'s Update and LateUpdate branches → `Update`/`LateUpdate` with
+  `[DefaultExecutionOrder(-10)]`. Compiles in the editor and as WebGL player scripts.
+
 **B5.5 — `EventBridge.Designer` goes.** `KitchenEvents` (notifications), kitchen methods
 (commands), `EventDesigner` (screen requests), prompts handed over, per decision 3; the model,
 the screens, the cameras and the photo manager move to them. `EventBridge.cs` is deleted; the

@@ -838,7 +838,7 @@ namespace KitchenDesign.KitchenModel
         /// <summary>
         /// Create a 3D-cube to help visualize the space this occupant occupies.
         /// The cube is hidden by default and only becomes visible when a
-        /// key combination is pressed. See <see cref="DesignerScene.OnStateEvent"/>
+        /// key combination is pressed. See <see cref="DesignerScreensControl"/>
         /// for the key logic.
         /// </summary>
         protected void Debug_AttachSizeVisualizer(Occupant occupant)
