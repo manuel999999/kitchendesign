@@ -248,6 +248,24 @@ gets an `Initialize` with what it uses and stops reading `ProFitGlobals` (decisi
   checked for its old argument list (every welcome raise passed `Regress`). `EventBridge.Menu`
   keeps 8 delegates. Compiles in the editor and as WebGL player scripts (the unauthorized-domain
   prompt is WebGL-only code).
+- **B5.3b, prepared 2026-11-12, not run yet.** Design: `SplashScene` → `SplashVideoControl`,
+  `PlatformSetupScene` → `PlatformSetupControl`, `IntermediateDesignerToMenuScene` →
+  `MemoryFlushControl`, `MenuScene` → `MenuNavigationControl` (`git mv` with `.meta`, in place;
+  base `MelcherMonoBehaviour`, which only adds the editor's `[MelcherFindComponent]` fill, so it
+  keeps that; `OnStateAdded` → `Initialize`). A root `<Scene>SceneInitializer` (first sibling) in
+  each scene holds a serialized reference to its control and calls it; `MenuSceneInitializer`
+  gets `navigation`. The scene objects and references are made through the editor (an
+  `eval_file` with `EditorSceneManager` and `SerializedObject`), then the scenes saved.
+  `MenuScene.PlayerPref` → `MenuPreferenceKeys` with the literal `"MainUI.AlwaysLandscapeOnMobile"`
+  (devices store it; it must not follow a class rename). Checked before writing it: only
+  `DesignerScene` uses the state machine's `Update`/`LateUpdate` (B5.4); the only load with an
+  `onLoaded` callback is `DesignerScene.LoadMenuScene` (the kick prompt), whose callback fires on
+  the intermediate scene with nothing listening either way, so start-up running after the
+  callbacks (it moves from the state machine's `sceneLoaded` handler to `AppInitializer`'s) changes
+  nothing. The script and the area 5 maps (menu events, every screen's dependencies) are in
+  `GeminiBaseline/area5-map/` (outside the repo); read the script before running it. The mapping
+  workflow was stopped before the scene-script and designer-event maps finished; rerun those
+  parts for B5.4/B5.5.
 - **Found while mapping the menu (2026-11-12), kept as they are (decision 8):**
   1. A kick while in the designer never shows its prompt: the callback runs when the intermediate
      scene has loaded, before the menu exists, so nothing listens (`SessionStatus.KickUser`).

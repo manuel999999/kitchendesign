@@ -1655,6 +1655,15 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   products, apply boxes, render a camera to a PNG). Notes in `Tools/Cutouts/README.md`.
 
 ## Not built yet / handover
+- **Where we are (2026-11-12, the user's limit ran out mid-area).** New machine: Unity
+  6000.6.8f1 with the Web, iOS and Android modules installed; the editor's target is WebGL.
+  `GeminiBaseline/` (the old app's baseline and every earlier run) and `kitchendesign-held-back/`
+  aren't on this disk: ask the user to copy them from the old machine. Done today, each step
+  compiled and committed, behaviour checks deferred to the end of area 5 (user): the team ports
+  (`3d25da55`), B5.1, B5.2, B5.3a. Next: B5.3b (prepared, see the plan), then B5.3c, B5.4–B5.7,
+  then the deferred checks against `3d25da55`. Waiting on the user: whether to move the
+  per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
+  CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at
   `/Users/emmanuel/Documents/Unity/GeminiUpgradeTest/` is throwaway and can be deleted; its
   captures are in `Captures/` and `Assets/Captures/`. A real kitchen in the designer was not
