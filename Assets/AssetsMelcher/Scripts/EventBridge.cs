@@ -42,54 +42,6 @@ namespace KitchenDesign
     {
         public delegate void SetSpinnerStatusMessage(string statusMessage);
 
-        public static class Menu
-        {
-            public delegate void ShowSortModeHandler(Action<ListControllerSortMode> onChoose);
-            public static ShowSortModeHandler showSortModeUi;
-
-            public delegate void OnMultipleChoiceSelected(int? selectedIndex);
-            public delegate void ShowMultipleChoiceHandler(IEnumerable<string> choices, OnMultipleChoiceSelected onChoice, string title = "Choice");
-            public static ShowMultipleChoiceHandler showMultipleChoiceUi;
-
-            public delegate void ShowEditUserProfileUI(
-                string title,
-                string header1,
-                string value1,
-                string header2 = null,
-                string value2 = null,
-                TMPro.TMP_InputField.ContentType contentType = TMPro.TMP_InputField.ContentType.Standard,
-                TouchScreenKeyboardType keyboardType = TouchScreenKeyboardType.Default,
-                Action<string, string> onAccept = null);
-            public static ShowEditUserProfileUI showEditUserProfileUi;
-
-            public static Action<string> setEditUserProfileError;
-
-            public static Action hideEditUserProfileUi;
-
-            public delegate void KioskKeypadSuccessHandler(Action onSuccess);
-
-            /// <summary>
-            ///     Show the kiosk keypad. This always shows the keypad
-            ///     regardless of whether the user has kiosk mode enabled or
-            ///     not.
-            /// </summary>
-            public static KioskKeypadSuccessHandler showKioskKeypad;
-
-            /// <summary>
-            ///     Show the kiosk keypad, but only if kiosk mode is enabled.
-            /// </summary>
-            public static KioskKeypadSuccessHandler verifyKioskPermission;
-
-            public delegate void SetMenuHasPendingChangesHandler(MelcherUI menu, bool hasPendingChanges);
-            /// <summary>
-            ///     Mark a menu UI as having changes (and therefore the user
-            ///     should be prompted before it is closed).
-            /// </summary>
-            public static SetMenuHasPendingChangesHandler setMenuHasPendingChanges;
-
-        }   // class Menu
-
-
         /// <summary>
         /// Events for the Designer scene
         /// </summary>

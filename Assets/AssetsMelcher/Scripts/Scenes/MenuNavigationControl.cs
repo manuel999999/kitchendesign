@@ -9,12 +9,23 @@ namespace KitchenDesign
 
     public class MenuNavigationControl : MelcherMonoBehaviour
     {
+        [SerializeField] private SortModeUI sortModePrompt;
+        [SerializeField] private KioskPinUI kioskPinPrompt;
+        [SerializeField] private EditUserProfileUI editProfilePrompt;
+        [SerializeField] private EditUserProfileMultipleChoiceUI multipleChoicePrompt;
+
         // =====================================================================
         // Methods
         // =====================================================================
 
         public void Initialize(AppSystems systems)
         {
+            m_ClientListUi.Initialize(this.sortModePrompt);
+            m_ClientQuoteListUi.Initialize(this.sortModePrompt);
+            m_ClientProfileUi.Initialize(this.editProfilePrompt);
+            m_UserProfileUi.Initialize(this.editProfilePrompt, this.multipleChoicePrompt, this.kioskPinPrompt);
+            m_ManufacturerWhitelistUi.Initialize(hasPendingChanges => this.SetMenuHasPendingChanges(m_ManufacturerWhitelistUi, hasPendingChanges));
+
             // Reset the last selected user and quote to avoid dangling
             // references to users who may not exist or be our own
             ProFitGlobals.activeClientId = null;
@@ -116,7 +127,6 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            EventBridge.Menu.setMenuHasPendingChanges += SetMenuHasPendingChanges;
 
 
             EventSession.OnSpinnerMessageRequested.AddListener(this.OnSpinnerMessageRequested);
@@ -154,7 +164,6 @@ namespace KitchenDesign
 
         protected void OnDisable()
         {
-            EventBridge.Menu.setMenuHasPendingChanges -= SetMenuHasPendingChanges;
 
 
             EventSession.OnSpinnerMessageRequested.RemoveListener(this.OnSpinnerMessageRequested);
@@ -419,7 +428,7 @@ namespace KitchenDesign
 
         protected void ShowClientListUI()
         {
-            EventBridge.Menu.verifyKioskPermission?.Invoke(
+            this.kioskPinPrompt.VerifyKioskPermission(
                 onSuccess: () =>
                 {
                     MelcherUI currentUi = null;
@@ -486,7 +495,7 @@ namespace KitchenDesign
 
         protected void ShowUserProfileUI()
         {
-            EventBridge.Menu.verifyKioskPermission?.Invoke(
+            this.kioskPinPrompt.VerifyKioskPermission(
                 onSuccess: () =>
                 {
                     MelcherUI currentUi = null;

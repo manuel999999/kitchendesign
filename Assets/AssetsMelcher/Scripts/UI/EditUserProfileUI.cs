@@ -55,9 +55,6 @@ namespace KitchenDesign
             m_CancelButton.onClick += OnClickCancel;
             m_ApplyButton.onClick += OnClickApply;
 
-            EventBridge.Menu.showEditUserProfileUi += SetContent;
-            EventBridge.Menu.setEditUserProfileError += SetError;
-            EventBridge.Menu.hideEditUserProfileUi += Finished;
         }
 
         protected override void OnDisable()
@@ -67,12 +64,9 @@ namespace KitchenDesign
             m_CancelButton.onClick -= OnClickCancel;
             m_ApplyButton.onClick -= OnClickApply;
 
-            EventBridge.Menu.showEditUserProfileUi -= SetContent;
-            EventBridge.Menu.setEditUserProfileError -= SetError;
-            EventBridge.Menu.hideEditUserProfileUi -= Finished;
         }
 
-        protected void Finished()
+        public void Finished()
         {
             Hide();
         }

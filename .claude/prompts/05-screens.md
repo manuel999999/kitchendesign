@@ -248,6 +248,13 @@ gets an `Initialize` with what it uses and stops reading `ProFitGlobals` (decisi
   checked for its old argument list (every welcome raise passed `Regress`). `EventBridge.Menu`
   keeps 8 delegates. Compiles in the editor and as WebGL player scripts (the unauthorized-domain
   prompt is WebGL-only code).
+- **B5.3c split (2026-11-12):** c1 hands the prompts over and deletes `EventBridge.Menu`; c2
+  replaces the menu screens' `ProFitGlobals` reads with the systems handed in.
+- **B5.3c1 done 2026-11-12.** As in CLAUDE.md, "Events". Prompt screens lost their
+  `EventBridge` subscriptions; `Finished`, `ShowKioskKeypad` and `VerifyKioskPermission` became
+  public; the multiple-choice callback type is `Action<int?>`. Four references set on
+  `MenuNavigationControl` through the editor (MenuScene +4 lines). Compiles in the editor and as
+  WebGL player scripts.
 - **B5.3b done 2026-11-12** (run in the next session, as prepared). Scene objects and references were made through the editor; `MenuScene.unity` was reopened and saved in the same call, because saving it while it had been open in the editor wrote the layout groups' computed values (about 3,000 lines); left over: one `m_AnchoredSize` (-25 → -28) Unity recomputed on open. Compiles in the editor and as WebGL player scripts. Design: `SplashScene` → `SplashVideoControl`,
   `PlatformSetupScene` → `PlatformSetupControl`, `IntermediateDesignerToMenuScene` →
   `MemoryFlushControl`, `MenuScene` → `MenuNavigationControl` (`git mv` with `.meta`, in place;

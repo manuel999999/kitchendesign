@@ -47,8 +47,6 @@ namespace KitchenDesign
                 pinButton.onClick += OnClickPinButton;
             }
 
-            EventBridge.Menu.showKioskKeypad += ShowKioskKeypad;
-            EventBridge.Menu.verifyKioskPermission += VerifyKioskPermission;
         }
 
         protected override void OnDisable()
@@ -68,8 +66,6 @@ namespace KitchenDesign
                 pinButton.onClick -= OnClickPinButton;
             }
 
-            EventBridge.Menu.showKioskKeypad -= ShowKioskKeypad;
-            EventBridge.Menu.verifyKioskPermission -= VerifyKioskPermission;
         }
 
         protected override void DoShow()
@@ -176,16 +172,14 @@ namespace KitchenDesign
             m_MessageBox.Clear();
         }
 
-        /// <inheritdoc cref="EventBridge.Menu.showKioskKeypad"/>
-        protected void ShowKioskKeypad(Action onSuccess)
+        public void ShowKioskKeypad(Action onSuccess)
         {
             m_OnSuccessCallback = onSuccess;
 
             Show();
         }
 
-        /// <inheritdoc cref="EventBridge.Menu.verifyKioskPermission"/>
-        protected void VerifyKioskPermission(Action onSuccess)
+        public void VerifyKioskPermission(Action onSuccess)
         {
             if (!ProFitGlobals.isKioskModeEnabled)
             {

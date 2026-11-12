@@ -14,6 +14,11 @@ namespace KitchenDesign
     /// </summary>
     public class ClientListUI : Menu
     {
+        public void Initialize(SortModeUI sortModePrompt)
+        {
+            m_ClientList.Initialize(sortModePrompt);
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================

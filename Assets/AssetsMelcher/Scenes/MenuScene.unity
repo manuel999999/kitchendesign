@@ -25083,6 +25083,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4091d7f032e4fae238a744675120f89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortModePrompt: {fileID: 1460145805}
+  kioskPinPrompt: {fileID: 1332845975}
+  editProfilePrompt: {fileID: 1473856691}
+  multipleChoicePrompt: {fileID: 250401314}
   m_FullScreenLoadingUi: {fileID: 1677284580}
   m_BackgroundLoadingUi: {fileID: 44735835}
   m_MainUi: {fileID: 513131575}

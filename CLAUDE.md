@@ -1098,9 +1098,14 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   quote info and delete quote (`ClientQuoteInfo`), user profile, manufacturer whitelist, log-out
   prompt, back, screen orientation (mobile only), quit prompt (standalone only). One listener
   each. `MenuScene`'s own start-up calls its handlers directly instead of raising.
-- `EventBridge.Menu` keeps only the prompts that answer through a callback (sort mode, multiple
-  choice, edit profile field with its error and hide replies, kiosk keypad and permission) and
-  `setMenuHasPendingChanges`, until B5.3c hands them to the screens that use them.
+- `EventBridge.Menu` is gone (B5.3c1). The prompts that answer through a callback are handed to
+  the screens that open them: `MenuNavigationControl` holds the sort-mode, kiosk PIN, edit-profile
+  and multiple-choice prompts (serialized) and, first thing in its `Initialize`, gives the sort
+  prompt to the client and quote lists (their `ListController`), the edit prompt to the client
+  profile, and the edit, multiple-choice and kiosk prompts to the user profile; it uses the kiosk
+  prompt itself to guard the client list and the profile. The manufacturer whitelist gets a
+  callback that marks it as having pending changes (it already held the edit prompt). Why not
+  events: the answers come back through callbacks and the payloads carry TMP and model types.
 - Everything else still goes through the old `EventBridge`.
 
 ## Key systems

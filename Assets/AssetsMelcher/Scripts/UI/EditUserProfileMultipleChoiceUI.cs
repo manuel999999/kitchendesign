@@ -17,7 +17,7 @@ namespace KitchenDesign
         // Methods
         // =====================================================================
 
-        public void SetupAndShow(IEnumerable<string> choices, EventBridge.Menu.OnMultipleChoiceSelected onChoose, string title)
+        public void SetupAndShow(IEnumerable<string> choices, Action<int?> onChoose, string title)
         {
             m_Title.phrase = title;
 
@@ -68,7 +68,6 @@ namespace KitchenDesign
         {
             base.OnEnable();
 
-            EventBridge.Menu.showMultipleChoiceUi += SetupAndShow;
 
             ComponentsInChildrenEnumerator<MelcherButton> choices =
                 new (m_MultipleChoiceListRoot);
@@ -85,7 +84,6 @@ namespace KitchenDesign
         {
             base.OnDisable();
 
-            EventBridge.Menu.showMultipleChoiceUi -= SetupAndShow;
 
             ComponentsInChildrenEnumerator<MelcherButton> choices =
                 new (m_MultipleChoiceListRoot);
@@ -137,7 +135,7 @@ namespace KitchenDesign
         // Non-serialized fields
         // =====================================================================
 
-        protected EventBridge.Menu.OnMultipleChoiceSelected m_Callback;
+        protected Action<int?> m_Callback;
 
     }   // class EditUserProfileMultipleChoiceUI
 

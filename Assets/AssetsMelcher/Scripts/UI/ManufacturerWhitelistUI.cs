@@ -17,6 +17,13 @@ namespace KitchenDesign
     /// </summary>
     public class ManufacturerWhitelistUI : Menu
     {
+        private System.Action<bool> _setHasPendingChanges;
+
+        public void Initialize(System.Action<bool> setHasPendingChanges)
+        {
+            this._setHasPendingChanges = setHasPendingChanges;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -169,7 +176,7 @@ namespace KitchenDesign
             m_ManufacturerListContentGroup.interactable = isUsingWhitelist;
             m_ManufacturerListAccordion.TweenUsingDuration(expand: isUsingWhitelist, duration: 0.6f);
 
-            EventBridge.Menu.setMenuHasPendingChanges(this, hasPendingChanges: true);
+            this._setHasPendingChanges(true);
         }
 
         protected void BindItem(RecyclingListViewItem item, int itemIndex)
@@ -236,7 +243,7 @@ namespace KitchenDesign
                 m_SelectedManufacturerIds.Remove(manufacturerId);
             }
 
-            EventBridge.Menu.setMenuHasPendingChanges(this, hasPendingChanges: true);
+            this._setHasPendingChanges(true);
         }
 
         protected void OnPriceMarkupButtonClicked(ManufacturerWhitelistRow row)
@@ -258,7 +265,7 @@ namespace KitchenDesign
 
                     m_ManufacturerList.Refresh(row.GetComponent<RecyclingListViewItem>());
 
-                    EventBridge.Menu.setMenuHasPendingChanges(this, hasPendingChanges: true);
+                    this._setHasPendingChanges(true);
                 }
             );
         }
@@ -277,14 +284,14 @@ namespace KitchenDesign
 
                     m_ManufacturerList.Refresh();
 
-                    EventBridge.Menu.setMenuHasPendingChanges(this, hasPendingChanges: true);
+                    this._setHasPendingChanges(true);
                 }
             );
         }
 
         protected void PromptForMarkupPercentage(string title, decimal markupPercentage, System.Action<decimal> onAccept)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            m_EditUserProfileUi.SetContent(
                 title,
                 header1: $"Price Markup %",
                 value1: markupPercentage.ToString(),
@@ -298,7 +305,7 @@ namespace KitchenDesign
                         newMarkupPercent < -MaxPriceMarkupPercent ||
                         newMarkupPercent > MaxPriceMarkupPercent)
                     {
-                        EventBridge.Menu.setEditUserProfileError($"Please enter a number between -{MaxPriceMarkupPercent} and +{MaxPriceMarkupPercent}.");
+                        m_EditUserProfileUi.SetError($"Please enter a number between -{MaxPriceMarkupPercent} and +{MaxPriceMarkupPercent}.");
                         return;
                     }
 
@@ -309,7 +316,7 @@ namespace KitchenDesign
                     if ((newMarkupPercent / PercentStep) % 1.0m != 0.0m)
                     {
                         // Input is too precise.
-                        EventBridge.Menu.setEditUserProfileError($"Please enter a number that is an increment of {PercentStep}.");
+                        m_EditUserProfileUi.SetError($"Please enter a number that is an increment of {PercentStep}.");
                         return;
                     }
 
@@ -382,7 +389,7 @@ namespace KitchenDesign
                     user.userType = newUserProfile.userType;
                     ProFitGlobals.user = user;
 
-                    EventBridge.Menu.setMenuHasPendingChanges(this, hasPendingChanges: false);
+                    this._setHasPendingChanges(false);
 
                     EventMenu.OnBackRequested.Raise();
                 },

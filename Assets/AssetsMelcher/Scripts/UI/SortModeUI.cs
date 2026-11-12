@@ -33,7 +33,6 @@ namespace KitchenDesign
         {
             base.OnEnable();
 
-            EventBridge.Menu.showSortModeUi += SetupAndShow;
 
             m_NameAscendingButton.onClick   += SortNameAscending;
             m_NameDescendingButton.onClick  += SortNameDescending;
@@ -47,7 +46,6 @@ namespace KitchenDesign
         {
             base.OnDisable();
 
-            EventBridge.Menu.showSortModeUi -= SetupAndShow;
 
             m_NameAscendingButton.onClick   -= SortNameAscending;
             m_NameDescendingButton.onClick  -= SortNameDescending;

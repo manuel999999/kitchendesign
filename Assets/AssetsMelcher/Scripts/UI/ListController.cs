@@ -12,6 +12,13 @@ namespace KitchenDesign
     /// </summary>
     public class ListController : MelcherMonoBehaviour
     {
+        private SortModeUI _sortModePrompt;
+
+        public void Initialize(SortModeUI sortModePrompt)
+        {
+            this._sortModePrompt = sortModePrompt;
+        }
+
         public event Action<string> onSearchChanged;
 
         public event Action<ListControllerSortMode> onSortModeChanged;
@@ -96,7 +103,7 @@ namespace KitchenDesign
 
         protected void ShowSortPrompt(MelcherButton caller)
         {
-            EventBridge.Menu.showSortModeUi.Invoke(EmitSortChangedEvent);
+            this._sortModePrompt.SetupAndShow(EmitSortChangedEvent);
         }
 
         protected void EmitSortChangedEvent(ListControllerSortMode sortMode)

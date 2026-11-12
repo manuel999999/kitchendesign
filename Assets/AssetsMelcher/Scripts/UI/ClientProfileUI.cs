@@ -11,6 +11,13 @@ namespace KitchenDesign
 
     public class ClientProfileUI : Menu
     {
+        private EditUserProfileUI _editProfilePrompt;
+
+        public void Initialize(EditUserProfileUI editProfilePrompt)
+        {
+            this._editProfilePrompt = editProfilePrompt;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -86,7 +93,7 @@ namespace KitchenDesign
 
         protected void ChangeClientName(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit client's name?",
                 "Client's First Name",
                 m_ClientProfile.firstName,
@@ -105,7 +112,7 @@ namespace KitchenDesign
 
         protected void ChangeClientPhoneNumber(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit client's phone number?",
                 "Client's Phone Number",
                 PhoneNumber.Format(m_ClientProfile.phoneNumber),
@@ -123,7 +130,7 @@ namespace KitchenDesign
 
         protected void ChangeClientEmail(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit contact's email?",
                 "Client's Email",
                 m_ClientProfile.email,
@@ -140,7 +147,7 @@ namespace KitchenDesign
 
         protected void ChangeAddress(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit address?",
                 "Address",
                 m_ClientProfile.address,
@@ -156,7 +163,7 @@ namespace KitchenDesign
 
         protected void ChangeCity(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit city?",
                 "City",
                 m_ClientProfile.city,
@@ -172,7 +179,7 @@ namespace KitchenDesign
 
         protected void ChangeState(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit state?",
                 "State",
                 m_ClientProfile.state,
@@ -188,7 +195,7 @@ namespace KitchenDesign
 
         protected void ChangeZipCode(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit zip code?",
                 "Zip Code",
                 m_ClientProfile.zipCode,
@@ -223,13 +230,13 @@ namespace KitchenDesign
 
                     Refresh();
 
-                    EventBridge.Menu.hideEditUserProfileUi.Invoke();
+                    this._editProfilePrompt.Finished();
                 },
                 onError: (builder, error, jsonValue) =>
                 {
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                    EventBridge.Menu.setEditUserProfileError.Invoke(error.Message);
+                    this._editProfilePrompt.SetError(error.Message);
                 }
             );
         }

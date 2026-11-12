@@ -12,6 +12,17 @@ namespace KitchenDesign
 
     public class UserProfileUI : Menu
     {
+        private EditUserProfileUI _editProfilePrompt;
+        private EditUserProfileMultipleChoiceUI _multipleChoicePrompt;
+        private KioskPinUI _kioskPinPrompt;
+
+        public void Initialize(EditUserProfileUI editProfilePrompt, EditUserProfileMultipleChoiceUI multipleChoicePrompt, KioskPinUI kioskPinPrompt)
+        {
+            this._editProfilePrompt = editProfilePrompt;
+            this._multipleChoicePrompt = multipleChoicePrompt;
+            this._kioskPinPrompt = kioskPinPrompt;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -132,9 +143,9 @@ namespace KitchenDesign
                         .Where(v => v != MeasurementUnit.None)
                 );
 
-            EventBridge.Menu.showMultipleChoiceUi.Invoke(
+            this._multipleChoicePrompt.SetupAndShow(
                 choices: unitChoices.Select(x => x.ToDisplayName()),
-                onChoice: (int? index) =>
+                onChoose: (int? index) =>
                 {
                     if (index.HasValue)
                     {
@@ -153,7 +164,7 @@ namespace KitchenDesign
 
         protected void ChangeBusinessName(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit business name?",
                 "Business Name",
                 ProFitGlobals.userProfile.businessName,
@@ -169,7 +180,7 @@ namespace KitchenDesign
 
         protected void ChangeContactName(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit contact's name?",
                 "Contact's First Name",
                 ProFitGlobals.userProfile.contactFirstName,
@@ -188,7 +199,7 @@ namespace KitchenDesign
 
         protected void ChangeContactPhoneNumber(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit contact's name?",
                 "Contact's Phone Number",
                 PhoneNumber.Format(ProFitGlobals.userProfile.contactPhoneNumber),
@@ -205,7 +216,7 @@ namespace KitchenDesign
 
         protected void ChangeContactInfo(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 title: "Edit contact email or website?",
                 header1: "Contact Email or Website",
                 value1: ProFitGlobals.userProfile.contactInfo,
@@ -223,7 +234,7 @@ namespace KitchenDesign
 
         protected void ChangeSignInEmail(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit sign in email?",
                 "Sign In Email",
                 ProFitGlobals.userProfile.signInEmail,
@@ -240,7 +251,7 @@ namespace KitchenDesign
 
         protected void ChangePassword(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit password?",
                 header1: "Password",
                 value1: "",
@@ -257,7 +268,7 @@ namespace KitchenDesign
 
         protected void ChangeAddress(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit address?",
                 "Address",
                 ProFitGlobals.userProfile.address,
@@ -273,7 +284,7 @@ namespace KitchenDesign
 
         protected void ChangeCity(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit city?",
                 "City",
                 ProFitGlobals.userProfile.city,
@@ -289,7 +300,7 @@ namespace KitchenDesign
 
         protected void ChangeState(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit state?",
                 "State",
                 ProFitGlobals.userProfile.state,
@@ -305,7 +316,7 @@ namespace KitchenDesign
 
         protected void ChangeZipCode(MelcherButton caller)
         {
-            EventBridge.Menu.showEditUserProfileUi.Invoke(
+            this._editProfilePrompt.SetContent(
                 "Edit zip code?",
                 "Zip Code",
                 ProFitGlobals.userProfile.zipCode,
@@ -323,7 +334,7 @@ namespace KitchenDesign
         {
             m_KioskModeToggle.SetIsOnWithoutNotify(ProFitGlobals.isKioskModeEnabled);
 
-            EventBridge.Menu.showKioskKeypad?.Invoke(
+            this._kioskPinPrompt.ShowKioskKeypad(
                 onSuccess: () =>
                 {
                     ProFitGlobals.isKioskModeEnabled = !ProFitGlobals.isKioskModeEnabled;
@@ -353,13 +364,13 @@ namespace KitchenDesign
                     ProFitGlobals.userProfile = newProfile;
                     Refresh();
 
-                    EventBridge.Menu.hideEditUserProfileUi.Invoke();
+                    this._editProfilePrompt.Finished();
                 },
                 onError: (request, error, jsonValue) =>
                 {
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
 
-                    EventBridge.Menu.setEditUserProfileError.Invoke(error.Message);
+                    this._editProfilePrompt.SetError(error.Message);
                 }
             );
         }
