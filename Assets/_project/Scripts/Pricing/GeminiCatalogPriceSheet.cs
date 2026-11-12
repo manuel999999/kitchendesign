@@ -147,7 +147,7 @@ namespace KitchenDesign.Pricing
                         JsonDict transitionPiece =
                             CreateManualPriceSheetEntry(
                                 productSku: "IM-45T-CN",
-                                productName: "OASIS\u2122 45\u00b0 Transition Piece",
+                                productName: "OASIS\u00AE 45\u00B0 Transition Piece",
                                 price: this._session.UserProfile.currency == Currency.CAD ?
                                     99.0f :
                                     109.0f
@@ -482,179 +482,11 @@ namespace KitchenDesign.Pricing
 
             if (this._selections.brandCatalog.ruleset == BrandCatalogRuleset.Challenger)
             {
-                if (this._selections.countertopFinish != null &&
-                    this._catalogData.FindManufacturerById(this._selections.countertopFinish.manufacturerId, out ManufacturerInfo countertopFinishManufacturer) &&
-                    this._catalogData.FindManufacturerByName(this._selections.brandCatalog.catalogName, out ManufacturerInfo challengerManufacturer) &&
-                    countertopFinishManufacturer.id == challengerManufacturer.id)
+                JsonDict countertopPricing = TryGetCountertopPricing(layout);
+
+                if(countertopPricing.ContainsKey("no_countertop") == false)
                 {
-                    const int ChallengerBrushedStainlessFinishId = 1960;
-
-                    List<ChallengerCountertopInfo> depthToPrice =
-                        this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
-                            new List<ChallengerCountertopInfo>()
-                            {
-                                new ()
-                                {
-                                    depthInInches = 13.0f,
-                                    sku = "SST-13",
-                                    description = "Countertop, 13\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 42.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 18.0f,
-                                    sku = "SST-18",
-                                    description = "Countertop, 18\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 55.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 29.0f,
-                                    sku = "SST-29",
-                                    description = "Countertop, 29\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 82.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 30.0f,
-                                    sku = "SST-30",
-                                    description = "Countertop, 30\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 86.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 33.0f,
-                                    sku = "SST-33",
-                                    description = "Countertop, 33\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 93.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 41.0f,
-                                    sku = "SST-41",
-                                    description = "Countertop, 41\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 118.0f,
-                                },
-                            } :
-                            new List<ChallengerCountertopInfo>()
-                            {
-                                new ()
-                                {
-                                    depthInInches = 13.0f,
-                                    sku = "ACT-13",
-                                    description = "Countertop, 13\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 19.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 18.0f,
-                                    sku = "ACT-18",
-                                    description = "Countertop, 18\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 25.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 29.0f,
-                                    sku = "ACT-29",
-                                    description = "Countertop, 29\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 38.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 30.0f,
-                                    sku = "ACT-30",
-                                    description = "Countertop, 30\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 41.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 33.0f,
-                                    sku = "ACT-33",
-                                    description = "Countertop, 33\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 44.0f,
-                                },
-                                new ()
-                                {
-                                    depthInInches = 41.0f,
-                                    sku = "ACT-41",
-                                    description = "Countertop, 41\"D x 1.25\" Thick",
-                                    pricePerLinearInch = 56.0f,
-                                },
-                            };
-
-                    float backsplashPricePerLinearInch =
-                        this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
-                            12.0f : 5.0f;
-
-                    float highBarTopPricePerLinearInch =
-                        this._selections.countertopFinish.id == ChallengerBrushedStainlessFinishId ?
-                            63.0f : 40.0f;
-
-                    float lastSpanDepthInMeters = 0.0f;
-                    float lastSpanBackingDepth = 0.0f;
-                    float totalLinearPricing = 0.0f;
-
-                    foreach (CabinetSpan span in layout.spans)
-                    {
-                        Cuboid outerCuboid =
-                            span.GetOutsideCuboidInSpanSpace(includeCountertop: true);
-
-                        if (span.IsSpace())
-                        {
-                            lastSpanDepthInMeters = 0.0f;
-                            lastSpanBackingDepth = 0.0f;
-                            continue;
-                        }
-
-                        float backEdgeLinearLengthInMeters =
-                            outerCuboid.width - lastSpanDepthInMeters;
-
-                        lastSpanDepthInMeters = outerCuboid.depth;
-
-                        float lastSpanDepthInInches = lastSpanDepthInMeters * Units.Meters2Inches;
-
-                        const float Smudge = 0.001f;
-
-                        foreach (ChallengerCountertopInfo info in depthToPrice)
-                        {
-                            if (info.depthInInches >= lastSpanDepthInInches - Smudge)
-                            {
-                                float inchesWide = backEdgeLinearLengthInMeters * Units.Meters2Inches;
-
-                                totalLinearPricing += inchesWide * info.pricePerLinearInch;
-
-                                break;
-                            }
-                        }
-
-                        float spanBackingDepth = 0.0f;
-
-                        if (span.backing && span.backing.info.category != ProductCategory.BarTopLow)
-                        {
-                            float backingPricePerLinearInch =
-                                span.backing.info.category == ProductCategory.Backsplash ?
-                                    backsplashPricePerLinearInch :
-                                    highBarTopPricePerLinearInch;
-
-                            Cuboid backingCuboid =
-                                span.backing.GetCountertopCuboidInSpanSpace(default);
-
-                            spanBackingDepth = backingCuboid.depth;
-
-                            totalLinearPricing += (backingCuboid.width - lastSpanBackingDepth) * Units.Meters2Inches * backingPricePerLinearInch;
-                        }
-
-                        lastSpanBackingDepth = spanBackingDepth;
-                    }
-
-                    JsonDict countertopFinishEntry =
-                        CreateManualPriceSheetEntry(
-                            this._selections.countertopFinish.sku,
-                            this._selections.countertopFinish.name,
-                            totalLinearPricing
-                        );
-
-                    manualPriceSheetEntries.Add(countertopFinishEntry);
+                    manualPriceSheetEntries.Add(countertopPricing);
                 }
 
                 if (toeKickLinearMeters > 0.0f

@@ -40,6 +40,8 @@ namespace KitchenDesign.Scriptables
             get => m_CatalogId;
             set => m_CatalogId = value;
         }
+        public string catalogTag =>
+            string.IsNullOrEmpty(m_CatalogTag) ? m_CatalogName : m_CatalogTag;
 
         public BrandCatalogRuleset ruleset => m_Ruleset.value;
 
@@ -417,6 +419,9 @@ namespace KitchenDesign.Scriptables
             "empty to show the catalog name.")]
         [SerializeField]
         protected string m_CatalogLabel = default;
+
+        [SerializeField]
+        protected string m_CatalogTag = default;
 
         [SerializeField]
         protected int m_CatalogId = default;

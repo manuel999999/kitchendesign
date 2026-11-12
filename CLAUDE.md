@@ -986,7 +986,7 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   reloads them (a script rename of their class, for example). The asset files never change, so
   it repeats. Harmless, but it adds 2 warnings to a run, and any comparison of addresses must
   normalise them first.
-- **Write non-ASCII text in C# strings as `\u` escapes** (`"OASIS\u2122 45\u00b0 ..."`). The old
+- **Write non-ASCII text in C# strings as `\u` escapes** (`"OASIS\u00AE 45\u00B0 ..."`). The old
   `Kitchen.cs` was saved in Windows-1252; old-repo commit `520d740c9d` (2025-11-26) re-saved it as
   UTF-8 and every `²`, `°` and `™` became U+FFFD, which the app then sent to the server for months
   (handover, "Needs attention"). An escape is plain ASCII and survives any re-encoding. Keep source
@@ -1083,7 +1083,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `CabinetSectionDoorHandleStyleSO`, `CabinetSectionLegStyleSO`, `CabinetSectionDoorEditorMappingSO`
     (moved with their `.meta`; 61 assets, names unchanged). The editor mapping is loaded by path
     (`Resources/CabinetSectionDoorEditorMapping.asset`); the template's create menu keeps the default
-    file name `KitchenTemplate`. Serializables in `_project/Scripts/Serializables/`:
+    file name `KitchenTemplate`. `BrandCatalogSO.catalogTag` (`m_CatalogTag`, empty means the
+    catalog name; team commit `c186aad175`, ported 2026-11-12) is what a door visual's
+    `brandCatalogName` is matched against when the thumbnail creator looks up its catalog, so
+    several catalogs can share one set of door visuals; no catalog sets a tag yet. Serializables in
+    `_project/Scripts/Serializables/`:
     `BackPanelInfo(s)`, `EndPanelInfo(s)`, `CabinetSectionDoorData` (cabinet id → door prefab name),
     `CabinetSectionDoorHandleData` (cabinet id → handle count), `Price` (a price per currency; only
     the catalogs' panel prices live in the app, everything else is priced by the server),
@@ -1143,9 +1147,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `EventBridge.Designer` subscription in the old order, pointing at the parts (plan, decision 2).
   - Price inputs, `_project/Scripts/Pricing/` (`KitchenDesign.Pricing`): `PriceSheetInputs` (the
     manual price-sheet lines and the per-product price factors), `IPriceSheetExtras` with
-    `StollPriceSheet` and `GeminiCatalogPriceSheet`, picked by the app rule `PriceSheetExtras`,
-    `ChallengerCountertopInfo`. The prices and SKUs in them are business rules agreed with the
-    clients (sources in the old code's comments, Basecamp threads):
+    `StollPriceSheet` and `GeminiCatalogPriceSheet`, picked by the app rule `PriceSheetExtras`.
+    The prices and SKUs in them are business rules agreed with the clients (sources in the old
+    code's comments, Basecamp threads):
     - Stoll: a setup fee on every custom kitchen; countertops priced per sq. ft. of overall length
       × depth (contiguous spans share the corner; the client's own example divided by 35 where it
       meant 144); cabinet finishes by the summed outside length of the spans in feet; custom
@@ -1157,8 +1161,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
       45s make a 90); Agora corners priced as their own SKU and Agora kamado grill cabinets forced
       to get end panels on the sides not next to an end cabinet; runtime end and back panels;
       fridge panels (not on Agora or Toppin; fridge back panels not on American Outdoor Cabinets
-      or Endura); cabinet end panels when the catalog has a SKU; Challenger countertops by linear
-      length and depth band (corners counted once, high bar tops separately); toe kicks (the first
+      or Endura); cabinet end panels when the catalog has a SKU; Challenger and Agora Berlin
+      Gardens countertops by linear length at the countertop finish's customer price, when the
+      finish's manufacturer is the catalog's cabinet manufacturer (corners counted once;
+      backsplashes and high bar tops per linear inch, brushed stainless dearer). Challenger used
+      fixed prices by depth band until the team's `dbd1a82fdb` (2026-11-05), ported 2026-11-12;
+      toe kicks (the first
       few follow the client's table, then one per 96"; WeatherStrong: front + back + 54" for the
       ends, divided by 96, rounded up); WeatherStrong end vents; no toe kick line for Agora.
   - **Building-method rules** (B4.7): `IBuildingMethodRules` (`KitchenDesign.Shared.Interfaces`)
@@ -1718,16 +1726,17 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   `OASIS™ 45°`; that commit re-saved it as UTF-8 and they became U+FFFD (Gotchas). The server's
   stored designs show it: `countertop_area` reads `ft²` up to September 2025, `ft�` from February
   to May 2026, and `sq. ft.` from August 2026, after the team's fix `875b80d9f2` (2026-06-11),
-  which covered the countertop area only. This project now sends `sq. ft.` / `sq. m.` in
+  which covered the countertop area only. This project sends `sq. ft.` / `sq. m.` in
   `cabinetFinishArea` (ProFit only, the Standard method; the team's wording) and
-  `OASIS™ 45° Transition Piece` on Napoleon corners (Gemini; what the server got before November
-  2025, e.g. designs 31373 and 31642). Nothing in the app reads either string back. Still open:
-  1. The old app still sends the broken text on every team branch (checked up to
-     `feature/model-integration`, 2026-10-22). The same two-line fix is needed there; the user
-     decides whether to tell the team.
-  2. Designs saved since November 2025 keep their broken text until they are saved again.
-  3. How the server's PDF prints `™` and `°` was not checked. The PDFs of 31373 or 31642 would
-     show it (a read-only download; ask first).
+  `OASIS® 45° Transition Piece` on Napoleon corners (Gemini). Nothing in the app reads either
+  string back. **The old app was fixed on 2026-11-05** (`dbd1a82fdb` by the user, `b2db7bd680` by
+  the team, on `feature/model-integration`): `sq. ft.` / `sq. m.` for both areas and the
+  transition piece as `OASIS® 45°` (the registered sign ®). Ported here on 2026-11-12,
+  replacing the `™` this project had sent since 2026-10-23 (the server got `™` before November
+  2025, e.g. designs 31373 and 31642), so both apps send the same text. Still open:
+  1. Designs saved since November 2025 keep their broken text until they are saved again.
+  2. How the server's PDF prints `®` and `°` was not checked. A Napoleon design's PDF would show
+     it (a read-only download; ask first).
 - The build modules (WebGL/iOS/Android for 6000.6.6f1) wait until the port runs properly; the user
   wants a working copy of the app in this project first (2026-10-20).
 - **Disk space decides the module install (2026-10-21).** 55 GB free of 460 GB (88% used), and a

@@ -635,7 +635,7 @@ namespace KitchenDesign
                 BrandCatalogSO usedBrandCatalog =
                     MelcherCommon.Find(
                         ProFitGlobals.appProfile.presetBrandCatalogs,
-                        static x => x.catalogName == m_UsedBrandCatalogName
+                        static x => x.catalogTag == m_UsedBrandCatalogName
                     );
 
                 if(usedBrandCatalog == null)
