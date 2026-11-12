@@ -6,6 +6,7 @@ using KitchenDesign.Shared.Enums;
 using KitchenDesign.Shared.Interfaces;
 using Melcher;
 using UnityEngine;
+using KitchenDesign.Events;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;
@@ -46,7 +47,7 @@ namespace KitchenDesign.Server
             IDictionary<string, string> headers = new Dictionary<string, string>();
             headers.Add(ServerJson.GetAuthorizationHeader(user.apiToken));
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting Client List");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting Client List"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -56,7 +57,7 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Reading Client List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Reading Client List"));
 
                 MelcherJsonObjectParser parser = null;
 

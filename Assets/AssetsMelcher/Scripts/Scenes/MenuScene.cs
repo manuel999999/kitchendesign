@@ -5,6 +5,7 @@ namespace KitchenDesign
     using KitchenDesign.Server;
     using System.Collections.Generic;
     using UnityEngine;
+    using KitchenDesign.Events;
 
     public class MenuScene : MelcherStateMachineState
     {
@@ -148,6 +149,17 @@ namespace KitchenDesign
             EventBridge.Menu.navigateBackward += PopMenu;
             EventBridge.Menu.toggleScreenOrientation += ToggleScreenOrientation;
             EventBridge.Menu.showQuitPrompt += ShowQuitPrompt;
+
+            EventSession.OnSpinnerMessageRequested.AddListener(this.OnSpinnerMessageRequested);
+            EventSession.OnFullScreenSpinnerRequested.AddListener(this.OnFullScreenSpinnerRequested);
+            EventSession.OnBackgroundSpinnerRequested.AddListener(this.OnBackgroundSpinnerRequested);
+            EventSession.OnHomeRequested.AddListener(this.ShowHome);
+            EventSession.OnWelcomeRequested.AddListener(this.OnWelcomeRequested);
+            EventSession.OnLogInRequested.AddListener(this.PushLogInUI);
+            EventSession.OnTrialCountdownRequested.AddListener(this.ShowTrialUI);
+            EventSession.OnLoggedOut.AddListener(this.HideTrialUI);
+            EventSession.OnSubscriptionActivated.AddListener(this.HideTrialUI);
+            EventSession.OnUserKickedPromptRequested.AddListener(this.OnUserKickedPromptRequested);
         }
 
         protected void OnDisable()
@@ -185,6 +197,17 @@ namespace KitchenDesign
             EventBridge.Menu.navigateBackward -= PopMenu;
             EventBridge.Menu.toggleScreenOrientation -= ToggleScreenOrientation;
             EventBridge.Menu.showQuitPrompt -= ShowQuitPrompt;
+
+            EventSession.OnSpinnerMessageRequested.RemoveListener(this.OnSpinnerMessageRequested);
+            EventSession.OnFullScreenSpinnerRequested.RemoveListener(this.OnFullScreenSpinnerRequested);
+            EventSession.OnBackgroundSpinnerRequested.RemoveListener(this.OnBackgroundSpinnerRequested);
+            EventSession.OnHomeRequested.RemoveListener(this.ShowHome);
+            EventSession.OnWelcomeRequested.RemoveListener(this.OnWelcomeRequested);
+            EventSession.OnLogInRequested.RemoveListener(this.PushLogInUI);
+            EventSession.OnTrialCountdownRequested.RemoveListener(this.ShowTrialUI);
+            EventSession.OnLoggedOut.RemoveListener(this.HideTrialUI);
+            EventSession.OnSubscriptionActivated.RemoveListener(this.HideTrialUI);
+            EventSession.OnUserKickedPromptRequested.RemoveListener(this.OnUserKickedPromptRequested);
         }
 
         protected void ShowMenu()
@@ -195,6 +218,31 @@ namespace KitchenDesign
         protected void HideMenu()
         {
             m_MainUi.Hide();
+        }
+
+        private void OnSpinnerMessageRequested(SpinnerMessageInfo info)
+        {
+            this.SetSpinnerStatusMessage(info.Message);
+        }
+
+        private void OnFullScreenSpinnerRequested(SpinnerInfo info)
+        {
+            this.ShowFullScreenSpinner(info.IsShown);
+        }
+
+        private void OnBackgroundSpinnerRequested(SpinnerInfo info)
+        {
+            this.ShowBackgroundSpinner(info.IsShown);
+        }
+
+        private void OnWelcomeRequested()
+        {
+            this.ShowWelcome(MelcherUITransitionStyle.Regress);
+        }
+
+        private void OnUserKickedPromptRequested(UserKickedInfo info)
+        {
+            this.ShowUserKickedPrompt(info.Reason);
         }
 
         protected void ShowFullScreenSpinner(bool show)

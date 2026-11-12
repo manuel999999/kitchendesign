@@ -6,6 +6,7 @@ namespace KitchenDesign
     using System.Collections.Generic;
     using UnityEngine;
     using MEC;
+    using KitchenDesign.Events;
 
     /// <summary>
     ///     <see cref="PlatformSetupScene"/> handles loading the proper scene
@@ -25,11 +26,18 @@ namespace KitchenDesign
         private void OnEnable()
         {
             EventBridge.Menu.setSpinnerStatusMessage += OnSetSpinnerStatusMessage;
+            EventSession.OnSpinnerMessageRequested.AddListener(this.OnSpinnerMessageRequested);
         }
 
         private void OnDisable()
         {
             EventBridge.Menu.setSpinnerStatusMessage -= OnSetSpinnerStatusMessage;
+            EventSession.OnSpinnerMessageRequested.RemoveListener(this.OnSpinnerMessageRequested);
+        }
+
+        private void OnSpinnerMessageRequested(SpinnerMessageInfo info)
+        {
+            this.OnSetSpinnerStatusMessage(info.Message);
         }
 
         private void OnSetSpinnerStatusMessage(string text)
@@ -135,7 +143,7 @@ namespace KitchenDesign
 
                 if (pendingUser.HasValue)
                 {
-                    EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting User Profile");
+                    EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting User Profile"));
 
                     m_LoadingUi.Show();
 
@@ -205,7 +213,7 @@ namespace KitchenDesign
                         Timing.RunCoroutine(ProFitGlobals.session.FinishLogInCoroutine(rememberMe: false, fetchClients: false, ErrorHandler))
                     );
 
-                    EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Loading 3D Designer");
+                    EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Loading 3D Designer"));
                 }
 
                 MelcherLog.Log(

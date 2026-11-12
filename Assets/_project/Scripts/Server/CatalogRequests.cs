@@ -6,6 +6,7 @@ using KitchenDesign.Shared.Enums;
 using KitchenDesign.Shared.Interfaces;
 using Melcher;
 using UnityEngine;
+using KitchenDesign.Events;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 using JsonList = System.Collections.Generic.IList<object>;
@@ -29,7 +30,7 @@ namespace KitchenDesign.Server
         {
             const string EndPoint = "/api/manufacturers/all";
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting Manufacturer List");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting Manufacturer List"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -38,7 +39,7 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Reading Manufacturer List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Reading Manufacturer List"));
 
                 MelcherJsonObjectParser parser = null;
                 List<ManufacturerInfo> manufacturers = null;
@@ -54,7 +55,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Writing Fallback Manufacturer List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing Fallback Manufacturer List"));
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.Manufacturers,
                     MiniJSON.Json.Serialize(jsonValue.jsonObject, prettyPrint: true)
@@ -71,7 +72,7 @@ namespace KitchenDesign.Server
         {
             const string EndPoint = "/api/cabinet-sections-categories/all";
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting cabinet categories");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting cabinet categories"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -80,7 +81,7 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Reading cabinet categories");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Reading cabinet categories"));
 
                 MelcherJsonObjectParser parser = null;
                 List<CabinetSectionCategoryInfo> categories = null;
@@ -96,7 +97,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Writing fallback cabinet section categories");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing fallback cabinet section categories"));
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.CabinetSectionCategories,
                     MiniJSON.Json.Serialize(jsonValue.jsonObject, prettyPrint: true)
@@ -113,7 +114,7 @@ namespace KitchenDesign.Server
         {
             const string EndPoint = "/api/groups/all";
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting Product Groups");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting Product Groups"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -122,7 +123,7 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Reading Product Groups");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Reading Product Groups"));
 
                 MelcherJsonObjectParser parser = null;
                 List<ProductGroupInfo> productGroups = null;
@@ -138,7 +139,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Writing Fallback Product Groups");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing Fallback Product Groups"));
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.ProductGroups,
                     MiniJSON.Json.Serialize(jsonValue.jsonObject, prettyPrint: true)
@@ -206,7 +207,7 @@ namespace KitchenDesign.Server
             IDictionary<string, string> headers = new Dictionary<string, string>();
             headers.Add(ServerJson.GetAuthorizationHeader(user.apiToken));
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting Product List");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting Product List"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -216,7 +217,7 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Reading Product List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Reading Product List"));
 
                 MelcherJsonObjectParser parser = null;
                 List<ProductInfo> productList = null;
@@ -232,8 +233,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage
-                    ?.Invoke("Writing Fallback Product List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing Fallback Product List"));
 
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.Products,
@@ -251,9 +251,9 @@ namespace KitchenDesign.Server
         {
             const string EndPoint = "/api/catalogs/all";
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke(
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo(
                 "Requesting Brand Catalogs"
-            );
+            ));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -262,9 +262,9 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke(
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo(
                     "Reading Brand Catalogs"
-                );
+                ));
 
                 MelcherJsonObjectParser parser = null;
                 List<BrandCatalogInfo> brandCatalogs = null;
@@ -280,9 +280,9 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke(
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo(
                     "Writing Fallback Brand Catalogs"
-                );
+                ));
 
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.BrandCatalogs,
@@ -356,7 +356,7 @@ namespace KitchenDesign.Server
             IDictionary<string, string> headers = new Dictionary<string, string>();
             headers.Add(ServerJson.GetAuthorizationHeader(user.apiToken));
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Requesting Cabinet Section List");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting Cabinet Section List"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -366,7 +366,7 @@ namespace KitchenDesign.Server
 
             void ParseResponse(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonValue)
             {
-                EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Reading Cabinet Section List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Reading Cabinet Section List"));
 
                 MelcherJsonObjectParser parser = null;
                 List<ProductInfo> cabinetList = null;
@@ -390,8 +390,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage
-                    ?.Invoke("Writing Fallback Cabinet List");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing Fallback Cabinet List"));
 
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.Cabinets,
@@ -409,7 +408,7 @@ namespace KitchenDesign.Server
         {
             const string EndPoint = "/api/tags/all";
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Getting Tags");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Getting Tags"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -431,8 +430,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage
-                    ?.Invoke("Writing Fallback Tags");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing Fallback Tags"));
 
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.Tags,
@@ -450,7 +448,7 @@ namespace KitchenDesign.Server
         {
             const string EndPoint = "/api/compatibilities/all";
 
-            EventBridge.Menu.setSpinnerStatusMessage?.Invoke("Getting Compatibilities");
+            EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Getting Compatibilities"));
 
             return
                 MelcherWebRequestBuilder.Get(this._connection.Host + EndPoint)
@@ -473,8 +471,7 @@ namespace KitchenDesign.Server
                 }
 
 #if UNITY_EDITOR
-                EventBridge.Menu.setSpinnerStatusMessage
-                    ?.Invoke("Writing Fallback Compatibilities");
+                EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Writing Fallback Compatibilities"));
 
                 this._connection.SaveFallbackJsonResource(
                     FallbackJsonFiles.Compatibilities,

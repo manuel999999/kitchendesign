@@ -17,6 +17,7 @@ namespace KitchenDesign
     using KitchenDesign.Cabinets;
     using KitchenDesign.KitchenModel;
     using KitchenDesign.Occupancy;
+    using KitchenDesign.Events;
 
     /// <summary>
     ///     Contains the "root" logic of the DesignerScene. It knows about the
@@ -184,6 +185,9 @@ namespace KitchenDesign
             EventBridge.Designer.showLoadingUi              += ShowLoadingUI;
             EventBridge.Designer.refreshCabinetLoadingUiImage      += RefreshCabinetLoadingUiImage;
             EventBridge.Designer.setSpinnerStatusMessage    += SetSpinnerStatusMessage;
+
+            EventSession.OnMenuSceneRequested.AddListener(this.OnMenuSceneRequested);
+            EventSession.OnLoggedOut.AddListener(this.HideTrialCountdownUI);
         }
 
         protected void OnDisable()
@@ -208,6 +212,9 @@ namespace KitchenDesign
             EventBridge.Designer.showLoadingUi              -= ShowLoadingUI;
             EventBridge.Designer.refreshCabinetLoadingUiImage      -= RefreshCabinetLoadingUiImage;
             EventBridge.Designer.setSpinnerStatusMessage    -= SetSpinnerStatusMessage;
+
+            EventSession.OnMenuSceneRequested.RemoveListener(this.OnMenuSceneRequested);
+            EventSession.OnLoggedOut.RemoveListener(this.HideTrialCountdownUI);
         }
 
         /// <summary>
@@ -387,6 +394,18 @@ namespace KitchenDesign
                 // The raycast hit nothing so clear the selection
                 await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
             }
+        }
+
+        private void OnMenuSceneRequested(MenuSceneRequestInfo info)
+        {
+            if (info.OnLoaded == null)
+            {
+                this.LoadMenuScene(null);
+                return;
+            }
+
+            System.Action onLoaded = info.OnLoaded;
+            this.LoadMenuScene((_, _) => onLoaded());
         }
 
         protected void LoadMenuScene(UnityAction<Scene, LoadSceneMode> onLoaded)

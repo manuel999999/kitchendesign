@@ -992,6 +992,17 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   (handover, "Needs attention"). An escape is plain ASCII and survives any re-encoding. Keep source
   files UTF-8 so they survive moves byte for byte. **The Edit tool turns a typed `\u2122` into the
   character itself**; write escapes with a script and check the bytes.
+- **Compile player scripts for WebGL, not macOS** (2026-11-12). `ProjectSettings` defines
+  `MELCHER_CORE_USE_TEXTCORE` for WebGL, iOS and Android only, and the core package's
+  `MelcherUnicodeDictionary.m_Font` changes type with it, so a `StandaloneOSX`
+  `PlayerBuildInterface.CompilePlayerScripts` reports "script class layout is incompatible
+  between the editor and the player" while the editor's target is WebGL (since 2026-11-12). The
+  CLI cuts the call off after 5 s but the compile goes on; wait for `unity status` ready and check
+  the output folder and the console.
+- **`kitchendatacensus.cs` includes in-memory instance ids** (2026-11-12): it enters object
+  references, so each one's `m_FileID` (the instance id, e.g. `26401`) is in the output and the
+  hash changes with every editor session. Compare its output only within one session, or drop the
+  `m_FileID`/`m_PathID` lines first; the `guid:localId` line beside them is the stable part.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -1016,8 +1027,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 2. `Awake` (B1.3): `LaunchOptions` first (the log level and DOTween's debug mode depend on it),
    then the `IAppRules` for the profile's `userFilter` (product parsing reads the padding rule),
    then construct the `ServerClient`, `CatalogDataStatus`, `ClientListStatus`, `SessionStatus` and
-   the `ProductVisualContentStatus` (B3.3) and hand all of them to `ProFitGlobals.Bind` before
-   initializing anything, because old code still reads the forwards. The content status is
+   the `ProductVisualContentStatus` (B3.3), collect them with the profile, the rules and the launch
+   options in one `AppSystems` (B5.2), and hand them to `ProFitGlobals.Bind` before initializing
+   anything, because old code still reads the forwards. The content status is
    app-wide only because the designer's start-up (`DesignerScene.OnEnable` subscribes to it)
    runs before a scene initializer can hand anything over; it holds nothing outside the designer
    (see step 4). Then `session.Initialize()`, `clientList.Initialize()`,
@@ -1027,8 +1039,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    `ProFitGlobals.ExecuteWhenReady`.
 3. `Start`, boot scene only: load build index 1 (`PlatformSetupScene`). Not in `Awake`, see
    Gotchas (`MelcherSceneManager` and a load from the first scene's `Awake`).
-4. On every scene load: the root `SceneInitializer` of that scene gets `Initialize(appProfile,
-   appRules, productContent)`, then `EventApp.OnSceneReady` is raised. `DesignerSceneInitializer`
+4. On every scene load: the root `SceneInitializer` of that scene gets `Initialize(AppSystems)`,
+   then `EventApp.OnSceneReady` is raised. Why one object rather than one argument per system: a
+   scene initializer hands each screen only what it uses, and adding an app system then changes
+   one constructor instead of every initializer's signature. `DesignerSceneInitializer`
    purges the content status in its `OnDestroy`, when the designer scene goes: the moment the old
    loader component released its Addressables handles. This runs after the old scene script's
    `OnStateAdded` (the core package's state machine is subscribed first), so the old scene
@@ -1037,6 +1051,27 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 ## Events
 - `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's
   `SceneInitializer` was initialized. No listeners yet.
+- `EventSession` (B5.2, `_projectEvents/Events/`, payloads next to it): what the app systems ask
+  of whichever scene is loaded. Why events: the systems outlive every scene and can't hold its
+  screens. Raised by `SessionStatus`, `CatalogRequests`, `ClientRequests` and `PlatformSetupScene`;
+  listened to in `OnEnable`/`OnDisable` by `MenuScene`, `DesignerScene` and `PlatformSetupScene`
+  (until B5.3/B5.4 move them into the scene controls' `Initialize`/`OnDestroy`).
+  - `OnSpinnerMessageRequested` (`SpinnerMessageInfo`): the loading spinner's status text, from
+    every catalog and client request and the platform setup. The menu and the platform setup
+    show it; the designer doesn't listen (it never got these).
+  - `OnFullScreenSpinnerRequested`, `OnBackgroundSpinnerRequested` (`SpinnerInfo`): sign-in.
+  - `OnHomeRequested`, `OnTrialCountdownRequested`: after sign-in (the countdown only on a trial).
+  - `OnWelcomeRequested` (always the `Regress` transition, so no payload; that keeps the core
+    package's `MelcherUITransitionStyle` out of the payloads) and `OnLogInRequested`: a failed
+    sign-in, a kick while the menu is open.
+  - `OnLoggedOut`: end of `SessionStatus.LogOut`; the menu and the designer hide their trial
+    countdown. `OnSubscriptionActivated`: the auto-kick check found a paid subscription; only the
+    menu hides its countdown, as before (the designer's stays until the scene changes). Named for
+    the cause, not "hide countdown", so the two keep their different listeners.
+  - `OnUserKickedPromptRequested` (`UserKickedInfo`): the kick prompt, in the menu.
+    `OnMenuSceneRequested` (`MenuSceneRequestInfo`, an optional `System.Action` run once the menu
+    scene has loaded): a kick while the menu isn't loaded; the designer goes back to the menu and
+    the callback asks for the kick prompt there.
 - Everything else still goes through the old `EventBridge`.
 
 ## Key systems
@@ -1417,6 +1452,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   What stays in `Const` and `ProFitUtility` until its area: the plan, B1.4.
 - **App-wide systems** (B1.3 of the refactor, 2026-10-22). Plain classes, constructed and owned
   by `AppInitializer`; collaborators come in through the constructor.
+  - `AppSystems` (B5.2, `_project/Scripts/Game/`): the profile (and its options), the rules, the
+    launch options and the systems below, as one object every `SceneInitializer` gets. Old code
+    reads the same instances through `ProFitGlobals`.
   - `LaunchOptions` (`_project/Scripts/Game/`): debug mode and verbose (editor, debug build,
     `?verbose` URL parameter, `--verbose` argument), the WebGL page's domain and `distributor`
     parameter (white label). In the editor, `AppOptions.simulateWhiteLabelMode` replaces the last

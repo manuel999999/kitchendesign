@@ -22,8 +22,7 @@ namespace KitchenDesign
         [SerializeField] private AppProfileSO appProfile;
 
         private bool _loadsFirstAppScene;
-        private IAppRules _appRules;
-        private ProductVisualContentStatus _productContent;
+        private AppSystems _systems;
 
         private void Awake()
         {
@@ -52,15 +51,17 @@ namespace KitchenDesign
 
             DOTweenInit.Init(launchOptions.IsDebugMode);
 
-            this._appRules = AppRulesFactory.Create(this.appProfile.appOptions.userFilter);
+            IAppRules appRules = AppRulesFactory.Create(this.appProfile.appOptions.userFilter);
 
-            ServerClient server = new ServerClient(this.appProfile, this._appRules);
-            CatalogDataStatus catalogData = new CatalogDataStatus(this.appProfile, this._appRules, server);
+            ServerClient server = new ServerClient(this.appProfile, appRules);
+            CatalogDataStatus catalogData = new CatalogDataStatus(this.appProfile, appRules, server);
             ClientListStatus clientList = new ClientListStatus();
-            SessionStatus session = new SessionStatus(this.appProfile, this._appRules, server, clientList, catalogData);
-            this._productContent = new ProductVisualContentStatus();
+            SessionStatus session = new SessionStatus(this.appProfile, appRules, server, clientList, catalogData);
+            ProductVisualContentStatus productContent = new ProductVisualContentStatus();
 
-            ProFitGlobals.Bind(this.appProfile, this._appRules, launchOptions, server, catalogData, clientList, session, this._productContent);
+            this._systems = new AppSystems(this.appProfile, appRules, launchOptions, server, catalogData, clientList, session, productContent);
+
+            ProFitGlobals.Bind(this.appProfile, appRules, launchOptions, server, catalogData, clientList, session, productContent);
 
             session.Initialize();
             clientList.Initialize();
@@ -93,7 +94,7 @@ namespace KitchenDesign
                     continue;
                 }
 
-                sceneInitializer.Initialize(this.appProfile, this._appRules, this._productContent);
+                sceneInitializer.Initialize(this._systems);
                 EventApp.OnSceneReady.Raise();
                 return;
             }

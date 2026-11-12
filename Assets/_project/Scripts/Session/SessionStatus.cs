@@ -8,6 +8,7 @@ using KitchenDesign.Shared.Interfaces;
 using MEC;
 using Melcher;
 using UnityEngine;
+using KitchenDesign.Events;
 
 using JsonDict = System.Collections.Generic.IDictionary<string, object>;
 
@@ -125,8 +126,7 @@ namespace KitchenDesign.Session
             this.ForgetRememberMeData();
             this.StopAutoKickCoroutine();
 
-            EventBridge.Menu.hideTrialCountdownUi?.Invoke();
-            EventBridge.Designer.hideTrialCountdownUi?.Invoke();
+            EventSession.OnLoggedOut.Raise();
         }
 
         public void KickUser(string kickReason)
@@ -140,23 +140,18 @@ namespace KitchenDesign.Session
             {
                 MelcherLog.Log("Menu isn't loaded");
 
-                EventBridge.Designer.loadMenuScene.Invoke(
-                    onLoaded: (_, _) =>
-                    {
-                        ShowKickPrompt();
-                    }
-                );
+                EventSession.OnMenuSceneRequested.Raise(new MenuSceneRequestInfo(ShowKickPrompt));
             }
             else
             {
-                EventBridge.Menu.showWelcomeUi.Invoke(MelcherUITransitionStyle.Regress);
+                EventSession.OnWelcomeRequested.Raise();
 
                 ShowKickPrompt();
             }
 
             void ShowKickPrompt()
             {
-                EventBridge.Menu.showUserKickedPrompt?.Invoke(kickReason);
+                EventSession.OnUserKickedPromptRequested.Raise(new UserKickedInfo(kickReason));
             }
         }
 
@@ -187,13 +182,13 @@ namespace KitchenDesign.Session
                 }
             }
 
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
-            EventBridge.Menu.showBackgroundSpinner?.Invoke(true);
-            EventBridge.Menu.showHomeUi?.Invoke();
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
+            EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(true));
+            EventSession.OnHomeRequested.Raise();
 
             if (this.UserProfile.IsTrialActive())
             {
-                EventBridge.Menu.showTrialCountdownUi?.Invoke();
+                EventSession.OnTrialCountdownRequested.Raise();
             }
 
             if (rememberMe)
@@ -339,7 +334,7 @@ namespace KitchenDesign.Session
 
             this._catalogData.BuildProductVariantLists();
 
-            EventBridge.Menu.showBackgroundSpinner?.Invoke(false);
+            EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(false));
 
             this.LogInState = LogInState.Finished;
 
@@ -348,13 +343,13 @@ namespace KitchenDesign.Session
         Error:
             bool didUserLogOut = this.UserProfile.userId == 0;
 
-            EventBridge.Menu.showFullScreenSpinner?.Invoke(false);
-            EventBridge.Menu.showBackgroundSpinner?.Invoke(false);
+            EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(false));
+            EventSession.OnBackgroundSpinnerRequested.Raise(new SpinnerInfo(false));
 
             this.LogOut();
 
-            EventBridge.Menu.showWelcomeUi.Invoke(MelcherUITransitionStyle.Regress);
-            EventBridge.Menu.pushLogInUi.Invoke();
+            EventSession.OnWelcomeRequested.Raise();
+            EventSession.OnLogInRequested.Raise();
 
             if (!didUserLogOut)
             {
@@ -398,7 +393,7 @@ namespace KitchenDesign.Session
 
                 if (this.UserProfile.IsSubscriptionActive())
                 {
-                    EventBridge.Menu.hideTrialCountdownUi?.Invoke();
+                    EventSession.OnSubscriptionActivated.Raise();
 
                     continue;
                 }

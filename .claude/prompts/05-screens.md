@@ -207,6 +207,25 @@ Check: as B4.1/B4.2 (no asset file changes; a census of the skin and button styl
 (spinners, status message, home, welcome, log in, trial countdown, kicked user); the menu's and
 designer's scene scripts listen instead of subscribing to those `EventBridge` delegates.
 `EventBridge.Menu`/`Designer` keep their other delegates for B5.3–B5.5.
+- **Done 2026-11-12.** `AppSystems`; `SceneInitializer.Initialize(AppSystems)`; `EventSession`
+  with 11 events (CLAUDE.md, "Events"), payloads in `KitchenDesign.Events` beside the holder (the
+  house layout; Shared only gets types a payload carries). `SessionStatus` no longer mentions
+  `EventBridge`; the 26 spinner messages of `CatalogRequests`, `ClientRequests` and
+  `PlatformSetupScene` are events. The three scene scripts listen in `OnEnable`/`OnDisable`, beside
+  their `EventBridge` subscriptions, which the screens still raise until B5.3. Two names follow the
+  cause rather than the old delegate: `LogOut` hid the trial countdown in both scenes and the
+  auto-kick check only in the menu, so they are `OnLoggedOut` and `OnSubscriptionActivated` with
+  their own listeners, not one "hide" request.
+- **Found on the way, not kept (2026-11-12):** three old calls used `.Invoke()` without `?.` on a
+  delegate only the menu or the designer subscribes to, so they threw a `NullReferenceException`
+  when neither listened: `FinishLogInCoroutine`'s error path (`showWelcomeUi`, `pushLogInUi`) and
+  `KickUser`'s `loadMenuScene`. The error path runs outside the menu only for a failed white-label
+  sign-in in `PlatformSetupScene`; there the exception ended the coroutine before it called the
+  error handler and set `LogInState` back to `NotStarted`. A Doge event without listeners does
+  nothing, so those two lines now run. A kick while neither menu nor designer is loaded (the
+  intermediate scene, during start-up) threw and now does nothing. Not reproduced on purpose:
+  code whose only job is to throw would be removed by the next reader. For the user to decide
+  whether the white-label error path needs anything.
 
 **B5.3 — The menu.** `SplashScene`, `PlatformSetupScene`, `IntermediateDesignerToMenuScene` and
 `MenuScene` start-up into their scene initializers; `MenuScene` → `MenuNavigationControl`.
