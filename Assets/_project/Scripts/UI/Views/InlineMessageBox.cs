@@ -16,7 +16,7 @@ namespace KitchenDesign.UI.Views
         {
             m_Circle.phrase = "$(circle)";
             m_Circle.textMesh.color =
-                ProFitGlobals.appOptions.appSkin.primaryColor;
+                AppProfileStore.Skin.primaryColor;
             m_Icon.phrase = "$(info)";
             m_Message.phrase = message;
         }
@@ -26,7 +26,7 @@ namespace KitchenDesign.UI.Views
             MelcherLog.LogError(message);
             m_Circle.phrase = "$(circle)";
             m_Circle.textMesh.color =
-                ProFitGlobals.appOptions.appSkin.dangerColor;
+                AppProfileStore.Skin.dangerColor;
             m_Icon.phrase = "$(exclamation)";
             m_Message.phrase = message;
         }

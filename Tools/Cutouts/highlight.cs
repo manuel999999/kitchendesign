@@ -1,5 +1,5 @@
 var k = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.KitchenModel.Kitchen>();
-var skin = KitchenDesign.ProFitGlobals.appOptions.appSkin;
+var skin = KitchenDesign.AppProfileStore.Skin;
 KitchenDesign.Cabinets.Cabinet target = null;
 foreach (var entry in k.layout.EnumerateCabinets()) foreach (var occ in entry.element.occupants) if (target == null) target = entry.element;
 Cysharp.Threading.Tasks.UniTaskExtensions.Forget(target.SetCabinetMaterials(skin.primarySelectionMaterial, skin.primarySelectionMaterial, null));

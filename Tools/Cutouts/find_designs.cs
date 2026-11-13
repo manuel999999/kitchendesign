@@ -1,6 +1,6 @@
 var lines = new System.Collections.Generic.List<string>();
 int n = 0;
-foreach (var c in KitchenDesign.ProFitGlobals.userClients)
+foreach (var c in UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.ClientList.UserClients)
 {
     if (c.quotes == null) continue;
     foreach (var q in c.quotes)

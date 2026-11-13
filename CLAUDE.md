@@ -1056,15 +1056,15 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    then the `IAppRules` for the profile's `userFilter` (product parsing reads the padding rule),
    then construct the `ServerClient`, `CatalogDataStatus`, `ClientListStatus`, `SessionStatus` and
    the `ProductVisualContentStatus` (B3.3), collect them with the profile, the rules and the launch
-   options in one `AppSystems` (B5.2), and hand them to `ProFitGlobals.Bind` before initializing
-   anything, because old code still reads the forwards. The content status is
+   options in one `AppSystems` (B5.2), and give the profile to `AppProfileStore.Bind` (B8.4)
+   before initializing anything, because views read the skin from it in `Awake`. The content status is
    app-wide only because the designer's start-up (`DesignerScene.OnEnable` subscribes to it)
    runs before a scene initializer can hand anything over; it holds nothing outside the designer
    (see step 4). Then `session.Initialize()`, `clientList.Initialize()`,
    `catalogData.Initialize()`: the order the old `ProFitGlobals.Init` reset its fields in (the
    session's reset writes user 0's kiosk preference, as it always did). The catalog starts loading
    the fallback data, then the server's; the screens wait for it through
-   `ProFitGlobals.ExecuteWhenReady`.
+   `CatalogDataStatus.ExecuteWhenLoaded`.
 3. `Start`, boot scene only: load build index 1 (`PlatformSetupScene`). Not in `Awake`, see
    Gotchas (`MelcherSceneManager` and a load from the first scene's `Awake`).
 4. On every scene load: the root `SceneInitializer` of that scene gets `Initialize(AppSystems)`,
@@ -1415,8 +1415,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     rule against the old expression for every id in the old constants and every catalog asset).
   - `DoorStyleLookup` (B4.8, `_project/Scripts/CatalogData/`): the door-style lookup that was the
     static `CabinetSectionDoorUtility`, now an instance owned by `CatalogDataStatus` (`DoorStyles`);
-    the brand catalog screen hands it to `BrandCatalogSO.PopulateRuntimeData`, other old code reaches
-    it through `ProFitGlobals.catalogData`. It maps a cabinet section id to the visual id whose doors
+    the brand catalog screen hands it to `BrandCatalogSO.PopulateRuntimeData`, other code reaches
+    it through the catalog data it was handed. It maps a cabinet section id to the visual id whose doors
     it uses, from every catalog's `CabinetSectionDoorStyleSO`, and finds a door visual by name
     (`ProductVisual_<cabinet>@<door style>^`, falling back to the catalog's default style). Kept
     exactly as it was, two quirks included: a catalog is never recorded as initialized, so its
@@ -1443,8 +1443,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     the session and the rules. `EndPanelInfo` and `FridgePanelInfo` have `GetDealerPrice(currency)`
     (the price sheet passes the user's currency), and `BrandCatalogSO.info` is gone: the toolbar
     looks the server's catalog record up in `CatalogDataStatus`. The model's profile, options and
-    skin reads (default materials, highlight materials, measure colours) are still on
-    `ProFitGlobals` and move to the profile store in B8.4.
+    skin reads (default materials, highlight materials, measure colours) go to `AppProfileStore`
+    (B8.4): a cabinet made in edit mode by the thumbnail creator has no kitchen to ask.
   - **Where the model's files are** (B4.10, `_project/Scripts/`, namespaces follow the folders):
     `KitchenModel/` (`Kitchen`, `IKitchen`, `KitchenCutoutClipping`, `KitchenSelections`,
     `KitchenInteractionState`, the three controls), `Cabinets/` (`Cabinet`, `CabinetSpan`,
@@ -1481,7 +1481,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   - `ScreenshotAngle` (`_projectShared/Enums/`, values as before: None, Cover, Top, Front, Back)
     and `IsPlanAngle` (`_projectShared/Common/`: top, front or back).
   - `ProductVisualThumbnailCreator` (`Photos/`): static editor-tool code that renders product
-    thumbnails in the screenshot scene. It keeps reading `ProFitGlobals.appProfile`: it runs in
+    thumbnails in the screenshot scene. It reads `AppProfileStore.Profile`: it runs in
     edit mode, where nothing constructs systems.
   - Cameras (`_project/Scripts/Cameras/`, `KitchenDesign.Cameras`): `OrbitCameraControl` (was
     `DesignerOrbitCamera`), `OverheadCameraControl` (was `DesignerOverheadCamera`).
@@ -1540,8 +1540,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     stale (reporting null) until reloaded, so Domain Reload stays on in play mode.
     `ProductVisualLookups.FindById` (`_project/Scripts/Products/`) finds a visual in a given list.
   - **Content loading (B3.3)**, `_project/Scripts/Products/` (`KitchenDesign.Products`).
-    `ProductVisualContentStatus` (plain class, constructed by `AppInitializer`; old code reaches
-    it as `ProFitGlobals.productContent`) loads a visual's content prefab through Addressables
+    `ProductVisualContentStatus` (plain class, constructed by `AppInitializer`) loads a visual's content prefab through Addressables
     once per address, keeps the handle, makes a runtime copy of the prefab
     (`LoadedProductContent`: source and runtime prefab), and raises `ContentLoaded` once per
     loaded content. `LoadContent` returns the runtime copy for a runtime visual and the source
@@ -1605,8 +1604,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   designs saved with an old SKU still load.
 - **Server client** (B2.2 of the refactor, 2026-10-22), `_project/Scripts/Server/`
   (`KitchenDesign.Server`); the old static `ProFitWeb` is gone. `ServerClient` (constructed by
-  `AppInitializer` before the catalog data and the session, which get it in their constructors;
-  old code reaches it as `ProFitGlobals.server`) owns:
+  `AppInitializer` before the catalog data and the session, which get it in their constructors) owns:
   - `ServerConnection`: the server address from the profile, `UseHttps` (starts true;
     `ProbeCoroutine` flips it once if the first request to the host fails, then tries again),
     `IsTestServer`, the domains the WebGL build may be embedded in, and the editor-only
@@ -1676,7 +1674,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     "Events"), `MelcherWebGL` (the C# side of `AssetsMelcher/Plugins/WebGL/MelcherWebGL.jslib`,
     which stays there as an asset) and `AppLinks` (opens the subscription page, the terms page
     and, in the editor and development builds only so the address can't leak, a product's
-    dashboard page; it reads `ProFitGlobals`).
+    dashboard page; the caller passes the server's host, or the options and the user's type).
   - `Behaviors/`: `HighlightTarget`, `PCMBandaidFix`, `TransformHelper`, and the cutout
     authoring helpers `ComponentCutoutHelper`, `StorageCutoutHelper` (its direction enum is
     `CutoutDirection` in `_projectShared/Enums/`) and `GeminiCutoutPrefabs` (editor-only menu
@@ -1699,14 +1697,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `_projectShared/Common/ProductCategorySizes` (finishes have no cut-out sizes, so missing
     ones aren't parse errors), `UI/Views/UiColors.Error`. The Remember Me key is
     `SessionStatus.RememberMeTokenKey`.
-  - `ProFitGlobals` (`Game/`) is still the forward store: see "App-wide systems". Who still reads
-    it: the kitchen model (built in `Kitchen.Awake`, before any initializer), the skin views and
-    other `Awake`/`OnEnable` code, components made at runtime, `AppLinks`, and edit-mode tools.
 - **App-wide systems** (B1.3 of the refactor, 2026-10-22). Plain classes, constructed and owned
   by `AppInitializer`; collaborators come in through the constructor.
   - `AppSystems` (B5.2, `_project/Scripts/Game/`): the profile (and its options), the rules, the
-    launch options and the systems below, as one object every `SceneInitializer` gets. Old code
-    reads the same instances through `ProFitGlobals`.
+    launch options and the systems below, as one object every `SceneInitializer` gets. Nothing else
+    reaches a system: there is no static forward any more (B8.4).
   - `LaunchOptions` (`_project/Scripts/Game/`): debug mode and verbose (editor, debug build,
     `?verbose` URL parameter, `--verbose` argument), the WebGL page's domain and `distributor`
     parameter (white label). In the editor, `AppOptions.simulateWhiteLabelMode` replaces the last
@@ -1742,12 +1737,24 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     in `PlayerPrefs` under `Token`), log out, the auto-kick that checks the subscription every 20 s
     and kicks expired trials and subscriptions, and the sign-in flow. Uses `ClientListStatus` and
     `CatalogDataStatus` (log out clears both, sign-in fills both); neither uses the session.
-  - **`ProFitGlobals` is now only forwards** to these systems, the profile and the rules, plus
-    the system instances themselves (`catalogData`, `clientList`, `session`, `launchOptions`). It is
-    the one app-wide static store of this area (reset at `SubsystemRegistration`). New code doesn't
-    use it; each area replaces its own uses with references passed in, and the class goes when no
-    one uses it. With no `AppInitializer` running (edit mode, test scenes), the forwards create
-    default instances, and `appProfile` loads `Resources/AppProfile` once.
+  - **`AppProfileStore`** (B8.4, 2026-11-13, `_project/Scripts/Game/`) is the one app-wide static
+    store: `Profile`, `Options`, `Skin`. `ProFitGlobals` is deleted. Why this one static stays:
+    the profile, its options and the skin are one immutable asset, read by views on dozens of
+    prefabs in `Awake`/`OnEnable` (before any initializer), by components made at runtime, by
+    the model for default and highlight materials, and by edit-mode tools where nothing is
+    constructed. `AppInitializer` binds its serialized profile; with no `AppInitializer` (edit
+    mode) the first read loads `Resources/AppProfile`; reset at `SubsystemRegistration`. A
+    screen that has an `Initialize` is handed the options instead. **No system (session, server,
+    catalog data, client list, rules, content, launch options) is reachable through a static.**
+    Editor-only code that needs the running systems (the two debug menus through
+    `_projectDebugging/Menus/DebugSystems.TryGet`, and the check snippets under `Tools/`) finds
+    the `AppInitializer` and reads its editor-only `SystemsForEditor`. Why on `AppInitializer`
+    and not on each `SceneInitializer` (the plan's first idea): it is one object that exists in
+    every scene, and the scene initializers stay untouched.
+    `ProductIdRemapDatabaseSO`'s editor button (`CaptureCurrentIds`) builds the rules from the
+    profile and reads the product groups from the fallback JSON itself; the cabinet parser gets
+    the products it has just parsed as "products already loaded". Before, in edit mode, both
+    lists came empty from a default catalog-data instance.
 - **Boot and scene initializers** (B1.2 of the refactor, 2026-10-22): `AppInitializer`,
   `SceneInitializer` (abstract, `Initialize(AppProfile, IAppRules)`), `MenuSceneInitializer`,
   `DesignerSceneInitializer` (they only keep what they get, until areas move into them),
@@ -1763,9 +1770,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   which app it was now asks a rule; the table of old check → rule is in
   `.claude/prompts/03-refactor.md`, "Area 1". **No code outside `AppRules/` may test
   `userFilter` to change behaviour.** The three places that still read it (`LogInUI`, `SignUpUI`,
-  `QuickLogInWidget`) use it as the app's identity on the server, not as a rule. Old code reaches
-  the rules through `ProFitGlobals.appRules` (handed over by `AppInitializer`; in edit mode
-  created from the profile on first use). Why rules return `null` for "leave the value alone" (the high bar top
+  `QuickLogInWidget`) use it as the app's identity on the server, not as a rule. Code gets
+  the rules handed in (`AppSystems.Rules`, or `IKitchen.appRules` in the model). Why rules return `null` for "leave the value alone" (the high bar top
   sizes, fridge padding, bottom inset): only Stoll overrides them, and the caller keeps its own
   value otherwise. Each app has exactly one building method today (ProFit Standard, Stoll
   Sections, Gemini Catalog), but app and building method stay separate axes: what the old code
@@ -1882,13 +1888,13 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   - **Menu screens get their systems** (B5.3c2): `MenuNavigationControl.Initialize` first hands
     every screen it holds only the systems it reads (session, client list, catalog data, server,
     options, rules) plus its prompts, then runs the menu's start-up; `PlatformSetupControl` uses
-    the `AppSystems` it is given. Still on `ProFitGlobals` in the menu, on purpose: reads in
+    the `AppSystems` it is given. On `AppProfileStore` in the menu, on purpose: reads in
     `Awake`/`OnEnable` (the skin in `MainUI`, `HomeUI`, `WelcomeUI` and the views: they run before
-    any initializer; they go with the UI Toolkit rewrite), `ClientListUI`'s row-count property,
-    `ManufacturerWhitelistRow` (rows made at runtime), `QuickLogInWidget` (editor sign-in helper,
-    not held by the navigation) and `TrialCountdownUI` (also in the designer, B5.4).
-    Also `PayNowUI`'s message post-processing (the app's display name): the label calls it
-    from `OnEnable`. A handler that a screen's own `Awake`/`OnEnable` triggers must not read a
+    any initializer; they go with the UI Toolkit rewrite), `ManufacturerWhitelistRow` (rows made
+    at runtime), `QuickLogInWidget` (editor sign-in helper, not held by the navigation) and
+    `PayNowUI`'s message post-processing (the app's display name): the label calls it
+    from `OnEnable`. `PayNowUI`, `UnauthorizedDomainUI` and `TrialCountdownUI` get the session
+    and the options for the subscription link (B8.4). A handler that a screen's own `Awake`/`OnEnable` triggers must not read a
     handed-in field (found by the cold start on 2026-11-13).
   - **Designer screens get their systems** (B5.4d, 2026-11-13): `DesignerScreensControl.Initialize`
     hands each designer screen the systems it reads next to the kitchen: the toolbar (which passes
@@ -1912,10 +1918,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     and the set-width prompt hand their `CabinetOtherSizeControl`s the session (the label needs
     the user's units on every slider change). `TrialCountdownUI` gets the session from
     `MenuNavigationControl` and `DesignerScreensControl`. `VersionLabel` reads the server type
-    from the profile instead of through the server client. What is left on `ProFitGlobals` in
-    the screens is profile, options and skin only (`DesignerScreensControl.Awake`'s skybox,
-    `CabinetShapeUI.OnEnable`, `BrandCatalogToggle`, `VersionLabel`, the menu's views), which
-    B8.4 moves to the profile store.
+    from the profile instead of through the server client. What the
+    screens read from `AppProfileStore` is profile, options and skin only
+    (`DesignerScreensControl.Awake`'s skybox, `CabinetShapeUI.OnEnable`, `BrandCatalogToggle`,
+    `VersionLabel`, the menu's views). The toolbar's highlighted-product content and the
+    about-product prompt get the server client for the product's dashboard link (B8.4).
   - **Where the screens' files are** (B5.7, 2026-11-13; moved with their `.meta`, comments kept
     in files that only moved): `_project/Scripts/UI/MenuScreens/` (`KitchenDesign.UI.MenuScreens`:
     the menu's screens, prompts and list rows, `ListController` and `ListControllerSortMode`),
@@ -1980,14 +1987,13 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   the files that were only moved. Done and committed on 2026-11-13: **B8.1** (the kitchen is
   built by `Kitchen.Initialize`, called from `DesignerSceneInitializer`; full check identical to
   `final-tip`) and **B8.2** (model objects ask their kitchen; full check the same after one fix,
-  see the plan's results) and **B8.3** (no designer screen reads a
-  system from the static; see "Screens"). **Next: B8.4** (`AppProfileStore` replaces
-  `ProFitGlobals`). Reads left on `ProFitGlobals` after B8.3: profile, options and skin reads
-  everywhere (they go to the store), and system reads in `AppLinks` (server host, user type),
-  `ProductIdRemapDatabaseSO`'s editor functions, the two debug menus and the check snippets
-  under `Tools/` (`state.cs`, `load.tmpl`, `menu.cs`, `contentprobe.cs`, `listenerorder.cs`, the
-  `Tools/Cutouts` snippets), which B8.4 has to move to the scene's `SceneInitializer.Systems`
-  too. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>` (reference `final-tip`; for photos
+  see the plan's results), **B8.3** (no designer screen reads a
+  system from the static; see "Screens") and **B8.4** (`AppProfileStore` replaces
+  `ProFitGlobals`, which is deleted; see "App-wide systems"): **part (a) of the plan is done.**
+  **Next: B8.5** (the measure placement out of `KitchenScreenshotControl` into
+  `PlanMeasurePlacement`), then B8.6 (ask the user first: it reimports every model) and B8.7.
+  The check snippets under `Tools/Baseline/unity6` and `Tools/Cutouts` read the systems through
+  `AppInitializer.SystemsForEditor`, so they no longer run on commits before B8.4. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>` (reference `final-tip`; for photos
   `final-tip/unity6-run2`, because `final-tip/unity6` has the three untextured covers);
   call `playercompile.sh` there by its absolute path (it now waits for `KitchenDesign.dll`). Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,

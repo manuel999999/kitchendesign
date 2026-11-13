@@ -12,9 +12,9 @@ namespace KitchenDesign.UI.Views
 
         protected void Awake()
         {
-            string phrase = $"v{Application.version}{ProFitGlobals.appOptions.versionSuffix}";
+            string phrase = $"v{Application.version}{AppProfileStore.Options.versionSuffix}";
 
-            if (ProFitGlobals.appProfile.targetServerType == ServerType.Test)
+            if (AppProfileStore.Profile.targetServerType == ServerType.Test)
             {
                 phrase += " (test)";
             }

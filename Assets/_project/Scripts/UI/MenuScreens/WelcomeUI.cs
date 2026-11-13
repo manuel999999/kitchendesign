@@ -27,7 +27,7 @@ namespace KitchenDesign.UI.MenuScreens
 #if UNITY_WEBGL || UNITY_EDITOR
             // For some builds (e.g., Stoll), the 1-day trial sign-in option
             // is not allowed.
-            SetOneDayTrialAllowed(ProFitGlobals.appOptions.allowOneDayTrial);
+            SetOneDayTrialAllowed(AppProfileStore.Options.allowOneDayTrial);
 #else
             SetOneDayTrialAllowed(false);
 #endif

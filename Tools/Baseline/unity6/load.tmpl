@@ -1,6 +1,7 @@
 int ci, qi;
-if (!KitchenDesign.ProFitGlobals.TryGetClientAndQuoteIndex(__CLIENT__, __QUOTE__, out ci, out qi)) return "not found";
-KitchenDesign.ProFitGlobals.activeClientId = __CLIENT__;
-KitchenDesign.ProFitGlobals.activeQuoteId = __QUOTE__;
+var clients = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.ClientList;
+if (!clients.TryGetClientAndQuoteIndex(__CLIENT__, __QUOTE__, out ci, out qi)) return "not found";
+clients.ActiveClientId = __CLIENT__;
+clients.ActiveQuoteId = __QUOTE__;
 Melcher.MelcherSceneManager.LoadSceneAsync(Melcher.MelcherSceneRequest.FromName("DesignerScene"), Melcher.MelcherSceneLoadMode.Single);
 return "loading quote __QUOTE__";

@@ -88,7 +88,7 @@ namespace KitchenDesign.UI.MenuScreens
             m_ToggleLabel.phrase = manufacturerName;
             m_ToggleLabel.gameObject.SetActive(true);
 
-            if (ProFitGlobals.appOptions.allowDealerMarkupPercentChanges)
+            if (AppProfileStore.Options.allowDealerMarkupPercentChanges)
             {
                 m_PriceMarkupButton.gameObject.SetActive(true);
                 if (m_PriceMarkupButton.TryGetComponent(out MelcherLocalizedText priceMarkupLabel))

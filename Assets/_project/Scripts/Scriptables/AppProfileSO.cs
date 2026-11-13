@@ -127,7 +127,7 @@ namespace KitchenDesign.Scriptables
 
         [Tooltip("These are the preset brand catalogs that are setup in the " +
             "Unity editor. At runtime, these may be cloned by server-defined " +
-            "catalogs and will be accessible from ProFitGlobals.runtimeBrandCatalogs")]
+            "catalogs and will be accessible from CatalogDataStatus.RuntimeBrandCatalogs")]
         [SerializeField]
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogs")]
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogDatabase")]

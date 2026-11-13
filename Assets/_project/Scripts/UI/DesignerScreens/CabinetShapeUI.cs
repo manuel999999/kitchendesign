@@ -61,7 +61,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             static void UpdateToggleVisibility(MelcherToggle toggle, KitchenStyle style)
             {
-                bool isAllowed = ProFitGlobals.appOptions.IsKitchenStyleAllowed(style);
+                bool isAllowed = AppProfileStore.Options.IsKitchenStyleAllowed(style);
                 toggle.gameObject.SetActive(isAllowed);
             }
         }

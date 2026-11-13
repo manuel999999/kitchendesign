@@ -165,7 +165,7 @@ switch (step)
         return "toe kicks";
     case "finish":
     {
-        var f = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku("Cabinet_Challenger_Graphite", false);
+        var f = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.CatalogData.FindProductInfoBySku("Cabinet_Challenger_Graphite", false);
         if (f == null) return "finish not found";
         k.SelectFinishProduct(f, KitchenDesign.Shared.Enums.ProductCategory.FinishCabinet);
         return "finish " + f.sku;
@@ -200,7 +200,7 @@ switch (step)
     case "add_grill":
     case "add_drawer":
     {
-        var pi = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku(step == "add_grill" ? "69008LP/69009NG" : "TEWD30-C", false);
+        var pi = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.CatalogData.FindProductInfoBySku(step == "add_grill" ? "69008LP/69009NG" : "TEWD30-C", false);
         if (pi == null) return "product not found";
         k.TryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
         return "add " + pi.sku;
@@ -208,7 +208,7 @@ switch (step)
     case "add_plunge":
     case "add_burner":
     {
-        var pi = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku(step == "add_plunge" ? "Shelf:Top" : "60008LP/60009NG", false);
+        var pi = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.CatalogData.FindProductInfoBySku(step == "add_plunge" ? "Shelf:Top" : "60008LP/60009NG", false);
         if (pi == null) return "product not found";
         k.TryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
         return "add " + pi.sku;

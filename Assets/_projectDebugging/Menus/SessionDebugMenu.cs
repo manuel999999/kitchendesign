@@ -9,7 +9,12 @@ namespace KitchenDesign.Debugging
         [MenuItem(KickUserItem)]
         private static void KickUser()
         {
-            ProFitGlobals.KickUser("Kicked by debug hotkey.");
+            if (!DebugSystems.TryGet(out AppSystems systems))
+            {
+                return;
+            }
+
+            systems.Session.KickUser("Kicked by debug hotkey.");
         }
 
         [MenuItem(KickUserItem, true)]

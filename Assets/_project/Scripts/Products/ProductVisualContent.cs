@@ -529,7 +529,7 @@ namespace KitchenDesign.Products
                 else
                 {
                     Material occupantDefaultMaterial =
-                        await ProFitGlobals.appProfile.GetDefaultOccupantMaterial();
+                        await AppProfileStore.Profile.GetDefaultOccupantMaterial();
 
                     for (int i = 0; i < prefabMeshRenderers.Length; ++i)
                     {

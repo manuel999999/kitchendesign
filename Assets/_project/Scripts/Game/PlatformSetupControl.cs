@@ -114,7 +114,7 @@ namespace KitchenDesign
                     // Bypass authorization by simulating offline mode
 
                     string fieldName =
-                        $"{nameof(ProFitGlobals)}.{nameof(this._systems.Options)}";
+                        $"{nameof(Scriptables.AppProfileSO)}.{nameof(Scriptables.AppProfileSO.appOptions)}";
 
                     MelcherLog.LogWarning(
                         $"The simulated white label options provided in " +

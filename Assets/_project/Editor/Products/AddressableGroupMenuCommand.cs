@@ -205,19 +205,19 @@ namespace KitchenDesign.ProductsEditor
             MeasureTime(
                 logWriter,
                 "Updating product models",
-                () => UpdateModelGroup(ProFitGlobals.appProfile.productModelFolderPath, "ProductModels", "ProductMaterials")
+                () => UpdateModelGroup(AppProfileStore.Profile.productModelFolderPath, "ProductModels", "ProductMaterials")
             );
 
             MeasureTime(
                 logWriter,
                 "Updating cabinet section models",
-                () => UpdateModelGroup(ProFitGlobals.appProfile.cabinetSectionModelFolderPath, "CabinetModels", "ProductMaterials", databaseAssetGuids)
+                () => UpdateModelGroup(AppProfileStore.Profile.cabinetSectionModelFolderPath, "CabinetModels", "ProductMaterials", databaseAssetGuids)
             );
 
             MeasureTime(
                 logWriter,
                 "Updating product visual prefabs",
-                () => UpdateAssetGroups("t:prefab", ProFitGlobals.appProfile.productVisualFolderPath, "ProductVisuals", databaseAssetGuids)
+                () => UpdateAssetGroups("t:prefab", AppProfileStore.Profile.productVisualFolderPath, "ProductVisuals", databaseAssetGuids)
             );
 
             MeasureTime(
@@ -466,7 +466,7 @@ namespace KitchenDesign.ProductsEditor
             string[] textureGuids =
                 AssetDatabase.FindAssets(
                     filter: "t:texture",
-                    new[] { ProFitGlobals.appProfile.finishesFolderPath }
+                    new[] { AppProfileStore.Profile.finishesFolderPath }
                 );
 
             foreach (string textureGuid in textureGuids)
@@ -477,7 +477,7 @@ namespace KitchenDesign.ProductsEditor
             string[] materialGuids =
                 AssetDatabase.FindAssets(
                     filter: "t:material",
-                    new[] { ProFitGlobals.appProfile.finishesFolderPath }
+                    new[] { AppProfileStore.Profile.finishesFolderPath }
                 );
 
             foreach (string materialGuid in materialGuids)

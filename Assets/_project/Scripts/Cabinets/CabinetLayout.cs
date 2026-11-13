@@ -1570,7 +1570,7 @@ namespace KitchenDesign.Cabinets
             await newCabinet.SetCabinetMaterials(
                 cabinetMaterial,
                 countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                await AppProfileStore.Profile.GetDefaultKitchenMaterial()
             );
 
             // Ensure `spans` is rebuilt the next time it is accessed.

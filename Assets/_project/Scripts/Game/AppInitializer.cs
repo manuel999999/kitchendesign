@@ -25,6 +25,10 @@ namespace KitchenDesign
         private bool _loadsFirstAppScene;
         private AppSystems _systems;
 
+#if UNITY_EDITOR
+        public AppSystems SystemsForEditor => this._systems;
+#endif
+
         private void Awake()
         {
             this._loadsFirstAppScene = this.gameObject.scene.buildIndex == BootSceneBuildIndex;
@@ -62,7 +66,7 @@ namespace KitchenDesign
 
             this._systems = new AppSystems(this.appProfile, appRules, launchOptions, server, catalogData, clientList, session, productContent);
 
-            ProFitGlobals.Bind(this.appProfile, appRules, launchOptions, server, catalogData, clientList, session, productContent);
+            AppProfileStore.Bind(this.appProfile);
 
             session.Initialize();
             clientList.Initialize();

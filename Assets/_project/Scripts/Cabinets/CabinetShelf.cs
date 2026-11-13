@@ -550,7 +550,7 @@ namespace KitchenDesign.Cabinets
             await occupant.productVisualContentInstance.SetCabinetMaterials(
                 countertopMaterial,
                 countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                await AppProfileStore.Profile.GetDefaultKitchenMaterial()
 
             );
 
@@ -639,7 +639,7 @@ namespace KitchenDesign.Cabinets
             await occupant.productVisualContentInstance.SetCabinetMaterials(
                 cabinetMaterial,
                 countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                await AppProfileStore.Profile.GetDefaultKitchenMaterial()
             );
 
             Utility.RendererUtility.SetAllRendererMaterials(

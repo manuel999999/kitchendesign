@@ -98,7 +98,7 @@ namespace KitchenDesign
 
             m_BrandCatalogUi.Initialize(m_Kitchen, systems.Profile, systems.Options, systems.CatalogData, systems.Session);
             this.devUi.Initialize(systems.Options, systems.CatalogData, systems.ProductContent);
-            m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.CatalogData, systems.Session, systems.ProductContent, this.confirmPrompt, this.aboutProductPrompt);
+            m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.Server, systems.CatalogData, systems.Session, systems.ProductContent, this.confirmPrompt, this.aboutProductPrompt);
             m_DesignerNavigationUi.Initialize(m_Kitchen, systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session, this.confirmPrompt, this.savePrompt);
             m_BuildingMethodsUi.Initialize(m_Kitchen, systems.Session);
             m_CabinetShapeUi.Initialize(m_Kitchen, systems.Options, systems.Session);
@@ -106,10 +106,10 @@ namespace KitchenDesign
             m_CabinetOtherSizesUi.Initialize(m_Kitchen, systems.Session);
             m_WhiteLabelClientInfoUi.Initialize(m_Kitchen, systems.Options, systems.Server, systems.ClientList, systems.Session);
             this.productSearch.Initialize(m_Kitchen, systems.Rules, systems.CatalogData);
-            this.aboutProductPrompt.Initialize(m_Kitchen, systems.CatalogData);
+            this.aboutProductPrompt.Initialize(m_Kitchen, systems.CatalogData, systems.Server);
             this.setVolumeSizePrompt.Initialize(systems.Session);
             this.screenshots.Initialize(systems.Session);
-            m_TrialCountdownUi.Initialize(systems.Session);
+            m_TrialCountdownUi.Initialize(systems.Session, systems.Options);
 
             // Hide the debug cuboid visualizations by default
             OccupantOccupiedCuboidVisualization.isVisible = false;
@@ -183,7 +183,7 @@ namespace KitchenDesign
         private void Awake()
         {
             RenderSettings.skybox =
-                ProFitGlobals.appOptions.appSkin.designerSceneSkyboxMaterial;
+                AppProfileStore.Skin.designerSceneSkyboxMaterial;
             DynamicGI.UpdateEnvironment();
         }
 

@@ -19,7 +19,7 @@ var ps = update.GetParameters();
 r += "UpdateAssetGroups(" + string.Join(", ", System.Array.ConvertAll(ps, p => p.ParameterType.Name + " " + p.Name)) + ")\n";
 var args = new object[ps.Length];
 args[0] = "t:prefab";
-args[1] = KitchenDesign.ProFitGlobals.appProfile.productVisualFolderPath;
+args[1] = KitchenDesign.AppProfileStore.Profile.productVisualFolderPath;
 args[2] = "ProductVisuals";
 for (int i = 3; i < ps.Length; i++) args[i] = guids != null && ps[i].ParameterType.IsAssignableFrom(guids.GetType()) ? guids : (ps[i].HasDefaultValue ? ps[i].DefaultValue : null);
 update.Invoke(null, args);

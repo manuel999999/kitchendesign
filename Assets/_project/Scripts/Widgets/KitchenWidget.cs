@@ -83,7 +83,7 @@ namespace KitchenDesign.Widgets
 
             m_CanvasLocalScaleWhenVisible = m_CanvasRoot.localScale.x;
 
-            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = AppProfileStore.Skin;
 
             m_Glyph.textMesh.color = currentSkin.resizerWidgetForegroundColor;
             m_Border.color = currentSkin.resizerWidgetForegroundColor;

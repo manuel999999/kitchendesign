@@ -18,12 +18,14 @@ namespace KitchenDesign.UI.DesignerScreens
     public class DesignerAboutProductUI : BasePromptUI
     {
         private CatalogDataStatus _catalogData;
+        private ServerClient _server;
 
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen, CatalogDataStatus catalogData)
+        public void Initialize(Kitchen kitchen, CatalogDataStatus catalogData, ServerClient server)
         {
             this._catalogData = catalogData;
+            this._server = server;
             this._kitchen = kitchen;
         }
 
@@ -109,7 +111,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void OnClickServerLink(MelcherButton caller)
         {
-            AppLinks.OpenProductUrl(m_SelectedProductServerId);
+            AppLinks.OpenProductUrl(this._server.Connection.Host, m_SelectedProductServerId);
         }
 
         protected void OnClickAssetLink(MelcherButton caller)

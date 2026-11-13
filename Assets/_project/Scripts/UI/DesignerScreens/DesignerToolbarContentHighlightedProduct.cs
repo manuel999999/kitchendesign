@@ -25,9 +25,11 @@ namespace KitchenDesign.UI.DesignerScreens
         private DesignerAboutProductUI _aboutProductPrompt;
         private SessionStatus _session;
         private LaunchOptions _launchOptions;
+        private ServerClient _server;
 
-        public void Initialize(Kitchen kitchen, SessionStatus session, LaunchOptions launchOptions, DesignerAboutProductUI aboutProductPrompt)
+        public void Initialize(Kitchen kitchen, SessionStatus session, LaunchOptions launchOptions, ServerClient server, DesignerAboutProductUI aboutProductPrompt)
         {
+            this._server = server;
             this._kitchen = kitchen;
             this._aboutProductPrompt = aboutProductPrompt;
             this._session = session;
@@ -506,7 +508,7 @@ namespace KitchenDesign.UI.DesignerScreens
         {
             if (m_SelectedObject && m_SelectedObject.TryGetComponent(out Occupant occupant))
             {
-                AppLinks.OpenProductUrl(occupant.productInfo.id);
+                AppLinks.OpenProductUrl(this._server.Connection.Host, occupant.productInfo.id);
             }
         }
 

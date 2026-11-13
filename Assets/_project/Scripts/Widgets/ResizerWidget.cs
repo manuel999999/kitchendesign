@@ -104,7 +104,7 @@ namespace KitchenDesign.Widgets
         {
             m_WasErrorState = isError;
 
-            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = AppProfileStore.Skin;
 
             Color foregroundColor = currentSkin.resizerWidgetForegroundColor;
             Color backgroundColor = currentSkin.resizerWidgetBackgroundColor;

@@ -133,3 +133,18 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   0.14/255 of `final-tip/unity6-run2`. **Compare photos with `final-tip/unity6-run2`, not
   `final-tip/unity6`**: the latter is the capture with the three untextured covers (28316,
   27763, 27764), and comparing against it looks like a regression in exactly those three.
+- **B8.4 done 2026-11-13.** `ProFitGlobals` is deleted. `AppProfileStore` (`Profile`, `Options`,
+  `Skin`) is bound by `AppInitializer` and loads `Resources/AppProfile` on first use otherwise.
+  `AppLinks` takes the server host, or the options and the user type; `PayNowUI`,
+  `UnauthorizedDomainUI`, `TrialCountdownUI`, the highlighted-product content and the
+  about-product prompt are handed what they pass on. Changed from decision 6: the editor-only
+  way to the running systems is `AppInitializer.SystemsForEditor` (one object in every scene),
+  not a property on each `SceneInitializer`; the debug menus use it through
+  `DebugSystems.TryGet`, the check snippets under `Tools/` directly, so those snippets don't run
+  on older commits. `ProductIdRemapDatabaseSO.CaptureCurrentIds` reads the product groups from
+  the fallback JSON and passes the parsed products to the cabinet parser (button not run).
+  Full run `final-b84` against `final-tip`: `resave.json` identical in all 8 designs,
+  measurements camera noise only, photos within 0.05/255 of `final-tip/unity6-run2`, edit probe
+  identical (cameras aside), menu check the same as `final-b83`, listener order the same in the
+  menu and the designer, both cold starts 13 errors. Compiles as WebGL player scripts.
+  **Part (a) is done.**

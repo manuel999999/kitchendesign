@@ -42,7 +42,7 @@ namespace KitchenDesign.UI.Views
 
         protected void HandleAppearanceTransition(MelcherSelectable.Appearance appearance, bool instant)
         {
-            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = AppProfileStore.Skin;
 
             if (m_Checkmark)
             {

@@ -18,11 +18,13 @@ namespace KitchenDesign.UI.MenuScreens
     {
         private SessionStatus _session;
         private ServerClient _server;
+        private AppOptionsSO _options;
 
-        public void Initialize(SessionStatus session, ServerClient server)
+        public void Initialize(SessionStatus session, ServerClient server, AppOptionsSO options)
         {
             this._session = session;
             this._server = server;
+            this._options = options;
         }
 
         // =====================================================================
@@ -127,7 +129,7 @@ namespace KitchenDesign.UI.MenuScreens
         {
             if (m_IsPaymentMode)
             {
-                AppLinks.OpenSubscriptionLandingPage();
+                AppLinks.OpenSubscriptionLandingPage(this._options, this._session.UserProfile.userType);
             }
             else
             {
@@ -142,7 +144,7 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void OnPostProcessMessage(MelcherLocalizedText caller, ref string phrase)
         {
-            string appName = ProFitGlobals.appOptions.appDisplayName;
+            string appName = AppProfileStore.Options.appDisplayName;
 
             phrase = phrase.Replace("%APPNAME%", appName);
         }

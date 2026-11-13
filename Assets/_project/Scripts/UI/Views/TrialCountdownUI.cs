@@ -2,6 +2,7 @@ namespace KitchenDesign.UI.Views
 {
     using KitchenDesign.Utility;
     using KitchenDesign.Session;
+    using KitchenDesign.Scriptables;
     using Melcher;
     using System.Collections.Generic;
     using UnityEngine;
@@ -15,10 +16,12 @@ namespace KitchenDesign.UI.Views
     public class TrialCountdownUI : MelcherUI
     {
         private SessionStatus _session;
+        private AppOptionsSO _options;
 
-        public void Initialize(SessionStatus session)
+        public void Initialize(SessionStatus session, AppOptionsSO options)
         {
             this._session = session;
+            this._options = options;
         }
 
         // =====================================================================
@@ -71,7 +74,7 @@ namespace KitchenDesign.UI.Views
 
         protected void OnClickButton(MelcherButton caller)
         {
-            AppLinks.OpenSubscriptionLandingPage();
+            AppLinks.OpenSubscriptionLandingPage(this._options, this._session.UserProfile.userType);
         }
 
         protected IEnumerator<float> PeriodicCountdownRefresh()

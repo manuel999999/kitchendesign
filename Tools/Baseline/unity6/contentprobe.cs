@@ -1,4 +1,4 @@
-var status = KitchenDesign.ProFitGlobals.productContent;
+var status = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.ProductContent;
 var f = status.GetType().GetField("_states", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 var states = (System.Collections.IDictionary)f.GetValue(status);
 int ok = 0, failed = 0, withCopies = 0, other = 0;

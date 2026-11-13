@@ -1,5 +1,6 @@
 namespace KitchenDesign.Utility
 {
+    using KitchenDesign.Scriptables;
     using KitchenDesign.Shared.Enums;
     using UnityEngine;
     using Conditional = System.Diagnostics.ConditionalAttribute;
@@ -7,34 +8,34 @@ namespace KitchenDesign.Utility
     public static class AppLinks
     {
         [Conditional("UNITY_EDITOR"), Conditional("DEVELOPMENT_BUILD")]
-        public static void OpenProductUrl(int productServerId)
+        public static void OpenProductUrl(string serverHost, int productServerId)
         {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             const string Endpoint = "/admin/components/{product_id}/edit";
 
             Application.OpenURL(
-                ProFitGlobals.server.Connection.Host + Endpoint.Replace("{product_id}", productServerId.ToString())
+                serverHost + Endpoint.Replace("{product_id}", productServerId.ToString())
             );
 #endif
         }
 
-        public static void OpenSubscriptionLandingPage()
+        public static void OpenSubscriptionLandingPage(AppOptionsSO options, UserType userType)
         {
             string subscriptionUrl =
-                ProFitGlobals.userProfile.userType switch
+                userType switch
                 {
-                    UserType.Trial => ProFitGlobals.appOptions.subscriptionUrlForTrialAccount,
-                    _ => ProFitGlobals.appOptions.subscriptionUrlForDealerAccount
+                    UserType.Trial => options.subscriptionUrlForTrialAccount,
+                    _ => options.subscriptionUrlForDealerAccount
                 };
 
             Application.OpenURL(subscriptionUrl);
         }
 
-        public static void ShowTermsAndConditions()
+        public static void ShowTermsAndConditions(string serverHost)
         {
             const string Endpoint = "/webgl/privacy-policy.html";
 
-            Application.OpenURL(ProFitGlobals.server.Connection.Host + Endpoint);
+            Application.OpenURL(serverHost + Endpoint);
         }
     }
 }

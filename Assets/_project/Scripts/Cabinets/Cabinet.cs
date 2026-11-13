@@ -2025,7 +2025,7 @@ namespace KitchenDesign.Cabinets
 
             Material cabinetMaterialExclusive = cabinetMaterial;
 
-            AppSkinSO appSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO appSkin = AppProfileStore.Skin;
 
             bool isCabinetHighlighting =
                 cabinetMaterial == appSkin.primarySelectionMaterial ||
@@ -2090,7 +2090,7 @@ namespace KitchenDesign.Cabinets
                     else
                     {
                         Material kitchenDefaultMaterial =
-                            await ProFitGlobals.appProfile.GetDefaultKitchenMaterial();
+                            await AppProfileStore.Profile.GetDefaultKitchenMaterial();
 
                         for (int i = 0; i < prefabMeshRenderers.Length; ++i)
                         {

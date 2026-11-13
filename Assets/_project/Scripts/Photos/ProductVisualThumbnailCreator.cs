@@ -42,7 +42,7 @@ namespace KitchenDesign.Photos
             string activeScenePath = EditorSceneManager.GetActiveScene().path;
             string screenshotScenePath =
                 AssetDatabase.GetAssetPath(
-                    ProFitGlobals.appProfile.screenshotScene
+                    AppProfileStore.Profile.screenshotScene
                 );
 
             if (activeScenePath == screenshotScenePath)
@@ -159,7 +159,7 @@ namespace KitchenDesign.Photos
 
                 BrandCatalogSO weatherStrongBrandCatalog =
                     MelcherCommon.Find(
-                        ProFitGlobals.appProfile.presetBrandCatalogs,
+                        AppProfileStore.Profile.presetBrandCatalogs,
                         static x => x.catalogName == "WeatherStrong"
                     );
 
@@ -305,7 +305,7 @@ namespace KitchenDesign.Photos
 
                         for (int j = 0; j < meshMaterials.Length; ++j)
                         {
-                            if (meshMaterials[j] == ProFitGlobals.appProfile.editorOnlyDefaultKitchenMaterial)
+                            if (meshMaterials[j] == AppProfileStore.Profile.editorOnlyDefaultKitchenMaterial)
                             {
                                 // Found the "cabinet material" identifier. It
                                 // is either substituted with the kitchen's
@@ -314,7 +314,7 @@ namespace KitchenDesign.Photos
                                 // usual occupant material.
 
                                 meshMaterials[j] =
-                                    ProFitGlobals.appProfile.editorOnlyDefaultOccupantMaterial;
+                                    AppProfileStore.Profile.editorOnlyDefaultOccupantMaterial;
                             }
                         }
 
@@ -524,7 +524,7 @@ namespace KitchenDesign.Photos
 
             // Load screenshot-quality render pipeline
             UniversalRenderPipelineAsset screenshotQuality =
-                ProFitGlobals.appProfile.screenshotQuality;
+                AppProfileStore.Profile.screenshotQuality;
 
             if (!Utility.RenderQuality.TrySetRenderQuality(screenshotQuality))
             {
@@ -634,7 +634,7 @@ namespace KitchenDesign.Photos
 
                 BrandCatalogSO usedBrandCatalog =
                     MelcherCommon.Find(
-                        ProFitGlobals.appProfile.presetBrandCatalogs,
+                        AppProfileStore.Profile.presetBrandCatalogs,
                         static x => x.catalogTag == m_UsedBrandCatalogName
                     );
 

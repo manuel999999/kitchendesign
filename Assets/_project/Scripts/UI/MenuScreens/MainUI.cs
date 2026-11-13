@@ -52,7 +52,7 @@ namespace KitchenDesign.UI.MenuScreens
         {
             base.Awake();
 
-            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = AppProfileStore.Skin;
 
             m_HeaderBackground.color = currentSkin.primaryColor;
 

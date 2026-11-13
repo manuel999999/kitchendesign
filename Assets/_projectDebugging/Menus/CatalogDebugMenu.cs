@@ -10,7 +10,13 @@ namespace KitchenDesign.Debugging
         [MenuItem("Tools/Kitchen Design/Dump sinks with zero depth")]
         private static void DumpSinksWithZeroDepth()
         {
-            foreach (ProductInfo productInfo in ProFitGlobals.sourceProducts)
+            if (!DebugSystems.TryGet(out AppSystems systems))
+            {
+                Debug.Log("The product list exists only in play mode.");
+                return;
+            }
+
+            foreach (ProductInfo productInfo in systems.CatalogData.SourceProducts)
             {
                 if (productInfo.category != ProductCategory.Sink)
                 {

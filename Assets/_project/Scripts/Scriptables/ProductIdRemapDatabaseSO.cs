@@ -3,6 +3,8 @@ namespace KitchenDesign.Scriptables
     using Melcher;
     using KitchenDesign.Serializables;
     using KitchenDesign.Server;
+    using KitchenDesign.AppRules;
+    using KitchenDesign.Shared.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -162,7 +164,7 @@ namespace KitchenDesign.Scriptables
         private void CaptureCurrentIds()
         {
             string fallbackManufacturerJsonPath =
-                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                AppProfileStore.Profile.GetFallbackJsonPath(
                         Server.FallbackJsonFiles.Manufacturers
                 );
 
@@ -201,7 +203,7 @@ namespace KitchenDesign.Scriptables
             }
 
             string fallbackProductListJsonPath =
-                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                AppProfileStore.Profile.GetFallbackJsonPath(
                         Server.FallbackJsonFiles.Products
                 );
 
@@ -227,15 +229,52 @@ namespace KitchenDesign.Scriptables
                 return;
             }
 
-            MelcherJsonObjectParser parser =
-                new (productListJson);
+            IAppRules appRules = AppRulesFactory.Create(AppProfileStore.Options.userFilter);
+
+            string fallbackProductGroupsJsonPath =
+                AppProfileStore.Profile.GetFallbackJsonPath(
+                        Server.FallbackJsonFiles.ProductGroups
+                );
+
+            TextAsset fallbackProductGroupsJson =
+                Resources.Load<TextAsset>(
+                   fallbackProductGroupsJsonPath
+                );
+
+            List<ProductGroupInfo> productGroups = new ();
+
+            if (fallbackProductGroupsJson)
+            {
+                Dictionary<string, object> productGroupsJson =
+                    (Dictionary<string, object>)MiniJSON.Json.Deserialize(
+                        fallbackProductGroupsJson.text
+                    );
+
+                if (productGroupsJson == null)
+                {
+                    MelcherLog.LogError("Failed to parse product groups JSON.");
+                    return;
+                }
+
+                Exception productGroupsException =
+                    Server.CatalogJson.TryParseProductGroups(
+                        new MelcherJsonObjectParser(productGroupsJson),
+                        out productGroups
+                    );
+
+                if (productGroupsException != null)
+                {
+                    Debug.LogException(productGroupsException);
+                    return;
+                }
+            }
 
             System.Exception productListException =
                 Server.CatalogJson.TryParseProductList(
                     new MelcherJsonObjectParser(productListJson),
                     manufacturers,
-                    ProFitGlobals.productGroups,
-                    ProFitGlobals.appRules,
+                    productGroups,
+                    appRules,
                     out List<ProductInfo> productInfos
                 );
 
@@ -246,7 +285,7 @@ namespace KitchenDesign.Scriptables
             }
 
             string fallbackCabinetListJsonPath =
-                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                AppProfileStore.Profile.GetFallbackJsonPath(
                         Server.FallbackJsonFiles.Cabinets
                 );
 
@@ -256,7 +295,7 @@ namespace KitchenDesign.Scriptables
                 );
 
             string fallbackCabinetCategoriesJsonPath =
-                ProFitGlobals.appProfile.GetFallbackJsonPath(
+                AppProfileStore.Profile.GetFallbackJsonPath(
                         Server.FallbackJsonFiles.CabinetSectionCategories
                 );
 
@@ -308,9 +347,9 @@ namespace KitchenDesign.Scriptables
                         new MelcherJsonObjectParser(cabinetListJson),
                         manufacturers,
                         cabinetCategories,
-                        ProFitGlobals.productGroups,
-                        ProFitGlobals.sourceProducts,
-                        ProFitGlobals.appRules,
+                        productGroups,
+                        productInfos,
+                        appRules,
                         out cabinetProductInfos
                     );
 

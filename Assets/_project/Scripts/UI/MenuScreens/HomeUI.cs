@@ -17,7 +17,7 @@ namespace KitchenDesign.UI.MenuScreens
             base.Awake();
 
             m_GridBackground.color =
-                ProFitGlobals.appOptions.appSkin.primaryColor;
+                AppProfileStore.Skin.primaryColor;
         }
 
         protected override void OnEnable()
@@ -26,7 +26,7 @@ namespace KitchenDesign.UI.MenuScreens
 
             m_StartCustomizingButton.onClick += OnStartCustomizing;
 
-            m_HeroImage.sprite = ProFitGlobals.appOptions.homeScreenImage;
+            m_HeroImage.sprite = AppProfileStore.Options.homeScreenImage;
         }
 
         protected override void OnDisable()

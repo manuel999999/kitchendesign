@@ -33,7 +33,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
                 // Try to lookup a logo for this (possibly) user-defined catalog.
                 if (m_BrandCatalog &&
-                    ProFitGlobals.appProfile.brandCatalogLogoDatabase.Find(brandCatalog.catalogId, out GroupInfo catalogLogoInfo))
+                    AppProfileStore.Profile.brandCatalogLogoDatabase.Find(brandCatalog.catalogId, out GroupInfo catalogLogoInfo))
                 {
                     catalogLogo = catalogLogoInfo.sprite;
                 }
@@ -41,7 +41,7 @@ namespace KitchenDesign.UI.DesignerScreens
                 if (!catalogLogo)
                 {
                     // No logo was found, fall back to a default image.
-                    catalogLogo = ProFitGlobals.appProfile.brandCatalogLogoDatabase.defaultSprite;
+                    catalogLogo = AppProfileStore.Profile.brandCatalogLogoDatabase.defaultSprite;
                 }
 
                 m_CatalogImage.sprite = catalogLogo;

@@ -19,7 +19,7 @@ namespace KitchenDesign.UI.MenuScreens
         private void Start()
         {
             gameObject.SetActive(
-                ProFitGlobals.appProfile.appOptions.userFilter == m_UserFilter
+                AppProfileStore.Options.userFilter == m_UserFilter
             );
         }
 

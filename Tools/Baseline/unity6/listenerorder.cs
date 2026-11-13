@@ -80,11 +80,11 @@ if (kitchen != null)
     var ep = kitchenType.GetProperty("Events", bf) ?? kitchenType.GetProperty("events", bf);
     if (ep != null) { var ke = ep.GetValue(kitchen); if (ke != null) Dump("KitchenEvents", ke.GetType(), ke); }
 }
-var contentType = T("KitchenDesign.ProFitGlobals");
-if (contentType != null)
+var appInitializer = UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>();
+if (appInitializer != null && appInitializer.SystemsForEditor != null)
 {
-    var pc = contentType.GetProperty("productContent", bf);
-    if (pc != null) { var c = pc.GetValue(null); if (c != null) Dump("ProductVisualContentStatus", c.GetType(), c); }
+    var c = appInitializer.SystemsForEditor.ProductContent;
+    if (c != null) Dump("ProductVisualContentStatus", c.GetType(), c);
 }
 System.IO.File.WriteAllLines(outPath, lines);
 return lines.Count + " lines -> " + outPath;

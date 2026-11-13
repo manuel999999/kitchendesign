@@ -25,13 +25,13 @@ namespace KitchenDesign
         {
             // App name
             PlayerSettings.productName =
-                ProFitGlobals.appOptions.appDisplayName;
+                AppProfileStore.Options.appDisplayName;
 
             {
                 // WebGL background colour
 
                 PlayerSettings.SplashScreen.backgroundColor =
-                    ProFitGlobals.appOptions.appSkin.primaryColor;
+                    AppProfileStore.Skin.primaryColor;
 
                 MelcherLog.Log("Applied app skin's primary color as background color. " +
                     MelcherFormat.ConsoleColorPreview(PlayerSettings.SplashScreen.backgroundColor)
@@ -42,16 +42,16 @@ namespace KitchenDesign
                 // Application identifer (for mobile stores)
 
                 MelcherEditorUtility.SetAllApplicationIdentifiers(
-                    ProFitGlobals.appOptions.appIdentifier
+                    AppProfileStore.Options.appIdentifier
                 );
 
-                MelcherLog.Log($"Applied app identifier: {ProFitGlobals.appOptions.appIdentifier}");
+                MelcherLog.Log($"Applied app identifier: {AppProfileStore.Options.appIdentifier}");
             }
 
             {
                 // App icon (mainly for mobile stores)
 
-                Texture2D appIcon = ProFitGlobals.appOptions.appIcon;
+                Texture2D appIcon = AppProfileStore.Options.appIcon;
 
                 // Set the default icon
                 PlayerSettings.SetIconsForTargetGroup(
@@ -73,14 +73,14 @@ namespace KitchenDesign
                 // the smaller sizes.
 
                 Texture2D androidIconBackground =
-                    ProFitGlobals.appOptions.androidProjectSettings.adaptiveIconBackground;
+                    AppProfileStore.Options.androidProjectSettings.adaptiveIconBackground;
 
                 Texture2D androidIconForeground =
-                    ProFitGlobals.appOptions.androidProjectSettings.adapativeIconForeground;
+                    AppProfileStore.Options.androidProjectSettings.adapativeIconForeground;
 
                 if (((bool)androidIconBackground) != ((bool)androidIconForeground))
                 {
-                    throw new System.Exception($"AppOptions {ProFitGlobals.appOptions.name} must provide both or neither, foreground and background adaptive Android icons.");
+                    throw new System.Exception($"AppOptions {AppProfileStore.Options.name} must provide both or neither, foreground and background adaptive Android icons.");
                 }
 
                 androidAdapativeIcons[0].SetTexture(androidIconBackground, layer: 0);
@@ -95,7 +95,7 @@ namespace KitchenDesign
 #endif
 
                 MelcherLog.Log(
-                    $"Applied app icon(s): {ProFitGlobals.appOptions.appIcon}",
+                    $"Applied app icon(s): {AppProfileStore.Options.appIcon}",
                     appIcon
                 );
             }
@@ -198,7 +198,7 @@ namespace KitchenDesign
                     .ToArray();
 
             string activeAppResourcesName =
-                ProFitGlobals.appProfile.GetAppResourcesName();
+                AppProfileStore.Profile.GetAppResourcesName();
 
             DirectoryInfo fromDirectoryInfo = new (from);
 

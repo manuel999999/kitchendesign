@@ -321,7 +321,7 @@ namespace KitchenDesign.Measures
 
             // Apply the app theme's colour to the lines
             color =
-                ProFitGlobals.appOptions.appSkin.designerMeasureLineColor;
+                AppProfileStore.Skin.designerMeasureLineColor;
 
             //
             m_LineRendererWidthCurve = m_LineRenderer.widthCurve;

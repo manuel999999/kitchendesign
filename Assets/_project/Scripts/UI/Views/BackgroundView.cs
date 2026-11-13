@@ -18,7 +18,7 @@ namespace KitchenDesign.UI.Views
 
         protected void Awake()
         {
-            AppSkinSO currentSkin = ProFitGlobals.appOptions.appSkin;
+            AppSkinSO currentSkin = AppProfileStore.Skin;
 
             ButtonStyleSO backgroundStyle =
                 currentSkin.GetButtonStyleFromName(backgroundStyleName);

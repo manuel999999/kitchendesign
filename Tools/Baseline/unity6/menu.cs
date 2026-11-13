@@ -7,7 +7,7 @@ bool Up(string n) { return ((Melcher.MelcherUI)F(n)).IsVisible(); }
 string step = "state";
 if (step == "home") { KitchenDesign.Events.EventSession.OnHomeRequested.Raise(); }
 else if (step == "clients") { KitchenDesign.Events.EventMenu.OnClientListRequested.Raise(); }
-else if (step == "quotes") { KitchenDesign.ProFitGlobals.activeClientId = 10191; KitchenDesign.Events.EventMenu.OnClientQuoteListRequested.Raise(); }
+else if (step == "quotes") { UnityEngine.Object.FindFirstObjectByType<KitchenDesign.AppInitializer>().SystemsForEditor.ClientList.ActiveClientId = 10191; KitchenDesign.Events.EventMenu.OnClientQuoteListRequested.Raise(); }
 else if (step == "clientinfo") { KitchenDesign.Events.EventMenu.OnClientInfoRequested.Raise(new KitchenDesign.Events.ClientInfo(10191)); }
 else if (step == "quoteinfo") { KitchenDesign.Events.EventMenu.OnQuoteInfoRequested.Raise(new KitchenDesign.Events.ClientQuoteInfo(10191, 27755)); }
 else if (step == "quoteinfo_close") { ((KitchenDesign.UI.MenuScreens.QuoteInfoUI)F("m_QuoteInfoUi")).Hide(); }

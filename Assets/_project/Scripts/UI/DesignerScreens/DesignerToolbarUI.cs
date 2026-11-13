@@ -86,7 +86,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen, AppProfileSO profile, IAppRules rules, LaunchOptions launchOptions, CatalogDataStatus catalogData, SessionStatus session, ProductVisualContentStatus productContent, DesignerConfirmUI confirmPrompt, DesignerAboutProductUI aboutProductPrompt)
+        public void Initialize(Kitchen kitchen, AppProfileSO profile, IAppRules rules, LaunchOptions launchOptions, ServerClient server, CatalogDataStatus catalogData, SessionStatus session, ProductVisualContentStatus productContent, DesignerConfirmUI confirmPrompt, DesignerAboutProductUI aboutProductPrompt)
         {
             this._confirmPrompt = confirmPrompt;
             this._aboutProductPrompt = aboutProductPrompt;
@@ -97,7 +97,7 @@ namespace KitchenDesign.UI.DesignerScreens
             this._session = session;
             this._productContent = productContent;
             this._kitchen = kitchen;
-            m_HighlightedProductContent.Initialize(kitchen, session, launchOptions, aboutProductPrompt);
+            m_HighlightedProductContent.Initialize(kitchen, session, launchOptions, server, aboutProductPrompt);
         }
 
         // =====================================================================

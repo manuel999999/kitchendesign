@@ -1,11 +1,22 @@
 namespace KitchenDesign.UI.MenuScreens
 {
     using KitchenDesign.Utility;
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Session;
     using Melcher;
     using UnityEngine;
 
     public class UnauthorizedDomainUI : MelcherUI
     {
+        private SessionStatus _session;
+        private AppOptionsSO _options;
+
+        public void Initialize(SessionStatus session, AppOptionsSO options)
+        {
+            this._session = session;
+            this._options = options;
+        }
+
         public void SetFields(string authorizedDomain)
         {
             string authorizedDomains = "geminikitchendesigner.com";
@@ -32,7 +43,7 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void ShowSubscriptionPage(MelcherButton caller)
         {
-            AppLinks.OpenSubscriptionLandingPage();
+            AppLinks.OpenSubscriptionLandingPage(this._options, this._session.UserProfile.userType);
         }
 
         [Header(nameof(UnauthorizedDomainUI))]

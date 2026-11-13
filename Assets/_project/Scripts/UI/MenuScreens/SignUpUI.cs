@@ -166,7 +166,7 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void ShowTermsOfService(MelcherButton caller)
         {
-            AppLinks.ShowTermsAndConditions();
+            AppLinks.ShowTermsAndConditions(this._server.Connection.Host);
         }
 
         protected void TrySignUp(MelcherButton caller)

@@ -158,7 +158,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void OnClickShowTermsAndConditions(MelcherButton caller)
         {
-            AppLinks.ShowTermsAndConditions();
+            AppLinks.ShowTermsAndConditions(this._server.Connection.Host);
         }
 
         protected void OnClickNext(MelcherButton caller)

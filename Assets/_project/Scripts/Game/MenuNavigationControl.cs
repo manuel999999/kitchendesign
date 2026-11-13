@@ -31,7 +31,7 @@ namespace KitchenDesign
             m_LogInUi.Initialize(systems.Session, systems.Server, systems.Options);
             m_ResetPasswordUi.Initialize(systems.Server);
             m_DeleteAccountUi.Initialize(systems.Session, systems.Server);
-            m_PayNowUi.Initialize(systems.Session, systems.Server);
+            m_PayNowUi.Initialize(systems.Session, systems.Server, systems.Options);
             m_CreateClientUi.Initialize(systems.Session, systems.ClientList, systems.Server);
             m_ClientListUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.sortModePrompt);
             m_ClientProfileUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.editProfilePrompt);
@@ -43,7 +43,8 @@ namespace KitchenDesign
             m_ManufacturerWhitelistUi.Initialize(systems.Session, systems.CatalogData, systems.Server, systems.Options, systems.Rules, hasPendingChanges => this.SetMenuHasPendingChanges(m_ManufacturerWhitelistUi, hasPendingChanges));
             m_UserLogOutPromptUi.Initialize(systems.Session);
             this.kioskPinPrompt.Initialize(systems.Session);
-            m_TrialCountdownUi.Initialize(systems.Session);
+            m_TrialCountdownUi.Initialize(systems.Session, systems.Options);
+            m_UnauthorizedDomainUi.Initialize(systems.Session, systems.Options);
 
             // Reset the last selected user and quote to avoid dangling
             // references to users who may not exist or be our own
