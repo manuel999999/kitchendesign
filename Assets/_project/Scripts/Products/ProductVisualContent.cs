@@ -183,7 +183,7 @@ namespace KitchenDesign.Products
         /// <summary>
         /// Set whether the product's cut-out measurements are enabled and
         /// therefore displayed. This function does not update the position of
-        /// the measurement lines. See <see cref="KitchenScreenshotManager.SetupOccupantCutOutMeasurements(Kitchen, ProductVisualContent)"/>
+        /// the measurement lines. See <see cref="KitchenScreenshotControl.SetupOccupantCutOutMeasurements(Kitchen, ProductVisualContent)"/>
         /// for that.
         /// </summary>
         public void SetCutOutMeasurementsVisibility(bool visible, ScreenshotAngle screenshotAngle)

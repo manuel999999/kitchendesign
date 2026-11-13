@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Cameras
 {
     using KitchenDesign.KitchenModel;
     using Melcher;
@@ -12,7 +12,7 @@ namespace KitchenDesign
     ///     and zoom in or out. It is sometimes referred to as the side camera
     ///     to distinguish it from the top camera.
     /// </summary>
-    public class DesignerOrbitCamera : MelcherMonoBehaviour
+    public class OrbitCameraControl : MelcherMonoBehaviour
     {
         private KitchenEvents _events;
 
@@ -187,9 +187,9 @@ namespace KitchenDesign
 
         protected float m_InitialCameraYaw;
         protected float m_TargetCameraYaw;
-    }   // class DesignerOrbitCamera
+    }   // class OrbitCameraControl
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Cameras
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

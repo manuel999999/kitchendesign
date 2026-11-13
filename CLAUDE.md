@@ -1434,6 +1434,31 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `.meta` (scenes and prefabs bind by GUID, so no asset changed); comments kept in files that only
     moved. Still in `AssetsMelcher/Scripts` from this area's list: nothing; what remains there is
     other areas' (screens, scenes, photos, `EventBridge`, `ProFitGlobals`, `Const`, small helpers).
+- **Cameras and photos** (area 6 of the refactor, from 2026-11-13; plan:
+  `.claude/prompts/06-cameras-photos.md`).
+  - `KitchenScreenshotControl` (`_project/Scripts/Photos/`, `KitchenDesign.Photos`; was
+    `KitchenScreenshotManager`): takes the save photos (`TakeScreenshots(kitchen)` returns a
+    `ScreenshotGallery`: the cover, the top-down photo and its plan, and a front photo and plan per
+    span) and places the measures for the plan photos. The PDF photo size is 1920×666 (an aspect
+    that fits the PDF page) and the plan size 1920×1360 (fills the page).
+    `SkipScreenshotInEditor` is a development switch that skips the renders to debug the measure
+    lines faster. Out of it since B6.1: `ScreenshotGallery` (`Serializables/`; serializable only
+    so the pictures can be inspected in the editor), `CameraCapture.TakeScreenshotFromCamera`
+    (renders a camera to JPG bytes; the hamburger menu's Export JPG uses it too),
+    `OccupantNeighbourFinder` (for every occupant, its nearest neighbour in each direction visible
+    from the top and from the front, then the unique pairs to measure between; a pair's second
+    occupant is null when the measure runs to the cabinet's edge) with its types
+    `OccupantNearestNeighbours` (arrays indexed by `CabinetLocalDirection`, oversized so the enum
+    value is the index), `OccupantAndDistance`, `OccupantMeasurementPair`, and
+    `MeasurementForScreenshot` (a placed measure, the angle it shows in, and its span).
+  - `ScreenshotAngle` (`_projectShared/Enums/`, values as before: None, Cover, Top, Front, Back)
+    and `IsPlanAngle` (`_projectShared/Common/`: top, front or back).
+  - `ProductVisualThumbnailCreator` (`Photos/`): static editor-tool code that renders product
+    thumbnails in the screenshot scene. It keeps reading `ProFitGlobals.appProfile`: it runs in
+    edit mode, where nothing constructs systems.
+  - Cameras (`_project/Scripts/Cameras/`, `KitchenDesign.Cameras`): `OrbitCameraControl` (was
+    `DesignerOrbitCamera`), `OverheadCameraControl` (was `DesignerOverheadCamera`).
+    `SpinBehavior` (`Behaviors/`, was `RotateCamera`) turns the object it is on.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
@@ -1837,8 +1862,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
-  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Next: area 6 (cameras and
-  photos), area 7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
+  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos) is under way
+  (`06-cameras-photos.md`), then area 7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at

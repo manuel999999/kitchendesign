@@ -1,5 +1,6 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.Cameras;
     using KitchenDesign.UI.DesignerScreens;
     using KitchenDesign.Events;
     using Melcher;
@@ -2965,7 +2966,7 @@ namespace KitchenDesign.KitchenModel
         private Transform m_Transform = null;
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
-        protected DesignerOrbitCamera m_OrbitCamera = default;
+        protected OrbitCameraControl m_OrbitCamera = default;
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
         protected MeasurementOverlayManager m_MeasurementOverlayManager = default;

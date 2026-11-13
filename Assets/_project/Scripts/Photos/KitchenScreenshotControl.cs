@@ -1,5 +1,6 @@
-namespace KitchenDesign
+namespace KitchenDesign.Photos
 {
+    using KitchenDesign.Serializables;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -26,7 +27,7 @@ namespace KitchenDesign
     ///     direction for each occupant that is added to the cabinet, and it
     ///     does this for every screenshot camera angle used.
     /// </summary>
-    public class KitchenScreenshotManager : MelcherMonoBehaviour
+    public class KitchenScreenshotControl : MelcherMonoBehaviour
     {
         /// <summary>
         ///     The resolution of screenshots used in the PDF. The aspect ratio
@@ -48,135 +49,6 @@ namespace KitchenDesign
         /// </summary>
         public const bool SkipScreenshotInEditor = false;
 
-        public static byte[] TakeScreenshotFromCamera(Camera screenshotCamera, Vector2Int screenshotResolution, System.Action beforeRender = null, System.Action afterRender = null)
-        {
-            if (Application.isEditor && SkipScreenshotInEditor)
-            {
-                return null;
-            }
-
-            // Force the garbage collector to run to free up memory (iOS).
-            // Without this, low-memory devices may run out of memory.
-            Utility.MemoryUtility.GarbageCollectOnLowMemoryDevices();
-
-            // Get a temporary render texture for our screenshot (with MSAA
-            // and stenciling enabled). MSAA: for soft edges, stenciling: for
-            // cut-out support (render feature)
-            RenderTextureDescriptor descriptor =
-                new RenderTextureDescriptor(
-                    screenshotResolution.x,
-                    screenshotResolution.y
-                );
-
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-            {
-                // This fixes an issue we were having on WebGL where the render
-                // texture had weird garbage and clipping effects.
-                // TODO: We should determine which format Unity is selecting and
-                //       use that explicitly.
-                descriptor.depthBufferBits = 16;
-            }
-            else
-            {
-                descriptor.depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D24_UNorm_S8_UInt;
-            }
-
-            descriptor.msaaSamples = 8;
-            descriptor.mipCount = 0;
-            descriptor.useMipMap = false;
-
-            // I was using RenderTexture.GetTemporary() and ReleaseTemporary(),
-            // but switched it out when I started having an issue on WebGL
-            // where the rendered images had garbage pixels and grey clipping
-            // effects (only rendering bottom left corner or bottom half of
-            // image). -Ryan
-            RenderTexture screenshotTargetTexture = new RenderTexture(descriptor);
-
-            using var releaseRenderTexture =
-                MelcherDeferred.Defer(
-                    toCapture: screenshotTargetTexture,
-                    onDispose: static renderTexture =>
-                    {
-                        if (renderTexture)
-                        {
-                            DestroyImmediate(renderTexture);
-                        }
-                    }
-                );
-
-            Debug.Assert(screenshotTargetTexture.width == screenshotResolution.x);
-            Debug.Assert(screenshotTargetTexture.height == screenshotResolution.y);
-
-            // Render the screenshot camera to a temporary render texture
-            RenderTexture targetTextureToRestore = screenshotCamera.targetTexture;
-
-            using var restoreCameraTarget =
-                MelcherDeferred.Defer(
-                    () => screenshotCamera.targetTexture = targetTextureToRestore
-                );
-
-            screenshotCamera.targetTexture = screenshotTargetTexture;
-
-            beforeRender?.Invoke();
-            screenshotCamera.Render();
-            afterRender?.Invoke();
-
-            //
-            // Copy the render texture pixels into a Texture2D so the
-            // screenshot's bytes can be encoded as an image and later uploaded
-            // to the server.
-            //
-
-            // Create readable texture (one that can use EncodeToJPG)
-            Texture2D screenshot =
-                new Texture2D(
-                    screenshotResolution.x,
-                    screenshotResolution.y,
-                    TextureFormat.ARGB32,
-                    mipChain: false
-                );
-
-            if (!screenshot)
-            {
-                throw new System.InvalidOperationException("Failed to create texture for reading screenshot.");
-            }
-
-            using var releaseScreenshot =
-                MelcherDeferred.Defer(
-                    toCapture: screenshot,
-                    onDispose: static screenshot =>
-                    {
-                        if (screenshot)
-                        {
-                            DestroyImmediate(screenshot);
-                        }
-                    }
-                );
-
-            // Make the screenshot render texture active so it can be read
-            RenderTexture renderTextureToRestore = RenderTexture.active;
-            RenderTexture.active = screenshotTargetTexture;
-
-            using var restoreRenderTexture =
-                MelcherDeferred.Defer(
-                    toCapture: renderTextureToRestore,
-                    onDispose: static renderTextureToRestore => RenderTexture.active = renderTextureToRestore
-                );
-
-            Debug.Assert(screenshotTargetTexture.width == screenshot.width);
-            Debug.Assert(screenshotTargetTexture.height == screenshot.height);
-
-            // Copy render texture to a readable/encodable texture
-            Rect rect = new Rect(0, 0, screenshotResolution.x, screenshotResolution.y);
-            screenshot.ReadPixels(rect, 0, 0);
-            screenshot.Apply(updateMipmaps: false, makeNoLongerReadable: false);
-
-            // We were returning a Texture2D, but to reduce memory overhead
-            // we will only return the jpeg bytes.
-            byte[] screenshotData = screenshot.EncodeToJPG();
-
-            return screenshotData;
-        }
 
         /// <summary>
         ///     Take all screenshots for the design's PDF.
@@ -194,12 +66,12 @@ namespace KitchenDesign
             // Figure out where products are in relation to each other. We'll
             // use this to find pairs of products to draw measurements between
             List<OccupantNearestNeighbours> occupantToNearestNeighbours =
-                FindNeighboursOfAllOccupants(kitchen);
+                OccupantNeighbourFinder.FindNeighboursOfAllOccupants(kitchen);
 
             // A list of measurement pairs. Each occupant has 1 closest
             // neighbour for each 6 ordinal directions (CabinetLocalDirection).
             List<OccupantMeasurementPair> uniqueMeasurementPairs =
-                FindUniqueOccupantMeasurementPairs(kitchen, occupantToNearestNeighbours);
+                OccupantNeighbourFinder.FindUniqueOccupantMeasurementPairs(kitchen, occupantToNearestNeighbours);
 
             List<MeasurementForScreenshot> measuresForScreenshots =
                 PopulateMeasuresForScreenshots(kitchen, uniqueMeasurementPairs);
@@ -213,7 +85,7 @@ namespace KitchenDesign
                     () => kitchen.ground.SetActive(wasGroundVisible)
                 );
 
-            screenshots.cover = TakeScreenshotFromCamera(
+            screenshots.cover = CameraCapture.TakeScreenshotFromCamera(
                 m_SaveCoverCamera,
                 PdfImageResolution,
                 beforeRender: () =>
@@ -315,7 +187,7 @@ namespace KitchenDesign
                 FitFrontCamera(cabinetOutsideCuboidInSpanSpace, PdfImageResolution, tight: false);
 
                 screenshots.front.Add(
-                    TakeScreenshotFromCamera(m_SaveFrontCamera, PdfImageResolution)
+                    CameraCapture.TakeScreenshotFromCamera(m_SaveFrontCamera, PdfImageResolution)
                 );
 
                 await ArtificialDelay();
@@ -345,7 +217,7 @@ namespace KitchenDesign
                 );
 
                 byte[] screenshotData =
-                    TakeScreenshotFromCamera(
+                    CameraCapture.TakeScreenshotFromCamera(
                         m_SaveFrontCamera,
                         PdfPlanImageResolution
                     );
@@ -400,7 +272,7 @@ namespace KitchenDesign
 
             Vector2Int topDownScreenshotResolution = PdfImageResolution;
             topDownScreenshotResolution.y = topDownScreenshotResolution.x;
-            screenshots.topDown = TakeScreenshotFromCamera(m_SaveTopDownCamera, topDownScreenshotResolution);
+            screenshots.topDown = CameraCapture.TakeScreenshotFromCamera(m_SaveTopDownCamera, topDownScreenshotResolution);
 
             await ArtificialDelay();
 
@@ -415,7 +287,7 @@ namespace KitchenDesign
 
             TryAddNapoleonTopDownWatermark(kitchen, topDownPlanScreenshotResolution);
 
-            screenshots.topDownPlan = TakeScreenshotFromCamera(m_SaveTopDownCamera, topDownPlanScreenshotResolution);
+            screenshots.topDownPlan = CameraCapture.TakeScreenshotFromCamera(m_SaveTopDownCamera, topDownPlanScreenshotResolution);
 
             DisableTopDownWatermark();
 
@@ -438,7 +310,7 @@ namespace KitchenDesign
             if (SkipScreenshotInEditor)
             {
                 MelcherLog.LogWarning(
-                    $"Screenshots are skipped in the editor. See {MelcherFormat.ConsoleTypeName<KitchenScreenshotManager>()}.{MelcherFormat.ConsoleFieldName(nameof(KitchenScreenshotManager.SkipScreenshotInEditor))}."
+                    $"Screenshots are skipped in the editor. See {MelcherFormat.ConsoleTypeName<KitchenScreenshotControl>()}.{MelcherFormat.ConsoleFieldName(nameof(KitchenScreenshotControl.SkipScreenshotInEditor))}."
                 );
             }
             else
@@ -674,296 +546,6 @@ namespace KitchenDesign
             }
         }
 
-        /// <summary>
-        ///     For each occupant on each cabinet in the kitchen, find the
-        ///     occupant's nearest neighbouring occupants. The nearest neighbour
-        ///     is the one that the occupant would bump into if it moved
-        ///     orthogonally. I.e., left, right, up, down, forward, or back.
-        ///     <br /><br />
-        ///
-        ///     If a direction doesn't have a neighbour, it will record the
-        ///     distance to the edge of the cabinet. This data will later be
-        ///     used to calculate the unique pairs of neighbours which will
-        ///     further be used to place measurement lines between each unique
-        ///     pair.
-        /// </summary>
-        protected static List<OccupantNearestNeighbours> FindNeighboursOfAllOccupants(Kitchen kitchen)
-        {
-            List<OccupantNearestNeighbours> occupantToNeighbours = new();
-
-            foreach (ElementIndex<Cabinet> i in kitchen.layout.EnumerateCabinets())
-            {
-                Cabinet cabinet = i.element;
-
-                foreach (Occupant occupant in cabinet.occupants)
-                {
-                    FindNeighboursOfOccupant(occupant, occupantToNeighbours);
-                }
-            }
-
-            return occupantToNeighbours;
-
-            /// <summary>
-            ///     The logic for finding nearest neighbour. This is
-            ///     encapsulated in its own function as it will be repeated
-            ///     for products within shelves and therefore it may be called
-            ///     recursively.
-            /// </summary>
-            static void FindNeighboursOfOccupant(Occupant occupant, List<OccupantNearestNeighbours> occupantToNeighbours)
-            {
-                OccupantNearestNeighbours entry = new ();
-
-                entry.occupant = occupant;
-
-                occupant.TryGetComponent(out CabinetShelf nestedVolume);
-
-                if (occupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Up))
-                {
-                    // This product is visible from the top. Limit neighbour
-                    // search to other occupants that are also visible from the
-                    // top.
-                    FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Top, CabinetLocalDirection.Left);
-                    FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Top, CabinetLocalDirection.Right);
-                    FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Top, CabinetLocalDirection.Front);
-                    FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Top, CabinetLocalDirection.Back);
-                }
-
-                if (occupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Front))
-                {
-                    // Only search up from occupants that are not in a shelf.
-                    // If a product is in a shelf, the product above will be the
-                    // shelf.
-                    bool allowSearchUp = occupant.occupiedVolume.parentVolume == null;
-
-                    // Only search down from occupants that are not shelves.
-                    // This avoid a measurement from the shelf that overlaps its
-                    // nested occupants.
-                    bool allowSearchDown = !nestedVolume;
-
-                    // This product is visible from the front. Limit neighbour
-                    // search to other occupants that are also visible from the
-                    // front.
-                    FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Front, CabinetLocalDirection.Left);
-                    FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Front, CabinetLocalDirection.Right);
-
-                    if (allowSearchUp)
-                    {
-                        FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Front, CabinetLocalDirection.Up);
-                    }
-
-                    if (allowSearchDown)
-                    {
-                        FindNeighbourOfOccupantInDirection(occupant, entry, ScreenshotAngle.Front, CabinetLocalDirection.Down);
-                    }
-                }
-
-                occupantToNeighbours.Add(entry);
-
-                if (nestedVolume)
-                {
-                    // The current occupant is a shelf. To ensure we handle
-                    // *all* occupants, we must recurse into any of the shelf's
-                    // occupants and find their neighbours.
-                    foreach (Occupant nestedOccupant in nestedVolume.occupants)
-                    {
-                        FindNeighboursOfOccupant(nestedOccupant, occupantToNeighbours);
-                    }
-                }
-            }
-
-            /// <summary>
-            ///     Given an occupant, find its nearest neighbour in the
-            ///     direction of <paramref name="directionOfNeighbour"/>.
-            /// </summary>
-            static void FindNeighbourOfOccupantInDirection(
-                Occupant                    occupant,
-                OccupantNearestNeighbours   entry,
-                ScreenshotAngle             screenshotAngle,
-                CabinetLocalDirection       directionOfNeighbour)
-            {
-                OccupantAndDistance nearestNeighbour =
-                    entry.GetNearestInDirection(screenshotAngle, directionOfNeighbour);
-
-                // Use a predicate to filter invalid neighbours for the
-                // requested screenshot angle (e.g., we don't want the top-down
-                // picture to measure between products that aren't visible from
-                // that angle)
-                OccupiableVolume.FindNearestOccupantPredicate neighbourPredicate = null;
-                switch (screenshotAngle)
-                {
-                    case ScreenshotAngle.Top:
-                        neighbourPredicate = IsFlushWithTop;
-                        break;
-
-                    case ScreenshotAngle.Front:
-                        neighbourPredicate = IsFlushWithFront;
-                        break;
-
-                    default:
-                        throw new System.NotImplementedException($"Unhandled {nameof(ScreenshotAngle)}: {screenshotAngle}");
-                }
-
-                OccupiableVolume occupiedVolume = occupant.occupiedVolume;
-
-                nearestNeighbour.occupant =
-                    occupiedVolume.FindNearestOccupantInDirection(
-                        occupant,
-                        directionOfNeighbour,
-                        out nearestNeighbour.distanceInMeters,
-                        neighbourPredicate
-                    );
-
-                if (nearestNeighbour.occupant == null && occupant.occupiedVolume is Cabinet occupiedCabinet)
-                {
-                    // This is a measurement to the edge of a cabinet. We will
-                    // ensure the measurement correctly measures to the
-                    // available visible area (as opposed to purely the
-                    // occupiable cuboid).
-                    nearestNeighbour.distanceInMeters =
-                        occupiedCabinet.AdjustCabinetDistanceToEdgeOfVisualArea(
-                            nearestNeighbour.distanceInMeters,
-                            directionOfNeighbour
-                        );
-                }
-
-                entry.SetNearestInDirection(screenshotAngle, directionOfNeighbour, nearestNeighbour);
-            }
-
-            /// <summary>
-            ///     A predicate for checking if an occupant is flush with the
-            ///     top of the cabinet. Intended to be used to filter which
-            ///     products are considered when finding an occupant's nearest
-            ///     neighbours for top-down screenshots.
-            /// </summary>
-            static bool IsFlushWithTop(Occupant otherOccupant)
-            {
-                return otherOccupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Up);
-            }
-
-            /// <summary>
-            ///     A predicate for checking if an occupant is flush with the
-            ///     front of the cabinet. Intended to be used to filter which
-            ///     products are considered when finding an occupant's nearest
-            ///     neighbours for front screenshots.
-            /// </summary>
-            static bool IsFlushWithFront(Occupant otherOccupant)
-            {
-                return otherOccupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Front);
-            }
-        }
-
-        /// <summary>
-        ///     Take a list of previously found occupant neighbours and
-        ///     construct a new list of all the unique pairs of closest
-        ///     neighbours. These new pairs can be used to create the measure
-        ///     objects between occupants without any duplicate measurements.
-        /// </summary>
-        /// <param name="occupantToNearestNeighbours"></param>
-        /// <returns></returns>
-        protected static List<OccupantMeasurementPair> FindUniqueOccupantMeasurementPairs(
-            Kitchen kitchen,
-            List<OccupantNearestNeighbours> occupantToNearestNeighbours)
-        {
-            List<OccupantMeasurementPair> measurementPairs = new ();
-
-            foreach (OccupantNearestNeighbours nearestNeighbours  in occupantToNearestNeighbours)
-            {
-                Occupant occupant = nearestNeighbours.occupant;
-
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Front, CabinetLocalDirection.Left);
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Front, CabinetLocalDirection.Right);
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Front, CabinetLocalDirection.Down);
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Front, CabinetLocalDirection.Up);
-
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Top, CabinetLocalDirection.Left);
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Top, CabinetLocalDirection.Right);
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Top, CabinetLocalDirection.Front);
-                RegisterOccupantMeasurementPairIfUnique(measurementPairs, occupant, nearestNeighbours, ScreenshotAngle.Top, CabinetLocalDirection.Back);
-            }
-
-            return measurementPairs;
-
-            void RegisterOccupantMeasurementPairIfUnique(
-                List<OccupantMeasurementPair>   measurementPairs,
-                Occupant                        occupant,
-                OccupantNearestNeighbours       nearestNeighbours,
-                ScreenshotAngle                 screenshotAngle,
-                CabinetLocalDirection           direction)
-            {
-                OccupantAndDistance nearestNeighbourInDirection =
-                    nearestNeighbours.GetNearestInDirection(screenshotAngle, direction);
-
-                if (nearestNeighbourInDirection.distanceInMeters <= 0.0f)
-                {
-                    // Skip. The occupants are flush/touching and don't need a
-                    // marking
-                    return;
-                }
-
-                // This is a kludge to increase the reported cut-out distance
-                // of plunge cuts to account for the thickness of the
-                // countertop.
-                float extraDistanceInMetersForLabelOnly = 0.0f;
-
-                if (nearestNeighbourInDirection.occupant)
-                {
-                    // Sort the pair so that the we can reliably detect if this
-                    // is a unique pair. (I.e., we can rely on the occupant with
-                    // the smallest offset in the cabinet's local-space being
-                    // the first entry in the pair.)
-                    Occupant a = occupant;
-                    Occupant b = nearestNeighbourInDirection.occupant;
-                    if (Occupant.CompareByCabinetPosition(a, b) > 0)
-                    {
-                        MelcherCommon.Swap(ref a, ref b);
-                        direction = direction.Reverse();
-                    }
-
-                    foreach (OccupantMeasurementPair pair in measurementPairs)
-                    {
-                        if (pair.occupantA == a && pair.occupantB == b && pair.screenshotAngle == screenshotAngle)
-                        {
-                            // This pair is not unique. Abort.
-                            return;
-                        }
-                    }
-
-                    measurementPairs.Add(
-                        new OccupantMeasurementPair(
-                            a,
-                            b,
-                            nearestNeighbourInDirection.distanceInMeters,
-                            extraDistanceInMetersForLabelOnly,
-                            direction,
-                            screenshotAngle
-                        )
-                    );
-                }
-                else
-                {
-                    // Correct for the "downward growing countertop" problem by
-                    // smudging the reported distance to the end of the cabinet
-                    // by the countertop's thickness.
-
-                    if (occupant.IsCutOutFlushWithVolume(CabinetLocalDirection.Up) &&
-                        direction.ToAxis() == MeasurementAxis.Y)
-                    {
-                        extraDistanceInMetersForLabelOnly = kitchen.countertopThicknessInMeters;
-                    }
-
-                    measurementPairs.Add(
-                        new OccupantMeasurementPair(
-                            occupant,
-                            null,
-                            nearestNeighbourInDirection.distanceInMeters,
-                            extraDistanceInMetersForLabelOnly,
-                            direction,
-                            screenshotAngle
-                        )
-                    );
-                }
-            }
-        }
 
         protected void Awake()
         {
@@ -2405,7 +1987,7 @@ namespace KitchenDesign
             if (m_NextMeasurePrefabIndex >= m_MeasurePrefabPool.Count)
             {
                 // Ran out of pooled objects
-                MelcherLog.LogWarning($"{nameof(KitchenScreenshotManager)} ran out of pooled {nameof(Measure)} for between-product measurements");
+                MelcherLog.LogWarning($"{nameof(KitchenScreenshotControl)} ran out of pooled {nameof(Measure)} for between-product measurements");
                 return;
             }
 
@@ -2536,180 +2118,10 @@ namespace KitchenDesign
         // Nested types
         // ====================================================================
 
-        /// <summary>
-        /// Contains all of the screenshots captured during <see
-        /// cref="TakeScreenshots(Kitchen)"/>. The creation of one of these
-        /// objects is the main purpose of this class.
-        /// </summary>
-        [System.Serializable]    // DEBUG: Only serializable so I can inspect the pictures in the editor. Will remove at some point. -Ryan
-        public class ScreenshotGallery
-        {
-            /// <summary>
-            /// The picture to appear at the start of the PDF.
-            /// </summary>
-            public byte[] cover;
 
-            /// <summary>
-            /// A top-down render of the kitchen with all the products' 3D
-            /// models.
-            /// </summary>
-            public byte[] topDown;
+    }   // class KitchenScreenshotControl
 
-            /// <summary>
-            /// A top-down render of the kitchen without the products' 3D
-            /// models, but containing the measurements of the products and the
-            /// distances between their neighbours.
-            /// </summary>
-            public byte[] topDownPlan;
-
-            /// <summary>
-            /// A front render of each cabinet with the product's 3D models
-            /// visible.
-            /// </summary>
-            public List<byte[]> front = new List<byte[]>();
-
-            /// <summary>
-            /// A front render of each cabinet with the product's 3D models
-            /// hidden but containing the measurements of the products and the
-            /// distances between their neighbours.
-            /// </summary>
-            public List<byte[]> frontPlan = new List<byte[]>();
-
-        }   // class ScreenshotGallery
-
-        /// <summary>
-        /// Records the nearest neighbours for one occupant in the 4 orthogonal
-        /// directions that are visible in a specific orthogonal camera angle.
-        /// I.e., a top-down picture will only consider the nearest neighbours
-        /// in the XZ plane and it will ignore any occupant whose cut-out is
-        /// not visible from the top-down camera angle.
-        /// <see cref="CabinetLocalDirection"/>).
-        /// </summary>
-        protected class OccupantNearestNeighbours
-        {
-            /// <summary>
-            /// Get the recorded occupant and distance for the given direction
-            /// in the top-down camera angle.
-            /// </summary>
-            public OccupantAndDistance GetNearestInDirection(ScreenshotAngle screenshotAngle, CabinetLocalDirection direction)
-            {
-                switch (screenshotAngle)
-                {
-                    default:
-                        throw new System.NotImplementedException($"Unhandled {nameof(ScreenshotAngle)}: {screenshotAngle}");
-
-                    case ScreenshotAngle.Top:
-                        Debug.Assert(direction.ToAxis() != MeasurementAxis.Y, "For top screenshots, the direction should be along the XZ plane");
-                        return topNearestNeighbours[(int)direction];
-
-                    case ScreenshotAngle.Front:
-                        Debug.Assert(direction.ToAxis() != MeasurementAxis.Z, "For front screenshots, be direction should be along the XY plane");
-                        return frontNearestNeighbours[(int)direction];
-                }
-            }
-
-            /// <summary>
-            /// Set the recorded occupant and distance for the given direction
-            /// in the top-down camera angle.
-            /// </summary>
-            public void SetNearestInDirection(ScreenshotAngle screenshotAngle, CabinetLocalDirection direction, OccupantAndDistance occupantAndDistance)
-            {
-                switch (screenshotAngle)
-                {
-                    default:
-                        throw new System.NotImplementedException($"Unhandled {nameof(ScreenshotAngle)}: {screenshotAngle}");
-
-                    case ScreenshotAngle.Top:
-                        Debug.Assert(direction.ToAxis() != MeasurementAxis.Y, "For top screenshots, the direction should be along the XZ plane");
-                        topNearestNeighbours[(int)direction] = occupantAndDistance;
-                        break;
-
-                    case ScreenshotAngle.Front:
-                        Debug.Assert(direction.ToAxis() != MeasurementAxis.Z, "For front screenshots, be direction should be along the XY plane");
-                        frontNearestNeighbours[(int)direction] = occupantAndDistance;
-                        break;
-                }
-            }
-
-            /// <summary>
-            /// The main occupant who the other <see cref="OccupantAndDistance"/>'s
-            /// are relative to.
-            /// </summary>
-            public Occupant occupant;
-
-            // It's simplest to use oversized arrays here. We only need 4
-            // entries but with 6 we can use the enum value to index the array
-            public OccupantAndDistance[] frontNearestNeighbours = new OccupantAndDistance[EnumInfo<CabinetLocalDirection>.count];
-            public OccupantAndDistance[] topNearestNeighbours = new OccupantAndDistance[EnumInfo<CabinetLocalDirection>.count];
-
-        }   // class OccupantNearestNeighbours
-
-        /// <summary>
-        /// Represents the distance from one occupant (not recorded) to a
-        /// particular other occupant.
-        /// </summary>
-        protected struct OccupantAndDistance
-        {
-            public Occupant occupant;
-            public float distanceInMeters;
-
-        }   // struct OccupantAndDistance
-
-        /// <summary>
-        /// Represents the distance between one occupant and it's nearest
-        /// neighbour in a specific <see cref="CabinetLocalDirection"/>. The
-        /// second occupant can be <see langword="null"/> to indicate the
-        /// measurement is a between one occupant and the edge of the cabinet.
-        /// </summary>
-        protected struct OccupantMeasurementPair
-        {
-            public OccupantMeasurementPair(Occupant a, Occupant b, float distanceInMeters, float extraDistanceInMetersForLabelOnly, CabinetLocalDirection directionAToB, ScreenshotAngle screenshotAngle)
-            {
-                occupantA = a;
-                occupantB = b;
-                this.distanceInMeters = distanceInMeters;
-                this.extraDistanceInMetersForLabelOnly = extraDistanceInMetersForLabelOnly;
-                this.directionAtoB = directionAToB;
-                this.screenshotAngle = screenshotAngle;
-            }
-
-            public Occupant occupantA;
-            public Occupant occupantB;
-            public float distanceInMeters;
-            public float extraDistanceInMetersForLabelOnly;
-            public CabinetLocalDirection directionAtoB;
-            public ScreenshotAngle screenshotAngle;
-        }
-
-        /// <summary>
-        /// Represents a pre-placed <see cref="Measure"/> between two points.
-        /// It may be indicating the distance between two occupants or between
-        /// one occupant and the edge of the cabinet.
-        /// </summary>
-        protected struct MeasurementForScreenshot
-        {
-            /// <summary>
-            /// The measure object rendering a line and number between the two
-            /// occupants.
-            /// </summary>
-            public Measure measure;
-
-            /// <summary>
-            /// The screenshot angle(s) where this measure will be displayed
-            /// (for plan mode)
-            /// </summary>
-            public ScreenshotAngle screenshotAngle;
-
-            /// <summary>
-            /// The cabinet span this measure will render with.
-            /// </summary>
-            public CabinetSpan cabinetSpan;
-
-        }   // struct InterOccupantMeasure
-
-    }   // class KitchenScreenshotManager
-
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Photos
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

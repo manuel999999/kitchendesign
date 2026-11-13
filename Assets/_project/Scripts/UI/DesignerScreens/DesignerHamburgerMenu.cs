@@ -1,5 +1,7 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
+    using KitchenDesign.Serializables;
+    using KitchenDesign.Photos;
     using KitchenDesign.UI.Views;
     using KitchenDesign.Events;
     using KitchenDesign.Session;
@@ -118,7 +120,7 @@ namespace KitchenDesign.UI.DesignerScreens
             Vector2Int imageResolution = new Vector2Int(screenResolution.width, screenResolution.height);
 
             byte[] screenshotBytes =
-                KitchenScreenshotManager.TakeScreenshotFromCamera(Camera.main, imageResolution);
+                CameraCapture.TakeScreenshotFromCamera(Camera.main, imageResolution);
 
             string imageTime = System.DateTime.Now.ToString("yyyyMMdd_HHmmssfff");
 
@@ -264,7 +266,7 @@ namespace KitchenDesign.UI.DesignerScreens
             // TODO: Better way to get the kitchen
             Kitchen kitchen = FindObjectOfType<Kitchen>();
 
-            KitchenScreenshotManager.ScreenshotGallery screenshots =
+            ScreenshotGallery screenshots =
                 await m_KitchenScreenshotManager.TakeScreenshots(kitchen);
 
             JsonDict saveData = kitchen.SaveToJson();
@@ -583,7 +585,7 @@ namespace KitchenDesign.UI.DesignerScreens
         [Space]
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
-        protected KitchenScreenshotManager m_KitchenScreenshotManager = null;
+        protected KitchenScreenshotControl m_KitchenScreenshotManager = null;
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Down)]
         protected MelcherButton m_MenuButton = null;

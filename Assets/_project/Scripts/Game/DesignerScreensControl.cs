@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Photos;
     using KitchenDesign.UI.DesignerScreens;
     using KitchenDesign.UI.Views;
     using KitchenDesign.Session;
@@ -158,7 +159,7 @@ namespace KitchenDesign
                 }
                 else if (Input.GetKeyDown(KeyCode.F6))
                 {
-                    KitchenScreenshotManager screenshotManager = FindObjectOfType<KitchenScreenshotManager>();
+                    KitchenScreenshotControl screenshotManager = FindObjectOfType<KitchenScreenshotControl>();
                     screenshotManager.TakeScreenshots(m_Kitchen).Forget();
                 }
 #endif  // if UNITY_EDITOR

@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 namespace KitchenDesign.Products
 {
+    using KitchenDesign.Photos;
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;

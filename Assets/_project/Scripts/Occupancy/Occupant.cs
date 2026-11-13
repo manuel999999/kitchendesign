@@ -155,7 +155,7 @@ namespace KitchenDesign.Occupancy
         ///     same cabinet but may or may not be in the same shelf.
         ///
         ///     This isn't Currently, this is only used by <see
-        ///     cref="KitchenScreenshotManager"/> to discover unique occupants
+        ///     cref="KitchenScreenshotControl"/> to discover unique occupants
         ///     and eliminate duplicate measurement pairs.
         /// </summary>
         /// <returns></returns>
@@ -664,7 +664,7 @@ namespace KitchenDesign.Occupancy
             // colour (full white). But products that fit to their cabinet
             // width (bar top, back splash) should continue to render as
             // normal
-            // TODO: Move this block into KitchenScreenshotManager. This won't
+            // TODO: Move this block into KitchenScreenshotControl. This won't
             //       be tripped anymore for cabinet backings here because they
             //       aren't added as occupants anymore.
             if (!productVisualContentInstance.TryGetComponent(out CabinetBacking _))

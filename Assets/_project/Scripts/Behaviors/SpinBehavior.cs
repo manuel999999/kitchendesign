@@ -4,14 +4,14 @@ namespace KitchenDesign
     using UnityEngine;
     using UnityEngine.Rendering;
 
-    public class RotateCamera : MelcherMonoBehaviour
+    public class SpinBehavior : MelcherMonoBehaviour
     {
         private void Update()
         {
             transform.localEulerAngles += Vector3.up * Time.deltaTime * 20.0f;
         }
     
-    }   // class RotateCamera
+    }   // class SpinBehavior
 
 }   // namespace KitchenDesign
 

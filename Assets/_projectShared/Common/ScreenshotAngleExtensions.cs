@@ -1,6 +1,6 @@
-namespace KitchenDesign
+namespace KitchenDesign.Shared.Common
 {
-    using Melcher;
+    using KitchenDesign.Shared.Enums;
     public static class ScreenshotAngleExtensions
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace KitchenDesign
 
     }   // static class ScreenshotAngleExtensions
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Shared.Common
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

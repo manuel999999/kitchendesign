@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Cameras
 {
     using Melcher;
     using Unity.Cinemachine;
@@ -12,7 +12,7 @@ namespace KitchenDesign
     ///     "Top" button on the navigation UI. This camera view is also
     ///     referred to as the plan view in some places.
     /// </summary>
-    public class DesignerOverheadCamera : MelcherMonoBehaviour
+    public class OverheadCameraControl : MelcherMonoBehaviour
     {
         // ====================================================================
         // Methods
@@ -147,9 +147,9 @@ namespace KitchenDesign
         protected float m_BlendCameraDesiredFieldOfView;
         protected float m_BlendCameraFieldOfViewVelocity;
 
-    }   // class DesignerOverheadCamera
+    }   // class OverheadCameraControl
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Cameras
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

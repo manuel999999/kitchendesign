@@ -1,6 +1,5 @@
-namespace KitchenDesign
+namespace KitchenDesign.Shared.Enums
 {
-    using Melcher;
     /// <summary>
     /// Types of screenshot camera angles. This is used to determine what
     /// product measurements should be made visible when taking screenshots. It
@@ -12,33 +11,33 @@ namespace KitchenDesign
         /// <summary>
         /// Default/none state.
         /// </summary>
-        None,
+        None = 0,
 
         /// <summary>
         /// A cover photo. This screenshot has perspective and is used as the
         /// "beauty shot" for the PDF document.
         /// </summary>
-        Cover,
+        Cover = 1,
 
         /// <summary>
         /// A top-down perspective. The top-down photo uses a square aspect
         /// ratio to better capture the full kitchen.
         /// </summary>
-        Top,
+        Top = 2,
 
         /// <summary>
         /// A front-facing perspective.
         /// </summary>
-        Front,
+        Front = 3,
 
         /// <summary>
         /// The back of the cabinet.
         /// </summary>
-        Back,
+        Back = 4,
 
     }   // enum ScreenshotAngle
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Shared.Enums
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

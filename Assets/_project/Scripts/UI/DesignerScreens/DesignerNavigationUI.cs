@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
+    using KitchenDesign.Cameras;
     using KitchenDesign.KitchenModel;
     using KitchenDesign.Events;
     using KitchenDesign.Scriptables;
@@ -285,10 +286,10 @@ namespace KitchenDesign.UI.DesignerScreens
         [Space]
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
-        protected DesignerOrbitCamera m_OrbitCamera = default;
+        protected OrbitCameraControl m_OrbitCamera = default;
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
-        protected DesignerOverheadCamera m_OverheadCamera = default;
+        protected OverheadCameraControl m_OverheadCamera = default;
 
         [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
         protected MeasurementOverlayManager m_MeasurementOverlayManager = default;

@@ -4,7 +4,7 @@ namespace KitchenDesign.Geometry
     using UnityEngine;
 
     /// <summary>
-    ///     Used by <see cref="KitchenScreenshotManager"/> to cache the start
+    ///     Used by <see cref="KitchenScreenshotControl"/> to cache the start
     ///     and end positions of measurement lines.
     /// </summary>
     public struct LineSegment

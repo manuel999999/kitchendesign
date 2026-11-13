@@ -1,3 +1,4 @@
+using KitchenDesign.Cameras;
 using KitchenDesign.UI.DesignerScreens;
 using KitchenDesign.KitchenModel;
 using KitchenDesign.Measures;
@@ -15,7 +16,7 @@ namespace KitchenDesign
         [SerializeField] private CabinetOtherSizesUI cabinetSizes;
         [SerializeField] private SetVolumeSizeUI setVolumeSizePrompt;
         [SerializeField] private MeasurementOverlayManager measurementOverlay;
-        [SerializeField] private DesignerOrbitCamera orbitCamera;
+        [SerializeField] private OrbitCameraControl orbitCamera;
 
         public AppSystems Systems { get; private set; }
 

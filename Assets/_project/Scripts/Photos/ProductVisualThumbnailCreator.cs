@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
 
-namespace KitchenDesign
+namespace KitchenDesign.Photos
 {
     using Melcher;
     using KitchenDesign.Scriptables;
@@ -655,7 +655,7 @@ namespace KitchenDesign
 
     }   // class ProductVisualThumbnailCreator
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Photos
 
 #endif  // if UNITY_EDITOR
 
