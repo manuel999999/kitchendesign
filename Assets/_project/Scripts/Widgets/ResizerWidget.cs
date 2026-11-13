@@ -1,5 +1,6 @@
 namespace KitchenDesign.Widgets
 {
+    using KitchenDesign.Session;
     using KitchenDesign.KitchenModel;
     using KitchenDesign.Utility;
     using Melcher;
@@ -21,6 +22,13 @@ namespace KitchenDesign.Widgets
         , IDragHandler
         , IEndDragHandler
     {
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         // ====================================================================
         // Events
         // ====================================================================
@@ -205,7 +213,7 @@ namespace KitchenDesign.Widgets
 
                 float lengthMetersDelta = 0.0f;
 
-                MeasurementUnit units = ProFitGlobals.userProfile.activeUnits;
+                MeasurementUnit units = this._session.UserProfile.activeUnits;
 
                 if (units == MeasurementUnit.Centimeters)
                 {

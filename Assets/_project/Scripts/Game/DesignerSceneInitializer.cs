@@ -25,6 +25,7 @@ namespace KitchenDesign
             this.Systems = systems;
 
             this.kitchen.Initialize(systems);
+            this.measurementOverlay.Initialize(systems.Session);
 
             KitchenEvents events = this.kitchen.events;
             this.navigation.ListenTo(events);

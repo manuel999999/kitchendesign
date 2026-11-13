@@ -1,5 +1,6 @@
 namespace KitchenDesign.Measures
 {
+    using KitchenDesign.Session;
     using KitchenDesign.UI.DesignerScreens;
     using KitchenDesign.KitchenModel;
     using Melcher;
@@ -27,6 +28,13 @@ namespace KitchenDesign.Measures
     public class MeasurementOverlayManager : MelcherMonoBehaviour
     {
         private KitchenEvents _events;
+
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
 
         public void ListenTo(KitchenEvents events)
         {
@@ -472,7 +480,7 @@ namespace KitchenDesign.Measures
             m_MeasurementOverlayUi.RemoveMeasurement(m_MeasureRight);
             m_MeasurementOverlayUi.RemoveMeasurement(m_MeasureSelected);
 
-            MeasurementUnit units = ProFitGlobals.userProfile.activeUnits;
+            MeasurementUnit units = this._session.UserProfile.activeUnits;
             m_MeasureLeft.units = units;
             m_MeasureRight.units = units;
             m_MeasureSelected.units = units;

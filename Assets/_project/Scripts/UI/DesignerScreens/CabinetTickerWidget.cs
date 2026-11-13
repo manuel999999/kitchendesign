@@ -1,5 +1,7 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
+    using KitchenDesign.Shared.Interfaces;
+    using KitchenDesign.Session;
     using KitchenDesign.Utility;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -53,10 +55,14 @@ namespace KitchenDesign.UI.DesignerScreens
         }
 
         private Kitchen _kitchen;
+        private SessionStatus _session;
+        private IAppRules _rules;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, SessionStatus session, IAppRules rules)
         {
             this._kitchen = kitchen;
+            this._session = session;
+            this._rules = rules;
             this.ListenTo(kitchen.events);
         }
 
@@ -131,7 +137,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             // Display the measurements
 
-            MeasurementUnit units = ProFitGlobals.userProfile.activeUnits;
+            MeasurementUnit units = this._session.UserProfile.activeUnits;
 
             AppendMeasurement(m_StringBuilder, sizeInMeters.x, units, allowFeet: true, 'L');
             m_StringBuilder.Append(Separator);
@@ -143,7 +149,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             m_Label.phrase = m_StringBuilder.ToString();
 
-            static void AppendMeasurement(
+            void AppendMeasurement(
                 StringBuilder stringBuilder,
                 float distanceInMeters,
                 MeasurementUnit units,
@@ -173,7 +179,7 @@ namespace KitchenDesign.UI.DesignerScreens
                         inches += feet * Mathf.RoundToInt(Units.InchesPerFoot);
                     }
 
-                    if (numerator > 0 && denominator > 0 && ProFitGlobals.appRules.ShowsTickerFractions)
+                    if (numerator > 0 && denominator > 0 && this._rules.ShowsTickerFractions)
                     {
                         stringBuilder.AppendFormat("{0,2} {1}/{2}\"", inches, numerator, denominator);
                     }

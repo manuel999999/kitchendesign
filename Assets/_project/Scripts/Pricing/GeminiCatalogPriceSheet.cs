@@ -197,7 +197,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: endPanelInfo.productId + "-R",
                                 productName: endPanelInfo.productName + "-R",
-                                price: endPanelInfo.dealerPrice
+                                price: endPanelInfo.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
 
@@ -210,7 +210,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: endPanelInfo.productId + "-L",
                                 productName: endPanelInfo.productName + "-L",
-                                price: endPanelInfo.dealerPrice
+                                price: endPanelInfo.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
 
@@ -228,7 +228,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: endPanelInfo.productId + "-R",
                                 productName: endPanelInfo.productName + "-R",
-                                price: endPanelInfo.dealerPrice
+                                price: endPanelInfo.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
 
@@ -236,7 +236,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: endPanelInfo.productId + "-L",
                                 productName: endPanelInfo.productName + "-L",
-                                price: endPanelInfo.dealerPrice
+                                price: endPanelInfo.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
                     }
@@ -267,7 +267,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: endPanelInfo.productId + suffix,
                                 productName: endPanelInfo.productName + suffix,
-                                price: endPanelInfo.dealerPrice
+                                price: endPanelInfo.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
                     }
@@ -307,7 +307,7 @@ namespace KitchenDesign.Pricing
                         backPanelEntry = CreateManualPriceSheetEntry(
                             productSku: backPanel.productId,
                             productName: backPanel.productName,
-                            price: backPanel.dealerPrice
+                            price: backPanel.GetDealerPrice(this._session.UserProfile.currency)
                         );
                     }
                     else
@@ -319,7 +319,7 @@ namespace KitchenDesign.Pricing
                         backPanelEntry = CreateManualPriceSheetEntry(
                             productSku: backPanelProductId,
                             productName: backPanelProductName,
-                            price: backPanel.dealerPrice
+                            price: backPanel.GetDealerPrice(this._session.UserProfile.currency)
                         );
                     }
 
@@ -409,7 +409,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: productId,
                                 productName: productName,
-                                price: fridgePanel.dealerPrice
+                                price: fridgePanel.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
                     }
@@ -446,7 +446,7 @@ namespace KitchenDesign.Pricing
                             CreateManualPriceSheetEntry(
                                 productSku: productId,
                                 productName: productName,
-                                price: endPanel.dealerPrice
+                                price: endPanel.GetDealerPrice(this._session.UserProfile.currency)
                             )
                         );
                     }
@@ -462,7 +462,7 @@ namespace KitchenDesign.Pricing
                     CreateManualPriceSheetEntry(
                         productSku: cabinetEndPanelInfo.productId,
                         productName: cabinetEndPanelInfo.productName,
-                        price: cabinetEndPanelInfo.dealerPrice
+                        price: cabinetEndPanelInfo.GetDealerPrice(this._session.UserProfile.currency)
                     );
 
                 for (int i = 0; i < cabinetEndPanelCount; ++i)

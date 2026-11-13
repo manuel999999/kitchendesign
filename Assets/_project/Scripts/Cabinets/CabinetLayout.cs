@@ -1492,7 +1492,7 @@ namespace KitchenDesign.Cabinets
                 else
                 {
                     ProductVisualContentStatus contentLoader =
-                        ProFitGlobals.productContent;
+                        kitchen.productContent;
 
                     ProductVisualContent cabinetSectionVisualPrefab =
                         await contentLoader.LoadContent(cabinetSectionVisual);
@@ -1506,7 +1506,7 @@ namespace KitchenDesign.Cabinets
                     {
                         // Now find the door from the currently selected door style.
                         ProductVisualSO cabinetDoorVisual =
-                            ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
+                            kitchen.catalogData.DoorStyles.FindDoorStyleVisual(
                                 kitchen.productVisualDatabase.runtimeEntries,
                                 cabinetSectionVisual,
                                 kitchen.selectedBrandCatalog,
@@ -1541,7 +1541,8 @@ namespace KitchenDesign.Cabinets
                                     selectedDoorHandleStyleName,
                                     newCabinet.cabinetSectionInstance.transform,
                                     newCabinet.cabinet.transform,
-                                    kitchen.events
+                                    kitchen.events,
+                                    kitchen.catalogData.DoorStyles
                                 );
                             }
                             else if(string.IsNullOrEmpty(kitchen.selectedBrandCatalog.defaultCabinetSectionDoorHandleStyleName) == false)
@@ -1552,7 +1553,8 @@ namespace KitchenDesign.Cabinets
                                     kitchen.selectedBrandCatalog.defaultCabinetSectionDoorHandleStyleName,
                                     newCabinet.cabinetSectionInstance.transform,
                                     newCabinet.cabinet.transform,
-                                    kitchen.events
+                                    kitchen.events,
+                                    kitchen.catalogData.DoorStyles
                                 );
                             }
                         }
@@ -1652,7 +1654,7 @@ namespace KitchenDesign.Cabinets
                 CuboidPadding occupiablePaddingInMeters =
                     cabinet.occupiablePaddingInMeters;
 
-                float cabinetColumnWidthInMeters = ProFitGlobals.appRules.CabinetColumnWidthInMeters;
+                float cabinetColumnWidthInMeters = cabinet.kitchen.appRules.CabinetColumnWidthInMeters;
 
                 occupiablePaddingInMeters.left = cabinetColumnWidthInMeters * 0.5f;
                 occupiablePaddingInMeters.right = cabinetColumnWidthInMeters * 0.5f;

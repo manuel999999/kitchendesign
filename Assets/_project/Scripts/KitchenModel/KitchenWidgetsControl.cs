@@ -1,3 +1,4 @@
+using KitchenDesign.Shared.Interfaces;
 using KitchenDesign.Utility;
 using KitchenDesign.UI.DesignerScreens;
 using Cysharp.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace KitchenDesign.KitchenModel
     public sealed class KitchenWidgetsControl
     {
         private readonly SessionStatus _session;
+        private readonly IAppRules _rules;
         private readonly ClientListStatus _clientList;
         private readonly Kitchen _kitchen;
         private readonly KitchenInteractionState _interaction;
@@ -47,9 +49,11 @@ namespace KitchenDesign.KitchenModel
             Transform cabinetResizeWidgetRoot,
             Transform cabinetShelfResizeWidgetRoot,
             SessionStatus session,
-            ClientListStatus clientList)
+            ClientListStatus clientList,
+            IAppRules rules)
         {
             this._session = session;
+            this._rules = rules;
             this._clientList = clientList;
             this._kitchen = kitchen;
             this._interaction = interaction;
@@ -160,7 +164,8 @@ namespace KitchenDesign.KitchenModel
                     this._inputCabinetSizeWidget,
                     widgetParent: this._cabinetResizeWidgetRoot,
                     mainCamera,
-                    cabinet
+                    cabinet,
+                    this._session
                 );
 
             middleWidget.name = "InputCabinetSizeWidget";
@@ -176,7 +181,8 @@ namespace KitchenDesign.KitchenModel
                         this._resizeCabinetWidgetPrefab,
                         this._cabinetResizeWidgetRoot,
                         mainCamera,
-                        cabinet
+                        cabinet,
+                        this._session
                     );
 
                 resizer.name = name;
@@ -197,6 +203,7 @@ namespace KitchenDesign.KitchenModel
                     parent: this._cabinetResizeWidgetRoot
                 );
 
+            resizer.Initialize(this._session);
             resizer.target = cabinet;
             resizer.worldCamera = mainCamera;
             resizer.onResizeBegin += OnCabinetResizeBegin;
@@ -234,7 +241,7 @@ namespace KitchenDesign.KitchenModel
                             this._tickerDimensionsRoot
                         );
 
-                    widget.Initialize(this._kitchen);
+                    widget.Initialize(this._kitchen, this._session, this._rules);
                     widget.targetCabinetSpan = span.index;
                     widget.RefreshLabel();
 
@@ -381,13 +388,18 @@ namespace KitchenDesign.KitchenModel
 
             await this._kitchen.events.onCabinetResized.InvokeIfNonEmpty(cabinet);
         }
-        internal static WidgetType CreateKitchenWidget<WidgetType>(WidgetType widgetPrefab, Transform widgetParent, Camera eventCamera, OccupiableVolume target)
+        internal static WidgetType CreateKitchenWidget<WidgetType>(WidgetType widgetPrefab, Transform widgetParent, Camera eventCamera, OccupiableVolume target, SessionStatus session)
             where WidgetType : KitchenWidget
         {
             WidgetType widget = Object.Instantiate(widgetPrefab, widgetParent);
 
             widget.worldCamera = eventCamera;
             widget.target = target;
+
+            if (widget is ResizerWidget resizerWidget)
+            {
+                resizerWidget.Initialize(session);
+            }
 
             return widget;
         }

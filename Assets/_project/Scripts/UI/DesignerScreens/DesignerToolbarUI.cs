@@ -2198,6 +2198,13 @@ namespace KitchenDesign.UI.DesignerScreens
             Kitchen kitchen = this._kitchen;
 
             BrandCatalogSO selectedBrandCatalog = kitchen.selectedBrandCatalog;
+            BrandCatalogInfo selectedBrandCatalogInfo = default;
+
+            if (selectedBrandCatalog)
+            {
+                int selectedCatalogId = selectedBrandCatalog.catalogId;
+                selectedBrandCatalogInfo = this._catalogData.ServerBrandCatalogs.Find(x => x.id == selectedCatalogId);
+            }
 
             int defaultManufacturerId = this._profile.defaultManufacturerId;
 
@@ -2237,7 +2244,7 @@ namespace KitchenDesign.UI.DesignerScreens
                     if (selectedBrandCatalog)
                     {
                         if (productInfo.category == ProductCategory.CabinetSection &&
-                            selectedBrandCatalog.info.cabinetManufacturerId != productInfo.manufacturerId)
+                            selectedBrandCatalogInfo.cabinetManufacturerId != productInfo.manufacturerId)
                         {
                             // The cabinet is not allowed by this brand catalog.
                             continue;
@@ -2249,14 +2256,14 @@ namespace KitchenDesign.UI.DesignerScreens
                             bool isAllowed = false;
 
                             if (productInfo.manufacturerId != defaultManufacturerId &&
-                                kitchen.selectedBrandCatalog.info.availableManufacturerIds.Contains(productInfo.manufacturerId))
+                                selectedBrandCatalogInfo.availableManufacturerIds.Contains(productInfo.manufacturerId))
                             {
                                 isAllowed |= true;
                             }
 
                             if (!isAllowed &&
                                 productInfo.groupId != 0 &&
-                                kitchen.selectedBrandCatalog.info.availableGroupIds.Contains(productInfo.groupId))
+                                selectedBrandCatalogInfo.availableGroupIds.Contains(productInfo.groupId))
                             {
                                 isAllowed |= true;
                             }

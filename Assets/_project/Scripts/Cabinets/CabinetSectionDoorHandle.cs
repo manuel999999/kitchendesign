@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cabinets
 {
+    using KitchenDesign.CatalogData;
     using KitchenDesign.KitchenModel;
     using Melcher;
     using System;
@@ -22,7 +23,8 @@ namespace KitchenDesign.Cabinets
             string                          selectedDoorHandleStyle,
             Transform                       cabinet,
             Transform                       parent,
-            KitchenEvents                   events)
+            KitchenEvents                   events,
+            DoorStyleLookup                 doorStyles)
         {
             if(doorHandleStyle == default)
             {
@@ -41,7 +43,7 @@ namespace KitchenDesign.Cabinets
             }      
 
             // TODO: DOOR HANDLES: Try requesting a door handle using the cabinet door id instead of cabinet base id
-            string customUsedId = ProFitGlobals.catalogData.DoorStyles.FindMappedDoorId(usedCabinetVisualId);
+            string customUsedId = doorStyles.FindMappedDoorId(usedCabinetVisualId);
 
             if(customUsedId != string.Empty)
             {

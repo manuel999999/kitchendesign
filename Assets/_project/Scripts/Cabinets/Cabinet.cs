@@ -1698,7 +1698,7 @@ namespace KitchenDesign.Cabinets
                     cabinetVisual.info.IsProductManufacturerAllowedInSection(productInfo.manufacturerId);
 
                 CabinetCompatibilityInfo cabinetCompatibility =
-                    ProFitGlobals.catalogData.FindCompatibilityById(m_CabinetSectionProductInfo.compatibilityId);
+                    kitchen.catalogData.FindCompatibilityById(m_CabinetSectionProductInfo.compatibilityId);
 
                 if (cabinetCompatibility != null)
                 {
@@ -2056,7 +2056,7 @@ namespace KitchenDesign.Cabinets
                     {
                         // Load the cabinet section prefab.
                         ProductVisualContent cabinetSectionVisualPrefab =
-                            await ProFitGlobals.productContent
+                            await kitchen.productContent
                                 .LoadContent(cabinetSectionVisual);
 
                         Material sectionMaterialOverride =
@@ -2602,7 +2602,7 @@ namespace KitchenDesign.Cabinets
 
             // Try to add a plunge (shelf)
             ProductInfo plungeProductInfo =
-                ProFitGlobals.catalogData.FindProductInfoBySku(plungeProductSku, findCabinetSection: false);
+                kitchen.catalogData.FindProductInfoBySku(plungeProductSku, findCabinetSection: false);
 
             if (plungeProductInfo == null)
             {
@@ -2622,7 +2622,7 @@ namespace KitchenDesign.Cabinets
             }
 
             ProductVisualContent plungeVisualPrefab =
-                await ProFitGlobals.productContent
+                await kitchen.productContent
                     .LoadContent(plungeProductVisual);
 
             Cuboid? backingOccupancyInWorldSpace = null;

@@ -158,8 +158,6 @@ namespace KitchenDesign.Scriptables
 
         public ReadOnlyCollection<KitchenTemplateSO> kitchenTemplates => m_KitchenTemplates.readOnly;
 
-        public BrandCatalogInfo info => ProFitGlobals.serverBrandCatalogs.Find(x => x.id == m_CatalogId);
-
         // ====================================================================
         // Methods
         // ====================================================================

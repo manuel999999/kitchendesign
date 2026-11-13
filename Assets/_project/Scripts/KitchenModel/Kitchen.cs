@@ -119,6 +119,14 @@ namespace KitchenDesign.KitchenModel
 
         public CabinetLayout layout => m_CurrentCabinetLayout;
 
+        public IAppRules appRules => this._rules;
+
+        public CatalogDataStatus catalogData => this._catalogData;
+
+        public ProductVisualContentStatus productContent => this._productContent;
+
+        public SessionStatus session => this._session;
+
         //public IReadOnlyList<CabinetSection> cabinetSections => m_CabinetSections;
 
         public KitchenCutoutClipping cutoutClipping => m_CutoutClipping;
@@ -1050,7 +1058,7 @@ namespace KitchenDesign.KitchenModel
             this._productContent = systems.ProductContent;
 
             this._interaction = new KitchenInteractionState();
-            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot, this._session, this._clientList);
+            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot, this._session, this._clientList, this._rules);
             this._camera = new KitchenCameraControl(m_OrbitCamera, m_PhotoCoverView, m_EmptyCameraTargetGroup, m_KitchenCameraTargetGroup, m_Ground);
             this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase, this._profile, this._productContent);
             this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask, this._session);
@@ -1074,6 +1082,7 @@ namespace KitchenDesign.KitchenModel
                     m_ResizeCabinetWidgetPrefab,
                     m_CabinetShelfResizeWidgetRoot,
                     eventCamera,
+                    this._session,
                     anchor: new (0.0f, 1.0f, 0.0f)
                 );
 
@@ -1085,6 +1094,7 @@ namespace KitchenDesign.KitchenModel
                     m_ResizeCabinetWidgetPrefab,
                     m_CabinetShelfResizeWidgetRoot,
                     eventCamera,
+                    this._session,
                     anchor: new (1.0f, 1.0f, 0.0f)
                 );
 
@@ -1120,6 +1130,7 @@ namespace KitchenDesign.KitchenModel
                 WidgetType  widgetPrefab,
                 Transform   instanceParent,
                 Camera      eventCamera,
+                SessionStatus session,
                 Vector3     anchor)
                 where WidgetType : KitchenWidget
             {
@@ -1128,7 +1139,8 @@ namespace KitchenDesign.KitchenModel
                         widgetPrefab,
                         instanceParent,
                         eventCamera,
-                        target: null
+                        target: null,
+                        session
                     );
 
                 widget.name = name;

@@ -1,3 +1,4 @@
+using KitchenDesign.Shared.Enums;
 using KitchenDesign.Shared.Common;
 using Melcher;
 using UnityEngine;
@@ -9,7 +10,10 @@ namespace KitchenDesign.Serializables
     {
         public string productName => m_ProductName;
         public string productId => m_ProductId;
-        public float dealerPrice => m_PriceSheetPrice.GetPrice(ProFitGlobals.userProfile.currency);
+        public float GetDealerPrice(Currency currency)
+        {
+            return m_PriceSheetPrice.GetPrice(currency);
+        }
         public float targetDepth => m_TargetDepth * Units.Inches2Meters;
 
         [SerializeField] protected string m_ProductName = default;

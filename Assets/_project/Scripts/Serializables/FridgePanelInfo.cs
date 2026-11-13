@@ -17,7 +17,10 @@ namespace KitchenDesign.Serializables
 
         public string panelHeight => m_PanelHeightInInches.ToString();
 
-        public float dealerPrice => m_PriceSheetPrice.GetPrice(ProFitGlobals.userProfile.currency);
+        public float GetDealerPrice(Currency currency)
+        {
+            return m_PriceSheetPrice.GetPrice(currency);
+        }
 
         public float specificPanelWidthInMeters => m_SpecificPanelWidthInInches * Units.Inches2Meters;
 

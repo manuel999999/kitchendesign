@@ -369,7 +369,7 @@ namespace KitchenDesign.Occupancy
                 truncatedProductName = truncatedProductName.Substring(0, MaxNameLengthToDisplay - 3) + "...";
             }
 
-            if (!ProFitGlobals.catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
+            if (!this._kitchen.catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
             {
                 manufacturerInfo.name = "Unknown Manufacturer";
             }

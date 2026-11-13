@@ -257,7 +257,7 @@ namespace KitchenDesign.Cabinets
 
             float riserDepthInMeters = backingInfo.productSizeInMeters.z;
 
-            float? highBarTopRiserDepthInMeters = ProFitGlobals.appRules.HighBarTopRiserDepthInMeters;
+            float? highBarTopRiserDepthInMeters = this.kitchen.appRules.HighBarTopRiserDepthInMeters;
 
             if (highBarTopRiserDepthInMeters.HasValue &&
                 backingInfo.category == ProductCategory.BarTopHigh)
@@ -776,7 +776,7 @@ namespace KitchenDesign.Cabinets
                 }
             }
 
-            float? highBarTopCountertopThicknessInMeters = ProFitGlobals.appRules.HighBarTopCountertopThicknessInMeters;
+            float? highBarTopCountertopThicknessInMeters = this.kitchen.appRules.HighBarTopCountertopThicknessInMeters;
 
             if (highBarTopCountertopThicknessInMeters.HasValue &&
                 m_CabinetBacking.info.category == ProductCategory.BarTopHigh)
@@ -812,7 +812,7 @@ namespace KitchenDesign.Cabinets
                 m_CabinetBacking.countertopOverhangInMeters
                     .Inflate(countertopCuboidInSpanSpace);
 
-            float? highBarTopCountertopDepthInMeters = ProFitGlobals.appRules.HighBarTopCountertopDepthInMeters;
+            float? highBarTopCountertopDepthInMeters = this.kitchen.appRules.HighBarTopCountertopDepthInMeters;
 
             if (highBarTopCountertopDepthInMeters.HasValue &&
                 backing.info.category == ProductCategory.BarTopHigh)

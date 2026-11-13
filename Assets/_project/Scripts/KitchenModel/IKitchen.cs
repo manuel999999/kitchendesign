@@ -1,5 +1,7 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.Session;
+    using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
@@ -46,6 +48,14 @@ namespace KitchenDesign.KitchenModel
         public float backPanelDepthInMeters { get; }
 
         public ProductVisualDatabaseSO productVisualDatabase { get;  }
+
+        public IAppRules appRules { get; }
+
+        public CatalogDataStatus catalogData { get; }
+
+        public ProductVisualContentStatus productContent { get; }
+
+        public SessionStatus session { get; }
 
         /// <summary>
         ///     Return <see langword="true"/> if cabinets can display columns
