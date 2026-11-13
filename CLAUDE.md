@@ -1092,7 +1092,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    `ListenTo(kitchen.events)`, in the fixed order given under "Events"; then
    `DesignerScreensControl.Initialize`, which hands the screens their kitchen, systems and
    prompts and then starts the designer (`restart`, at once when the catalog data is already
-   loaded); then the selection click. The listeners come first because that `restart` must reach
+   loaded); then the selection click. Inside it the brand catalog screen is initialized first,
+   then the dev screen, then the toolbar and the rest (B8.3): each of these queues work on
+   `CatalogDataStatus.ExecuteWhenLoaded`, and the brand catalog screen's (fill every runtime
+   brand catalog with its cabinet sections and door visuals) has to run before the toolbar's
+   set-up and before `restart`, as it did when it was queued from the screen's `Awake`. The listeners come first because that `restart` must reach
    all of them.
 ## Events
 - `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's
@@ -1893,15 +1897,25 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     screens, the white-label client info, the product search, the about-product prompt, the
     set-width prompt and the dev screen (the last two are new serialized references). It
     subscribes to `ProductVisualContentStatus.ContentLoaded` in `Initialize` and unsubscribes in
-    `OnDestroy` (it was `OnEnable`/`OnDisable` on the static forward). Still on `ProFitGlobals` in
-    the designer, on purpose: reads in `Awake`/`OnEnable` (the skybox from the skin in
-    `DesignerScreensControl.Awake`; `WhiteLabelClientInfoUI`, `BrandCatalogUI` and `DesignerDevUI`
-    set themselves up in `Awake`; `CabinetShapeUI.OnEnable`; the highlighted-product content's
-    verbose flag), and components nothing hands a reference to: `BrandCatalogToggle` and
-    `ToolbarProductButton` (rows made at runtime, read in property setters),
-    `CabinetOtherSizeControl` (its label is set from the setup paths), `CabinetTickerWidget`
-    (made by `KitchenWidgetsControl`, which has no rules to pass yet), `TrialCountdownUI`,
-    `VersionLabel`. Four lambdas lost `static` because they now read a field.
+    `OnDestroy` (it was `OnEnable`/`OnDisable` on the static forward). Four lambdas lost `static`
+    because they now read a field.
+  - **No designer screen reads a system from `ProFitGlobals`** (B8.3, 2026-11-13). What ran in
+    `Awake` on the static now runs in the screen's `Initialize`, in the same frame:
+    `BrandCatalogUI` queues its catalog population there (see "The Initialize() chain", step 5,
+    for the order), `DesignerDevUI` its product list, and `WhiteLabelClientInfoUI` shows or
+    hides the "email me the file" checkbox there (Napoleon in white label mode only). The
+    highlighted-product content gets the launch options from the toolbar and sets its product
+    link button from both `Awake` and `Initialize`, whichever runs last (the button shows in the
+    editor, debug builds and verbose mode). A `ToolbarProductButton` no longer looks its variants
+    up: `SetProduct(product, variants)` replaces the `productInfo` setter, and the toolbar and
+    the product search pass `CatalogDataStatus.GetProductVariantList(product)`. The sizes screen
+    and the set-width prompt hand their `CabinetOtherSizeControl`s the session (the label needs
+    the user's units on every slider change). `TrialCountdownUI` gets the session from
+    `MenuNavigationControl` and `DesignerScreensControl`. `VersionLabel` reads the server type
+    from the profile instead of through the server client. What is left on `ProFitGlobals` in
+    the screens is profile, options and skin only (`DesignerScreensControl.Awake`'s skybox,
+    `CabinetShapeUI.OnEnable`, `BrandCatalogToggle`, `VersionLabel`, the menu's views), which
+    B8.4 moves to the profile store.
   - **Where the screens' files are** (B5.7, 2026-11-13; moved with their `.meta`, comments kept
     in files that only moved): `_project/Scripts/UI/MenuScreens/` (`KitchenDesign.UI.MenuScreens`:
     the menu's screens, prompts and list rows, `ListController` and `ListControllerSortMode`),
@@ -1966,18 +1980,16 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   the files that were only moved. Done and committed on 2026-11-13: **B8.1** (the kitchen is
   built by `Kitchen.Initialize`, called from `DesignerSceneInitializer`; full check identical to
   `final-tip`) and **B8.2** (model objects ask their kitchen; full check the same after one fix,
-  see the plan's results). **Next: B8.3** (the designer
-  screens' reads in `Awake`/`OnEnable` and in rows made at runtime; all those screens are active
-  when the scene loads, so their `Awake` runs before `Initialize`; keep the order the
-  `ExecuteWhenLoaded` callbacks are queued in: `BrandCatalogUI`'s catalog population before the
-  toolbar's set-up), then **B8.4** (`AppProfileStore` replaces `ProFitGlobals`). Reads left on
-  `ProFitGlobals` after B8.2: profile, options and skin reads everywhere (they go to the store),
-  and system reads in `BrandCatalogUI`, `WhiteLabelClientInfoUI`, `DesignerDevUI`,
-  `ToolbarProductButton`, `CabinetOtherSizeControl`, the highlighted-product content,
-  `TrialCountdownUI`, `VersionLabel`, `AppLinks`, `ProductIdRemapDatabaseSO`'s editor functions
-  and the two debug menus. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>`
-  (reference `final-tip`; `playercompile.sh` there writes to an old session's scratch folder and
-  reports `files=0`: read the errors line, or fix its path). Waiting on the user: whether to move the
+  see the plan's results) and **B8.3** (no designer screen reads a
+  system from the static; see "Screens"). **Next: B8.4** (`AppProfileStore` replaces
+  `ProFitGlobals`). Reads left on `ProFitGlobals` after B8.3: profile, options and skin reads
+  everywhere (they go to the store), and system reads in `AppLinks` (server host, user type),
+  `ProductIdRemapDatabaseSO`'s editor functions, the two debug menus and the check snippets
+  under `Tools/` (`state.cs`, `load.tmpl`, `menu.cs`, `contentprobe.cs`, `listenerorder.cs`, the
+  `Tools/Cutouts` snippets), which B8.4 has to move to the scene's `SceneInitializer.Systems`
+  too. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>` (reference `final-tip`; for photos
+  `final-tip/unity6-run2`, because `final-tip/unity6` has the three untextured covers);
+  call `playercompile.sh` there by its absolute path (it now waits for `KitchenDesign.dll`). Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at

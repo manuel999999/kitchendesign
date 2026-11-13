@@ -96,10 +96,11 @@ namespace KitchenDesign
             this._productContent = systems.ProductContent;
             this._productContent.ContentLoaded += OnProductVisualContentLoaded;
 
+            m_BrandCatalogUi.Initialize(m_Kitchen, systems.Profile, systems.Options, systems.CatalogData, systems.Session);
+            this.devUi.Initialize(systems.Options, systems.CatalogData, systems.ProductContent);
             m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.CatalogData, systems.Session, systems.ProductContent, this.confirmPrompt, this.aboutProductPrompt);
             m_DesignerNavigationUi.Initialize(m_Kitchen, systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session, this.confirmPrompt, this.savePrompt);
             m_BuildingMethodsUi.Initialize(m_Kitchen, systems.Session);
-            m_BrandCatalogUi.Initialize(m_Kitchen, systems.Profile, systems.Options, systems.CatalogData, systems.Session);
             m_CabinetShapeUi.Initialize(m_Kitchen, systems.Options, systems.Session);
             m_KitchenTemplateUi.Initialize(m_Kitchen);
             m_CabinetOtherSizesUi.Initialize(m_Kitchen, systems.Session);
@@ -108,7 +109,7 @@ namespace KitchenDesign
             this.aboutProductPrompt.Initialize(m_Kitchen, systems.CatalogData);
             this.setVolumeSizePrompt.Initialize(systems.Session);
             this.screenshots.Initialize(systems.Session);
-            this.devUi.Initialize(systems.Options, systems.CatalogData, systems.ProductContent);
+            m_TrialCountdownUi.Initialize(systems.Session);
 
             // Hide the debug cuboid visualizations by default
             OccupantOccupiedCuboidVisualization.isVisible = false;

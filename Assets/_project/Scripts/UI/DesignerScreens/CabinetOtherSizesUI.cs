@@ -49,6 +49,10 @@ namespace KitchenDesign.UI.DesignerScreens
         {
             this._session = session;
             this._kitchen = kitchen;
+
+            m_StollCountertopThicknessControl.Initialize(session);
+            m_CountertopThicknessControl.Initialize(session);
+            m_CabinetDepthControl.Initialize(session);
         }
 
         // =====================================================================

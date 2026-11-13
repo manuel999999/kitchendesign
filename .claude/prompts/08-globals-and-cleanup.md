@@ -114,3 +114,22 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   session, and `Initialize` applies them); listener order re-run (`b82b`): the same as
   `final-tip`, no `NullReferenceException`. The save photos and the edit probe did not show this;
   the listener-order check did. Compiles as WebGL player scripts.
+- **B8.3 done 2026-11-13.** `BrandCatalogUI`, `DesignerDevUI` and `WhiteLabelClientInfoUI` do in
+  `Initialize` what they did in `Awake` on the static; `DesignerScreensControl.Initialize`
+  initializes the brand catalog screen first, then the dev screen, then the toolbar, so the
+  `ExecuteWhenLoaded` callbacks keep their order (catalog population, dev product list, toolbar
+  set-up, hamburger menu set-up, `restart`). `ToolbarProductButton.SetProduct(product, variants)`
+  replaces the `productInfo` setter; `CabinetOtherSizeControl` and `TrialCountdownUI` get the
+  session; the highlighted-product content gets the launch options; `VersionLabel` reads the
+  server type from the profile. Found on the way: `DesignerDevUI.OnGlobalDataReady` already read
+  its handed-in catalog data while still being queued from `Awake`, which ran it before
+  `Initialize` whenever the catalog was loaded (every start from the menu); queued from
+  `Initialize` now. Compiles in the editor and as WebGL player scripts.
+  Full run `final-b83` against `final-tip`: `resave.json` identical in all 8 designs,
+  measurements camera noise only (≤0.02°), edit probe identical (cameras aside), menu and
+  designer listener order the same, cold starts 13 and 14 (the CLI's own), no
+  `NullReferenceException` in `Logs/Editor.log` after the change, the menu check's console ends
+  with 1245 errors instead of 1247. Photos, both captures (`unity6` and `unity6-run2`), within
+  0.14/255 of `final-tip/unity6-run2`. **Compare photos with `final-tip/unity6-run2`, not
+  `final-tip/unity6`**: the latter is the capture with the three untextured covers (28316,
+  27763, 27764), and comparing against it looks like a regression in exactly those three.

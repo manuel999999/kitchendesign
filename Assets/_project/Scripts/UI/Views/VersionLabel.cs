@@ -1,6 +1,7 @@
 namespace KitchenDesign.UI.Views
 {
     using Melcher;
+    using KitchenDesign.Shared.Enums;
     using UnityEngine;
 
     public class VersionLabel : MelcherMonoBehaviour
@@ -13,7 +14,7 @@ namespace KitchenDesign.UI.Views
         {
             string phrase = $"v{Application.version}{ProFitGlobals.appOptions.versionSuffix}";
 
-            if (ProFitGlobals.server.Connection.IsTestServer)
+            if (ProFitGlobals.appProfile.targetServerType == ServerType.Test)
             {
                 phrase += " (test)";
             }

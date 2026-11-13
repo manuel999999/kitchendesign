@@ -1,6 +1,7 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
     using KitchenDesign.Shared.Interfaces;
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using System;
@@ -20,6 +21,13 @@ namespace KitchenDesign.UI.DesignerScreens
         // =====================================================================
 
         public event Action<CabinetSizeOption> onValueChanged;
+
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
 
         // =====================================================================
         // Properties
@@ -117,7 +125,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void UpdateLabel(CabinetSizeOption selectedOption)
         {
-            if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+            if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
             {
                 m_ValueLabel.phrase =
                     Utility.MeasurementFormat.FormatMetersToCentimeters(

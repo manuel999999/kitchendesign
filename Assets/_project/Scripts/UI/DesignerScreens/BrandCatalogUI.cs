@@ -38,6 +38,8 @@ namespace KitchenDesign.UI.DesignerScreens
             this._options = options;
             this._catalogData = catalogData;
             this._session = session;
+
+            this._catalogData.ExecuteWhenLoaded(this.PopulateRuntimeBrandCatalogs);
         }
 
         [SerializeField] private ProductVisualDatabaseSO productVisualDatabase;
@@ -122,64 +124,54 @@ namespace KitchenDesign.UI.DesignerScreens
             }
         }
 
-        protected override void Awake()
+        private void PopulateRuntimeBrandCatalogs()
         {
-            ProFitGlobals.ExecuteWhenReady(
-                () =>
+            // Create new runtime brand catalogs for all custom
+            // server-defined brand catalogs.
+
+            // TODO: This should really being using `runtimeProducts`
+            //       rather than `sourceProducts`, but the runtime list
+            //       isn't populated yet. -Ryan
+
+            List<ProductInfo> cabinetSectionProductInfos =
+                this._catalogData.SourceProducts.Where(
+                    static x => x != null && x.category == ProductCategory.CabinetSection
+                ).ToList();
+
+            List<ProductVisualSO> cabinetSectionVisuals = new ();
+            List<ProductVisualSO> cabinetDoorVisuals = new ();
+
+            foreach (ProductVisualSO productVisual in this.productVisualDatabase.runtimeEntries)
+            {
+                if (!productVisual)
                 {
-                    // Create new runtime brand catalogs for all custom
-                    // server-defined brand catalogs.
-
-                    //foreach (BrandCatalogInfo serverBrandCatalog in ProFitGlobals.serverBrandCatalogs)
-                    //{
-                    //    ProFitGlobals.appProfile.brandCatalogPresets
-                    //}
-
-                    // TODO: This should really being using `runtimeProducts`
-                    //       rather than `sourceProducts`, but the runtime list
-                    //       isn't populated yet. -Ryan
-
-                    List<ProductInfo> cabinetSectionProductInfos =
-                        ProFitGlobals.sourceProducts.Where(
-                            static x => x != null && x.category == ProductCategory.CabinetSection
-                        ).ToList();
-
-                    List<ProductVisualSO> cabinetSectionVisuals = new ();
-                    List<ProductVisualSO> cabinetDoorVisuals = new ();
-
-                    foreach (ProductVisualSO productVisual in this.productVisualDatabase.runtimeEntries)
-                    {
-                        if (!productVisual)
-                        {
-                            continue;
-                        }
-
-                        switch (productVisual.info.runtimePrefabCategory)
-                        {
-                            case ProductCategorySpecific.CabinetSection:
-                                cabinetSectionVisuals.Add(productVisual);
-                                break;
-
-                            case ProductCategorySpecific.CabinetDoor:
-                                cabinetDoorVisuals.Add(productVisual);
-                                break;
-
-                            default:
-                                break;
-                        }
-                    }
-
-                    foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
-                    {
-                        brandCatalog.PopulateRuntimeData(
-                            cabinetSectionProductInfos,
-                            cabinetSectionVisuals,
-                            cabinetDoorVisuals,
-                            ProFitGlobals.catalogData.DoorStyles
-                        );
-                    }
+                    continue;
                 }
-            );
+
+                switch (productVisual.info.runtimePrefabCategory)
+                {
+                    case ProductCategorySpecific.CabinetSection:
+                        cabinetSectionVisuals.Add(productVisual);
+                        break;
+
+                    case ProductCategorySpecific.CabinetDoor:
+                        cabinetDoorVisuals.Add(productVisual);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            foreach (BrandCatalogSO brandCatalog in this._catalogData.RuntimeBrandCatalogs)
+            {
+                brandCatalog.PopulateRuntimeData(
+                    cabinetSectionProductInfos,
+                    cabinetSectionVisuals,
+                    cabinetDoorVisuals,
+                    this._catalogData.DoorStyles
+                );
+            }
         }
 
         protected override void OnEnable()

@@ -40,6 +40,26 @@ namespace KitchenDesign.UI.DesignerScreens
             this._clientList = clientList;
             this._session = session;
             this._kitchen = kitchen;
+
+            string authorizedDomain =
+                this._session.UserProfile.authorizedDomain;
+
+#if UNITY_EDITOR
+            MelcherLog.Log("userType = " + this._session.UserProfile.userType);
+            if (this._session.UserProfile.userType is UserType.Offline or UserType.None &&
+                this._options.simulateWhiteLabelMode)
+            {
+                authorizedDomain = this._options.simulatedWhiteLabelDomain;
+            }
+#endif
+
+            // The "I want to be contacted" checkbox is only used by Napoleon
+            // in white label mode.
+            bool isWhiteLabeledNapoleon =
+                this._session.ShouldUseWhiteLabelMode() &&
+                authorizedDomain.Contains("napoleon.com", StringComparison.OrdinalIgnoreCase);
+
+            m_WantsFileEmailed.gameObject.SetActive(isWhiteLabeledNapoleon);
         }
 
         // =====================================================================
@@ -68,26 +88,6 @@ namespace KitchenDesign.UI.DesignerScreens
             base.Awake();
 
             m_AutoFillButton.gameObject.SetActive(Debug.isDebugBuild);
-
-            string authorizedDomain =
-                ProFitGlobals.userProfile.authorizedDomain;
-
-#if UNITY_EDITOR
-            MelcherLog.Log("userType = " + ProFitGlobals.userProfile.userType);
-            if (ProFitGlobals.userProfile.userType is UserType.Offline or UserType.None &&
-                ProFitGlobals.appOptions.simulateWhiteLabelMode)
-            {
-                authorizedDomain = ProFitGlobals.appOptions.simulatedWhiteLabelDomain;
-            }
-#endif
-
-            // The "I want to be contacted" checkbox is only used by Napoleon
-            // in white label mode.
-            bool isWhiteLabeledNapoleon =
-                ProFitGlobals.session.ShouldUseWhiteLabelMode() &&
-                authorizedDomain.Contains("napoleon.com", StringComparison.OrdinalIgnoreCase);
-
-            m_WantsFileEmailed.gameObject.SetActive(isWhiteLabeledNapoleon);
 
             // Napoleon was using an opt-in system for clients to be contacted
             // by a dealer but have since switched to treating all clients as

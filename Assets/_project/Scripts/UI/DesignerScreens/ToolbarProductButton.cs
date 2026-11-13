@@ -34,43 +34,41 @@ namespace KitchenDesign.UI.DesignerScreens
         public ProductInfo productInfo
         {
             get => m_ProductInfo;
-            set
+        }
+
+        public void SetProduct(ProductInfo product, List<int> productVariants)
+        {
+            m_ProductInfo = product;
+            m_Label.phrase = m_ProductInfo.name;
+
+            // Update the toolbar button's variant text label. This label
+            // displays how many product variants belong to the product
+            // variant chain and displays the index of the currently
+            // displayed product. E.g., "2 of 10".
+
+            string variantLabelText = "";
+
+            m_ProductVariantIndex = -1;
+
+            if (productVariants != null && productVariants.Count > 0)
             {
-                m_ProductInfo = value;
-                m_Label.phrase = m_ProductInfo.name;
+                m_ProductVariantIndex =
+                    productVariants.IndexOf(m_ProductInfo.id);
 
-                // Update the toolbar button's variant text label. This label
-                // displays how many product variants belong to the product
-                // variant chain and displays the index of the currently
-                // displayed product. E.g., "2 of 10".
+                MelcherLog.Assert(
+                    m_ProductVariantIndex >= 0,
+                    $"A product belongs to a product variant chain but its ID is not in the product variant chain. Product is {m_ProductInfo.name} (id: {m_ProductInfo.id}, baseProductId: {m_ProductInfo.baseProductId})"
+                );
 
-                string variantLabelText = "";
+                int displayIndex = m_ProductVariantIndex + 1;
 
-                m_ProductVariantIndex = -1;
-
-                List<int> productVariants =
-                    ProFitGlobals.catalogData.GetProductVariantList(m_ProductInfo);
-
-                if (productVariants != null && productVariants.Count > 0)
-                {
-                    m_ProductVariantIndex =
-                        productVariants.IndexOf(m_ProductInfo.id);
-
-                    MelcherLog.Assert(
-                        m_ProductVariantIndex >= 0,
-                        $"A product belongs to a product variant chain but its ID is not in the product variant chain. Product is {m_ProductInfo.name} (id: {m_ProductInfo.id}, baseProductId: {m_ProductInfo.baseProductId})"
-                    );
-
-                    int displayIndex = m_ProductVariantIndex + 1;
-
-                    variantLabelText = $"{displayIndex} of {productVariants.Count}";
-                }
-
-                bool useVariantsLabel = !string.IsNullOrEmpty(variantLabelText);
-
-                m_VariantsIndexLabel.phrase = variantLabelText;
-                m_VariantsIndexBackground.gameObject.SetActive(useVariantsLabel);
+                variantLabelText = $"{displayIndex} of {productVariants.Count}";
             }
+
+            bool useVariantsLabel = !string.IsNullOrEmpty(variantLabelText);
+
+            m_VariantsIndexLabel.phrase = variantLabelText;
+            m_VariantsIndexBackground.gameObject.SetActive(useVariantsLabel);
         }
 
         public int productVariantIndex => m_ProductVariantIndex;

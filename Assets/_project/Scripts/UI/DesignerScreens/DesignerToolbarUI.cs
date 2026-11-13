@@ -97,7 +97,7 @@ namespace KitchenDesign.UI.DesignerScreens
             this._session = session;
             this._productContent = productContent;
             this._kitchen = kitchen;
-            m_HighlightedProductContent.Initialize(kitchen, session, aboutProductPrompt);
+            m_HighlightedProductContent.Initialize(kitchen, session, launchOptions, aboutProductPrompt);
         }
 
         // =====================================================================
@@ -1224,7 +1224,7 @@ namespace KitchenDesign.UI.DesignerScreens
                 button.name = $"{Category}_{sectionProductInfo.name}_Button";
                 button.phrase = sectionProductInfo.name;
                 button.sprite = sectionVisual?.info.thumbnail;
-                button.productInfo = sectionProductInfo;
+                button.SetProduct(sectionProductInfo, this._catalogData.GetProductVariantList(sectionProductInfo));
                 button.overlaySprite = doorStyleVisual?.info.thumbnail;
                 button.SetErrorHighlightVisible(
                     !sectionVisual || sectionProductInfo.hasErrors
@@ -1844,7 +1844,7 @@ namespace KitchenDesign.UI.DesignerScreens
                             m_ProductToolbar.GetScrollContent()
                         );
                     productButton.name = productInfo.sku + "Button";
-                    productButton.productInfo = productInfo;
+                    productButton.SetProduct(productInfo, this._catalogData.GetProductVariantList(productInfo));
 
                     if (visual && visual.info.thumbnail)
                     {
@@ -1874,7 +1874,7 @@ namespace KitchenDesign.UI.DesignerScreens
             {
                 if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                 {
-                    m_ProductBreadcrumb.productInfo = caller.productInfo;
+                    m_ProductBreadcrumb.SetProduct(caller.productInfo, this._catalogData.GetProductVariantList(caller.productInfo));
                     AddProduct(caller.GetComponent<MelcherButton>());
                     return;
                 }
@@ -1898,7 +1898,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected bool SetProductBreadcrumbTarget(ProductInfo targetProductInfo)
         {
-            m_ProductBreadcrumb.productInfo = targetProductInfo;
+            m_ProductBreadcrumb.SetProduct(targetProductInfo, this._catalogData.GetProductVariantList(targetProductInfo));
 
             ProductVisualSO visual =
                 m_ProductVisualDatabase.FindRuntimeVisualByID(

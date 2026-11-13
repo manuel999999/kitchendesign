@@ -24,12 +24,24 @@ namespace KitchenDesign.UI.DesignerScreens
         private Kitchen _kitchen;
         private DesignerAboutProductUI _aboutProductPrompt;
         private SessionStatus _session;
+        private LaunchOptions _launchOptions;
 
-        public void Initialize(Kitchen kitchen, SessionStatus session, DesignerAboutProductUI aboutProductPrompt)
+        public void Initialize(Kitchen kitchen, SessionStatus session, LaunchOptions launchOptions, DesignerAboutProductUI aboutProductPrompt)
         {
             this._kitchen = kitchen;
             this._aboutProductPrompt = aboutProductPrompt;
             this._session = session;
+            this._launchOptions = launchOptions;
+
+            this.RefreshProductServerLinkButton();
+        }
+
+        private void RefreshProductServerLinkButton()
+        {
+            bool isVerbose = this._launchOptions != null && this._launchOptions.IsVerbose;
+            bool showProductButton = Application.isEditor || Debug.isDebugBuild || isVerbose;
+
+            m_ProductServerLinkButton.gameObject.SetActive(showProductButton);
         }
 
         // =====================================================================
@@ -191,9 +203,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void Awake()
         {
-            bool showProductButton = Application.isEditor || Debug.isDebugBuild || ProFitGlobals.isVerbose;
-
-            m_ProductServerLinkButton.gameObject.SetActive(showProductButton);
+            this.RefreshProductServerLinkButton();
 
             bool showClipboardButton = !MelcherWebGL.IsActiveBuildTarget();
 

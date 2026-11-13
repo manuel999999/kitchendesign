@@ -139,7 +139,7 @@ namespace KitchenDesign.UI.DesignerScreens
                             m_ProductSearchToolbar.GetScrollContent()
                         );
                     productButton.name = productInfo.sku + "Button";
-                    productButton.productInfo = productInfo;
+                    productButton.SetProduct(productInfo, this._catalogData.GetProductVariantList(productInfo));
                     productButton.overlaySprite = doorStyleVisual ? doorStyleVisual.info.thumbnail : null;
 
                     if (visual && visual.info.thumbnail)

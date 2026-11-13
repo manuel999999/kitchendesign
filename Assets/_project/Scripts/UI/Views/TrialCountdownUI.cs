@@ -1,6 +1,7 @@
 namespace KitchenDesign.UI.Views
 {
     using KitchenDesign.Utility;
+    using KitchenDesign.Session;
     using Melcher;
     using System.Collections.Generic;
     using UnityEngine;
@@ -13,6 +14,13 @@ namespace KitchenDesign.UI.Views
     /// </summary>
     public class TrialCountdownUI : MelcherUI
     {
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -70,7 +78,7 @@ namespace KitchenDesign.UI.Views
         {
             do
             {
-                System.DateTime trialExpireDate = ProFitGlobals.userProfile.trialExpireUtc.GetValueOrDefault();
+                System.DateTime trialExpireDate = this._session.UserProfile.trialExpireUtc.GetValueOrDefault();
                 System.DateTime now = System.DateTime.UtcNow;
 
                 System.TimeSpan timeDifference = trialExpireDate - now;

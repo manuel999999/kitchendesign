@@ -54,6 +54,8 @@ namespace KitchenDesign.UI.DesignerScreens
         public void Initialize(SessionStatus session)
         {
             this._session = session;
+
+            m_CabinetDepthControl.Initialize(session);
         }
 
         // =====================================================================

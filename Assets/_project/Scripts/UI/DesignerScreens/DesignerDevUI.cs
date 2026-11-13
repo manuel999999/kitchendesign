@@ -28,13 +28,8 @@ namespace KitchenDesign.UI.DesignerScreens
             this._options = options;
             this._catalogData = catalogData;
             this._productContent = productContent;
-        }
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            ProFitGlobals.ExecuteWhenReady(OnGlobalDataReady);
+            this._catalogData.ExecuteWhenLoaded(this.OnGlobalDataReady);
         }
 
         protected override void OnEnable()

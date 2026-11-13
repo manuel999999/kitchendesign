@@ -43,6 +43,7 @@ namespace KitchenDesign
             m_ManufacturerWhitelistUi.Initialize(systems.Session, systems.CatalogData, systems.Server, systems.Options, systems.Rules, hasPendingChanges => this.SetMenuHasPendingChanges(m_ManufacturerWhitelistUi, hasPendingChanges));
             m_UserLogOutPromptUi.Initialize(systems.Session);
             this.kioskPinPrompt.Initialize(systems.Session);
+            m_TrialCountdownUi.Initialize(systems.Session);
 
             // Reset the last selected user and quote to avoid dangling
             // references to users who may not exist or be our own
