@@ -1200,12 +1200,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   (`_projectShared`, refs nothing), `KitchenDesign.Debugging` (`_projectDebugging`, Editor only,
   autoReferenced off, refs KitchenDesign, Shared). All reference by name. `KitchenDesign` also
   references `Unity.Cinemachine` (2026-10-20, for `CameraLevelAimBehavior`).
-  **Since phase A of the refactor (2026-10-22) all the old code is in our assemblies and namespace**,
-  files not moved yet: `.asmref` files put `AssetsMelcher/Scripts`, `/Miscellaneous`,
-  `/Plugins/WebGL`, `Procedural Assets` and `Cloder` into `KitchenDesign`; the old editor tools
-  (`AssetsMelcher/Editor`, and `Cloder/Editor` through an `.asmref`) are
-  `KitchenDesign.Tools.Editor` (Editor only). The namespace is `KitchenDesign` throughout (sub
-  namespaces come with phase B); every old file has `using Melcher;` for the core package, which
+  **Since phase A of the refactor (2026-10-22) all the old code is in our assemblies and namespace.**
+  Since area 7 (2026-11-13) all runtime code is under `_project/Scripts`; `.asmref` files still
+  put `Procedural Assets` (Weaver's `Layers.cs`) and the user's `Cloder` into `KitchenDesign`,
+  and the old editor tools (`AssetsMelcher/Editor`, and `Cloder/Editor` through an `.asmref`) are
+  `KitchenDesign.Tools.Editor` (Editor only). Namespaces follow the folders under
+  `KitchenDesign`; every old file has `using Melcher;` for the core package, which
   keeps `namespace Melcher` until it is replaced by our own library. `KitchenDesign` references the
   core package, MEC, MiniJSON, UniTask (+Addressables), `DOTween.Modules`, `RecyclingListView`,
   TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
@@ -1432,8 +1432,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     (`ProductVisualContent` and its editor partial), `Geometry/` (`SlicedMesh` with the structs),
     `Save/`, `Pricing/`, `BuildingRules/`, `Brands/`, `CatalogData/DoorStyleLookup`. Moved with their
     `.meta` (scenes and prefabs bind by GUID, so no asset changed); comments kept in files that only
-    moved. Still in `AssetsMelcher/Scripts` from this area's list: nothing; what remains there is
-    other areas' (screens, scenes, photos, `EventBridge`, `ProFitGlobals`, `Const`, small helpers).
+    moved.
 - **Cameras and photos** (area 6 of the refactor, from 2026-11-13; plan:
   `.claude/prompts/06-cameras-photos.md`).
   - `KitchenScreenshotControl` (`_project/Scripts/Photos/`, `KitchenDesign.Photos`; was
@@ -1638,7 +1637,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   - `RandomNamesForEditor` (editor only): random names and places to fill the sign-up and client
     forms while testing.
   `KitchenDesign.Tools.Editor` now references `KitchenDesign.Shared` (for `Units`).
-  What stays in `Const` and `ProFitUtility` until its area: the plan, B1.4.
+  `Const` and `ProFitUtility` were split by owner in area 7 (see "Leftovers").
 - **Leftovers** (area 7 of the refactor, 2026-11-13; plan: `.claude/prompts/07-leftovers.md`).
   **No runtime code is left in `AssetsMelcher`**; its `.asmref` files are gone. What remains
   outside the house layout: `AssetsMelcher/Editor` (the `KitchenDesign.Tools.Editor` assembly;
@@ -1920,7 +1919,14 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
   (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos, `06-cameras-photos.md`, B6.1–B6.4) and
-  area 7 (leftovers, `07-leftovers.md`, B7.1–B7.2) are done too. **Next: then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
+  area 7 (leftovers, `07-leftovers.md`, B7.1–B7.2) are done too. **Next: all the deferred checks, comparing the
+  branch tip with `3d25da55` on the same day** (`rulescheck.cs`, `buildingrulescheck.cs`,
+  `brandrulescheck.cs`, `coldstart.sh` from both start scenes, `runall.sh` with `compare_runs.py`
+  and `photodiff.sh`, the fallback JSON a sign-in writes, `menucheck.sh`, `editprobe.sh` with
+  `compare_probe.py`, `listenerorder.cs` against the two `…-before-area5.txt` files, and
+  `screenprobe.sh`, which B5.0 planned and was never written). The bug list and the per-step
+  notes for that pass are in `05-screens.md`. If a difference shows, bisect over the commits
+  from `3d25da55` to the tip: every one compiles. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at
