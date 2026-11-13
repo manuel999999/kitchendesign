@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using MEC;
@@ -84,5 +84,5 @@ namespace KitchenDesign
         }
     }   // class SceneSavingHandler
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor
 

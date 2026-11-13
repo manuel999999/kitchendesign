@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using KitchenDesign.ProductsEditor.Scriptables;
@@ -19,7 +19,7 @@ namespace KitchenDesign
     ///
     ///     Based on: https://forum.unity.com/threads/batch-change-all-fbx-default-materials-help.626341/#post-6874607
     /// </summary>
-    public class ProFitProductModelFbxImporter : AssetPostprocessor
+    public class ProductModelFbxImporter : AssetPostprocessor
     {
         void OnPostprocessModel(GameObject modelAsset)
         {
@@ -235,9 +235,9 @@ namespace KitchenDesign
                 "Lit",
             };
 
-    }   // class ProFitProductModelFbxImporter
+    }   // class ProductModelFbxImporter
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

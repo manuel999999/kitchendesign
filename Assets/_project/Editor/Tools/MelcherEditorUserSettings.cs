@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using System.IO;
@@ -63,7 +63,7 @@ namespace KitchenDesign
 
     }   // class MelcherEditorUserSettings
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

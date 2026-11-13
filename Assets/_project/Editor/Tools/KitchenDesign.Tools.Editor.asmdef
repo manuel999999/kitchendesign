@@ -1,6 +1,6 @@
 {
     "name": "KitchenDesign.Tools.Editor",
-    "rootNamespace": "KitchenDesign",
+    "rootNamespace": "KitchenDesign.ToolsEditor",
     "references": [
         "KitchenDesign",
         "KitchenDesign.Shared",

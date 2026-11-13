@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using System.Collections;
@@ -19,7 +19,7 @@ namespace KitchenDesign
         public override VisualElement CreatePanelContent()
         {
             m_DocumentAsset =
-                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/AssetsMelcher/Editor/ScreencastKeysOverlay.uxml");
+                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/_project/Editor/Tools/ScreencastKeysOverlay.uxml");
             m_PanelContent = m_DocumentAsset.Instantiate();
 
             m_PanelContent.RegisterCallback<AttachToPanelEvent>(
@@ -338,7 +338,7 @@ namespace KitchenDesign
 
     }   // class ScreencastKeysOverlay
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

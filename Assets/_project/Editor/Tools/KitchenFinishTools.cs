@@ -1,10 +1,10 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using UnityEngine;
     using UnityEditor;
 
-    public static class ProFitKitchenFinishTools
+    public static class KitchenFinishTools
     {
         /// <summary>
         ///     Attempts to use the user's current selection as the base
@@ -104,9 +104,9 @@ namespace KitchenDesign
 
         private static Material m_ParentMaterial;
 
-    }   // class ProFitKitchenFinishTools
+    }   // class KitchenFinishTools
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

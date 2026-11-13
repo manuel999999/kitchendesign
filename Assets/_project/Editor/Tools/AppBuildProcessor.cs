@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using KitchenDesign.Scriptables;
@@ -15,7 +15,7 @@ namespace KitchenDesign
     ///     selected <see cref="AppSkinSO"/>. This is relevant in WebGL where the
     ///     splash screen background color is shown during the loading phase.
     /// </summary>
-    public class ProFitBuildProcessor
+    public class AppBuildProcessor
         : IPreprocessBuildWithReport
         , IPostprocessBuildWithReport
     {
@@ -235,9 +235,9 @@ namespace KitchenDesign
         private const string s_ResourcesPath = "Assets/AssetsMelcher/Resources";
         private const string s_InactiveResourcesPath = "Assets/AssetsMelcher/InactiveResources";
 
-    }   // class ProFitBuildProcess
+    }   // class AppBuildProcessor
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

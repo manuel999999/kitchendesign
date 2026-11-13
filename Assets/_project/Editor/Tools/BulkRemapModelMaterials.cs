@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.ToolsEditor
 {
     using Melcher;
     using UnityEngine;
@@ -353,4 +353,4 @@ namespace KitchenDesign
 
     }   // class BulkRemapModelMaterials
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.ToolsEditor

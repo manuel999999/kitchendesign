@@ -156,3 +156,12 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   Two captures (`final-b85/unity6-1`, `unity6-2`) against `final-tip`: `resave.json` identical
   in all 8 designs, measurements camera noise only, every photo (plans included) within
   0.14/255 of `final-tip/unity6-run2`. Compiles as WebGL player scripts.
+- **B8.6 done 2026-11-13** (the user said to go ahead). `AssetsMelcher/Editor` is
+  `_project/Editor/Tools/`, moved whole with its `.meta` files; scripts in
+  `namespace KitchenDesign.ToolsEditor`; `ProductModelFbxImporter`, `AppBuildProcessor`,
+  `KitchenFinishTools` lost the `ProFit` prefix; three path strings updated. Measured: the
+  folder move alone reimported nothing; the rename and namespace change reimported every model
+  once (2,096 imports, 1,159 actual, 20 s). No `.fbx.meta` changed, nothing in
+  `AddressableAssetsData` changed. Visuals census: 901 entries, hash `D72B3E9CB18746DF` (the
+  reference). Two captures (`final-b86/unity6-1`, `unity6-2`): `resave.json` identical,
+  measurements camera noise only, photos within 0.08/255 of `final-tip/unity6-run2`.

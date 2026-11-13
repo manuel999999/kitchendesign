@@ -8,8 +8,8 @@ namespace KitchenDesign.Utility
 {
     public static class RandomNamesForEditor
     {
-        private const string NamesPath = "Assets/AssetsMelcher/Editor/RandomNames.txt";
-        private const string PlacesPath = "Assets/AssetsMelcher/Editor/RandomPlaces.txt";
+        private const string NamesPath = "Assets/_project/Editor/Tools/RandomNames.txt";
+        private const string PlacesPath = "Assets/_project/Editor/Tools/RandomPlaces.txt";
 
         private static List<string> s_Names;
         private static List<string> s_Places;

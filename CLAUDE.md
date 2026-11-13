@@ -864,6 +864,10 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
 - **The 6.6 editor writes its log to `kitchendesign/Logs/Editor.log`** and leaves a stub at
   `~/Library/Logs/Unity/Editor.log`, which the 2022.3 editor also uses. With both editors open,
   the old editor's log is lost; read the old app's errors through kitwright's console instead.
+- **`Logs/Editor.log` grows without limit while the editor stays open** (7.4 GB on 2026-11-13
+  after two days of check runs). A `grep` over it takes minutes; search the tail
+  (`tail -c 50000000 Logs/Editor.log | /usr/bin/grep …`). It is replaced when the editor
+  restarts. Pointed out to the user; not deleted.
 - **The Unity CLI's `eval`/`eval_file` take statements and local functions, no `using`s and no
   classes;** `run_script` takes a class but ends play mode. Measuring in play mode therefore uses
   fully qualified `eval_file` snippets.
@@ -1221,7 +1225,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   **Since phase A of the refactor (2026-10-22) all the old code is in our assemblies and namespace.**
   Since area 7 (2026-11-13) all runtime code is under `_project/Scripts`; `.asmref` files still
   put `Procedural Assets` (Weaver's `Layers.cs`) and the user's `Cloder` into `KitchenDesign`,
-  and the old editor tools (`AssetsMelcher/Editor`, and `Cloder/Editor` through an `.asmref`) are
+  and the old editor tools (`_project/Editor/Tools/` since B8.6, namespace
+  `KitchenDesign.ToolsEditor`, and `Cloder/Editor` through an `.asmref`) are
   `KitchenDesign.Tools.Editor` (Editor only). Namespaces follow the folders under
   `KitchenDesign`; every old file has `using Melcher;` for the core package, which
   keeps `namespace Melcher` until it is replaced by our own library. `KitchenDesign` references the
@@ -1589,12 +1594,15 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     mismatched models, reserialize, insulated-jacket fix, `ProductVisualEditorHelp`), the
     `AssetAddress` drawer, `AddressableGroupMenuCommand` (was `ProFitAddressableGroupMenuCommand`;
     menu paths unchanged), `FilteredObjectSelector`, and `ProductEditorOptionsSO` (was
-    `ProFitEditorOptions`; the asset `AssetsMelcher/Editor/ProFitEditorOptions.asset` is found by
+    `ProFitEditorOptions`; the asset `_project/Editor/Tools/ProFitEditorOptions.asset` is found by
     type). Comments in these files stay: they were moved, not refactored. **The FBX import
-    postprocessor (`ProFitProductModelFbxImporter`) stays in `KitchenDesign.Tools.Editor` on
-    purpose:** Unity counts the model postprocessors (type and version) among each model's import
-    dependencies, so moving or renaming it is expected to reimport every model and run its material
-    remap again (not measured; avoided). Move it only together with a planned model reimport.
+    postprocessor is `ProductModelFbxImporter` in `KitchenDesign.Tools.Editor`** (was
+    `ProFitProductModelFbxImporter`). Unity counts the model postprocessors' type names among
+    each model's import dependencies. Measured in B8.6 (2026-11-13): moving its file to another
+    folder (same GUID, class, namespace and assembly) reimported nothing; renaming the class and
+    its namespace reimported every model once (1,159 actual imports, 20 s on the thinned copy),
+    with no `.fbx.meta` changed. Rename or re-namespace it again only when that reimport is
+    acceptable on the full catalog.
   - Checked with `Tools/Baseline/unity6/visualscensus.cs` (edit mode): every source visual's
     content address and every public value of its info, written to
     `GeminiBaseline/visualscensus-latest.txt` with a hash; it finds the types by name, so it
@@ -1673,9 +1681,19 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   `Const` and `ProFitUtility` were split by owner in area 7 (see "Leftovers").
 - **Leftovers** (area 7 of the refactor, 2026-11-13; plan: `.claude/prompts/07-leftovers.md`).
   **No runtime code is left in `AssetsMelcher`**; its `.asmref` files are gone. What remains
-  outside the house layout: `AssetsMelcher/Editor` (the `KitchenDesign.Tools.Editor` assembly;
-  it moves in one piece with a planned model reimport, because it holds the FBX postprocessor),
-  the user's `Cloder` folder and Weaver's `Procedural Assets/Layers.cs` (each with an `.asmref`).
+  outside the house layout: the user's `Cloder` folder and Weaver's `Procedural Assets/Layers.cs` (each with an `.asmref`).
+  - **`_project/Editor/Tools/`** (B8.6, 2026-11-13): the whole old `AssetsMelcher/Editor` folder,
+    moved in one piece with its `.meta` files: the `KitchenDesign.Tools.Editor` asmdef, the
+    scripts (now `namespace KitchenDesign.ToolsEditor`; `AppBuildProcessor` was
+    `ProFitBuildProcessor`, `KitchenFinishTools` was `ProFitKitchenFinishTools`,
+    `ProductModelFbxImporter` was `ProFitProductModelFbxImporter`; menu paths unchanged) and
+    the assets they use (asset icons, `ProFitEditorOptions.asset`, the random name lists, the
+    UXML/USS, `ToolScenes/`). Why the assets stay beside the scripts: three are loaded by path
+    (`ScreencastKeysOverlay.uxml`, and `RandomNames.txt` / `RandomPlaces.txt` from
+    `Utility/RandomNamesForEditor`), and `ButtonStyleEditor` finds
+    `TransparencyBackground.png` relative to its own script. `AppBuildProcessor` still has
+    `Assets/AssetsMelcher/Resources` and `…/InactiveResources` as literal paths (it moves the
+    other apps' resources out for a build); they change when those folders move.
   - `_project/Scripts/Utility/` (`KitchenDesign.Utility`) gained: `ElementIndex<T>` (an element
     with its index, what the layout's enumerations yield), `ComponentsInChildrenEnumerator<T>`,
     `EnumInfo<T>` (cached enum count and values), `ImperialUnit` (feet, inches and fractions),
@@ -2002,8 +2020,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   system from the static; see "Screens") and **B8.4** (`AppProfileStore` replaces
   `ProFitGlobals`, which is deleted; see "App-wide systems"): **part (a) of the plan is done.**
   **B8.5** is done too (`PlanMeasurePlacement`, see "Cameras and photos").
-  **Next: B8.6** (`AssetsMelcher/Editor` to `_project/Editor/Tools/`; ask the user first: it
-  reimports every model), then B8.7. Noticed in B8.5, not changed:
+  **B8.6** is done (`_project/Editor/Tools/`, see "Leftovers"; the user said to go ahead).
+  **Next: B8.7** (house conventions in the files that were only moved, one folder per commit).
+  Noticed in B8.5, not changed:
   `KitchenScreenshotControl.TryAddNapoleonTopDownWatermark` compares the catalog's
   `cabinetManufacturerId` with a literal 95 (Napoleon) instead of asking `BrandRules`; it
   belongs there as a rule.
