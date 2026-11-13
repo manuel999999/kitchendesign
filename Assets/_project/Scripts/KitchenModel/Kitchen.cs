@@ -1,5 +1,6 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.UI.DesignerScreens;
     using KitchenDesign.Events;
     using Melcher;
     using KitchenDesign.Server;

@@ -1,0 +1,252 @@
+namespace KitchenDesign
+{
+    using KitchenDesign.UI.DesignerScreens;
+    using Melcher;
+    using KitchenDesign.Shared.Enums;
+    using KitchenDesign.Server;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using MEC;
+    using KitchenDesign.Events;
+
+    /// <summary>
+    ///     <see cref="PlatformSetupScene"/> handles loading the proper scene
+    ///     according to whether the user is white labeled.
+    /// </summary>
+    public class PlatformSetupControl : MelcherMonoBehaviour
+    {
+        private AppSystems _systems;
+
+        // ====================================================================
+        // Methods
+        // ====================================================================
+
+        public void Initialize(AppSystems systems)
+        {
+            this._systems = systems;
+
+            this._systems.CatalogData.ExecuteWhenLoaded(OnGlobalsReady);
+        }
+
+        private void OnEnable()
+        {
+            EventSession.OnSpinnerMessageRequested.AddListener(this.OnSpinnerMessageRequested);
+        }
+
+        private void OnDisable()
+        {
+            EventSession.OnSpinnerMessageRequested.RemoveListener(this.OnSpinnerMessageRequested);
+        }
+
+        private void OnSpinnerMessageRequested(SpinnerMessageInfo info)
+        {
+            this.OnSetSpinnerStatusMessage(info.Message);
+        }
+
+        private void OnSetSpinnerStatusMessage(string text)
+        {
+            m_LoadingUi.SetStatusMessage(text);
+        }
+
+        private void OnGlobalsReady()
+        {
+            Timing.RunCoroutine(Coroutine());
+
+            IEnumerator<float> Coroutine()
+            {
+                // The will-be User info if the user is white labeled
+                User? pendingUser = null;
+
+                // The will-be User Profile info the user is white labeled
+                UserProfile? pendingUserProfile = null;
+
+#if UNITY_WEBGL || UNITY_EDITOR
+
+                // The intent of this coroutine is to correctly select the next
+                // scene to load. We need to choose the designer scene for
+                // white labeled WebGL users.
+
+                // To make development easier, there is an option to simulate
+                // white label mode in the editor set in ProFitAppOptions.
+
+                string webDomainOfApp = this._systems.LaunchOptions.GetWebDomainOfApp();
+
+                MelcherLog.Log(
+                    "webDomainOfApp: " + webDomainOfApp,
+                    severity: MelcherLogSeverity.Verbose
+                );
+
+                string distributorUrlParameter =
+                    this._systems.LaunchOptions.GetDistributorUrlParameter();
+
+                MelcherLog.Log(
+                    "distributorUrlParameter: " + distributorUrlParameter,
+                    severity: MelcherLogSeverity.Verbose
+                );
+
+                if (webDomainOfApp != null)
+                {
+                    // Check if the distributor is setup for white labeling.
+
+                    MelcherWebCoroutine request =
+                        this._systems.Server.Accounts.CheckWhiteLabelAuthorization(
+                            webDomainOfApp,
+                            distributorUrlParameter,
+                            onSuccess: newUser =>
+                            {
+                                pendingUser = newUser;
+
+                                MelcherLog.Log("Has authorization", severity: MelcherLogSeverity.Verbose);
+                            },
+                            onError: (builder, error, jsonValue) =>
+                            {
+                                // "Unauthorized"
+                                MelcherLog.LogError(error.Message);
+                            }
+                        );
+
+                    yield return Timing.WaitUntilDone(request);
+                }
+
+#if UNITY_EDITOR
+                if (Application.isEditor && pendingUser == null)
+                {
+                    // Bypass authorization by simulating offline mode
+
+                    string fieldName =
+                        $"{nameof(ProFitGlobals)}.{nameof(this._systems.Options)}";
+
+                    MelcherLog.LogWarning(
+                        $"The simulated white label options provided in " +
+                        $"{MelcherFormat.ConsoleFieldName(fieldName)} are" +
+                        $"out-of-date. White label mode will still be " +
+                        $"simulated using an offline user.",
+                        context: this._systems.Options
+                    );
+
+                    MelcherWebCoroutine request =
+                        this._systems.Server.Accounts.LogIn(
+                            signInEmail: "",
+                            password: "",
+                            isOffline: true,
+                            onSuccess: newUser =>
+                            {
+                                pendingUser = newUser;
+                            },
+                            onError: (builder, error, jsonValue) =>
+                            {
+                                MelcherLog.LogError("Failed to log in as offline user.");
+                            }
+                        );
+
+                    yield return Timing.WaitUntilDone(request);
+                }
+#endif  // if UNITY_EDITOR
+
+
+                if (pendingUser.HasValue)
+                {
+                    EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Requesting User Profile"));
+
+                    m_LoadingUi.Show();
+
+                    MelcherWebCoroutine request =
+                        this._systems.Server.Accounts.GetProfile(
+                            pendingUser.Value.apiToken,
+                            isOffline: pendingUser.Value.userType == UserType.Offline,
+                            onSuccess: newUserProfile =>
+                            {
+                                User updatedUser = pendingUser.Value;
+                                updatedUser.userType = newUserProfile.userType;
+                                pendingUser = updatedUser;
+
+                                pendingUserProfile = newUserProfile;
+                            },
+                            onError: (builder, error, jsonValue) =>
+                            {
+                                MelcherLog.LogError(error.Message);
+                            }
+                        );
+
+                    string userPref = "User/{pendingUser.Value.id}/isKioskModeEnabled";
+
+                    this._systems.Session.IsKioskModeEnabled = PlayerPrefs.GetInt(userPref) != 0;
+
+                    yield return Timing.WaitUntilDone(request);
+                }
+
+#if UNITY_EDITOR
+                if (pendingUserProfile.HasValue &&
+                    this._systems.Options.simulateWhiteLabelMode &&
+                    pendingUserProfile.Value.isWhiteLabeled == false)
+                {
+                    MelcherLog.LogWarning(
+                        $"Forcing white mode on as it is requested in the" +
+                        $"app options.",
+                        context: this._systems.Options
+                    );
+
+                    UserProfile profileCopy = pendingUserProfile.Value;
+                    profileCopy.isWhiteLabeled = true;
+                    pendingUserProfile = profileCopy;
+                }
+#endif  // if UNITY_EDITOR
+
+#endif  // if UNITY_WEBGL || UNITY_EDITOR
+
+                // Jump to the appropriate scene depending on whether the user
+                // is in white label mode or not
+
+                string sceneNameToLoad = "MenuScene";
+
+                this._systems.Session.UseWhiteLabelMode =
+                    pendingUser.HasValue &&
+                    pendingUserProfile.HasValue &&
+                    pendingUserProfile.Value.isActive &&
+                    pendingUserProfile.Value.isWhiteLabeled;
+
+                if (this._systems.Session.UseWhiteLabelMode)
+                {
+                    this._systems.Session.User = pendingUser.Value;
+                    this._systems.Session.UserProfile = pendingUserProfile.Value;
+
+                    sceneNameToLoad = "DesignerScene";
+
+                    yield return Timing.WaitUntilDone(
+                        Timing.RunCoroutine(this._systems.Session.FinishLogInCoroutine(rememberMe: false, fetchClients: false, ErrorHandler))
+                    );
+
+                    EventSession.OnSpinnerMessageRequested.Raise(new SpinnerMessageInfo("Loading 3D Designer"));
+                }
+
+                MelcherLog.Log(
+                    $"{nameof(PlatformSetupControl)} will load scene {sceneNameToLoad}",
+                    severity: MelcherLogSeverity.Verbose
+                );
+
+                MelcherSceneRequest sceneRequest =
+                    MelcherSceneRequest.FromName(sceneNameToLoad);
+
+                MelcherSceneManager.LoadSceneAsync(sceneRequest, MelcherSceneLoadMode.Single);
+
+                yield break;
+            }
+
+            static void ErrorHandler(MelcherWebRequestBuilder builder, System.Exception error, MelcherJsonValue jsonResponse)
+            {
+                MelcherLog.LogError(error.Message);
+            }
+
+        }
+
+        [SerializeField, MelcherReadOnlyInInspector, MelcherFindComponent(MelcherFindComponentMode.Scene)]
+        protected LoadingUI m_LoadingUi = default;
+
+    }   // class PlatformSetupControl
+
+}   // namespace KitchenDesign
+
+/// ===========================================================================
+/// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
+/// Initial creation date: 2023-02-14
+/// ===========================================================================

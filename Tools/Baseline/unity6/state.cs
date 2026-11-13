@@ -1,3 +1,3 @@
-var w = UnityEngine.Object.FindObjectsByType<KitchenDesign.QuickLogInWidget>(UnityEngine.FindObjectsInactive.Include, UnityEngine.FindObjectsSortMode.None);
+var w = UnityEngine.Object.FindObjectsByType<KitchenDesign.UI.MenuScreens.QuickLogInWidget>(UnityEngine.FindObjectsInactive.Include, UnityEngine.FindObjectsSortMode.None);
 int active = 0; foreach (var x in w) if (x.isActiveAndEnabled) active++;
 return "scene=" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " user=" + KitchenDesign.ProFitGlobals.user.userType + " login=" + KitchenDesign.ProFitGlobals.logInCoroutineState + " clients=" + (KitchenDesign.ProFitGlobals.userClients == null ? -1 : KitchenDesign.ProFitGlobals.userClients.Count) + " quickActive=" + active + " rib=" + UnityEngine.Application.runInBackground;

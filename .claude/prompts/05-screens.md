@@ -394,6 +394,13 @@ folders. One type per file.
   `buildingrulescheck.cs`: 128 checks, 0 mismatches. `KitchenScreenshotManager`'s five
   comparisons are area 6's. Compiles in the editor and as WebGL player scripts.
 
+- **B5.7 done 2026-11-13.** 94 files moved by a script (`git mv` with `.meta`): 33 menu
+  screens, 33 designer screens, 20 shared views, 6 scene controls to `Game/`, `PhoneNumber` to
+  `Utility/`, the input validator to `Scriptables/` as `PhoneNumberInputFieldValidatorSO`.
+  Namespaces set in the moved files, `using` lines added to the 36 files that name a moved type,
+  the tool snippets requalified. Text assets searched for the type names first: none. Compiles in
+  the editor and as WebGL player scripts. **Area 5's steps are done; its checks are owed.**
+
 **Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
 (areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
 check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.

@@ -1798,6 +1798,24 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `CabinetOtherSizeControl` (its label is set from the setup paths), `CabinetTickerWidget`
     (made by `KitchenWidgetsControl`, which has no rules to pass yet), `TrialCountdownUI`,
     `VersionLabel`. Four lambdas lost `static` because they now read a field.
+  - **Where the screens' files are** (B5.7, 2026-11-13; moved with their `.meta`, comments kept
+    in files that only moved): `_project/Scripts/UI/MenuScreens/` (`KitchenDesign.UI.MenuScreens`:
+    the menu's screens, prompts and list rows, `ListController` and `ListControllerSortMode`),
+    `UI/DesignerScreens/` (`KitchenDesign.UI.DesignerScreens`: the setup wizard, the toolbar and
+    its buttons and contents, the navigation screen and hamburger menu, the designer's prompts,
+    toast, loading and recording screens, the measure overlay, the cabinet tickers) and
+    `UI/Views/` (`KitchenDesign.UI.Views`: what both scenes share: `Menu` and `BasePromptUI` (our
+    bases on `MelcherUI`), `MenuTransition`, the skin views, `Accordion`, `Spinner`, `QuickHint`,
+    `InlineMessageBox` and its prompt, `TrialCountdownUI`, `VersionLabel`, the WebGL input
+    fixes). The scene controls (`MenuNavigationControl`, `DesignerScreensControl`,
+    `PlatformSetupControl`, `SplashVideoControl`, `MemoryFlushControl`, `MenuPreferenceKeys`) are
+    in `_project/Scripts/Game/` beside their initializers, namespace `KitchenDesign`.
+    `PhoneNumber` (formatting and checking phone numbers) is in `Utility/`, and the TMP input
+    validator is `PhoneNumberInputFieldValidatorSO` in `Scriptables/` (a ScriptableObject; its
+    asset keeps the name `PhoneNumberInputFieldValidator.asset`). Why the folders aren't `Menu/`
+    and `Designer/`: a namespace must not contain a type's name, and `Menu` is a class. No scene,
+    prefab or asset names these types as text, so nothing but the scripts changed.
+    `AssetsMelcher/Scripts/UI` and `/Scenes` are gone.
   - `MenuPreferenceKeys` (B5.3b): the `PlayerPrefs` key for "always landscape on mobile",
     written as the literal `"MainUI.AlwaysLandscapeOnMobile"` (it was `nameof(MainUI) + …`):
     devices already store it under that name, so it must not follow a class rename.
@@ -1819,8 +1837,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
-  (a, b, c; `EventBridge` is gone), B5.6. Next:
-  B5.7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
+  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Next: area 6 (cameras and
+  photos), area 7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at

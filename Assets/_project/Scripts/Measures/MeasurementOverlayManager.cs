@@ -1,5 +1,6 @@
 namespace KitchenDesign.Measures
 {
+    using KitchenDesign.UI.DesignerScreens;
     using KitchenDesign.KitchenModel;
     using Melcher;
     using KitchenDesign.Shared.Enums;
