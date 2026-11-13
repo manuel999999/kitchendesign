@@ -24,6 +24,8 @@ namespace KitchenDesign
         {
             this.Systems = systems;
 
+            this.kitchen.Initialize(systems);
+
             KitchenEvents events = this.kitchen.events;
             this.navigation.ListenTo(events);
             this.toolbar.ListenTo(events);

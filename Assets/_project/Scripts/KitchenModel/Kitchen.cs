@@ -27,6 +27,8 @@ namespace KitchenDesign.KitchenModel
     using KitchenDesign.Measures;
     using KitchenDesign.Occupancy;
     using KitchenDesign.Widgets;
+    using KitchenDesign.CatalogData;
+    using KitchenDesign.Session;
 
     using JsonDict = System.Collections.Generic.IDictionary<string, object>;
     using JsonList = System.Collections.Generic.IList<object>;
@@ -358,7 +360,7 @@ namespace KitchenDesign.KitchenModel
 
         public async UniTask CreateCabinetLayoutFromShape(CabinetLayout prefab)
         {
-            ProFitGlobals.productContent
+            this._productContent
                 .Purge();
 
             MelcherLog.LogEditorOnly("Trying to create cabinet layout from prefab: " + prefab, prefab);
@@ -539,7 +541,7 @@ namespace KitchenDesign.KitchenModel
                     // cabinets must be replaced with custom modeled versions.
 
                     ProductInfo fallbackCabinetSectionInfo =
-                        ProFitGlobals.catalogData.FindProductInfoById(
+                        this._catalogData.FindProductInfoById(
                                 this._selections.brandCatalog.fallbackDefaultCabinetSectionProductServerId,
                                 findCabinetSection: true
                             );
@@ -552,7 +554,7 @@ namespace KitchenDesign.KitchenModel
                         );
                     }
 
-                    if (!ProFitGlobals.catalogData.FindBrandCatalogInfoById(selectedBrandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo))
+                    if (!this._catalogData.FindBrandCatalogInfoById(selectedBrandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo))
                     {
                         MelcherLog.LogError(
                             $"No brand catalog for ID \"{this._selections.brandCatalog.catalogId}\".",
@@ -610,7 +612,7 @@ namespace KitchenDesign.KitchenModel
                             ++nextDefaultCabinetSectionIndex;
 
                             replacementCabinetInfo =
-                                ProFitGlobals.catalogData.FindProductInfoById(
+                                this._catalogData.FindProductInfoById(
                                     defaultSectionServerId,
                                     findCabinetSection: true
                                 );
@@ -737,7 +739,7 @@ namespace KitchenDesign.KitchenModel
                 await m_CurrentCabinetLayout.SetCabinetMaterials(
                     cabinetMaterial,
                     countertopMaterial,
-                    await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                    await this._profile.GetDefaultKitchenMaterial()
                 );
             }
 
@@ -850,7 +852,7 @@ namespace KitchenDesign.KitchenModel
             await occupant.SetCabinetMaterials(
                 cabinetMaterial,
                 countertopMaterial,
-                await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                await this._profile.GetDefaultKitchenMaterial()
             );
 
             // Create a little mock up to show where this object's cuboid is
@@ -1004,7 +1006,7 @@ namespace KitchenDesign.KitchenModel
                             showFraction: true
                         );
 
-                    if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                    if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                     {
                         requiredSize =
                             Utility.MeasurementFormat.FormatMetersToCentimeters(requiredDepth);
@@ -1037,17 +1039,25 @@ namespace KitchenDesign.KitchenModel
             return null;
         }
 
-        private void Awake()
+        public void Initialize(AppSystems systems)
         {
+            this._profile = systems.Profile;
+            this._options = systems.Options;
+            this._rules = systems.Rules;
+            this._catalogData = systems.CatalogData;
+            this._clientList = systems.ClientList;
+            this._session = systems.Session;
+            this._productContent = systems.ProductContent;
+
             this._interaction = new KitchenInteractionState();
-            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot, ProFitGlobals.session, ProFitGlobals.clientList);
+            this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot, this._session, this._clientList);
             this._camera = new KitchenCameraControl(m_OrbitCamera, m_PhotoCoverView, m_EmptyCameraTargetGroup, m_KitchenCameraTargetGroup, m_Ground);
-            this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase, ProFitGlobals.appProfile, ProFitGlobals.productContent);
-            this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask, ProFitGlobals.session);
+            this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase, this._profile, this._productContent);
+            this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask, this._session);
             this._materials.Connect(this._widgets);
             this._drag.Connect(this._widgets);
-            this._saveWriter = new KitchenSaveWriter(this._selections, m_ProductVisualDatabase, ProFitGlobals.session, ProFitGlobals.clientList, ProFitGlobals.appRules, ProFitGlobals.catalogData);
-            this._saveReader = new KitchenSaveReader(this, this._selections, m_ProductVisualDatabase, m_LayoutPrefabs, m_CabinetBackingSprites, m_BacksplashPrefab, m_HighBarTopPrefab, m_LowBarTopPrefab, ProFitGlobals.clientList, ProFitGlobals.catalogData, ProFitGlobals.appProfile, ProFitGlobals.appRules, ProFitGlobals.productContent);
+            this._saveWriter = new KitchenSaveWriter(this._selections, m_ProductVisualDatabase, this._session, this._clientList, this._rules, this._catalogData);
+            this._saveReader = new KitchenSaveReader(this, this._selections, m_ProductVisualDatabase, m_LayoutPrefabs, m_CabinetBackingSprites, m_BacksplashPrefab, m_HighBarTopPrefab, m_LowBarTopPrefab, this._clientList, this._catalogData, this._profile, this._rules, this._productContent);
 
             m_Ground.gameObject.SetActive(false);
 
@@ -1097,6 +1107,11 @@ namespace KitchenDesign.KitchenModel
 
             this._widgets.SetCabinetShelfResizeWidgetsVisible(target: null);
 
+            if (this.isActiveAndEnabled)
+            {
+                this.AddShelfWidgetListeners();
+            }
+
             /// <summary>
             ///     Create a kitchen widget for a cabinet plunge/shelf.
             /// </summary>
@@ -1124,6 +1139,32 @@ namespace KitchenDesign.KitchenModel
             }
         }
 
+        private void AddShelfWidgetListeners()
+        {
+            foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
+            {
+                if (shelfWidgetTransform.TryGetComponent(out ResizerWidget shelfWidget))
+                {
+                    shelfWidget.onResizeBegin += this._widgets.OnCabinetShelfResizeBegin;
+                    shelfWidget.onResizeEnd += this._widgets.OnCabinetShelfResizeEnd;
+                    shelfWidget.onResized += this._widgets.OnCabinetShelfResized;
+                }
+            }
+        }
+
+        private void RemoveShelfWidgetListeners()
+        {
+            foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
+            {
+                if (shelfWidgetTransform.TryGetComponent(out ResizerWidget shelfWidget))
+                {
+                    shelfWidget.onResizeBegin -= this._widgets.OnCabinetShelfResizeBegin;
+                    shelfWidget.onResizeEnd -= this._widgets.OnCabinetShelfResizeEnd;
+                    shelfWidget.onResized -= this._widgets.OnCabinetShelfResized;
+                }
+            }
+        }
+
         private void OnEnable()
         {
             m_CutoutClipping.Attach(this);
@@ -1141,14 +1182,9 @@ namespace KitchenDesign.KitchenModel
             // Products
 
 
-            foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
+            if (this._widgets != null)
             {
-                if (shelfWidgetTransform.TryGetComponent(out ResizerWidget shelfWidget))
-                {
-                    shelfWidget.onResizeBegin += this._widgets.OnCabinetShelfResizeBegin;
-                    shelfWidget.onResizeEnd += this._widgets.OnCabinetShelfResizeEnd;
-                    shelfWidget.onResized += this._widgets.OnCabinetShelfResized;
-                }
+                this.AddShelfWidgetListeners();
             }
         }
 
@@ -1168,14 +1204,9 @@ namespace KitchenDesign.KitchenModel
             // Products
 
 
-            foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
+            if (this._widgets != null)
             {
-                if (shelfWidgetTransform.TryGetComponent(out ResizerWidget shelfWidget))
-                {
-                    shelfWidget.onResizeBegin -= this._widgets.OnCabinetShelfResizeBegin;
-                    shelfWidget.onResizeEnd -= this._widgets.OnCabinetShelfResizeEnd;
-                    shelfWidget.onResized -= this._widgets.OnCabinetShelfResized;
-                }
+                this.RemoveShelfWidgetListeners();
             }
         }
 
@@ -1222,7 +1253,7 @@ namespace KitchenDesign.KitchenModel
                     return;
                 }
 
-                SetBuildingMethod(ProFitGlobals.appOptions.defaultBuildingMethod);
+                SetBuildingMethod(this._options.defaultBuildingMethod);
                 SetCountertopType(CountertopType.Default);
                 this._selections.cabinetFinish = null;
                 this._selections.countertopFinish = null;
@@ -1240,11 +1271,11 @@ namespace KitchenDesign.KitchenModel
                 // old one without creating a new one
                 await CreateCabinetLayoutFromShape(prefab: null);
 
-                if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
+                if (this._session.ShouldUseWhiteLabelMode())
                 {
                     EventDesigner.OnWhiteLabelClientInfoRequested.Raise();
                 }
-                else if (ProFitGlobals.appOptions.allowBuildingMethods)
+                else if (this._options.allowBuildingMethods)
                 {
                     EventDesigner.OnBuildingMethodsRequested.Raise();
                 }
@@ -1288,7 +1319,7 @@ namespace KitchenDesign.KitchenModel
 
                 BrandCatalogSO selectedBrandCatalog =
                     this._selections.brandCatalog ?
-                        ProFitGlobals.runtimeBrandCatalogs.Find(x => x.catalogId == this._selections.brandCatalog.catalogId) :
+                        this._catalogData.RuntimeBrandCatalogs.Find(x => x.catalogId == this._selections.brandCatalog.catalogId) :
                         null;
 
                 await LoadFromJson(saveJson);
@@ -1815,7 +1846,7 @@ namespace KitchenDesign.KitchenModel
                 await heightTransitionCabinet.SetCabinetMaterials(
                     cabinetMaterial,
                     countertopMaterial,
-                    await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                    await this._profile.GetDefaultKitchenMaterial()
                 );
             }
 
@@ -1849,7 +1880,7 @@ namespace KitchenDesign.KitchenModel
                 }
 
                 ProductVisualContent productVisualPrefab =
-                    await ProFitGlobals.productContent
+                    await this._productContent
                         .LoadContent(productVisual);
 
                 Occupant addedOccupant =
@@ -1956,7 +1987,7 @@ namespace KitchenDesign.KitchenModel
                         }
 
                         ProductVisualContent productVisualPrefab =
-                            await ProFitGlobals.productContent
+                            await this._productContent
                                 .LoadContent(productVisual);
 
                         Occupant newOccupant =
@@ -2023,7 +2054,7 @@ namespace KitchenDesign.KitchenModel
                 }
 
                 ProductVisualContent cabinetSectionVisualContent =
-                    await ProFitGlobals.productContent
+                    await this._productContent
                         .LoadContent(cabinetSectionVisual);
 
                 if (cabinetSectionVisualContent.sectionModelPrefab)
@@ -2211,7 +2242,7 @@ namespace KitchenDesign.KitchenModel
                         showFraction: true
                     );
 
-                if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                 {
                     requiredSize =
                         Utility.MeasurementFormat.FormatMetersToCentimeters(requiredWidthInMeters);
@@ -2376,7 +2407,7 @@ namespace KitchenDesign.KitchenModel
 
         protected void TrySendOnBrandCatalogChanged()
         {
-            if(ProFitGlobals.appRules.RequiresBrandCatalog && this._selections.brandCatalog == null)
+            if(this._rules.RequiresBrandCatalog && this._selections.brandCatalog == null)
             {
                 return;
             }
@@ -2866,6 +2897,13 @@ namespace KitchenDesign.KitchenModel
         private KitchenWidgetsControl _widgets;
         private KitchenMaterialControl _materials;
         private OccupantDragControl _drag;
+        private AppProfileSO _profile;
+        private AppOptionsSO _options;
+        private IAppRules _rules;
+        private CatalogDataStatus _catalogData;
+        private ClientListStatus _clientList;
+        private SessionStatus _session;
+        private ProductVisualContentStatus _productContent;
 
         private bool m_IsUpdatingCabinetHeightTransitions;
 
