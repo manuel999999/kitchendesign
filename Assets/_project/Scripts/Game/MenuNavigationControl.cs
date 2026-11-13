@@ -31,7 +31,7 @@ namespace KitchenDesign
             m_LogInUi.Initialize(systems.Session, systems.Server, systems.Options);
             m_ResetPasswordUi.Initialize(systems.Server);
             m_DeleteAccountUi.Initialize(systems.Session, systems.Server);
-            m_PayNowUi.Initialize(systems.Session, systems.Server, systems.Options);
+            m_PayNowUi.Initialize(systems.Session, systems.Server);
             m_CreateClientUi.Initialize(systems.Session, systems.ClientList, systems.Server);
             m_ClientListUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.sortModePrompt);
             m_ClientProfileUi.Initialize(systems.Session, systems.ClientList, systems.Server, this.editProfilePrompt);

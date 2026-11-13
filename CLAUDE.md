@@ -1863,6 +1863,9 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     any initializer; they go with the UI Toolkit rewrite), `ClientListUI`'s row-count property,
     `ManufacturerWhitelistRow` (rows made at runtime), `QuickLogInWidget` (editor sign-in helper,
     not held by the navigation) and `TrialCountdownUI` (also in the designer, B5.4).
+    Also `PayNowUI`'s message post-processing (the app's display name): the label calls it
+    from `OnEnable`. A handler that a screen's own `Awake`/`OnEnable` triggers must not read a
+    handed-in field (found by the cold start on 2026-11-13).
   - **Designer screens get their systems** (B5.4d, 2026-11-13): `DesignerScreensControl.Initialize`
     hands each designer screen the systems it reads next to the kitchen: the toolbar (which passes
     the session on to its highlighted-product content), the navigation screen (which passes

@@ -421,6 +421,26 @@ check runs once at the end, against `3d25da55`. Suspicious things go in "Bug lis
    with no listener), B5.5b (a volume without a kitchen), B5.5c (subscription timing, layouts
    listening only once they have a kitchen).
 
+## First results of the final pass (2026-11-13, after area 7)
+Run on the branch tip, without `GeminiBaseline/` (not copied yet), so nothing is compared with
+`3d25da55` yet:
+- `rulescheck.cs` 60 / 0, `buildingrulescheck.cs` 132 / 0, `brandrulescheck.cs` 169 / 0.
+- `coldstart.sh` from `PlatformSetupScene` and from `BootScene`: both reach the menu's welcome
+  screen. **It found a regression from B5.3c2:** `PayNowUI.OnPostProcessMessage` read the handed
+  `_options`, but the label calls it from `OnEnable`, before `Initialize` (two
+  `NullReferenceException`s per start). The conversion script skipped `Awake`/`OnEnable` bodies
+  but not callbacks those bodies trigger. Fixed: that read is back on `ProFitGlobals.appOptions`
+  (it is an `OnEnable`-time read, like the skin views), and `PayNowUI.Initialize` no longer takes
+  the options. After the fix: no exceptions; 14 errors and 5 warnings from `BootScene` (the old
+  reference was 13 and 4 on the other machine; compare with `3d25da55` here).
+- `DesignerScene` played directly (offline guest): no exception in start-up, `ListenTo`,
+  `Initialize` or `restart`. The bug-list item 1 (`CabinetOtherSizeControl.get_value`) did not
+  show in this run. About 1,250 "Could not find product visual" errors are the thinned catalog.
+- **Same kind of bug to look for in the full pass:** a handler that reads a handed-in field and
+  is invoked while its screen's `Awake`/`OnEnable` runs (label post-processing, a toggle or
+  dropdown value set in `OnEnable`). Start-up of both scenes is clean; screens opened later can't
+  have it, because `Initialize` has run by then.
+
 ## Checks for every step
 As area 4, plus the new probe:
 - `rulescheck.cs` (60/0), `buildingrulescheck.cs` and `brandrulescheck.cs` (0 mismatches),
