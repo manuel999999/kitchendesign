@@ -1012,6 +1012,11 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   references, so each one's `m_FileID` (the instance id, e.g. `26401`) is in the output and the
   hash changes with every editor session. Compare its output only within one session, or drop the
   `m_FileID`/`m_PathID` lines first; the `guid:localId` line beside them is the stable part.
+- **The edit probe's drag positions depend on the live camera** (2026-11-13). One run logged
+  its drag steps 30 to 100 pixels away from every earlier run, with `MainCamera` at FOV 14.39
+  instead of 21.37, while every snapshot was identical; the next run was back to normal. Cause
+  not found (the live orbit FOV is the open item in the handover). Re-run the probe before
+  reading a drag-position difference as a regression.
 - **Photo comparisons:** Python here has no Pillow. Compare JPGs in an `eval_file` with
   `ImageConversion.LoadImage` and `GetPixels32`.
 
@@ -2021,7 +2026,22 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   `ProFitGlobals`, which is deleted; see "App-wide systems"): **part (a) of the plan is done.**
   **B8.5** is done too (`PlanMeasurePlacement`, see "Cameras and photos").
   **B8.6** is done (`_project/Editor/Tools/`, see "Leftovers"; the user said to go ahead).
-  **Next: B8.7** (house conventions in the files that were only moved, one folder per commit).
+  **B8.7** (2026-11-13), the mechanical part: braces and explicit access modifiers (a C#
+  formatter run; the old code already followed both, 9 files changed), six runtime
+  `Debug.Log`/`LogError` calls wrapped in `#if UNITY_EDITOR` (`Debug.LogException` is left
+  alone: it reports real errors in builds), and 220 non-serialized `m_`/`s_` fields in 77
+  files renamed to `_camelCase`. **Still as the old code had it, on purpose:** every serialized
+  field keeps its `m_` name (assets bind it; about 1,000 fields), 66 non-serialized fields
+  whose `m_` name also occurs in another file (mostly the same private name in several
+  classes; each needs a look), 19 whose name is a key in some asset or a string literal, and
+  the comments (about 8,700 comment lines in the moved files; R-CODE-7 leaves an existing
+  codebase's comments alone unless the user asks, and where their whys should live is the open
+  question below). How the renames were made safe, for the next batch: a field is renamed only
+  when its declaration has no `Serialize…` attribute and isn't public, its name is not a key in
+  any scene, prefab or asset, it occurs in no other file (code, `Tools/`, the check scripts)
+  and in no string literal, and the new name is free in the file; afterwards an `eval` over the
+  assemblies confirmed no `_`-named field is serialized apart from two that already were
+  (`PCMBandaidFix`).
   Noticed in B8.5, not changed:
   `KitchenScreenshotControl.TryAddNapoleonTopDownWatermark` compares the catalog's
   `cabinetManufacturerId` with a literal 95 (Napoleon) instead of asking `BrandRules`; it
@@ -2031,7 +2051,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   `final-tip/unity6-run2`, because `final-tip/unity6` has the three untextured covers);
   call `playercompile.sh` there by its absolute path (it now waits for `KitchenDesign.dll`). Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
-  CLAUDE.md keeping rules, gotchas, chain, events and handover).
+  CLAUDE.md keeping rules, gotchas, chain, events and handover), and with it whether the old
+  code's comments should be removed and their whys written there (asked 2026-11-13).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at
   `/Users/emmanuel/Documents/Unity/GeminiUpgradeTest/` is throwaway and can be deleted; its
   captures are in `Captures/` and `Assets/Captures/`. A real kitchen in the designer was not

@@ -26,13 +26,13 @@ namespace KitchenDesign.ToolsEditor
 
             if (MelcherEditorUserSettings.TryGet(EditorUserSetting.GuidHashCodeOfLastOpenedPrefab, out string hashOfGuid))
             {
-                int.TryParse(hashOfGuid, out s_GuidHashCodeOfLastOpenedPrefab);
+                int.TryParse(hashOfGuid, out _guidHashCodeOfLastOpenedPrefab);
             }
         }
 
         private static void OnProjectItemGUI(string guid, Rect rect)
         {
-            if (s_GuidHashCodeOfLastOpenedPrefab != guid.GetHashCode())
+            if (_guidHashCodeOfLastOpenedPrefab != guid.GetHashCode())
             {
                 return;
             }
@@ -46,14 +46,14 @@ namespace KitchenDesign.ToolsEditor
             Vector3 c = rect.max;
             Vector3 d = new(rect.xMin, rect.yMax);
 
-            s_LinesForOutline[0] = a;
-            s_LinesForOutline[1] = b;
-            s_LinesForOutline[2] = b;
-            s_LinesForOutline[3] = c;
-            s_LinesForOutline[4] = c;
-            s_LinesForOutline[5] = d;
-            s_LinesForOutline[6] = d;
-            s_LinesForOutline[7] = a;
+            _linesForOutline[0] = a;
+            _linesForOutline[1] = b;
+            _linesForOutline[2] = b;
+            _linesForOutline[3] = c;
+            _linesForOutline[4] = c;
+            _linesForOutline[5] = d;
+            _linesForOutline[6] = d;
+            _linesForOutline[7] = a;
 
             Handles.color = Color.green;
             Handles.DrawSolidRectangleWithOutline(rect, faceColor: new Color(0.0f, 0.8f, 0.1f, 0.04f), outlineColor: Color.green);
@@ -64,18 +64,18 @@ namespace KitchenDesign.ToolsEditor
             string prefabGuid =
                 AssetDatabase.AssetPathToGUID(prefabStage.assetPath);
 
-            s_GuidHashCodeOfLastOpenedPrefab = prefabGuid.GetHashCode();
+            _guidHashCodeOfLastOpenedPrefab = prefabGuid.GetHashCode();
 
             // Save the GUID so it can be recovered if the user recompiles
             // any scripts.
-            MelcherEditorUserSettings.Set(EditorUserSetting.GuidHashCodeOfLastOpenedPrefab, s_GuidHashCodeOfLastOpenedPrefab.ToString());
+            MelcherEditorUserSettings.Set(EditorUserSetting.GuidHashCodeOfLastOpenedPrefab, _guidHashCodeOfLastOpenedPrefab.ToString());
         }
 
         [MelcherStaticFieldEditorTreatment.PersistBetweenPlaymodeSessions]
-        private static int s_GuidHashCodeOfLastOpenedPrefab;
+        private static int _guidHashCodeOfLastOpenedPrefab;
 
         [MelcherStaticFieldEditorTreatment.PersistBetweenPlaymodeSessions]
-        private static Vector3[] s_LinesForOutline = new Vector3[8];
+        private static Vector3[] _linesForOutline = new Vector3[8];
 
         // ====================================================================
         // Nested types

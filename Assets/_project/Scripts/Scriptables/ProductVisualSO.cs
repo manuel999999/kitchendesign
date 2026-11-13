@@ -12,9 +12,9 @@ namespace KitchenDesign.Scriptables
 
         public AssetAddress<ProductVisualContent> contentAddress => m_ContentAddress;
 
-        public bool isRuntimeInfo => m_SourceProductVisual != null;
+        public bool isRuntimeInfo => _sourceProductVisual != null;
 
-        public ProductVisualSO sourceProductVisual => m_SourceProductVisual;
+        public ProductVisualSO sourceProductVisual => _sourceProductVisual;
 
         public ProductVisualSO MakeRuntimeClone()
         {
@@ -31,7 +31,7 @@ namespace KitchenDesign.Scriptables
             clone.name = name;
             clone.m_Info = Instantiate(clone.m_Info);
             clone.m_Info.name = m_Info.name;
-            clone.m_SourceProductVisual = this;
+            clone._sourceProductVisual = this;
 
             return clone;
         }
@@ -43,7 +43,7 @@ namespace KitchenDesign.Scriptables
         [UnityEngine.Serialization.FormerlySerializedAs("m_PrefabAddress")]
         private AssetAddress<ProductVisualContent> m_ContentAddress;
 
-        private ProductVisualSO m_SourceProductVisual;
+        private ProductVisualSO _sourceProductVisual;
 
 #if UNITY_EDITOR
 

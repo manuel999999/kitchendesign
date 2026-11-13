@@ -21,14 +21,14 @@ namespace KitchenDesign.UI.DesignerScreens
 
         public ToolbarGroupIdType targetIdType
         {
-            get => m_TargetIdType;
-            set => m_TargetIdType = value;
+            get => _targetIdType;
+            set => _targetIdType = value;
         }
 
         public int targetId
         {
-            get => m_TargetId;
-            set => m_TargetId = value;
+            get => _targetId;
+            set => _targetId = value;
         }
 
         public CabinetSpan targetCabinetSpan
@@ -41,8 +41,8 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected override ToolbarButton highlightedButton
         {
-            get => s_HighlightedManufacturerButton;
-            set => s_HighlightedManufacturerButton = value;
+            get => _highlightedManufacturerButton;
+            set => _highlightedManufacturerButton = value;
         }
 
         // =====================================================================
@@ -51,7 +51,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         internal static void ForgetHighlight()
         {
-            s_HighlightedManufacturerButton = null;
+            _highlightedManufacturerButton = null;
         }
 
         // =====================================================================
@@ -92,9 +92,9 @@ namespace KitchenDesign.UI.DesignerScreens
         // Non-serialized fields
         // =====================================================================
 
-        protected ToolbarGroupIdType m_TargetIdType;
+        protected ToolbarGroupIdType _targetIdType;
 
-        protected int m_TargetId;
+        protected int _targetId;
 
         protected CabinetSpan m_TargetCabinetSpan;
 
@@ -102,7 +102,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Static fields
         // =====================================================================
 
-        protected static ToolbarButton s_HighlightedManufacturerButton;
+        protected static ToolbarButton _highlightedManufacturerButton;
 
     }   // class ToolbarGroupButton
 

@@ -26,8 +26,8 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected override ToolbarButton highlightedButton
         {
-            get => s_HighlightedCategoryButton;
-            set => s_HighlightedCategoryButton = value;
+            get => _highlightedCategoryButton;
+            set => _highlightedCategoryButton = value;
         }
 
         // ====================================================================
@@ -36,7 +36,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         public static void ForgetHighlight()
         {
-            s_HighlightedCategoryButton = null;
+            _highlightedCategoryButton = null;
         }
 
         // =====================================================================
@@ -61,7 +61,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Static fields
         // =====================================================================
 
-        protected static ToolbarButton s_HighlightedCategoryButton;
+        protected static ToolbarButton _highlightedCategoryButton;
 
     }   // class ToolbarCategoryButton
 

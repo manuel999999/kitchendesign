@@ -82,7 +82,7 @@ namespace KitchenDesign.ProductsEditor
             listView.itemsSource = m_Database ? (IList)m_Database.sourceEntries : null;
 
             // Display products with any status by default.
-            m_SearchStatusFilter = (ProductVisualEditorSetupStatus)~0;
+            _searchStatusFilter = (ProductVisualEditorSetupStatus)~0;
 
             RefreshSearch();
         }
@@ -93,11 +93,11 @@ namespace KitchenDesign.ProductsEditor
             // a quick way to visualize which product models have issues
             m_StatusGood = new GUIContent(text: "", image: null, tooltip: "Good!");
 
-            m_StatusOrange = EditorGUIUtility.IconContent("orangeLight");
-            m_StatusOrange.tooltip = "Model hash has changed. Verify the product visual is good and click Approve Model";
+            _statusOrange = EditorGUIUtility.IconContent("orangeLight");
+            _statusOrange.tooltip = "Model hash has changed. Verify the product visual is good and click Approve Model";
 
-            m_StatusRed = EditorGUIUtility.IconContent("redLight");
-            m_StatusRed.tooltip = "Incomplete. Please finish setting up the product visual";
+            _statusRed = EditorGUIUtility.IconContent("redLight");
+            _statusRed.tooltip = "Incomplete. Please finish setting up the product visual";
         }
 
         private void CreateGUI()
@@ -284,18 +284,18 @@ namespace KitchenDesign.ProductsEditor
                     rowUnderlyingAsset      = content.underlyingAsset;
                     rowThumbnail            = v.info.thumbnail;
                     isModelApproved         = content.currentHash == content.approvedHash;
-                    isLastOpenedRow         = v == m_LastVisualPrefabSelected;
+                    isLastOpenedRow         = v == _lastVisualPrefabSelected;
                 }
 
                 GUIContent statusContent = null;
                 switch (rowStatus)
                 {
                     case ProductVisualEditorSetupStatus.MissingFields:
-                        statusContent = m_StatusRed;
+                        statusContent = _statusRed;
                         break;
 
                     case ProductVisualEditorSetupStatus.HashHasChanged:
-                        statusContent = m_StatusOrange;
+                        statusContent = _statusOrange;
                         break;
 
                     default:
@@ -435,7 +435,7 @@ namespace KitchenDesign.ProductsEditor
 
                     // Every search word should match (excluding negative words)
                     if (matchCount == searchWords.Length &&
-                        m_SearchStatusFilter.HasFlag(content.editorSetupStatus))
+                        _searchStatusFilter.HasFlag(content.editorSetupStatus))
                     {
                         m_FilteredData.Add(entry);
                     }
@@ -448,7 +448,7 @@ namespace KitchenDesign.ProductsEditor
                 // Filter out products that are good (i.e. have no issues)
                 foreach (ProductVisualSO entry in m_Database.sourceEntries)
                 {
-                    if (entry && m_SearchStatusFilter.HasFlag(entry.contentAddress.editorOnlyCachedAsset.editorSetupStatus))
+                    if (entry && _searchStatusFilter.HasFlag(entry.contentAddress.editorOnlyCachedAsset.editorSetupStatus))
                     {
                         m_FilteredData.Add(entry);
                     }
@@ -499,13 +499,13 @@ namespace KitchenDesign.ProductsEditor
                 }
             }
 
-            if (m_LastVisualPrefabSelected)
+            if (_lastVisualPrefabSelected)
             {
                 // Try to keep the previously clicked item in view.
                 int index =
                     MelcherCommon.IndexOf(
                         m_DisplayedData,
-                        m_LastVisualPrefabSelected
+                        _lastVisualPrefabSelected
                     );
 
                 if (index >= 0)
@@ -523,7 +523,7 @@ namespace KitchenDesign.ProductsEditor
                 statusMessage = $"{sourceItemCount} items";
             }
 
-            if (m_SearchStatusFilter != (ProductVisualEditorSetupStatus)~0 || hasSearchInput)
+            if (_searchStatusFilter != (ProductVisualEditorSetupStatus)~0 || hasSearchInput)
             {
                 statusMessage = $"Matched {m_DisplayedData.Count} of {sourceItemCount} items";
             }
@@ -880,7 +880,7 @@ namespace KitchenDesign.ProductsEditor
                 return;
             }
 
-            m_LastVisualPrefabSelected = m_DisplayedData[dataIndex];
+            _lastVisualPrefabSelected = m_DisplayedData[dataIndex];
 
             // Refresh the whole table (to hide the old highlight and show the
             // new)
@@ -1489,7 +1489,7 @@ namespace KitchenDesign.ProductsEditor
         {
             ToolbarMenu searchFilterMenu = rootVisualElement.Q<ToolbarMenu>("SearchFilterMenu");
 
-            bool isDefaultFilter = m_SearchStatusFilter == (ProductVisualEditorSetupStatus)~0;
+            bool isDefaultFilter = _searchStatusFilter == (ProductVisualEditorSetupStatus)~0;
 
             TextElement toolbarLabel = searchFilterMenu.Q<TextElement>();
             toolbarLabel.style.unityFontStyleAndWeight =
@@ -1507,35 +1507,35 @@ namespace KitchenDesign.ProductsEditor
 
         private DropdownMenuAction.Status GetSearchFilterItemStatus(ProductVisualEditorSetupStatus mask)
         {
-            return m_SearchStatusFilter.HasFlag(mask) ?
+            return _searchStatusFilter.HasFlag(mask) ?
                 DropdownMenuAction.Status.Checked :
                 DropdownMenuAction.Status.Normal;
         }
 
         private void OnSearchStatusFilterClicked_Reset(DropdownMenuAction action)
         {
-            m_SearchStatusFilter = (ProductVisualEditorSetupStatus)~0;
+            _searchStatusFilter = (ProductVisualEditorSetupStatus)~0;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
 
         private void OnSearchStatusFilterClicked_Good(DropdownMenuAction action)
         {
-            m_SearchStatusFilter ^= ProductVisualEditorSetupStatus.Good;
+            _searchStatusFilter ^= ProductVisualEditorSetupStatus.Good;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
 
         private void OnSearchStatusFilterClicked_Changed(DropdownMenuAction action)
         {
-            m_SearchStatusFilter ^= ProductVisualEditorSetupStatus.HashHasChanged;
+            _searchStatusFilter ^= ProductVisualEditorSetupStatus.HashHasChanged;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
 
         private void OnSearchStatusFilterClicked_Incomplete(DropdownMenuAction action)
         {
-            m_SearchStatusFilter ^= ProductVisualEditorSetupStatus.MissingFields;
+            _searchStatusFilter ^= ProductVisualEditorSetupStatus.MissingFields;
             RefreshSearch();
             RebuildSearchStatusFilterMenu();
         }
@@ -1748,7 +1748,7 @@ namespace KitchenDesign.ProductsEditor
 
         protected void DuplicateSelectedVisual(DropdownMenuAction action)
         {
-            if (!m_LastVisualPrefabSelected)
+            if (!_lastVisualPrefabSelected)
             {
                 return;
             }
@@ -1767,7 +1767,7 @@ namespace KitchenDesign.ProductsEditor
             AddressableAssetGroup addressableGroup = settings.DefaultGroup;
 
             string originalVisualPath =
-                AssetDatabase.GetAssetPath(m_LastVisualPrefabSelected);
+                AssetDatabase.GetAssetPath(_lastVisualPrefabSelected);
 
             string duplicateVisualPath =
                 AssetDatabase.GenerateUniqueAssetPath(originalVisualPath);
@@ -1777,7 +1777,7 @@ namespace KitchenDesign.ProductsEditor
             //
 
             ProductVisualInfoSO duplicateInfo =
-                Instantiate(m_LastVisualPrefabSelected.info);
+                Instantiate(_lastVisualPrefabSelected.info);
 
             string duplicateInfoPath = duplicateVisualPath.Replace("^", "");
 
@@ -1804,7 +1804,7 @@ namespace KitchenDesign.ProductsEditor
 
             GameObject duplicateContentAsset =
                 PrefabUtility.SaveAsPrefabAsset(
-                    m_LastVisualPrefabSelected.contentAddress.editorOnlyCachedAsset.gameObject,
+                    _lastVisualPrefabSelected.contentAddress.editorOnlyCachedAsset.gameObject,
                     duplicateContentPath
                 );
 
@@ -1829,7 +1829,7 @@ namespace KitchenDesign.ProductsEditor
             //
 
             ProductVisualSO duplicateVisual =
-                Instantiate(m_LastVisualPrefabSelected);
+                Instantiate(_lastVisualPrefabSelected);
 
             duplicateVisual.EditorOnlySetInfo(duplicateInfo);
             duplicateVisual.EditorOnlySetContentAddress(duplicateContent);
@@ -1845,10 +1845,10 @@ namespace KitchenDesign.ProductsEditor
             // Duplicate the thumbnail (if present)
             //
 
-            if (m_LastVisualPrefabSelected.info.thumbnail)
+            if (_lastVisualPrefabSelected.info.thumbnail)
             {
                 string originalThumbnailPath =
-                    AssetDatabase.GetAssetPath(m_LastVisualPrefabSelected.info.thumbnail);
+                    AssetDatabase.GetAssetPath(_lastVisualPrefabSelected.info.thumbnail);
 
                 string duplicateThumbnailPath =
                     System.IO.Path.Combine(
@@ -1873,7 +1873,7 @@ namespace KitchenDesign.ProductsEditor
                     MelcherLog.LogError(
                         $"Could not duplicate the visual's thumbnail to " +
                         $"{MelcherFormat.ConsoleString(duplicateThumbnailPath)}",
-                        context: m_LastVisualPrefabSelected.info.thumbnail
+                        context: _lastVisualPrefabSelected.info.thumbnail
                     );
                 }
             }
@@ -2001,7 +2001,7 @@ namespace KitchenDesign.ProductsEditor
 
         protected void RemoveSelectedVisual(DropdownMenuAction action)
         {
-            if (!m_LastVisualPrefabSelected)
+            if (!_lastVisualPrefabSelected)
             {
                 return;
             }
@@ -2009,7 +2009,7 @@ namespace KitchenDesign.ProductsEditor
             bool willRemove =
                 EditorUtility.DisplayDialog(
                     title: "Remove Selected Product Visual",
-                    message: $"Remove {m_LastVisualPrefabSelected.name}?\n" +
+                    message: $"Remove {_lastVisualPrefabSelected.name}?\n" +
                         "\n" +
                         "When removed, the prefab will remain in its current " +
                         "folder and can be re-added to the database using the " +
@@ -2021,14 +2021,14 @@ namespace KitchenDesign.ProductsEditor
             if (willRemove)
             {
                 int productVisualSourceIndex =
-                    MelcherCommon.IndexOf(m_Database.sourceEntries, m_LastVisualPrefabSelected);
+                    MelcherCommon.IndexOf(m_Database.sourceEntries, _lastVisualPrefabSelected);
 
                 int productVisualDisplayIndex =
-                    MelcherCommon.IndexOf(m_DisplayedData, m_LastVisualPrefabSelected);
+                    MelcherCommon.IndexOf(m_DisplayedData, _lastVisualPrefabSelected);
 
                 if (productVisualSourceIndex < 0)
                 {
-                    MelcherLog.LogError($"Product Visual not found in database: {m_LastVisualPrefabSelected.name}", m_LastVisualPrefabSelected);
+                    MelcherLog.LogError($"Product Visual not found in database: {_lastVisualPrefabSelected.name}", _lastVisualPrefabSelected);
                     return;
                 }
 
@@ -2048,7 +2048,7 @@ namespace KitchenDesign.ProductsEditor
 
                 AssetDatabase.SaveAssets();
 
-                MelcherLog.Log($"Removed {m_LastVisualPrefabSelected.name} from {m_Database.name}", m_LastVisualPrefabSelected);
+                MelcherLog.Log($"Removed {_lastVisualPrefabSelected.name} from {m_Database.name}", _lastVisualPrefabSelected);
 
                 RefreshSearch();
 
@@ -2412,8 +2412,8 @@ namespace KitchenDesign.ProductsEditor
         [SerializeField, MelcherAssetField] protected ProductVisualContent m_NewProductVisualPrefab = default;
 
         private GUIContent m_StatusGood;
-        private GUIContent m_StatusOrange;
-        private GUIContent m_StatusRed;
+        private GUIContent _statusOrange;
+        private GUIContent _statusRed;
 
         [SerializeField]
         private ProductVisualDatabaseSO m_Database = default;
@@ -2426,7 +2426,7 @@ namespace KitchenDesign.ProductsEditor
         ///     searching for the product by name, selecting it, and then
         ///     clearing the selection.
         /// </summary>
-        private ProductVisualSO m_LastVisualPrefabSelected;
+        private ProductVisualSO _lastVisualPrefabSelected;
 
         /// <summary>
         /// The database's entries with the search field and "exclude good
@@ -2441,7 +2441,7 @@ namespace KitchenDesign.ProductsEditor
         /// </summary>
         private IReadOnlyList<ProductVisualSO> m_DisplayedData;
 
-        private ProductVisualEditorSetupStatus m_SearchStatusFilter = (ProductVisualEditorSetupStatus)~0;
+        private ProductVisualEditorSetupStatus _searchStatusFilter = (ProductVisualEditorSetupStatus)~0;
 
         // ====================================================================
         // Nested types

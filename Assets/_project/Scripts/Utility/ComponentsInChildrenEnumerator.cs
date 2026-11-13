@@ -25,17 +25,17 @@ namespace KitchenDesign.Utility
 
         public ComponentsInChildrenEnumerator(Transform root, bool reverse = false)
         {
-            m_Root = root;
-            m_Current = null;
-            m_NextChildIndex = reverse ? root.childCount - 1 : 0;
-            m_Reverse = reverse;
+            _root = root;
+            _current = null;
+            _nextChildIndex = reverse ? root.childCount - 1 : 0;
+            _reverse = reverse;
         }
 
         // =====================================================================
         // Properties
         // =====================================================================
 
-        public ComponentType Current => m_Current;
+        public ComponentType Current => _current;
 
         // =====================================================================
         // Methods
@@ -43,35 +43,35 @@ namespace KitchenDesign.Utility
 
         public void Reset()
         {
-            m_Current = null;
-            m_NextChildIndex = m_Reverse ? m_Root.childCount - 1 : 0;
+            _current = null;
+            _nextChildIndex = _reverse ? _root.childCount - 1 : 0;
         }
 
         public bool MoveNext()
         {
-            m_Current = null;
-            while (!m_Current && m_Root && m_NextChildIndex >= 0 && m_NextChildIndex < m_Root.childCount)
+            _current = null;
+            while (!_current && _root && _nextChildIndex >= 0 && _nextChildIndex < _root.childCount)
             {
-                int index = m_NextChildIndex;
+                int index = _nextChildIndex;
 
-                m_NextChildIndex =
-                    m_Reverse ?
-                        m_NextChildIndex - 1 :
-                        m_NextChildIndex + 1;
+                _nextChildIndex =
+                    _reverse ?
+                        _nextChildIndex - 1 :
+                        _nextChildIndex + 1;
 
-                m_Root.GetChild(index).TryGetComponent(out m_Current);
+                _root.GetChild(index).TryGetComponent(out _current);
             }
-            return m_Current;
+            return _current;
         }
 
         // =====================================================================
         // Fields
         // =====================================================================
 
-        private Transform m_Root;
-        private ComponentType m_Current;
-        private int m_NextChildIndex;
-        private bool m_Reverse;
+        private Transform _root;
+        private ComponentType _current;
+        private int _nextChildIndex;
+        private bool _reverse;
 
     }   // class ComponentsInChildrenEnumerator
 

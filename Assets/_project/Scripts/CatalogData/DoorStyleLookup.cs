@@ -115,28 +115,28 @@ namespace KitchenDesign.CatalogData
 
         public void TryInitialize(BrandCatalogSO catalog)
         {
-            if(m_IsCollectionsInitialized == false)
+            if(_isCollectionsInitialized == false)
             {
-                m_InitializedCatalogsCollection = new();
-                m_RejectedCatalogsCollection = new();
-                m_DoorMapping = new();
+                _initializedCatalogsCollection = new();
+                _rejectedCatalogsCollection = new();
+                _doorMapping = new();
 
-                m_IsCollectionsInitialized = true;
+                _isCollectionsInitialized = true;
             }
 
-            if(m_RejectedCatalogsCollection.Contains(catalog.catalogId))
+            if(_rejectedCatalogsCollection.Contains(catalog.catalogId))
             {
                 return;
             }
 
-            if(m_InitializedCatalogsCollection.Contains(catalog.catalogId))
+            if(_initializedCatalogsCollection.Contains(catalog.catalogId))
             {
                 return;
             }
 
             if(catalog.cabinetSectionDoorStyle == default)
             {
-                m_RejectedCatalogsCollection.Add(catalog.catalogId);
+                _rejectedCatalogsCollection.Add(catalog.catalogId);
                 return;
             }
 
@@ -148,21 +148,21 @@ namespace KitchenDesign.CatalogData
             for(int i = 0; i < catalogMapping.Length; i++)
             {
                 CabinetSectionDoorData mappingLine = catalogMapping[i];
-                m_DoorMapping[mappingLine.key] = mappingLine.value;
+                _doorMapping[mappingLine.key] = mappingLine.value;
             }
         }
 
         public string FindMappedDoorId(string cabinetId)
         {
-            return m_DoorMapping.ContainsKey(cabinetId) ?
-                    m_DoorMapping[cabinetId] :
+            return _doorMapping.ContainsKey(cabinetId) ?
+                    _doorMapping[cabinetId] :
                     string.Empty;
         }
 
-        private HashSet<int> m_InitializedCatalogsCollection;
-        private HashSet<int> m_RejectedCatalogsCollection;
-        private bool m_IsCollectionsInitialized = false;
-        private Dictionary<string, string> m_DoorMapping;
+        private HashSet<int> _initializedCatalogsCollection;
+        private HashSet<int> _rejectedCatalogsCollection;
+        private bool _isCollectionsInitialized = false;
+        private Dictionary<string, string> _doorMapping;
     }
 }
 

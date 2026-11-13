@@ -284,12 +284,12 @@ namespace KitchenDesign.Geometry
         public static Cuboid zero => new Cuboid();
 
         [MelcherStaticFieldEditorTreatment.ResetToTypeDefault]
-        private static int s_DrawCount = 0;
+        private static int _drawCount = 0;
 
         public static MelcherDeferred.Details.DeferredAction StartDrawScope()
         {
-            s_DrawCount += 1;
-            return MelcherDeferred.Defer(() => s_DrawCount -= 1);
+            _drawCount += 1;
+            return MelcherDeferred.Defer(() => _drawCount -= 1);
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace KitchenDesign.Geometry
 
         public void Draw(Color color1, Color color2, float duration, float step = 0.0f, bool drawX = false, int offset = 0)
         {
-            if (s_DrawCount <= 0)
+            if (_drawCount <= 0)
             {
                 return;
             }
@@ -335,7 +335,7 @@ namespace KitchenDesign.Geometry
             if (drawX)
             {
                 // Draw lines connecting opposite corners.
-                foreach (var line in s_UnitCubeLinePairsX)
+                foreach (var line in _unitCubeLinePairsX)
                 {
                     Vector3 start = NormalizedToPoint(this, s_UnitCubeVertices[line.vertexIndex1]) + smudge;
                     Vector3 end = NormalizedToPoint(this, s_UnitCubeVertices[line.vertexIndex2]) + smudge;
@@ -414,7 +414,7 @@ namespace KitchenDesign.Geometry
         ///     cref="s_UnitCubeVertices"/> that can be used to draw an inner
         ///     X shape inside a cuboid.
         /// </summary>
-        private static (int vertexIndex1, int vertexIndex2)[] s_UnitCubeLinePairsX =
+        private static (int vertexIndex1, int vertexIndex2)[] _unitCubeLinePairsX =
         {
             (0, 6),
             (1, 7),

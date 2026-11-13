@@ -46,13 +46,13 @@ namespace KitchenDesign.Cabinets
         public int index { get; protected set; }
 
         public ReadOnlyCollection<ElementIndex<Cabinet>> cabinets =>
-            m_Cabinets.readOnly;
+            _cabinets.readOnly;
 
-        public CabinetBacking backing => m_CabinetBacking;
+        public CabinetBacking backing => _cabinetBacking;
 
         public Cabinet orientationAlignedCabinet => m_OrientationAlignedCabinet;
 
-        public float baseCabinetDepthInMeters => m_BaseCabinetDepthInMeters;
+        public float baseCabinetDepthInMeters => _baseCabinetDepthInMeters;
 
         // ====================================================================
         // Methods
@@ -240,7 +240,7 @@ namespace KitchenDesign.Cabinets
             Cuboid backingCutOutInSpanSpace =
                 GetOutsideCuboidInSpanSpace();
 
-            if (!m_CabinetBacking)
+            if (!_cabinetBacking)
             {
                 // Only apply inflation once.
 
@@ -298,7 +298,7 @@ namespace KitchenDesign.Cabinets
 
         public void Add(Cabinet cabinet, int cabinetIndex)
         {
-            m_Cabinets.mutable.Add(ElementIndex.From(cabinet, cabinetIndex));
+            _cabinets.mutable.Add(ElementIndex.From(cabinet, cabinetIndex));
 
             // TODO: This check probably won't handle Galley style kitchens.
             //       Their bends do not use corner sections.
@@ -307,7 +307,7 @@ namespace KitchenDesign.Cabinets
             if (!m_OrientationAlignedCabinet)
             {
                 m_OrientationAlignedCabinet =
-                    m_Cabinets.readOnly.FirstOrDefault(
+                    _cabinets.readOnly.FirstOrDefault(
                         static x =>
                             x.element.cabinetType != CabinetType.Corner
                     ).element;
@@ -323,7 +323,7 @@ namespace KitchenDesign.Cabinets
         /// </summary>
         public void Clear()
         {
-            m_Cabinets.mutable.Clear();
+            _cabinets.mutable.Clear();
             m_OrientationAlignedCabinet = null;
         }
 
@@ -352,7 +352,7 @@ namespace KitchenDesign.Cabinets
                 return result;
             }
 
-            if (m_CabinetBacking)
+            if (_cabinetBacking)
             {
                 // There can only be one backing per span.
 
@@ -459,13 +459,13 @@ namespace KitchenDesign.Cabinets
             // At this point, we know the backing fits across all cabinets in
             // the span. It will now be created and fit to the cabinet.
 
-            m_CabinetBacking =
+            _cabinetBacking =
                 GameObject.Instantiate(
                     backingPrefab,
                     m_OrientationAlignedCabinet.GetTransform()
                 );
 
-            if (!m_CabinetBacking)
+            if (!_cabinetBacking)
             {
                 MelcherLog.LogError($"Could not instantiate backing: {backingPrefab}", backingPrefab);
 
@@ -474,14 +474,14 @@ namespace KitchenDesign.Cabinets
                 return result;
             }
 
-            m_CabinetBacking.SetProductInfo(backingInfo);
-            m_CabinetBacking.SetKitchen(kitchen);
+            _cabinetBacking.SetProductInfo(backingInfo);
+            _cabinetBacking.SetKitchen(kitchen);
 
             // Match the kitchen's current finishes.
             (Material cabinetMaterial, Material countertopMaterial) =
                 await kitchen.GetFinishMaterials(allowHighlightToReturn: true);
 
-            m_CabinetBacking.OnCabinetMaterialsChanged(kitchen,
+            _cabinetBacking.OnCabinetMaterialsChanged(kitchen,
                 cabinetMaterial,
                 countertopMaterial
             );
@@ -491,7 +491,7 @@ namespace KitchenDesign.Cabinets
             {
                 Cabinet cabinet = i.element;
 
-                await ApplyCabinetBackingToCabinet(cabinet, m_CabinetBacking, add: true);
+                await ApplyCabinetBackingToCabinet(cabinet, _cabinetBacking, add: true);
             }
 
             return result;
@@ -628,7 +628,7 @@ namespace KitchenDesign.Cabinets
         {
             MelcherLog.Log("TryDestroyBacking");
 
-            if (!m_CabinetBacking)
+            if (!_cabinetBacking)
             {
                 return true;
             }
@@ -637,7 +637,7 @@ namespace KitchenDesign.Cabinets
             // backing is removed.
 
             float inflateCabinetDepthByMeters =
-                m_CabinetBacking.GetCabinetInflateDepthInMeters(kitchen.buildingRules);
+                _cabinetBacking.GetCabinetInflateDepthInMeters(kitchen.buildingRules);
 
             Vector3 inflateCabinetSizeByMetersInSpanSpace =
                 new Vector3(0.0f, 0.0f, inflateCabinetDepthByMeters);
@@ -680,7 +680,7 @@ namespace KitchenDesign.Cabinets
             // properly observe that this backing was removed. Otherwise they
             // will expand to fit a backing that is being removed.
 
-            CabinetBacking removedBacking = m_CabinetBacking;
+            CabinetBacking removedBacking = _cabinetBacking;
 
             using var _ =
                 MelcherDeferred.Defer(
@@ -688,9 +688,9 @@ namespace KitchenDesign.Cabinets
                     onDispose: static removedBacking => GameObject.Destroy(removedBacking.gameObject)
                 );
 
-            m_CabinetBacking.GetTransform().SetParent(null);
+            _cabinetBacking.GetTransform().SetParent(null);
 
-            m_CabinetBacking = null;
+            _cabinetBacking = null;
 
             // Un-apply the cabinet size change.
             foreach (ElementIndex<Cabinet> i in cabinets)
@@ -724,7 +724,7 @@ namespace KitchenDesign.Cabinets
         //       connections will have flicker.
         public void UpdateBackingSizeAndPosition()
         {
-            if (!m_CabinetBacking)
+            if (!_cabinetBacking)
             {
                 return;
             }
@@ -735,7 +735,7 @@ namespace KitchenDesign.Cabinets
             // backing and its intended span will be wrong.
             SetParentOfBacking(m_OrientationAlignedCabinet.GetTransform());
 
-            m_CabinetBacking.GetTransform()
+            _cabinetBacking.GetTransform()
                 .SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
             // Calculate the backing's countertop thickness. This may differ
@@ -748,13 +748,13 @@ namespace KitchenDesign.Cabinets
             bool allowCountertop = true;
 
             if (!kitchen.buildingRules.BacksplashesHaveCountertop &&
-                m_CabinetBacking.info.category == ProductCategory.Backsplash)
+                _cabinetBacking.info.category == ProductCategory.Backsplash)
             {
                 // Backsplashes in Stoll builds have no countertop.
                 allowCountertop = false;
             }
 
-            m_CabinetBacking.SetRiserCountertopVisible(allowCountertop);
+            _cabinetBacking.SetRiserCountertopVisible(allowCountertop);
 
             if (!allowCountertop)
             {
@@ -765,7 +765,7 @@ namespace KitchenDesign.Cabinets
                 countertopThicknessInMeters = 0.0f;
             }
 
-            if (m_CabinetBacking.hasRiserAndRiserCountertop &&
+            if (_cabinetBacking.hasRiserAndRiserCountertop &&
                 kitchen.selectedCountertopType == CountertopType.Stoll)
             {
                 const float MaxStollBackingCountertopThicknessInMeters = 2.0f * Units.Inches2Meters;
@@ -779,7 +779,7 @@ namespace KitchenDesign.Cabinets
             float? highBarTopCountertopThicknessInMeters = this.kitchen.appRules.HighBarTopCountertopThicknessInMeters;
 
             if (highBarTopCountertopThicknessInMeters.HasValue &&
-                m_CabinetBacking.info.category == ProductCategory.BarTopHigh)
+                _cabinetBacking.info.category == ProductCategory.BarTopHigh)
             {
                 countertopThicknessInMeters = highBarTopCountertopThicknessInMeters.Value;
             }
@@ -789,12 +789,12 @@ namespace KitchenDesign.Cabinets
 
             Cuboid riserCuboidInSpanSpace =
                 GetBackingRiserFootprintCuboidInSpanSpace(
-                    m_CabinetBacking.info,
-                    m_CabinetBacking
+                    _cabinetBacking.info,
+                    _cabinetBacking
                 );
 
             riserCuboidInSpanSpace.height =
-                m_CabinetBacking.info.productSizeInMeters.y - countertopThicknessInMeters;
+                _cabinetBacking.info.productSizeInMeters.y - countertopThicknessInMeters;
 
             // Calculate the riser's countertop size. It must extend to meet
             // the countertop of it's adjacent backings (if they exist).
@@ -809,7 +809,7 @@ namespace KitchenDesign.Cabinets
             // Calculate the size of the backing's default countertop, with
             // respect to its own overhang.
             countertopCuboidInSpanSpace =
-                m_CabinetBacking.countertopOverhangInMeters
+                _cabinetBacking.countertopOverhangInMeters
                     .Inflate(countertopCuboidInSpanSpace);
 
             float? highBarTopCountertopDepthInMeters = this.kitchen.appRules.HighBarTopCountertopDepthInMeters;
@@ -859,7 +859,7 @@ namespace KitchenDesign.Cabinets
                     continue;
                 }
 
-                if (m_CabinetBacking.hasRiserAndRiserCountertop != span.backing.hasRiserAndRiserCountertop)
+                if (_cabinetBacking.hasRiserAndRiserCountertop != span.backing.hasRiserAndRiserCountertop)
                 {
                     // These backings are at different heights (e.g., low bar
                     // top versus high bar top). We will not attempt to merge
@@ -873,12 +873,12 @@ namespace KitchenDesign.Cabinets
                 // here.
                 Cuboid neighbourBackingCutOutCuboidInNeighbourSpanSpace =
                     span.GetBackingRiserFootprintCuboidInSpanSpace(
-                        span.m_CabinetBacking.info,
-                        span.m_CabinetBacking
+                        span._cabinetBacking.info,
+                        span._cabinetBacking
                     );
 
                 Cuboid neighbourBackingCountertopCuboidInNeighbourSpanSpace =
-                    span.m_CabinetBacking.countertopOverhangInMeters
+                    span._cabinetBacking.countertopOverhangInMeters
                         .Inflate(neighbourBackingCutOutCuboidInNeighbourSpanSpace);
 
                 Cuboid neighbourBackingCountertopCuboidInThisSpanSpace =
@@ -900,7 +900,7 @@ namespace KitchenDesign.Cabinets
             }
 
             // Apply the calculated backing model sizes.
-            m_CabinetBacking.SetModelSize(
+            _cabinetBacking.SetModelSize(
                 riserCuboidInSpanSpace,
                 countertopCuboidInSpanSpace,
                 kitchen.countertopThicknessInMeters
@@ -1004,14 +1004,14 @@ namespace KitchenDesign.Cabinets
         /// <param name="depthInMeters"></param>
         public void SetBaseCabinetDepth(float depthInMeters)
         {
-            m_BaseCabinetDepthInMeters = depthInMeters;
+            _baseCabinetDepthInMeters = depthInMeters;
 
             foreach (ElementIndex<Cabinet> i in cabinets)
             {
                 Cabinet cabinet = i.element;
 
                 cabinet.SetBaseCabinetDepth(
-                    m_BaseCabinetDepthInMeters,
+                    _baseCabinetDepthInMeters,
                     cabinet.IsYawSimilar(orientationAlignedCabinet) ? CabinetResizeAxis.Z : CabinetResizeAxis.X
                 );
 
@@ -1050,9 +1050,9 @@ namespace KitchenDesign.Cabinets
                 }
             }
 
-            if (m_CabinetBacking && currentHighlightObject != m_CabinetBacking.gameObject)
+            if (_cabinetBacking && currentHighlightObject != _cabinetBacking.gameObject)
             {
-                m_CabinetBacking.OnCabinetMaterialsChanged(kitchen, cabinetMaterial, countertopMaterial);
+                _cabinetBacking.OnCabinetMaterialsChanged(kitchen, cabinetMaterial, countertopMaterial);
             }
         }
 
@@ -1082,13 +1082,13 @@ namespace KitchenDesign.Cabinets
         /// </summary>
         public void RelocateBackingFromDestructingCabinet(Cabinet cabinetBeingDestroyed)
         {
-            if (!m_CabinetBacking)
+            if (!_cabinetBacking)
             {
                 // No backing to relocate.
                 return;
             }
 
-            Transform cabinetBackingTransform = m_CabinetBacking.GetTransform();
+            Transform cabinetBackingTransform = _cabinetBacking.GetTransform();
 
             if (cabinetBackingTransform != cabinetBeingDestroyed.GetTransform())
             {
@@ -1120,8 +1120,8 @@ namespace KitchenDesign.Cabinets
 
         protected void SetParentOfBacking(Transform newParent)
         {
-            m_CabinetBacking.GetTransform().SetParent(newParent);
-            m_CabinetBacking.GetTransform().SetSiblingIndex(0);
+            _cabinetBacking.GetTransform().SetParent(newParent);
+            _cabinetBacking.GetTransform().SetSiblingIndex(0);
         }
 
         protected void ApplyCabinetBackingToCountertop(Cabinet cabinet, CabinetBacking backing, bool add)
@@ -1196,7 +1196,7 @@ namespace KitchenDesign.Cabinets
         ///     The `index` member in each entry refers to the index of the
         ///     cabinet within the layout.
         /// </summary>
-        protected MelcherReadWriteList<ElementIndex<Cabinet>> m_Cabinets = new ();
+        protected MelcherReadWriteList<ElementIndex<Cabinet>> _cabinets = new ();
 
         /// <summary>
         ///     This is the first cabinet section in the cabinet span that is
@@ -1213,9 +1213,9 @@ namespace KitchenDesign.Cabinets
         ///     The bar top or backsplash (or nothing) that runs this length
         ///     of cabinets.
         /// </summary>
-        protected CabinetBacking m_CabinetBacking;
+        protected CabinetBacking _cabinetBacking;
 
-        protected float m_BaseCabinetDepthInMeters;
+        protected float _baseCabinetDepthInMeters;
 
     }   // class CabinetSpan
 

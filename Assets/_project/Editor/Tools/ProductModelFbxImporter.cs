@@ -116,7 +116,7 @@ namespace KitchenDesign.ToolsEditor
             for (int i = 0; i < sharedMaterials.Length; ++i)
             {
                 if (sharedMaterials[i] != null &&
-                    s_DefaultMaterialNames.Contains(sharedMaterials[i].name))
+                    _defaultMaterialNames.Contains(sharedMaterials[i].name))
                 {
                     sharedMaterials[i] = rendererToMaterial.Invoke(renderer);
                     modified = true;
@@ -155,7 +155,7 @@ namespace KitchenDesign.ToolsEditor
             {
                 foreach (AssetImporter.SourceAssetIdentifier identifier in sourceMaterials)
                 {
-                    if (s_DefaultMaterialNames.Contains(identifier.name))
+                    if (_defaultMaterialNames.Contains(identifier.name))
                     {
                         Material expectedMaterial = rendererToMaterial.Invoke(null);
 
@@ -171,9 +171,9 @@ namespace KitchenDesign.ToolsEditor
         {
             System.IO.File.AppendAllText(PendingReimportsPath, assetPath + "\n");
 
-            if (!s_ReimportScheduled)
+            if (!_reimportScheduled)
             {
-                s_ReimportScheduled = true;
+                _reimportScheduled = true;
                 EditorApplication.delayCall += ReimportPending;
             }
         }
@@ -181,16 +181,16 @@ namespace KitchenDesign.ToolsEditor
         [InitializeOnLoadMethod]
         private static void ScheduleReimportOfPendingFromEarlierSession()
         {
-            if (System.IO.File.Exists(PendingReimportsPath) && !s_ReimportScheduled)
+            if (System.IO.File.Exists(PendingReimportsPath) && !_reimportScheduled)
             {
-                s_ReimportScheduled = true;
+                _reimportScheduled = true;
                 EditorApplication.delayCall += ReimportPending;
             }
         }
 
         private static void ReimportPending()
         {
-            s_ReimportScheduled = false;
+            _reimportScheduled = false;
 
             if (!System.IO.File.Exists(PendingReimportsPath))
             {
@@ -226,9 +226,9 @@ namespace KitchenDesign.ToolsEditor
 
         private const string PendingReimportsPath = "Library/ProFitPendingModelReimports.txt";
 
-        private static bool s_ReimportScheduled;
+        private static bool _reimportScheduled;
 
-        protected static readonly List<string> s_DefaultMaterialNames =
+        protected static readonly List<string> _defaultMaterialNames =
             new()
             {
                 "Default-Material",

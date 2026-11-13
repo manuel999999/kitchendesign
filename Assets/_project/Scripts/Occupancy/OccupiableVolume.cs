@@ -254,8 +254,8 @@ namespace KitchenDesign.Occupancy
 
         public CuboidPadding occupiablePaddingInMeters
         {
-            get => m_OccupiablePaddingInMeters;
-            set => m_OccupiablePaddingInMeters = value;
+            get => _occupiablePaddingInMeters;
+            set => _occupiablePaddingInMeters = value;
         }
 
         /// <summary>
@@ -641,7 +641,7 @@ namespace KitchenDesign.Occupancy
                     case ProductAnchor.OnFrontAtTop:
                     case ProductAnchor.OnBackAtTop:
                         // The product's origin is at the top.
-                        cuboidPosition.y = positionInVolumeY.Value - anchoredCuboid.height + topPadding - m_OccupiablePaddingInMeters.bottom;
+                        cuboidPosition.y = positionInVolumeY.Value - anchoredCuboid.height + topPadding - _occupiablePaddingInMeters.bottom;
                         break;
 
                     default:
@@ -911,7 +911,7 @@ namespace KitchenDesign.Occupancy
         /// </remarks>
         public bool CanVolumeResizeFitOccupants(CuboidPadding changeAmountInMeters, Occupant occupantToIgnore = null)
         {
-            s_VolumeResizeTestCuboids.Clear();
+            _volumeResizeTestCuboids.Clear();
 
             Cuboid proposedVolumeOccupiableCuboid =
                 changeAmountInMeters.Inflate(occupiableCuboid);
@@ -931,7 +931,7 @@ namespace KitchenDesign.Occupancy
                         overrideOccupiableCuboid: proposedVolumeOccupiableCuboid
                     );
 
-                s_VolumeResizeTestCuboids.Add(
+                _volumeResizeTestCuboids.Add(
                     new ReanchoredOccupant(occupant, reanchoredCuboid)
                 );
             }
@@ -939,10 +939,10 @@ namespace KitchenDesign.Occupancy
             bool failed = false;
 
             // Verify the proposed positions have no overlaps
-            int occupantCount = s_VolumeResizeTestCuboids.Count;
+            int occupantCount = _volumeResizeTestCuboids.Count;
             for (int i = 0; i < occupantCount; ++i)
             {
-                ReanchoredOccupant reanchoredOccupant = s_VolumeResizeTestCuboids[i];
+                ReanchoredOccupant reanchoredOccupant = _volumeResizeTestCuboids[i];
 
                 // Ensure the occupants will fit in the new size (skipping some
                 // occupants that don't block a resize like a bar-top)
@@ -965,10 +965,10 @@ namespace KitchenDesign.Occupancy
                 {
                     if (Cuboid.Overlaps(
                         reanchoredOccupant.cuboid,
-                        s_VolumeResizeTestCuboids[j].cuboid))
+                        _volumeResizeTestCuboids[j].cuboid))
                     {
                         MelcherLog.Log($"failing resize check. Products would overlap. Product 1 {reanchoredOccupant.occupant}", reanchoredOccupant.occupant);
-                        MelcherLog.Log($"                                              Product 2 {s_VolumeResizeTestCuboids[j].occupant}", s_VolumeResizeTestCuboids[j].occupant);
+                        MelcherLog.Log($"                                              Product 2 {_volumeResizeTestCuboids[j].occupant}", _volumeResizeTestCuboids[j].occupant);
                         return false;
                     }
                 }
@@ -2875,7 +2875,7 @@ namespace KitchenDesign.Occupancy
         ///     The amount of empty space on all edges of the cabinet where
         ///     occupants are prevented from occupying.
         /// </summary>
-        protected CuboidPadding m_OccupiablePaddingInMeters;
+        protected CuboidPadding _occupiablePaddingInMeters;
 
         // ====================================================================
         // Static fields
@@ -2885,7 +2885,7 @@ namespace KitchenDesign.Occupancy
         ///     A shared list used when calculating whether a volume can be
         ///     resized without overlapping its occupants.
         /// </summary>
-        protected static List<ReanchoredOccupant> s_VolumeResizeTestCuboids = new List<ReanchoredOccupant>();
+        protected static List<ReanchoredOccupant> _volumeResizeTestCuboids = new List<ReanchoredOccupant>();
 
         protected const float s_LineDuration = 2.0f;
 

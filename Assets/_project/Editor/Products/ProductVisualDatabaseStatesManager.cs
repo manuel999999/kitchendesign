@@ -82,69 +82,69 @@ namespace KitchenDesign.ProductsEditor
             m_DatabaseField.RegisterValueChangedCallback(OnDatabaseChanged);
             root.Add(m_DatabaseField);
 
-            m_CurrentLabel = new Label();
-            m_CurrentLabel.style.marginLeft = 4.0f;
-            m_CurrentLabel.style.marginTop = 2.0f;
-            m_CurrentLabel.style.marginBottom = 4.0f;
-            root.Add(m_CurrentLabel);
+            _currentLabel = new Label();
+            _currentLabel.style.marginLeft = 4.0f;
+            _currentLabel.style.marginTop = 2.0f;
+            _currentLabel.style.marginBottom = 4.0f;
+            root.Add(_currentLabel);
 
             VisualElement saveRow = new VisualElement();
             saveRow.style.flexDirection = FlexDirection.Row;
             saveRow.style.marginBottom = 4.0f;
             root.Add(saveRow);
 
-            m_NewStateNameField = new TextField("New State Name");
-            m_NewStateNameField.style.flexGrow = 1.0f;
-            saveRow.Add(m_NewStateNameField);
+            _newStateNameField = new TextField("New State Name");
+            _newStateNameField.style.flexGrow = 1.0f;
+            saveRow.Add(_newStateNameField);
 
-            m_SaveNewButton = new Button(SaveCurrentAsNewState);
-            m_SaveNewButton.text = "Save Current Entries";
-            m_SaveNewButton.tooltip = "Save the database's current entries as a new state.";
-            saveRow.Add(m_SaveNewButton);
+            _saveNewButton = new Button(SaveCurrentAsNewState);
+            _saveNewButton.text = "Save Current Entries";
+            _saveNewButton.tooltip = "Save the database's current entries as a new state.";
+            saveRow.Add(_saveNewButton);
 
             TwoPaneSplitView splitView =
                 new TwoPaneSplitView(0, 440.0f, TwoPaneSplitViewOrientation.Horizontal);
             root.Add(splitView);
 
-            m_StatesView = new MultiColumnListView();
-            m_StatesView.itemsSource = m_States;
-            m_StatesView.selectionType = SelectionType.Single;
-            m_StatesView.fixedItemHeight = 20.0f;
-            m_StatesView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
-            m_StatesView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
-            m_StatesView.columns.Add(MakeColumn("State", 150.0f, true, index => m_States[index].name));
-            m_StatesView.columns.Add(MakeColumn("Entries", 60.0f, false, index => m_States[index].entries.Count.ToString("N0")));
-            m_StatesView.columns.Add(MakeColumn("Saved", 115.0f, false, index => m_States[index].savedAt.ToString("yyyy-MM-dd HH:mm")));
-            m_StatesView.columns.Add(MakeColumn("Loading It", 115.0f, false, index => DescribeLoad(m_States[index])));
-            m_StatesView.selectionChanged += OnStateSelectionChanged;
-            splitView.Add(m_StatesView);
+            _statesView = new MultiColumnListView();
+            _statesView.itemsSource = _states;
+            _statesView.selectionType = SelectionType.Single;
+            _statesView.fixedItemHeight = 20.0f;
+            _statesView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
+            _statesView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
+            _statesView.columns.Add(MakeColumn("State", 150.0f, true, index => _states[index].name));
+            _statesView.columns.Add(MakeColumn("Entries", 60.0f, false, index => _states[index].entries.Count.ToString("N0")));
+            _statesView.columns.Add(MakeColumn("Saved", 115.0f, false, index => _states[index].savedAt.ToString("yyyy-MM-dd HH:mm")));
+            _statesView.columns.Add(MakeColumn("Loading It", 115.0f, false, index => DescribeLoad(_states[index])));
+            _statesView.selectionChanged += OnStateSelectionChanged;
+            splitView.Add(_statesView);
 
             VisualElement detailPane = new VisualElement();
             splitView.Add(detailPane);
 
-            m_SummaryLabel = new Label();
-            m_SummaryLabel.style.whiteSpace = WhiteSpace.Normal;
-            m_SummaryLabel.style.marginLeft = 4.0f;
-            m_SummaryLabel.style.marginTop = 4.0f;
-            m_SummaryLabel.style.marginBottom = 4.0f;
-            detailPane.Add(m_SummaryLabel);
+            _summaryLabel = new Label();
+            _summaryLabel.style.whiteSpace = WhiteSpace.Normal;
+            _summaryLabel.style.marginLeft = 4.0f;
+            _summaryLabel.style.marginTop = 4.0f;
+            _summaryLabel.style.marginBottom = 4.0f;
+            detailPane.Add(_summaryLabel);
 
-            m_DifferenceSearchField = new ToolbarSearchField();
-            m_DifferenceSearchField.style.width = StyleKeyword.Auto;
-            m_DifferenceSearchField.style.flexShrink = 1.0f;
-            m_DifferenceSearchField.RegisterValueChangedCallback(OnDifferenceSearchChanged);
-            detailPane.Add(m_DifferenceSearchField);
+            _differenceSearchField = new ToolbarSearchField();
+            _differenceSearchField.style.width = StyleKeyword.Auto;
+            _differenceSearchField.style.flexShrink = 1.0f;
+            _differenceSearchField.RegisterValueChangedCallback(OnDifferenceSearchChanged);
+            detailPane.Add(_differenceSearchField);
 
-            m_DifferencesView = new MultiColumnListView();
-            m_DifferencesView.itemsSource = m_DisplayedDifferences;
-            m_DifferencesView.selectionType = SelectionType.None;
-            m_DifferencesView.fixedItemHeight = 20.0f;
-            m_DifferencesView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
-            m_DifferencesView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
-            m_DifferencesView.columns.Add(MakeColumn("When Loaded", 100.0f, false, index => m_DisplayedDifferences[index].change));
-            m_DifferencesView.columns.Add(MakeColumn("Product Visual", 400.0f, true, index => m_DisplayedDifferences[index].name));
-            m_DifferencesView.style.flexGrow = 1.0f;
-            detailPane.Add(m_DifferencesView);
+            _differencesView = new MultiColumnListView();
+            _differencesView.itemsSource = _displayedDifferences;
+            _differencesView.selectionType = SelectionType.None;
+            _differencesView.fixedItemHeight = 20.0f;
+            _differencesView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
+            _differencesView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
+            _differencesView.columns.Add(MakeColumn("When Loaded", 100.0f, false, index => _displayedDifferences[index].change));
+            _differencesView.columns.Add(MakeColumn("Product Visual", 400.0f, true, index => _displayedDifferences[index].name));
+            _differencesView.style.flexGrow = 1.0f;
+            detailPane.Add(_differencesView);
 
             VisualElement buttonRow = new VisualElement();
             buttonRow.style.flexDirection = FlexDirection.Row;
@@ -153,23 +153,23 @@ namespace KitchenDesign.ProductsEditor
             buttonRow.style.marginBottom = 4.0f;
             detailPane.Add(buttonRow);
 
-            m_LoadButton = new Button(LoadSelectedState);
-            m_LoadButton.text = "Load";
-            m_LoadButton.tooltip = "Replace the database's entries with the selected state's entries.";
-            buttonRow.Add(m_LoadButton);
+            _loadButton = new Button(LoadSelectedState);
+            _loadButton.text = "Load";
+            _loadButton.tooltip = "Replace the database's entries with the selected state's entries.";
+            buttonRow.Add(_loadButton);
 
-            m_OverwriteButton = new Button(OverwriteSelectedState);
-            m_OverwriteButton.text = "Overwrite With Current";
-            m_OverwriteButton.tooltip = "Save the database's current entries into the selected state.";
-            buttonRow.Add(m_OverwriteButton);
+            _overwriteButton = new Button(OverwriteSelectedState);
+            _overwriteButton.text = "Overwrite With Current";
+            _overwriteButton.tooltip = "Save the database's current entries into the selected state.";
+            buttonRow.Add(_overwriteButton);
 
             VisualElement buttonSpacer = new VisualElement();
             buttonSpacer.style.flexGrow = 1.0f;
             buttonRow.Add(buttonSpacer);
 
-            m_RevealButton = new Button(RevealSelectedState);
-            m_RevealButton.text = "Show File";
-            buttonRow.Add(m_RevealButton);
+            _revealButton = new Button(RevealSelectedState);
+            _revealButton.text = "Show File";
+            buttonRow.Add(_revealButton);
 
             m_DeleteButton = new Button(DeleteSelectedState);
             m_DeleteButton.text = "Delete";
@@ -231,14 +231,14 @@ namespace KitchenDesign.ProductsEditor
 
         private State GetSelectedState()
         {
-            int index = m_StatesView.selectedIndex;
+            int index = _statesView.selectedIndex;
 
-            return index >= 0 && index < m_States.Count ? m_States[index] : null;
+            return index >= 0 && index < _states.Count ? _states[index] : null;
         }
 
         private void Refresh()
         {
-            if (m_StatesView == null)
+            if (_statesView == null)
             {
                 return;
             }
@@ -248,15 +248,15 @@ namespace KitchenDesign.ProductsEditor
             ReadCurrentEntries();
             ReadStates();
 
-            m_StatesView.RefreshItems();
+            _statesView.RefreshItems();
 
-            int selectedIndex = m_States.FindIndex(state => state.name == selectedName);
-            m_StatesView.SetSelectionWithoutNotify(
+            int selectedIndex = _states.FindIndex(state => state.name == selectedName);
+            _statesView.SetSelectionWithoutNotify(
                 selectedIndex >= 0 ? new[] { selectedIndex } : Array.Empty<int>()
             );
 
-            m_CurrentLabel.text = DescribeDatabase();
-            m_SaveNewButton.SetEnabled(m_Database);
+            _currentLabel.text = DescribeDatabase();
+            _saveNewButton.SetEnabled(m_Database);
 
             RefreshDetail();
         }
@@ -270,12 +270,12 @@ namespace KitchenDesign.ProductsEditor
 
             string description = $"The database holds {m_CurrentEntries.Count:N0} entries";
 
-            if (m_CurrentNullEntryCount > 0)
+            if (_currentNullEntryCount > 0)
             {
-                description += $" and {m_CurrentNullEntryCount:N0} null entries";
+                description += $" and {_currentNullEntryCount:N0} null entries";
             }
 
-            State matchingState = m_States.Find(static state => state.matchesDatabase);
+            State matchingState = _states.Find(static state => state.matchesDatabase);
 
             return matchingState != null ?
                 $"{description}, the same as the state \"{matchingState.name}\"." :
@@ -287,7 +287,7 @@ namespace KitchenDesign.ProductsEditor
             m_CurrentEntries.Clear();
             m_CurrentGuids.Clear();
             m_GuidIsInProject.Clear();
-            m_CurrentNullEntryCount = 0;
+            _currentNullEntryCount = 0;
 
             if (!m_Database)
             {
@@ -298,7 +298,7 @@ namespace KitchenDesign.ProductsEditor
             {
                 if (!ProductVisualDatabaseEntryFile.TryGetEntry(visual, out Entry entry))
                 {
-                    ++m_CurrentNullEntryCount;
+                    ++_currentNullEntryCount;
                     continue;
                 }
 
@@ -309,7 +309,7 @@ namespace KitchenDesign.ProductsEditor
 
         private void ReadStates()
         {
-            m_States.Clear();
+            _states.Clear();
 
             foreach (string filePath in ProductVisualDatabaseEntryFile.GetFilePaths(STATES_FOLDER_NAME))
             {
@@ -321,7 +321,7 @@ namespace KitchenDesign.ProductsEditor
 
                 CompareWithDatabase(state);
 
-                m_States.Add(state);
+                _states.Add(state);
             }
         }
 
@@ -376,7 +376,7 @@ namespace KitchenDesign.ProductsEditor
         {
             State state = GetSelectedState();
 
-            m_Differences.Clear();
+            _differences.Clear();
 
             if (state != null)
             {
@@ -391,7 +391,7 @@ namespace KitchenDesign.ProductsEditor
                         continue;
                     }
 
-                    m_Differences.Add(
+                    _differences.Add(
                         new Difference
                         {
                             change = IsInProject(entry.guid) ? CHANGE_ADDED : CHANGE_NOT_IN_PROJECT,
@@ -404,11 +404,11 @@ namespace KitchenDesign.ProductsEditor
                 {
                     if (!stateGuids.Contains(entry.guid))
                     {
-                        m_Differences.Add(new Difference { change = CHANGE_REMOVED, name = entry.name });
+                        _differences.Add(new Difference { change = CHANGE_REMOVED, name = entry.name });
                     }
                 }
 
-                m_Differences.Sort(
+                _differences.Sort(
                     static (a, b) =>
                     {
                         int order = string.CompareOrdinal(a.change, b.change);
@@ -417,11 +417,11 @@ namespace KitchenDesign.ProductsEditor
                 );
             }
 
-            m_SummaryLabel.text = DescribeSelection(state);
+            _summaryLabel.text = DescribeSelection(state);
 
-            m_LoadButton.SetEnabled(state != null && m_Database && !state.matchesDatabase);
-            m_OverwriteButton.SetEnabled(state != null && m_Database && !state.matchesDatabase);
-            m_RevealButton.SetEnabled(state != null);
+            _loadButton.SetEnabled(state != null && m_Database && !state.matchesDatabase);
+            _overwriteButton.SetEnabled(state != null && m_Database && !state.matchesDatabase);
+            _revealButton.SetEnabled(state != null);
             m_DeleteButton.SetEnabled(state != null);
 
             RefreshDisplayedDifferences();
@@ -431,7 +431,7 @@ namespace KitchenDesign.ProductsEditor
         {
             if (state == null)
             {
-                return m_States.Count > 0 ?
+                return _states.Count > 0 ?
                     "Select a state to see what loading it would change." :
                     "No states saved yet. Name one above and save the current entries.";
             }
@@ -463,20 +463,20 @@ namespace KitchenDesign.ProductsEditor
 
         private void RefreshDisplayedDifferences()
         {
-            string search = m_DifferenceSearchField.value;
+            string search = _differenceSearchField.value;
 
-            m_DisplayedDifferences.Clear();
+            _displayedDifferences.Clear();
 
-            foreach (Difference difference in m_Differences)
+            foreach (Difference difference in _differences)
             {
                 if (string.IsNullOrWhiteSpace(search) ||
                     difference.name.Contains(search.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    m_DisplayedDifferences.Add(difference);
+                    _displayedDifferences.Add(difference);
                 }
             }
 
-            m_DifferencesView.RefreshItems();
+            _differencesView.RefreshItems();
         }
 
         private void SaveCurrentAsNewState()
@@ -486,7 +486,7 @@ namespace KitchenDesign.ProductsEditor
                 return;
             }
 
-            string stateName = m_NewStateNameField.value.Trim();
+            string stateName = _newStateNameField.value.Trim();
 
             if (!ProductVisualDatabaseEntryFile.IsValidFileName(stateName))
             {
@@ -523,7 +523,7 @@ namespace KitchenDesign.ProductsEditor
 
             WriteState(filePath);
 
-            m_NewStateNameField.SetValueWithoutNotify("");
+            _newStateNameField.SetValueWithoutNotify("");
 
             Refresh();
             SelectState(stateName);
@@ -572,7 +572,7 @@ namespace KitchenDesign.ProductsEditor
                 return;
             }
 
-            if (!m_States.Exists(static x => x.matchesDatabase))
+            if (!_states.Exists(static x => x.matchesDatabase))
             {
                 bool willLoad =
                     EditorUtility.DisplayDialog(
@@ -666,12 +666,12 @@ namespace KitchenDesign.ProductsEditor
 
         private void SelectState(string stateName)
         {
-            int index = m_States.FindIndex(state => state.name == stateName);
+            int index = _states.FindIndex(state => state.name == stateName);
 
             if (index >= 0)
             {
-                m_StatesView.SetSelection(index);
-                m_StatesView.ScrollToItem(index);
+                _statesView.SetSelection(index);
+                _statesView.ScrollToItem(index);
             }
         }
 
@@ -680,22 +680,22 @@ namespace KitchenDesign.ProductsEditor
         private readonly List<Entry> m_CurrentEntries = new ();
         private readonly HashSet<string> m_CurrentGuids = new ();
         private readonly Dictionary<string, bool> m_GuidIsInProject = new ();
-        private readonly List<State> m_States = new ();
-        private readonly List<Difference> m_Differences = new ();
-        private readonly List<Difference> m_DisplayedDifferences = new ();
-        private int m_CurrentNullEntryCount;
+        private readonly List<State> _states = new ();
+        private readonly List<Difference> _differences = new ();
+        private readonly List<Difference> _displayedDifferences = new ();
+        private int _currentNullEntryCount;
 
         private ObjectField m_DatabaseField;
-        private Label m_CurrentLabel;
-        private TextField m_NewStateNameField;
-        private Button m_SaveNewButton;
-        private MultiColumnListView m_StatesView;
-        private Label m_SummaryLabel;
-        private ToolbarSearchField m_DifferenceSearchField;
-        private MultiColumnListView m_DifferencesView;
-        private Button m_LoadButton;
-        private Button m_OverwriteButton;
-        private Button m_RevealButton;
+        private Label _currentLabel;
+        private TextField _newStateNameField;
+        private Button _saveNewButton;
+        private MultiColumnListView _statesView;
+        private Label _summaryLabel;
+        private ToolbarSearchField _differenceSearchField;
+        private MultiColumnListView _differencesView;
+        private Button _loadButton;
+        private Button _overwriteButton;
+        private Button _revealButton;
         private Button m_DeleteButton;
 
         private struct Difference

@@ -140,11 +140,11 @@ namespace KitchenDesign
         /// </summary>
         private void LoadNextScene()
         {
-            if (m_SceneLoadOperation == null)
+            if (_sceneLoadOperation == null)
             {
                 int nextSceneIndex = gameObject.scene.buildIndex + 1;
 
-                m_SceneLoadOperation =
+                _sceneLoadOperation =
                     MelcherSceneManager.LoadSceneAsync(
                         MelcherSceneRequest.FromBuildIndex(nextSceneIndex),
                         MelcherSceneLoadMode.Single
@@ -176,7 +176,7 @@ namespace KitchenDesign
         // Non-serialized members
         // ====================================================================
 
-        private AsyncOperation m_SceneLoadOperation;
+        private AsyncOperation _sceneLoadOperation;
 
     }   // class SplashVideoControl
 

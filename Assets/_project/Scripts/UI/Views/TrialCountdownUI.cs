@@ -33,7 +33,7 @@ namespace KitchenDesign.UI.Views
             base.Awake();
 
             m_ButtonLabel = MelcherSearch.FirstFromTransformDownward<MelcherLocalizedText>(m_Button.transform);
-            m_CountdownLabelHourFormat = m_ButtonLabel.phrase;
+            _countdownLabelHourFormat = m_ButtonLabel.phrase;
         }
 
         protected override void OnEnable()
@@ -58,7 +58,7 @@ namespace KitchenDesign.UI.Views
         {
             base.DoShow();
 
-            m_PeriodicCountdownRefreshRoutine = Timing.RunCoroutine(PeriodicCountdownRefresh());
+            _periodicCountdownRefreshRoutine = Timing.RunCoroutine(PeriodicCountdownRefresh());
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace KitchenDesign.UI.Views
         {
             base.DoHide();
 
-            Timing.KillCoroutines(m_PeriodicCountdownRefreshRoutine);
-            m_PeriodicCountdownRefreshRoutine = default;
+            Timing.KillCoroutines(_periodicCountdownRefreshRoutine);
+            _periodicCountdownRefreshRoutine = default;
         }
 
         protected void OnClickButton(MelcherButton caller)
@@ -90,7 +90,7 @@ namespace KitchenDesign.UI.Views
 
                 if (totalHours > 1)
                 {
-                    m_ButtonLabel.phrase = m_CountdownLabelHourFormat.Replace("%HOURS%", totalHours.ToString());
+                    m_ButtonLabel.phrase = _countdownLabelHourFormat.Replace("%HOURS%", totalHours.ToString());
                 }
                 else
                 {
@@ -116,9 +116,9 @@ namespace KitchenDesign.UI.Views
 
         protected MelcherLocalizedText m_ButtonLabel;
 
-        protected CoroutineHandle m_PeriodicCountdownRefreshRoutine;
+        protected CoroutineHandle _periodicCountdownRefreshRoutine;
 
-        protected string m_CountdownLabelHourFormat;
+        protected string _countdownLabelHourFormat;
 
     }   // class TrialCountdownUI
 

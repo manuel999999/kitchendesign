@@ -75,7 +75,7 @@ namespace KitchenDesign.UI.DesignerScreens
             // Create a pool of canvas labels for the overlay
             for (int i = 0; i < m_NumberOfLabelsToPool; ++i)
             {
-                m_PooledCanvasLabels.Add(
+                _pooledCanvasLabels.Add(
                     Instantiate(m_CanvasLabelPrefab, m_RectTransform)
                 );
             }
@@ -94,9 +94,9 @@ namespace KitchenDesign.UI.DesignerScreens
                 activeMeasure.measure.SetWorldSpaceLabelVisible(false);
             }
 
-            if (!Timing.IsRunning(m_UpdateCoroutine))
+            if (!Timing.IsRunning(_updateCoroutine))
             {
-                m_UpdateCoroutine = Timing.RunCoroutine(
+                _updateCoroutine = Timing.RunCoroutine(
                     UpdateMeasurements().CancelWith(gameObject)
                 );
             }
@@ -104,7 +104,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected override void DoHide()
         {
-            Timing.KillCoroutines(m_UpdateCoroutine);
+            Timing.KillCoroutines(_updateCoroutine);
 
             HideCanvasLabels();
 
@@ -130,11 +130,11 @@ namespace KitchenDesign.UI.DesignerScreens
 
             while (true)
             {
-                for (int i = 0; i < m_PooledCanvasLabels.Count; ++i)
+                for (int i = 0; i < _pooledCanvasLabels.Count; ++i)
                 {
                     bool isVisible = i < m_ActiveMeasurements.Count;
 
-                    MelcherLocalizedText label = m_PooledCanvasLabels[i];
+                    MelcherLocalizedText label = _pooledCanvasLabels[i];
 
                     if (isVisible)
                     {
@@ -168,7 +168,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void HideCanvasLabels()
         {
-            foreach (MelcherLocalizedText canvasLabel in m_PooledCanvasLabels)
+            foreach (MelcherLocalizedText canvasLabel in _pooledCanvasLabels)
             {
                 canvasLabel.gameObject.SetActive(false);
             }
@@ -195,9 +195,9 @@ namespace KitchenDesign.UI.DesignerScreens
         /// </summary>
         protected List<ActiveMeasure> m_ActiveMeasurements = new List<ActiveMeasure>();
 
-        protected List<MelcherLocalizedText> m_PooledCanvasLabels = new List<MelcherLocalizedText>();
+        protected List<MelcherLocalizedText> _pooledCanvasLabels = new List<MelcherLocalizedText>();
 
-        protected CoroutineHandle m_UpdateCoroutine;
+        protected CoroutineHandle _updateCoroutine;
 
     }   // class MeasureOverlayUI
 

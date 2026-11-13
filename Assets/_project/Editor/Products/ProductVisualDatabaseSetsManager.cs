@@ -62,8 +62,8 @@ namespace KitchenDesign.ProductsEditor
         {
             Undo.undoRedoPerformed += Refresh;
 
-            m_SetAsideGuids.Clear();
-            m_SetAsideGuids.UnionWith(
+            _setAsideGuids.Clear();
+            _setAsideGuids.UnionWith(
                 SessionState.GetString(SET_ASIDE_SESSION_KEY, "")
                     .Split('\n', StringSplitOptions.RemoveEmptyEntries)
             );
@@ -137,88 +137,88 @@ namespace KitchenDesign.ProductsEditor
             VisualElement selectionButtonRow = MakeButtonRow();
             entriesPane.Add(selectionButtonRow);
 
-            m_SelectAllShownButton = MakeButton("Select All Shown", "Select every entry the search shows.", SelectAllShown);
-            selectionButtonRow.Add(m_SelectAllShownButton);
+            _selectAllShownButton = MakeButton("Select All Shown", "Select every entry the search shows.", SelectAllShown);
+            selectionButtonRow.Add(_selectAllShownButton);
 
-            m_SetAsideButton = MakeButton("Set Aside Selected", "Add the selected entries to the set-aside list, so they stay picked when the search changes.", SetAsideSelected);
-            selectionButtonRow.Add(m_SetAsideButton);
+            _setAsideButton = MakeButton("Set Aside Selected", "Add the selected entries to the set-aside list, so they stay picked when the search changes.", SetAsideSelected);
+            selectionButtonRow.Add(_setAsideButton);
 
-            m_SetAsideLabel = MakeLabel();
-            entriesPane.Add(m_SetAsideLabel);
+            _setAsideLabel = MakeLabel();
+            entriesPane.Add(_setAsideLabel);
 
-            m_SetAsideView = new MultiColumnListView();
-            m_SetAsideView.itemsSource = m_SetAsideRows;
-            m_SetAsideView.selectionType = SelectionType.Multiple;
-            m_SetAsideView.fixedItemHeight = 20.0f;
-            m_SetAsideView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
-            m_SetAsideView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
-            m_SetAsideView.columns.Add(MakeColumn(COLUMN_POSITION, "#", 60.0f, false, index => m_SetAsideRows[index].position.ToString()));
-            m_SetAsideView.columns.Add(MakeColumn(COLUMN_NAME, "Product Visual", 320.0f, true, index => m_SetAsideRows[index].name));
-            m_SetAsideView.selectionChanged += OnSetAsideSelectionChanged;
-            m_SetAsideView.itemsChosen += OnSetAsideChosen;
-            m_SetAsideView.style.height = 110.0f;
-            m_SetAsideView.style.flexShrink = 0.0f;
-            entriesPane.Add(m_SetAsideView);
+            _setAsideView = new MultiColumnListView();
+            _setAsideView.itemsSource = _setAsideRows;
+            _setAsideView.selectionType = SelectionType.Multiple;
+            _setAsideView.fixedItemHeight = 20.0f;
+            _setAsideView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
+            _setAsideView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
+            _setAsideView.columns.Add(MakeColumn(COLUMN_POSITION, "#", 60.0f, false, index => _setAsideRows[index].position.ToString()));
+            _setAsideView.columns.Add(MakeColumn(COLUMN_NAME, "Product Visual", 320.0f, true, index => _setAsideRows[index].name));
+            _setAsideView.selectionChanged += OnSetAsideSelectionChanged;
+            _setAsideView.itemsChosen += OnSetAsideChosen;
+            _setAsideView.style.height = 110.0f;
+            _setAsideView.style.flexShrink = 0.0f;
+            entriesPane.Add(_setAsideView);
 
             VisualElement setAsideButtonRow = MakeButtonRow();
             entriesPane.Add(setAsideButtonRow);
 
-            m_TakeOutButton = MakeButton("Take Out", "Remove the entries selected in the set-aside list from it. The database is not changed.", TakeOutOfSetAside);
-            setAsideButtonRow.Add(m_TakeOutButton);
+            _takeOutButton = MakeButton("Take Out", "Remove the entries selected in the set-aside list from it. The database is not changed.", TakeOutOfSetAside);
+            setAsideButtonRow.Add(_takeOutButton);
 
-            m_ClearSetAsideButton = MakeButton("Clear", "Empty the set-aside list. The database is not changed.", ClearSetAside);
-            setAsideButtonRow.Add(m_ClearSetAsideButton);
+            _clearSetAsideButton = MakeButton("Clear", "Empty the set-aside list. The database is not changed.", ClearSetAside);
+            setAsideButtonRow.Add(_clearSetAsideButton);
 
-            m_NewSetNameField = new TextField("New Set Name");
-            m_NewSetNameField.style.marginTop = 4.0f;
-            entriesPane.Add(m_NewSetNameField);
+            _newSetNameField = new TextField("New Set Name");
+            _newSetNameField.style.marginTop = 4.0f;
+            entriesPane.Add(_newSetNameField);
 
-            m_ActionTargetLabel = MakeLabel();
-            entriesPane.Add(m_ActionTargetLabel);
+            _actionTargetLabel = MakeLabel();
+            entriesPane.Add(_actionTargetLabel);
 
             VisualElement entryButtonRow = MakeButtonRow();
             entriesPane.Add(entryButtonRow);
 
-            m_SaveSetButton = MakeButton("Save Selected As Set", "Save the set-aside and selected entries as a new set. The database is not changed.", SaveSelectedAsSet);
-            entryButtonRow.Add(m_SaveSetButton);
+            _saveSetButton = MakeButton("Save Selected As Set", "Save the set-aside and selected entries as a new set. The database is not changed.", SaveSelectedAsSet);
+            entryButtonRow.Add(_saveSetButton);
 
-            m_RemoveButton = MakeButton("Remove Selected", "Remove the set-aside and selected entries from the database. Their files stay in the project.", RemoveSelected);
-            entryButtonRow.Add(m_RemoveButton);
+            _removeButton = MakeButton("Remove Selected", "Remove the set-aside and selected entries from the database. Their files stay in the project.", RemoveSelected);
+            entryButtonRow.Add(_removeButton);
 
-            m_SaveSetAndRemoveButton = MakeButton("Save Selected As Set And Remove", "Save the set-aside and selected entries as a new set, then remove them from the database.", SaveSelectedAsSetAndRemove);
-            entryButtonRow.Add(m_SaveSetAndRemoveButton);
+            _saveSetAndRemoveButton = MakeButton("Save Selected As Set And Remove", "Save the set-aside and selected entries as a new set, then remove them from the database.", SaveSelectedAsSetAndRemove);
+            entryButtonRow.Add(_saveSetAndRemoveButton);
 
             VisualElement setsPane = new VisualElement();
             splitView.Add(setsPane);
 
-            m_SetsView = new MultiColumnListView();
-            m_SetsView.itemsSource = m_Sets;
-            m_SetsView.selectionType = SelectionType.Single;
-            m_SetsView.fixedItemHeight = 20.0f;
-            m_SetsView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
-            m_SetsView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
-            m_SetsView.columns.Add(MakeColumn("Set", "Set", 180.0f, true, index => m_Sets[index].name));
-            m_SetsView.columns.Add(MakeColumn("Entries", "Entries", 60.0f, false, index => m_Sets[index].entries.Count.ToString("N0")));
-            m_SetsView.columns.Add(MakeColumn("InDatabase", "In Database", 90.0f, false, index => m_Sets[index].inDatabaseCount.ToString("N0")));
-            m_SetsView.selectionChanged += OnSetSelectionChanged;
-            m_SetsView.style.height = 130.0f;
-            m_SetsView.style.flexShrink = 0.0f;
-            setsPane.Add(m_SetsView);
+            _setsView = new MultiColumnListView();
+            _setsView.itemsSource = _sets;
+            _setsView.selectionType = SelectionType.Single;
+            _setsView.fixedItemHeight = 20.0f;
+            _setsView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
+            _setsView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
+            _setsView.columns.Add(MakeColumn("Set", "Set", 180.0f, true, index => _sets[index].name));
+            _setsView.columns.Add(MakeColumn("Entries", "Entries", 60.0f, false, index => _sets[index].entries.Count.ToString("N0")));
+            _setsView.columns.Add(MakeColumn("InDatabase", "In Database", 90.0f, false, index => _sets[index].inDatabaseCount.ToString("N0")));
+            _setsView.selectionChanged += OnSetSelectionChanged;
+            _setsView.style.height = 130.0f;
+            _setsView.style.flexShrink = 0.0f;
+            setsPane.Add(_setsView);
 
-            m_SetSummaryLabel = MakeLabel();
-            m_SetSummaryLabel.style.whiteSpace = WhiteSpace.Normal;
-            setsPane.Add(m_SetSummaryLabel);
+            _setSummaryLabel = MakeLabel();
+            _setSummaryLabel.style.whiteSpace = WhiteSpace.Normal;
+            setsPane.Add(_setSummaryLabel);
 
-            m_SetEntriesView = new MultiColumnListView();
-            m_SetEntriesView.itemsSource = m_SetEntryRows;
-            m_SetEntriesView.selectionType = SelectionType.None;
-            m_SetEntriesView.fixedItemHeight = 20.0f;
-            m_SetEntriesView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
-            m_SetEntriesView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
-            m_SetEntriesView.columns.Add(MakeColumn("Status", "Status", 100.0f, false, index => m_SetEntryRows[index].status));
-            m_SetEntriesView.columns.Add(MakeColumn("Name", "Product Visual", 300.0f, true, index => m_SetEntryRows[index].name));
-            m_SetEntriesView.style.flexGrow = 1.0f;
-            setsPane.Add(m_SetEntriesView);
+            _setEntriesView = new MultiColumnListView();
+            _setEntriesView.itemsSource = _setEntryRows;
+            _setEntriesView.selectionType = SelectionType.None;
+            _setEntriesView.fixedItemHeight = 20.0f;
+            _setEntriesView.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
+            _setEntriesView.columns.stretchMode = Columns.StretchMode.GrowAndFill;
+            _setEntriesView.columns.Add(MakeColumn("Status", "Status", 100.0f, false, index => _setEntryRows[index].status));
+            _setEntriesView.columns.Add(MakeColumn("Name", "Product Visual", 300.0f, true, index => _setEntryRows[index].name));
+            _setEntriesView.style.flexGrow = 1.0f;
+            setsPane.Add(_setEntriesView);
 
             VisualElement setButtonRow = MakeButtonRow();
             setsPane.Add(setButtonRow);
@@ -226,18 +226,18 @@ namespace KitchenDesign.ProductsEditor
             m_AppendButton = MakeButton("Append To Database", "Add the set's entries that are not in the database yet to the end of the database.", AppendSelectedSet);
             setButtonRow.Add(m_AppendButton);
 
-            m_RemoveSetEntriesButton = MakeButton("Remove From Database", "Remove the set's entries from the database. The set and the files stay.", RemoveSelectedSetFromDatabase);
-            setButtonRow.Add(m_RemoveSetEntriesButton);
+            _removeSetEntriesButton = MakeButton("Remove From Database", "Remove the set's entries from the database. The set and the files stay.", RemoveSelectedSetFromDatabase);
+            setButtonRow.Add(_removeSetEntriesButton);
 
             VisualElement setButtonSpacer = new VisualElement();
             setButtonSpacer.style.flexGrow = 1.0f;
             setButtonRow.Add(setButtonSpacer);
 
-            m_RevealSetButton = MakeButton("Show File", null, RevealSelectedSet);
-            setButtonRow.Add(m_RevealSetButton);
+            _revealSetButton = MakeButton("Show File", null, RevealSelectedSet);
+            setButtonRow.Add(_revealSetButton);
 
-            m_DeleteSetButton = MakeButton("Delete Set", "Delete the set's file. The database is not changed.", DeleteSelectedSet);
-            setButtonRow.Add(m_DeleteSetButton);
+            _deleteSetButton = MakeButton("Delete Set", "Delete the set's file. The database is not changed.", DeleteSelectedSet);
+            setButtonRow.Add(_deleteSetButton);
 
             Refresh();
         }
@@ -322,7 +322,7 @@ namespace KitchenDesign.ProductsEditor
 
         private void OnSetAsideSelectionChanged(IEnumerable<object> selection)
         {
-            m_TakeOutButton.SetEnabled(m_SetAsideView.selectedIndices.Any());
+            _takeOutButton.SetEnabled(_setAsideView.selectedIndices.Any());
         }
 
         private void OnSetAsideChosen(IEnumerable<object> chosen)
@@ -354,10 +354,10 @@ namespace KitchenDesign.ProductsEditor
             RebuildSetAsideRows();
             RebuildDisplayedRows();
 
-            m_SetsView.RefreshItems();
+            _setsView.RefreshItems();
 
-            int selectedSetIndex = m_Sets.FindIndex(set => set.name == selectedSetName);
-            m_SetsView.SetSelectionWithoutNotify(
+            int selectedSetIndex = _sets.FindIndex(set => set.name == selectedSetName);
+            _setsView.SetSelectionWithoutNotify(
                 selectedSetIndex >= 0 ? new[] { selectedSetIndex } : Array.Empty<int>()
             );
 
@@ -369,7 +369,7 @@ namespace KitchenDesign.ProductsEditor
             m_Rows.Clear();
             m_CurrentGuids.Clear();
             m_GuidIsInProject.Clear();
-            m_NullEntryCount = 0;
+            _nullEntryCount = 0;
 
             if (!m_Database)
             {
@@ -384,7 +384,7 @@ namespace KitchenDesign.ProductsEditor
 
                 if (!ProductVisualDatabaseEntryFile.TryGetEntry(visual, out Entry entry))
                 {
-                    ++m_NullEntryCount;
+                    ++_nullEntryCount;
                     continue;
                 }
 
@@ -404,7 +404,7 @@ namespace KitchenDesign.ProductsEditor
 
         private void ReadSets()
         {
-            m_Sets.Clear();
+            _sets.Clear();
 
             foreach (string filePath in ProductVisualDatabaseEntryFile.GetFilePaths(SETS_FOLDER_NAME))
             {
@@ -431,7 +431,7 @@ namespace KitchenDesign.ProductsEditor
                     }
                 }
 
-                m_Sets.Add(set);
+                _sets.Add(set);
             }
         }
 
@@ -536,14 +536,14 @@ namespace KitchenDesign.ProductsEditor
         private readonly struct SearchTerm
         {
             public readonly bool isExclusion;
-            private readonly string m_Word;
-            private readonly Regex m_Pattern;
+            private readonly string _word;
+            private readonly Regex _pattern;
 
             private SearchTerm(bool isExclusion, string word, Regex pattern)
             {
                 this.isExclusion = isExclusion;
-                m_Word = word;
-                m_Pattern = pattern;
+                _word = word;
+                _pattern = pattern;
             }
 
             public static SearchTerm Parse(string searchWord)
@@ -567,9 +567,9 @@ namespace KitchenDesign.ProductsEditor
 
             public bool Matches(string text)
             {
-                return m_Pattern != null
-                    ? m_Pattern.IsMatch(text)
-                    : text.Contains(m_Word, StringComparison.OrdinalIgnoreCase);
+                return _pattern != null
+                    ? _pattern.IsMatch(text)
+                    : text.Contains(_word, StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -592,11 +592,11 @@ namespace KitchenDesign.ProductsEditor
 
         private List<Row> GetActionRows()
         {
-            List<Row> rows = new (m_SetAsideRows);
+            List<Row> rows = new (_setAsideRows);
 
             foreach (Row row in GetSelectedRows())
             {
-                if (!m_SetAsideGuids.Contains(row.guid))
+                if (!_setAsideGuids.Contains(row.guid))
                 {
                     rows.Add(row);
                 }
@@ -611,25 +611,25 @@ namespace KitchenDesign.ProductsEditor
         {
             if (m_Database)
             {
-                m_SetAsideGuids.IntersectWith(m_CurrentGuids);
+                _setAsideGuids.IntersectWith(m_CurrentGuids);
                 SaveSetAsideGuids();
             }
 
-            m_SetAsideRows.Clear();
-            m_SetAsideRows.AddRange(m_Rows.Where(row => m_SetAsideGuids.Contains(row.guid)));
+            _setAsideRows.Clear();
+            _setAsideRows.AddRange(m_Rows.Where(row => _setAsideGuids.Contains(row.guid)));
 
-            m_SetAsideView.ClearSelection();
-            m_SetAsideView.RefreshItems();
+            _setAsideView.ClearSelection();
+            _setAsideView.RefreshItems();
         }
 
         private void SaveSetAsideGuids()
         {
-            SessionState.SetString(SET_ASIDE_SESSION_KEY, string.Join("\n", m_SetAsideGuids));
+            SessionState.SetString(SET_ASIDE_SESSION_KEY, string.Join("\n", _setAsideGuids));
         }
 
         private void SetAsideSelected()
         {
-            m_SetAsideGuids.UnionWith(GetSelectedRows().Select(static row => row.guid));
+            _setAsideGuids.UnionWith(GetSelectedRows().Select(static row => row.guid));
             SaveSetAsideGuids();
 
             RebuildSetAsideRows();
@@ -638,11 +638,11 @@ namespace KitchenDesign.ProductsEditor
 
         private void TakeOutOfSetAside()
         {
-            foreach (int index in m_SetAsideView.selectedIndices)
+            foreach (int index in _setAsideView.selectedIndices)
             {
-                if (index >= 0 && index < m_SetAsideRows.Count)
+                if (index >= 0 && index < _setAsideRows.Count)
                 {
-                    m_SetAsideGuids.Remove(m_SetAsideRows[index].guid);
+                    _setAsideGuids.Remove(_setAsideRows[index].guid);
                 }
             }
 
@@ -654,7 +654,7 @@ namespace KitchenDesign.ProductsEditor
 
         private void ClearSetAside()
         {
-            m_SetAsideGuids.Clear();
+            _setAsideGuids.Clear();
             SaveSetAsideGuids();
 
             RebuildSetAsideRows();
@@ -663,16 +663,16 @@ namespace KitchenDesign.ProductsEditor
 
         private Set GetSelectedSet()
         {
-            int index = m_SetsView.selectedIndex;
+            int index = _setsView.selectedIndex;
 
-            return index >= 0 && index < m_Sets.Count ? m_Sets[index] : null;
+            return index >= 0 && index < _sets.Count ? _sets[index] : null;
         }
 
         private void RefreshEntryControls()
         {
             int selectedCount = GetSelectedRows().Count;
             int actionCount = GetActionRows().Count;
-            int setAsideCount = m_SetAsideRows.Count;
+            int setAsideCount = _setAsideRows.Count;
             int selectedOutsideSetAsideCount = actionCount - setAsideCount;
 
             if (!m_Database)
@@ -683,44 +683,44 @@ namespace KitchenDesign.ProductsEditor
             {
                 string description = $"Showing {m_DisplayedRows.Count:N0} of {m_Rows.Count:N0} entries. {selectedCount:N0} selected.";
 
-                if (m_NullEntryCount > 0)
+                if (_nullEntryCount > 0)
                 {
-                    description += $" The database also holds {m_NullEntryCount:N0} null entries.";
+                    description += $" The database also holds {_nullEntryCount:N0} null entries.";
                 }
 
                 m_EntriesLabel.text = description;
             }
 
-            m_SetAsideLabel.text = $"Set aside: {setAsideCount:N0} entries.";
+            _setAsideLabel.text = $"Set aside: {setAsideCount:N0} entries.";
 
-            m_ActionTargetLabel.text =
+            _actionTargetLabel.text =
                 actionCount > 0 ?
                     $"Acts on {actionCount:N0}: {setAsideCount:N0} set aside, {selectedOutsideSetAsideCount:N0} selected." :
                     "Select entries or set some aside to save or remove them.";
 
-            m_SelectAllShownButton.SetEnabled(m_DisplayedRows.Count > 0);
-            m_SetAsideButton.SetEnabled(selectedCount > 0);
-            m_TakeOutButton.SetEnabled(m_SetAsideView.selectedIndices.Any());
-            m_ClearSetAsideButton.SetEnabled(setAsideCount > 0);
-            m_SaveSetButton.SetEnabled(actionCount > 0);
-            m_RemoveButton.SetEnabled(actionCount > 0);
-            m_SaveSetAndRemoveButton.SetEnabled(actionCount > 0);
+            _selectAllShownButton.SetEnabled(m_DisplayedRows.Count > 0);
+            _setAsideButton.SetEnabled(selectedCount > 0);
+            _takeOutButton.SetEnabled(_setAsideView.selectedIndices.Any());
+            _clearSetAsideButton.SetEnabled(setAsideCount > 0);
+            _saveSetButton.SetEnabled(actionCount > 0);
+            _removeButton.SetEnabled(actionCount > 0);
+            _saveSetAndRemoveButton.SetEnabled(actionCount > 0);
         }
 
         private void RefreshSetDetail()
         {
             Set set = GetSelectedSet();
 
-            m_SetEntryRows.Clear();
+            _setEntryRows.Clear();
 
             if (set != null)
             {
                 foreach (Entry entry in set.entries)
                 {
-                    m_SetEntryRows.Add(new SetEntryRow { status = GetStatus(entry.guid), name = entry.name });
+                    _setEntryRows.Add(new SetEntryRow { status = GetStatus(entry.guid), name = entry.name });
                 }
 
-                m_SetEntryRows.Sort(
+                _setEntryRows.Sort(
                     static (a, b) =>
                     {
                         int order = string.CompareOrdinal(b.status, a.status);
@@ -728,7 +728,7 @@ namespace KitchenDesign.ProductsEditor
                     }
                 );
 
-                m_SetSummaryLabel.text =
+                _setSummaryLabel.text =
                     $"\"{set.name}\" holds {set.entries.Count:N0} entries. " +
                     $"To append: {set.toAppendCount:N0}. " +
                     $"Already in the database: {set.inDatabaseCount:N0}. " +
@@ -736,18 +736,18 @@ namespace KitchenDesign.ProductsEditor
             }
             else
             {
-                m_SetSummaryLabel.text =
-                    m_Sets.Count > 0 ?
+                _setSummaryLabel.text =
+                    _sets.Count > 0 ?
                         "Select a set to see what appending it would add." :
                         "No sets saved yet. Select entries on the left and save them as a set.";
             }
 
-            m_SetEntriesView.RefreshItems();
+            _setEntriesView.RefreshItems();
 
             m_AppendButton.SetEnabled(set != null && m_Database && set.toAppendCount > 0);
-            m_RemoveSetEntriesButton.SetEnabled(set != null && m_Database && set.inDatabaseCount > 0);
-            m_RevealSetButton.SetEnabled(set != null);
-            m_DeleteSetButton.SetEnabled(set != null);
+            _removeSetEntriesButton.SetEnabled(set != null && m_Database && set.inDatabaseCount > 0);
+            _revealSetButton.SetEnabled(set != null);
+            _deleteSetButton.SetEnabled(set != null);
         }
 
         private void SelectAllShown()
@@ -757,7 +757,7 @@ namespace KitchenDesign.ProductsEditor
 
         private bool TryGetNewSetFilePath(out string setName, out string filePath)
         {
-            setName = m_NewSetNameField.value.Trim();
+            setName = _newSetNameField.value.Trim();
             filePath = null;
 
             if (!ProductVisualDatabaseEntryFile.IsValidFileName(setName))
@@ -797,7 +797,7 @@ namespace KitchenDesign.ProductsEditor
                 rows.Select(static row => new Entry { guid = row.guid, name = row.name })
             );
 
-            m_NewSetNameField.SetValueWithoutNotify("");
+            _newSetNameField.SetValueWithoutNotify("");
         }
 
         private void SaveSelectedAsSet()
@@ -1020,12 +1020,12 @@ namespace KitchenDesign.ProductsEditor
 
         private void SelectSet(string setName)
         {
-            int index = m_Sets.FindIndex(set => set.name == setName);
+            int index = _sets.FindIndex(set => set.name == setName);
 
             if (index >= 0)
             {
-                m_SetsView.SetSelection(index);
-                m_SetsView.ScrollToItem(index);
+                _setsView.SetSelection(index);
+                _setsView.ScrollToItem(index);
             }
         }
 
@@ -1033,36 +1033,36 @@ namespace KitchenDesign.ProductsEditor
 
         private readonly List<Row> m_Rows = new ();
         private readonly List<Row> m_DisplayedRows = new ();
-        private readonly HashSet<string> m_SetAsideGuids = new ();
-        private readonly List<Row> m_SetAsideRows = new ();
+        private readonly HashSet<string> _setAsideGuids = new ();
+        private readonly List<Row> _setAsideRows = new ();
         private readonly HashSet<string> m_CurrentGuids = new ();
         private readonly Dictionary<string, bool> m_GuidIsInProject = new ();
-        private readonly List<Set> m_Sets = new ();
-        private readonly List<SetEntryRow> m_SetEntryRows = new ();
-        private int m_NullEntryCount;
+        private readonly List<Set> _sets = new ();
+        private readonly List<SetEntryRow> _setEntryRows = new ();
+        private int _nullEntryCount;
 
         private ObjectField m_DatabaseField;
         private ToolbarSearchField m_SearchField;
         private Label m_EntriesLabel;
         private MultiColumnListView m_EntriesView;
-        private TextField m_NewSetNameField;
-        private Button m_SelectAllShownButton;
-        private Button m_SetAsideButton;
-        private Label m_SetAsideLabel;
-        private MultiColumnListView m_SetAsideView;
-        private Button m_TakeOutButton;
-        private Button m_ClearSetAsideButton;
-        private Label m_ActionTargetLabel;
-        private Button m_SaveSetButton;
-        private Button m_RemoveButton;
-        private Button m_SaveSetAndRemoveButton;
-        private MultiColumnListView m_SetsView;
-        private Label m_SetSummaryLabel;
-        private MultiColumnListView m_SetEntriesView;
+        private TextField _newSetNameField;
+        private Button _selectAllShownButton;
+        private Button _setAsideButton;
+        private Label _setAsideLabel;
+        private MultiColumnListView _setAsideView;
+        private Button _takeOutButton;
+        private Button _clearSetAsideButton;
+        private Label _actionTargetLabel;
+        private Button _saveSetButton;
+        private Button _removeButton;
+        private Button _saveSetAndRemoveButton;
+        private MultiColumnListView _setsView;
+        private Label _setSummaryLabel;
+        private MultiColumnListView _setEntriesView;
         private Button m_AppendButton;
-        private Button m_RemoveSetEntriesButton;
-        private Button m_RevealSetButton;
-        private Button m_DeleteSetButton;
+        private Button _removeSetEntriesButton;
+        private Button _revealSetButton;
+        private Button _deleteSetButton;
 
         private struct Row
         {

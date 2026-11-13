@@ -110,17 +110,17 @@ namespace KitchenDesign.Cabinets
                 return false;
             }
 
-            if (!m_HasClipBounds)
+            if (!_hasClipBounds)
             {
-                m_HasClipBounds = TryMeasureStencilBounds(out m_ClipBounds);
+                _hasClipBounds = TryMeasureStencilBounds(out _clipBounds);
             }
 
-            if (!m_HasClipBounds)
+            if (!_hasClipBounds)
             {
                 return false;
             }
 
-            localBounds = m_ClipBounds;
+            localBounds = _clipBounds;
 
             foreach (CutOutCubeFace face in s_CubeFaces)
             {
@@ -239,8 +239,8 @@ namespace KitchenDesign.Cabinets
         static protected CutOutCubeFace[] s_CubeFaces =
             System.Linq.Enumerable.ToArray(MelcherEnumInfo<CutOutCubeFace>.values);
 
-        private bool m_HasClipBounds;
-        private Bounds m_ClipBounds;
+        private bool _hasClipBounds;
+        private Bounds _clipBounds;
 
         // =====================================================================
         // Nested types

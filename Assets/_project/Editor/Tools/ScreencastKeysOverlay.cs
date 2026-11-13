@@ -20,39 +20,39 @@ namespace KitchenDesign.ToolsEditor
         {
             m_DocumentAsset =
                 AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/_project/Editor/Tools/ScreencastKeysOverlay.uxml");
-            m_PanelContent = m_DocumentAsset.Instantiate();
+            _panelContent = m_DocumentAsset.Instantiate();
 
-            m_PanelContent.RegisterCallback<AttachToPanelEvent>(
+            _panelContent.RegisterCallback<AttachToPanelEvent>(
                 ev =>
                 {
-                    m_AbsoluteRootElement = m_PanelContent;
-                    while (m_AbsoluteRootElement.parent != null)
+                    _absoluteRootElement = _panelContent;
+                    while (_absoluteRootElement.parent != null)
                     {
-                        m_AbsoluteRootElement = m_AbsoluteRootElement.parent;
+                        _absoluteRootElement = _absoluteRootElement.parent;
                     }
 
-                    m_AbsoluteRootElement.RegisterCallback<MouseDownEvent>(OnMouseDown, TrickleDown.TrickleDown);
+                    _absoluteRootElement.RegisterCallback<MouseDownEvent>(OnMouseDown, TrickleDown.TrickleDown);
                 }
             );
 
-            m_PanelContent.RegisterCallback<DetachFromPanelEvent>(
+            _panelContent.RegisterCallback<DetachFromPanelEvent>(
                 ev =>
                 {
-                    if (m_AbsoluteRootElement != null)
+                    if (_absoluteRootElement != null)
                     {
-                        m_AbsoluteRootElement.UnregisterCallback<MouseDownEvent>(OnMouseDown, TrickleDown.TrickleDown);
+                        _absoluteRootElement.UnregisterCallback<MouseDownEvent>(OnMouseDown, TrickleDown.TrickleDown);
                     }
                 }
             );
 
-            m_PanelContent.style.minWidth = 900;
-            m_PanelContent.style.minHeight = 60;
-            m_PanelContent.RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
+            _panelContent.style.minWidth = 900;
+            _panelContent.style.minHeight = 60;
+            _panelContent.RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
 
             // Find all the labels that display the users input
-            m_ScreencastKeyLabels = m_PanelContent.Query<Label>(name: "InputEcho").ToList();
+            _screencastKeyLabels = _panelContent.Query<Label>(name: "InputEcho").ToList();
 
-            return m_PanelContent;
+            return _panelContent;
         }
 
 
@@ -63,13 +63,13 @@ namespace KitchenDesign.ToolsEditor
             MelcherEditorUtility.globalEventHandler -= OnEvent;
             MelcherEditorUtility.globalEventHandler += OnEvent;
 
-            m_IsCreated = true;
+            _isCreated = true;
             MelcherEditorCoroutine.StartEditorCoroutine(UpdateLabelColor());
         }
 
         public override void OnWillBeDestroyed()
         {
-            m_IsCreated = false;
+            _isCreated = false;
 
             MelcherEditorUtility.globalEventHandler -= OnEvent;
 
@@ -102,14 +102,14 @@ namespace KitchenDesign.ToolsEditor
 
         protected void UpdateVisuals()
         {
-            PickingMode pickingMode = m_IsPickable ? PickingMode.Position : PickingMode.Ignore;
+            PickingMode pickingMode = _isPickable ? PickingMode.Position : PickingMode.Ignore;
 
             // Find the overlay's root and restyle it to be transparent
-            VisualElement root = m_PanelContent;
+            VisualElement root = _panelContent;
             while (root != null && !root.ClassListContains("unity-overlay") && root.parent != null)
             {
                 root.pickingMode = pickingMode;
-                root.delegatesFocus = m_IsPickable;
+                root.delegatesFocus = _isPickable;
                 root = root.parent;
             }
 
@@ -118,33 +118,33 @@ namespace KitchenDesign.ToolsEditor
                 root.pickingMode = pickingMode;
 
                 VisualElement overlayHeader = root.Q(className: "overlay-header");
-                overlayHeader.visible = m_IsPickable;
+                overlayHeader.visible = _isPickable;
 
                 Label headerLabel = root.Q<Label>(name: "overlay-header__title");
-                headerLabel.text = m_IsPickable ? displayName : "";
+                headerLabel.text = _isPickable ? displayName : "";
 
                 VisualElement background = root.Q(className: "overlay-box-background");
                 Color backgroundColor = background.style.backgroundColor.value;
-                backgroundColor.a = m_IsPickable ? 0.6f : 0.0f;
+                backgroundColor.a = _isPickable ? 0.6f : 0.0f;
                 background.style.backgroundColor = backgroundColor;
             }
         }
 
         protected void OnMouseDown(MouseDownEvent ev)
         {
-            m_MouseEvent.type       = EventType.MouseDown;
-            m_MouseEvent.button     = ev.button;
-            m_MouseEvent.control    = ev.ctrlKey;
-            m_MouseEvent.shift      = ev.shiftKey;
-            m_MouseEvent.alt        = ev.altKey;
-            m_MouseEvent.command    = ev.commandKey;
-            m_MouseEvent.keyCode    = KeyCode.Mouse0 + ev.button;
-            OnKeyDown(m_MouseEvent);
+            _mouseEvent.type       = EventType.MouseDown;
+            _mouseEvent.button     = ev.button;
+            _mouseEvent.control    = ev.ctrlKey;
+            _mouseEvent.shift      = ev.shiftKey;
+            _mouseEvent.alt        = ev.altKey;
+            _mouseEvent.command    = ev.commandKey;
+            _mouseEvent.keyCode    = KeyCode.Mouse0 + ev.button;
+            OnKeyDown(_mouseEvent);
         }
 
         protected void OnKeyDown(Event ev)
         {
-            if (m_PanelContent == null)
+            if (_panelContent == null)
             {
                 return;
             }
@@ -152,7 +152,7 @@ namespace KitchenDesign.ToolsEditor
             // Special condition: Clear the input history and early exit
             if (ev.keyCode == KeyCode.PageUp)
             {
-                foreach (Label label in m_ScreencastKeyLabels)
+                foreach (Label label in _screencastKeyLabels)
                 {
                     label.text = "";
                 }
@@ -162,12 +162,12 @@ namespace KitchenDesign.ToolsEditor
             // Special condition: Update the visibility and pickability of the panel
             if (ev.keyCode == KeyCode.PageDown)
             {
-                m_IsPickable = !m_IsPickable;
+                _isPickable = !_isPickable;
                 UpdateVisuals();
                 return;
             }
 
-            if (m_KeyStates[(int)ev.keyCode])
+            if (_keyStates[(int)ev.keyCode])
             {
                 // Filter out repeated key events. These are sent when a key is
                 // held down
@@ -178,7 +178,7 @@ namespace KitchenDesign.ToolsEditor
             {
                 // Mark keyboard keys as pressed so we can detect and filter
                 // out duplicate key down events (i.e., when the key is held)
-                m_KeyStates[(int)ev.keyCode] = true;
+                _keyStates[(int)ev.keyCode] = true;
             }
 
             if (ev.keyCode == KeyCode.None ||
@@ -197,53 +197,53 @@ namespace KitchenDesign.ToolsEditor
             {
                 // Build the string that shows which key and modifiers were
                 // pressed
-                m_LabelParts.Clear();
+                _labelParts.Clear();
 
                 if (ev.control)
                 {
-                    m_LabelParts.Add("Ctrl");
+                    _labelParts.Add("Ctrl");
                 }
 
                 if (ev.shift)
                 {
-                    m_LabelParts.Add("Shift");
+                    _labelParts.Add("Shift");
                 }
 
                 if (ev.alt)
                 {
-                    m_LabelParts.Add("Alt");
+                    _labelParts.Add("Alt");
                 }
 
-                m_LabelParts.Add(ev.keyCode.ToString());
+                _labelParts.Add(ev.keyCode.ToString());
             }
 
-            int labelCount = m_ScreencastKeyLabels.Count;
+            int labelCount = _screencastKeyLabels.Count;
 
-            string latestInput = string.Join(" + ", m_LabelParts);
+            string latestInput = string.Join(" + ", _labelParts);
             if (ev.keyCode == m_LastKeyCode)
             {
                 // This key was pressed more than once. Show a little x2 or
                 // similar depending on how many times it was pressed
-                ++m_RepeatedKeyCount;
-                latestInput += $" x{m_RepeatedKeyCount}";
+                ++_repeatedKeyCount;
+                latestInput += $" x{_repeatedKeyCount}";
             }
             else
             {
-                m_RepeatedKeyCount = 1;
+                _repeatedKeyCount = 1;
                 m_LastKeyCode = ev.keyCode;
 
                 // Shift the previous input labels up. This keeps the previous
                 // inputs visible on screen but less prominent
                 for (int i = 1; i < labelCount; ++i)
                 {
-                    m_ScreencastKeyLabels[i - 1].text = m_ScreencastKeyLabels[i].text;
+                    _screencastKeyLabels[i - 1].text = _screencastKeyLabels[i].text;
                 }
             }
 
             // Show the newest input. Highlight it in bright white. This will
             // decay back to its default color in the UpdateLabelColor coroutine
-            m_ScreencastKeyLabels[labelCount - 1].text = latestInput;
-            m_ScreencastKeyLabels[labelCount - 1].style.color = Color.white;
+            _screencastKeyLabels[labelCount - 1].text = latestInput;
+            _screencastKeyLabels[labelCount - 1].style.color = Color.white;
         }
 
         /// <summary>
@@ -254,19 +254,19 @@ namespace KitchenDesign.ToolsEditor
         /// </summary>
         protected void OnKeyUp(Event ev)
         {
-            m_KeyStates[(int)ev.keyCode] = false;
+            _keyStates[(int)ev.keyCode] = false;
         }
 
         protected IEnumerator UpdateLabelColor()
         {
-            while (m_IsCreated)
+            while (_isCreated)
             {
-                if (m_ScreencastKeyLabels != null && m_ScreencastKeyLabels.Count > 0)
+                if (_screencastKeyLabels != null && _screencastKeyLabels.Count > 0)
                 {
-                    Label previousInputLabel = m_ScreencastKeyLabels[0];
+                    Label previousInputLabel = _screencastKeyLabels[0];
 
-                    int labelCount = m_ScreencastKeyLabels.Count;
-                    Label currentInputLabel = m_ScreencastKeyLabels[labelCount - 1];
+                    int labelCount = _screencastKeyLabels.Count;
+                    Label currentInputLabel = _screencastKeyLabels[labelCount - 1];
 
                     currentInputLabel.style.color =
                         Color.Lerp(currentInputLabel.style.color.value, previousInputLabel.resolvedStyle.color, 0.1f);
@@ -281,26 +281,26 @@ namespace KitchenDesign.ToolsEditor
         /// cref="OnMouseDown(MouseDownEvent)"/> and passed to <see
         /// cref="OnKeyDown(Event)"/>.
         /// </summary>
-        protected readonly Event m_MouseEvent = new Event();
+        protected readonly Event _mouseEvent = new Event();
 
-        protected VisualElement m_PanelContent;
+        protected VisualElement _panelContent;
 
         /// <summary>
         /// The absolute root of the scene view. This allows us to detect
         /// mouse clicks outside of the overlay.
         /// </summary>
-        protected VisualElement m_AbsoluteRootElement;
+        protected VisualElement _absoluteRootElement;
 
         /// <summary>
         /// The names of the key and modifiers that are pressed. This is used
         /// to construct a string with these parts joined by pluses.
         /// </summary>
-        protected List<string> m_LabelParts = new List<string>();
+        protected List<string> _labelParts = new List<string>();
 
         /// <summary>
         /// The labels where the user's inputs will be displayed.
         /// </summary>
-        protected List<Label> m_ScreencastKeyLabels;    // intentionally uninitialized
+        protected List<Label> _screencastKeyLabels;    // intentionally uninitialized
 
         [SerializeField, MelcherAssetField]
         protected VisualTreeAsset m_DocumentAsset = default;
@@ -310,7 +310,7 @@ namespace KitchenDesign.ToolsEditor
         /// using the values of <see cref="KeyCode"/> and represents if the key
         /// is held down by the user.
         /// </summary>
-        protected BitArray m_KeyStates = new BitArray(1024);
+        protected BitArray _keyStates = new BitArray(1024);
 
         /// <summary>
         /// The last keyboard, mouse or joystick key that was pressed. This is
@@ -323,18 +323,18 @@ namespace KitchenDesign.ToolsEditor
         /// Number of times <see cref="m_LastKeyCode"/> has been pressed in a
         /// row.
         /// </summary>
-        protected int m_RepeatedKeyCount;
+        protected int _repeatedKeyCount;
 
         /// <summary>
         /// Is the panel created. When the panel is destroyed, its color-tweening
         /// coroutine should end too.
         /// </summary>
-        protected bool m_IsCreated;
+        protected bool _isCreated;
 
         /// <summary>
         /// Can the user click the panel and drag it around.
         /// </summary>
-        protected bool m_IsPickable;
+        protected bool _isPickable;
 
     }   // class ScreencastKeysOverlay
 

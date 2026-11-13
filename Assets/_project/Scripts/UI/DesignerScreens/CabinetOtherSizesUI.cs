@@ -94,35 +94,35 @@ namespace KitchenDesign.UI.DesignerScreens
             // This was requested by Stoll.
             m_CabinetDepthControl.gameObject.SetActive(displayCabinetDepthOption);
 
-            m_CurrentKitchen = null;
+            _currentKitchen = null;
 
             if (m_Mode == CabinetSizesMode.ModifyExistingCabinet)
             {
                 // Make the sliders display the kitchen's current size.
 
-                m_CurrentKitchen = this._kitchen;
+                _currentKitchen = this._kitchen;
 
-                m_CurrentCabinetDepthInMeters = m_CurrentKitchen.baseCabinetDepthInMeters;
-                m_CurrentCountertopThicknessInMeters = m_CurrentKitchen.countertopThicknessInMeters;
-                m_CurrentCountertopType = m_CurrentKitchen.selectedCountertopType;
+                _currentCabinetDepthInMeters = _currentKitchen.baseCabinetDepthInMeters;
+                _currentCountertopThicknessInMeters = _currentKitchen.countertopThicknessInMeters;
+                _currentCountertopType = _currentKitchen.selectedCountertopType;
 
                 CabinetOtherSizeControl.SelectOptionMatchingCurrentSize(
                     m_CabinetDepthControl,
-                    m_CurrentKitchen.baseCabinetDepthInMeters
+                    _currentKitchen.baseCabinetDepthInMeters
                 );
 
-                if (m_CurrentKitchen.selectedCountertopType == CountertopType.Default)
+                if (_currentKitchen.selectedCountertopType == CountertopType.Default)
                 {
                     CabinetOtherSizeControl.SelectOptionMatchingCurrentSize(
                         m_CountertopThicknessControl,
-                        m_CurrentKitchen.countertopThicknessInMeters
+                        _currentKitchen.countertopThicknessInMeters
                     );
                 }
                 else
                 {
                     CabinetOtherSizeControl.SelectOptionMatchingCurrentSize(
                         m_StollCountertopThicknessControl,
-                        m_CurrentKitchen.countertopThicknessInMeters
+                        _currentKitchen.countertopThicknessInMeters
                     );
                 }
             }
@@ -139,9 +139,9 @@ namespace KitchenDesign.UI.DesignerScreens
             countertopEnabledToggleGroup.SetAllTogglesOff(instant: true, sendCallback: false);
             m_StollCountertopThicknessControl.isEnabledToggle.isOn = true;
 
-            m_StollCountertopThicknessControl.SelectOption(m_DefaultStollCountertopThicknessOptionIndex, notify: false);
-            m_CountertopThicknessControl.SelectOption(m_DefaultCountertopThicknessOptionIndex, notify: false);
-            m_CabinetDepthControl.SelectOption(m_DefaultCabinetDepthOptionIndex, notify: false);
+            m_StollCountertopThicknessControl.SelectOption(_defaultStollCountertopThicknessOptionIndex, notify: false);
+            m_CountertopThicknessControl.SelectOption(_defaultCountertopThicknessOptionIndex, notify: false);
+            m_CabinetDepthControl.SelectOption(_defaultCabinetDepthOptionIndex, notify: false);
         }
 
         protected override void OnEnable()
@@ -206,9 +206,9 @@ namespace KitchenDesign.UI.DesignerScreens
             {
                 // Restore the original kitchen size.
 
-                m_CurrentKitchen.SetBaseCabinetDepth(m_CurrentCabinetDepthInMeters);
-                m_CurrentKitchen.SetCountertopThickness(m_CurrentCountertopThicknessInMeters);
-                this._kitchen.SetCountertopType(m_CurrentCountertopType);
+                _currentKitchen.SetBaseCabinetDepth(_currentCabinetDepthInMeters);
+                _currentKitchen.SetCountertopThickness(_currentCountertopThicknessInMeters);
+                this._kitchen.SetCountertopType(_currentCountertopType);
             }
         }
 
@@ -243,13 +243,13 @@ namespace KitchenDesign.UI.DesignerScreens
             }
             else
             {
-                m_CurrentKitchen.RefreshTickerLabels();
+                _currentKitchen.RefreshTickerLabels();
 
                 bool hasCorner =
-                    m_CurrentKitchen.layout.EnumerateCabinets()
+                    _currentKitchen.layout.EnumerateCabinets()
                         .Any(x => x.element.cabinetType == CabinetType.Corner);
 
-                if (hasCorner && !MelcherCommon.IsAlmostEqual(m_CurrentKitchen.baseCabinetDepthInMeters, m_CurrentCabinetDepthInMeters, tolerance: 0.001f))
+                if (hasCorner && !MelcherCommon.IsAlmostEqual(_currentKitchen.baseCabinetDepthInMeters, _currentCabinetDepthInMeters, tolerance: 0.001f))
                 {
                     // Display a message that informs the user of the new
                     // cabinet lengths. This is intended to draw attention to
@@ -266,7 +266,7 @@ namespace KitchenDesign.UI.DesignerScreens
                         "also affects the outside measurement of the " +
                         "cabinets. The new widths are:";
 
-                    foreach (CabinetSpan span in m_CurrentKitchen.layout.spans)
+                    foreach (CabinetSpan span in _currentKitchen.layout.spans)
                     {
                         float widthInMeters =
                             span.GetOutsideCuboidInSpanSpace().width;
@@ -310,7 +310,7 @@ namespace KitchenDesign.UI.DesignerScreens
             if (isSectionsMethod)
             {
                 // Custom countertop thicknesses when in Sections method (Stoll).
-                m_DefaultCountertopThicknessOptionIndex =
+                _defaultCountertopThicknessOptionIndex =
                     m_CountertopThicknessControl.SetOptions(
                         defaultIndex: 3,
                         new CabinetSizeOption(0.25f),
@@ -329,7 +329,7 @@ namespace KitchenDesign.UI.DesignerScreens
             }
             else
             {
-                m_DefaultCountertopThicknessOptionIndex =
+                _defaultCountertopThicknessOptionIndex =
                     m_CountertopThicknessControl.SetOptions(
                         defaultIndex: 3,
                         new CabinetSizeOption(0.5f),
@@ -342,13 +342,13 @@ namespace KitchenDesign.UI.DesignerScreens
                     );
             }
 
-            m_DefaultCabinetDepthOptionIndex =
+            _defaultCabinetDepthOptionIndex =
                 CabinetOtherSizeControl.SetupCabinetDepthSizes(m_CabinetDepthControl, this._kitchen.buildingRules);
 
             // The Stoll countertop thickness always uses these values.
             // However, this control will be completely hidden unless Sections
             // method is used.
-            m_DefaultStollCountertopThicknessOptionIndex =
+            _defaultStollCountertopThicknessOptionIndex =
                 m_StollCountertopThicknessControl.SetOptions(
                     defaultIndex: 3,
                     new CabinetSizeOption(1.25f),
@@ -391,7 +391,7 @@ namespace KitchenDesign.UI.DesignerScreens
             {
                 MelcherLog.Breadcrumb("Cabinet countertop thickness changed to: " + selectedOption.displayLabel);
 
-                m_CurrentKitchen.SetCountertopThickness(selectedOption.sizeInMeters);
+                _currentKitchen.SetCountertopThickness(selectedOption.sizeInMeters);
             }
         }
 
@@ -402,7 +402,7 @@ namespace KitchenDesign.UI.DesignerScreens
                 MelcherLog.Log("Cabinet depth changed to: " + selectedOption.displayLabel);
 
                 // Test if the new size works.
-                foreach (CabinetSpan span in m_CurrentKitchen.layout.spans)
+                foreach (CabinetSpan span in _currentKitchen.layout.spans)
                 {
                     if (!span.CanResizeBaseCabinetDepth(selectedOption.sizeInMeters))
                     {
@@ -413,7 +413,7 @@ namespace KitchenDesign.UI.DesignerScreens
                 // Clear the previous toast in case it was the message saying
                 // the cabinet depth size cannot be used.
                 EventDesigner.OnToastRequested.Raise(new ToastInfo("", holdDuration: 0.0f));
-                m_CurrentKitchen.SetBaseCabinetDepth(selectedOption.sizeInMeters);
+                _currentKitchen.SetBaseCabinetDepth(selectedOption.sizeInMeters);
             }
         }
 
@@ -437,27 +437,27 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected CabinetSizesMode m_Mode;
 
-        protected Kitchen m_CurrentKitchen;
+        protected Kitchen _currentKitchen;
 
         /// <summary>
         ///     The depth of the cabinet when this UI was displayed. Only valid
         ///     when the UI was displayed with <see cref="CabinetSizesMode.ModifyExistingCabinet"/>.
         /// </summary>
-        protected float m_CurrentCabinetDepthInMeters;
+        protected float _currentCabinetDepthInMeters;
 
         /// <summary>
         ///     The thickness of the countertop when this UI was displayed. Only
         ///     valid when the UI was displayed with <see cref="CabinetSizesMode.ModifyExistingCabinet"/>.
         /// </summary>
-        protected float m_CurrentCountertopThicknessInMeters;
+        protected float _currentCountertopThicknessInMeters;
 
-        protected CountertopType m_CurrentCountertopType;
+        protected CountertopType _currentCountertopType;
 
-        protected int m_DefaultCabinetDepthOptionIndex;
+        protected int _defaultCabinetDepthOptionIndex;
 
-        protected int m_DefaultCountertopThicknessOptionIndex;
+        protected int _defaultCountertopThicknessOptionIndex;
 
-        protected int m_DefaultStollCountertopThicknessOptionIndex;
+        protected int _defaultStollCountertopThicknessOptionIndex;
 
     }   // class CabinetOtherSizesUI
 

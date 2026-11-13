@@ -19,27 +19,27 @@ namespace KitchenDesign.Serializables
         public DoorStyleInfo(string doorStyleName, string doorStyleDisplayName)
         {
             m_Name = doorStyleName;
-            m_DoorStyleDisplayName = doorStyleDisplayName == string.Empty ? doorStyleName : doorStyleDisplayName;
+            _doorStyleDisplayName = doorStyleDisplayName == string.Empty ? doorStyleName : doorStyleDisplayName;
         }
 
         public string name => m_Name;
-        public string doorStyleDisplayName => m_DoorStyleDisplayName;
+        public string doorStyleDisplayName => _doorStyleDisplayName;
 
-        public ReadOnlyCollection<ProductVisualSO> visuals => m_Visuals.readOnly;
+        public ReadOnlyCollection<ProductVisualSO> visuals => _visuals.readOnly;
 
-        public Sprite toolbarButtonSprite => m_ToolbarButtonSprite;
+        public Sprite toolbarButtonSprite => _toolbarButtonSprite;
 
         public void AddVisual(ProductVisualSO productVisual)
         {
-            if (!m_Visuals.readOnly.Contains(productVisual))
+            if (!_visuals.readOnly.Contains(productVisual))
             {
-                m_Visuals.mutable.Add(productVisual);
+                _visuals.mutable.Add(productVisual);
             }
         }
 
         protected string m_Name;
-        protected string m_DoorStyleDisplayName;
-        protected MelcherReadWriteList<ProductVisualSO> m_Visuals = new ();
-        protected Sprite m_ToolbarButtonSprite;
+        protected string _doorStyleDisplayName;
+        protected MelcherReadWriteList<ProductVisualSO> _visuals = new ();
+        protected Sprite _toolbarButtonSprite;
     }
 }

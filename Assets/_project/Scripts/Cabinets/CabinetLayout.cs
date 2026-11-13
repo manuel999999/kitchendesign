@@ -77,11 +77,11 @@ namespace KitchenDesign.Cabinets
         {
             get
             {
-                if (m_CabinetSpansNeedsRebuild)
+                if (_cabinetSpansNeedsRebuild)
                 {
                     RebuildSpans(EnumerateCabinets(), m_CabinetSpans.mutable);
 
-                    m_CabinetSpansNeedsRebuild = false;
+                    _cabinetSpansNeedsRebuild = false;
                 }
 
                 return m_CabinetSpans.readOnly;
@@ -1293,7 +1293,7 @@ namespace KitchenDesign.Cabinets
 
             newCabinet.sizeInMeters = requestedSizeInMeters;
 
-            m_CabinetSpansNeedsRebuild = true;
+            _cabinetSpansNeedsRebuild = true;
 
             newCabinet.SetCountertopThickness(kitchen.countertopThicknessInMeters);
 
@@ -1574,7 +1574,7 @@ namespace KitchenDesign.Cabinets
             );
 
             // Ensure `spans` is rebuilt the next time it is accessed.
-            m_CabinetSpansNeedsRebuild = true;
+            _cabinetSpansNeedsRebuild = true;
 
             ModifyCabinetForBuildingMethod(newCabinet);
 
@@ -1702,7 +1702,7 @@ namespace KitchenDesign.Cabinets
             UpdateMeshes();
             UpdatePositions();
 
-            m_CabinetSpansNeedsRebuild = true;
+            _cabinetSpansNeedsRebuild = true;
 
             foreach (CabinetSpan span in spans)
             {
@@ -1765,12 +1765,12 @@ namespace KitchenDesign.Cabinets
         /// </summary>
         public void MarkSpansForRebuild()
         {
-            m_CabinetSpansNeedsRebuild = true;
+            _cabinetSpansNeedsRebuild = true;
         }
 
         protected void Awake()
         {
-            m_CabinetSpansNeedsRebuild = true;
+            _cabinetSpansNeedsRebuild = true;
         }
 
         protected void OnEnable()
@@ -1849,7 +1849,7 @@ namespace KitchenDesign.Cabinets
 
             cabinetSpan.RelocateBackingFromDestructingCabinet(cabinet);
 
-            m_CabinetSpansNeedsRebuild = true;
+            _cabinetSpansNeedsRebuild = true;
         }
 
         protected async UniTask OnCabinetDestroyedByUser(int cabinetSpanIndex)
@@ -2014,7 +2014,7 @@ namespace KitchenDesign.Cabinets
         ///     This field is <see cref="true"/> when <see
         ///     cref="m_CabinetSpans"/> should be rebuilt.
         /// </summary>
-        protected bool m_CabinetSpansNeedsRebuild;
+        protected bool _cabinetSpansNeedsRebuild;
 
     }   // class CabinetLayout
 

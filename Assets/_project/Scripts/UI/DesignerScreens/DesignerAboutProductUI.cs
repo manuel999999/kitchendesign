@@ -41,7 +41,7 @@ namespace KitchenDesign.UI.DesignerScreens
             }
 
             m_SelectedProductServerId = productInfo.id;
-            m_SelectedProductVisual = productVisual;
+            _selectedProductVisual = productVisual;
 
             m_NameLabel.phrase  = productInfo.name;
             m_IdLabel.phrase    = manufacturerInfo.name + " - " + productInfo.sku;
@@ -117,10 +117,10 @@ namespace KitchenDesign.UI.DesignerScreens
         protected void OnClickAssetLink(MelcherButton caller)
         {
 #if UNITY_EDITOR
-            UnityEditor.EditorGUIUtility.PingObject(m_SelectedProductVisual);
+            UnityEditor.EditorGUIUtility.PingObject(_selectedProductVisual);
 
             // Open the asset for viewing/editing.
-            UnityEditor.AssetDatabase.OpenAsset(m_SelectedProductVisual.contentAddress.editorOnlyCachedAsset);
+            UnityEditor.AssetDatabase.OpenAsset(_selectedProductVisual.contentAddress.editorOnlyCachedAsset);
 #endif  // if UNITY_EDITOR
         }
 
@@ -151,7 +151,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // =====================================================================
 
         private int m_SelectedProductServerId;
-        private ProductVisualSO m_SelectedProductVisual;
+        private ProductVisualSO _selectedProductVisual;
 
     }   // class DesignerAboutProductUI
 

@@ -23,7 +23,7 @@ namespace KitchenDesign.Utility
         /// </summary>
         public static string Random()
         {
-            s_UnformattedNumberBuilder.Clear();
+            _unformattedNumberBuilder.Clear();
 
             for (int i = 0; i < MaxPhoneNumberLength; ++i)
             {
@@ -36,10 +36,10 @@ namespace KitchenDesign.Utility
 
                 int digit = UnityEngine.Random.Range(minDigit, 9);
 
-                s_UnformattedNumberBuilder.Append(digit);
+                _unformattedNumberBuilder.Append(digit);
             }
 
-            return s_UnformattedNumberBuilder.ToString();
+            return _unformattedNumberBuilder.ToString();
         }
 
         public static string Format(string unformattedNumber)
@@ -127,7 +127,7 @@ namespace KitchenDesign.Utility
         {
             unformattedCursorPos = formattedCursorPos;
 
-            s_UnformattedNumberBuilder.Clear();
+            _unformattedNumberBuilder.Clear();
 
             // Remove all non-digit characters. Adjust the cursor to account
             // for removed characters.
@@ -138,7 +138,7 @@ namespace KitchenDesign.Utility
             {
                 if (char.IsDigit(formattedNumber[i]))
                 {
-                    s_UnformattedNumberBuilder.Append(formattedNumber[i]);
+                    _unformattedNumberBuilder.Append(formattedNumber[i]);
                 }
                 else if (i < formattedCursorPos)
                 {
@@ -146,19 +146,19 @@ namespace KitchenDesign.Utility
                 }
             }
 
-            if (s_UnformattedNumberBuilder.Length > MaxPhoneNumberLength)
+            if (_unformattedNumberBuilder.Length > MaxPhoneNumberLength)
             {
-                s_UnformattedNumberBuilder.Length = MaxPhoneNumberLength;
+                _unformattedNumberBuilder.Length = MaxPhoneNumberLength;
             }
 
-            return s_UnformattedNumberBuilder.ToString();
+            return _unformattedNumberBuilder.ToString();
         }
 
         // ====================================================================
         // Static fields
         // ====================================================================
 
-        private static StringBuilder s_UnformattedNumberBuilder = new StringBuilder();
+        private static StringBuilder _unformattedNumberBuilder = new StringBuilder();
 
     }   // static class PhoneNumber
 

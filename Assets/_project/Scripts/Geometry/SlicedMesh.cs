@@ -18,7 +18,7 @@ namespace KitchenDesign.Geometry
         // =====================================================================
 
         public IReadOnlyList<SlicedMeshSlice> slices => m_Slices;
-        public Cuboid cuboid => m_Cuboid;
+        public Cuboid cuboid => _cuboid;
 
         public CuboidPadding skinScale
         {
@@ -36,7 +36,7 @@ namespace KitchenDesign.Geometry
 
         public void UpdateSlices(Cuboid cuboid)
         {
-            m_Cuboid = cuboid;
+            _cuboid = cuboid;
 
             if (!m_AllowUpdateInPrefabs && Utility.RuntimePrefabs.IsPrefab(gameObject))
             {
@@ -232,7 +232,7 @@ namespace KitchenDesign.Geometry
         // Non-serialized fields
         // =====================================================================
 
-        private Cuboid m_Cuboid;
+        private Cuboid _cuboid;
 
         // =====================================================================
         // Nested types

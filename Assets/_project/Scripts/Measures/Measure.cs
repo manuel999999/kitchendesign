@@ -95,7 +95,7 @@ namespace KitchenDesign.Measures
                 // Format measurement text
                 float distanceInMeters = Vector3.Distance(worldStartPoint, worldEndPoint);
 
-                distanceInMeters += m_ExtraDistanceInMetersForLabelOnly;
+                distanceInMeters += _extraDistanceInMetersForLabelOnly;
 
                 if (m_UseMonospace)
                 {
@@ -237,9 +237,9 @@ namespace KitchenDesign.Measures
                 Camera camera = null;
                 if (m_LookAtCamera)
                 {
-                    if (m_AlignToEditorCamera && m_EditorViewCamera)
+                    if (m_AlignToEditorCamera && _editorViewCamera)
                     {
-                        camera = m_EditorViewCamera;
+                        camera = _editorViewCamera;
                     }
                     else
                     {
@@ -316,7 +316,7 @@ namespace KitchenDesign.Measures
         protected void Awake()
         {
 #if UNITY_EDITOR
-            m_EditorViewCamera = UnityEditor.SceneView.GetWindow<UnityEditor.SceneView>().camera;
+            _editorViewCamera = UnityEditor.SceneView.GetWindow<UnityEditor.SceneView>().camera;
 #endif  // if UNITY_EDITOR
 
             // Apply the app theme's colour to the lines
@@ -324,12 +324,12 @@ namespace KitchenDesign.Measures
                 AppProfileStore.Skin.designerMeasureLineColor;
 
             //
-            m_LineRendererWidthCurve = m_LineRenderer.widthCurve;
-            while (m_LineRendererWidthCurve.length < 3)
+            _lineRendererWidthCurve = m_LineRenderer.widthCurve;
+            while (_lineRendererWidthCurve.length < 3)
             {
-                m_LineRendererWidthCurve.AddKey(time: 0.1f * m_LineRendererWidthCurve.length, value: 0.0f);
+                _lineRendererWidthCurve.AddKey(time: 0.1f * _lineRendererWidthCurve.length, value: 0.0f);
             }
-            m_LineRendererWidthCurveKeyframes = m_LineRendererWidthCurve.keys;
+            _lineRendererWidthCurveKeyframes = _lineRendererWidthCurve.keys;
         }
 
         /// <summary>
@@ -346,7 +346,7 @@ namespace KitchenDesign.Measures
 
         public void SetExtraDistanceForLabelOnly(float extraDistanceInMetersForLabelOnly)
         {
-            m_ExtraDistanceInMetersForLabelOnly = extraDistanceInMetersForLabelOnly;
+            _extraDistanceInMetersForLabelOnly = extraDistanceInMetersForLabelOnly;
         }
 
         // ====================================================================
@@ -444,16 +444,16 @@ namespace KitchenDesign.Measures
         // ====================================================================
 
         protected StringBuilder m_StringBuilder = new StringBuilder();
-        protected Camera m_EditorViewCamera;
+        protected Camera _editorViewCamera;
 
-        protected AnimationCurve m_LineRendererWidthCurve;
-        protected Keyframe[] m_LineRendererWidthCurveKeyframes;
+        protected AnimationCurve _lineRendererWidthCurve;
+        protected Keyframe[] _lineRendererWidthCurveKeyframes;
 
         /// <summary>
         ///     This distance will be added to the actual distance measured,
         ///     but will not affect the rendered line.
         /// </summary>
-        protected float m_ExtraDistanceInMetersForLabelOnly;
+        protected float _extraDistanceInMetersForLabelOnly;
 
         // ====================================================================
         // Nested types

@@ -22,8 +22,8 @@ namespace KitchenDesign.UI.DesignerScreens
 
         public Sprite loadingSprite
         {
-            get => m_LoadingSprite;
-            set => m_LoadingSprite = value;
+            get => _loadingSprite;
+            set => _loadingSprite = value;
         }
 
         // =====================================================================
@@ -57,7 +57,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             if (m_TintBackground)
             {
-                m_TintTween.Reset(
+                _tintTween.Reset(
                     m_TintBackground.DOAlpha(endValue: 1.0f, m_BackgroundFadeInDuration)
                 );
             }
@@ -73,7 +73,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             if (m_LoadingImage)
             {
-                m_LoadingImage.sprite = m_LoadingSprite;
+                m_LoadingImage.sprite = _loadingSprite;
                 m_LoadingImage.SetAllDirty();
                 hasLoadingImage = m_LoadingImage.sprite;
                 m_LoadingImage.gameObject.SetActive(hasLoadingImage);
@@ -90,7 +90,7 @@ namespace KitchenDesign.UI.DesignerScreens
         {
             if (m_TintBackground)
             {
-                m_TintTween.Reset(
+                _tintTween.Reset(
                     m_TintBackground.DOAlpha(endValue: 0.0f, m_BackgroundFadeOutDuration)
                         .OnComplete(FinishHide)
                 );
@@ -164,13 +164,13 @@ namespace KitchenDesign.UI.DesignerScreens
         // =====================================================================
 
         protected CoroutineHandle m_RotateCoroutine;
-        protected RecyclableTween<Tween> m_TintTween = new RecyclableTween<Tween>();
+        protected RecyclableTween<Tween> _tintTween = new RecyclableTween<Tween>();
 
         /// <summary>
         ///     An optional sprite to show when this UI is visible. If this
         ///     is <see langword="null"/>, a spinner is shown instead.
         /// </summary>
-        protected Sprite m_LoadingSprite;
+        protected Sprite _loadingSprite;
 
     }   // class HomeUI
 

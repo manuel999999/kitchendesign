@@ -121,7 +121,7 @@ namespace KitchenDesign.UI.DesignerScreens
             // Allow mouse wheel to change zoom
             float scaledMouseWheelInput = Input.mouseScrollDelta.y * m_MouseWheelSensitivity;
             if (Application.isFocused &&
-                !m_UsingTopView &&
+                !_usingTopView &&
                 IsMouseWithinScreen() &&
                 Mathf.Abs(scaledMouseWheelInput) > 0.01f &&
                 !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
@@ -154,9 +154,9 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void UseSideView(MelcherButton caller)
         {
-            if (m_UsingTopView)
+            if (_usingTopView)
             {
-                m_UsingTopView = false;
+                _usingTopView = false;
 
                 m_OverheadCamera.ClearPriority();
             }
@@ -164,9 +164,9 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void UseTopView(MelcherButton caller)
         {
-            if (!m_UsingTopView)
+            if (!_usingTopView)
             {
-                m_UsingTopView = true;
+                _usingTopView = true;
 
                 m_OverheadCamera.SetPriority();
             }
@@ -174,7 +174,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void ZoomIn(MelcherButton caller)
         {
-            if (!m_UsingTopView)
+            if (!_usingTopView)
             {
                 m_OrbitCamera.AdjustZoom(0.3f);
             }
@@ -186,7 +186,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void ZoomOut(MelcherButton caller)
         {
-            if (!m_UsingTopView)
+            if (!_usingTopView)
             {
                 m_OrbitCamera.AdjustZoom(-0.3f);
             }
@@ -298,7 +298,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Non-serialized fields
         // =====================================================================
 
-        protected bool m_UsingTopView;
+        protected bool _usingTopView;
 
     }   // class DesignerNavigationUI
 

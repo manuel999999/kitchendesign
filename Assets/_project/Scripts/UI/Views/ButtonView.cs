@@ -26,7 +26,7 @@ namespace KitchenDesign.UI.Views
             {
                 if (graphic && graphic is TMP_Text text)
                 {
-                    m_DefaultFontStylesInGraphics[text] = text.fontStyle;
+                    _defaultFontStylesInGraphics[text] = text.fontStyle;
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace KitchenDesign.UI.Views
 
         protected void ApplyFontStyleOverride(FontStyleOverride styleOverride, TMP_Text text)
         {
-            if (m_DefaultFontStylesInGraphics.TryGetValue(text, out FontStyles defaultFontStyle))
+            if (_defaultFontStylesInGraphics.TryGetValue(text, out FontStyles defaultFontStyle))
             {
                 text.fontStyle = styleOverride.Apply(defaultFontStyle);
             }
@@ -176,7 +176,7 @@ namespace KitchenDesign.UI.Views
         ///     active during Awake. These values are then used when changing
         ///     the font style according to the button's appearance style.
         /// </summary>
-        protected Dictionary<TMP_Text, FontStyles> m_DefaultFontStylesInGraphics = new();
+        protected Dictionary<TMP_Text, FontStyles> _defaultFontStylesInGraphics = new();
 
     }   // class ButtonView
 

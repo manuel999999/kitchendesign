@@ -76,12 +76,12 @@ namespace KitchenDesign.Cabinets
                     m_Kitchen != null &&
                     m_Kitchen.buildingRules.FridgeCabinetsResizableOnlyWhenEmpty &&
                     m_Occupants.readOnly.Count > 0 &&    // At least one product
-                    m_CabinetSectionProductInfo != null &&
-                    !string.IsNullOrEmpty(m_CabinetSectionProductInfo.visualId))
+                    _cabinetSectionProductInfo != null &&
+                    !string.IsNullOrEmpty(_cabinetSectionProductInfo.visualId))
                 {
-                    if (m_CabinetSectionVisual.info.sectionModelType == CabinetModelType.Procedural &&
-                        m_CabinetSectionVisual.info.productCategoriesAllowedInSection != null &&
-                        m_CabinetSectionVisual.info.IsCategoryAllowedInSection(ProductCategorySpecific.Fridge))
+                    if (_cabinetSectionVisual.info.sectionModelType == CabinetModelType.Procedural &&
+                        _cabinetSectionVisual.info.productCategoriesAllowedInSection != null &&
+                        _cabinetSectionVisual.info.IsCategoryAllowedInSection(ProductCategorySpecific.Fridge))
                     {
                         // This is a fridge panel. It is not resizable now
                         // because it has at least one occupant.
@@ -144,10 +144,10 @@ namespace KitchenDesign.Cabinets
         /// </summary>
         public Vector3 sizeInMeters
         {
-            get => m_SizeInMeters;
+            get => _sizeInMeters;
             set
             {
-                m_SizeInMeters = value;
+                _sizeInMeters = value;
                 ResizeMeshToCabinetSize();
             }
         }
@@ -160,14 +160,14 @@ namespace KitchenDesign.Cabinets
                     cabinetSectionVisual.info.sectionEndPanelSizeInches > 0 &&
                     kitchen.buildingRules.AppliesMidRunEndPanelPadding)
                 {
-                    Vector3 rawSizeInMeters = m_SizeInMeters;
-                    rawSizeInMeters.x -= m_AppliedMidOfRunPaddingInMetersLeft + m_AppliedMidOfRunPaddingInMetersRight;
+                    Vector3 rawSizeInMeters = _sizeInMeters;
+                    rawSizeInMeters.x -= _appliedMidOfRunPaddingInMetersLeft + _appliedMidOfRunPaddingInMetersRight;
 
                     return rawSizeInMeters;
                     
                 } else
                 {
-                    return m_SizeInMeters;
+                    return _sizeInMeters;
                 }
             }
         }
@@ -251,7 +251,7 @@ namespace KitchenDesign.Cabinets
 
         public IKitchen kitchen => m_Kitchen;
 
-        public override Cuboid resizerCuboid => new Cuboid(m_SizeInMeters);
+        public override Cuboid resizerCuboid => new Cuboid(_sizeInMeters);
 
         /// <summary>
         ///     Get the cuboid that represents the full shape of the cabinet
@@ -264,16 +264,16 @@ namespace KitchenDesign.Cabinets
                 Cuboid result =
                     occupiablePaddingInMeters.Deflate(resizerCuboid);
 
-                if (m_CabinetSectionVisual)
+                if (_cabinetSectionVisual)
                 {
                     result =
-                        m_CabinetSectionVisual.info.sectionOccupiableCuboidPaddingInMeters.Deflate(result);
+                        _cabinetSectionVisual.info.sectionOccupiableCuboidPaddingInMeters.Deflate(result);
                 }
 
                 if (kitchen.selectedBrandCatalog &&
                     kitchen.selectedBrandCatalog.cabinetSectionLegStyle &&
                     canHaveLegs &&
-                    (m_CabinetSectionVisual == null || m_CabinetSectionVisual.info.cabinetSectionFootingType == CabinetSectionFootingType.Floating))
+                    (_cabinetSectionVisual == null || _cabinetSectionVisual.info.cabinetSectionFootingType == CabinetSectionFootingType.Floating))
                 {
                     // Account for the height of the kitchen legs
                     result.yMin +=
@@ -299,7 +299,7 @@ namespace KitchenDesign.Cabinets
 
         public Cuboid countertopCuboid => m_Countertop ? m_Countertop.cuboid : default;
 
-        public ProductVisualSO cabinetSectionVisual => m_CabinetSectionVisual;
+        public ProductVisualSO cabinetSectionVisual => _cabinetSectionVisual;
 
         /// <inheritdoc cref="m_CabinetSectionVisualPrefab"/>
         public ProductVisualContent cabinetSectionVisualPrefab => m_CabinetSectionVisualPrefab;
@@ -308,7 +308,7 @@ namespace KitchenDesign.Cabinets
 
         public string cabinetSectionName => m_CabinetSectionInstance.name;
 
-        public ProductInfo cabinetSectionProductInfo => m_CabinetSectionProductInfo;
+        public ProductInfo cabinetSectionProductInfo => _cabinetSectionProductInfo;
 
         // =====================================================================
         // Methods
@@ -378,7 +378,7 @@ namespace KitchenDesign.Cabinets
 
         public void SetToeKickType(CabinetToeKickType toeKickType)
         {
-            m_ToeKickType = toeKickType;
+            _toeKickType = toeKickType;
 
             RefreshToeKick();
         }
@@ -431,13 +431,13 @@ namespace KitchenDesign.Cabinets
             float toeKickHeightInMeters = 0.0f;
 
             int toeKickIndex =
-                m_CabinetSectionVisual ?
-                    m_CabinetSectionVisual.info.sectionInsetToeKickIndex :
+                _cabinetSectionVisual ?
+                    _cabinetSectionVisual.info.sectionInsetToeKickIndex :
                     -1;
 
             Vector2 extraInsetDistanceInMeters =
-                m_CabinetSectionVisual ?
-                    m_CabinetSectionVisual.info.sectionProceduralInsetToeKickExtraInsetInMeters :
+                _cabinetSectionVisual ?
+                    _cabinetSectionVisual.info.sectionProceduralInsetToeKickExtraInsetInMeters :
                     Vector2.zero;
 
             if (kitchen != null)
@@ -452,13 +452,13 @@ namespace KitchenDesign.Cabinets
             }
 
             bool canHaveToeKick =
-                !m_CabinetSectionVisual ||
-                m_CabinetSectionVisual.info.sectionCanHaveToeKick;
+                !_cabinetSectionVisual ||
+                _cabinetSectionVisual.info.sectionCanHaveToeKick;
 
             bool useProceduralToeKickLocalX =
                 canHaveToeKick &&
                 selectedToeKickType != CabinetToeKickType.None &&
-                m_SizeInMeters.x > 0.0f &&
+                _sizeInMeters.x > 0.0f &&
                 toeKickIndex < 0;
 
             if (m_ToeKickLocalX)
@@ -470,9 +470,9 @@ namespace KitchenDesign.Cabinets
                     new Cuboid(
                         new()
                         {
-                            x = m_SizeInMeters.x,
+                            x = _sizeInMeters.x,
                             y = toeKickHeightInMeters,
-                            z = m_SizeInMeters.z
+                            z = _sizeInMeters.z
                         }
                     );
 
@@ -502,7 +502,7 @@ namespace KitchenDesign.Cabinets
                     new Cuboid(
                         new()
                         {
-                            x = m_SizeInMeters.x,
+                            x = _sizeInMeters.x,
                             y = toeKickHeightInMeters,
                             z = KitchenSizes.ToeKickInsetInMeters
                         }
@@ -553,20 +553,20 @@ namespace KitchenDesign.Cabinets
 
         public void SetCabinetSectionProductInfo(ProductInfo cabinetSectionProductInfo)
         {
-            if (m_CabinetSectionProductInfo != null)
+            if (_cabinetSectionProductInfo != null)
             {
                 MelcherLog.LogError("Only expecting a cabinet's section product info to be set once.", this);
                 return;
             }
 
-            m_CabinetSectionProductInfo = cabinetSectionProductInfo;
+            _cabinetSectionProductInfo = cabinetSectionProductInfo;
 
-            if (m_CabinetSectionProductInfo != null)
+            if (_cabinetSectionProductInfo != null)
             {
                 string label =
                     kitchen.buildingRules.LabelsCabinetsByProductName ?
-                        m_CabinetSectionProductInfo.name :
-                        m_CabinetSectionProductInfo.sku;
+                        _cabinetSectionProductInfo.name :
+                        _cabinetSectionProductInfo.sku;
 
                 m_InfoLabelFront.text = label;
                 m_InfoLabelTop.text = label;
@@ -643,14 +643,14 @@ namespace KitchenDesign.Cabinets
 
             if (resizeAxis.HasFlag(CabinetResizeAxis.Z))
             {
-                m_SizeInMeters.z = baseDepthInMeters + backingDepthInMetersZ;
+                _sizeInMeters.z = baseDepthInMeters + backingDepthInMetersZ;
             }
 
             if (resizeAxis.HasFlag(CabinetResizeAxis.X) && Is(CabinetType.Corner))
             {
                 // If this is a corner, we need to update the width to affect the
                 // depth of the next span.
-                m_SizeInMeters.x = cornerBaseWidthInMeters + backingDepthInMetersX;
+                _sizeInMeters.x = cornerBaseWidthInMeters + backingDepthInMetersX;
             }
 
             ResizeMeshToCabinetSize();
@@ -664,7 +664,7 @@ namespace KitchenDesign.Cabinets
             {
                 // Match the cabinet's size but use the countertop thickness/height
                 Cuboid countertopCuboid = m_Countertop.cuboid;
-                countertopCuboid.yMax = m_SizeInMeters.y;
+                countertopCuboid.yMax = _sizeInMeters.y;
                 countertopCuboid.yMin = countertopCuboid.yMax - thicknessInMeters;
                 m_Countertop.UpdateSlices(countertopCuboid);
 
@@ -772,10 +772,10 @@ namespace KitchenDesign.Cabinets
                 if (isVisible)
                 {
                     // isVisible==true -> The backing no longer hides it.
-                    --m_CountertopSliceAffectedByBackingCount[sliceIndex];
+                    --_countertopSliceAffectedByBackingCount[sliceIndex];
 
                     MelcherLog.Assert(
-                        m_CountertopSliceAffectedByBackingCount[sliceIndex] >= 0,
+                        _countertopSliceAffectedByBackingCount[sliceIndex] >= 0,
                         $"The variable that counts the number of {MelcherFormat.ConsoleTypeName<CabinetBacking>()}'s " +
                         $"affecting this cabinet's countertop was decremented below zero. This is not " +
                         $"intended to happen (logic error). It's possible that " +
@@ -788,7 +788,7 @@ namespace KitchenDesign.Cabinets
                 else
                 {
                     // isVisible==false -> The backing hides it.
-                    ++m_CountertopSliceAffectedByBackingCount[sliceIndex];
+                    ++_countertopSliceAffectedByBackingCount[sliceIndex];
                 }
 
                 foreach (MeshRenderer renderer in slice.meshRenderers)
@@ -806,7 +806,7 @@ namespace KitchenDesign.Cabinets
                     // The slice is only visible if no backings (not just this
                     // one) affect it.
                     renderer.enabled =
-                        m_CountertopSliceAffectedByBackingCount[sliceIndex] <= 0;
+                        _countertopSliceAffectedByBackingCount[sliceIndex] <= 0;
                 }
             }
         }
@@ -880,12 +880,12 @@ namespace KitchenDesign.Cabinets
                             }
                         }
 
-                        m_SizeInMeters.z = neighbourDepthInMeters;
+                        _sizeInMeters.z = neighbourDepthInMeters;
 
                         if (kitchen.selectedBrandCatalog &&
                             kitchen.selectedBrandCatalog.ruleset == BrandCatalogRuleset.WeatherStrong)
                         {
-                            m_SizeInMeters.x =
+                            _sizeInMeters.x =
                                 neighbour.IsProductCategoryAllowedInSection(ProductCategorySpecific.Fridge) ?
                                     0.0f :
                                     kitchen.selectedBrandCatalog.cabinetEndPanelInfo.specificPanelWidthInMeters;
@@ -903,7 +903,7 @@ namespace KitchenDesign.Cabinets
                                     kitchen.selectedBrandCatalog.cabinetRuntimeEndPanelInfo.specificPanelWidthInMeters;
                             }
 
-                            m_SizeInMeters.x = endPanelWidthInMeters;
+                            _sizeInMeters.x = endPanelWidthInMeters;
                         }
                     }
 
@@ -911,7 +911,7 @@ namespace KitchenDesign.Cabinets
                     // are shorter than other cabinets. Cabinet ends must
                     // therefore be shortened or raised to meet any type of
                     // cabinet next to it.
-                    m_SizeInMeters.y = neighbour.sizeInMeters.y;
+                    _sizeInMeters.y = neighbour.sizeInMeters.y;
                 }
             }
 
@@ -919,7 +919,7 @@ namespace KitchenDesign.Cabinets
             {
                 Transform cabinetTransform = m_Cabinet.transform;
 
-                Vector3 cabinetLocalScale = m_SizeInMeters;
+                Vector3 cabinetLocalScale = _sizeInMeters;
 
                 if (isEndPanelOnGround)
                 {
@@ -930,7 +930,7 @@ namespace KitchenDesign.Cabinets
                 else if (kitchen != null &&
                     kitchen.selectedBrandCatalog &&
                     m_CabinetModelType == CabinetModelType.Procedural &&
-                    (!m_CabinetSectionVisual || m_CabinetSectionVisual.info.cabinetSectionFootingType != CabinetSectionFootingType.OnGround))
+                    (!_cabinetSectionVisual || _cabinetSectionVisual.info.cabinetSectionFootingType != CabinetSectionFootingType.OnGround))
                 {
                     // Fix up the scale of procedural cabinets. Procedural
                     // cabinets normally scale the full height of sizeInMeters
@@ -960,9 +960,9 @@ namespace KitchenDesign.Cabinets
                 }
 
                 bool isCabinetVisible =
-                    !IsAlmostZero(m_SizeInMeters.x) &&
-                    !IsAlmostZero(m_SizeInMeters.y) &&
-                    !IsAlmostZero(m_SizeInMeters.z);
+                    !IsAlmostZero(_sizeInMeters.x) &&
+                    !IsAlmostZero(_sizeInMeters.y) &&
+                    !IsAlmostZero(_sizeInMeters.z);
 
                 if (!Utility.RuntimePrefabs.IsPrefab(gameObject))
                 {
@@ -976,12 +976,12 @@ namespace KitchenDesign.Cabinets
             if (m_Countertop)
             {
                 // Size the countertop to match the cabinet's size
-                Cuboid newCountertopCuboid = new Cuboid(m_SizeInMeters);
+                Cuboid newCountertopCuboid = new Cuboid(_sizeInMeters);
 
                 {
                     // Preserve the countertop thickness
                     Cuboid oldCountertopCuboid = m_Countertop.cuboid;
-                    newCountertopCuboid.yMax = m_SizeInMeters.y;
+                    newCountertopCuboid.yMax = _sizeInMeters.y;
                     newCountertopCuboid.yMin = newCountertopCuboid.yMax - oldCountertopCuboid.height;
                 }
 
@@ -1187,7 +1187,7 @@ namespace KitchenDesign.Cabinets
                     m_Kitchen.countertopThicknessInMeters :
                     0.0f;
 
-            float defaultColumnHeight = m_SizeInMeters.y - countertopThicknessMeters;
+            float defaultColumnHeight = _sizeInMeters.y - countertopThicknessMeters;
 
             float backColumnHeight = defaultColumnHeight;
 
@@ -1278,7 +1278,7 @@ namespace KitchenDesign.Cabinets
                 // countertop's back-right overhang. The column has a 180
                 // rotation so it scales towards the cabinet's origin point.
 
-                Vector3 positionInMeters = m_SizeInMeters;
+                Vector3 positionInMeters = _sizeInMeters;
                 positionInMeters.x += kitchen.baseCountertopOverhangInMeters.right;
                 positionInMeters.z += kitchen.baseCountertopOverhangInMeters.towardMaxZ;
                 positionInMeters.y = 0.0f;
@@ -1297,12 +1297,12 @@ namespace KitchenDesign.Cabinets
                 }
             }
 
-            foreach (CabinetSectionLeg leg in m_CabinetLegs)
+            foreach (CabinetSectionLeg leg in _cabinetLegs)
             {
                 leg.RefreshPosition();
             }
 
-            for (int ventIndex = 0; ventIndex < m_CabinetVents.Count; ++ventIndex)
+            for (int ventIndex = 0; ventIndex < _cabinetVents.Count; ++ventIndex)
             {
                 bool isAtTop = (ventIndex % 2) != 0;
                 bool isOnRight = ventIndex >= 2;
@@ -1310,7 +1310,7 @@ namespace KitchenDesign.Cabinets
                 // Rotate the vent to point out the intended direction from
                 // the cabinet.
 
-                Transform vent = m_CabinetVents[ventIndex];
+                Transform vent = _cabinetVents[ventIndex];
 
                 vent.localEulerAngles =
                     new Vector3(0.0f, isOnRight ? 180.0f : 0.0f, 0.0f);
@@ -1345,7 +1345,7 @@ namespace KitchenDesign.Cabinets
         {
             if (cabinetSectionVisual)
             {
-                foreach (MelcherStableEnum<ProductCategorySpecific> allowedCategory in m_CabinetSectionVisual.info.productCategoriesAllowedInSection)
+                foreach (MelcherStableEnum<ProductCategorySpecific> allowedCategory in _cabinetSectionVisual.info.productCategoriesAllowedInSection)
                 {
                     if (allowedCategory.value == category)
                     {
@@ -1577,14 +1577,14 @@ namespace KitchenDesign.Cabinets
                 }
 
                 // resize to default
-                if(m_AppliedMidOfRunPaddingInMetersLeft > 0 || m_AppliedMidOfRunPaddingInMetersRight > 0)
+                if(_appliedMidOfRunPaddingInMetersLeft > 0 || _appliedMidOfRunPaddingInMetersRight > 0)
                 {
-                    Vector3 newSizeInMeters = m_SizeInMeters;
-                    newSizeInMeters.x -= m_AppliedMidOfRunPaddingInMetersLeft + m_AppliedMidOfRunPaddingInMetersRight;
-                    m_SizeInMeters = newSizeInMeters; // local variable is used to prevent resizing the cabinet multiple times
+                    Vector3 newSizeInMeters = _sizeInMeters;
+                    newSizeInMeters.x -= _appliedMidOfRunPaddingInMetersLeft + _appliedMidOfRunPaddingInMetersRight;
+                    _sizeInMeters = newSizeInMeters; // local variable is used to prevent resizing the cabinet multiple times
 
-                    m_AppliedMidOfRunPaddingInMetersLeft = 0;
-                    m_AppliedMidOfRunPaddingInMetersRight = 0;
+                    _appliedMidOfRunPaddingInMetersLeft = 0;
+                    _appliedMidOfRunPaddingInMetersRight = 0;
                 }
                 
                 float leftCabinetPanelSize = leftCabinet && leftCabinet.cabinetSectionVisual ? leftCabinet.cabinetSectionVisual.info.sectionEndPanelSizeInches : 0;
@@ -1596,7 +1596,7 @@ namespace KitchenDesign.Cabinets
                         cabinetSectionVisual.info.sectionEndPanelSizeInches * Units.Inches2Meters;
 
                     TryToResizeLength(ref endPadding, Extent.Min, forceAutoCenterProducts: true);
-                    m_AppliedMidOfRunPaddingInMetersLeft = endPadding;
+                    _appliedMidOfRunPaddingInMetersLeft = endPadding;
                 }
 
                 if (rightCabinet && rightCabinet.cabinetType.IsEnd() == false && rightCabinetPanelSize == 0)
@@ -1605,7 +1605,7 @@ namespace KitchenDesign.Cabinets
                         cabinetSectionVisual.info.sectionEndPanelSizeInches * Units.Inches2Meters;
 
                     TryToResizeLength(ref endPadding, Extent.Max, forceAutoCenterProducts: true);
-                    m_AppliedMidOfRunPaddingInMetersRight = endPadding;
+                    _appliedMidOfRunPaddingInMetersRight = endPadding;
 
                     
                 }
@@ -1617,7 +1617,7 @@ namespace KitchenDesign.Cabinets
 #endif
                 }
 
-                if(m_AppliedMidOfRunPaddingInMetersLeft == 0 && m_AppliedMidOfRunPaddingInMetersRight == 0)
+                if(_appliedMidOfRunPaddingInMetersLeft == 0 && _appliedMidOfRunPaddingInMetersRight == 0)
                 {
                     float endPadding = 0f;
 
@@ -1650,7 +1650,7 @@ namespace KitchenDesign.Cabinets
         /// </param>
         protected void ResizeColumn(TransformHelper column, bool isContiguousWithNeighbour, Vector3 normalizedAnchorWithinCabinet, float columnHeight, bool areColumnsVisible)
         {
-            Cuboid cabinetCuboid = new Cuboid(m_SizeInMeters);
+            Cuboid cabinetCuboid = new Cuboid(_sizeInMeters);
 
             column.GetTransform().localPosition =
                 Cuboid.NormalizedToPoint(cabinetCuboid, normalizedAnchorWithinCabinet);
@@ -1688,19 +1688,19 @@ namespace KitchenDesign.Cabinets
             bool isProductAllowed = m_CanHaveProducts;
 
             if (isProductAllowed &&
-                m_CabinetSectionProductInfo != null &&
+                _cabinetSectionProductInfo != null &&
                 !productVisualInfo.ignoreCabinetProductWhitelist)
             {
                 ProductVisualSO cabinetVisual =
                     kitchen.productVisualDatabase.FindRuntimeVisualByID(
-                        m_CabinetSectionProductInfo.visualId
+                        _cabinetSectionProductInfo.visualId
                     );
 
                 isProductAllowed = cabinetVisual.info.IsCategoryAllowedInSection(productVisualInfo.runtimePrefabCategory) ||
                     cabinetVisual.info.IsProductManufacturerAllowedInSection(productInfo.manufacturerId);
 
                 CabinetCompatibilityInfo cabinetCompatibility =
-                    kitchen.catalogData.FindCompatibilityById(m_CabinetSectionProductInfo.compatibilityId);
+                    kitchen.catalogData.FindCompatibilityById(_cabinetSectionProductInfo.compatibilityId);
 
                 if (cabinetCompatibility != null)
                 {
@@ -1751,7 +1751,7 @@ namespace KitchenDesign.Cabinets
                     return true;
                 }
                 else if (productVisualInfo.anchor.IsOnFront() &&
-                    !m_CabinetSectionVisual.info.sectionCanHaveFrontProducts)
+                    !_cabinetSectionVisual.info.sectionCanHaveFrontProducts)
                 {
                     // Some cabinets don't have a single unified face (corner
                     // return's) and therefore any front-mounted product is
@@ -1821,7 +1821,7 @@ namespace KitchenDesign.Cabinets
             }
 
             // Calculate the new target size
-            Vector3 oldSizeInMeters = m_SizeInMeters;
+            Vector3 oldSizeInMeters = _sizeInMeters;
             Vector3 newSizeInMeters = oldSizeInMeters;
             newSizeInMeters.x =
                 Mathf.Clamp(
@@ -1830,7 +1830,7 @@ namespace KitchenDesign.Cabinets
                     maxSizeInMeters.x
                 );
 
-            lengthMetersDelta = newSizeInMeters.x - m_SizeInMeters.x;
+            lengthMetersDelta = newSizeInMeters.x - _sizeInMeters.x;
 
             if (MelcherCommon.IsAlmostEqual(lengthMetersDelta, 0.0f, 0.0001f))
             {
@@ -1838,7 +1838,7 @@ namespace KitchenDesign.Cabinets
                 return false;
             }
 
-            m_SizeInMeters = newSizeInMeters;
+            _sizeInMeters = newSizeInMeters;
 
             if (autoCenterProducts)
             {
@@ -1867,13 +1867,13 @@ namespace KitchenDesign.Cabinets
                 // occupants in the original list may change while the loop is
                 // iterated.
 
-                s_OccupantsToCenter.Clear();
-                s_OccupantsToCenter.AddRange(m_Occupants.readOnly);
+                _occupantsToCenter.Clear();
+                _occupantsToCenter.AddRange(m_Occupants.readOnly);
 
-                int occupantCount = s_OccupantsToCenter.Count;
+                int occupantCount = _occupantsToCenter.Count;
                 for (int i = 0; i < occupantCount; ++i)
                 {
-                    Occupant occupant = s_OccupantsToCenter[i];
+                    Occupant occupant = _occupantsToCenter[i];
 
                     Cuboid occupantOccupancyCuboid =
                         CalculateOccupancyCuboidForOccupant(occupant);
@@ -2044,7 +2044,7 @@ namespace KitchenDesign.Cabinets
                     cabinetMaterialExclusive = cabinetMaterial;
                 }
 
-                if (m_CabinetSectionProductInfo != null)
+                if (_cabinetSectionProductInfo != null)
                 {
                     // Allow custom cabinet's material to be overwritten when they
                     // are not selected.
@@ -2074,7 +2074,7 @@ namespace KitchenDesign.Cabinets
 
             if (m_CabinetMeshRenderers != null)
             {
-                if (m_CabinetModelType == CabinetModelType.Authored && m_CabinetSectionVisual)
+                if (m_CabinetModelType == CabinetModelType.Authored && _cabinetSectionVisual)
                 {
                     // This cabinet is using an authored section. Therefore,
                     // it may have specific materials that need to appear
@@ -2130,9 +2130,9 @@ namespace KitchenDesign.Cabinets
                 }
             }
 
-            if (m_CabinetDoorInstance)
+            if (_cabinetDoorInstance)
             {
-                await m_CabinetDoorInstance.SetCabinetMaterials(
+                await _cabinetDoorInstance.SetCabinetMaterials(
                     cabinetMaterial,
                     countertopMaterial,
                     productCabinetMaterialIdentifier
@@ -2199,7 +2199,7 @@ namespace KitchenDesign.Cabinets
 
         public void SetCabinetSectionProductVisualPrefab(ProductVisualSO cabinetSectionVisual, ProductVisualContent cabinetSectionVisualPrefab)
         {
-            m_CabinetSectionVisual = cabinetSectionVisual;
+            _cabinetSectionVisual = cabinetSectionVisual;
             m_CabinetSectionVisualPrefab = cabinetSectionVisualPrefab;
         }
 
@@ -2294,7 +2294,7 @@ namespace KitchenDesign.Cabinets
                 );
 
             int activeCountertopVariationIndex =
-                m_CabinetSectionVisual.info.sectionCountertopIndexInCabinetPrefab;
+                _cabinetSectionVisual.info.sectionCountertopIndexInCabinetPrefab;
 
             for (int i = 0; i < m_CountertopVariations.Count; ++i)
             {
@@ -2378,8 +2378,8 @@ namespace KitchenDesign.Cabinets
                 return;
             }
 
-            if (m_CabinetSectionVisual &&
-                m_CabinetSectionVisual.info.cabinetSectionFootingType == CabinetSectionFootingType.OnGround)
+            if (_cabinetSectionVisual &&
+                _cabinetSectionVisual.info.cabinetSectionFootingType == CabinetSectionFootingType.OnGround)
             {
                 return;
             }
@@ -2402,20 +2402,20 @@ namespace KitchenDesign.Cabinets
                 return;
             }
 
-            if (m_CabinetSectionVisual &&
-                m_CabinetSectionVisual.info.cabinetSectionFootingType != CabinetSectionFootingType.OnLegs)
+            if (_cabinetSectionVisual &&
+                _cabinetSectionVisual.info.cabinetSectionFootingType != CabinetSectionFootingType.OnLegs)
             {
                 return;
             }
 
             Vector2 legOffsetInMeters = legStyle.horizontalInsetFromCabinetEdgesInMeters;
 
-            if (m_CabinetSectionVisual)
+            if (_cabinetSectionVisual)
             {
                 // Allow cabinets to override the leg's horizontal position.
 
                 Vector2 legOffsetInMetersOverride =
-                    m_CabinetSectionVisual.info.cabinetLegHorizontalInsetFromCabinetEdgesOverrideInMeters;
+                    _cabinetSectionVisual.info.cabinetLegHorizontalInsetFromCabinetEdgesOverrideInMeters;
 
                 if (float.IsNormal(legOffsetInMetersOverride.x))
                 {
@@ -2432,7 +2432,7 @@ namespace KitchenDesign.Cabinets
             if (m_CabinetType != CabinetType.Corner)
             {
                 InstantiateLeg(
-                    m_CabinetLegs,
+                    _cabinetLegs,
                     legStyle,
                     this,
                     normalizedCabinetAnchor: new Vector3(0.0f, 0.0f, 0.0f),
@@ -2447,7 +2447,7 @@ namespace KitchenDesign.Cabinets
 
             // Front-right leg
             InstantiateLeg(
-                m_CabinetLegs,
+                _cabinetLegs,
                 legStyle,
                 this,
                 normalizedCabinetAnchor: new Vector3(1.0f, 0.0f, 0.0f),
@@ -2461,7 +2461,7 @@ namespace KitchenDesign.Cabinets
 
             // Back-left leg
             InstantiateLeg(
-                m_CabinetLegs,
+                _cabinetLegs,
                 legStyle,
                 this,
                 normalizedCabinetAnchor: new Vector3(0.0f, 0.0f, 1.0f),
@@ -2475,7 +2475,7 @@ namespace KitchenDesign.Cabinets
 
             // Back-right leg
             InstantiateLeg(
-                m_CabinetLegs,
+                _cabinetLegs,
                 legStyle,
                 this,
                 normalizedCabinetAnchor: new Vector3(1.0f, 0.0f, 1.0f),
@@ -2523,7 +2523,7 @@ namespace KitchenDesign.Cabinets
             for (int i = 0; i < 4; ++i)
             {
                 MeshRenderer newVent = Instantiate(ventPrefab, parent: m_Transform);
-                m_CabinetVents.Add(newVent.transform);
+                _cabinetVents.Add(newVent.transform);
             }
         }
 
@@ -2535,15 +2535,15 @@ namespace KitchenDesign.Cabinets
         /// </summary>
         public void RemakeCabinetDoor(ProductVisualInfoSO cabinetDoorVisualInfo, ProductVisualContent cabinetDoorVisualPrefab)
         {
-            if (m_CabinetDoorInstance)
+            if (_cabinetDoorInstance)
             {
-                Destroy(m_CabinetDoorInstance.gameObject);
-                m_CabinetDoorInstance = null;
+                Destroy(_cabinetDoorInstance.gameObject);
+                _cabinetDoorInstance = null;
             }
 
             if (cabinetDoorVisualPrefab)
             {
-                m_CabinetDoorInstance =
+                _cabinetDoorInstance =
                     Instantiate(
                         cabinetDoorVisualPrefab,
                         parent: m_Cabinet.transform
@@ -2558,7 +2558,7 @@ namespace KitchenDesign.Cabinets
                 // Force the cabinet door to preserve its 1,1,1 scale relative
                 // to the world.
                 Transform cabinetDoorInstanceTransform =
-                    m_CabinetDoorInstance.transform;
+                    _cabinetDoorInstance.transform;
 
                 Vector3 localScale =
                     m_CabinetSectionInstance.transform.localScale;
@@ -2577,11 +2577,11 @@ namespace KitchenDesign.Cabinets
 
                 // Disable the colliders on embedded storage because otherwise they
                 // will block clicking the cabinet.
-                m_CabinetDoorInstance.clickCollider.enabled = false;
+                _cabinetDoorInstance.clickCollider.enabled = false;
 
                 // Runtime prefabs are disabled by default and so must be
                 // explicitly enabled after they are cloned.
-                m_CabinetDoorInstance.gameObject.SetActive(true);
+                _cabinetDoorInstance.gameObject.SetActive(true);
             }
         }
 
@@ -2594,8 +2594,8 @@ namespace KitchenDesign.Cabinets
         /// </summary>
         public async UniTask InstantiateCabinetPlunge()
         {
-            if (!m_CabinetSectionVisual ||
-                !m_CabinetSectionVisual.info.sectionAlwaysHasPlunge)
+            if (!_cabinetSectionVisual ||
+                !_cabinetSectionVisual.info.sectionAlwaysHasPlunge)
             {
                 return;
             }
@@ -2705,12 +2705,12 @@ namespace KitchenDesign.Cabinets
         {
             if (m_Countertop)
             {
-                m_CountertopSliceAffectedByBackingCount =
+                _countertopSliceAffectedByBackingCount =
                     new int[m_Countertop.slices.Count];
             }
             else
             {
-                m_CountertopSliceAffectedByBackingCount = System.Array.Empty<int>();
+                _countertopSliceAffectedByBackingCount = System.Array.Empty<int>();
             }
 
             SetSizeFromInches(m_InitialSizeInches);
@@ -2911,7 +2911,7 @@ namespace KitchenDesign.Cabinets
 
         protected IKitchen m_Kitchen;
 
-        protected Vector3 m_SizeInMeters;
+        protected Vector3 _sizeInMeters;
 
         /// <summary>
         ///     The amount of end-panel padding (in meters) that <see
@@ -2920,8 +2920,8 @@ namespace KitchenDesign.Cabinets
         ///     apply the padding relative to the cabinet's un-padded size
         ///     instead of stacking on top of the previous call's result.
         /// </summary>
-        protected float m_AppliedMidOfRunPaddingInMetersLeft;
-        protected float m_AppliedMidOfRunPaddingInMetersRight;
+        protected float _appliedMidOfRunPaddingInMetersLeft;
+        protected float _appliedMidOfRunPaddingInMetersRight;
 
         /// <summary>
         ///     A 0-based number that indicates which "span" a cabinet belongs
@@ -2931,7 +2931,7 @@ namespace KitchenDesign.Cabinets
         ///     cref="KitchenBuildingMethod.Sections"/> building method is
         ///     used.
         /// </summary>
-        protected int m_SpanIndex;
+        protected int _spanIndex;
 
         /// <summary>
         ///     This counts the number of backings that are affecting each
@@ -2941,14 +2941,14 @@ namespace KitchenDesign.Cabinets
         ///     re-enable visibility of a slice that is still hidden by another
         ///     backing.
         /// </summary>
-        protected int[] m_CountertopSliceAffectedByBackingCount;
+        protected int[] _countertopSliceAffectedByBackingCount;
 
-        protected ProductInfo m_CabinetSectionProductInfo;
+        protected ProductInfo _cabinetSectionProductInfo;
 
         /// <summary>
         ///     The product visual that was used to create this cabinet.
         /// </summary>
-        protected ProductVisualSO m_CabinetSectionVisual;
+        protected ProductVisualSO _cabinetSectionVisual;
 
         /// <summary>
         ///     The prefab that was used to instantiate <see
@@ -2967,13 +2967,13 @@ namespace KitchenDesign.Cabinets
         ///     Used in <see cref="KitchenBuildingMethod.Catalog"/>. A cabinet
         ///     section must have a cabinet door.
         /// </summary>
-        protected ProductVisualContent m_CabinetDoorInstance;
+        protected ProductVisualContent _cabinetDoorInstance;
 
-        protected CabinetToeKickType m_ToeKickType;
+        protected CabinetToeKickType _toeKickType;
 
-        protected List<CabinetSectionLeg> m_CabinetLegs = new ();
+        protected List<CabinetSectionLeg> _cabinetLegs = new ();
 
-        protected List<Transform> m_CabinetVents = new();
+        protected List<Transform> _cabinetVents = new();
 
         /// <summary>
         ///     This list holds a copy of the occupants for the cabinet that is
@@ -2981,7 +2981,7 @@ namespace KitchenDesign.Cabinets
         ///     This is necessary because the order of the occupants can change
         ///     as the list is iterated when the products are repositioned.
         /// </summary>
-        protected static List<Occupant> s_OccupantsToCenter = new ();
+        protected static List<Occupant> _occupantsToCenter = new ();
 
         // ====================================================================
         // Types

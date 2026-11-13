@@ -59,14 +59,14 @@ namespace KitchenDesign.Utility
         {
             get
             {
-                if (s_Values == null)
+                if (_values == null)
                 {
                     // Memorize the values the first time they are requested
                     Array array = Enum.GetValues(typeof(EnumType));
-                    s_Values = Array.AsReadOnly((EnumType[])array);
+                    _values = Array.AsReadOnly((EnumType[])array);
                 }
 
-                return s_Values;
+                return _values;
             }
         }
 
@@ -102,7 +102,7 @@ namespace KitchenDesign.Utility
         /// <summary>
         /// Enum values.
         /// </summary>
-        private static ReadOnlyCollection<EnumType> s_Values = default;
+        private static ReadOnlyCollection<EnumType> _values = default;
 
     }   // class EnumInfo
 

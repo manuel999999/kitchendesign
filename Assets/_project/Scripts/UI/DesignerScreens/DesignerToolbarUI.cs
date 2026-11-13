@@ -135,7 +135,7 @@ namespace KitchenDesign.UI.DesignerScreens
             SetToolbarVisibility(true, ToolbarContentDuration.Tween);
             m_ToolbarToggleButton.SetIsOnWithoutNotify(true);
 
-            m_ToolbarCabinetProductPredicate = predicate;
+            _toolbarCabinetProductPredicate = predicate;
 
             PopulateCabinetSectionGroupsToolbarForCatalog(m_CabinetSectionButton);
         }
@@ -144,7 +144,7 @@ namespace KitchenDesign.UI.DesignerScreens
         {
             base.Awake();
 
-            m_CabinetFinishesButtonDefaultSiblingIndex =
+            _cabinetFinishesButtonDefaultSiblingIndex =
                 m_CabinetFinishesButton.transform.GetSiblingIndex();
 
             m_ProductAddButtonSpinner.SetVisible(false);
@@ -472,7 +472,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             if (caller && caller == m_CategoryBreadcrumb)
             {
-                s_BreadcrumbButtonHintTaught = true;
+                _breadcrumbButtonHintTaught = true;
                 m_BreadcrumbButtonQuickHint.Close();
 
                 ShowCategoryToolbar();
@@ -528,7 +528,7 @@ namespace KitchenDesign.UI.DesignerScreens
             m_ProductToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
             m_ProductActionToolbar.SetVisibility(ToolbarContentVisibility.Collapsed, ToolbarContentDuration.Tween);
 
-            if (!s_BreadcrumbButtonHintTaught && !m_BreadcrumbButtonQuickHint.isVisible)
+            if (!_breadcrumbButtonHintTaught && !m_BreadcrumbButtonQuickHint.isVisible)
             {
                 m_BreadcrumbButtonQuickHint.Show(delayDuration: 0.8f);
             }
@@ -550,7 +550,7 @@ namespace KitchenDesign.UI.DesignerScreens
             // or bar top)
             if (caller.category == ProductCategory.CabinetSection)
             {
-                m_ToolbarCabinetProductPredicate = null;
+                _toolbarCabinetProductPredicate = null;
 
 
                 IBuildingMethodRules buildingRules = this._kitchen.buildingRules;
@@ -1038,7 +1038,7 @@ namespace KitchenDesign.UI.DesignerScreens
                 m_ManufacturerToolbar.GetScrollContent();
 
             IEnumerable<ProductInfo> availableCabinetsInCatalog =
-                GetAvailableCabinetSections(m_ToolbarCabinetProductPredicate);
+                GetAvailableCabinetSections(_toolbarCabinetProductPredicate);
 
             IEnumerable<int> cabinetSectionGroupsInCatalog =
                 availableCabinetsInCatalog
@@ -1114,7 +1114,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             // Get the cabinet sections available in this catalog.
             ProductInfo[] cabinetsMatchingType =
-                GetAvailableCabinetSections(m_ToolbarCabinetProductPredicate)
+                GetAvailableCabinetSections(_toolbarCabinetProductPredicate)
                     .Where(x => x.cabinetSectionCategoryId == cabinetSectionCategoryId)
                     .ToArray();
 
@@ -2047,7 +2047,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void OnBreadcrumbButtonQuickHintManuallyClosed(QuickHint sender)
         {
-            s_BreadcrumbButtonHintTaught = true;
+            _breadcrumbButtonHintTaught = true;
         }
 
         protected void ResetToolbar()
@@ -2070,7 +2070,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected async UniTask OnHighlightChanged(GameObject highlightedObject)
         {
-            m_ToolbarCabinetProductPredicate = null;
+            _toolbarCabinetProductPredicate = null;
 
             Occupant occupant       = null;
             Cabinet cabinet         = null;
@@ -2109,25 +2109,25 @@ namespace KitchenDesign.UI.DesignerScreens
                 // Set the toolbars up in background if visible
                 if (m_ProductActionToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
-                    m_ToolbarBeforeHighlight = m_ProductActionToolbar;
+                    _toolbarBeforeHighlight = m_ProductActionToolbar;
                 }
                 else if (m_ProductToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
-                    m_ToolbarBeforeHighlight = m_ProductToolbar;
+                    _toolbarBeforeHighlight = m_ProductToolbar;
                 }
                 else if (m_ManufacturerToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
-                    m_ToolbarBeforeHighlight = m_ManufacturerToolbar;
+                    _toolbarBeforeHighlight = m_ManufacturerToolbar;
                 }
                 else if (m_CategoryToolbar.visibility == ToolbarContentVisibility.InForeground)
                 {
-                    m_ToolbarBeforeHighlight = m_CategoryToolbar;
+                    _toolbarBeforeHighlight = m_CategoryToolbar;
                 }
 
-                MelcherLog.LogEditorOnly("Toolbar before highlight: " + m_ToolbarBeforeHighlight, m_ToolbarBeforeHighlight);
+                MelcherLog.LogEditorOnly("Toolbar before highlight: " + _toolbarBeforeHighlight, _toolbarBeforeHighlight);
 
 
-                m_ToolbarBeforeHighlight?.SetVisibility(
+                _toolbarBeforeHighlight?.SetVisibility(
                     ToolbarContentVisibility.InBackground,
                     duration
                 );
@@ -2135,7 +2135,7 @@ namespace KitchenDesign.UI.DesignerScreens
             else
             {
                 // Restore the last toolbar's visibility
-                m_ToolbarBeforeHighlight?.SetVisibility(ToolbarContentVisibility.InForeground, duration);
+                _toolbarBeforeHighlight?.SetVisibility(ToolbarContentVisibility.InForeground, duration);
             }
 
             await UniTask.CompletedTask;
@@ -2144,7 +2144,7 @@ namespace KitchenDesign.UI.DesignerScreens
         protected void OnBuildingMethodChanged(KitchenBuildingMethod newMethod)
         {
             int newCabinetFinishesButtonSiblingIndex =
-                m_CabinetFinishesButtonDefaultSiblingIndex;
+                _cabinetFinishesButtonDefaultSiblingIndex;
 
             if (this._kitchen.buildingRules.UsesStollHighBarTopOverhang)
             {
@@ -2552,19 +2552,19 @@ namespace KitchenDesign.UI.DesignerScreens
         /// </summary>
         protected Dictionary<ProductCategory, List<ProductInfo>> m_AvailableProductsByProductCategory = new ();
 
-        protected ToolbarContent m_ToolbarBeforeHighlight;
+        protected ToolbarContent _toolbarBeforeHighlight;
 
-        protected int m_LastUsedDoorStyleId;
-        protected int m_LastUsedDoorHandleStyleId;
+        protected int _lastUsedDoorStyleId;
+        protected int _lastUsedDoorHandleStyleId;
 
-        protected int m_CabinetFinishesButtonDefaultSiblingIndex;
+        protected int _cabinetFinishesButtonDefaultSiblingIndex;
 
         /// <summary>
         ///     This predicate is used to filter which cabinets can appear in
         ///     the cabinet product toolbar. When it is <see langword="null"/>,
         ///     all cabinets are allowed.
         /// </summary>
-        protected Func<ProductInfo, bool> m_ToolbarCabinetProductPredicate;
+        protected Func<ProductInfo, bool> _toolbarCabinetProductPredicate;
 
         /// <summary>
         ///     The cabinet the user had selected in the designer scene when
@@ -2580,7 +2580,7 @@ namespace KitchenDesign.UI.DesignerScreens
         ///     in a kiosk environment.
         /// </summary>
         [MelcherStaticFieldEditorTreatment.ResetToTypeDefault]
-        protected static bool s_BreadcrumbButtonHintTaught;
+        protected static bool _breadcrumbButtonHintTaught;
 
     }   // class DesignerToolbarUI
 

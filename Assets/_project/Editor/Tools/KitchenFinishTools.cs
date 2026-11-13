@@ -14,20 +14,20 @@ namespace KitchenDesign.ToolsEditor
         [MenuItem(MelcherEditorConst.Menu.ToolsPrefix + "Pro-Fit/Finish Tools - Select parent material")]
         private static void SelectParentMaterial()
         {
-            m_ParentMaterial = null;
+            _parentMaterial = null;
 
             foreach (Object selectedObject in Selection.objects)
             {
                 if (selectedObject && selectedObject is Material baseMaterial)
                 {
-                    m_ParentMaterial = baseMaterial;
+                    _parentMaterial = baseMaterial;
                     break;
                 }
             }
 
-            if (m_ParentMaterial)
+            if (_parentMaterial)
             {
-                MelcherLog.Log($"Using {m_ParentMaterial.name} as the parent material for subsequent finishes.", m_ParentMaterial);
+                MelcherLog.Log($"Using {_parentMaterial.name} as the parent material for subsequent finishes.", _parentMaterial);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace KitchenDesign.ToolsEditor
         [MenuItem(MelcherEditorConst.Menu.ToolsPrefix + "Pro-Fit/Finish Tools - Create materials for selected textures")]
         private static void CreateMaterialsForSelectedTextures()
         {
-            if (!m_ParentMaterial)
+            if (!_parentMaterial)
             {
                 EditorUtility.DisplayDialog(
                     title: $"{nameof(CreateMaterialsForSelectedTextures)}() Error",
@@ -58,7 +58,7 @@ namespace KitchenDesign.ToolsEditor
                 return;
             }
 
-            string outputFolderPath = AssetDatabase.GetAssetPath(m_ParentMaterial);
+            string outputFolderPath = AssetDatabase.GetAssetPath(_parentMaterial);
             int trailingSlashIndex = outputFolderPath.LastIndexOf('/');
             if (trailingSlashIndex >= 0)
             {
@@ -76,11 +76,11 @@ namespace KitchenDesign.ToolsEditor
                     continue;
                 }
 
-                Material variantMaterial = new Material(m_ParentMaterial.shader);
+                Material variantMaterial = new Material(_parentMaterial.shader);
                 variantMaterial.name = texture.name;
-                variantMaterial.parent = m_ParentMaterial;
+                variantMaterial.parent = _parentMaterial;
 
-                if (m_ParentMaterial.shader.FindPropertyIndex("_AlbedoMap") >= 0)
+                if (_parentMaterial.shader.FindPropertyIndex("_AlbedoMap") >= 0)
                 {
                     // Our Triplanar shader uses the name _AlbedoMap for the
                     // primary color texture. Too bad we didn't stick with
@@ -102,7 +102,7 @@ namespace KitchenDesign.ToolsEditor
             MelcherLog.Log($"Done! Created {createdMaterialCount} materials.");
         }
 
-        private static Material m_ParentMaterial;
+        private static Material _parentMaterial;
 
     }   // class KitchenFinishTools
 

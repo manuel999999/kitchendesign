@@ -14,17 +14,17 @@ namespace KitchenDesign.ProductsEditor.Scriptables
 
         public static ProductEditorOptionsSO Get()
         {
-            if (!s_Instance)
+            if (!_instance)
             {
                 string[] guids = AssetDatabase.FindAssets($"t:{nameof(ProductEditorOptionsSO)}");
-                for (int i = 0; i < guids.Length && !s_Instance; ++i)
+                for (int i = 0; i < guids.Length && !_instance; ++i)
                 {
                     string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
-                    s_Instance = AssetDatabase.LoadAssetAtPath<ProductEditorOptionsSO>(assetPath);
+                    _instance = AssetDatabase.LoadAssetAtPath<ProductEditorOptionsSO>(assetPath);
                 }
             }
 
-            return s_Instance;
+            return _instance;
         }
 
         // =====================================================================
@@ -81,7 +81,7 @@ namespace KitchenDesign.ProductsEditor.Scriptables
         // Static fields
         // =====================================================================
 
-        protected static ProductEditorOptionsSO s_Instance;
+        protected static ProductEditorOptionsSO _instance;
 
     }   // class ProFitEditorOptions
 

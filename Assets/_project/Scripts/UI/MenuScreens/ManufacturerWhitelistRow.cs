@@ -24,7 +24,7 @@ namespace KitchenDesign.UI.MenuScreens
         // =====================================================================Info
 
         public int index => m_Index;
-        public bool isHeading => m_IsHeading;
+        public bool isHeading => _isHeading;
         public bool isOn
         {
             get
@@ -165,7 +165,7 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected int m_Index;
 
-        protected bool m_IsHeading;
+        protected bool _isHeading;
 
     }   // class ManufacturerWhitelistRow
 

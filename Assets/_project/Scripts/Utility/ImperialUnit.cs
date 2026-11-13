@@ -19,7 +19,7 @@ namespace KitchenDesign.Utility
         {
             return new ImperialUnit()
             {
-                m_Inches = totalMeters * Units.Meters2Inches
+                _inches = totalMeters * Units.Meters2Inches
             };
         }
 
@@ -27,7 +27,7 @@ namespace KitchenDesign.Utility
         {
             return new ImperialUnit()
             {
-                m_Inches = totalInches
+                _inches = totalInches
             };
         }
 
@@ -38,29 +38,29 @@ namespace KitchenDesign.Utility
         /// <summary>
         /// The total measurement in meters.
         /// </summary>
-        public double totalMeters => m_Inches * Units.Inches2Meters;
+        public double totalMeters => _inches * Units.Inches2Meters;
 
         /// <summary>
         /// The number of whole feet that the measurement is divisible by.
         /// </summary>
-        public int feet => (int)Math.Floor(m_Inches / Units.InchesPerFoot);
+        public int feet => (int)Math.Floor(_inches / Units.InchesPerFoot);
 
         /// <summary>
         /// The total measurement in feet.
         /// </summary>
-        public double totalFeet => m_Inches / Units.InchesPerFoot;
+        public double totalFeet => _inches / Units.InchesPerFoot;
 
         /// <summary>
         /// The number of whole inches the measurement is divisible by that
         /// extend beyond whole divisions of feet. That is, the leftover inches
         /// after <see cref="feet"/> is removed.
         /// </summary>
-        public int inches => (int)Math.Floor(m_Inches - (feet * Units.InchesPerFoot));
+        public int inches => (int)Math.Floor(_inches - (feet * Units.InchesPerFoot));
 
         /// <summary>
         /// The total measurement in inches.
         /// </summary>
-        public double totalInches => m_Inches;
+        public double totalInches => _inches;
 
         /// <summary>
         /// The fraction part of the measurement.
@@ -70,7 +70,7 @@ namespace KitchenDesign.Utility
         /// <summary>
         /// The fractional part of the measurement as a decimal number.
         /// </summary>
-        public double fractionAsDecimal => Math.Ceiling(m_Inches) - m_Inches;
+        public double fractionAsDecimal => Math.Ceiling(_inches) - _inches;
 
         // ====================================================================
         // Methods
@@ -114,7 +114,7 @@ namespace KitchenDesign.Utility
         public (int numerator, int denominator) GetFraction(int maximumInchDivisions = DefaultMaximumInchDivision)
         {
             // The number of non-whole inches left
-            double partialInches = m_Inches - Math.Floor(m_Inches);
+            double partialInches = _inches - Math.Floor(_inches);
 
             /// Determine if the leftover inches are within some threshold of
             /// a denominator. This is used to check for non-power-of-two
@@ -154,7 +154,7 @@ namespace KitchenDesign.Utility
 
             // Determine the best power-of-two ratio.
 
-            numerator =  (int)Math.Round((m_Inches - Math.Floor(m_Inches)) * maximumInchDivisions);
+            numerator =  (int)Math.Round((_inches - Math.Floor(_inches)) * maximumInchDivisions);
             int denominator = maximumInchDivisions;
 
             // Simplify the fraction by iteratively halving it
@@ -169,12 +169,12 @@ namespace KitchenDesign.Utility
 
         public void SetFromTotalMeters(float newTotalMeters)
         {
-            m_Inches = newTotalMeters * Units.Meters2Inches;
+            _inches = newTotalMeters * Units.Meters2Inches;
         }
 
         public void SetFromTotalInches(double totalInches)
         {
-            m_Inches = totalInches;
+            _inches = totalInches;
         }
 
         public void Set(int feet, int inches)
@@ -184,10 +184,10 @@ namespace KitchenDesign.Utility
 
         public void Set(int feet, int inches, int numerator, int denominator)
         {
-            m_Inches = (feet * Units.InchesPerFoot) + inches;
+            _inches = (feet * Units.InchesPerFoot) + inches;
             if (denominator > 0)
             {
-                m_Inches += (double)numerator / denominator;
+                _inches += (double)numerator / denominator;
             }
         }
 
@@ -283,7 +283,7 @@ namespace KitchenDesign.Utility
         // Internal fields
         // ====================================================================
 
-        private double m_Inches;
+        private double _inches;
 
     }   // class ImperialUnit
 

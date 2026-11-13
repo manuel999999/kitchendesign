@@ -47,8 +47,8 @@ namespace KitchenDesign.Widgets
 
         public Extent affectExtent
         {
-            get => m_AffectExtent;
-            set => m_AffectExtent = value;
+            get => _affectExtent;
+            set => _affectExtent = value;
         }
 
         // =====================================================================
@@ -72,7 +72,7 @@ namespace KitchenDesign.Widgets
                 return;
             }
 
-            if (m_WasErrorState)
+            if (_wasErrorState)
             {
                 // No rotation on glyph when showing error symbol
                 m_Glyph.transform.localEulerAngles = Vector3.zero;
@@ -102,7 +102,7 @@ namespace KitchenDesign.Widgets
         /// </param>
         private void SetErrorState(bool isError)
         {
-            m_WasErrorState = isError;
+            _wasErrorState = isError;
 
             AppSkinSO currentSkin = AppProfileStore.Skin;
 
@@ -121,23 +121,23 @@ namespace KitchenDesign.Widgets
 
             const float TweenSeconds = 0.1f;
 
-            m_ColorSequence.Reset(
+            _colorSequence.Reset(
                 DOTween.Sequence()
             );
 
-            m_ColorSequence.value.Join(
+            _colorSequence.value.Join(
                  m_Glyph.textMesh.DOColor(foregroundColor, TweenSeconds)
                     .SetLink(gameObject, LinkBehaviour.CompleteAndKillOnDisable)
                     .SetEase(Ease.Linear)
             );
 
-            m_ColorSequence.value.Join(
+            _colorSequence.value.Join(
                  m_Border.DOColor(foregroundColor, TweenSeconds)
                     .SetLink(gameObject, LinkBehaviour.CompleteAndKillOnDisable)
                     .SetEase(Ease.Linear)
             );
 
-            m_ColorSequence.value.Join(
+            _colorSequence.value.Join(
                  m_Background.DOColor(backgroundColor, TweenSeconds)
                     .SetLink(gameObject, LinkBehaviour.CompleteAndKillOnDisable)
                     .SetEase(Ease.Linear)
@@ -240,7 +240,7 @@ namespace KitchenDesign.Widgets
                 // delta. This makes the code easier to read because the value
                 // will be positive when the cuboid is expanding and negative
                 // when it is contracting.
-                if (m_AffectExtent == Extent.Min)
+                if (_affectExtent == Extent.Min)
                 {
                     lengthMetersDelta = -lengthMetersDelta;
                 }
@@ -249,7 +249,7 @@ namespace KitchenDesign.Widgets
                 // drag position if it fails as otherwise the mouse pointer will
                 // deviate from the widget.
                 bool isErrorState = lengthMetersDelta != 0;
-                if (m_TargetVolume.TryToResizeLengthAsUser(ref lengthMetersDelta, m_AffectExtent))
+                if (m_TargetVolume.TryToResizeLengthAsUser(ref lengthMetersDelta, _affectExtent))
                 {
                     isErrorState = false;
                     m_LastCameraLocalDragPosition = cameraLocalDragPosition;
@@ -257,7 +257,7 @@ namespace KitchenDesign.Widgets
                     onResized?.Invoke(this, lengthMetersDelta);
                 }
 
-                if (isErrorState != m_WasErrorState)
+                if (isErrorState != _wasErrorState)
                 {
                     SetErrorState(isErrorState);
                 }
@@ -297,9 +297,9 @@ namespace KitchenDesign.Widgets
         ///     left face of a cabinet and <see cref="Extent.Max"/> does the
         ///     right face.
         /// </summary>
-        protected Extent m_AffectExtent;
+        protected Extent _affectExtent;
 
-        protected RecyclableTween<Sequence> m_ColorSequence = new RecyclableTween<Sequence>();
+        protected RecyclableTween<Sequence> _colorSequence = new RecyclableTween<Sequence>();
 
         /// <summary>
         ///     When the resize widget is dragged too far, it enters an Error
@@ -307,7 +307,7 @@ namespace KitchenDesign.Widgets
         ///     a line through it for the icon. This field indicates whether
         ///     the widget is in this error state.
         /// </summary>
-        protected bool m_WasErrorState;
+        protected bool _wasErrorState;
 
     }   // class ResizerWidget
 

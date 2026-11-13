@@ -39,7 +39,7 @@ namespace KitchenDesign.UI.Views
         {
             m_CloseButton.interactable = true;
 
-            m_ScaleTween.Reset(
+            _scaleTween.Reset(
                 m_Transform.DOScale(endValue: Vector3.one, duration: 0.2f)
                     .SetDelay(delayDuration)
             );
@@ -49,7 +49,7 @@ namespace KitchenDesign.UI.Views
         {
             m_CloseButton.interactable = false;
 
-            m_ScaleTween.Reset(
+            _scaleTween.Reset(
                 m_Transform.DOScale(endValue: Vector3.zero, duration: 0.2f)
             );
         }
@@ -97,7 +97,7 @@ namespace KitchenDesign.UI.Views
         // Non-serialized fields
         // ====================================================================
 
-        private RecyclableTween<Tween> m_ScaleTween = new ();
+        private RecyclableTween<Tween> _scaleTween = new ();
     }   // class QuickHint
 
 }   // namespace KitchenDesign.UI.Views

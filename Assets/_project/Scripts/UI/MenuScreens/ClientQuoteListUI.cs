@@ -156,8 +156,8 @@ namespace KitchenDesign.UI.MenuScreens
                 .Where(word => !string.IsNullOrEmpty(word))
                 .ToArray();
 
-            m_ActiveClientQuotes = null;
-            m_ActiveClientQuoteDateTimes.Clear();
+            _activeClientQuotes = null;
+            _activeClientQuoteDateTimes.Clear();
 
             int clientId = this._clientList.ActiveClientId.Value;
             int clientIndex = this._clientList.UserClients.FindIndex(
@@ -165,38 +165,38 @@ namespace KitchenDesign.UI.MenuScreens
             );
             if (clientIndex >= 0)
             {
-                m_ActiveClientQuotes = this._clientList.UserClients[clientIndex].quotes;
+                _activeClientQuotes = this._clientList.UserClients[clientIndex].quotes;
             }
 
-            if (m_ActiveClientQuotes != null)
+            if (_activeClientQuotes != null)
             {
                 const StringComparison CaseInsensitive = StringComparison.OrdinalIgnoreCase;
 
                 // For each quote, check if they match all the search terms
-                for (int i = 0; i < m_ActiveClientQuotes.Count; ++i)
+                for (int i = 0; i < _activeClientQuotes.Count; ++i)
                 {
                     // Get DateTime from all timestamps for faster compare
                     DateTime time = DateTime.MinValue;
-                    if (m_ActiveClientQuotes[i].saveData.TryGetValueFromJson("timeStamp", out string timestamp))
+                    if (_activeClientQuotes[i].saveData.TryGetValueFromJson("timeStamp", out string timestamp))
                     {
                         if (!DateTime.TryParse(timestamp, out time))
                         {
                             MelcherLog.LogWarningEditorOnly(
-                                $"Failed to parse timestamp \"{timestamp}\" (quote index:{i}, ID:{m_ActiveClientQuotes[i].id})"
+                                $"Failed to parse timestamp \"{timestamp}\" (quote index:{i}, ID:{_activeClientQuotes[i].id})"
                             );
                         }
                     }
                     else
                     {
-                        MelcherLog.LogWarningEditorOnly($"No timestamp in quote (index:{i}, ID:{m_ActiveClientQuotes[i].id})");
+                        MelcherLog.LogWarningEditorOnly($"No timestamp in quote (index:{i}, ID:{_activeClientQuotes[i].id})");
                     }
-                    m_ActiveClientQuoteDateTimes.Add(time);
+                    _activeClientQuoteDateTimes.Add(time);
 
                     bool allWordsMatched = true;
 
                     foreach (string word in searchWords)
                     {
-                        if (!m_ActiveClientQuotes[i].saveName.Contains(word, CaseInsensitive))
+                        if (!_activeClientQuotes[i].saveName.Contains(word, CaseInsensitive))
                         {
                             // If any word does not match, do not display this quote
                             allWordsMatched = false;
@@ -241,8 +241,8 @@ namespace KitchenDesign.UI.MenuScreens
         protected int AscendingNameSort(int index1, int index2)
         {
             int compare = string.Compare(
-                m_ActiveClientQuotes[index1].saveName,
-                m_ActiveClientQuotes[index2].saveName,
+                _activeClientQuotes[index1].saveName,
+                _activeClientQuotes[index2].saveName,
                 StringComparison.OrdinalIgnoreCase
             );
             if (compare != 0)
@@ -250,15 +250,15 @@ namespace KitchenDesign.UI.MenuScreens
                 return compare;
             }
 
-            return m_ActiveClientQuotes[index1].id.CompareTo(
-                m_ActiveClientQuotes[index2].id
+            return _activeClientQuotes[index1].id.CompareTo(
+                _activeClientQuotes[index2].id
             );
         }
 
         protected int AscendingDateSort(int index1, int index2)
         {
-            return m_ActiveClientQuoteDateTimes[index1].CompareTo(
-                m_ActiveClientQuoteDateTimes[index2]
+            return _activeClientQuoteDateTimes[index1].CompareTo(
+                _activeClientQuoteDateTimes[index2]
             );
         }
 
@@ -289,8 +289,8 @@ namespace KitchenDesign.UI.MenuScreens
             {
                 int quoteIndex = m_FilteredQuoteIndices[itemIndex];
                 row.SetFields(
-                    m_ActiveClientQuotes[quoteIndex],
-                    m_ActiveClientQuoteDateTimes[quoteIndex],
+                    _activeClientQuotes[quoteIndex],
+                    _activeClientQuoteDateTimes[quoteIndex],
                     itemIndex
                 );
             }
@@ -307,19 +307,19 @@ namespace KitchenDesign.UI.MenuScreens
         protected void ShowRenamePrompt(QuoteListRow row)
         {
             int quoteIndex = m_FilteredQuoteIndices[row.index];
-            int quoteId = m_ActiveClientQuotes[quoteIndex].id;
+            int quoteId = _activeClientQuotes[quoteIndex].id;
             EventMenu.OnQuoteInfoRequested.Raise(new ClientQuoteInfo(this._clientList.ActiveClientId.Value, quoteId));
         }
 
         protected void OpenPdf(QuoteListRow row)
         {
             int quoteIndex = m_FilteredQuoteIndices[row.index];
-            string pdfEndpoint = m_ActiveClientQuotes[quoteIndex].pdfEndpoint;
+            string pdfEndpoint = _activeClientQuotes[quoteIndex].pdfEndpoint;
             string pdfUrl = this._server.Connection.Host + pdfEndpoint;
             MelcherLog.LogVerbose(
                 $"Opening PDF url: {pdfUrl}\n" +
                 $"Host: {this._server.Connection.Host}\n" +
-                $"Endpoint: {m_ActiveClientQuotes[quoteIndex].pdfEndpoint}"
+                $"Endpoint: {_activeClientQuotes[quoteIndex].pdfEndpoint}"
             );
             pdfUrl = Uri.EscapeUriString(pdfUrl);
             Application.OpenURL(pdfUrl);
@@ -340,7 +340,7 @@ namespace KitchenDesign.UI.MenuScreens
                 }
 
                 int quoteIndex = m_FilteredQuoteIndices[row.index];
-                this._clientList.ActiveQuoteId = m_ActiveClientQuotes[quoteIndex].id;
+                this._clientList.ActiveQuoteId = _activeClientQuotes[quoteIndex].id;
 
                 MelcherSceneManager.LoadSceneAsync(
                     MelcherSceneRequest.FromName("DesignerScene"),
@@ -367,8 +367,8 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected List<int> m_FilteredQuoteIndices = new List<int>();
         protected ListControllerSortMode m_SortMode = ListControllerSortMode.DateDescending;
-        protected List<UserClientQuote> m_ActiveClientQuotes;
-        protected List<DateTime> m_ActiveClientQuoteDateTimes = new List<DateTime>();
+        protected List<UserClientQuote> _activeClientQuotes;
+        protected List<DateTime> _activeClientQuoteDateTimes = new List<DateTime>();
 
         // =====================================================================
         // Nested types

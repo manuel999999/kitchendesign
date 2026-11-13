@@ -176,7 +176,7 @@ namespace KitchenDesign.Products
         {
             bool showCutOuts = !isProductVisible || m_RenderProductWithCutOut;
 
-            m_CountertopCutOut.gameObject.SetActive(m_NeedsCountertopCutOut && showCutOuts);
+            m_CountertopCutOut.gameObject.SetActive(_needsCountertopCutOut && showCutOuts);
 
             m_CabinetCutOut.gameObject.SetActive(showCutOuts);
         }
@@ -321,7 +321,7 @@ namespace KitchenDesign.Products
         /// </summary>
         public Vector3 GetCurrentCutOutSizeInMeters(Vector3 defaultCutOutSizeInMeters)
         {
-            return m_CurrentCutOutSizeInMeters.GetValueOrDefault(defaultCutOutSizeInMeters);
+            return _currentCutOutSizeInMeters.GetValueOrDefault(defaultCutOutSizeInMeters);
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace KitchenDesign.Products
         /// </summary>
         public void SetCutOutSizeInMeters(ProductVisualInfoSO productVisualInfo, Vector3 cutOutSizeInMeters, bool notifyListeners = true)
         {
-            m_CurrentCutOutSizeInMeters = cutOutSizeInMeters;
+            _currentCutOutSizeInMeters = cutOutSizeInMeters;
 
             // TODO: Currently limiting fake shadows to Stoll products (i.e.,
             //       products with `useCabinetMaterial == true`) because we
@@ -470,7 +470,7 @@ namespace KitchenDesign.Products
                 offset.z += -countertopOverhangInMeters;
                 countertop.offsetInMeters = offset;
 
-                m_NeedsCountertopCutOut = countertopThicknessInMeters > 0.0f;
+                _needsCountertopCutOut = countertopThicknessInMeters > 0.0f;
             }
 
             // Reduce the cabinet cut out height by the countertop thickness
@@ -656,8 +656,8 @@ namespace KitchenDesign.Products
                     Vector3 min = t.TransformPoint(localBounds.min);
                     Vector3 max = t.TransformPoint(localBounds.max);
 
-                    s_WorldSpaceBoundsExtentsOfAllSubmeshes.Add(min);
-                    s_WorldSpaceBoundsExtentsOfAllSubmeshes.Add(max);
+                    _worldSpaceBoundsExtentsOfAllSubmeshes.Add(min);
+                    _worldSpaceBoundsExtentsOfAllSubmeshes.Add(max);
                 }
 
                 static Vector3 WorldSpacePointToColliderLocal(Vector3 worldSpacePoint, Transform colliderTransform)
@@ -665,7 +665,7 @@ namespace KitchenDesign.Products
                     return colliderTransform.InverseTransformPoint(worldSpacePoint);
                 }
 
-                s_WorldSpaceBoundsExtentsOfAllSubmeshes.Clear();
+                _worldSpaceBoundsExtentsOfAllSubmeshes.Clear();
                 for (int i = 0; i < meshRenderers.Length; ++i)
                 {
                     CollectBoundsExtents(meshRenderers[i]);
@@ -675,14 +675,14 @@ namespace KitchenDesign.Products
 
                 localBounds =
                     new Bounds(
-                        center: WorldSpacePointToColliderLocal(s_WorldSpaceBoundsExtentsOfAllSubmeshes[0], colliderTransform),
+                        center: WorldSpacePointToColliderLocal(_worldSpaceBoundsExtentsOfAllSubmeshes[0], colliderTransform),
                         size: Vector3.zero
                     );
 
-                for (int i = 1; i < s_WorldSpaceBoundsExtentsOfAllSubmeshes.Count; ++i)
+                for (int i = 1; i < _worldSpaceBoundsExtentsOfAllSubmeshes.Count; ++i)
                 {
                     localBounds.Encapsulate(
-                        WorldSpacePointToColliderLocal(s_WorldSpaceBoundsExtentsOfAllSubmeshes[i], colliderTransform)
+                        WorldSpacePointToColliderLocal(_worldSpaceBoundsExtentsOfAllSubmeshes[i], colliderTransform)
                     );
                 }
             }
@@ -887,9 +887,9 @@ namespace KitchenDesign.Products
         ///     their cut-out size to change according to the user. The active
         ///     and up-to-date value is reflected here.
         /// </summary>
-        protected Vector3? m_CurrentCutOutSizeInMeters;
+        protected Vector3? _currentCutOutSizeInMeters;
 
-        protected bool m_NeedsCountertopCutOut;
+        protected bool _needsCountertopCutOut;
 
         protected ProductInfo m_ProductInfo;
 
@@ -901,7 +901,7 @@ namespace KitchenDesign.Products
         ///     For less GC, this list is reused by product visuals when they
         ///     are calculating their box collider shape.
         /// </summary>
-        protected static List<Vector3> s_WorldSpaceBoundsExtentsOfAllSubmeshes = new List<Vector3>();
+        protected static List<Vector3> _worldSpaceBoundsExtentsOfAllSubmeshes = new List<Vector3>();
 
 
     }   // class ProductVisualContent

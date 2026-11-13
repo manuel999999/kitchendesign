@@ -24,9 +24,9 @@ namespace KitchenDesign.Cameras
             m_BlendCamera.Priority = 30;
             m_OrthoCamera.Priority = 20;
 
-            Timing.KillCoroutines(m_CameraOrthoTransition);
+            Timing.KillCoroutines(_cameraOrthoTransition);
 
-            m_CameraOrthoTransition =
+            _cameraOrthoTransition =
                 Timing.RunCoroutine(
                     CutToOrthoAfterBlend(m_BlendCamera)
                 );
@@ -63,9 +63,9 @@ namespace KitchenDesign.Cameras
             m_BlendCamera.Priority = 30;
             m_OrthoCamera.Priority = 0;
 
-            Timing.KillCoroutines(m_CameraOrthoTransition);
+            Timing.KillCoroutines(_cameraOrthoTransition);
 
-            m_CameraOrthoTransition =
+            _cameraOrthoTransition =
                 CoroutineUtility.CallDelayedByFrames(
                     actionArgument: m_BlendCamera,
                     action: blendCamera => blendCamera.Priority = 0
@@ -75,27 +75,27 @@ namespace KitchenDesign.Cameras
         public void AdjustFieldOfView(float percentChange)
         {
             const float MinimumOrthographicSize = 1.25f;
-            if (percentChange < 1.0f && m_OrthoCameraDesiredOrthographicSize <= MinimumOrthographicSize)
+            if (percentChange < 1.0f && _orthoCameraDesiredOrthographicSize <= MinimumOrthographicSize)
             {
                 return;
             }
 
             const float MaximumOrthographicSize = 10.0f;
-            if (percentChange > 1.0f && m_OrthoCameraDesiredOrthographicSize >= MaximumOrthographicSize)
+            if (percentChange > 1.0f && _orthoCameraDesiredOrthographicSize >= MaximumOrthographicSize)
             {
                 return;
             }
 
-            m_OrthoCameraDesiredOrthographicSize *= percentChange;
-            m_BlendCameraDesiredFieldOfView *= percentChange;
+            _orthoCameraDesiredOrthographicSize *= percentChange;
+            _blendCameraDesiredFieldOfView *= percentChange;
         }
 
         protected void Awake()
         {
-            m_OrthoCameraDesiredOrthographicSize =
+            _orthoCameraDesiredOrthographicSize =
                 m_OrthoCamera.Lens.OrthographicSize;
 
-            m_BlendCameraDesiredFieldOfView =
+            _blendCameraDesiredFieldOfView =
                 m_BlendCamera.Lens.FieldOfView;
         }
 
@@ -106,16 +106,16 @@ namespace KitchenDesign.Cameras
             m_OrthoCamera.Lens.OrthographicSize =
                 Mathf.SmoothDamp(
                     m_OrthoCamera.Lens.OrthographicSize,
-                    m_OrthoCameraDesiredOrthographicSize,
-                    ref m_OrthoCameraOrthographicSizeVelocity,
+                    _orthoCameraDesiredOrthographicSize,
+                    ref _orthoCameraOrthographicSizeVelocity,
                     SmoothTimeInSeconds
                 );
 
             m_BlendCamera.Lens.FieldOfView =
                 Mathf.SmoothDamp(
                     m_BlendCamera.Lens.FieldOfView,
-                    m_BlendCameraDesiredFieldOfView,
-                    ref m_BlendCameraFieldOfViewVelocity,
+                    _blendCameraDesiredFieldOfView,
+                    ref _blendCameraFieldOfViewVelocity,
                     SmoothTimeInSeconds
                 );
         }
@@ -138,15 +138,15 @@ namespace KitchenDesign.Cameras
         // Non-serialized fields
         // ====================================================================
 
-        protected CinemachineFollowZoom m_BlendCameraFollowZoom;
+        protected CinemachineFollowZoom _blendCameraFollowZoom;
 
-        protected CoroutineHandle m_CameraOrthoTransition;
+        protected CoroutineHandle _cameraOrthoTransition;
 
-        protected float m_OrthoCameraDesiredOrthographicSize;
-        protected float m_OrthoCameraOrthographicSizeVelocity;
+        protected float _orthoCameraDesiredOrthographicSize;
+        protected float _orthoCameraOrthographicSizeVelocity;
 
-        protected float m_BlendCameraDesiredFieldOfView;
-        protected float m_BlendCameraFieldOfViewVelocity;
+        protected float _blendCameraDesiredFieldOfView;
+        protected float _blendCameraFieldOfViewVelocity;
 
     }   // class OverheadCameraControl
 

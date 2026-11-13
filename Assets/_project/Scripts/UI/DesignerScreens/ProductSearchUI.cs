@@ -31,7 +31,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Properties
         // =====================================================================
 
-        protected bool m_IsSearching = false;
+        protected bool _isSearching = false;
 
         // =====================================================================
         // Methods Methods
@@ -56,7 +56,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         private void OnClickSearch(MelcherButton button)
         {
-            if(m_IsSearching)
+            if(_isSearching)
             {
                 return;
             }
@@ -181,14 +181,14 @@ namespace KitchenDesign.UI.DesignerScreens
 
         private void DisableSearchBox()
         {
-            m_IsSearching = true;
+            _isSearching = true;
             m_SearchContentGroup.interactable = false;
             m_SearchButton.interactable = false;
         }
 
         private void EnableSearchBox()
         {
-            m_IsSearching = false;
+            _isSearching = false;
             m_SearchContentGroup.interactable = true;
             m_SearchButton.interactable = true;
         }

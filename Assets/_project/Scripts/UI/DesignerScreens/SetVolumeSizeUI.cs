@@ -70,7 +70,7 @@ namespace KitchenDesign.UI.DesignerScreens
             }
 
             m_TargetVolume = targetVolume;
-            m_CurrentVolumeDepthInMeters = targetVolume.resizerCuboid.depth;
+            _currentVolumeDepthInMeters = targetVolume.resizerCuboid.depth;
             m_MessageBox.Clear();
 
             // Setup width control.
@@ -94,7 +94,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             m_WidthInputField.text = widthAsText;
 
-            m_DisplayedWidthMetersDelta =
+            _displayedWidthMetersDelta =
                 displayedWidthInMeters - targetVolume.resizerCuboid.width;
 
             // Setup depth control.
@@ -184,10 +184,10 @@ namespace KitchenDesign.UI.DesignerScreens
                 CabinetSpan cabinetSpan =
                     cabinet.kitchen.layout.FindCabinetSpan(cabinet);
 
-                if (cabinetSpan.CanResizeBaseCabinetDepth(m_CurrentVolumeDepthInMeters))
+                if (cabinetSpan.CanResizeBaseCabinetDepth(_currentVolumeDepthInMeters))
                 {
                     EventDesigner.OnToastRequested.Raise(new ToastInfo("", holdDuration: 0.0f));
-                    cabinetSpan.SetBaseCabinetDepth(m_CurrentVolumeDepthInMeters);
+                    cabinetSpan.SetBaseCabinetDepth(_currentVolumeDepthInMeters);
                 }
             }
 
@@ -260,7 +260,7 @@ namespace KitchenDesign.UI.DesignerScreens
                 // the length of adjacent cabinets are included in the
                 // "displayed" length.
                 float actualUserInputWidthInMeters =
-                    displayedUserInputWidthInMeters - m_DisplayedWidthMetersDelta;
+                    displayedUserInputWidthInMeters - _displayedWidthMetersDelta;
 
                 Cabinet targetCabinet = m_TargetVolume as Cabinet;
 
@@ -269,7 +269,7 @@ namespace KitchenDesign.UI.DesignerScreens
                     if (actualUserInputWidthInMeters < targetCabinet.minSizeInMeters.x)
                     {
                         float minSizeInMeters =
-                            targetCabinet.minSizeInMeters.x + m_DisplayedWidthMetersDelta;
+                            targetCabinet.minSizeInMeters.x + _displayedWidthMetersDelta;
 
                         string minSizeInUserUnits;
 
@@ -293,7 +293,7 @@ namespace KitchenDesign.UI.DesignerScreens
                     if (actualUserInputWidthInMeters > targetCabinet.maxSizeInMeters.x)
                     {
                         float maxSizeInMeters =
-                            targetCabinet.maxSizeInMeters.x + m_DisplayedWidthMetersDelta;
+                            targetCabinet.maxSizeInMeters.x + _displayedWidthMetersDelta;
 
                         string maxSizeInUserUnits;
 
@@ -405,12 +405,12 @@ namespace KitchenDesign.UI.DesignerScreens
         ///     The number of meters that the "display width" differs from the
         ///     actual cuboid width.
         /// </summary>
-        protected float m_DisplayedWidthMetersDelta;
+        protected float _displayedWidthMetersDelta;
 
         /// <summary>
         ///     The initial depth of the volume when the prompt was shown.
         /// </summary>
-        protected float m_CurrentVolumeDepthInMeters;
+        protected float _currentVolumeDepthInMeters;
 
     }   // class SetVolumeWidthUI
 

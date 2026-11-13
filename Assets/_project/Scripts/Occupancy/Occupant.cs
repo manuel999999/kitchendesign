@@ -65,23 +65,23 @@ namespace KitchenDesign.Occupancy
         ///     the loaded-as-needed <see cref="ProductVisualContent"/> (as an
         ///     asset address).
         /// </summary>
-        public ProductVisualSO productVisual => m_ProductVisual;
+        public ProductVisualSO productVisual => _productVisual;
 
         /// <summary>
         ///     The instantiated <see cref="ProductVisualContent" /> that is used to
         ///     represent the product in the kitchen.
         /// </summary>
-        public ProductVisualContent productVisualContentInstance => m_ProductVisualContentInstance;
+        public ProductVisualContent productVisualContentInstance => _productVisualContentInstance;
 
         public float metersFromVolumeMinX
         {
-            get => m_LocalPositionInVolumeSpace.x;
+            get => _localPositionInVolumeSpace.x;
             set
             {
-                m_LocalPositionInVolumeSpace.x = value;
+                _localPositionInVolumeSpace.x = value;
 
-                Transform visualTransform = m_ProductVisualContentInstance.GetTransform();
-                visualTransform.localPosition = m_LocalPositionInVolumeSpace;
+                Transform visualTransform = _productVisualContentInstance.GetTransform();
+                visualTransform.localPosition = _localPositionInVolumeSpace;
             }
         }
 
@@ -97,7 +97,7 @@ namespace KitchenDesign.Occupancy
         {
             get
             {
-                OccupiableVolume current = m_OccupiedVolume;
+                OccupiableVolume current = _occupiedVolume;
 
                 while (current != null && current.parentVolume != null)
                 {
@@ -116,12 +116,12 @@ namespace KitchenDesign.Occupancy
         //       cyclical references" restriction similar to ICabinet and
         //       IKitchen. I.e., Occupant knows about OccupiableVolumes and
         //       OccupiableVolume knows about and has a list of Occupants.
-        public OccupiableVolume occupiedVolume => m_OccupiedVolume;
+        public OccupiableVolume occupiedVolume => _occupiedVolume;
 
         public bool isLockedToCabinet
         {
-            get => m_IsLockedToCabinet;
-            set => m_IsLockedToCabinet = value;
+            get => _isLockedToCabinet;
+            set => _isLockedToCabinet = value;
         }
 
         // ====================================================================
@@ -355,10 +355,10 @@ namespace KitchenDesign.Occupancy
             }
 
             m_ProductInfo = productInfo;
-            m_ProductVisual = newProductVisual;
-            m_ProductVisualContentInstance = newProductVisualInstance;
-            m_ProductVisualContentInstance.SetProductVisibility(true);
-            m_ProductVisualContentInstance.SetCutOutSizeInMeters(m_ProductVisual.info, productInfo.cutOutSizeInMeters);
+            _productVisual = newProductVisual;
+            _productVisualContentInstance = newProductVisualInstance;
+            _productVisualContentInstance.SetProductVisibility(true);
+            _productVisualContentInstance.SetCutOutSizeInMeters(_productVisual.info, productInfo.cutOutSizeInMeters);
 
             // Get a truncated product name. Some of the product names are
             // really long!
@@ -377,7 +377,7 @@ namespace KitchenDesign.Occupancy
             // TODO: Truncate the manufacturer name?
 
             // Show the (truncated) product name, manufacturer and product ID
-            m_ProductVisualContentInstance.SetCutOutInfoLabelText(
+            _productVisualContentInstance.SetCutOutInfoLabelText(
                 $"<font-weight=\"300\">{truncatedProductName}</font-weight>\n{manufacturerInfo.name} - {productInfo.sku}"
             );
         }
@@ -394,13 +394,13 @@ namespace KitchenDesign.Occupancy
             float?          volumePositionY = null,
             float?          volumePositionZ = null)
         {
-            if (cabinetVolume == m_OccupiedVolume)
+            if (cabinetVolume == _occupiedVolume)
             {
                 // Do nothing if this is the same cabinet
                 return;
             }
 
-            if (m_OccupiedVolume != null)
+            if (_occupiedVolume != null)
             {
                 // Notify listeners when we're changing cabinets
                 NotifyOccupantListeners(
@@ -408,12 +408,12 @@ namespace KitchenDesign.Occupancy
                 );
             }
 
-            m_OccupiedVolume = cabinetVolume;
+            _occupiedVolume = cabinetVolume;
 
-            if (m_OccupiedVolume != null)
+            if (_occupiedVolume != null)
             {
                 Vector3 scaleOriginLocalPosition =
-                    m_ProductVisualContentInstance.scaleOrigin.localPosition;
+                    _productVisualContentInstance.scaleOrigin.localPosition;
 
                 // Center the product within its occupied space.
                 scaleOriginLocalPosition.x = 0.0f;
@@ -422,14 +422,14 @@ namespace KitchenDesign.Occupancy
                 {
                     scaleOriginLocalPosition.x = (productInfo.productSizeInMeters.x - productInfo.cutOutSizeInMeters.x) * 0.5f;
                 }
-                else if (m_OccupiedVolume.DoesApplyHorizontalPadding(productInfo))
+                else if (_occupiedVolume.DoesApplyHorizontalPadding(productInfo))
                 {
                     scaleOriginLocalPosition.x = productInfo.productPaddingInMeters.left;
                 }
 
-                m_ProductVisualContentInstance.scaleOrigin.localPosition = scaleOriginLocalPosition;
+                _productVisualContentInstance.scaleOrigin.localPosition = scaleOriginLocalPosition;
 
-                Transform visualTransform = m_ProductVisualContentInstance.GetTransform();
+                Transform visualTransform = _productVisualContentInstance.GetTransform();
 
                 visualTransform.SetParent(
                     cabinetVolume.GetTransform(),
@@ -451,7 +451,7 @@ namespace KitchenDesign.Occupancy
                     localPositionInVolume.z = volumePositionZ.Value;
                 }
 
-                SetLocalPositionInCabinet(localPositionInVolume, m_OccupiedVolume.GetLocalOrientationForOccupants());
+                SetLocalPositionInCabinet(localPositionInVolume, _occupiedVolume.GetLocalOrientationForOccupants());
 
                 MelcherLog.LogEditorOnly("Notifying listeners OnAddedToCabinet", this);
                 NotifyOccupantListeners(
@@ -468,7 +468,7 @@ namespace KitchenDesign.Occupancy
         /// </summary>
         public void SetCutOutSizeInMeters(Vector3 cutOutSizeInMeters)
         {
-            productVisualContentInstance.SetCutOutSizeInMeters(m_ProductVisual.info, cutOutSizeInMeters, notifyListeners: true);
+            productVisualContentInstance.SetCutOutSizeInMeters(_productVisual.info, cutOutSizeInMeters, notifyListeners: true);
             RefreshCutOuts();
         }
 
@@ -483,10 +483,10 @@ namespace KitchenDesign.Occupancy
             bool cutOutBack = IsCutOutFlushWithVolume(CabinetLocalDirection.Back);
 
             // Allow the visual to override adjacent faces from being cut-out
-            if (!m_ProductVisual.info.allowAdjacentCutOutWhenFlush)
+            if (!_productVisual.info.allowAdjacentCutOutWhenFlush)
             {
                 // Forbid the adjacent faces from being cut-out
-                if (m_ProductVisual.info.anchor.IsOnTop())
+                if (_productVisual.info.anchor.IsOnTop())
                 {
                     cutOutFront = false;
                     cutOutBack = false;
@@ -514,7 +514,7 @@ namespace KitchenDesign.Occupancy
             //       depth of the cabinet. I.e., the overhang is only
             //       adjusted to the front or to the back
             float countertopOverhangInMeters = 0.0f;
-            bool isOnOrAtFront = m_ProductVisual.info.anchor.IsOnOrAtFront();
+            bool isOnOrAtFront = _productVisual.info.anchor.IsOnOrAtFront();
             if (isOnOrAtFront && cutOutFront)
             {
                 // The cut-out should extend to cut-away the overhang
@@ -532,7 +532,7 @@ namespace KitchenDesign.Occupancy
 
             float cabinetCutOutMetersToKeepBelowCountertop = 0.0f;
 
-            if (m_OccupiedVolume is Cabinet occupiedCabinet &&
+            if (_occupiedVolume is Cabinet occupiedCabinet &&
                 occupiedCabinet.cabinetSectionVisual)
             {
                 if (occupiedCabinet.cabinetSectionVisual.info.sectionModelType == CabinetModelType.Authored &&
@@ -550,7 +550,7 @@ namespace KitchenDesign.Occupancy
                 CabinetCutOutMode cutOutMode =
                     occupiedCabinet.cabinetSectionVisual.info.sectionCutOutMode;
 
-                if (!m_ProductVisual.info.anchor.IsAtBottom())
+                if (!_productVisual.info.anchor.IsAtBottom())
                 {
                     // These rules currently only apply to occupants that
                     // touch the countertop. Therefore, the `!IsAtBottom()`
@@ -568,7 +568,7 @@ namespace KitchenDesign.Occupancy
                             StollSizes.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop;
                     }
                     else if (cutOutMode == CabinetCutOutMode.NoCutOuts ||
-                        (cutOutMode == CabinetCutOutMode.NoSmokerCutOuts && m_ProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker))
+                        (cutOutMode == CabinetCutOutMode.NoSmokerCutOuts && _productVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker))
                     {
                         // Disable all cut-outs.
 
@@ -583,7 +583,7 @@ namespace KitchenDesign.Occupancy
                 }
             }
 
-            m_ProductVisualContentInstance.SetCountertopSize(
+            _productVisualContentInstance.SetCountertopSize(
                 countertopThickness,
                 countertopOverhangInMeters,
                 cabinetCutOutMetersToKeepBelowCountertop
@@ -607,7 +607,7 @@ namespace KitchenDesign.Occupancy
             // Anchor the product to the cabinet
             Transform visualTransform = productVisualContentInstance.GetTransform();
             Vector3 localAnchoredPosition = visualTransform.localPosition;
-            switch (m_ProductVisual.info.anchor)
+            switch (_productVisual.info.anchor)
             {
                 case ProductAnchor.OnFrontAtBottom:
                     localAnchoredPosition.y = 0.0f;
@@ -632,7 +632,7 @@ namespace KitchenDesign.Occupancy
                     break;
 
                 default:
-                    MelcherLog.LogError("Unhandled anchor: " + m_ProductVisual.info.anchor);
+                    MelcherLog.LogError("Unhandled anchor: " + _productVisual.info.anchor);
                     break;
             }
             visualTransform.localPosition = localAnchoredPosition;
@@ -677,7 +677,7 @@ namespace KitchenDesign.Occupancy
                 }
             }
 
-            await m_ProductVisualContentInstance.SetCabinetMaterials(
+            await _productVisualContentInstance.SetCabinetMaterials(
                 cabinetMaterial,
                 countertopMaterial,
                 productCabinetMaterialIdentifier
@@ -708,7 +708,7 @@ namespace KitchenDesign.Occupancy
         /// </summary>
         public Vector3 GetLocalPositionInVolume()
         {
-            return m_LocalPositionInVolumeSpace;
+            return _localPositionInVolumeSpace;
         }
 
         /// <summary>
@@ -728,9 +728,9 @@ namespace KitchenDesign.Occupancy
         /// </param>
         public void SetLocalPositionInCabinet(Vector3 positionInCabinetSpace, Transform cabinetOccupantOrientation)
         {
-            m_LocalPositionInVolumeSpace = positionInCabinetSpace;
+            _localPositionInVolumeSpace = positionInCabinetSpace;
 
-            Transform visualTransform = m_ProductVisualContentInstance.GetTransform();
+            Transform visualTransform = _productVisualContentInstance.GetTransform();
 
             Vector3 worldSpacePosition =
                 cabinetOccupantOrientation.TransformPoint(positionInCabinetSpace);
@@ -750,8 +750,8 @@ namespace KitchenDesign.Occupancy
         {
             Cuboid cutOutCuboid =
                 GetCutOutCuboidInVisualSpace(
-                    m_ProductVisual.info,
-                    m_ProductVisualContentInstance,
+                    _productVisual.info,
+                    _productVisualContentInstance,
                     currentCutOutSizeInMeters
                 );
 
@@ -789,7 +789,7 @@ namespace KitchenDesign.Occupancy
         /// </summary>
         public bool IsCutOutFlushWithVolume(CabinetLocalDirection volumeFaceNormal)
         {
-            ProductAnchor anchor = m_ProductVisual.info.anchor;
+            ProductAnchor anchor = _productVisual.info.anchor;
 
             Func<Cuboid, float> getCuboidEdge = null;
 
@@ -863,7 +863,7 @@ namespace KitchenDesign.Occupancy
                 throw new ArgumentNullException(nameof(listenerAction));
             }
 
-            if (s_IsListenerListInUse)
+            if (_isListenerListInUse)
             {
                 // Guard against recursive calls. We're sharing this list of
                 // listeners with all products and need to ensure it isn't
@@ -876,10 +876,10 @@ namespace KitchenDesign.Occupancy
 
             // Mark the list as in-use and setup a scope guard to automatically
             // revert the in-use flag when the scope exits
-            s_IsListenerListInUse = true;
+            _isListenerListInUse = true;
             using var _ =
                 MelcherDeferred.Defer(
-                    () => s_IsListenerListInUse = false
+                    () => _isListenerListInUse = false
                 );
 
             GetComponents(s_OccupantListeners);
@@ -925,7 +925,7 @@ namespace KitchenDesign.Occupancy
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (!m_ProductVisual.info.isDraggable)
+            if (!_productVisual.info.isDraggable)
             {
                 eventData.pointerDrag = null;
                 return;
@@ -955,10 +955,10 @@ namespace KitchenDesign.Occupancy
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!m_LastDragTask.HasValue || m_LastDragTask.Value.Status != UniTaskStatus.Pending)
+            if (!_lastDragTask.HasValue || _lastDragTask.Value.Status != UniTaskStatus.Pending)
             {
-                m_LastDragTask = this._kitchen.OnOccupantDragEnd((this, eventData));
-                m_LastDragTask.Value.Forget();
+                _lastDragTask = this._kitchen.OnOccupantDragEnd((this, eventData));
+                _lastDragTask.Value.Forget();
             }
         }
 
@@ -982,13 +982,13 @@ namespace KitchenDesign.Occupancy
         /// <summary>
         ///     The product visual data that represents the this occupant.
         /// </summary>
-        protected ProductVisualSO m_ProductVisual;
+        protected ProductVisualSO _productVisual;
 
         /// <summary>
         ///     A unique instantiation of the product's content prefab for this
         ///     object.
         /// </summary>
-        protected ProductVisualContent m_ProductVisualContentInstance;
+        protected ProductVisualContent _productVisualContentInstance;
 
         /// <summary>
         ///     The <see cref="OccupiableVolume"/> that is most directly
@@ -998,7 +998,7 @@ namespace KitchenDesign.Occupancy
         ///     attached to directly to a cabinet and thus this will be a
         ///     <see cref="Cabinet"/>.
         /// </summary>
-        protected OccupiableVolume m_OccupiedVolume;
+        protected OccupiableVolume _occupiedVolume;
 
         /// <summary>
         /// The local position of the product in cabinet space. This is saved
@@ -1006,16 +1006,16 @@ namespace KitchenDesign.Occupancy
         /// value does not include any custom rotation that would be applied by
         /// a 45-degree corner cabinet.
         /// </summary>
-        protected Vector3 m_LocalPositionInVolumeSpace;
+        protected Vector3 _localPositionInVolumeSpace;
 
         /// <summary>
         ///     This marks an occupant as being permanently attached to its
         ///     cabinet. A locked occupant cannot be moved to a different
         ///     cabinet and can only be removed if its cabinet is destroyed.
         /// </summary>
-        protected bool m_IsLockedToCabinet;
+        protected bool _isLockedToCabinet;
 
-        private UniTask? m_LastDragTask;
+        private UniTask? _lastDragTask;
 
         // =====================================================================
         // Static fields
@@ -1033,7 +1033,7 @@ namespace KitchenDesign.Occupancy
         /// list must only be used by one <see cref="Occupant"/> at a time. This
         /// field lets us detect if this requirement ever fails.
         /// </summary>
-        protected static bool s_IsListenerListInUse;
+        protected static bool _isListenerListInUse;
 
     }   // class Occupant
 

@@ -48,19 +48,19 @@ namespace KitchenDesign.UI.DesignerScreens
 
             string variantLabelText = "";
 
-            m_ProductVariantIndex = -1;
+            _productVariantIndex = -1;
 
             if (productVariants != null && productVariants.Count > 0)
             {
-                m_ProductVariantIndex =
+                _productVariantIndex =
                     productVariants.IndexOf(m_ProductInfo.id);
 
                 MelcherLog.Assert(
-                    m_ProductVariantIndex >= 0,
+                    _productVariantIndex >= 0,
                     $"A product belongs to a product variant chain but its ID is not in the product variant chain. Product is {m_ProductInfo.name} (id: {m_ProductInfo.id}, baseProductId: {m_ProductInfo.baseProductId})"
                 );
 
-                int displayIndex = m_ProductVariantIndex + 1;
+                int displayIndex = _productVariantIndex + 1;
 
                 variantLabelText = $"{displayIndex} of {productVariants.Count}";
             }
@@ -71,7 +71,7 @@ namespace KitchenDesign.UI.DesignerScreens
             m_VariantsIndexBackground.gameObject.SetActive(useVariantsLabel);
         }
 
-        public int productVariantIndex => m_ProductVariantIndex;
+        public int productVariantIndex => _productVariantIndex;
 
         public bool belongsToProductVariantChain => m_VariantsIndexBackground.gameObject.activeSelf;
 
@@ -82,8 +82,8 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected override ToolbarButton highlightedButton
         {
-            get => s_HighlightedProductButton;
-            set => s_HighlightedProductButton = value;
+            get => _highlightedProductButton;
+            set => _highlightedProductButton = value;
         }
         // =====================================================================
         // Static functions
@@ -91,7 +91,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         internal static void ForgetHighlight()
         {
-            s_HighlightedProductButton = null;
+            _highlightedProductButton = null;
         }
 
         // =====================================================================
@@ -156,13 +156,13 @@ namespace KitchenDesign.UI.DesignerScreens
         ///     greater than this is within the base product's list stored at
         ///     <see cref="ProFitGlobals.baseProductIdToProductVariantIds"/>.
         /// </summary>
-        protected int m_ProductVariantIndex;
+        protected int _productVariantIndex;
 
         // =====================================================================
         // Static fields
         // =====================================================================
 
-        protected static ToolbarButton s_HighlightedProductButton;
+        protected static ToolbarButton _highlightedProductButton;
 
     }   // class ToolbarProductButton
 

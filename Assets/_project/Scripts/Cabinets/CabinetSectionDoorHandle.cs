@@ -199,7 +199,7 @@ namespace KitchenDesign.Cabinets
 
         private void TryInitializeHandleStyles()
         {
-            if(m_IsInitialized)
+            if(_isInitialized)
             {
                 return;
             }
@@ -215,7 +215,7 @@ namespace KitchenDesign.Cabinets
                 handle.SetActive(false);
             }
 
-            m_IsInitialized = true;
+            _isInitialized = true;
         }
 
 
@@ -228,7 +228,7 @@ namespace KitchenDesign.Cabinets
         public int hanndleCount = 0;
 
         protected GameObject[] m_Handles;
-        protected bool m_IsInitialized = false;
+        protected bool _isInitialized = false;
 
 #endregion /Fields
 

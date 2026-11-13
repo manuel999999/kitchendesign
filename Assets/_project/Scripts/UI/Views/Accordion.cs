@@ -18,7 +18,7 @@ namespace KitchenDesign.UI.Views
         // Properties
         // =====================================================================
 
-        public bool isExpanded => m_IsExpanded;
+        public bool isExpanded => _isExpanded;
 
         public LayoutGroup contentLayout => m_ContentLayout;
 
@@ -31,7 +31,7 @@ namespace KitchenDesign.UI.Views
         /// </summary>
         public void Snap(bool expand)
         {
-            m_IsExpanded = expand;
+            _isExpanded = expand;
             m_Sequence.KillIfActive();
 
             // Interactable when expanded, otherwise not
@@ -56,7 +56,7 @@ namespace KitchenDesign.UI.Views
         /// </summary>
         public void TweenUsingDuration(bool expand, float duration, Ease ease = Ease.OutExpo)
         {
-            m_IsExpanded = expand;
+            _isExpanded = expand;
 
             Vector4 maskPadding = Vector4.zero;
             Vector4 rootPadding = m_BasePadding;
@@ -202,7 +202,7 @@ namespace KitchenDesign.UI.Views
 
         protected RecyclableTween<Sequence> m_Sequence = new RecyclableTween<Sequence>();
 
-        protected bool m_IsExpanded;
+        protected bool _isExpanded;
 
         // ====================================================================
         // Editor

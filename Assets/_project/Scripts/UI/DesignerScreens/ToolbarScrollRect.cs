@@ -104,7 +104,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             if (tween != null)
             {
-                m_ScrollTween.Reset(tween);
+                _scrollTween.Reset(tween);
             }
         }
 
@@ -145,7 +145,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Non-serialized fields
         // ====================================================================
 
-        private RecyclableTween<Tween> m_ScrollTween = new RecyclableTween<Tween>();
+        private RecyclableTween<Tween> _scrollTween = new RecyclableTween<Tween>();
 
     }   // class ToolbarScrollRect
 

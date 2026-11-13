@@ -93,10 +93,10 @@ namespace KitchenDesign.Measures
 
         public MeasureMode measureMode
         {
-            get => m_MeasureMode;
+            get => _measureMode;
             set
             {
-                m_MeasureMode = value;
+                _measureMode = value;
 
                 UpdateMeasurements();
             }
@@ -127,19 +127,19 @@ namespace KitchenDesign.Measures
         {
             m_HighlightedObject = highlightObject;
 
-            m_HighlightedCabinet = highlightObject?.GetComponent<Cabinet>();
-            m_HighlightedProduct = highlightObject?.GetComponent<Occupant>();
-            m_HighlightedBacking = highlightObject?.GetComponent<CabinetBacking>();
+            _highlightedCabinet = highlightObject?.GetComponent<Cabinet>();
+            _highlightedProduct = highlightObject?.GetComponent<Occupant>();
+            _highlightedBacking = highlightObject?.GetComponent<CabinetBacking>();
 
             // Left and right measurements are only displyed when a product is
             // selected. When a cabinet is selected, they are hidden.
-            m_MeasureLeft.gameObject.SetActive(m_HighlightedProduct);
-            m_MeasureRight.gameObject.SetActive(m_HighlightedProduct);
+            m_MeasureLeft.gameObject.SetActive(_highlightedProduct);
+            m_MeasureRight.gameObject.SetActive(_highlightedProduct);
 
-            m_CanMeasureSelectedObject =
-                (m_HighlightedCabinet || m_HighlightedProduct) && !m_HighlightedBacking;
+            _canMeasureSelectedObject =
+                (_highlightedCabinet || _highlightedProduct) && !_highlightedBacking;
 
-            m_MeasureSelected.gameObject.SetActive(m_CanMeasureSelectedObject);
+            m_MeasureSelected.gameObject.SetActive(_canMeasureSelectedObject);
 
             UpdateMeasurements();
 
@@ -148,7 +148,7 @@ namespace KitchenDesign.Measures
 
         protected void UpdateMeasurements()
         {
-            if (!m_HighlightedProduct)
+            if (!_highlightedProduct)
             {
                 // Remove the measurement overlays. These are used to keep the
                 // labels at a consistent screen size but they can be hidden
@@ -157,7 +157,7 @@ namespace KitchenDesign.Measures
                 m_MeasurementOverlayUi.RemoveMeasurement(m_MeasureRight);
             }
 
-            if (!m_CanMeasureSelectedObject)
+            if (!_canMeasureSelectedObject)
             {
                 m_MeasurementOverlayUi.RemoveMeasurement(m_MeasureSelected);
             }
@@ -176,12 +176,12 @@ namespace KitchenDesign.Measures
         /// </summary>
         protected void UpdateMeasurementsForProduct()
         {
-            if (!m_HighlightedProduct)
+            if (!_highlightedProduct)
             {
                 return;
             }
 
-            OccupiableVolume occupiedVolume = m_HighlightedProduct.occupiedVolume;
+            OccupiableVolume occupiedVolume = _highlightedProduct.occupiedVolume;
 
             Cabinet cabinet = occupiedVolume as Cabinet;
 
@@ -189,11 +189,11 @@ namespace KitchenDesign.Measures
             float metersToNearestRight = 0.0f;
 
             Cuboid selectedProductCutOutCuboidInCabinetSpace =
-                m_HighlightedProduct.GetCutOutCuboidInVolumeSpace();
+                _highlightedProduct.GetCutOutCuboidInVolumeSpace();
 
-            if (m_MeasureMode == MeasureMode.ToNearestOccupant)
+            if (_measureMode == MeasureMode.ToNearestOccupant)
             {
-                if (!occupiedVolume.FindNearestOccupantInDirection(m_HighlightedProduct, CabinetLocalDirection.Left, out metersToNearestLeft) &&
+                if (!occupiedVolume.FindNearestOccupantInDirection(_highlightedProduct, CabinetLocalDirection.Left, out metersToNearestLeft) &&
                     cabinet != null)
                 {
                     metersToNearestLeft =
@@ -203,7 +203,7 @@ namespace KitchenDesign.Measures
                         );
                 }
 
-                if (!occupiedVolume.FindNearestOccupantInDirection(m_HighlightedProduct, CabinetLocalDirection.Right, out metersToNearestRight) &&
+                if (!occupiedVolume.FindNearestOccupantInDirection(_highlightedProduct, CabinetLocalDirection.Right, out metersToNearestRight) &&
                     cabinet != null)
                 {
                     metersToNearestRight =
@@ -213,7 +213,7 @@ namespace KitchenDesign.Measures
                         );
                 }
             }
-            else if (m_MeasureMode == MeasureMode.ToCabinetEdge)
+            else if (_measureMode == MeasureMode.ToCabinetEdge)
             {
                 metersToNearestLeft = selectedProductCutOutCuboidInCabinetSpace.xMin - occupiedVolume.occupiableCuboid.xMin;
                 metersToNearestRight = occupiedVolume.occupiableCuboid.xMax - selectedProductCutOutCuboidInCabinetSpace.xMax;
@@ -243,7 +243,7 @@ namespace KitchenDesign.Measures
             Vector3 measurementLeftStartInVolumeSpace =
                 selectedProductCutOutCuboidInCabinetSpace.min;
 
-            if (m_HighlightedProduct.productVisual.info.anchor.IsOnTop())
+            if (_highlightedProduct.productVisual.info.anchor.IsOnTop())
             {
                 // Snap the line renderer to the top of the cabinet
                 measurementLeftStartInVolumeSpace.y =
@@ -263,14 +263,14 @@ namespace KitchenDesign.Measures
 
                 // Offset the measurement line from the cabinet to prevent
                 // clipping
-                if (m_HighlightedProduct.productVisual.info.anchor.IsOnFront())
+                if (_highlightedProduct.productVisual.info.anchor.IsOnFront())
                 {
                     measurementLeftStartInVolumeSpace.z =
                         -MeasurementLineOffsetFromCabinetInMeters;
                 }
                 else
                 {
-                    bool showLineAtFront = m_HighlightedProduct.productVisual.info.anchor.IsOnOrAtFront();
+                    bool showLineAtFront = _highlightedProduct.productVisual.info.anchor.IsOnOrAtFront();
 
                     float normalizedZ = showLineAtFront ? 0.0f : 1.0f;
 
@@ -316,9 +316,9 @@ namespace KitchenDesign.Measures
             );
 
             // Draw the length of the cabinet shelf (if one is selected)
-            if (m_CanMeasureSelectedObject)
+            if (_canMeasureSelectedObject)
             {
-                Cuboid shelfCutOut = m_HighlightedProduct.GetCutOutCuboidInVolumeSpace();
+                Cuboid shelfCutOut = _highlightedProduct.GetCutOutCuboidInVolumeSpace();
 
                 Vector3 measurementSelectedStartInVolumeSpace = Cuboid.NormalizedToPoint(shelfCutOut, new Vector3(0.0f, 1.0f, 0.5f));
                 Vector3 measurementSelectedEndInVolumeSpace = Cuboid.NormalizedToPoint(shelfCutOut, new Vector3(1.0f, 1.0f, 0.5f));
@@ -345,13 +345,13 @@ namespace KitchenDesign.Measures
         /// </summary>
         protected void UpdateMeasurementsForCabinet()
         {
-            if (!m_HighlightedCabinet)
+            if (!_highlightedCabinet)
             {
                 return;
             }
 
             // Draw the length of the cabinet
-            Cuboid cabinetResizerCuboid = m_HighlightedCabinet.resizerCuboid;
+            Cuboid cabinetResizerCuboid = _highlightedCabinet.resizerCuboid;
 
             Vector3 measurementSelectedStartInVolumeSpace =
                 Cuboid.NormalizedToPoint(cabinetResizerCuboid, new Vector3(0.0f, 1.0f, 0.5f));
@@ -364,7 +364,7 @@ namespace KitchenDesign.Measures
 
             DrawMeasurementLine(
                 m_MeasureSelected,
-                m_HighlightedCabinet,
+                _highlightedCabinet,
                 measurementSelectedStartInVolumeSpace,
                 measurementSelectedEndInVolumeSpace,
                 canvasLabelPivot: new Vector2(0.5f, 0.5f)   // center the label
@@ -483,7 +483,7 @@ namespace KitchenDesign.Measures
 
             this.ApplyUserUnits();
 
-            m_MeasureMode = MeasureMode.ToNearestOccupant;
+            _measureMode = MeasureMode.ToNearestOccupant;
         }
 
         private void ApplyUserUnits()
@@ -519,17 +519,17 @@ namespace KitchenDesign.Measures
         // Non-serialized fields
         // ====================================================================
 
-        protected List<Occupant> m_PossibleBlockers = new List<Occupant>();
+        protected List<Occupant> _possibleBlockers = new List<Occupant>();
         protected GameObject m_HighlightedObject;
-        protected Occupant m_HighlightedProduct;
-        protected CabinetBacking m_HighlightedBacking;
+        protected Occupant _highlightedProduct;
+        protected CabinetBacking _highlightedBacking;
 
         /// <summary>
         ///     The <see cref="Cabinet"/> attached to the selected object. This
         ///     can only have a non-null value when Sections building method is
         ///     used which allows the player to select individual cabinets.
         /// </summary>
-        protected Cabinet m_HighlightedCabinet;
+        protected Cabinet _highlightedCabinet;
 
         /// <summary>
         ///     Whether <see cref="m_HighlightedObject"/> should display a
@@ -538,12 +538,12 @@ namespace KitchenDesign.Measures
         ///     cref="CabinetShelf"/> or a <see cref="Cabinet"/> when <see
         ///     cref="KitchenBuildingMethod.Sections"/> is active.
         /// </summary>
-        protected bool m_CanMeasureSelectedObject;
+        protected bool _canMeasureSelectedObject;
 
         /// <summary>
         ///     Defines which endpoints to consider for the measurement.
         /// </summary>
-        protected MeasureMode m_MeasureMode = MeasureMode.ToNearestOccupant;
+        protected MeasureMode _measureMode = MeasureMode.ToNearestOccupant;
 
         // ====================================================================
         // Types

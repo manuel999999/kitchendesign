@@ -31,7 +31,7 @@ namespace KitchenDesign.Photos
 
         public const int ThumbnailResolution = 256;
 
-        private static string m_UsedBrandCatalogName = "";
+        private static string _usedBrandCatalogName = "";
 
         /// <summary>
         ///     Prompt the user to load the screenshot scene so that the
@@ -630,12 +630,12 @@ namespace KitchenDesign.Photos
         {
             if (visualInfo.runtimePrefabCategory == ProductCategorySpecific.CabinetDoor)
             {
-                m_UsedBrandCatalogName = visualInfo.brandCatalogName;
+                _usedBrandCatalogName = visualInfo.brandCatalogName;
 
                 BrandCatalogSO usedBrandCatalog =
                     MelcherCommon.Find(
                         AppProfileStore.Profile.presetBrandCatalogs,
-                        static x => x.catalogTag == m_UsedBrandCatalogName
+                        static x => x.catalogTag == _usedBrandCatalogName
                     );
 
                 if(usedBrandCatalog == null)

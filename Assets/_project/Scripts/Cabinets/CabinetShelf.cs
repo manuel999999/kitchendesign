@@ -137,7 +137,7 @@ namespace KitchenDesign.Cabinets
         ///     to the shelf product itself and not the cabinet volume it is
         ///     occupying.
         /// </summary>
-        public Cuboid boundingCuboid => m_BoundingCuboid;
+        public Cuboid boundingCuboid => _boundingCuboid;
 
         /// <summary>
         ///     Get the nested countertop's cuboid in the shelf's local space.
@@ -429,19 +429,19 @@ namespace KitchenDesign.Cabinets
             // Make `occupiedSpaceInVolume` relative to the shelf itself. This
             // needs to use the negative height of the volume as the y-position
             // to correctly anchor the cuboid similar to the shelf's cut-out.
-            m_BoundingCuboid = occupiedSpaceInVolume;
-            m_BoundingCuboid.position = new Vector3(0.0f, -m_BoundingCuboid.height, 0.0f);
+            _boundingCuboid = occupiedSpaceInVolume;
+            _boundingCuboid.position = new Vector3(0.0f, -_boundingCuboid.height, 0.0f);
 
             foreach (Occupant occupant in occupants)
             {
                 Cuboid occupantCuboid =
                     CalculateOccupancyCuboidForOccupant(occupant);
 
-                m_BoundingCuboid = m_BoundingCuboid.Encapsulate(occupantCuboid);
+                _boundingCuboid = _boundingCuboid.Encapsulate(occupantCuboid);
             }
 
             // DEBUG: Drawing the cuboid to be sure it's local to this product.
-            //m_BoundingCuboid.Transform(GetTransform()).Draw(Color.yellow, 4.0f);
+            //_boundingCuboid.Transform(GetTransform()).Draw(Color.yellow, 4.0f);
         }
 
         protected override async UniTask OnOccupantAdded(Occupant addedOccupant)
@@ -731,7 +731,7 @@ namespace KitchenDesign.Cabinets
         ///     cut-out and all of its occupants. This is recalculated whenever
         ///     an occupant is added or removed.
         /// </summary>
-        protected Cuboid m_BoundingCuboid;
+        protected Cuboid _boundingCuboid;
 
         // ====================================================================
         // Nested types

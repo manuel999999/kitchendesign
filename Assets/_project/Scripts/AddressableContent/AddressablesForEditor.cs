@@ -54,7 +54,7 @@ namespace KitchenDesign.AddressableContent
         }
 
         [MelcherStaticFieldEditorTreatment.ResetToTypeDefault]
-        private static List<AddressableAssetGroupSchema> s_DefaultSchemas;
+        private static List<AddressableAssetGroupSchema> _defaultSchemas;
 
         public static AddressableAssetEntry MakeAddressable(string assetGuid, string groupName, string address)
         {
@@ -89,7 +89,7 @@ namespace KitchenDesign.AddressableContent
                             setAsDefaultGroup: false,
                             readOnly: false,
                             postEvent: false,
-                            schemasToCopy: s_DefaultSchemas
+                            schemasToCopy: _defaultSchemas
                         );
 
                     if (destinationGroup == null)
@@ -147,9 +147,9 @@ namespace KitchenDesign.AddressableContent
                 throw new System.InvalidOperationException(error);
             }
 
-            if (s_DefaultSchemas == null || s_DefaultSchemas.Count <= 0)
+            if (_defaultSchemas == null || _defaultSchemas.Count <= 0)
             {
-                s_DefaultSchemas = new (addressableSettings.DefaultGroup.Schemas);
+                _defaultSchemas = new (addressableSettings.DefaultGroup.Schemas);
             }
 
             return addressableSettings;

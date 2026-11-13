@@ -14,7 +14,7 @@ namespace KitchenDesign.Server
 {
     public static class ServerJson
     {
-        private static readonly StringBuilder s_CombinedErrorBuilder = new StringBuilder();
+        private static readonly StringBuilder _combinedErrorBuilder = new StringBuilder();
 
         public static KeyValuePair<string, string> GetAuthorizationHeader(string apiToken)
         {
@@ -79,14 +79,14 @@ namespace KitchenDesign.Server
 
             if (parser.hasErrors)
             {
-                s_CombinedErrorBuilder.Clear();
+                _combinedErrorBuilder.Clear();
 
                 foreach (MelcherJsonKeyResult error in parser.errors)
                 {
-                    s_CombinedErrorBuilder.AppendLine(error.exception.Message);
+                    _combinedErrorBuilder.AppendLine(error.exception.Message);
                 }
 
-                combinedError = new Exception(s_CombinedErrorBuilder.ToString());
+                combinedError = new Exception(_combinedErrorBuilder.ToString());
             }
 
             return combinedError;

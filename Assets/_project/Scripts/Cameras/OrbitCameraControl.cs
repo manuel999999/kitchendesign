@@ -51,7 +51,7 @@ namespace KitchenDesign.Cameras
         public float rotationIntervalInDegrees => m_RotateDegrees;
         public Transform orbitRoot => m_OrbitRoot;
         public CinemachineCamera virtualCamera => m_OrbitCamera;
-        public float initialCameraGroupFramingSize => m_InitialSideCameraGroupFramingSize;
+        public float initialCameraGroupFramingSize => _initialSideCameraGroupFramingSize;
 
         // ====================================================================
         // Methods
@@ -61,10 +61,10 @@ namespace KitchenDesign.Cameras
         {
             const float TweenSeconds = 1.0f;
 
-            m_TargetCameraYaw += deltaAngle;
+            _targetCameraYaw += deltaAngle;
 
-            m_CameraRotateTween.Reset(
-                m_OrbitRoot.DOLocalRotateQuaternion(Quaternion.Euler(Vector3.up * m_TargetCameraYaw), TweenSeconds)
+            _cameraRotateTween.Reset(
+                m_OrbitRoot.DOLocalRotateQuaternion(Quaternion.Euler(Vector3.up * _targetCameraYaw), TweenSeconds)
                     .SetLink(gameObject, LinkBehaviour.CompleteAndKillOnDisable)
                     .SetEase(Ease.OutQuad)
             );
@@ -74,13 +74,13 @@ namespace KitchenDesign.Cameras
         {
             const float TweenSeconds = 0.3f;
 
-            m_SideCameraGroupFramingSize = Mathf.Clamp(m_SideCameraGroupFramingSize + deltaZoom, 0.0f, 1.8f);
+            _sideCameraGroupFramingSize = Mathf.Clamp(_sideCameraGroupFramingSize + deltaZoom, 0.0f, 1.8f);
 
-            m_CameraZoomSequence.Reset(
+            _cameraZoomSequence.Reset(
                 DOTween.Sequence()
                     .SetLink(gameObject, LinkBehaviour.CompleteAndKillOnDisable)
                     .Join(
-                        TweenFramingSize(m_OrbitCamera, m_SideCameraGroupFramingSize, TweenSeconds)
+                        TweenFramingSize(m_OrbitCamera, _sideCameraGroupFramingSize, TweenSeconds)
                     ),
                 completePrevious: true
             );
@@ -110,11 +110,11 @@ namespace KitchenDesign.Cameras
 
         public void ResetView()
         {
-            m_OrbitRoot.eulerAngles = new Vector3(0.0f, m_InitialCameraYaw, 0.0f);
-            m_TargetCameraYaw = m_InitialCameraYaw;
+            m_OrbitRoot.eulerAngles = new Vector3(0.0f, _initialCameraYaw, 0.0f);
+            _targetCameraYaw = _initialCameraYaw;
 
             CinemachineGroupFraming sideGroupComposer = m_OrbitCamera.GetComponent<CinemachineGroupFraming>();
-            sideGroupComposer.FramingSize = m_InitialSideCameraGroupFramingSize;
+            sideGroupComposer.FramingSize = _initialSideCameraGroupFramingSize;
 
             //CinemachineGroupComposer topGroupComposer = m_TopCamera.GetCinemachineComponent<CinemachineGroupComposer>();
             //topGroupComposer.m_GroupFramingSize = m_InitialTopCameraGroupFramingSize;
@@ -123,13 +123,13 @@ namespace KitchenDesign.Cameras
 
         protected void Awake()
         {
-            m_InitialCameraYaw = m_OrbitRoot.eulerAngles.y;
-            m_TargetCameraYaw = m_InitialCameraYaw;
+            _initialCameraYaw = m_OrbitRoot.eulerAngles.y;
+            _targetCameraYaw = _initialCameraYaw;
 
             CinemachineGroupFraming sideGroupComposer =
                 m_OrbitCamera.GetComponent<CinemachineGroupFraming>();
-            m_InitialSideCameraGroupFramingSize = sideGroupComposer.FramingSize;
-            m_SideCameraGroupFramingSize = m_InitialSideCameraGroupFramingSize;
+            _initialSideCameraGroupFramingSize = sideGroupComposer.FramingSize;
+            _sideCameraGroupFramingSize = _initialSideCameraGroupFramingSize;
         }
 
         protected void OnEnable()
@@ -156,7 +156,7 @@ namespace KitchenDesign.Cameras
                 // by the kitchen layout.
 
                 m_OrbitRoot.eulerAngles = Vector3.up * layoutPrefab.designerCameraStartYaw;
-                m_TargetCameraYaw = layoutPrefab.designerCameraStartYaw;
+                _targetCameraYaw = layoutPrefab.designerCameraStartYaw;
             }
         }
 
@@ -179,15 +179,15 @@ namespace KitchenDesign.Cameras
         // Non-serialized fields
         // ====================================================================
 
-        protected RecyclableTween<Sequence> m_CameraZoomSequence = new ();
+        protected RecyclableTween<Sequence> _cameraZoomSequence = new ();
 
-        protected RecyclableTween<Tween> m_CameraRotateTween = new ();
+        protected RecyclableTween<Tween> _cameraRotateTween = new ();
 
-        protected float m_InitialSideCameraGroupFramingSize;
-        protected float m_SideCameraGroupFramingSize;
+        protected float _initialSideCameraGroupFramingSize;
+        protected float _sideCameraGroupFramingSize;
 
-        protected float m_InitialCameraYaw;
-        protected float m_TargetCameraYaw;
+        protected float _initialCameraYaw;
+        protected float _targetCameraYaw;
     }   // class OrbitCameraControl
 
 }   // namespace KitchenDesign.Cameras

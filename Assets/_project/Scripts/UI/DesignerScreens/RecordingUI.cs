@@ -32,7 +32,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // ====================================================================
 
         private Color m_DefaultColor;
-        private Color m_OffColor;
+        private Color _offColor;
 
         // ====================================================================
         // Methods
@@ -43,8 +43,8 @@ namespace KitchenDesign.UI.DesignerScreens
             base.Awake();
 
             m_DefaultColor = m_PointerFollower.color;
-            m_OffColor = m_DefaultColor;
-            m_OffColor.a = 0.0f;
+            _offColor = m_DefaultColor;
+            _offColor.a = 0.0f;
 
             m_ClickIndicator.rectTransform.localScale = Vector3.zero;
 
@@ -56,7 +56,7 @@ namespace KitchenDesign.UI.DesignerScreens
             base.OnEnable();
             DOTween.Kill(GetTweenID());
             m_PointerFollower.rectTransform.localScale = Vector3.zero;
-            m_PointerFollower.color = m_OffColor;
+            m_PointerFollower.color = _offColor;
         }
 
         protected override void OnDisable()
@@ -90,7 +90,7 @@ namespace KitchenDesign.UI.DesignerScreens
             else if (Input.GetMouseButtonUp(0))
             {
                 DOTween.Kill(tweenId);
-                m_PointerFollower.DOColor(m_OffColor, TweenDuration)
+                m_PointerFollower.DOColor(_offColor, TweenDuration)
                     .SetUpdate(isIndependentUpdate: true)
                     .SetId(tweenId);
                 m_PointerFollower.rectTransform.DOScale(endValue: 0.0f, TweenDuration)

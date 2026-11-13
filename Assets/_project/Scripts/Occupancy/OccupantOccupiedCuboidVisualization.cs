@@ -46,7 +46,7 @@ namespace KitchenDesign.Occupancy
 
         public void SetOccupant(Occupant product)
         {
-            m_VisualizedOccupant = product;
+            _visualizedOccupant = product;
         }
 
         protected void Awake()
@@ -66,7 +66,7 @@ namespace KitchenDesign.Occupancy
 
         protected void Update()
         {
-            if (!m_Renderer.enabled || !m_VisualizedOccupant || m_VisualizedOccupant.cabinet == null)
+            if (!m_Renderer.enabled || !_visualizedOccupant || _visualizedOccupant.cabinet == null)
             {
                 return;
             }
@@ -75,16 +75,16 @@ namespace KitchenDesign.Occupancy
             // volume's CalculateCabinetSpaceCuboidForProduct to ensure 1:1
             // visualization of the occupant's bounds.
 
-            OccupiableVolume occupiableVolume = m_VisualizedOccupant.occupiedVolume;
+            OccupiableVolume occupiableVolume = _visualizedOccupant.occupiedVolume;
 
             Cuboid volumeLocalCuboid =
-                occupiableVolume.CalculateOccupancyCuboidForOccupant(m_VisualizedOccupant);
+                occupiableVolume.CalculateOccupancyCuboidForOccupant(_visualizedOccupant);
 
             Vector3 worldPosition =
                 occupiableVolume.GetTransform().TransformPoint(volumeLocalCuboid.position);
 
             Vector3 productLocalPosition =
-                m_VisualizedOccupant.productVisualContentInstance.GetTransform().InverseTransformPoint(worldPosition);
+                _visualizedOccupant.productVisualContentInstance.GetTransform().InverseTransformPoint(worldPosition);
 
             m_TransformHelper.offsetInMeters = productLocalPosition;
             m_TransformHelper.sizeInMeters = volumeLocalCuboid.size;
@@ -112,7 +112,7 @@ namespace KitchenDesign.Occupancy
         /// <summary>
         ///     The cabinet occupant that this visual represents.
         /// </summary>
-        protected Occupant m_VisualizedOccupant;
+        protected Occupant _visualizedOccupant;
 
         // =====================================================================
         // Static fields

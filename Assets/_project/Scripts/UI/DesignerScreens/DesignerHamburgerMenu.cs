@@ -101,7 +101,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void ToggleMenu(MelcherButton caller)
         {
-            Vector4 offscreenPadding = m_MenuPanelPaddingWhenVisible;
+            Vector4 offscreenPadding = _menuPanelPaddingWhenVisible;
             offscreenPadding.z += 200;
             offscreenPadding.w -= 200;
 
@@ -595,8 +595,8 @@ namespace KitchenDesign.UI.DesignerScreens
         // Non-serialized fields
         // =====================================================================
 
-        protected Vector4 m_MenuPanelPaddingWhenVisible;
-        protected RecyclableTween<Tween> m_MenuSlideTween = new RecyclableTween<Tween>();
+        protected Vector4 _menuPanelPaddingWhenVisible;
+        protected RecyclableTween<Tween> _menuSlideTween = new RecyclableTween<Tween>();
 
     }   // class DesignerHamburgerMenu
 

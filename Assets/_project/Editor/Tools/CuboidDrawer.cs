@@ -13,7 +13,7 @@ namespace KitchenDesign.ToolsEditor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            m_Property = property;
+            _property = property;
 
             using var propertyScope = new EditorGUI.PropertyScope(position, label, property);
 
@@ -56,7 +56,7 @@ namespace KitchenDesign.ToolsEditor
             return base.GetPropertyHeight(property, label) * RowCount;
         }
 
-        protected SerializedProperty m_Property;
+        protected SerializedProperty _property;
     }   // class CuboidDrawer
 
 }   // namespace KitchenDesign.ToolsEditor

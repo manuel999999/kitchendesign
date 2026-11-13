@@ -165,3 +165,17 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   `AddressableAssetsData` changed. Visuals census: 901 entries, hash `D72B3E9CB18746DF` (the
   reference). Two captures (`final-b86/unity6-1`, `unity6-2`): `resave.json` identical,
   measurements camera noise only, photos within 0.08/255 of `final-tip/unity6-run2`.
+- **B8.7, mechanical part, 2026-11-13.** Braces (IDE0011) and accessibility modifiers (IDE0040)
+  with `dotnet format style <project>.csproj --no-restore --diagnostics IDE0011 IDE0040
+  --severity warn --include Assets/_project/ …` and a temporary `.editorconfig` (Unity writes the
+  `.csproj` files on `CodeEditor.CurrentEditor.SyncAll()`; they are gitignored): 9 files. Six
+  runtime log calls editor-wrapped. 220 non-serialized fields renamed (guards in CLAUDE.md's
+  handover). Not done: serialized names, 85 fields the guards skipped, and the comments, which
+  wait for the user's answer on where the whys go.
+  Full run `final-b87` against `final-tip`: `resave.json` identical, measurements camera noise
+  only, photos within 0.08/255 of `final-tip/unity6-run2`, menu check and both cold starts (13)
+  the same as `final-b84`, listener order the same, no null-reference exception in the log.
+  The edit probe's snapshots were identical, but in the first run its drag steps logged screen
+  positions 30 to 100 pixels off and `MainCamera` ended with FOV 14.39 instead of 21.37; a
+  second run of the probe gave the usual values (449.71, 339.17; FOV 21.37). Not reproduced,
+  cause not found; the camera code's change is renames only.

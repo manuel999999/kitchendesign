@@ -135,8 +135,8 @@ namespace KitchenDesign.Scriptables
         public int fallbackDefaultCabinetSectionProductServerId =>
             m_FallbackDefaultCabinetSectionProductServerId;
 
-        public ReadOnlyCollection<DoorStyleInfo> doorStyles => m_DoorStyles.readOnly;
-        public ReadOnlyCollection<DoorStyleInfo> doorHandleStyles => m_DoorHandleStyles.readOnly;
+        public ReadOnlyCollection<DoorStyleInfo> doorStyles => _doorStyles.readOnly;
+        public ReadOnlyCollection<DoorStyleInfo> doorHandleStyles => _doorHandleStyles.readOnly;
 
         public MeshRenderer cabinetVentPrefab => m_CabinetVentPrefab;
 
@@ -168,8 +168,8 @@ namespace KitchenDesign.Scriptables
             IReadOnlyList<ProductVisualSO> cabinetDoorVisuals,
             DoorStyleLookup doorStyles)
         {
-            m_DoorStyles.mutable.Clear();
-            m_DoorHandleStyles.mutable.Clear();
+            _doorStyles.mutable.Clear();
+            _doorHandleStyles.mutable.Clear();
 
             RegisterDoorHandleStyles();
             doorStyles.TryInitialize(this);
@@ -239,7 +239,7 @@ namespace KitchenDesign.Scriptables
             // Look for an existing door style collection for this style name.
             DoorStyleInfo doorStyleInfo =
                 MelcherCommon.Find(
-                    m_DoorStyles.readOnly,
+                    _doorStyles.readOnly,
                     x => x.name == doorStyleVisual.info.sectionDoorStyleName
                 );
 
@@ -252,7 +252,7 @@ namespace KitchenDesign.Scriptables
                         doorStyleVisual.info.sectionDoorStyleDisplayName
                     );
 
-                m_DoorStyles.mutable.Add(
+                _doorStyles.mutable.Add(
                     doorStyleInfo
                 );
 
@@ -290,7 +290,7 @@ namespace KitchenDesign.Scriptables
                         handleStyle
                     );
 
-                m_DoorHandleStyles.mutable.Add(
+                _doorHandleStyles.mutable.Add(
                     doorHandleStyleInfo
                 );
 
@@ -606,8 +606,8 @@ namespace KitchenDesign.Scriptables
         // Non-serialized fields
         // ====================================================================
 
-        protected MelcherReadWriteList<DoorStyleInfo> m_DoorStyles = new ();
-        protected MelcherReadWriteList<DoorStyleInfo> m_DoorHandleStyles = new ();
+        protected MelcherReadWriteList<DoorStyleInfo> _doorStyles = new ();
+        protected MelcherReadWriteList<DoorStyleInfo> _doorHandleStyles = new ();
 
         // ====================================================================
         // Nested types

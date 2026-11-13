@@ -50,9 +50,9 @@ namespace KitchenDesign.UI.MenuScreens
         /// </summary>
         public void SetSelectionFromProfile()
         {
-            m_MandatoryManufacturerIds.Clear();
-            m_SelectedManufacturerIds.Clear();
-            m_ManufacturerListEntries.Clear();
+            _mandatoryManufacturerIds.Clear();
+            _selectedManufacturerIds.Clear();
+            _manufacturerListEntries.Clear();
 
             List<ManufacturerInfo> allManufactures = this._catalogData.Manufacturers;
             List<int> currentWhitelistIds = this._session.UserProfile.dealerSelectedManufacturerIds;
@@ -65,7 +65,7 @@ namespace KitchenDesign.UI.MenuScreens
                 if (string.IsNullOrEmpty(allManufactures[manufacturerIndex].name))
                 {
                     // If it's a blank name, it's mandatory
-                    m_MandatoryManufacturerIds.Add(allManufactures[manufacturerIndex].id);
+                    _mandatoryManufacturerIds.Add(allManufactures[manufacturerIndex].id);
                 }
             }
 
@@ -73,9 +73,9 @@ namespace KitchenDesign.UI.MenuScreens
             // Filter out the mandatory IDs
             foreach (int whitelistId in currentWhitelistIds)
             {
-                if (!m_MandatoryManufacturerIds.Contains(whitelistId))
+                if (!_mandatoryManufacturerIds.Contains(whitelistId))
                 {
-                    m_SelectedManufacturerIds.Add(whitelistId);
+                    _selectedManufacturerIds.Add(whitelistId);
                 }
             }
 
@@ -110,22 +110,22 @@ namespace KitchenDesign.UI.MenuScreens
                 if (manufacturerGroup.Key.HasValue)
                 {
                     // Start each product category with a header.
-                    m_ManufacturerListEntries.Add(new WhitelistRowEntry(manufacturerGroup.Key.Value));
+                    _manufacturerListEntries.Add(new WhitelistRowEntry(manufacturerGroup.Key.Value));
                 }
 
                 foreach (ManufacturerInfo manufacturer in manufacturerGroup)
                 {
-                    m_ManufacturerListEntries.Add(new WhitelistRowEntry(manufacturer));
+                    _manufacturerListEntries.Add(new WhitelistRowEntry(manufacturer));
                 }
             }
 
             // Cache current manufacturer price markups
 
-            m_ManufacturerIdToMarkupPercentages.Clear();
+            _manufacturerIdToMarkupPercentages.Clear();
 
             foreach (ManufacturerInfo manufacturer in this._catalogData.Manufacturers)
             {
-                m_ManufacturerIdToMarkupPercentages[manufacturer.id] =
+                _manufacturerIdToMarkupPercentages[manufacturer.id] =
                     this._session.UserProfile.GetMarkupPercentageForManufacturerId(manufacturer.id);
             }
 
@@ -138,10 +138,10 @@ namespace KitchenDesign.UI.MenuScreens
                 LayoutRebuilder.ForceRebuildLayoutImmediate(t as RectTransform);
             }
 
-            m_ManufacturerList.RowCount = m_ManufacturerListEntries.Count;
+            m_ManufacturerList.RowCount = _manufacturerListEntries.Count;
             m_ManufacturerList.Refresh();
 
-            bool isUsingWhitelist = m_SelectedManufacturerIds.Count > 0;
+            bool isUsingWhitelist = _selectedManufacturerIds.Count > 0;
             m_AllowAllManufacturersToggle.SetIsOnWithoutNotify(!isUsingWhitelist);
             m_ManufacturerListAccordion.Snap(expand: isUsingWhitelist);
         }
@@ -201,7 +201,7 @@ namespace KitchenDesign.UI.MenuScreens
                 return;
             }
 
-            WhitelistRowEntry rowData = m_ManufacturerListEntries[itemIndex];
+            WhitelistRowEntry rowData = _manufacturerListEntries[itemIndex];
 
             if (rowData.rowType == WhitelistRowType.Header)
             {
@@ -230,13 +230,13 @@ namespace KitchenDesign.UI.MenuScreens
             }
 
             decimal markupPercentage = 0.0m;
-            m_ManufacturerIdToMarkupPercentages.TryGetValue(manufacturer.id, out markupPercentage);
+            _manufacturerIdToMarkupPercentages.TryGetValue(manufacturer.id, out markupPercentage);
 
             row.SetManufacturerCheckboxFields(
                 manufacturerName,
                 markupPercentage,
                 itemIndex,
-                m_SelectedManufacturerIds.Contains(manufacturerId),
+                _selectedManufacturerIds.Contains(manufacturerId),
                 isRowInteractable
             );
         }
@@ -244,18 +244,18 @@ namespace KitchenDesign.UI.MenuScreens
         protected void OnWhitelistChanged(ManufacturerWhitelistRow row)
         {
             int manufacturerId =
-                m_ManufacturerListEntries[row.index].manufacturerId;
+                _manufacturerListEntries[row.index].manufacturerId;
 
             if (row.isOn)
             {
-                if (!m_SelectedManufacturerIds.Contains(manufacturerId))
+                if (!_selectedManufacturerIds.Contains(manufacturerId))
                 {
-                    m_SelectedManufacturerIds.Add(manufacturerId);
+                    _selectedManufacturerIds.Add(manufacturerId);
                 }
             }
             else
             {
-                m_SelectedManufacturerIds.Remove(manufacturerId);
+                _selectedManufacturerIds.Remove(manufacturerId);
             }
 
             this._setHasPendingChanges(true);
@@ -264,19 +264,19 @@ namespace KitchenDesign.UI.MenuScreens
         protected void OnPriceMarkupButtonClicked(ManufacturerWhitelistRow row)
         {
             int manufacturerId =
-                m_ManufacturerListEntries[row.index].manufacturerId;
+                _manufacturerListEntries[row.index].manufacturerId;
 
             this._catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo);
 
             decimal markupPercentage = 0.0m;
-            m_ManufacturerIdToMarkupPercentages.TryGetValue(manufacturerId, out markupPercentage);
+            _manufacturerIdToMarkupPercentages.TryGetValue(manufacturerId, out markupPercentage);
 
             PromptForMarkupPercentage(
                 manufacturerInfo.name,
                 markupPercentage,
                 newMarkupPercentage =>
                 {
-                    m_ManufacturerIdToMarkupPercentages[manufacturerId] = newMarkupPercentage;
+                    _manufacturerIdToMarkupPercentages[manufacturerId] = newMarkupPercentage;
 
                     m_ManufacturerList.Refresh(row.GetComponent<RecyclingListViewItem>());
 
@@ -294,7 +294,7 @@ namespace KitchenDesign.UI.MenuScreens
                 {
                     foreach (ManufacturerInfo manufacturer in this._catalogData.Manufacturers)
                     {
-                        m_ManufacturerIdToMarkupPercentages[manufacturer.id] = newMarkupPercentage;
+                        _manufacturerIdToMarkupPercentages[manufacturer.id] = newMarkupPercentage;
                     }
 
                     m_ManufacturerList.Refresh();
@@ -354,12 +354,12 @@ namespace KitchenDesign.UI.MenuScreens
 
             // If a user selects no toggles we will treat that as allowing all
             // of them. This behaviour occurs elsewhere in the app (ToolbarUI)
-            if (!m_AllowAllManufacturersToggle.isOn && m_SelectedManufacturerIds.Count > 0)
+            if (!m_AllowAllManufacturersToggle.isOn && _selectedManufacturerIds.Count > 0)
             {
                 List<ManufacturerInfo> allManufactures = this._catalogData.Manufacturers;
 
                 // First, add all the mandatory IDs
-                foreach (int id in m_MandatoryManufacturerIds)
+                foreach (int id in _mandatoryManufacturerIds)
                 {
                     if (!profileCopy.dealerSelectedManufacturerIds.Contains(id))
                     {
@@ -371,7 +371,7 @@ namespace KitchenDesign.UI.MenuScreens
                 // of indirection here (m_SelectedAvailableManufactures indexes
                 // m_AvailableManufacturerIndices which in turn indexes
                 // allManufactures)
-                foreach (int id in m_SelectedManufacturerIds)
+                foreach (int id in _selectedManufacturerIds)
                 {
                     if (!profileCopy.dealerSelectedManufacturerIds.Contains(id))
                     {
@@ -380,11 +380,11 @@ namespace KitchenDesign.UI.MenuScreens
                 }
             }
 
-            foreach (int manufacturerId in m_ManufacturerIdToMarkupPercentages.Keys)
+            foreach (int manufacturerId in _manufacturerIdToMarkupPercentages.Keys)
             {
                 profileCopy.SetMarkupPercentageForManufacturerId(
                     manufacturerId,
-                    m_ManufacturerIdToMarkupPercentages[manufacturerId]
+                    _manufacturerIdToMarkupPercentages[manufacturerId]
                 );
             }
 
@@ -446,9 +446,9 @@ namespace KitchenDesign.UI.MenuScreens
         // Non-serialized fields
         // =====================================================================
 
-        protected List<int> m_MandatoryManufacturerIds = new List<int>();
+        protected List<int> _mandatoryManufacturerIds = new List<int>();
 
-        protected List<int> m_SelectedManufacturerIds = new List<int>();
+        protected List<int> _selectedManufacturerIds = new List<int>();
 
         /// <summary>
         ///     This defines the rows in the RecyclableList. A row can be
@@ -458,9 +458,9 @@ namespace KitchenDesign.UI.MenuScreens
         ///     manufacturer that the user can choose to filter.
         ///     This is the list the recyclable ListView is bound to.
         /// </summary>
-        protected List<WhitelistRowEntry> m_ManufacturerListEntries = new List<WhitelistRowEntry>();
+        protected List<WhitelistRowEntry> _manufacturerListEntries = new List<WhitelistRowEntry>();
 
-        protected Dictionary<int, decimal> m_ManufacturerIdToMarkupPercentages = new ();
+        protected Dictionary<int, decimal> _manufacturerIdToMarkupPercentages = new ();
 
     }   // class ClientListUI
 

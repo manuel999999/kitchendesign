@@ -99,22 +99,22 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void OnClickPinButton(MelcherButton caller)
         {
-            if (m_PinInput.Length >= MaxDigits)
+            if (_pinInput.Length >= MaxDigits)
             {
                 // Auto-clear the input if the user enters a character beyond
                 // the limit. This condition is only possible after the user
                 // has entered the wrong PIN and was presented a message box
                 // indicating such.
 
-                m_PinInput = "";
+                _pinInput = "";
                 m_MessageBox.Clear();
             }
 
             char digit = caller.name[0];
 
-            m_PinInput += digit;
+            _pinInput += digit;
 
-            m_PinDigits.textMesh.maxVisibleCharacters = m_PinInput.Length;
+            m_PinDigits.textMesh.maxVisibleCharacters = _pinInput.Length;
 
             if (m_PinDigits.textMesh.maxVisibleCharacters >= MaxDigits)
             {
@@ -128,24 +128,24 @@ namespace KitchenDesign.UI.MenuScreens
 
             IEnumerator<float> TestPinCoroutine()
             {
-                if (m_PinInput == "3030")
+                if (_pinInput == "3030")
                 {
                     // Instantly accept a correct PIN when it is provided and
                     // reset the wrong pin counter so future PIN attempts are
                     // not penalized for this user's failed attempts.
 
-                    m_NumberOfConsecutiveWrongPinAttempts = 0;
+                    _numberOfConsecutiveWrongPinAttempts = 0;
 
-                    m_OnSuccessCallback?.Invoke();
+                    _onSuccessCallback?.Invoke();
 
                     Hide();
 
                     yield break;
                 }
 
-                ++m_NumberOfConsecutiveWrongPinAttempts;
+                ++_numberOfConsecutiveWrongPinAttempts;
 
-                if (m_NumberOfConsecutiveWrongPinAttempts > 2)
+                if (_numberOfConsecutiveWrongPinAttempts > 2)
                 {
                     // By the third failed PIN, the user is forced to wait
                     // between PIN attempts. The waits gets progressively
@@ -163,7 +163,7 @@ namespace KitchenDesign.UI.MenuScreens
                     m_CanvasGroup.interactable = false;
                     EventSession.OnFullScreenSpinnerRequested.Raise(new SpinnerInfo(true));
 
-                    yield return Timing.WaitForSeconds(m_NumberOfConsecutiveWrongPinAttempts);
+                    yield return Timing.WaitForSeconds(_numberOfConsecutiveWrongPinAttempts);
                 }
 
                 m_MessageBox.Error("Incorrect PIN.");
@@ -177,14 +177,14 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void Clear()
         {
-            m_PinInput = "";
-            m_PinDigits.textMesh.maxVisibleCharacters = m_PinInput.Length;
+            _pinInput = "";
+            m_PinDigits.textMesh.maxVisibleCharacters = _pinInput.Length;
             m_MessageBox.Clear();
         }
 
         public void ShowKioskKeypad(Action onSuccess)
         {
-            m_OnSuccessCallback = onSuccess;
+            _onSuccessCallback = onSuccess;
 
             Show();
         }
@@ -223,16 +223,16 @@ namespace KitchenDesign.UI.MenuScreens
         /// <summary>
         ///     The PIN being entered by the user using the keypad interface.
         /// </summary>
-        protected string m_PinInput;
+        protected string _pinInput;
 
         /// <summary>
         ///     Counts the number of times an incorrect PIN has been entered.
         ///     This is used to ramp up the delay between PINs to discourage
         ///     brute force guessing.
         /// </summary>
-        protected int m_NumberOfConsecutiveWrongPinAttempts;
+        protected int _numberOfConsecutiveWrongPinAttempts;
 
-        protected Action m_OnSuccessCallback;
+        protected Action _onSuccessCallback;
 
     }   // class KioskPinUI
 

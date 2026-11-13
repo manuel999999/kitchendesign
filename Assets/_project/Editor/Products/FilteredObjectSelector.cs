@@ -62,12 +62,12 @@ namespace KitchenDesign.ProductsEditor
             m_IsVisible = true;
 
             m_Content = content;
-            m_GetRowName = getRowName;
-            m_GetRowStatus = getRowStatus;
-            m_ResultCallback = resultCallback;
-            m_SelectedIndices.Clear();
+            _getRowName = getRowName;
+            _getRowStatus = getRowStatus;
+            _resultCallback = resultCallback;
+            _selectedIndices.Clear();
 
-            m_ExtraFilter = extraFilter;
+            _extraFilter = extraFilter;
 
             ToolbarToggle extraFilterToggle = GetExtraFilterToggle();
             extraFilterToggle.text = !string.IsNullOrWhiteSpace(extraFilterText) ? extraFilterText : "Apply Extra Filter";
@@ -84,7 +84,7 @@ namespace KitchenDesign.ProductsEditor
 
             TextField statusField = GetStatusField();
             statusField.SetValueWithoutNotify("");
-            statusField.style.display = m_GetRowStatus != null ? DisplayStyle.Flex : DisplayStyle.None;
+            statusField.style.display = _getRowStatus != null ? DisplayStyle.Flex : DisplayStyle.None;
 
             RefreshSearch();
 
@@ -116,7 +116,7 @@ namespace KitchenDesign.ProductsEditor
                             m_FilteredData[i] :
                             i;
 
-                    label.text = m_GetRowName(actualIndex);
+                    label.text = _getRowName(actualIndex);
                 };
 
             ListView listView = GetTable();
@@ -158,10 +158,10 @@ namespace KitchenDesign.ProductsEditor
             m_FilteredData = null;
             m_DisplayedData = null;
 
-            m_ExtraFilter = null;
+            _extraFilter = null;
 
-            m_ResultCallback?.Invoke(m_SelectedIndices);
-            m_ResultCallback = null;
+            _resultCallback?.Invoke(_selectedIndices);
+            _resultCallback = null;
         }
 
         /// <summary>
@@ -184,13 +184,13 @@ namespace KitchenDesign.ProductsEditor
 
             if (m_DisplayedData == m_FilteredData)
             {
-                m_SelectedIndices.AddRange(
+                _selectedIndices.AddRange(
                     listView.selectedIndices.Select(x => m_FilteredData[x])
                 );
             }
             else
             {
-                m_SelectedIndices.AddRange(listView.selectedIndices);
+                _selectedIndices.AddRange(listView.selectedIndices);
             }
 
             CloseWithoutCrashing();
@@ -198,7 +198,7 @@ namespace KitchenDesign.ProductsEditor
 
         private void OnSelectedIndicesChanged(IEnumerable<int> indices)
         {
-            if (m_GetRowStatus == null)
+            if (_getRowStatus == null)
             {
                 return;
             }
@@ -223,7 +223,7 @@ namespace KitchenDesign.ProductsEditor
             }
 
             TextField statusField = GetStatusField();
-            statusField.SetValueWithoutNotify(m_GetRowStatus(lastIndex));
+            statusField.SetValueWithoutNotify(_getRowStatus(lastIndex));
         }
 
         private void OnSearchChange(ChangeEvent<string> changeEvent)
@@ -266,7 +266,7 @@ namespace KitchenDesign.ProductsEditor
             m_FilteredData.Clear();
 
             bool isExtraFilterApplied =
-                m_ExtraFilter != null && GetExtraFilterToggle().value;
+                _extraFilter != null && GetExtraFilterToggle().value;
 
             if (!string.IsNullOrWhiteSpace(searchInput))
             {
@@ -280,7 +280,7 @@ namespace KitchenDesign.ProductsEditor
                 {
                     int matchingSearchWordCount = 0;
 
-                    string name = m_GetRowName(i) ?? "";
+                    string name = _getRowName(i) ?? "";
 
                     foreach (string word in searchWords)
                     {
@@ -325,9 +325,9 @@ namespace KitchenDesign.ProductsEditor
 
         private bool DoesPassExtraFilter(int indexToCheck)
         {
-            if (m_ExtraFilter != null)
+            if (_extraFilter != null)
             {
-                return m_ExtraFilter.Invoke(indexToCheck);
+                return _extraFilter.Invoke(indexToCheck);
             }
 
             return true;
@@ -343,8 +343,8 @@ namespace KitchenDesign.ProductsEditor
 
         private bool m_IsVisible;
 
-        private GetRowText m_GetRowName;
-        private GetRowText m_GetRowStatus;
+        private GetRowText _getRowName;
+        private GetRowText _getRowStatus;
 
         private IList m_Content;
 
@@ -365,10 +365,10 @@ namespace KitchenDesign.ProductsEditor
         /// Optional, extra filter. Can be toggled freely if available. Can be
         /// combined with search filter.
         /// </summary>
-        private ExtraFilter m_ExtraFilter;
+        private ExtraFilter _extraFilter;
 
-        private ResultCallback m_ResultCallback;
-        private List<int> m_SelectedIndices = new();
+        private ResultCallback _resultCallback;
+        private List<int> _selectedIndices = new();
 
     }   // class FilteredObjectSelector
 

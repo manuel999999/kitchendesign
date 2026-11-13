@@ -124,11 +124,11 @@ namespace KitchenDesign
 
         protected void Start()
         {
-            m_UseLandscapeOrientation = true;
+            _useLandscapeOrientation = true;
 
             if (Application.isMobilePlatform)
             {
-                m_UseLandscapeOrientation =
+                _useLandscapeOrientation =
                     PlayerPrefs.GetInt(MenuPreferenceKeys.AlwaysLandscapeOnMobile) != 0;
             }
 
@@ -573,11 +573,11 @@ namespace KitchenDesign
         {
             if (hasPendingChanges)
             {
-                m_HasPendingChanges.Add(menu);
+                _hasPendingChanges.Add(menu);
             }
             else
             {
-                m_HasPendingChanges.Remove(menu);
+                _hasPendingChanges.Remove(menu);
             }
         }
 
@@ -587,7 +587,7 @@ namespace KitchenDesign
             {
                 MelcherUI currentMenu = m_MenuHistory.Peek();
 
-                if (m_HasPendingChanges.Contains(currentMenu))
+                if (_hasPendingChanges.Contains(currentMenu))
                 {
                     // Prompt the user if the changes should be discarded.
                     m_DiscardPendingChangesUi.SetCallback(
@@ -595,7 +595,7 @@ namespace KitchenDesign
                         {
                             if (discard)
                             {
-                                m_HasPendingChanges.Remove(currentMenu);
+                                _hasPendingChanges.Remove(currentMenu);
                                 PopMenu();
                             }
                         }
@@ -622,9 +622,9 @@ namespace KitchenDesign
         /// </summary>
         protected void ToggleScreenOrientation()
         {
-            m_UseLandscapeOrientation = !m_UseLandscapeOrientation;
+            _useLandscapeOrientation = !_useLandscapeOrientation;
 
-            PlayerPrefs.SetInt(MenuPreferenceKeys.AlwaysLandscapeOnMobile, m_UseLandscapeOrientation ? 1 : 0);
+            PlayerPrefs.SetInt(MenuPreferenceKeys.AlwaysLandscapeOnMobile, _useLandscapeOrientation ? 1 : 0);
             PlayerPrefs.Save();
 
             RefreshScreenOrientation();
@@ -632,12 +632,12 @@ namespace KitchenDesign
         protected void RefreshScreenOrientation()
         {
             // Apply screen orientation
-            Screen.autorotateToPortrait = !m_UseLandscapeOrientation;
-            Screen.autorotateToLandscapeRight = m_UseLandscapeOrientation;
-            Screen.autorotateToLandscapeLeft = m_UseLandscapeOrientation;
+            Screen.autorotateToPortrait = !_useLandscapeOrientation;
+            Screen.autorotateToLandscapeRight = _useLandscapeOrientation;
+            Screen.autorotateToLandscapeLeft = _useLandscapeOrientation;
             Screen.autorotateToPortraitUpsideDown = false;
 
-            if (m_UseLandscapeOrientation)
+            if (_useLandscapeOrientation)
             {
                 if (Screen.orientation != ScreenOrientation.LandscapeLeft && Screen.orientation != ScreenOrientation.LandscapeRight)
                 {
@@ -674,7 +674,7 @@ namespace KitchenDesign
                 }
             }
 
-            m_HasPendingChanges.Clear();
+            _hasPendingChanges.Clear();
 
             m_MenuHistory.Push(rootUi);
         }
@@ -778,14 +778,14 @@ namespace KitchenDesign
         ///     user will see a prompt if they try to navigate backwards from
         ///     one of these menus.
         /// </summary>
-        private HashSet<MelcherUI> m_HasPendingChanges = new ();
+        private HashSet<MelcherUI> _hasPendingChanges = new ();
 
         /// <summary>
         ///     Whether the app will use landscape orientation in the menu.
         ///     This is only used in mobile builds because other platforms are
         ///     permanently in landscape orientation.
         /// </summary>
-        protected bool m_UseLandscapeOrientation;
+        protected bool _useLandscapeOrientation;
 
 
     }   // class MenuNavigationControl

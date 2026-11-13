@@ -12,7 +12,7 @@ namespace KitchenDesign.Utility
         private const string PlacesPath = "Assets/_project/Editor/Tools/RandomPlaces.txt";
 
         private static List<string> s_Names;
-        private static List<string> s_Places;
+        private static List<string> _places;
 
         public static string RandomName()
         {
@@ -22,8 +22,8 @@ namespace KitchenDesign.Utility
 
         public static string RandomPlace()
         {
-            s_Places ??= GetLinesFromAsset(PlacesPath);
-            return s_Places[UnityEngine.Random.Range(0, s_Places.Count)];
+            _places ??= GetLinesFromAsset(PlacesPath);
+            return _places[UnityEngine.Random.Range(0, _places.Count)];
         }
 
         private static List<string> GetLinesFromAsset(string assetPath)

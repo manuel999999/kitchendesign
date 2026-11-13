@@ -32,8 +32,8 @@ namespace KitchenDesign.Widgets
 
         public Vector3 normalizedTargetAnchor
         {
-            get => m_NormalizedTargetAnchor;
-            set => m_NormalizedTargetAnchor = value;
+            get => _normalizedTargetAnchor;
+            set => _normalizedTargetAnchor = value;
         }
 
         public Camera worldCamera
@@ -110,7 +110,7 @@ namespace KitchenDesign.Widgets
             if (m_TargetVolume != null)
             {
                 Cuboid targetCuboid = m_TargetVolume.resizerCuboid;
-                Vector3 localPosInCabinet = Cuboid.NormalizedToPoint(targetCuboid, m_NormalizedTargetAnchor);
+                Vector3 localPosInCabinet = Cuboid.NormalizedToPoint(targetCuboid, _normalizedTargetAnchor);
                 Vector3 worldPos = m_TargetVolume.GetTransform().TransformPoint(localPosInCabinet);
                 m_Transform.position = worldPos;
             }
@@ -190,7 +190,7 @@ namespace KitchenDesign.Widgets
         ///     local space of its resizable cuboid. E.g., (0, 1, 1) could
         ///     correspond to the left-top-back corner of a cabinet cuboid.
         /// </summary>
-        protected Vector3 m_NormalizedTargetAnchor;
+        protected Vector3 _normalizedTargetAnchor;
 
         /// <summary>
         ///     The position of the pointer in the event camera's local space

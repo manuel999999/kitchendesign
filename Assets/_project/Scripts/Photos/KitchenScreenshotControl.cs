@@ -555,7 +555,7 @@ namespace KitchenDesign.Photos
         public void Initialize(SessionStatus session)
         {
             this._session = session;
-            this._measurePlacement = new PlanMeasurePlacement(m_MeasurePrefabPool, m_CabinetMeasureColorX, m_CabinetMeasureColorY, m_CabinetMeasureColorZ, session);
+            this._measurePlacement = new PlanMeasurePlacement(_measurePrefabPool, m_CabinetMeasureColorX, m_CabinetMeasureColorY, m_CabinetMeasureColorZ, session);
         }
 
         protected void Awake()
@@ -571,7 +571,7 @@ namespace KitchenDesign.Photos
                     Instantiate(m_MeasurePrefab, parent: myTransform);
                 pooledMeasure.minimumInchDivisions = 32;
                 pooledMeasure.gameObject.SetActive(false);
-                m_MeasurePrefabPool.Add(pooledMeasure);
+                _measurePrefabPool.Add(pooledMeasure);
             }
         }
 
@@ -857,7 +857,7 @@ namespace KitchenDesign.Photos
 
         protected Material m_DesignSceneSkybox;
 
-        protected List<Measure> m_MeasurePrefabPool = new List<Measure>();
+        protected List<Measure> _measurePrefabPool = new List<Measure>();
 
         // ====================================================================
         // Nested types

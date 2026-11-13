@@ -279,7 +279,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Non-serialized fields
         // ====================================================================
 
-        private UniTask? m_ActiveCatalogChangeTask;
+        private UniTask? _activeCatalogChangeTask;
 
     }   // class BrandCatalogUI
 

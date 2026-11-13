@@ -117,7 +117,7 @@ namespace KitchenDesign.KitchenModel
 
         public CabinetToeKickType selectedToeKickType => this._selections.toeKickType;
 
-        public CabinetLayout layout => m_CurrentCabinetLayout;
+        public CabinetLayout layout => _currentCabinetLayout;
 
         public IAppRules appRules => this._rules;
 
@@ -129,7 +129,7 @@ namespace KitchenDesign.KitchenModel
 
         //public IReadOnlyList<CabinetSection> cabinetSections => m_CabinetSections;
 
-        public KitchenCutoutClipping cutoutClipping => m_CutoutClipping;
+        public KitchenCutoutClipping cutoutClipping => _cutoutClipping;
 
         public float baseCabinetDepthInMeters => this._selections.baseCabinetDepthInMeters;
 
@@ -206,8 +206,8 @@ namespace KitchenDesign.KitchenModel
 
         public void UpdateLayoutCabinetMeshes()
         {
-            m_CurrentCabinetLayout.UpdateMeshes();
-            m_CurrentCabinetLayout.UpdatePositions();
+            _currentCabinetLayout.UpdateMeshes();
+            _currentCabinetLayout.UpdatePositions();
         }
 
         public CabinetLayout selectedCabinetLayout => this._selections.layoutPrefab;
@@ -314,7 +314,7 @@ namespace KitchenDesign.KitchenModel
 
         public JsonDict SaveToJson()
         {
-            return this._saveWriter.Write(m_CurrentCabinetLayout);
+            return this._saveWriter.Write(_currentCabinetLayout);
         }
         public UniTask<bool> LoadFromJson(JsonDict saveJson)
         {
@@ -374,15 +374,15 @@ namespace KitchenDesign.KitchenModel
             MelcherLog.LogEditorOnly("Trying to create cabinet layout from prefab: " + prefab, prefab);
 
             // Destroy the existing layout
-            if (m_CurrentCabinetLayout)
+            if (_currentCabinetLayout)
             {
-                Destroy(m_CurrentCabinetLayout.gameObject);
-                m_CurrentCabinetLayout = null;
+                Destroy(_currentCabinetLayout.gameObject);
+                _currentCabinetLayout = null;
             }
 
             if (prefab)
             {
-                m_CurrentCabinetLayout =
+                _currentCabinetLayout =
                     Instantiate(
                         prefab,
                         m_Transform.position,
@@ -390,7 +390,7 @@ namespace KitchenDesign.KitchenModel
                         m_Transform
                     );
 
-                m_CurrentCabinetLayout.SetKitchen(this);
+                _currentCabinetLayout.SetKitchen(this);
 
                 if (this.buildingRules.PadsCornersForAdjacentSpans)
                 {
@@ -401,7 +401,7 @@ namespace KitchenDesign.KitchenModel
 
                     int cabinetCount = layout.CountCabinets();
 
-                    foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+                    foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
                     {
                         Cabinet cabinet = i.element;
 
@@ -410,7 +410,7 @@ namespace KitchenDesign.KitchenModel
                             continue;
                         }
 
-                        m_CurrentCabinetLayout.GetCabinetNeighbours(
+                        _currentCabinetLayout.GetCabinetNeighbours(
                             cabinet,
                             out Cabinet leftCabinet,
                             out Cabinet rightCabinet
@@ -451,7 +451,7 @@ namespace KitchenDesign.KitchenModel
                     // invalidated.
                     for (int i = cabinetCount - 1; i >= 0; --i)
                     {
-                        Cabinet cabinet = m_CurrentCabinetLayout.GetCabinetAtIndex(i);
+                        Cabinet cabinet = _currentCabinetLayout.GetCabinetAtIndex(i);
 
                         if (cabinet.cabinetType != CabinetType.Corner)
                         {
@@ -459,14 +459,14 @@ namespace KitchenDesign.KitchenModel
                         }
 
                         Cabinet cornerColumnLeft =
-                            await m_CurrentCabinetLayout.InstantiateCabinet(
+                            await _currentCabinetLayout.InstantiateCabinet(
                                 cornerColumnLeftPrefab,
                                 cabinetSectionProductInfo: null,
                                 this
                             );
 
                         Cabinet cornerColumnRight =
-                            await m_CurrentCabinetLayout.InstantiateCabinet(
+                            await _currentCabinetLayout.InstantiateCabinet(
                                 cornerColumnRightPrefab,
                                 cabinetSectionProductInfo: null,
                                 this
@@ -484,7 +484,7 @@ namespace KitchenDesign.KitchenModel
                         if (i + 1 < cabinetCount)
                         {
                             Cabinet cabinetAfterColumnRight =
-                                m_CurrentCabinetLayout.GetCabinetAtIndex(i + 1);
+                                _currentCabinetLayout.GetCabinetAtIndex(i + 1);
 
                             cabinetAfterColumnRight.normalizedAnchorToPreviousSection = new Vector3(1.0f, 0.0f, 0.0f);
                         }
@@ -501,7 +501,7 @@ namespace KitchenDesign.KitchenModel
                     float straightSectionWidthInMeters =
                         (float)ImperialUnit.FromTotalInches(3.0f * Units.InchesPerFoot).totalMeters;
 
-                    foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+                    foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
                     {
                         Cabinet cabinet = i.element;
 
@@ -535,11 +535,11 @@ namespace KitchenDesign.KitchenModel
                             cabinet.sizeInMeters = cabinetSizeInMeters;
                         }
 
-                        m_CurrentCabinetLayout.ModifyCabinetForBuildingMethod(cabinet);
+                        _currentCabinetLayout.ModifyCabinetForBuildingMethod(cabinet);
                     }
 
                     // Apply the cabinet size changes.
-                    m_CurrentCabinetLayout.UpdatePositions();
+                    _currentCabinetLayout.UpdatePositions();
                 }
                 else if (this.buildingRules.UsesBrandCatalog)
                 {
@@ -572,7 +572,7 @@ namespace KitchenDesign.KitchenModel
 
                     int nextDefaultCabinetSectionIndex = 0;
 
-                    int cabinetCount = m_CurrentCabinetLayout.CountCabinets();
+                    int cabinetCount = _currentCabinetLayout.CountCabinets();
 
                     // Replace the default kitchen layout's cabinets with
                     // ones specified by the catalog. These are chosen
@@ -582,7 +582,7 @@ namespace KitchenDesign.KitchenModel
                     for (int i = 0; i < cabinetCount; ++i)
                     {
                         Cabinet cabinet =
-                            m_CurrentCabinetLayout.GetCabinetAtIndex(i);
+                            _currentCabinetLayout.GetCabinetAtIndex(i);
 
                         if (cabinet.cabinetType.IsEnd() &&
                             this._selections.brandCatalog.fridgeEndPanelInfo.specificPanelWidthInMeters > 0.0f)
@@ -674,7 +674,7 @@ namespace KitchenDesign.KitchenModel
                         }
 
                         Cabinet replacementCabinet =
-                            await m_CurrentCabinetLayout.InstantiateCabinet(
+                            await _currentCabinetLayout.InstantiateCabinet(
                                 m_CatalogCabinetPrefab,
                                 replacementCabinetInfo,
                                 this
@@ -713,7 +713,7 @@ namespace KitchenDesign.KitchenModel
 
                         // Remove the placeholder cabinet and replace it with
                         // this one.
-                        m_CurrentCabinetLayout.DestroyCabinetAtIndex(i);
+                        _currentCabinetLayout.DestroyCabinetAtIndex(i);
 
                         replacementCabinet.GetTransform().SetSiblingIndex(i);
                     }
@@ -735,7 +735,7 @@ namespace KitchenDesign.KitchenModel
                 SetCountertopOverhang(this._selections.countertopOverhangInMeters);
 
                 // Move cabinets to their proper anchors
-                m_CurrentCabinetLayout.UpdatePositions();
+                _currentCabinetLayout.UpdatePositions();
 
                 (Material cabinetMaterial, Material countertopMaterial) =
                     await this._materials.GetFinishMaterials(allowHighlightToReturn: true);
@@ -744,7 +744,7 @@ namespace KitchenDesign.KitchenModel
                 // any future catalogs that have a cabinet material override)
                 // will have their cabinets start with the intended materials.
 
-                await m_CurrentCabinetLayout.SetCabinetMaterials(
+                await _currentCabinetLayout.SetCabinetMaterials(
                     cabinetMaterial,
                     countertopMaterial,
                     await this._profile.GetDefaultKitchenMaterial()
@@ -763,16 +763,16 @@ namespace KitchenDesign.KitchenModel
             this._widgets.RecreateTickerWidgets();
 
             // Reset the ground
-            if (m_CurrentCabinetLayout)
+            if (_currentCabinetLayout)
             {
                 CenterTheGround();
             }
-            m_Ground.gameObject.SetActive(m_CurrentCabinetLayout);
+            m_Ground.gameObject.SetActive(_currentCabinetLayout);
 
             // Notify listeners that the kitchen layout has changed. This is
             // useful to initialize the camera rotation depending on which
             // layout was chosen.
-            this.events.onKitchenLayoutChanged?.Invoke(prefab, m_CurrentCabinetLayout);
+            this.events.onKitchenLayoutChanged?.Invoke(prefab, _currentCabinetLayout);
 
         }
 
@@ -784,19 +784,19 @@ namespace KitchenDesign.KitchenModel
         {
             this._selections.baseCabinetDepthInMeters = depthInMeters;
 
-            if (m_CurrentCabinetLayout)
+            if (_currentCabinetLayout)
             {
                 // First pass: Change the depth of all cabinets and snap any
                 // back-anchored products to the new back position.
-                foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
+                foreach (CabinetSpan span in _currentCabinetLayout.spans)
                 {
                     span.SetBaseCabinetDepth(depthInMeters);
                 }
 
-                m_CurrentCabinetLayout.UpdatePositions();
+                _currentCabinetLayout.UpdatePositions();
 
                 // Second pass: Fix up size of any backings.
-                foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
+                foreach (CabinetSpan span in _currentCabinetLayout.spans)
                 {
                     if (span.backing)
                     {
@@ -810,14 +810,14 @@ namespace KitchenDesign.KitchenModel
         {
             this._selections.countertopThicknessInMeters = thicknessInMeters;
 
-            if (m_CurrentCabinetLayout)
+            if (_currentCabinetLayout)
             {
-                foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
+                foreach (CabinetSpan span in _currentCabinetLayout.spans)
                 {
                     span.UpdateBackingSizeAndPosition();
                 }
 
-                foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+                foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
                 {
                     Cabinet cabinet = i.element;
 
@@ -826,7 +826,7 @@ namespace KitchenDesign.KitchenModel
 
                 // Ensure the height of the cabinets are updated to match up
                 // with the new countertop height.
-                m_CurrentCabinetLayout.UpdateMeshes();
+                _currentCabinetLayout.UpdateMeshes();
             }
         }
 
@@ -1179,7 +1179,7 @@ namespace KitchenDesign.KitchenModel
 
         private void OnEnable()
         {
-            m_CutoutClipping.Attach(this);
+            _cutoutClipping.Attach(this);
 
             if (this._events != null)
             {
@@ -1202,7 +1202,7 @@ namespace KitchenDesign.KitchenModel
 
         private void OnDisable()
         {
-            m_CutoutClipping.Detach();
+            _cutoutClipping.Detach();
 
             if (this._events != null)
             {
@@ -1366,7 +1366,7 @@ namespace KitchenDesign.KitchenModel
 
             // Apply brand catalog's default toe kick. Currently, this is only
             // necessary to enforce Napoleon's mandatory toe kick.
-            if (m_CurrentCabinetLayout && this.buildingRules.UsesBrandCatalog)
+            if (_currentCabinetLayout && this.buildingRules.UsesBrandCatalog)
             {
                 this._selections.toeKickType = this._selections.brandCatalog.defaultToeKickType;
                 this.OnToeKickTypeChanged(this._selections.toeKickType);
@@ -1375,9 +1375,9 @@ namespace KitchenDesign.KitchenModel
             // Ensure the cabinet is the client's intended outside-edge length
             // (at time of writing, that is 15", as set as initial size on
             // straight cabinet prefab)
-            if (m_CurrentCabinetLayout && this.buildingRules.SizesStraightCabinetsToOutsideEdge)
+            if (_currentCabinetLayout && this.buildingRules.SizesStraightCabinetsToOutsideEdge)
             {
-                foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+                foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
                 {
                     Cabinet cabinet = i.element;
 
@@ -1386,7 +1386,7 @@ namespace KitchenDesign.KitchenModel
                     {
                         Vector3 cabinetSizeInMeters = cabinet.sizeInMeters;
 
-                        m_CurrentCabinetLayout.GetCabinetNeighbours(
+                        _currentCabinetLayout.GetCabinetNeighbours(
                             cabinet,
                             out Cabinet leftCabinet,
                             out Cabinet rightCabinet
@@ -1406,8 +1406,8 @@ namespace KitchenDesign.KitchenModel
                     }
                 }
 
-                m_CurrentCabinetLayout.UpdatePositions();
-                m_CurrentCabinetLayout.UpdateMeshes();
+                _currentCabinetLayout.UpdatePositions();
+                _currentCabinetLayout.UpdateMeshes();
 
                 this._widgets.RefreshTickerLabels();
 
@@ -1420,7 +1420,7 @@ namespace KitchenDesign.KitchenModel
 
         public void GetCabinetLayout(ref CabinetLayout cabinetLayout)
         {
-            cabinetLayout = m_CurrentCabinetLayout;
+            cabinetLayout = _currentCabinetLayout;
         }
 
         public void SetBuildingMethod(KitchenBuildingMethod buildingMethod)
@@ -1674,9 +1674,9 @@ namespace KitchenDesign.KitchenModel
         {
             this._selections.countertopOverhangInMeters = overhangInMeters;
 
-            if (m_CurrentCabinetLayout)
+            if (_currentCabinetLayout)
             {
-                foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+                foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
                 {
                     Cabinet cabinet = i.element;
 
@@ -1687,10 +1687,10 @@ namespace KitchenDesign.KitchenModel
 
         protected async UniTask OnCabinetResized(Cabinet caller)
         {
-            if (m_CurrentCabinetLayout != null)
+            if (_currentCabinetLayout != null)
             {
-                m_CurrentCabinetLayout.UpdateMeshes();
-                m_CurrentCabinetLayout.UpdatePositions();
+                _currentCabinetLayout.UpdateMeshes();
+                _currentCabinetLayout.UpdatePositions();
             }
 
             await UniTask.CompletedTask;
@@ -1709,13 +1709,13 @@ namespace KitchenDesign.KitchenModel
         /// </summary>
         protected async UniTask OnCabinetReordered((Cabinet reorderedCabinet, int previousCabinetIndex, List<CabinetSpan> previousCabinetSpans) args)
         {
-            if (!m_IsUpdatingCabinetHeightTransitions)
+            if (!_isUpdatingCabinetHeightTransitions)
             {
-                m_IsUpdatingCabinetHeightTransitions = true;
+                _isUpdatingCabinetHeightTransitions = true;
 
                 using var _ =
                     MelcherDeferred.Defer(
-                        () => m_IsUpdatingCabinetHeightTransitions = false
+                        () => _isUpdatingCabinetHeightTransitions = false
                     );
 
                 await UpdateCabinetHeightTransitions();
@@ -1733,7 +1733,7 @@ namespace KitchenDesign.KitchenModel
         /// </summary>
         internal async UniTask UpdateCabinetHeightTransitions()
         {
-            if(m_CurrentCabinetLayout == null)
+            if(_currentCabinetLayout == null)
             {
                 return;
             }
@@ -1741,7 +1741,7 @@ namespace KitchenDesign.KitchenModel
             // First pass: Remove any unnecessary height transition cabinets.
             ComponentsInChildrenEnumerator<Cabinet> cabinets =
                 new ComponentsInChildrenEnumerator<Cabinet>(
-                    m_CurrentCabinetLayout.GetTransform(),
+                    _currentCabinetLayout.GetTransform(),
                     reverse: true
                 );
 
@@ -1755,7 +1755,7 @@ namespace KitchenDesign.KitchenModel
                     continue;
                 }
 
-                m_CurrentCabinetLayout.GetCabinetNeighbours(
+                _currentCabinetLayout.GetCabinetNeighbours(
                     cabinet,
                     out Cabinet leftCabinet,
                     out Cabinet rightCabinet
@@ -1779,7 +1779,7 @@ namespace KitchenDesign.KitchenModel
                     continue;
                 }
 
-                m_CurrentCabinetLayout.DestroyCabinet(cabinet);
+                _currentCabinetLayout.DestroyCabinet(cabinet);
             }
 
             // Second pass: Add any missing height transition cabinets. This
@@ -1789,7 +1789,7 @@ namespace KitchenDesign.KitchenModel
             (Material cabinetMaterial, Material countertopMaterial) =
                 await this._materials.GetFinishMaterials(allowHighlightToReturn: true);
 
-            foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+            foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
             {
                 Cabinet cabinet = i.element;
 
@@ -1800,7 +1800,7 @@ namespace KitchenDesign.KitchenModel
                 }
 
                 Cabinet rightNeighbor =
-                    m_CurrentCabinetLayout.GetCabinetNeighbour(
+                    _currentCabinetLayout.GetCabinetNeighbour(
                         cabinet,
                         Extent.Max
                     );
@@ -2159,13 +2159,13 @@ namespace KitchenDesign.KitchenModel
             // to limit the number of times the cabinet spans need to be
             // rebuilt.
             Cabinet currentCabinetAtIndex =
-                m_CurrentCabinetLayout.GetCabinetAtIndex(insertIndex.Value);
+                _currentCabinetLayout.GetCabinetAtIndex(insertIndex.Value);
 
             Quaternion currentCabientAtIndexRotation =
                 currentCabinetAtIndex.GetTransform().rotation;
 
             Cabinet createdCabinet =
-                await m_CurrentCabinetLayout.UserInstantiateCabinetAtIndex(
+                await _currentCabinetLayout.UserInstantiateCabinetAtIndex(
                     insertIndex.Value,
                     cabinetPrefab,
                     cabinetSectionProductInfo,
@@ -2190,7 +2190,7 @@ namespace KitchenDesign.KitchenModel
                                 currentCabinetAtIndex.normalizedAnchorToPreviousSection;
 
                             // Destroy the original corner.
-                            m_CurrentCabinetLayout.DestroyCabinet(currentCabinetAtIndex);
+                            _currentCabinetLayout.DestroyCabinet(currentCabinetAtIndex);
                         }
                     }
                 );
@@ -2566,7 +2566,7 @@ namespace KitchenDesign.KitchenModel
 
             // Fix up the anchoring of the straight sections. They need an
             // anchor of (0,0,0) when trailing an end or corner.
-            foreach (ElementIndex<Cabinet> i in m_CurrentCabinetLayout.EnumerateCabinets())
+            foreach (ElementIndex<Cabinet> i in _currentCabinetLayout.EnumerateCabinets())
             {
                 Cabinet cabinet = i.element;
 
@@ -2581,8 +2581,8 @@ namespace KitchenDesign.KitchenModel
                 previousCabinet = cabinet;
             }
 
-            m_CurrentCabinetLayout.UpdateMeshes();
-            m_CurrentCabinetLayout.UpdatePositions();
+            _currentCabinetLayout.UpdateMeshes();
+            _currentCabinetLayout.UpdatePositions();
         }
 
         /// <summary>
@@ -2648,7 +2648,7 @@ namespace KitchenDesign.KitchenModel
         {
             Cuboid? backingOccupancyInWorldSpace = null;
 
-            foreach (CabinetSpan span in m_CurrentCabinetLayout.spans)
+            foreach (CabinetSpan span in _currentCabinetLayout.spans)
             {
                 if (span.backing &&
                     span.Contains((Cabinet)occupant.cabinet))
@@ -2743,7 +2743,7 @@ namespace KitchenDesign.KitchenModel
 
         internal void UpdateCameraAndFramingGroups()
         {
-            this._camera.FrameLayout(m_CurrentCabinetLayout);
+            this._camera.FrameLayout(_currentCabinetLayout);
         }
 
 
@@ -2876,9 +2876,9 @@ namespace KitchenDesign.KitchenModel
         // =====================================================================
 
 
-        private readonly KitchenCutoutClipping m_CutoutClipping = new KitchenCutoutClipping();
+        private readonly KitchenCutoutClipping _cutoutClipping = new KitchenCutoutClipping();
 
-        private CabinetLayout m_CurrentCabinetLayout;
+        private CabinetLayout _currentCabinetLayout;
 
 
         // Player's kitchen customizations:
@@ -2917,7 +2917,7 @@ namespace KitchenDesign.KitchenModel
         private SessionStatus _session;
         private ProductVisualContentStatus _productContent;
 
-        private bool m_IsUpdatingCabinetHeightTransitions;
+        private bool _isUpdatingCabinetHeightTransitions;
 
 
         // =====================================================================

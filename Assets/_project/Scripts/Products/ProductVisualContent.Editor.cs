@@ -776,15 +776,15 @@ namespace KitchenDesign.Products
                 throw new System.ArgumentNullException(nameof(instanceRootToCheck));
             }
 
-            s_BreadthFirstModelSearchCandidates.Clear();
-            s_BreadthFirstModelSearchCandidates.Add(instanceRootToCheck);
+            _breadthFirstModelSearchCandidates.Clear();
+            _breadthFirstModelSearchCandidates.Add(instanceRootToCheck);
 
             // Use breadth-first search because (in the original use-case) the
             // corresponding object was likely to be close to the top of the
             // instance root
-            for (int i = 0; i < s_BreadthFirstModelSearchCandidates.Count; ++i)
+            for (int i = 0; i < _breadthFirstModelSearchCandidates.Count; ++i)
             {
-                Transform current = s_BreadthFirstModelSearchCandidates[i];
+                Transform current = _breadthFirstModelSearchCandidates[i];
 
                 // Cast the instance object to its corresponding object in the
                 // prefab asset
@@ -798,7 +798,7 @@ namespace KitchenDesign.Products
 
                 foreach (Transform child in current)
                 {
-                    s_BreadthFirstModelSearchCandidates.Add(child);
+                    _breadthFirstModelSearchCandidates.Add(child);
                 }
             }
 
@@ -889,7 +889,7 @@ namespace KitchenDesign.Products
         // Static fields
         // ====================================================================
 
-        private static List<Transform> s_BreadthFirstModelSearchCandidates = new List<Transform>();
+        private static List<Transform> _breadthFirstModelSearchCandidates = new List<Transform>();
 
         // ====================================================================
         // Types

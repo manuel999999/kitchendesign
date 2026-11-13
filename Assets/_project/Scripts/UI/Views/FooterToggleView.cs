@@ -55,12 +55,12 @@ namespace KitchenDesign.UI.Views
             {
                 if (instant)
                 {
-                    m_Tween.KillIfActive();
+                    _tween.KillIfActive();
                     m_Label.color = background;
                 }
                 else
                 {
-                    m_Tween.Reset(
+                    _tween.Reset(
                         m_Label.DOColor(background, m_TweenDuration)
                     );
                 }
@@ -90,7 +90,7 @@ namespace KitchenDesign.UI.Views
         // Non-serialized fields
         // =====================================================================
 
-        protected RecyclableTween<Tween> m_Tween = new RecyclableTween<Tween>();
+        protected RecyclableTween<Tween> _tween = new RecyclableTween<Tween>();
 
     }   // class FooterToggleView
 

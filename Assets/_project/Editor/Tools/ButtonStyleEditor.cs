@@ -10,12 +10,12 @@ namespace KitchenDesign.ToolsEditor
     {
         public void OnEnable()
         {
-            m_ForcePreviewButtonStyleRefresh = true;
+            _forcePreviewButtonStyleRefresh = true;
         }
 
         protected void RefreshPreviewButtonStyle()
         {
-            if (!s_TransparencyBackground)
+            if (!_transparencyBackground)
             {
                 string pathContainingThisScript =
                     MelcherCommon.GetCallerSourceCodePath();
@@ -26,17 +26,17 @@ namespace KitchenDesign.ToolsEditor
                     MelcherTransformFilePath.From("TransparencyBackground.png", relativeTo: pathContainingThisScript)
                         .To(MelcherPredefinedFilePath.project);
 
-                s_TransparencyBackground =
+                _transparencyBackground =
                     AssetDatabase.LoadAssetAtPath<Texture2D>(
                         transparencyBackgroundImagePath
                     );
             }
             ButtonStyleSO buttonStyleToReplicate = (ButtonStyleSO)target;
 
-            m_PreviewButtonStyle = new GUIStyle(GUI.skin.button);
-            m_PreviewButtonStyle.fontStyle |= FontStyle.Bold;
-            m_PreviewButtonStyle.fontSize = 20;
-            m_PreviewButtonStyle.padding = new RectOffset(5, 5, 5, 5);
+            _previewButtonStyle = new GUIStyle(GUI.skin.button);
+            _previewButtonStyle.fontStyle |= FontStyle.Bold;
+            _previewButtonStyle.fontSize = 20;
+            _previewButtonStyle.padding = new RectOffset(5, 5, 5, 5);
 
             Color foreground;
             Color background;
@@ -45,38 +45,38 @@ namespace KitchenDesign.ToolsEditor
             (foreground, background) =
                 buttonStyleToReplicate.ColorsForAppearance(MelcherSelectable.Appearance.Normal);
 
-            m_PreviewButtonStyle.normal.textColor = foreground;
-            m_PreviewButtonStyle.normal.background =
+            _previewButtonStyle.normal.textColor = foreground;
+            _previewButtonStyle.normal.background =
                 CreateBackgroundTexture(background);
 
             // Hovered:
             (foreground, background) =
                 buttonStyleToReplicate.ColorsForAppearance(MelcherSelectable.Appearance.Hovered);
 
-            m_PreviewButtonStyle.hover.textColor = foreground;
-            m_PreviewButtonStyle.hover.background =
+            _previewButtonStyle.hover.textColor = foreground;
+            _previewButtonStyle.hover.background =
                 CreateBackgroundTexture(background);
 
             // Pressed/active:
             (foreground, background) =
                 buttonStyleToReplicate.ColorsForAppearance(MelcherSelectable.Appearance.Pressed);
 
-            m_PreviewButtonStyle.active.textColor = foreground;
-            m_PreviewButtonStyle.active.background =
+            _previewButtonStyle.active.textColor = foreground;
+            _previewButtonStyle.active.background =
                 CreateBackgroundTexture(background);
 
             // Noninteractable
-            m_NonInteractablePreviewButtonStyle = new GUIStyle(m_PreviewButtonStyle);
+            _nonInteractablePreviewButtonStyle = new GUIStyle(_previewButtonStyle);
 
             (foreground, background) =
                 buttonStyleToReplicate.ColorsForAppearance(MelcherSelectable.Appearance.NonInteractable);
 
-            m_NonInteractablePreviewButtonStyle.normal.textColor = foreground;
-            m_NonInteractablePreviewButtonStyle.normal.background =
+            _nonInteractablePreviewButtonStyle.normal.textColor = foreground;
+            _nonInteractablePreviewButtonStyle.normal.background =
                 CreateBackgroundTexture(background);
 
-            m_NonInteractablePreviewButtonStyle.hover = m_NonInteractablePreviewButtonStyle.normal;
-            m_NonInteractablePreviewButtonStyle.active = m_NonInteractablePreviewButtonStyle.normal;
+            _nonInteractablePreviewButtonStyle.hover = _nonInteractablePreviewButtonStyle.normal;
+            _nonInteractablePreviewButtonStyle.active = _nonInteractablePreviewButtonStyle.normal;
 
             static Texture2D CreateBackgroundTexture(Color color)
             {
@@ -101,11 +101,11 @@ namespace KitchenDesign.ToolsEditor
 
                 EditorGUILayout.Space(20);
 
-                if (defaultInspectorControls.changed || m_ForcePreviewButtonStyleRefresh)
+                if (defaultInspectorControls.changed || _forcePreviewButtonStyleRefresh)
                 {
                     RefreshPreviewButtonStyle();
 
-                    m_ForcePreviewButtonStyleRefresh = false;
+                    _forcePreviewButtonStyleRefresh = false;
                 }
 
                 using (new EditorGUI.DisabledGroupScope(disabled: true))
@@ -116,7 +116,7 @@ namespace KitchenDesign.ToolsEditor
                     // is prioritized for click events which prevents our
                     // intended button that draws over it from animating on
                     // click.
-                    GUILayout.Button(s_PreviewButtonContent, m_PreviewButtonStyle);
+                    GUILayout.Button(_previewButtonContent, _previewButtonStyle);
                 }
 
                 const float CheckerboardImageDeltaMinY = 0.0f;
@@ -125,7 +125,7 @@ namespace KitchenDesign.ToolsEditor
                 Rect previewButtonRect = GUILayoutUtility.GetLastRect();
                 previewButtonRect.yMin += CheckerboardImageDeltaMinY;
                 previewButtonRect.yMax += CheckerboardImageDeltaMaxY;
-                EditorGUI.DrawTextureTransparent(previewButtonRect, s_TransparencyBackground, ScaleMode.ScaleAndCrop);
+                EditorGUI.DrawTextureTransparent(previewButtonRect, _transparencyBackground, ScaleMode.ScaleAndCrop);
 
                 float alpha =
                     Mathf.PingPong(
@@ -139,21 +139,21 @@ namespace KitchenDesign.ToolsEditor
 
                 GUI.Button(
                     previewButtonRect,
-                    s_PreviewButtonContent,
-                    style: m_PreviewButtonStyle
+                    _previewButtonContent,
+                    style: _previewButtonStyle
                 );
 
                 EditorGUILayout.Space(20);
 
-                GUILayout.Label(s_NonInteractablePreviewButtonContent, m_NonInteractablePreviewButtonStyle);
+                GUILayout.Label(_nonInteractablePreviewButtonContent, _nonInteractablePreviewButtonStyle);
                 Rect nonInteractablePreviewButtonRect = GUILayoutUtility.GetLastRect();
                 nonInteractablePreviewButtonRect.yMin += CheckerboardImageDeltaMinY;
                 nonInteractablePreviewButtonRect.yMax += CheckerboardImageDeltaMaxY;
-                //EditorGUI.DrawTextureTransparent(nonInteractablePreviewButtonRect, s_TransparencyBackground, ScaleMode.ScaleAndCrop);
+                //EditorGUI.DrawTextureTransparent(nonInteractablePreviewButtonRect, _transparencyBackground, ScaleMode.ScaleAndCrop);
                 //GUI.Button(
                 //    nonInteractablePreviewButtonRect,
-                //    s_NonInteractablePreviewButtonContent,
-                //    style: m_NonInteractablePreviewButtonStyle
+                //    _nonInteractablePreviewButtonContent,
+                //    style: _nonInteractablePreviewButtonStyle
                 //);
             }
 
@@ -169,13 +169,13 @@ namespace KitchenDesign.ToolsEditor
             Repaint();
         }
 
-        protected static GUIContent s_PreviewButtonContent = new GUIContent("Preview Button");
-        protected static GUIContent s_NonInteractablePreviewButtonContent = new GUIContent("Non-Interactable Example");
-        protected static Texture2D s_TransparencyBackground = default;
+        protected static GUIContent _previewButtonContent = new GUIContent("Preview Button");
+        protected static GUIContent _nonInteractablePreviewButtonContent = new GUIContent("Non-Interactable Example");
+        protected static Texture2D _transparencyBackground = default;
 
-        protected GUIStyle m_PreviewButtonStyle;
-        protected GUIStyle m_NonInteractablePreviewButtonStyle;
-        protected bool m_ForcePreviewButtonStyleRefresh;
+        protected GUIStyle _previewButtonStyle;
+        protected GUIStyle _nonInteractablePreviewButtonStyle;
+        protected bool _forcePreviewButtonStyleRefresh;
 
     }   // class ButtonStyleEditor
 

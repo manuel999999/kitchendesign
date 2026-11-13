@@ -16,7 +16,7 @@ namespace KitchenDesign.Scriptables
     [CreateAssetMenu(fileName = "Product Visual Database", menuName = "Melcher Studios/Pro-Fit/Product Visual Database")]
     public class ProductVisualDatabaseSO : ScriptableObject
     {
-        public IReadOnlyList<ProductVisualSO> runtimeEntries => m_RuntimeEntries;
+        public IReadOnlyList<ProductVisualSO> runtimeEntries => _runtimeEntries;
 
         public IReadOnlyList<ProductVisualSO> sourceEntries => m_SourceEntries;
 
@@ -89,13 +89,13 @@ namespace KitchenDesign.Scriptables
             {
                 ProductVisualSO runtimeEntry = sourceEntry.MakeRuntimeClone();
 
-                m_RuntimeEntries.Add(runtimeEntry);
+                _runtimeEntries.Add(runtimeEntry);
 
                 m_VisualIdToRuntimeProductVisual[runtimeEntry.info.id] = runtimeEntry;
             }
 
             MelcherLog.Log(
-                $"Created {m_RuntimeEntries.Count} runtime product visuals.",
+                $"Created {_runtimeEntries.Count} runtime product visuals.",
                 severity: MelcherLogSeverity.Verbose
             );
         }
@@ -104,7 +104,7 @@ namespace KitchenDesign.Scriptables
         {
             m_VisualIdToRuntimeProductVisual.Clear();
 
-            foreach (ProductVisualSO runtimeEntry in m_RuntimeEntries)
+            foreach (ProductVisualSO runtimeEntry in _runtimeEntries)
             {
                 if (runtimeEntry)
                 {
@@ -112,7 +112,7 @@ namespace KitchenDesign.Scriptables
                 }
             }
 
-            m_RuntimeEntries.Clear();
+            _runtimeEntries.Clear();
 
             MelcherLog.Log(
                 $"Destroyed runtime product visuals.",
@@ -123,7 +123,7 @@ namespace KitchenDesign.Scriptables
         [SerializeField]
         private List<ProductVisualSO> m_SourceEntries;
 
-        private List<ProductVisualSO> m_RuntimeEntries = new ();
+        private List<ProductVisualSO> _runtimeEntries = new ();
 
         private Dictionary<string, ProductVisualSO> m_VisualIdToRuntimeProductVisual = new ();
 

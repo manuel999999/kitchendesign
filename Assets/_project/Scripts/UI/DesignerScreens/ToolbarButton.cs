@@ -54,9 +54,9 @@ namespace KitchenDesign.UI.DesignerScreens
         /// </remarks>
         public void SetIsGreyedOut(bool isGreyed)
         {
-            m_IsGreyedOut = isGreyed;
+            _isGreyedOut = isGreyed;
 
-            m_Icon.material = m_IsGreyedOut ? m_GreyedOutSpriteMaterial : null;// m_Icon.defaultMaterial;
+            m_Icon.material = _isGreyedOut ? m_GreyedOutSpriteMaterial : null;// m_Icon.defaultMaterial;
         }
 
         protected virtual void Awake()
@@ -76,7 +76,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected virtual void OnClicked(MelcherButton caller)
         {
-            if (!m_IsGreyedOut)
+            if (!_isGreyedOut)
             {
                 Highlight();
                 DoEmitClickEvent();
@@ -146,7 +146,7 @@ namespace KitchenDesign.UI.DesignerScreens
         ///     cref="SetIsGreyedOut(bool)"/> and used in <see
         ///     cref="OnClicked(MelcherButton)"/>.
         /// </summary>
-        protected bool m_IsGreyedOut;
+        protected bool _isGreyedOut;
 
     }   // class ToolbarButton
 

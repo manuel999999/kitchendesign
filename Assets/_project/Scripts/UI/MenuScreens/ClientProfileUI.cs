@@ -42,22 +42,22 @@ namespace KitchenDesign.UI.MenuScreens
         {
             if (this._clientList.TryGetClientIndex(m_ClientId, out int clientIndex))
             {
-                m_ClientProfile = this._clientList.UserClients[clientIndex];
+                _clientProfile = this._clientList.UserClients[clientIndex];
             }
             else
             {
-                m_ClientProfile = default;
+                _clientProfile = default;
             }
 
-            m_ClientFirstNameLabel.phrase   = m_ClientProfile.firstName;
-            m_ClientLastNameLabel.phrase    = m_ClientProfile.lastName;
-            m_ClientEmailLabel.phrase       = m_ClientProfile.email;
-            m_ClientPhoneNumberLabel.phrase = PhoneNumber.Format(m_ClientProfile.phoneNumber);
+            m_ClientFirstNameLabel.phrase   = _clientProfile.firstName;
+            m_ClientLastNameLabel.phrase    = _clientProfile.lastName;
+            m_ClientEmailLabel.phrase       = _clientProfile.email;
+            m_ClientPhoneNumberLabel.phrase = PhoneNumber.Format(_clientProfile.phoneNumber);
 
-            m_AddressLabel.phrase           = m_ClientProfile.address;
-            m_CityLabel.phrase              = m_ClientProfile.city;
-            m_StateLabel.phrase             = m_ClientProfile.state;
-            m_ZipCodeLabel.phrase           = m_ClientProfile.zipCode;
+            m_AddressLabel.phrase           = _clientProfile.address;
+            m_CityLabel.phrase              = _clientProfile.city;
+            m_StateLabel.phrase             = _clientProfile.state;
+            m_ZipCodeLabel.phrase           = _clientProfile.zipCode;
         }
 
         protected override void OnEnable()
@@ -105,12 +105,12 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit client's name?",
                 "Client's First Name",
-                m_ClientProfile.firstName,
+                _clientProfile.firstName,
                 "Client's Last Name",
-                m_ClientProfile.lastName,
+                _clientProfile.lastName,
                 onAccept: (newFirstName, newLastName) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.firstName = newFirstName;
                     newProfile.lastName = newLastName;
 
@@ -124,12 +124,12 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit client's phone number?",
                 "Client's Phone Number",
-                PhoneNumber.Format(m_ClientProfile.phoneNumber),
+                PhoneNumber.Format(_clientProfile.phoneNumber),
                 contentType: TMP_InputField.ContentType.Custom,
                 keyboardType: TouchScreenKeyboardType.NumberPad,
                 onAccept: (newFormattedPhoneNumber, _) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.phoneNumber = PhoneNumber.Unformat(newFormattedPhoneNumber);
 
                     UpdateProfile(newProfile);
@@ -142,11 +142,11 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit contact's email?",
                 "Client's Email",
-                m_ClientProfile.email,
+                _clientProfile.email,
                 contentType: TMP_InputField.ContentType.EmailAddress,
                 onAccept: (newEmail, _) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.email = newEmail;
 
                     UpdateProfile(newProfile);
@@ -159,10 +159,10 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit address?",
                 "Address",
-                m_ClientProfile.address,
+                _clientProfile.address,
                 onAccept: (newAddress, _) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.address = newAddress;
 
                     UpdateProfile(newProfile);
@@ -175,10 +175,10 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit city?",
                 "City",
-                m_ClientProfile.city,
+                _clientProfile.city,
                 onAccept: (newCity, _) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.city = newCity;
 
                     UpdateProfile(newProfile);
@@ -191,10 +191,10 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit state?",
                 "State",
-                m_ClientProfile.state,
+                _clientProfile.state,
                 onAccept: (newState, _) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.state = newState;
 
                     UpdateProfile(newProfile);
@@ -207,11 +207,11 @@ namespace KitchenDesign.UI.MenuScreens
             this._editProfilePrompt.SetContent(
                 "Edit zip code?",
                 "Zip Code",
-                m_ClientProfile.zipCode,
+                _clientProfile.zipCode,
                 contentType: TMP_InputField.ContentType.Alphanumeric,
                 onAccept: (newZipCode, _) =>
                 {
-                    UserClient newProfile = m_ClientProfile;
+                    UserClient newProfile = _clientProfile;
                     newProfile.zipCode = newZipCode;
 
                     UpdateProfile(newProfile);
@@ -257,12 +257,12 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void Email(MelcherButton caller)
         {
-            Application.OpenURL("mailto:" + m_ClientProfile.email);
+            Application.OpenURL("mailto:" + _clientProfile.email);
         }
 
         protected void Phone(MelcherButton caller)
         {
-            Application.OpenURL("tel:" + m_ClientProfile.phoneNumber);
+            Application.OpenURL("tel:" + _clientProfile.phoneNumber);
         }
 
         // =====================================================================
@@ -316,7 +316,7 @@ namespace KitchenDesign.UI.MenuScreens
         protected Dictionary<string, Selectable> m_NameToSelectable;
 
         protected int m_ClientId;
-        protected UserClient m_ClientProfile;
+        protected UserClient _clientProfile;
 
     }   // class ClientProfileUI
 

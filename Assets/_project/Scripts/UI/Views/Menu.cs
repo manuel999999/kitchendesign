@@ -13,19 +13,19 @@ namespace KitchenDesign.UI.Views
         protected override void DoShow()
         {
             base.DoShow();
-            MenuTransition.HalfSlideIn(this, m_Transition, m_TransitionTween, onComplete: null);
+            MenuTransition.HalfSlideIn(this, m_Transition, _transitionTween, onComplete: null);
         }
 
         protected override void DoHide()
         {
-            MenuTransition.HalfSlideOut(this, m_Transition, m_TransitionTween, () => SetVisible(false));
+            MenuTransition.HalfSlideOut(this, m_Transition, _transitionTween, () => SetVisible(false));
         }
 
         // =====================================================================
         // Non-serialized fields
         // =====================================================================
 
-        protected RecyclableTween<Sequence> m_TransitionTween = new RecyclableTween<Sequence>();
+        protected RecyclableTween<Sequence> _transitionTween = new RecyclableTween<Sequence>();
     }   // class Menu
 
 }   // namespace KitchenDesign.UI.Views

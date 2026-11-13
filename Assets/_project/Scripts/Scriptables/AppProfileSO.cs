@@ -46,28 +46,28 @@ namespace KitchenDesign.Scriptables
 
         public async UniTask<Material> GetDefaultKitchenMaterial()
         {
-            if (!m_KitchenDefaultMaterialOperation.IsValid())
+            if (!_kitchenDefaultMaterialOperation.IsValid())
             {
-                m_KitchenDefaultMaterialOperation =
+                _kitchenDefaultMaterialOperation =
                     Addressables.LoadAssetAsync<Material>(m_KitchenDefaultMaterial);
             }
 
-            await m_KitchenDefaultMaterialOperation;
+            await _kitchenDefaultMaterialOperation;
 
-            return m_KitchenDefaultMaterialOperation.Result;
+            return _kitchenDefaultMaterialOperation.Result;
         }
 
         public async UniTask<Material> GetDefaultOccupantMaterial()
         {
-            if (!m_OccupantDefaultMaterialOperation.IsValid())
+            if (!_occupantDefaultMaterialOperation.IsValid())
             {
-                m_OccupantDefaultMaterialOperation =
+                _occupantDefaultMaterialOperation =
                     Addressables.LoadAssetAsync<Material>(m_OccupantDefaultMaterial);
             }
 
-            await m_OccupantDefaultMaterialOperation;
+            await _occupantDefaultMaterialOperation;
 
-            return m_OccupantDefaultMaterialOperation.Result;
+            return _occupantDefaultMaterialOperation.Result;
         }
 
         public string GetAppResourcesName()
@@ -134,9 +134,9 @@ namespace KitchenDesign.Scriptables
         [UnityEngine.Serialization.FormerlySerializedAs("m_BrandCatalogPresets")]
         protected MelcherReadWriteList<BrandCatalogSO> m_PresetBrandCatalogs = new ();
 
-        private AsyncOperationHandle<Material> m_OccupantDefaultMaterialOperation;
+        private AsyncOperationHandle<Material> _occupantDefaultMaterialOperation;
 
-        private AsyncOperationHandle<Material> m_KitchenDefaultMaterialOperation;
+        private AsyncOperationHandle<Material> _kitchenDefaultMaterialOperation;
 
 #if UNITY_EDITOR
 

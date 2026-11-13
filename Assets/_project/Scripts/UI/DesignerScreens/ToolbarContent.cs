@@ -15,7 +15,7 @@ namespace KitchenDesign.UI.DesignerScreens
         // Properties
         // =====================================================================
 
-        public ToolbarContentVisibility visibility => m_LastVisibility;
+        public ToolbarContentVisibility visibility => _lastVisibility;
 
         // =====================================================================
         // Methods
@@ -38,7 +38,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         public void SetVisibility(ToolbarContentVisibility visibility, ToolbarContentDuration duration)
         {
-            m_LastVisibility = visibility;
+            _lastVisibility = visibility;
 
             Vector2 offsetMin = Vector2.zero;
             Vector2 offsetMax = Vector2.zero;
@@ -75,7 +75,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             if (duration == ToolbarContentDuration.Immediate)
             {
-                m_VisibilityTween.KillIfActive();
+                _visibilityTween.KillIfActive();
                 m_RectTransform.offsetMin = offsetMin;
                 m_RectTransform.offsetMax = offsetMax;
                 m_InactiveTint.canvasRenderer.SetAlpha(tintAlpha);
@@ -84,7 +84,7 @@ namespace KitchenDesign.UI.DesignerScreens
             {
                 const float TweenSeconds = 0.15f;
 
-                m_VisibilityTween.Reset(
+                _visibilityTween.Reset(
                     DOTween.Sequence()
                         .SetLink(gameObject, LinkBehaviour.CompleteAndKillOnDisable)
                         .Join(
@@ -154,9 +154,9 @@ namespace KitchenDesign.UI.DesignerScreens
         // Non-serialized fields
         // =====================================================================
 
-        protected RecyclableTween<Sequence> m_VisibilityTween = new RecyclableTween<Sequence>();
+        protected RecyclableTween<Sequence> _visibilityTween = new RecyclableTween<Sequence>();
 
-        protected ToolbarContentVisibility m_LastVisibility;
+        protected ToolbarContentVisibility _lastVisibility;
 
     }   // class ToolbarContent
 

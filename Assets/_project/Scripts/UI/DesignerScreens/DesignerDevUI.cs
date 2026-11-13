@@ -145,7 +145,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             async UniTask SpawnPreviousProductBatchAsync()
             {
-                if (m_LastBatchProductIndexMin <= 0)
+                if (_lastBatchProductIndexMin <= 0)
                 {
                     // Already at the start (maybe we should clear the products)
                     return;
@@ -153,14 +153,14 @@ namespace KitchenDesign.UI.DesignerScreens
 
                 await ClearProducts();
 
-                m_LastBatchProductIndexMax = m_LastBatchProductIndexMin - 1;
+                _lastBatchProductIndexMax = _lastBatchProductIndexMin - 1;
 
                 MelcherSafeLoop safeLoop = MelcherSafeLoop.WithMaxIterations(maxIterations: 1000);
 
-                while (safeLoop.While(m_LastBatchProductIndexMin - 1 >= 0))
+                while (safeLoop.While(_lastBatchProductIndexMin - 1 >= 0))
                 {
                     ProductInfo productAtIndex =
-                        m_ProductsForBatchPreviewing[m_LastBatchProductIndexMin - 1];
+                        _productsForBatchPreviewing[_lastBatchProductIndexMin - 1];
 
                     if (!AllowProductInBatch(productAtIndex))
                     {
@@ -185,10 +185,10 @@ namespace KitchenDesign.UI.DesignerScreens
                         break;
                     }
 
-                    --m_LastBatchProductIndexMin;
+                    --_lastBatchProductIndexMin;
                 }
 
-                MelcherLog.Log($"Batch: Products {m_LastBatchProductIndexMin} - {m_LastBatchProductIndexMax}");
+                MelcherLog.Log($"Batch: Products {_lastBatchProductIndexMin} - {_lastBatchProductIndexMax}");
             }
 #endif  // if UNITY_EDITOR
         }
@@ -199,7 +199,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             async UniTaskVoid SpawnNextProductBatchAsync()
             {
-                if (m_LastBatchProductIndexMax >= m_ProductsForBatchPreviewing.Length)
+                if (_lastBatchProductIndexMax >= _productsForBatchPreviewing.Length)
                 {
                     // Already at the end (maybe we should clear the products and
                     // allow the batch spawning to wrap).
@@ -211,13 +211,13 @@ namespace KitchenDesign.UI.DesignerScreens
 
                 await ClearProducts();
 
-                m_LastBatchProductIndexMin = m_LastBatchProductIndexMax + 1;
+                _lastBatchProductIndexMin = _lastBatchProductIndexMax + 1;
 
                 MelcherSafeLoop safeLoop = MelcherSafeLoop.WithMaxIterations(maxIterations: 1000);
 
-                while (safeLoop.While(m_LastBatchProductIndexMax + 1 < m_ProductsForBatchPreviewing.Length))
+                while (safeLoop.While(_lastBatchProductIndexMax + 1 < _productsForBatchPreviewing.Length))
                 {
-                    ProductInfo productAtIndex = m_ProductsForBatchPreviewing[m_LastBatchProductIndexMax + 1];
+                    ProductInfo productAtIndex = _productsForBatchPreviewing[_lastBatchProductIndexMax + 1];
 
                     if (AllowProductInBatch(productAtIndex))
                     {
@@ -259,10 +259,10 @@ namespace KitchenDesign.UI.DesignerScreens
                         }
                     }
 
-                    ++m_LastBatchProductIndexMax;
+                    ++_lastBatchProductIndexMax;
                 }
 
-                MelcherLog.Log($"Batch: Products {m_LastBatchProductIndexMin} - {m_LastBatchProductIndexMax}");
+                MelcherLog.Log($"Batch: Products {_lastBatchProductIndexMin} - {_lastBatchProductIndexMax}");
             }
         }
 
@@ -323,13 +323,13 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void OnGlobalDataReady()
         {
-            m_ProductsForBatchPreviewing =
+            _productsForBatchPreviewing =
                 this._catalogData.SourceProducts
                     .Where(x => AllowProductInBatch(x))
                     .ToArray();
 
             Array.Sort(
-                m_ProductsForBatchPreviewing,
+                _productsForBatchPreviewing,
                 comparison: (a, b) =>
                 {
                     // We are most likely to want to preview new product
@@ -436,10 +436,10 @@ namespace KitchenDesign.UI.DesignerScreens
         ///     example, priority is given to those that have not been added
         ///     to the dashboard yet.
         /// </summary>
-        protected ProductInfo[] m_ProductsForBatchPreviewing;
+        protected ProductInfo[] _productsForBatchPreviewing;
 
-        protected int m_LastBatchProductIndexMin = 0;
-        protected int m_LastBatchProductIndexMax = -1;
+        protected int _lastBatchProductIndexMin = 0;
+        protected int _lastBatchProductIndexMax = -1;
 
     }   // class DesignerDevUI
 
