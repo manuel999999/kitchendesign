@@ -118,7 +118,7 @@ namespace KitchenDesign
                 }
 
                 if (isCornerCabinet &&
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                    kitchen.buildingRules.HasCabinetColumns)
                 {
                     // The columns on the neighbouring span must be manually
                     // accounted for.

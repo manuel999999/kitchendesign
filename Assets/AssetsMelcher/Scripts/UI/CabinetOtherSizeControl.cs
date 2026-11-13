@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Shared.Interfaces;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using System;
@@ -166,9 +167,9 @@ namespace KitchenDesign
         ///     are displayed in two different scripts and this ensures we only
         ///     have one spot to update if the depths ever change.
         /// </summary>
-        public static int SetupCabinetDepthSizes(CabinetOtherSizeControl control, KitchenBuildingMethod buildingMethod)
+        public static int SetupCabinetDepthSizes(CabinetOtherSizeControl control, IBuildingMethodRules rules)
         {
-            if (buildingMethod == KitchenBuildingMethod.Sections)
+            if (rules.HasSingleCabinetDepth)
             {
                 // Only one cabinet depth in Sections method.
                 return

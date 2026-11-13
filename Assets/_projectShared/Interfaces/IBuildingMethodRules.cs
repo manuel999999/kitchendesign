@@ -26,5 +26,13 @@ namespace KitchenDesign.Shared.Interfaces
         bool CabinetsAreProducts { get; }
         bool CabinetProductIsOptional { get; }
         bool ProductsCenteredInCabinets { get; }
+        bool HasShelfProducts { get; }
+        bool UserChoosesCabinetDepth { get; }
+        bool HasSingleCabinetDepth { get; }
+        bool HasSecondCountertopThickness { get; }
+        bool ProductsMoveUpAndDown { get; }
+        string CabinetSectionManufacturerName { get; }
+        bool UsesStollHighBarTopOverhang { get; }
+        bool SelectsWholeKitchen { get; }
     }
 }

@@ -269,7 +269,7 @@ namespace KitchenDesign
                 {
                     EventDesigner.OnBuildingMethodsRequested.Raise();
                 }
-                else if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                else if (this._kitchen.buildingRules.UsesBrandCatalog)
                 {
                     EventDesigner.OnBrandCatalogsRequested.Raise();
                 }

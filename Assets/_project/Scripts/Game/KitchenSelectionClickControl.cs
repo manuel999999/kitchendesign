@@ -3,6 +3,7 @@ using KitchenDesign.Cabinets;
 using KitchenDesign.KitchenModel;
 using KitchenDesign.Occupancy;
 using KitchenDesign.Shared.Enums;
+using KitchenDesign.Shared.Interfaces;
 using Melcher;
 using UnityEngine;
 
@@ -80,52 +81,53 @@ namespace KitchenDesign
                         {
                             bool allowCabinet;
 
-                            switch (this._kitchen.selectedBuildingMethod)
+                            IBuildingMethodRules rules = this._kitchen.buildingRules;
+
+                            if (rules.SelectsWholeKitchen)
                             {
-                                default:
-                                    throw new System.InvalidOperationException("Unhandled kitchen building method: " + this._kitchen.selectedBuildingMethod);
+                                allowCabinet = cabinet.cabinetType != CabinetType.Space;
+                            }
+                            else if (rules.HasBlindCorners)
+                            {
+                                if (cabinet.Is(CabinetType.Corner, CabinetModelType.Procedural))
+                                {
+                                    this._kitchen.layout.GetCabinetNeighbours(
+                                        cabinet,
+                                        out Cabinet leftCabinet,
+                                        out Cabinet rightCabinet
+                                    );
 
-                                case KitchenBuildingMethod.Standard:
-                                    allowCabinet = cabinet.cabinetType != CabinetType.Space;
-                                    break;
-
-                                case KitchenBuildingMethod.Sections:
-                                    allowCabinet = cabinet.canHaveProducts;
-                                    break;
-
-                                case KitchenBuildingMethod.Catalog:
-                                    if (cabinet.Is(CabinetType.Corner, CabinetModelType.Procedural))
+                                    if (leftCabinet && leftCabinet.Is(CabinetType.StraightOnLeftOfCorner))
                                     {
-                                        this._kitchen.layout.GetCabinetNeighbours(
-                                            cabinet,
-                                            out Cabinet leftCabinet,
-                                            out Cabinet rightCabinet
-                                        );
-
-                                        if (leftCabinet && leftCabinet.Is(CabinetType.StraightOnLeftOfCorner))
-                                        {
-                                            cabinet = leftCabinet;
-                                            allowCabinet = true;
-                                        }
-                                        else if (rightCabinet && rightCabinet.Is(CabinetType.StraightOnRightOfCorner))
-                                        {
-                                            cabinet = rightCabinet;
-                                            allowCabinet = true;
-                                        }
-                                        else
-                                        {
-                                            allowCabinet = false;
-                                        }
+                                        cabinet = leftCabinet;
+                                        allowCabinet = true;
+                                    }
+                                    else if (rightCabinet && rightCabinet.Is(CabinetType.StraightOnRightOfCorner))
+                                    {
+                                        cabinet = rightCabinet;
+                                        allowCabinet = true;
                                     }
                                     else
                                     {
-                                        allowCabinet =
-                                            cabinet.canHaveProducts ||
-                                            cabinet.Is(CabinetType.StraightOnLeftOfCorner) ||
-                                            cabinet.Is(CabinetType.StraightOnRightOfCorner) ||
-                                            cabinet.Is(CabinetType.Corner, CabinetModelType.Authored);
+                                        allowCabinet = false;
                                     }
-                                    break;
+                                }
+                                else
+                                {
+                                    allowCabinet =
+                                        cabinet.canHaveProducts ||
+                                        cabinet.Is(CabinetType.StraightOnLeftOfCorner) ||
+                                        cabinet.Is(CabinetType.StraightOnRightOfCorner) ||
+                                        cabinet.Is(CabinetType.Corner, CabinetModelType.Authored);
+                                }
+                            }
+                            else if (rules.CabinetsAreProducts)
+                            {
+                                allowCabinet = cabinet.canHaveProducts;
+                            }
+                            else
+                            {
+                                throw new System.InvalidOperationException("Unhandled kitchen building method: " + this._kitchen.selectedBuildingMethod);
                             }
 
                             Debug.DrawLine(
@@ -163,7 +165,7 @@ namespace KitchenDesign
                     {
                         GameObject objectToHighlight = nearestCabinet.gameObject;
 
-                        if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Standard)
+                        if (this._kitchen.buildingRules.SelectsWholeKitchen)
                         {
                             objectToHighlight = this._kitchen.gameObject;
                         }

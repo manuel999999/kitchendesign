@@ -162,7 +162,7 @@ namespace KitchenDesign
                     }
                 }
 
-                if (kitchen && kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                if (kitchen && !kitchen.buildingRules.ProductsMoveUpAndDown)
                 {
                     // No up-and-down movement in Sections/Stoll mode.
                     showUpAndDownButtons = false;

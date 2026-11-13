@@ -82,10 +82,8 @@ namespace KitchenDesign
             // kitchens if they have more than one span. This is because
             // kitchens in Pro-Fit now support different cabinet depths per
             // span.
-            KitchenBuildingMethod buildingMethod = GetKitchenBuildingMethod();
-
             bool displayCabinetDepthOption =
-                buildingMethod == KitchenBuildingMethod.Standard &&
+                this._kitchen.buildingRules.UserChoosesCabinetDepth &&
                 (mode == CabinetSizesMode.InitialCabinetSetup || cornerCabinetCount < 1);
 
             // Hide the cabinet depth control when Section mode is enabled.
@@ -219,28 +217,24 @@ namespace KitchenDesign
                 float countertopThicknessInMeters =
                     m_CountertopThicknessControl.value.sizeInMeters;
 
-                if (GetKitchenBuildingMethod() == KitchenBuildingMethod.Sections &&
+                if (this._kitchen.buildingRules.HasSecondCountertopThickness &&
                     m_StollCountertopThicknessControl.isEnabledToggle.isOn)
                 {
                     countertopThicknessInMeters = m_StollCountertopThicknessControl.value.sizeInMeters;
                 }
 
-                CuboidPadding countertopOverhangInInches = CuboidPadding.one;
-
-                if (GetKitchenBuildingMethod() == KitchenBuildingMethod.Sections)
-                {
-                    countertopOverhangInInches *= 0.5f;
-                }
+                CuboidPadding countertopOverhangInMeters =
+                    CuboidPadding.one * this._kitchen.buildingRules.DefaultCountertopOverhangInMeters;
 
                 float baseCabinetDepthInMeters = m_CabinetDepthControl.value.sizeInMeters;
-                if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                if (this._kitchen.buildingRules.UsesBrandCatalog)
                 {
                     baseCabinetDepthInMeters = this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters;
                 }
 
                 this._kitchen.SetBaseCabinetDepth(baseCabinetDepthInMeters);
                 this._kitchen.SetCountertopThickness(countertopThicknessInMeters);
-                this._kitchen.SetCountertopOverhang(countertopOverhangInInches * Units.Inches2Meters);
+                this._kitchen.SetCountertopOverhang(countertopOverhangInMeters);
                 this._kitchen.CreateKitchen().Forget();
             }
             else
@@ -301,7 +295,7 @@ namespace KitchenDesign
         protected void OnBuildingMethodChanged(KitchenBuildingMethod newBuildingMethod)
         {
             bool isSectionsMethod =
-                newBuildingMethod == KitchenBuildingMethod.Sections;
+                this._kitchen.buildingRules.HasSecondCountertopThickness;
 
             // Stoll has a second countertop thickness control.
             m_StollCountertopThicknessControl.gameObject.SetActive(isSectionsMethod);
@@ -345,7 +339,7 @@ namespace KitchenDesign
             }
 
             m_DefaultCabinetDepthOptionIndex =
-                CabinetOtherSizeControl.SetupCabinetDepthSizes(m_CabinetDepthControl, newBuildingMethod);
+                CabinetOtherSizeControl.SetupCabinetDepthSizes(m_CabinetDepthControl, this._kitchen.buildingRules);
 
             // The Stoll countertop thickness always uses these values.
             // However, this control will be completely hidden unless Sections

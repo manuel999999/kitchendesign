@@ -103,11 +103,11 @@ namespace KitchenDesign
                 IKitchen kitchen = cabinet.kitchen;
 
                 showCabinetDepthOption =
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Standard;
+                    kitchen.buildingRules.UserChoosesCabinetDepth;
 
                 CabinetOtherSizeControl.SetupCabinetDepthSizes(
                     m_CabinetDepthControl,
-                    kitchen.selectedBuildingMethod
+                    kitchen.buildingRules
                 );
 
                 CabinetOtherSizeControl.SelectOptionMatchingCurrentSize(
@@ -353,7 +353,7 @@ namespace KitchenDesign
             float displayedVolumeWidthInMeters = volume.resizerCuboid.width;
 
             if (volume is Cabinet cabinet &&
-                cabinet.kitchen.selectedBuildingMethod == KitchenBuildingMethod.Standard)
+                cabinet.kitchen.buildingRules.SizesStraightCabinetsToOutsideEdge)
             {
                 // In Standard building method, the length displayed must be
                 // the full outside measurement which includes any attached

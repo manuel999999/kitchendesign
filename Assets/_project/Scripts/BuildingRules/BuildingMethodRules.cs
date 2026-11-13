@@ -62,5 +62,21 @@ namespace KitchenDesign.BuildingRules
         public bool CabinetProductIsOptional => this._method == KitchenBuildingMethod.Sections;
 
         public bool ProductsCenteredInCabinets => this._method == KitchenBuildingMethod.Sections || this._method == KitchenBuildingMethod.Catalog;
+
+        public bool HasShelfProducts => this._method != KitchenBuildingMethod.Catalog;
+
+        public bool UserChoosesCabinetDepth => this._method == KitchenBuildingMethod.Standard;
+
+        public bool HasSingleCabinetDepth => this._method == KitchenBuildingMethod.Sections;
+
+        public bool HasSecondCountertopThickness => this._method == KitchenBuildingMethod.Sections;
+
+        public bool ProductsMoveUpAndDown => this._method != KitchenBuildingMethod.Sections;
+
+        public string CabinetSectionManufacturerName => this._method == KitchenBuildingMethod.Sections ? "Stoll" : null;
+
+        public bool UsesStollHighBarTopOverhang => this._method == KitchenBuildingMethod.Sections;
+
+        public bool SelectsWholeKitchen => this._method == KitchenBuildingMethod.Standard;
     }
 }

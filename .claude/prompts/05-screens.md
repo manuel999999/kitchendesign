@@ -389,6 +389,11 @@ folders. One type per file.
   3. `Cabinet.OnResized`-style raises use `kitchen?.events`, so a cabinet without a kitchen (the
      thumbnail creator) raises nothing; it reached nobody before either.
 
+- **B5.6 done 2026-11-13.** 38 comparisons in 9 screen files and the selection click became
+  rules (8 new, the rest existing; table in CLAUDE.md, "Building-method rules").
+  `buildingrulescheck.cs`: 128 checks, 0 mismatches. `KitchenScreenshotManager`'s five
+  comparisons are area 6's. Compiles in the editor and as WebGL player scripts.
+
 **Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
 (areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
 check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.

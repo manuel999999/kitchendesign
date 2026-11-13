@@ -1355,6 +1355,28 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     - Standard and Sections: `PricesCabinetFinishByArea`.
     Checked with `Tools/Baseline/unity6/buildingrulescheck.cs` (every rule against the old
     expression for the four values: 96 checks).
+    **The screens ask the same rules since B5.6 (2026-11-13)**; no screen compares the building
+    method any more (`BuildingMethodUI` only names the three values its toggles select). Eight
+    rules were added for them: `HasShelfProducts` (not Catalog: no plunge / shelf category),
+    `UserChoosesCabinetDepth` (Standard: the depth control on the sizes screen and the set-width
+    prompt), `HasSingleCabinetDepth` (Sections: 29" only; the others offer 24" to 36"),
+    `HasSecondCountertopThickness` (Sections: Stoll's second thickness control and its own
+    thickness options), `ProductsMoveUpAndDown` (not Sections), `CabinetSectionManufacturerName`
+    ("Stoll" in Sections, else null: the finishes offered are limited to it; Catalog limits them
+    to the catalog's name), `UsesStollHighBarTopOverhang` (Sections: the toolbar sets the high bar
+    top prefab's back overhang to 10", for a 14" deep top with the 1" front overhang and 3" riser;
+    never restored, which can't matter while an app has one method), `SelectsWholeKitchen`
+    (Standard: a click on a cabinet selects the kitchen, and every cabinet but a `Space` can be
+    clicked). The screens reuse the existing ones where the meaning is the same: `UsesBrandCatalog`
+    (brand catalog screen in the wizard, catalog-driven toolbar categories and finishes, the
+    catalog's cabinet depth), `CabinetsAreProducts` (the Add Cabinets category), `CanToggleToeKicks`,
+    `HasCabinetColumns` (a corner's ticker adds the neighbouring span's columns),
+    `CabinetProductIsOptional` (Stoll's procedural section, id 0), `HasBlindCorners` (the click
+    picks the blind cabinet for a procedural corner), `SizesStraightCabinetsToOutsideEdge` (the
+    set-width prompt shows the outside length) and `DefaultCountertopOverhangInMeters`. The two
+    `OnBuildingMethodChanged` handlers read `kitchen.buildingRules` instead of their argument: the
+    kitchen raises the event with its own selection, so they are the same. The check now makes
+    128 comparisons. The photo manager's five checks wait for area 6.
   - **Brand rules** (B4.8): `BrandRules` (`_project/Scripts/Brands/`, `KitchenDesign.Brands`), a
     readonly struct built from a catalog's cabinet manufacturer id (`brandCatalog.rules`; a struct so
     asking costs nothing and a runtime clone of a catalog can't hold a stale copy). It replaces every
@@ -1797,7 +1819,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
-  (a, b, c; `EventBridge` is gone). Next: B5.6,
+  (a, b, c; `EventBridge` is gone), B5.6. Next:
   B5.7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).

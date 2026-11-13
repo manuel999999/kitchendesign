@@ -128,7 +128,7 @@ namespace KitchenDesign
         {
             m_CanvasGroup.interactable = false;
 
-            if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+            if (this._kitchen.buildingRules.UsesBrandCatalog)
             {
                 Hide();
 

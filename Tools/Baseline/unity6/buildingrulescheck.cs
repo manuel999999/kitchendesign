@@ -29,5 +29,13 @@ foreach (var m in methods)
     Check("CabinetsAreProducts", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Catalog || m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.CabinetsAreProducts, m);
     Check("CabinetProductIsOptional", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.CabinetProductIsOptional, m);
     Check("ProductsCenteredInCabinets", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections || m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Catalog, r.ProductsCenteredInCabinets, m);
+    Check("HasShelfProducts", m != KitchenDesign.Shared.Enums.KitchenBuildingMethod.Catalog, r.HasShelfProducts, m);
+    Check("UserChoosesCabinetDepth", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard, r.UserChoosesCabinetDepth, m);
+    Check("HasSingleCabinetDepth", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.HasSingleCabinetDepth, m);
+    Check("HasSecondCountertopThickness", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.HasSecondCountertopThickness, m);
+    Check("ProductsMoveUpAndDown", m != KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.ProductsMoveUpAndDown, m);
+    Check("CabinetSectionManufacturerName", (m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections ? "Stoll" : "<null>"), r.CabinetSectionManufacturerName ?? "<null>", m);
+    Check("UsesStollHighBarTopOverhang", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.UsesStollHighBarTopOverhang, m);
+    Check("SelectsWholeKitchen", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard, r.SelectsWholeKitchen, m);
 }
 return "checks=" + checks + " mismatches=" + mismatches + " " + sb;

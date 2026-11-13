@@ -212,7 +212,7 @@ namespace KitchenDesign
                 {
                     // Plunge/shelf is not available in Catalog building
                     // method.
-                    categoryButton.gameObject.SetActive(kitchen.selectedBuildingMethod != KitchenBuildingMethod.Catalog);
+                    categoryButton.gameObject.SetActive(kitchen.buildingRules.HasShelfProducts);
                     continue;
                 }
 
@@ -220,20 +220,20 @@ namespace KitchenDesign
                 {
                     // Toe kick button is only allowed in Gemini builds.
                     categoryButton.gameObject.SetActive(
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog
+                        kitchen.buildingRules.CanToggleToeKicks
                     );
                     continue;
                 }
 
                 if (categoryButton == m_CabinetSectionButton)
                 {
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                    if (kitchen.buildingRules.CabinetsAreProducts && !kitchen.buildingRules.UsesBrandCatalog)
                     {
                         // Always allow the add section button in Sections
                         // building method.
                         continue;
                     }
-                    else if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                    else if (kitchen.buildingRules.UsesBrandCatalog)
                     {
                         // Always allow the add section button in Catalog
                         // building method.
@@ -254,7 +254,7 @@ namespace KitchenDesign
                 {
                     // Door style button is only available in catalog mode.
                     m_DoorStylesButton.gameObject.SetActive(
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                        kitchen.buildingRules.UsesBrandCatalog &&
                         kitchen.selectedBrandCatalog &&
                         kitchen.selectedBrandCatalog.hasDoorStyles
                     );
@@ -265,7 +265,7 @@ namespace KitchenDesign
                 {
                     // Door Handle style button is only available in catalog mode.
                     m_DoorHandleStylesButton.gameObject.SetActive(
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                        kitchen.buildingRules.UsesBrandCatalog &&
                         kitchen.selectedBrandCatalog &&
                         kitchen.selectedBrandCatalog.hasDoorHandleStyles
                     );
@@ -276,7 +276,7 @@ namespace KitchenDesign
                 {
                     // End panels button is only available in catalog mode.
                     m_EndPanelsButton.gameObject.SetActive(
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                        kitchen.buildingRules.UsesBrandCatalog &&
                         kitchen.selectedBrandCatalog &&
                         kitchen.selectedBrandCatalog.hasEndPanelsOption
                     );
@@ -287,14 +287,14 @@ namespace KitchenDesign
                 {
                     // Back panels button is only available in catalog mode.
                     m_BackPanelsButton.gameObject.SetActive(
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                        kitchen.buildingRules.UsesBrandCatalog &&
                         kitchen.selectedBrandCatalog &&
                         kitchen.selectedBrandCatalog.hasBackPanelsOption
                     );
                     continue;
                 }
 
-                if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                if (kitchen.buildingRules.UsesBrandCatalog)
                 {
                     switch (categoryButton.category)
                     {
@@ -551,19 +551,19 @@ namespace KitchenDesign
                 m_ToolbarCabinetProductPredicate = null;
 
 
-                KitchenBuildingMethod buildingMethod = this._kitchen.selectedBuildingMethod;
+                IBuildingMethodRules buildingRules = this._kitchen.buildingRules;
 
-                if (buildingMethod == KitchenBuildingMethod.Sections)
+                if (buildingRules.CabinetsAreProducts && !buildingRules.UsesBrandCatalog)
                 {
                     PopulateCabinetSectionGroupsToolbarForSections(caller);
                 }
-                else if (buildingMethod == KitchenBuildingMethod.Catalog)
+                else if (buildingRules.UsesBrandCatalog)
                 {
                     PopulateCabinetSectionGroupsToolbarForCatalog(caller);
                 }
                 else
                 {
-                    MelcherLog.LogError("Unhandled building method: " + buildingMethod);
+                    MelcherLog.LogError("Unhandled building method: " + this._kitchen.selectedBuildingMethod);
                 }
 
                 return;
@@ -695,11 +695,11 @@ namespace KitchenDesign
 
                     string manufacturerNameToLimitTo = null;
 
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                    if (kitchen.buildingRules.CabinetSectionManufacturerName != null)
                     {
-                        manufacturerNameToLimitTo = "Stoll";
+                        manufacturerNameToLimitTo = kitchen.buildingRules.CabinetSectionManufacturerName;
                     }
-                    else if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                    else if (kitchen.buildingRules.UsesBrandCatalog)
                     {
                         manufacturerNameToLimitTo =
                             kitchen.selectedBrandCatalog.catalogName;
@@ -743,7 +743,7 @@ namespace KitchenDesign
                 // countertop finishes are allowed when a high bar top is
                 // present.
                 if (caller.category == ProductCategory.FinishCountertop &&
-                    kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                    kitchen.buildingRules.UsesBrandCatalog &&
                     kitchen.selectedBrandCatalog.whitelistedHighBarTopCountertopManufacturers.Count > 0 &&
                     kitchen.layout.spans.Any(static span => span.backing && span.backing.info.category == ProductCategory.BarTopHigh))
                 {
@@ -773,7 +773,7 @@ namespace KitchenDesign
             }
 
             if (caller.category == ProductCategory.FinishCabinet &&
-                kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                kitchen.buildingRules.UsesBrandCatalog &&
                 kitchen.selectedBrandCatalog.ruleset == BrandCatalogRuleset.Challenger)
             {
                 // Challenger has an optional premium finish option.
@@ -1164,16 +1164,13 @@ namespace KitchenDesign
 
                     bool IsStandardDepth(float cabinetDepthInMeters)
                     {
-                        KitchenBuildingMethod buildingMethod =
-                            this._kitchen.selectedBuildingMethod;
+                        IBuildingMethodRules buildingRules =
+                            this._kitchen.buildingRules;
 
                         float standardCabinetDepthInMeters =
-                            buildingMethod switch
-                            {
-                                KitchenBuildingMethod.Sections => Const.Stoll.DefaultCabinetDepth,
-                                KitchenBuildingMethod.Catalog => this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters,
-                                _ => throw new Exception("Unhandled building method.")
-                            };
+                            buildingRules.UsesBrandCatalog ? this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters :
+                            buildingRules.CabinetsAreProducts ? Const.Stoll.DefaultCabinetDepth :
+                            throw new Exception("Unhandled building method.");
 
                         return
                             MelcherCommon.IsAlmostEqual(
@@ -1728,7 +1725,7 @@ namespace KitchenDesign
                     }
 
                     if (caller.targetIdType == ToolbarGroupIdType.CabinetSectionType &&
-                        this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+                        this._kitchen.buildingRules.CabinetProductIsOptional &&
                         caller.targetId == 0)
                     {
                         // Special case cabinet in Stoll. Try to add a procedural cabinet.
@@ -2147,7 +2144,7 @@ namespace KitchenDesign
             int newCabinetFinishesButtonSiblingIndex =
                 m_CabinetFinishesButtonDefaultSiblingIndex;
 
-            if (newMethod == KitchenBuildingMethod.Sections)
+            if (this._kitchen.buildingRules.UsesStollHighBarTopOverhang)
             {
                 // In Stoll, high bar tops are 14" deep.
                 CuboidPadding overhangInMeters =
@@ -2168,7 +2165,7 @@ namespace KitchenDesign
                 //       or kitchen script.
             }
 
-            if (newMethod == KitchenBuildingMethod.Catalog)
+            if (this._kitchen.buildingRules.UsesBrandCatalog)
             {
                 // Move the cabinet finishes category button next to the door
                 // styles category button.
