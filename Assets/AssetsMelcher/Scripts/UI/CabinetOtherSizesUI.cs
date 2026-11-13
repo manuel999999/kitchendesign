@@ -14,6 +14,33 @@ namespace KitchenDesign
 
     public class CabinetOtherSizesUI : MelcherUI
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.onBuildingMethodChanged += OnBuildingMethodChanged;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.onBuildingMethodChanged -= OnBuildingMethodChanged;
+        }
+
         private SessionStatus _session;
 
         private Kitchen _kitchen;
@@ -122,7 +149,10 @@ namespace KitchenDesign
             m_BackButton.onClick += NavigateBackward;
             m_NextButton.onClick += GoNext;
 
-            EventBridge.Designer.onBuildingMethodChanged += OnBuildingMethodChanged;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
             m_StollCountertopThicknessControl.isEnabledToggle.toggleGroup.onToggleChanged += OnCountertopTypeChanged;
             m_CountertopThicknessControl.onValueChanged += OnCountertopThicknessChanged;
             m_StollCountertopThicknessControl.onValueChanged += OnCountertopThicknessChanged;
@@ -152,7 +182,10 @@ namespace KitchenDesign
             m_BackButton.onClick -= NavigateBackward;
             m_NextButton.onClick -= GoNext;
 
-            EventBridge.Designer.onBuildingMethodChanged -= OnBuildingMethodChanged;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
             m_StollCountertopThicknessControl.isEnabledToggle.toggleGroup.onToggleChanged -= OnCountertopTypeChanged;
             m_CountertopThicknessControl.onValueChanged -= OnCountertopThicknessChanged;
             m_StollCountertopThicknessControl.onValueChanged -= OnCountertopThicknessChanged;

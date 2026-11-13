@@ -69,19 +69,19 @@ switch (step)
     {
         System.IO.Directory.CreateDirectory(outDir);
         System.IO.File.WriteAllText(logPath, "");
-        KitchenDesign.EventBridge.Designer.showToast += (t, h) => Log("toast: " + t);
-        KitchenDesign.EventBridge.Designer.showNotification += (t, m, d) => Log("notification: " + t + ": " + m);
-        KitchenDesign.EventBridge.Designer.onHighlightChanged.OnInvoke += go => { Log("highlight: " + (go != null ? go.name : "null")); return Cysharp.Threading.Tasks.UniTask.CompletedTask; };
+        KitchenDesign.Events.EventDesigner.OnToastRequested.AddListener(i => Log("toast: " + i.Toast));
+        KitchenDesign.Events.EventDesigner.OnNotificationRequested.AddListener(i => Log("notification: " + i.Title + ": " + i.Message));
+        k.events.onHighlightChanged.OnInvoke += go => { Log("highlight: " + (go != null ? go.name : "null")); return Cysharp.Threading.Tasks.UniTask.CompletedTask; };
         return "setup occA=" + (a != null ? a.productInfo.sku : "none") + " cabC=" + Sku(cc);
     }
     case "hl_occ":
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(a.gameObject));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryHighlightObject(a.gameObject));
         return "highlight " + a.productInfo.sku;
     case "nudge":
     {
         UnityEngine.Vector3 p = a.productVisualContentInstance.GetTransform().localPosition + UnityEngine.Vector3.right * 2f * 0.0254f;
         bool moved = false;
-        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.Shared.Enums.RepositionSnapMode.None, ref moved);
+        k.TryRepositionProduct(a, p, KitchenDesign.Shared.Enums.RepositionSnapMode.None, ref moved);
         Log("nudge moved=" + moved);
         return "nudge moved=" + moved;
     }
@@ -90,21 +90,21 @@ switch (step)
         var drawer = LastWithSku("TEWD30-C"); if (drawer != null) a = drawer;
         UnityEngine.Vector3 p = a.productVisualContentInstance.GetTransform().localPosition + UnityEngine.Vector3.up * 0.0254f;
         bool moved = false;
-        KitchenDesign.EventBridge.Designer.onTryRepositionOccupant(a, p, KitchenDesign.Shared.Enums.RepositionSnapMode.None, ref moved);
+        k.TryRepositionProduct(a, p, KitchenDesign.Shared.Enums.RepositionSnapMode.None, ref moved);
         Log("nudge_up moved=" + moved);
         return "nudge_up moved=" + moved;
     }
     case "center":
-        KitchenDesign.EventBridge.Designer.centerOccupantInVolume(a);
+        k.CenterOccupantInVolume(a);
         return "center";
     case "clone_occ":
-        KitchenDesign.EventBridge.Designer.onTryCloneProduct(a.productInfo, o => Log("cloned: " + (o != null ? o.productInfo.sku : "null")));
+        k.TryAddProduct(a.productInfo, o => Log("cloned: " + (o != null ? o.productInfo.sku : "null")));
         return "clone " + a.productInfo.sku;
     case "drag_begin":
     {
         var o = LastWithSku(a.productInfo.sku);
         var ev = Pointer(o.transform.position);
-        KitchenDesign.EventBridge.Designer.onOccupantDragBegin(o, ev);
+        k.OnOccupantDragBegin(o, ev);
         return "drag begin " + o.name + " at " + ev.position;
     }
     case "drag_move":
@@ -112,24 +112,24 @@ switch (step)
         var o = LastWithSku(a.productInfo.sku);
         var t = DragTarget();
         var ev = Pointer(TopCenter(t));
-        KitchenDesign.EventBridge.Designer.onOccupantDrag(o, ev);
+        k.OnOccupantDrag(o, ev);
         return "drag to " + Sku(t) + " at " + ev.position;
     }
     case "drag_end":
     {
         var o = LastWithSku(a.productInfo.sku);
         var ev = Pointer(TopCenter(DragTarget()));
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onOccupantDragEnd.Invoke((o, ev)));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.OnOccupantDragEnd((o, ev)));
         return "drag end";
     }
     case "destroy_occ":
     {
         var o = LastWithSku(a.productInfo.sku);
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryDestroyOccupant.Invoke(o));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryDestroyOccupant(o));
         return "destroy " + o.productInfo.sku;
     }
     case "hl_cab":
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(cc.gameObject));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryHighlightObject(cc.gameObject));
         return "highlight " + Sku(cc);
     case "resize_begin":
     case "resize_move":
@@ -149,25 +149,25 @@ switch (step)
         return step + " " + w.name;
     }
     case "clone_cab":
-        KitchenDesign.EventBridge.Designer.onTryCloneSection(cc);
+        k.TryCloneSection(cc);
         return "clone section " + Sku(cc);
     case "reorder":
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryReorderCabinet.Invoke((cc, KitchenDesign.Shared.Enums.Extent.Max)));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryReorderCabinet((cc, KitchenDesign.Shared.Enums.Extent.Max)));
         return "reorder " + Sku(cc);
     case "add_cab":
-        KitchenDesign.EventBridge.Designer.onTryAddSection(cc.cabinetSectionProductInfo, null);
+        k.OnToolbarAddSectionClicked(cc.cabinetSectionProductInfo, null);
         return "add section " + Sku(cc);
     case "destroy_cab":
-        KitchenDesign.EventBridge.Designer.onTryDestroySection(cc);
+        k.TryDestroySection(cc);
         return "destroy section " + Sku(cc);
     case "toekick":
-        KitchenDesign.EventBridge.Designer.tryToggleToeKicks();
+        k.TryToggleToeKicks();
         return "toe kicks";
     case "finish":
     {
         var f = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku("Cabinet_Challenger_Graphite", false);
         if (f == null) return "finish not found";
-        KitchenDesign.EventBridge.Designer.onFinishMaterialChanged(f, KitchenDesign.Shared.Enums.ProductCategory.FinishCabinet);
+        k.SelectFinishProduct(f, KitchenDesign.Shared.Enums.ProductCategory.FinishCabinet);
         return "finish " + f.sku;
     }
     case "destroy_backing":
@@ -176,25 +176,25 @@ switch (step)
         {
             if (span.backing == null) continue;
             string bsku = span.backing.info != null ? span.backing.info.sku : span.backing.name;
-            Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryDestroyCabinetBacking.Invoke(span.backing));
+            Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryDestroyCabinetBacking(span.backing));
             return "destroy backing " + bsku;
         }
         return "no backing";
     }
     case "add_occ":
-        KitchenDesign.EventBridge.Designer.onTryAddProduct(a.productInfo, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
+        k.TryAddProduct(a.productInfo, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
         return "add " + a.productInfo.sku;
     case "new_standard":
     {
         var layoutPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/AssetsMelcher/KitchenLayouts/StyleL.prefab").GetComponent<KitchenDesign.Cabinets.CabinetLayout>();
-        KitchenDesign.EventBridge.Designer.setBuildingMethod(KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard);
-        KitchenDesign.EventBridge.Designer.setCabinetLayout(layoutPrefab);
-        KitchenDesign.EventBridge.Designer.setKitchenTemplate(null);
-        KitchenDesign.EventBridge.Designer.setCountertopType(KitchenDesign.Shared.Enums.CountertopType.Default);
-        KitchenDesign.EventBridge.Designer.setBaseCabinetDepth(30f * 0.0254f);
-        KitchenDesign.EventBridge.Designer.setCountertopThickness(1.25f * 0.0254f);
-        KitchenDesign.EventBridge.Designer.setCountertopOverhang(KitchenDesign.Geometry.CuboidPadding.one * 0.0254f);
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.createKitchen.Invoke());
+        k.SetBuildingMethod(KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard);
+        k.SetCabinetLayout(layoutPrefab);
+        k.SetKitchenTemplate(null);
+        k.SetCountertopType(KitchenDesign.Shared.Enums.CountertopType.Default);
+        k.SetBaseCabinetDepth(30f * 0.0254f);
+        k.SetCountertopThickness(1.25f * 0.0254f);
+        k.SetCountertopOverhang(KitchenDesign.Geometry.CuboidPadding.one * 0.0254f);
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.CreateKitchen());
         return "new standard kitchen " + layoutPrefab.name;
     }
     case "add_grill":
@@ -202,7 +202,7 @@ switch (step)
     {
         var pi = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku(step == "add_grill" ? "69008LP/69009NG" : "TEWD30-C", false);
         if (pi == null) return "product not found";
-        KitchenDesign.EventBridge.Designer.onTryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
+        k.TryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
         return "add " + pi.sku;
     }
     case "add_plunge":
@@ -210,13 +210,13 @@ switch (step)
     {
         var pi = KitchenDesign.ProFitGlobals.catalogData.FindProductInfoBySku(step == "add_plunge" ? "Shelf:Top" : "60008LP/60009NG", false);
         if (pi == null) return "product not found";
-        KitchenDesign.EventBridge.Designer.onTryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
+        k.TryAddProduct(pi, o => Log("added: " + (o != null ? o.productInfo.sku : "null")));
         return "add " + pi.sku;
     }
     case "hl_plunge":
     {
         var o = LastWithSku("Shelf:Top"); if (o == null) return "no plunge";
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(o.gameObject));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryHighlightObject(o.gameObject));
         return "highlight plunge";
     }
     case "plunge_resize_begin":
@@ -248,13 +248,13 @@ switch (step)
         var cu = shelf.resizerCuboid;
         UnityEngine.Vector3 top = shelf.transform.TransformPoint(new UnityEngine.Vector3(cu.center.x, cu.max.y, cu.center.z));
         var ev = Pointer(step == "burner_drag_begin" ? b.transform.position : top);
-        if (step == "burner_drag_begin") KitchenDesign.EventBridge.Designer.onOccupantDragBegin(b, ev);
-        else if (step == "burner_drag_move") KitchenDesign.EventBridge.Designer.onOccupantDrag(b, ev);
-        else Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onOccupantDragEnd.Invoke((b, ev)));
+        if (step == "burner_drag_begin") k.OnOccupantDragBegin(b, ev);
+        else if (step == "burner_drag_move") k.OnOccupantDrag(b, ev);
+        else Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.OnOccupantDragEnd((b, ev)));
         return step;
     }
     case "hl_none":
-        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(KitchenDesign.EventBridge.Designer.onTryHighlightObject.Invoke(null));
+        Cysharp.Threading.Tasks.UniTaskExtensions.Forget(k.TryHighlightObject(null));
         return "highlight none";
 }
 return "unknown step " + step;

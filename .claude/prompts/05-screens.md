@@ -372,6 +372,23 @@ folders. One type per file.
   never unsubscribed in `Kitchen.OnDisable` (harmless then, gone now). Compiles in the editor and
   as WebGL player scripts.
 
+- **B5.5c done 2026-11-13. `EventBridge.cs` is deleted.** `KitchenEvents` (19 members, old
+  names) on `Kitchen.events` / `IKitchen.events`. Instead of the initializer adding every handler
+  itself (decision 3), each listener has `ListenTo(KitchenEvents)` and the initializer calls
+  those in one component order; that order reproduces every recorded per-event order, keeps the
+  handlers private and keeps each listener's add and remove together. Ten listeners converted by
+  script; five references set on `DesignerSceneInitializer` through the editor (+5 scene lines).
+  The check snippets (`editstep.tmpl`, `tomenu.cs`, `listenerorder.cs`, `Tools/Cutouts/add_product.cs`)
+  call the new API. For the final pass:
+  1. Scene-load listeners now subscribe in `DesignerSceneInitializer.Initialize` (the
+     `sceneLoaded` callback) instead of their `OnEnable`. Nothing raises a kitchen event between
+     the two (the first is `restart`, from `DesignerScreensControl.Initialize`, after the
+     `ListenTo` calls), but `listenerorder.cs` must show the same lists as before area 5.
+  2. A `CabinetLayout` instance now listens only once it has a kitchen (`SetKitchen`); before, any
+     enabled instance listened. `Kitchen` sets it right after `Instantiate`.
+  3. `Cabinet.OnResized`-style raises use `kitchen?.events`, so a cabinet without a kitchen (the
+     thumbnail creator) raises nothing; it reached nobody before either.
+
 **Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
 (areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
 check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.

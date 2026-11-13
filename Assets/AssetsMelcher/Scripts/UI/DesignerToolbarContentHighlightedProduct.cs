@@ -364,7 +364,7 @@ namespace KitchenDesign
 
             if (didMove)
             {
-                EventBridge.Designer.onOccupantNudged?.Invoke(occupant, nudgeAmountInMeters);
+                this._kitchen.events.onOccupantNudged?.Invoke(occupant, nudgeAmountInMeters);
             }
             else
             {
@@ -406,7 +406,7 @@ namespace KitchenDesign
 
             if (didMove)
             {
-                EventBridge.Designer.onOccupantNudged?.Invoke(occupant, nudgeAmountInMeters);
+                this._kitchen.events.onOccupantNudged?.Invoke(occupant, nudgeAmountInMeters);
             }
             else
             {
@@ -452,7 +452,7 @@ namespace KitchenDesign
         {
             if (m_SelectedObject.TryGetComponent(out Cabinet cabinet))
             {
-                EventBridge.Designer.onCabinetSwapStart?.Invoke(cabinet);
+                this._kitchen.events.onCabinetSwapStart?.Invoke(cabinet);
             }
         }
 

@@ -2827,7 +2827,12 @@ namespace KitchenDesign.Occupancy
             await OnOccupantAdded(occupant);
 
             // Let the kitchen handle cabinet resizing and neighbour changes
-            await EventBridge.Designer.onOccupantAddedToCabinet.InvokeIfNonEmpty(occupant);
+            IKitchen addedToKitchen = this.FindOwningKitchen();
+
+            if (addedToKitchen != null)
+            {
+                await addedToKitchen.events.onOccupantAddedToCabinet.InvokeIfNonEmpty(occupant);
+            }
         }
 
         protected virtual async UniTask OnOccupantAdded(Occupant addedOccupant)

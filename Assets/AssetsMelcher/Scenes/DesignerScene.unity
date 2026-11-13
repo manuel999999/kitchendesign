@@ -17152,6 +17152,11 @@ MonoBehaviour:
   kitchen: {fileID: 1168655925}
   navigation: {fileID: 109070593}
   selectionClick: {fileID: 1519661574}
+  toolbar: {fileID: 645796124}
+  cabinetSizes: {fileID: 828734219}
+  setVolumeSizePrompt: {fileID: 927552745}
+  measurementOverlay: {fileID: 757805830}
+  orbitCamera: {fileID: 1348877582}
 --- !u!4 &639643568
 Transform:
   m_ObjectHideFlags: 0

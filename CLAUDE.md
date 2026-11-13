@@ -1074,6 +1074,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    prompt uses one, on the intermediate scene, with nothing listening either way). The designer
    followed in B5.4a: `DesignerSceneInitializer` calls `DesignerScreensControl.Initialize`.
 
+5. `DesignerSceneInitializer.Initialize` (B5.5c): first every scene-load listener's
+   `ListenTo(kitchen.events)`, in the fixed order given under "Events"; then
+   `DesignerScreensControl.Initialize`, which hands the screens their kitchen, systems and
+   prompts and then starts the designer (`restart`, at once when the catalog data is already
+   loaded); then the selection click. The listeners come first because that `restart` must reach
+   all of them.
 ## Events
 - `EventApp.OnSceneReady` (`ActionEvent`, `_projectEvents/Events/EventApp.cs`): after a scene's
   `SceneInitializer` was initialized. No listeners yet.
@@ -1151,8 +1157,42 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   end, a `CabinetBacking` (given it by its span) for its highlight, and an `OccupiableVolume` for
   "occupant instantiated" and "occupant removed", through `FindOwningKitchen` (up the parent
   volumes to the cabinet); a volume with no kitchen above it tells no one.
-- The kitchen's notifications still go through the old `EventBridge.Designer` (B5.5c replaces
-  them).
+- **`KitchenEvents`** (B5.5c, `_project/Scripts/KitchenModel/`, `kitchen.events`, also on
+  `IKitchen`): the kitchen's notifications, an object the `Kitchen` owns. `EventBridge` is gone.
+  Why not Doge: several are awaited (`SequentiallyAwaitedDelegate`: each listener finishes before
+  the next starts, because loading content is asynchronous and WebGL can't block on it) and they
+  carry model types, which `KitchenDesign.Events` can't see. Members keep their old names:
+  - `restart`: clear the kitchen and go back to the setup wizard (raised by the designer's
+    start-up and the hamburger menu's restart).
+  - `onBuildingMethodChanged` (raised even when the method is the same as before),
+    `onBrandCatalogChanged` (awaited), `onKitchenReady` (awaited; a kitchen finished being created
+    or loaded, the last step whatever the building method), `onKitchenLayoutChanged` (layout
+    prefab and instance, after the layout was created or removed; the orbit camera takes its start
+    angle from it).
+  - `onHighlightChanged` (awaited; `null` when nothing is highlighted).
+  - `onCabinetAddedByUser`, `onCabinetResized` (also while a resize widget is dragged),
+    `onCabinetReordered` (Sections: shift left / right), `onPreCabinetDestroyedByUser` (just before
+    the cabinet goes), `onCabinetDestroyedByUser` (after; carries the span index),
+    `onCabinetSwapStart` / `onCabinetSwapCanceled` (Catalog's swap-cabinet button).
+  - `onOccupantAddedToCabinet` (the kitchen resizes the cabinet and its neighbours),
+    `onOccupantResized` (a shelf), `onOccupantDragSuccess`, `onOccupantNudged` (the last three
+    refresh the measurement lines).
+  - `onDoorHandleStyleNameUpdate` (the toolbar picked a handle style; every door handle switches
+    its model), `onSetVolumeWidthRequested` (the size button widget was clicked; the set-width
+    prompt opens).
+  **Who listens, and the order.** A listener gets the events through `ListenTo(KitchenEvents)` and
+  adds its handlers in `AddKitchenListeners` (removed in `OnDisable`, added again in `OnEnable`
+  once it has the events, so disabling a listener behaves as it did). Handlers of one event run
+  in subscription order, and some depend on it (see the orbit start-yaw note in the handover), so
+  `DesignerSceneInitializer` calls `ListenTo` in one fixed order that reproduces the order every
+  event had on 2026-11-12 (`GeminiBaseline/listenerorder-designer-before-area5.txt`): navigation
+  screen, toolbar, cabinet sizes screen, measurement overlay, **kitchen**, orbit camera,
+  `DesignerScreensControl`, set-width prompt. The kitchen listens to its own events at its place
+  in that list (`restart`, cabinet added / resized / reordered / destroyed, occupant added), not
+  first. Listeners made later subscribe when they get their kitchen, after all of these, as
+  before: a `CabinetLayout` in `SetKitchen`, a `CabinetTickerWidget` in `Initialize`, a
+  `CabinetSectionDoorHandle` when `CabinetLayout` creates it (`InstantiateHandle` takes the
+  events; the thumbnail creator's editor variant has none).
 
 ## Key systems
 - **Assemblies (2026-10-20):** `KitchenDesign` (`_project/Scripts`, refs Events, Shared, Doge),
@@ -1756,8 +1796,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   aren't on this disk: ask the user to copy them from the old machine. Done today, each step
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
-  (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads). Next:
-  B5.5 (`EventBridge.Designer`; its event map has to be rerun: the workflow was stopped), B5.6,
+  (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
+  (a, b, c; `EventBridge` is gone). Next: B5.6,
   B5.7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).

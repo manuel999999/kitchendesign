@@ -38,7 +38,7 @@ qualified names, no `using`s, no classes), with `__PLACEHOLDERS__` filled in by 
   finish (`Kitchen_Default`) is plain URP Lit, which doesn't clip, so rerun this first.
 - `topdown_cam.cs`: moves `CutoutTestCam` above the first occupied cabinet.
 - `add_product.cs` (`__SKUS__`, a C# list of quoted SKUs): adds products through
-  `EventBridge.Designer.onTryAddProduct`, as the Add Part menu does.
+  `Kitchen.TryAddProduct`, as the Add Part menu does.
 - `shadow_test.cs` (`__SLOT__`): a plate above a floor with one box cutting its middle (slot 30,
   or 0 for no cut), seen from above, to check the shadow pass clips. It replaces the global box
   arrays, so rerun `apply.cs` afterwards.

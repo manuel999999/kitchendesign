@@ -1,6 +1,6 @@
 #!/bin/sh
 # Edit probe (area 4): signs in, opens design 28316 and makes a fixed series of edits through the
-# EventBridge.Designer calls the toolbar makes (highlight, nudge, center, clone, drag, delete, widget
+# kitchen calls the toolbar makes (highlight, nudge, center, clone, drag, delete, widget
 # resize, clone/reorder/add/delete a section, toe kicks, finish, delete a backing, add a product).
 # After each edit it waits until the kitchen is stable and writes a snapshot; at the end measured.json
 # and resave.json (SaveToJson, never sent). Nothing is saved to the server. Output:

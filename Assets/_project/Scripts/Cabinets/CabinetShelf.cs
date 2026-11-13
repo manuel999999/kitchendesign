@@ -479,7 +479,12 @@ namespace KitchenDesign.Cabinets
 
                 // Force the parent cabinet to resize to contain the shelf.
                 // (I.e., apply Stoll's minimum unoccupied sizes.)
-                await EventBridge.Designer.onOccupantAddedToCabinet.InvokeIfNonEmpty(occupant);
+                IKitchen addedToKitchen = this.FindOwningKitchen();
+
+                if (addedToKitchen != null)
+                {
+                    await addedToKitchen.events.onOccupantAddedToCabinet.InvokeIfNonEmpty(occupant);
+                }
             }
 
             RecalculateBoundingBox();

@@ -15,6 +15,35 @@ namespace KitchenDesign
 
     public class DesignerNavigationUI : MelcherUI
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.restart += OnRestart;
+            this._events.onHighlightChanged.OnInvoke += OnHighlightChanged;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.restart -= OnRestart;
+            this._events.onHighlightChanged.OnInvoke -= OnHighlightChanged;
+        }
+
         public void Initialize(Kitchen kitchen, AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session, DesignerConfirmUI confirmPrompt, DesignerSaveUI savePrompt)
         {
             m_MenuButton.Initialize(kitchen, options, server, catalogData, clientList, session, confirmPrompt, savePrompt);
@@ -56,8 +85,10 @@ namespace KitchenDesign
             m_RotateClockwiseButton.onClick += RotateClockwise;
             m_RotateCounterClockwiseButton.onClick += RotateCounterClockwise;
 
-            EventBridge.Designer.restart += OnRestart;
-            EventBridge.Designer.onHighlightChanged.OnInvoke += OnHighlightChanged;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
         }
 
         protected override void OnDisable()
@@ -78,8 +109,10 @@ namespace KitchenDesign
             m_RotateClockwiseButton.onClick -= RotateClockwise;
             m_RotateCounterClockwiseButton.onClick -= RotateCounterClockwise;
 
-            EventBridge.Designer.restart -= OnRestart;
-            EventBridge.Designer.onHighlightChanged.OnInvoke -= OnHighlightChanged;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
         }
 
         protected void Update()

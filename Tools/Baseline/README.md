@@ -18,11 +18,11 @@ client names; never copy it into a repo.
   project root into `GeminiBaseline/unity6/<quote id>/photos/`.
 - `menucheck.sh` (2026-10-22): the menu smoke check, read-only (never creates, edits, deletes or
   saves on the server). Signs in with the quick sign-in, then drives the menu through the same
-  `EventBridge.Menu` delegates the buttons call (`menu.tmpl`, one step per call): home, client
+  `EventMenu` requests the buttons raise (`menu.tmpl`, one step per call): home, client
   list, client 10191's quotes, client info, quote info (opened and closed), user profile, the
   log-out prompt (opened and closed). Each step prints the top of `MenuScene.m_MenuHistory` and
   which screens are visible (`MelcherUI.IsVisible()`; `activeInHierarchy` is true for all of
-  them). Then it opens design 27755, goes back with `EventBridge.Designer.loadMenuScene`
+  them). Then it opens design 27755, goes back with `EventSession.OnMenuSceneRequested`
   (`tomenu.cs`, no save prompt, nothing saved) and checks the menu again. Prints the editor
   console's error count after sign-in, after the menu and at the end. Reference counts
   (2026-10-22, Gemini quick sign-in): 21 errors after sign-in (server JSON missing
@@ -62,7 +62,7 @@ client names; never copy it into a repo.
   `GeminiBaseline/menuitems-latest.txt`. After B3.4: 29 items, all registered.
 - `editprobe.sh` + `editstep.tmpl` + `editsig.tmpl` (2026-10-23, area 4): play mode, read-only on
   the server (nothing is saved). Signs in, opens design 28316 (Catalog, two products, a low and a
-  high bar top) and makes a fixed series of edits through the same `EventBridge.Designer` calls the
+  high bar top) and makes a fixed series of edits through the same `Kitchen` calls the
   toolbar makes: highlight, nudge, center, clone, drag (pointer positions projected from the
   camera), delete, a resize-widget drag (the widget's own `OnBeginDrag/OnDrag/OnEndDrag`),
   clone / reorder / add / delete a section, toe kicks, a finish, delete a backing, add a product.

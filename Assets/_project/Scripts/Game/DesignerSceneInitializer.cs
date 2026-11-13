@@ -1,4 +1,5 @@
 using KitchenDesign.KitchenModel;
+using KitchenDesign.Measures;
 using UnityEngine;
 
 namespace KitchenDesign
@@ -9,12 +10,28 @@ namespace KitchenDesign
         [SerializeField] private Kitchen kitchen;
         [SerializeField] private DesignerNavigationUI navigation;
         [SerializeField] private KitchenSelectionClickControl selectionClick;
+        [SerializeField] private DesignerToolbarUI toolbar;
+        [SerializeField] private CabinetOtherSizesUI cabinetSizes;
+        [SerializeField] private SetVolumeSizeUI setVolumeSizePrompt;
+        [SerializeField] private MeasurementOverlayManager measurementOverlay;
+        [SerializeField] private DesignerOrbitCamera orbitCamera;
 
         public AppSystems Systems { get; private set; }
 
         public override void Initialize(AppSystems systems)
         {
             this.Systems = systems;
+
+            KitchenEvents events = this.kitchen.events;
+            this.navigation.ListenTo(events);
+            this.toolbar.ListenTo(events);
+            this.cabinetSizes.ListenTo(events);
+            this.measurementOverlay.ListenTo(events);
+            this.kitchen.ListenTo(events);
+            this.orbitCamera.ListenTo(events);
+            this.screens.ListenTo(events);
+            this.setVolumeSizePrompt.ListenTo(events);
+
             this.screens.Initialize(systems);
             this.selectionClick.Initialize(this.kitchen, this.navigation);
         }

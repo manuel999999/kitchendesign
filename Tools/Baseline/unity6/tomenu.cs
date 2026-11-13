@@ -1,3 +1,2 @@
-if (KitchenDesign.EventBridge.Designer.loadMenuScene == null) return "no loadMenuScene listener (scene=" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + ")";
-KitchenDesign.EventBridge.Designer.loadMenuScene.Invoke(null);
-return "leaving designer";
+if (UnityEngine.Object.FindFirstObjectByType<KitchenDesign.DesignerScreensControl>() == null) return "no designer scene (scene=" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + ")";
+KitchenDesign.Events.EventSession.OnMenuSceneRequested.Raise(new KitchenDesign.Events.MenuSceneRequestInfo(null));

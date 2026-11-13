@@ -221,7 +221,7 @@ namespace KitchenDesign.KitchenModel
 
                         if (wasProductAdded)
                         {
-                            EventBridge.Designer.onOccupantDragSuccess?.Invoke(
+                            this._kitchen.events.onOccupantDragSuccess?.Invoke(
                                 draggedOccupant,
                                 eventData
                             );
@@ -307,7 +307,7 @@ namespace KitchenDesign.KitchenModel
 
                         if (wasProductAdded)
                         {
-                            EventBridge.Designer.onOccupantDragSuccess?.Invoke(
+                            this._kitchen.events.onOccupantDragSuccess?.Invoke(
                                 draggedOccupant,
                                 eventData
                             );
@@ -367,7 +367,7 @@ namespace KitchenDesign.KitchenModel
 
                     if (didMoveProduct)
                     {
-                        EventBridge.Designer.onOccupantDragSuccess?.Invoke(
+                        this._kitchen.events.onOccupantDragSuccess?.Invoke(
                             draggedOccupant,
                             eventData
                         );

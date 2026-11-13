@@ -655,7 +655,7 @@ namespace KitchenDesign.Cabinets
 
             ResizeMeshToCabinetSize();
 
-            EventBridge.Designer.onCabinetResized?.Invoke(this);
+            kitchen?.events.onCabinetResized?.Invoke(this);
         }
 
         public void SetCountertopThickness(float thicknessInMeters)

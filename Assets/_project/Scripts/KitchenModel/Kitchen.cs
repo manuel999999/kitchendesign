@@ -36,6 +36,45 @@ namespace KitchenDesign.KitchenModel
     /// </summary>
     public class Kitchen : MelcherMonoBehaviour, IKitchen
     {
+        private KitchenEvents _events;
+
+        public KitchenEvents events { get; } = new KitchenEvents();
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.restart += Restart;
+            this._events.onCabinetResized.OnInvoke += OnCabinetResized;
+            this._events.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
+            this._events.onCabinetReordered.OnInvoke += OnCabinetReordered;
+            this._events.onCabinetDestroyedByUser.OnInvoke += OnCabinetDestroyedByUser;
+            this._events.onOccupantAddedToCabinet.OnInvoke += OnOccupantAddedToCabinet;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.restart -= Restart;
+            this._events.onCabinetResized.OnInvoke -= OnCabinetResized;
+            this._events.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
+            this._events.onCabinetReordered.OnInvoke -= OnCabinetReordered;
+            this._events.onCabinetDestroyedByUser.OnInvoke -= OnCabinetDestroyedByUser;
+            this._events.onOccupantAddedToCabinet.OnInvoke -= OnOccupantAddedToCabinet;
+        }
+
         // =====================================================================
         // Static properties
         // =====================================================================
@@ -104,7 +143,7 @@ namespace KitchenDesign.KitchenModel
         {
             get => this._selections.doorStyleName;
 
-            // TODO: Remove the setter and add an event to EventBridge to
+            // TODO: Remove the setter and add an event to
             //       handle changing the door style.
             set
             {
@@ -112,7 +151,7 @@ namespace KitchenDesign.KitchenModel
 
                 // if (value == "Shaker" && this._selections.doorStyleName != value)
                 // {
-                //     EventBridge.Designer.showNotification?.Invoke(
+                //     this.events.showNotification?.Invoke(
                 //         title: "Shaker Doors",
                 //         message: "Please note that the Shaker style adds a 5% premium to your cabinet choices.",
                 //         onDismiss: null
@@ -722,7 +761,7 @@ namespace KitchenDesign.KitchenModel
             // Notify listeners that the kitchen layout has changed. This is
             // useful to initialize the camera rotation depending on which
             // layout was chosen.
-            EventBridge.Designer.onKitchenLayoutChanged?.Invoke(prefab, m_CurrentCabinetLayout);
+            this.events.onKitchenLayoutChanged?.Invoke(prefab, m_CurrentCabinetLayout);
 
         }
 
@@ -1087,19 +1126,17 @@ namespace KitchenDesign.KitchenModel
         {
             m_CutoutClipping.Attach(this);
 
-            EventBridge.Designer.restart                    += Restart;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
 
 
-            EventBridge.Designer.onCabinetResized.OnInvoke              += OnCabinetResized;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke          += OnCabinetAddedByUser;
-            EventBridge.Designer.onCabinetReordered.OnInvoke            += OnCabinetReordered;
-            EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke      += OnCabinetDestroyedByUser;
 
 
             // UI
 
             // Products
-            EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke      += OnOccupantAddedToCabinet;
 
 
             foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
@@ -1117,18 +1154,16 @@ namespace KitchenDesign.KitchenModel
         {
             m_CutoutClipping.Detach();
 
-            EventBridge.Designer.restart                    -= Restart;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
 
 
-            EventBridge.Designer.onCabinetResized.OnInvoke              -= OnCabinetResized;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke          -= OnCabinetAddedByUser;
-            EventBridge.Designer.onCabinetReordered.OnInvoke            -= OnCabinetReordered;
-            EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke      -= OnCabinetDestroyedByUser;
 
             // UI
 
             // Products
-            EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke      -= OnOccupantAddedToCabinet;
 
 
             foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
@@ -1335,7 +1370,7 @@ namespace KitchenDesign.KitchenModel
             }
 
             // The kitchen is ready.
-            await EventBridge.Designer.onKitchenReady.InvokeIfNonEmpty();
+            await this.events.onKitchenReady.InvokeIfNonEmpty();
         }
 
         public void GetCabinetLayout(ref CabinetLayout cabinetLayout)
@@ -1347,7 +1382,7 @@ namespace KitchenDesign.KitchenModel
         {
             this._selections.buildingMethod = buildingMethod;
 
-            EventBridge.Designer.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
+            this.events.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
         }
 
         public async UniTask SetBrandCatalog(BrandCatalogSO brandCatalog)
@@ -1367,7 +1402,7 @@ namespace KitchenDesign.KitchenModel
             // TODO: Display a sprite for the selected brand catalog in the
             //       designer scene.
 
-            await EventBridge.Designer.onBrandCatalogChanged.InvokeIfNonEmpty(brandCatalog);
+            await this.events.onBrandCatalogChanged.InvokeIfNonEmpty(brandCatalog);
         }
 
         /// <summary>
@@ -1566,7 +1601,7 @@ namespace KitchenDesign.KitchenModel
 
                 // Allow listeners to respond to the cabinet's deletion before
                 // it is fully gone.
-                EventBridge.Designer.onPreCabinetDestroyedByUser?.Invoke(cabinetToDestroy);
+                this.events.onPreCabinetDestroyedByUser?.Invoke(cabinetToDestroy);
 
                 // Remove the cabinet as a child from the layout. This is needed
                 // to prevent the layout's UpdatePositions() from still treating
@@ -1586,7 +1621,7 @@ namespace KitchenDesign.KitchenModel
 
                 layout.UpdateMeshes();
 
-                await EventBridge.Designer.onCabinetDestroyedByUser.InvokeIfNonEmpty(spanIndex);
+                await this.events.onCabinetDestroyedByUser.InvokeIfNonEmpty(spanIndex);
             }
         }
 
@@ -1930,7 +1965,7 @@ namespace KitchenDesign.KitchenModel
 
                 await this.TryHighlightObject(this._interaction.highlightObject);
 
-                await EventBridge.Designer.onCabinetAddedByUser.InvokeIfNonEmpty(newCabinet);
+                await this.events.onCabinetAddedByUser.InvokeIfNonEmpty(newCabinet);
 
                 async UniTask CloneOccupants(OccupiableVolume from, OccupiableVolume to)
                 {
@@ -2173,7 +2208,7 @@ namespace KitchenDesign.KitchenModel
 
             CenterTheGround();
 
-            await EventBridge.Designer.onCabinetAddedByUser.InvokeIfNonEmpty(createdCabinet);
+            await this.events.onCabinetAddedByUser.InvokeIfNonEmpty(createdCabinet);
 
             return createdCabinet;
         }
@@ -2303,7 +2338,7 @@ namespace KitchenDesign.KitchenModel
                         layout.UpdateMeshes();
                         layout.UpdatePositions();
 
-                        await EventBridge.Designer.onCabinetResized.Invoke(cabinet);
+                        await this.events.onCabinetResized.Invoke(cabinet);
 
                         // Center all other occupants.
                         foreach (Occupant otherOccupant in cabinet.occupants)
@@ -2378,7 +2413,7 @@ namespace KitchenDesign.KitchenModel
                 return;
             }
 
-            EventBridge.Designer.onBrandCatalogChanged?.Invoke(this._selections.brandCatalog);
+            this.events.onBrandCatalogChanged?.Invoke(this._selections.brandCatalog);
         }
 
         // Used to pass values "by ref" to async functions.
@@ -2401,7 +2436,7 @@ namespace KitchenDesign.KitchenModel
 
             bool result = cabinetToResize.FitToProductWidth(specificOccupant: occupant);
 
-            await EventBridge.Designer.onCabinetResized.InvokeIfNonEmpty(cabinetToResize);
+            await this.events.onCabinetResized.InvokeIfNonEmpty(cabinetToResize);
 
             return result;
         }
@@ -2664,7 +2699,7 @@ namespace KitchenDesign.KitchenModel
             {
                 // Invoke the nudge event to cause the measurement overlay to
                 // refresh.
-                EventBridge.Designer.onOccupantNudged?.Invoke(occupant, Vector3.zero);
+                this.events.onOccupantNudged?.Invoke(occupant, Vector3.zero);
             }
 
             return didCenterOccupant;

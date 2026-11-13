@@ -29,6 +29,43 @@ namespace KitchenDesign
     [DefaultExecutionOrder(-10)]
     public class DesignerScreensControl : MelcherMonoBehaviour
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.restart += ForgetCabinetSettings;
+            this._events.onBuildingMethodChanged += OnBuildingMethodChanged;
+            this._events.onBrandCatalogChanged.OnInvoke += OnBrandCatalogChanged;
+            this._events.onCabinetSwapStart += OnCabinetSwapStart;
+            this._events.onHighlightChanged.OnInvoke += OnHighlightChanged;
+            this._events.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.restart -= ForgetCabinetSettings;
+            this._events.onBuildingMethodChanged -= OnBuildingMethodChanged;
+            this._events.onBrandCatalogChanged.OnInvoke -= OnBrandCatalogChanged;
+            this._events.onCabinetSwapStart -= OnCabinetSwapStart;
+            this._events.onHighlightChanged.OnInvoke -= OnHighlightChanged;
+            this._events.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
+        }
+
         private AppOptionsSO _options;
         private IAppRules _rules;
         private CatalogDataStatus _catalogData;
@@ -196,23 +233,21 @@ namespace KitchenDesign
 
             // Begin the "setup kitchen" UI process, but only after all the
             // global data (like product infos) has been loaded.
-            EventBridge.Designer.restart.Invoke();
+            m_Kitchen.events.restart.Invoke();
         }
 
         protected void OnEnable()
         {
-            EventBridge.Designer.restart                    += ForgetCabinetSettings;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
             EventDesigner.OnWhiteLabelClientInfoRequested.AddListener(this.ShowWhiteLabelClientInfoUI);
             EventDesigner.OnBuildingMethodsRequested.AddListener(this.ShowBuildingMethodsUI);
             EventDesigner.OnBrandCatalogsRequested.AddListener(this.ShowBrandCatalogUI);
             EventDesigner.OnCabinetShapesRequested.AddListener(this.ShowCabinetShapeUI);
             EventDesigner.OnKitchenTemplatesRequested.AddListener(this.ShowKitchenTemplateUI);
             EventDesigner.OnCabinetSizesRequested.AddListener(this.ShowCabinetOtherSizesUI);
-            EventBridge.Designer.onBuildingMethodChanged    += OnBuildingMethodChanged;
-            EventBridge.Designer.onBrandCatalogChanged.OnInvoke += OnBrandCatalogChanged;
-            EventBridge.Designer.onCabinetSwapStart         += OnCabinetSwapStart;
-            EventBridge.Designer.onHighlightChanged.OnInvoke += OnHighlightChanged;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
             EventDesigner.OnLoadingScreenRequested.AddListener(this.ShowLoadingUI);
             EventDesigner.OnLoadingImageRefreshRequested.AddListener(this.RefreshCabinetLoadingUiImage);
             EventDesigner.OnLoadingMessageRequested.AddListener(this.OnLoadingMessageRequested);
@@ -223,18 +258,16 @@ namespace KitchenDesign
 
         protected void OnDisable()
         {
-            EventBridge.Designer.restart                    -= ForgetCabinetSettings;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
             EventDesigner.OnWhiteLabelClientInfoRequested.RemoveListener(this.ShowWhiteLabelClientInfoUI);
             EventDesigner.OnBuildingMethodsRequested.RemoveListener(this.ShowBuildingMethodsUI);
             EventDesigner.OnBrandCatalogsRequested.RemoveListener(this.ShowBrandCatalogUI);
             EventDesigner.OnCabinetShapesRequested.RemoveListener(this.ShowCabinetShapeUI);
             EventDesigner.OnKitchenTemplatesRequested.RemoveListener(this.ShowKitchenTemplateUI);
             EventDesigner.OnCabinetSizesRequested.RemoveListener(this.ShowCabinetOtherSizesUI);
-            EventBridge.Designer.onBuildingMethodChanged    -= OnBuildingMethodChanged;
-            EventBridge.Designer.onBrandCatalogChanged.OnInvoke -= OnBrandCatalogChanged;
-            EventBridge.Designer.onCabinetSwapStart         -= OnCabinetSwapStart;
-            EventBridge.Designer.onHighlightChanged.OnInvoke -= OnHighlightChanged;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
             EventDesigner.OnLoadingScreenRequested.RemoveListener(this.ShowLoadingUI);
             EventDesigner.OnLoadingImageRefreshRequested.RemoveListener(this.RefreshCabinetLoadingUiImage);
             EventDesigner.OnLoadingMessageRequested.RemoveListener(this.OnLoadingMessageRequested);
@@ -543,7 +576,7 @@ namespace KitchenDesign
 
             if (wasCanceled)
             {
-                EventBridge.Designer.onCabinetSwapCanceled?.Invoke();
+                m_Kitchen.events.onCabinetSwapCanceled?.Invoke();
             }
         }
 

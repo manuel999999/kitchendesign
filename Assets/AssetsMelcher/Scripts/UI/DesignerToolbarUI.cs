@@ -34,6 +34,45 @@ namespace KitchenDesign
     /// </remarks>
     public class DesignerToolbarUI : MelcherUI
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.restart += ResetToolbar;
+            this._events.onHighlightChanged.OnInvoke += OnHighlightChanged;
+            this._events.onBuildingMethodChanged += OnBuildingMethodChanged;
+            this._events.onBrandCatalogChanged.OnInvoke += OnBrandCatalogChanged;
+            this._events.onKitchenReady.OnInvoke += OnKitchenReady;
+            this._events.onCabinetSwapStart += OnCabinetSwapStart;
+            this._events.onCabinetSwapCanceled += OnCabinetSwapCanceled;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.restart -= ResetToolbar;
+            this._events.onHighlightChanged.OnInvoke -= OnHighlightChanged;
+            this._events.onBuildingMethodChanged -= OnBuildingMethodChanged;
+            this._events.onBrandCatalogChanged.OnInvoke -= OnBrandCatalogChanged;
+            this._events.onKitchenReady.OnInvoke -= OnKitchenReady;
+            this._events.onCabinetSwapStart -= OnCabinetSwapStart;
+            this._events.onCabinetSwapCanceled -= OnCabinetSwapCanceled;
+        }
+
         private DesignerConfirmUI _confirmPrompt;
         private DesignerAboutProductUI _aboutProductPrompt;
         private AppProfileSO _profile;
@@ -301,13 +340,10 @@ namespace KitchenDesign
         {
             base.OnEnable();
 
-            EventBridge.Designer.restart                    += ResetToolbar;
-            EventBridge.Designer.onHighlightChanged.OnInvoke += OnHighlightChanged;
-            EventBridge.Designer.onBuildingMethodChanged    += OnBuildingMethodChanged;
-            EventBridge.Designer.onBrandCatalogChanged.OnInvoke += OnBrandCatalogChanged;
-            EventBridge.Designer.onKitchenReady.OnInvoke    += OnKitchenReady;
-            EventBridge.Designer.onCabinetSwapStart         += OnCabinetSwapStart;
-            EventBridge.Designer.onCabinetSwapCanceled      += OnCabinetSwapCanceled;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
 
             m_ToolbarToggleButton.onValueChanged += ToggleToolbar;
 
@@ -328,13 +364,10 @@ namespace KitchenDesign
         {
             base.OnDisable();
 
-            EventBridge.Designer.restart                    -= ResetToolbar;
-            EventBridge.Designer.onHighlightChanged.OnInvoke -= OnHighlightChanged;
-            EventBridge.Designer.onBuildingMethodChanged    -= OnBuildingMethodChanged;
-            EventBridge.Designer.onBrandCatalogChanged.OnInvoke -= OnBrandCatalogChanged;
-            EventBridge.Designer.onKitchenReady.OnInvoke    -= OnKitchenReady;
-            EventBridge.Designer.onCabinetSwapStart         -= OnCabinetSwapStart;
-            EventBridge.Designer.onCabinetSwapCanceled      -= OnCabinetSwapCanceled;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
 
             m_ToolbarToggleButton.onValueChanged -= ToggleToolbar;
 
@@ -1489,7 +1522,7 @@ namespace KitchenDesign
 
                         kitchen.selectedDoorHandleStyleName = doorHandleStyleInfo.name;
 
-                        EventBridge.Designer.onDoorHandleStyleNameUpdate?.Invoke(doorHandleStyleInfo.name);
+                        this._kitchen.events.onDoorHandleStyleNameUpdate?.Invoke(doorHandleStyleInfo.name);
 
                         return;
                     }

@@ -125,7 +125,7 @@ namespace KitchenDesign.KitchenModel
 
             if (isNewHighlight)
             {
-                await EventBridge.Designer.onHighlightChanged.InvokeIfNonEmpty(this._interaction.highlightObject);
+                await this._kitchen.events.onHighlightChanged.InvokeIfNonEmpty(this._interaction.highlightObject);
             }
         }
 

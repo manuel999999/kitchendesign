@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.KitchenModel;
     using Melcher;
     using Unity.Cinemachine;
     using DG.Tweening;
@@ -13,6 +14,35 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerOrbitCamera : MelcherMonoBehaviour
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.restart += ResetView;
+            this._events.onKitchenLayoutChanged += OnKitchenCabinetLayoutChanged;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.restart -= ResetView;
+            this._events.onKitchenLayoutChanged -= OnKitchenCabinetLayoutChanged;
+        }
+
         // ====================================================================
         // Properties
         // ====================================================================
@@ -103,14 +133,18 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            EventBridge.Designer.restart += ResetView;
-            EventBridge.Designer.onKitchenLayoutChanged += OnKitchenCabinetLayoutChanged;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
         }
 
         protected void OnDisable()
         {
-            EventBridge.Designer.restart -= ResetView;
-            EventBridge.Designer.onKitchenLayoutChanged -= OnKitchenCabinetLayoutChanged;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
         }
 
         protected void OnKitchenCabinetLayoutChanged(CabinetLayout layoutPrefab, CabinetLayout layoutInstance)

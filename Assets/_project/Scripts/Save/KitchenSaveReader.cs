@@ -174,9 +174,9 @@ namespace KitchenDesign.Save
                     bottom = 0.0f
                 };
 
-            EventBridge.Designer.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
+            this._kitchen.events.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
 
-            await EventBridge.Designer.onBrandCatalogChanged.InvokeIfNonEmpty(this._selections.brandCatalog);
+            await this._kitchen.events.onBrandCatalogChanged.InvokeIfNonEmpty(this._selections.brandCatalog);
 
             this._selections.cabinetFinish = this._catalogData.FindProductInfoBySku(cabinetFinishProductSku, findCabinetSection: false);
             this._selections.countertopFinish = this._catalogData.FindProductInfoBySku(countertopFinishProductSku, findCabinetSection: false);
@@ -578,7 +578,7 @@ namespace KitchenDesign.Save
 
             this._kitchen.RefreshTickerLabels();
 
-            await EventBridge.Designer.onKitchenReady.InvokeIfNonEmpty();
+            await this._kitchen.events.onKitchenReady.InvokeIfNonEmpty();
 
             return true;
         }

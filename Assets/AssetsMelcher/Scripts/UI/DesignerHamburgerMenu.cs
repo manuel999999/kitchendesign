@@ -488,7 +488,7 @@ namespace KitchenDesign
                     // Don't reload the previous save
                     this._clientList.ActiveQuoteId = null;
 
-                    EventBridge.Designer.restart.Invoke();
+                    this._kitchen.events.restart.Invoke();
                 }
             );
         }

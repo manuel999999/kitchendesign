@@ -20,6 +20,8 @@ namespace KitchenDesign.KitchenModel
     /// </summary>
     public interface IKitchen
     {
+        public KitchenEvents events { get; }
+
         public KitchenBuildingMethod selectedBuildingMethod { get; }
 
         public IBuildingMethodRules buildingRules { get; }

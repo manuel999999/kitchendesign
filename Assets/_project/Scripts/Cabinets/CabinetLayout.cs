@@ -23,6 +23,41 @@ namespace KitchenDesign.Cabinets
     /// </summary>
     public class CabinetLayout : MelcherMonoBehaviour
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
+            this._events.onCabinetResized.OnInvoke += OnCabinetResized;
+            this._events.onCabinetReordered.OnInvoke += OnCabinetReordered;
+            this._events.onPreCabinetDestroyedByUser += OnPreCabinetDestroyedByUser;
+            this._events.onCabinetDestroyedByUser.OnInvoke += OnCabinetDestroyedByUser;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
+            this._events.onCabinetResized.OnInvoke -= OnCabinetResized;
+            this._events.onCabinetReordered.OnInvoke -= OnCabinetReordered;
+            this._events.onPreCabinetDestroyedByUser -= OnPreCabinetDestroyedByUser;
+            this._events.onCabinetDestroyedByUser.OnInvoke -= OnCabinetDestroyedByUser;
+        }
+
         // =====================================================================
         // Properties
         // =====================================================================
@@ -113,6 +148,7 @@ namespace KitchenDesign.Cabinets
         public void SetKitchen(IKitchen kitchen)
         {
             m_Kitchen = kitchen;
+            this.ListenTo(kitchen?.events);
 
             foreach (ElementIndex<Cabinet> currentCabinet in EnumerateCabinets())
             {
@@ -1503,7 +1539,8 @@ namespace KitchenDesign.Cabinets
                                     cabinetSectionProductInfo.visualId,
                                     selectedDoorHandleStyleName,
                                     newCabinet.cabinetSectionInstance.transform,
-                                    newCabinet.cabinet.transform
+                                    newCabinet.cabinet.transform,
+                                    kitchen.events
                                 );
                             }
                             else if(string.IsNullOrEmpty(kitchen.selectedBrandCatalog.defaultCabinetSectionDoorHandleStyleName) == false)
@@ -1513,7 +1550,8 @@ namespace KitchenDesign.Cabinets
                                     cabinetSectionProductInfo.visualId,
                                     kitchen.selectedBrandCatalog.defaultCabinetSectionDoorHandleStyleName,
                                     newCabinet.cabinetSectionInstance.transform,
-                                    newCabinet.cabinet.transform
+                                    newCabinet.cabinet.transform,
+                                    kitchen.events
                                 );
                             }
                         }
@@ -1672,7 +1710,7 @@ namespace KitchenDesign.Cabinets
             }
 
             await
-                EventBridge.Designer.onCabinetReordered.InvokeIfNonEmpty(
+                m_Kitchen.events.onCabinetReordered.InvokeIfNonEmpty(
                     (cabinetToReorder, previousCabinetIndex, previousCabinetSpans)
                 );
         }
@@ -1734,20 +1772,18 @@ namespace KitchenDesign.Cabinets
 
         protected void OnEnable()
         {
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
-            EventBridge.Designer.onCabinetResized.OnInvoke += OnCabinetResized;
-            EventBridge.Designer.onCabinetReordered.OnInvoke += OnCabinetReordered;
-            EventBridge.Designer.onPreCabinetDestroyedByUser += OnPreCabinetDestroyedByUser;
-            EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke += OnCabinetDestroyedByUser;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
         }
 
         protected void OnDisable()
         {
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
-            EventBridge.Designer.onCabinetResized.OnInvoke -= OnCabinetResized;
-            EventBridge.Designer.onCabinetReordered.OnInvoke -= OnCabinetReordered;
-            EventBridge.Designer.onPreCabinetDestroyedByUser -= OnPreCabinetDestroyedByUser;
-            EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke -= OnCabinetDestroyedByUser;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
         }
 
         protected async UniTask OnCabinetAddedByUser(Cabinet cabinet)

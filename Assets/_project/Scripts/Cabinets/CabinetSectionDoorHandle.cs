@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cabinets
 {
+    using KitchenDesign.KitchenModel;
     using Melcher;
     using System;
     using UnityEngine;
@@ -8,6 +9,8 @@ namespace KitchenDesign.Cabinets
 
     public class CabinetSectionDoorHandle : MonoBehaviour
     {
+        private KitchenEvents _events;
+
 #region Static methods
         // ====================================================================
         // Static methods
@@ -18,7 +21,8 @@ namespace KitchenDesign.Cabinets
             string                          cabinetBaseVisualId,
             string                          selectedDoorHandleStyle,
             Transform                       cabinet,
-            Transform                       parent)
+            Transform                       parent,
+            KitchenEvents                   events)
         {
             if(doorHandleStyle == default)
             {
@@ -59,6 +63,7 @@ namespace KitchenDesign.Cabinets
             doorHandleInstance.gameObject.AddComponent<CabinetSectionDoorHandle>();
             CabinetSectionDoorHandle handle = doorHandleInstance.GetComponent<CabinetSectionDoorHandle>();
             handle.hanndleCount = handleData.count;
+            handle.ListenTo(events);
 
             handle.ActivateDoorHandleStyle(selectedDoorHandleStyle);
         }
@@ -143,14 +148,27 @@ namespace KitchenDesign.Cabinets
         // ====================================================================
         // Methods
         // ====================================================================
-        private void Awake()
+        public void ListenTo(KitchenEvents events)
         {
-            EventBridge.Designer.onDoorHandleStyleNameUpdate += ActivateDoorHandleStyle;
+            if (this._events != null)
+            {
+                this._events.onDoorHandleStyleNameUpdate -= ActivateDoorHandleStyle;
+            }
+
+            this._events = events;
+
+            if (this._events != null)
+            {
+                this._events.onDoorHandleStyleNameUpdate += ActivateDoorHandleStyle;
+            }
         }
 
         private void OnDestroy()
         {
-            EventBridge.Designer.onDoorHandleStyleNameUpdate -= ActivateDoorHandleStyle;
+            if (this._events != null)
+            {
+                this._events.onDoorHandleStyleNameUpdate -= ActivateDoorHandleStyle;
+            }
         }
 
         public void ActivateDoorHandleStyle(string doorHandleStyle)

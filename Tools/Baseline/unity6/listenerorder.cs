@@ -77,7 +77,7 @@ var kitchenType = T("KitchenDesign.KitchenModel.Kitchen");
 var kitchen = kitchenType == null ? null : UnityEngine.Object.FindFirstObjectByType(kitchenType);
 if (kitchen != null)
 {
-    var ep = kitchenType.GetProperty("Events", bf);
+    var ep = kitchenType.GetProperty("Events", bf) ?? kitchenType.GetProperty("events", bf);
     if (ep != null) { var ke = ep.GetValue(kitchen); if (ke != null) Dump("KitchenEvents", ke.GetType(), ke); }
 }
 var contentType = T("KitchenDesign.ProFitGlobals");

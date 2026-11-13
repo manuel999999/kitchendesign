@@ -21,6 +21,33 @@ namespace KitchenDesign
     /// </summary>
     public class SetVolumeSizeUI : MelcherUI
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.onSetVolumeWidthRequested += ShowPrompt;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.onSetVolumeWidthRequested -= ShowPrompt;
+        }
+
         private SessionStatus _session;
 
         public void Initialize(SessionStatus session)
@@ -105,7 +132,10 @@ namespace KitchenDesign
         {
             base.OnEnable();
 
-            EventBridge.Designer.showSetOccupiableVolumeWidthPrompt += ShowPrompt;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
 
             m_CabinetDepthControl.onValueChanged += OnCabinetDepthChanged;
 
@@ -117,7 +147,10 @@ namespace KitchenDesign
         {
             base.OnDisable();
 
-            EventBridge.Designer.showSetOccupiableVolumeWidthPrompt -= ShowPrompt;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
 
             m_CabinetDepthControl.onValueChanged -= OnCabinetDepthChanged;
 
@@ -308,7 +341,7 @@ namespace KitchenDesign
 
                 if (targetCabinet)
                 {
-                    EventBridge.Designer.onCabinetResized.Invoke(targetCabinet).Forget();
+                    targetCabinet.kitchen.events.onCabinetResized.Invoke(targetCabinet).Forget();
                 }
             }
 

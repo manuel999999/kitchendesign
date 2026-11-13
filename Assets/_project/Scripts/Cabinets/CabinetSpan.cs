@@ -549,7 +549,7 @@ namespace KitchenDesign.Cabinets
 
             ApplyCabinetBackingToCountertop(cabinet, backing, add);
 
-            await EventBridge.Designer.onCabinetResized.InvokeIfNonEmpty(cabinet);
+            await kitchen.events.onCabinetResized.InvokeIfNonEmpty(cabinet);
         }
 
         public CabinetLocalDirection TransformDirectionFromSpanToCabinet(CabinetLocalDirection spanRelativeDirection, Cabinet cabinet)

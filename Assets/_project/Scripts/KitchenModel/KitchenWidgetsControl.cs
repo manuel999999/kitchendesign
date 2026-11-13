@@ -358,11 +358,11 @@ namespace KitchenDesign.KitchenModel
         {
             CabinetShelf resizedShelf = (CabinetShelf)caller.target;
 
-            await EventBridge.Designer.onOccupantResized.InvokeIfNonEmpty(resizedShelf.occupant);
+            await this._kitchen.events.onOccupantResized.InvokeIfNonEmpty(resizedShelf.occupant);
         }
         internal void OnInputCabinetSizeClicked(ButtonWidget caller)
         {
-            EventBridge.Designer.showSetOccupiableVolumeWidthPrompt?.Invoke(caller.target);
+            this._kitchen.events.onSetVolumeWidthRequested?.Invoke(caller.target);
         }
         internal async UniTask OnCabinetResizedByWidget(ResizerWidget cabinetResizerWidget, float lengthMetersDelta)
         {
@@ -377,7 +377,7 @@ namespace KitchenDesign.KitchenModel
                     targetTransform.TransformDirection(Vector3.right) * -lengthMetersDelta;
             }
 
-            await EventBridge.Designer.onCabinetResized.InvokeIfNonEmpty(cabinet);
+            await this._kitchen.events.onCabinetResized.InvokeIfNonEmpty(cabinet);
         }
         internal static WidgetType CreateKitchenWidget<WidgetType>(WidgetType widgetPrefab, Transform widgetParent, Camera eventCamera, OccupiableVolume target)
             where WidgetType : KitchenWidget

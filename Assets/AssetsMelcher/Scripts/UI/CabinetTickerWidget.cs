@@ -18,11 +18,45 @@ namespace KitchenDesign
     /// </summary>
     public class CabinetTickerWidget : MelcherMonoBehaviour
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.onCabinetResized.OnInvoke += RefreshLabel;
+            this._events.onCabinetAddedByUser.OnInvoke += RefreshLabel;
+            this._events.onCabinetReordered.OnInvoke += OnCabinetReordered;
+            this._events.onCabinetDestroyedByUser.OnInvoke += OnCabinetDestroyedByUser;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.onCabinetResized.OnInvoke -= RefreshLabel;
+            this._events.onCabinetAddedByUser.OnInvoke -= RefreshLabel;
+            this._events.onCabinetReordered.OnInvoke -= OnCabinetReordered;
+            this._events.onCabinetDestroyedByUser.OnInvoke -= OnCabinetDestroyedByUser;
+        }
+
         private Kitchen _kitchen;
 
         public void Initialize(Kitchen kitchen)
         {
             this._kitchen = kitchen;
+            this.ListenTo(kitchen.events);
         }
 
         // =====================================================================
@@ -164,18 +198,18 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            EventBridge.Designer.onCabinetResized.OnInvoke += RefreshLabel;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke += RefreshLabel;
-            EventBridge.Designer.onCabinetReordered.OnInvoke += OnCabinetReordered;
-            EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke += OnCabinetDestroyedByUser;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
         }
 
         protected void OnDisable()
         {
-            EventBridge.Designer.onCabinetResized.OnInvoke -= RefreshLabel;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke -= RefreshLabel;
-            EventBridge.Designer.onCabinetReordered.OnInvoke -= OnCabinetReordered;
-            EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke -= OnCabinetDestroyedByUser;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
         }
 
         protected async UniTask RefreshLabel(Cabinet cabinet)

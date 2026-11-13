@@ -1,5 +1,6 @@
 namespace KitchenDesign.Measures
 {
+    using KitchenDesign.KitchenModel;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -24,6 +25,49 @@ namespace KitchenDesign.Measures
     /// </summary>
     public class MeasurementOverlayManager : MelcherMonoBehaviour
     {
+        private KitchenEvents _events;
+
+        public void ListenTo(KitchenEvents events)
+        {
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.RemoveKitchenListeners();
+            }
+
+            this._events = events;
+
+            if (this._events != null && this.isActiveAndEnabled)
+            {
+                this.AddKitchenListeners();
+            }
+        }
+
+        private void AddKitchenListeners()
+        {
+            this._events.onHighlightChanged.OnInvoke += OnHighlightChanged;
+            this._events.onCabinetResized.OnInvoke += OnCabinetResized;
+            this._events.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
+            this._events.onCabinetReordered.OnInvoke += OnCabinetReordered;
+            this._events.onOccupantDragSuccess += OnProductDragged;
+            this._events.onOccupantResized.OnInvoke += OnOccupantResized;
+            this._events.onOccupantAddedToCabinet.OnInvoke += OnOccupantAdded;
+            this._events.onOccupantNudged += OnOccupantNudged;
+            this._events.restart += OnKitchenRestart;
+        }
+
+        private void RemoveKitchenListeners()
+        {
+            this._events.onHighlightChanged.OnInvoke -= OnHighlightChanged;
+            this._events.onCabinetResized.OnInvoke -= OnCabinetResized;
+            this._events.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
+            this._events.onCabinetReordered.OnInvoke -= OnCabinetReordered;
+            this._events.onOccupantDragSuccess -= OnProductDragged;
+            this._events.onOccupantResized.OnInvoke -= OnOccupantResized;
+            this._events.onOccupantAddedToCabinet.OnInvoke -= OnOccupantAdded;
+            this._events.onOccupantNudged -= OnOccupantNudged;
+            this._events.restart -= OnKitchenRestart;
+        }
+
         // =====================================================================
         // Constants
         // =====================================================================
@@ -55,28 +99,18 @@ namespace KitchenDesign.Measures
 
         protected void OnEnable()
         {
-            EventBridge.Designer.onHighlightChanged.OnInvoke += OnHighlightChanged;
-            EventBridge.Designer.onCabinetResized.OnInvoke += OnCabinetResized;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
-            EventBridge.Designer.onCabinetReordered.OnInvoke += OnCabinetReordered;
-            EventBridge.Designer.onOccupantDragSuccess  += OnProductDragged;
-            EventBridge.Designer.onOccupantResized.OnInvoke += OnOccupantResized;
-            EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke += OnOccupantAdded;
-            EventBridge.Designer.onOccupantNudged       += OnOccupantNudged;
-            EventBridge.Designer.restart                += OnKitchenRestart;
+            if (this._events != null)
+            {
+                this.AddKitchenListeners();
+            }
         }
 
         protected void OnDisable()
         {
-            EventBridge.Designer.onHighlightChanged.OnInvoke -= OnHighlightChanged;
-            EventBridge.Designer.onCabinetResized.OnInvoke -= OnCabinetResized;
-            EventBridge.Designer.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
-            EventBridge.Designer.onCabinetReordered.OnInvoke -= OnCabinetReordered;
-            EventBridge.Designer.onOccupantDragSuccess  -= OnProductDragged;
-            EventBridge.Designer.onOccupantResized.OnInvoke -= OnOccupantResized;
-            EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke -= OnOccupantAdded;
-            EventBridge.Designer.onOccupantNudged       -= OnOccupantNudged;
-            EventBridge.Designer.restart                -= OnKitchenRestart;
+            if (this._events != null)
+            {
+                this.RemoveKitchenListeners();
+            }
         }
 
         protected async UniTask OnHighlightChanged(GameObject highlightObject)
