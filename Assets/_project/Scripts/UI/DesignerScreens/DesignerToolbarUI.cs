@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.UI.Views;
     using KitchenDesign.Events;
     using KitchenDesign.Session;

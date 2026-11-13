@@ -1,3 +1,4 @@
+using KitchenDesign.Utility;
 using KitchenDesign.BuildingRules;
 using KitchenDesign.CatalogData;
 using KitchenDesign.Geometry;

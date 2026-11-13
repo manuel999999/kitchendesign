@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Server;

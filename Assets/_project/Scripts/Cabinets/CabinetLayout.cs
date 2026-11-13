@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cabinets
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;

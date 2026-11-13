@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     using KitchenDesign.Shared.Common;
@@ -287,7 +287,7 @@ namespace KitchenDesign
 
     }   // class ImperialUnit
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

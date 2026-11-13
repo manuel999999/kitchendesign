@@ -1,5 +1,6 @@
 namespace KitchenDesign.Photos
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.Session;
     using KitchenDesign.Serializables;
     using Melcher;

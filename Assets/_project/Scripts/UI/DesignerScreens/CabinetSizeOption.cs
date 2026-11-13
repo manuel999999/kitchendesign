@@ -1,3 +1,4 @@
+using KitchenDesign.Utility;
 namespace KitchenDesign.UI.DesignerScreens
 {
     public readonly struct CabinetSizeOption

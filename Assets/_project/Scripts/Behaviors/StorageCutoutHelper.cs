@@ -1,17 +1,11 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Shared.Enums;
     using Melcher;
     using UnityEngine;
 
     public class StorageCutoutHelper : MelcherMonoBehaviour
     {
-        public enum CutoutDirection
-        {
-            Auto,
-            Up,
-            Down
-        }
-
         private const string BEGIN_NAME = "ModelCutOutBegin";
         private const string EXTENT_NAME = "ModelCutOutExtent";
         private const float CUTOUT_OFFSET = 0.0125f;

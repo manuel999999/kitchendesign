@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     using System;
@@ -107,7 +107,7 @@ namespace KitchenDesign
     }   // class EnumInfo
 
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

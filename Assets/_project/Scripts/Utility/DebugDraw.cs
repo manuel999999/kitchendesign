@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     using UnityEngine;
@@ -17,7 +17,7 @@ namespace KitchenDesign
         }
     }   // class DebugDraw
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

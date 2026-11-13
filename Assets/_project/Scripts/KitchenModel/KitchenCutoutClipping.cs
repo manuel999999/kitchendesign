@@ -1,5 +1,6 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using System.Collections.Generic;
     using KitchenDesign.Cutouts;

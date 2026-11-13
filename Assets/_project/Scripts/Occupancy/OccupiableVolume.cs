@@ -1,5 +1,6 @@
 namespace KitchenDesign.Occupancy
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.KitchenModel;
     using Melcher;
     using KitchenDesign.Shared.Common;

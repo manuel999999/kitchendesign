@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     using UnityEngine;
@@ -75,7 +75,7 @@ namespace KitchenDesign
 
     }   // class ComponentsInChildrenEnumerator
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

@@ -1,5 +1,6 @@
 namespace KitchenDesign.Widgets
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using UnityEngine;
     using UnityEngine.UI;

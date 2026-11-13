@@ -1,18 +1,18 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     using UnityEngine;
 
-    public static class ProFitUnityExtensions
+    public static class UnityExtensions
     {
         public static void SetLocalPositionAndRotation(this Transform target, Vector3 localPosition, Quaternion localRotation)
         {
             target.localPosition = localPosition;
             target.localRotation = localRotation;
         }
-    }   // class ProFitUnityExtensions
+    }   // class UnityExtensions
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

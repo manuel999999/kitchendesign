@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     /// <summary>
@@ -45,5 +45,5 @@ namespace KitchenDesign
 
     }   // class Ref
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 

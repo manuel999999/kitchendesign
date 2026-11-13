@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.Views
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using UnityEngine;
     using UnityEngine.UI;

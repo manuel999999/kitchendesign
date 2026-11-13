@@ -1,5 +1,6 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.Cameras;
     using KitchenDesign.UI.DesignerScreens;
     using KitchenDesign.Events;

@@ -1,5 +1,6 @@
 namespace KitchenDesign.Photos
 {
+    using KitchenDesign.Utility;
     using Cysharp.Threading.Tasks;
     using KitchenDesign.Cabinets;
     using KitchenDesign.Geometry;

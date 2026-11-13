@@ -1,5 +1,6 @@
 namespace KitchenDesign.ProductsEditor
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.Photos;
     using Melcher;
     using KitchenDesign.Shared.Common;

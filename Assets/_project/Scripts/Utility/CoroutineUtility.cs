@@ -1,4 +1,4 @@
-namespace KitchenDesign
+namespace KitchenDesign.Utility
 {
     using Melcher;
     using MEC;
@@ -8,7 +8,7 @@ namespace KitchenDesign
     /// <summary>
     ///     Utility methods for coroutines.
     /// </summary>
-    public static class ProFitCoroutineUtility
+    public static class CoroutineUtility
     {
         /// <summary>
         ///     Starts a coroutine that will invoke the action once the
@@ -73,9 +73,9 @@ namespace KitchenDesign
             }
         }
 
-    }   // static class ProFitCoroutineUtility
+    }   // static class CoroutineUtility
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility
 
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)

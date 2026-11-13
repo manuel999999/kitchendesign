@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.Views
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using DG.Tweening;
     using UnityEngine;

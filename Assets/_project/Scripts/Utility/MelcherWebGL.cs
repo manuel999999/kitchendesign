@@ -1,5 +1,6 @@
-﻿namespace KitchenDesign
+﻿namespace KitchenDesign.Utility
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using UnityEngine;
 
@@ -197,4 +198,4 @@
 
     }   // class MelcherWebGL
 
-}   // namespace KitchenDesign
+}   // namespace KitchenDesign.Utility

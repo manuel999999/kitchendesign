@@ -1,5 +1,6 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.Utility;
     using Cysharp.Threading.Tasks;
     using KitchenDesign.Cabinets;
     using KitchenDesign.Occupancy;

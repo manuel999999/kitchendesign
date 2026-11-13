@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cameras
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using Unity.Cinemachine;
     using MEC;
@@ -65,7 +66,7 @@ namespace KitchenDesign.Cameras
             Timing.KillCoroutines(m_CameraOrthoTransition);
 
             m_CameraOrthoTransition =
-                ProFitCoroutineUtility.CallDelayedByFrames(
+                CoroutineUtility.CallDelayedByFrames(
                     actionArgument: m_BlendCamera,
                     action: blendCamera => blendCamera.Priority = 0
                 );

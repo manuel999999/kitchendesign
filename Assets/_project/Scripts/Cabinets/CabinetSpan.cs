@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cabinets
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.Events;
     using Melcher;
     using KitchenDesign.Shared.Common;

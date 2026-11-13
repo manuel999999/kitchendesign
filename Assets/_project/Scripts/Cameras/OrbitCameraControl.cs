@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cameras
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.KitchenModel;
     using Melcher;
     using Unity.Cinemachine;
