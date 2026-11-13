@@ -1930,12 +1930,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   the same at every step (21 / 21 errors); the fallback JSON a sign-in writes byte-identical;
   every kitchen event has the same subscribers in the same order as before area 5; the rule
   checks 60 / 132 / 169 with no mismatch. The cold start found and fixed one regression
-  (`PayNowUI`, see "Screens"). **Two things not settled:** (1) three cover photos differ on the
-  tip's first run (28316, 27763, 27764: cabinets with a white noisy texture), which matches the
-  "freshly opened editor" gotcha; a second capture on the warm editor was running when the
-  session ended (`final-tip/unity6-run2`, log `final-tip/runall2.log`): run
-  `photodiff.sh final-base/unity6 final-tip/unity6-run2`, and if the covers still differ, bisect.
-  (2) a cold start from `BootScene` logs 14 errors against 13 on `3d25da55`; not identified.
+  (`PayNowUI`, see "Screens"). The three cover photos that differed on the tip's first run (28316, 27763,
+  27764: cabinets with a white noisy texture) were the "freshly opened editor" gotcha: a second
+  capture on the warm editor (`final-tip/unity6-run2`) matches `3d25da55` in every photo (at
+  most 0.08/255) and in every `resave.json`. **One thing not settled:** a cold start from `BootScene` logs 14 errors against 13 on `3d25da55`; not identified.
   After a check run, `Tools/Baseline/unity6/load.cs` and `measure.cs` are regenerated (restore
   them) and the Gemini fallback JSON must be put back from `GeminiBaseline/_backup-2026-11-12`.
   `screenprobe.sh` (B5.0) was never written.
