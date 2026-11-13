@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using Melcher;
     using System;
     using UnityEngine;
@@ -23,13 +24,18 @@ namespace KitchenDesign
             Show();
         }
 
+        private void OnNotificationRequested(NotificationInfo info)
+        {
+            this.ShowPrompt(info.Title, info.Message, info.OnDismiss);
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
             m_OkButton.onClick += OnClickOK;
 
-            EventBridge.Designer.showNotification += ShowPrompt;
+            EventDesigner.OnNotificationRequested.AddListener(this.OnNotificationRequested);
         }
 
         protected override void OnDisable()
@@ -38,7 +44,7 @@ namespace KitchenDesign
 
             m_OkButton.onClick -= OnClickOK;
 
-            EventBridge.Designer.showNotification -= ShowPrompt;
+            EventDesigner.OnNotificationRequested.RemoveListener(this.OnNotificationRequested);
         }
 
         protected void OnClickOK(MelcherButton caller)

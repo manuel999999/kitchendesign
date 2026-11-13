@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -133,7 +134,7 @@ namespace KitchenDesign
 
                 if (cabinetSpan.CanResizeBaseCabinetDepth(selectedOption.sizeInMeters))
                 {
-                    EventBridge.Designer.showToast?.Invoke("", holdDuration: 0.0f);
+                    EventDesigner.OnToastRequested.Raise(new ToastInfo("", holdDuration: 0.0f));
                     cabinetSpan.SetBaseCabinetDepth(selectedOption.sizeInMeters);
                 }
             }
@@ -149,7 +150,7 @@ namespace KitchenDesign
 
                 if (cabinetSpan.CanResizeBaseCabinetDepth(m_CurrentVolumeDepthInMeters))
                 {
-                    EventBridge.Designer.showToast?.Invoke("", holdDuration: 0.0f);
+                    EventDesigner.OnToastRequested.Raise(new ToastInfo("", holdDuration: 0.0f));
                     cabinetSpan.SetBaseCabinetDepth(m_CurrentVolumeDepthInMeters);
                 }
             }

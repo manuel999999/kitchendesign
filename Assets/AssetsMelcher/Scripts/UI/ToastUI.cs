@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using Melcher;
     using UnityEngine;
     using DG.Tweening;
@@ -53,18 +54,23 @@ namespace KitchenDesign
             m_ToastCanvasGroup.alpha = 0.0f;
         }
 
+        private void OnToastRequested(ToastInfo info)
+        {
+            this.ShowToast(info.Toast, info.HoldDuration);
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            EventBridge.Designer.showToast += ShowToast;
+            EventDesigner.OnToastRequested.AddListener(this.OnToastRequested);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
 
-            EventBridge.Designer.showToast -= ShowToast;
+            EventDesigner.OnToastRequested.RemoveListener(this.OnToastRequested);
         }
 
         // ====================================================================

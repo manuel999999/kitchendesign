@@ -1,3 +1,4 @@
+using KitchenDesign.Events;
 using Cysharp.Threading.Tasks;
 using KitchenDesign.Geometry;
 using KitchenDesign.Products;
@@ -398,11 +399,11 @@ namespace KitchenDesign.KitchenModel
 
                     if (this._kitchen.buildingRules.UsesBrandCatalog && this._selections.cabinetFinish.manufacturerId == 140)
                     {
-                        EventBridge.Designer.showNotification?.Invoke(
+                        EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                             title: "Deco Grain",
                             message: "Please note that the Deco Grain finish adds a 25% premium to your cabinet choices.",
                             onDismiss: null
-                        );
+                        ));
                     }
                     break;
 

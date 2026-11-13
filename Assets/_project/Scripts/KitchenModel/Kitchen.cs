@@ -1,5 +1,6 @@
 namespace KitchenDesign.KitchenModel
 {
+    using KitchenDesign.Events;
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
@@ -970,23 +971,23 @@ namespace KitchenDesign.KitchenModel
 
                     // Prompt the player to change their cabinet depth if the
                     // product doesn't fit
-                    EventBridge.Designer.showNotification.Invoke(
+                    EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                         title: "Product Doesn't Fit",
                         message: "This product is too big for the current " +
                             "cabinet depth. Please create a new cabinet that " +
                             $"is at least {requiredSize} deep to place this product.",
                         onDismiss: null
-                    );
+                    ));
                 }
                 else
                 {
-                    EventBridge.Designer.showNotification.Invoke(
+                    EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                         title: "No Room Available",
                         message: "There is not enough cabinet space to place " +
                             "this product. Please extend the island or remove " +
                             $"other products to free up space.",
                         onDismiss: null
-                    );
+                    ));
                 }
             }
 
@@ -1235,19 +1236,19 @@ namespace KitchenDesign.KitchenModel
 
                 if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
                 {
-                    EventBridge.Designer.showWhiteLabelClientInfoUi.Invoke();
+                    EventDesigner.OnWhiteLabelClientInfoRequested.Raise();
                 }
                 else if (ProFitGlobals.appOptions.allowBuildingMethods)
                 {
-                    EventBridge.Designer.showBuildingMethodsUi.Invoke();
+                    EventDesigner.OnBuildingMethodsRequested.Raise();
                 }
                 else if (this.buildingRules.UsesBrandCatalog)
                 {
-                    EventBridge.Designer.showBrandCatalogUi.Invoke();
+                    EventDesigner.OnBrandCatalogsRequested.Raise();
                 }
                 else
                 {
-                    EventBridge.Designer.showCabinetShapeUi.Invoke();
+                    EventDesigner.OnCabinetShapesRequested.Raise();
                 }
             }
         }
@@ -1261,17 +1262,17 @@ namespace KitchenDesign.KitchenModel
         {
             using var clearLoadingSpinner =
                 MelcherDeferred.Defer(
-                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Hide)
+                    onDispose: static () => EventDesigner.OnLoadingScreenRequested.Raise(DesignerLoadingMode.Hide)
                 );
 
-            EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Load);
+            EventDesigner.OnLoadingScreenRequested.Raise(DesignerLoadingMode.Load);
 
             // Assume the default material is selected for each surface type
             if (this._selections.kitchenTemplate)
             {
-                EventBridge.Designer.setSpinnerStatusMessage?.Invoke(
+                EventDesigner.OnLoadingMessageRequested.Raise(new LoadingMessageInfo(
                     $"Preparing from {this._selections.kitchenTemplate.displayName} template"
-                );
+                ));
 
                 Dictionary<string, object> saveJson =
                     (Dictionary<string, object>)
@@ -1301,9 +1302,9 @@ namespace KitchenDesign.KitchenModel
             }
             else
             {
-                EventBridge.Designer.setSpinnerStatusMessage?.Invoke(
+                EventDesigner.OnLoadingMessageRequested.Raise(new LoadingMessageInfo(
                     $"Preparing from {this._selections.layoutPrefab.displayName} layout"
-                );
+                ));
 
                 await CreateCabinetLayoutFromShape(this._selections.layoutPrefab);
             }
@@ -1489,9 +1490,9 @@ namespace KitchenDesign.KitchenModel
 
                 if (!await span.TryDestroyBacking())
                 {
-                    EventBridge.Designer.showToast?.Invoke(
+                    EventDesigner.OnToastRequested.Raise(new ToastInfo(
                         "The backing can't be removed due to some of the current products."
-                    );
+                    ));
 
                     if (isBackingHighlighted)
                     {
@@ -1521,7 +1522,7 @@ namespace KitchenDesign.KitchenModel
                 if (cabinetToDestroy.cabinetType.IsMidSpanCabinetType(selectedBuildingMethod) &&
                     !layout.CabinetHasMidSpanCabinetNeighbour(cabinetToDestroy))
                 {
-                    EventBridge.Designer.showToast("There must be at least one cabinet per side.", holdDuration: 1.5f);
+                    EventDesigner.OnToastRequested.Raise(new ToastInfo("There must be at least one cabinet per side.", holdDuration: 1.5f));
                     return;
                 }
 
@@ -1542,7 +1543,7 @@ namespace KitchenDesign.KitchenModel
 
                     if (!cornerCabinetPrefab)
                     {
-                        EventBridge.Designer.showToast("Could not find default corner cabinet prefab.", holdDuration: 1.5f);
+                        EventDesigner.OnToastRequested.Raise(new ToastInfo("Could not find default corner cabinet prefab.", holdDuration: 1.5f));
                         return;
                     }
 
@@ -1878,11 +1879,11 @@ namespace KitchenDesign.KitchenModel
 
                         if (isHeatProduct && addedOccupant.productVisual.info.isCountertopOven == false)
                         {
-                            EventBridge.Designer.showNotification?.Invoke(
+                            EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                                 title: "Heat Product",
                                 message: "An insulated jacket is required for this product.",
                                 onDismiss: null
-                            );
+                            ));
                         }
                     }
                 }
@@ -2089,30 +2090,30 @@ namespace KitchenDesign.KitchenModel
                     // The most likely issue is that the backing(s) are
                     // preventing the cabinet from being added.
 
-                    EventBridge.Designer.showNotification?.Invoke(
+                    EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                         title: "No Suitable Location",
                         message: "This cabinet cannot be added to a section " +
                             "that has a cabinet backing.",
                         onDismiss: null
-                    );
+                    ));
                 }
                 else if (cabinetPrefab.cabinetType == CabinetType.Straight)
                 {
-                    EventBridge.Designer.showNotification?.Invoke(
+                    EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                         title: "Max Kitchen Size Reached",
                         message: "The kitchen is at its maximum size. No " +
                             "further cabinet sections may be added.",
                         onDismiss: null
-                    );
+                    ));
                 }
                 else
                 {
-                    EventBridge.Designer.showNotification?.Invoke(
+                    EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                         title: "No Suitable Location",
                         message: "There is no suitable location for this " +
                             "cabinet to be added.",
                         onDismiss: null
-                    );
+                    ));
                 }
 
                 return null;
@@ -2244,14 +2245,14 @@ namespace KitchenDesign.KitchenModel
                         Utility.MeasurementFormat.FormatMetersToCentimeters(requiredWidthInMeters);
                 }
 
-                EventBridge.Designer.showNotification.Invoke(
+                EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                     title: "Product Doesn't Fit",
                     message: "This product is too wide for the existing " +
                         "cabinets. Please resize or add a wider cabinet " +
                         $"that is at least {requiredSize} wide to place " +
                         $"this product.",
                     onDismiss: null
-                );
+                ));
             }
         }
 
@@ -2509,7 +2510,7 @@ namespace KitchenDesign.KitchenModel
             if (args.cabinetToReorder.cabinetType.IsMidSpanCabinetType(selectedBuildingMethod) &&
                 !layout.CabinetHasMidSpanCabinetNeighbour(args.cabinetToReorder))
             {
-                EventBridge.Designer.showToast?.Invoke("This cabinet is not movable.");
+                EventDesigner.OnToastRequested.Raise(new ToastInfo("This cabinet is not movable."));
                 return;
             }
 
@@ -2537,7 +2538,7 @@ namespace KitchenDesign.KitchenModel
                     toast = "No valid corner found.";
                 }
 
-                EventBridge.Designer.showToast?.Invoke(toast);
+                EventDesigner.OnToastRequested.Raise(new ToastInfo(toast));
                 return;
             }
 
@@ -2625,7 +2626,7 @@ namespace KitchenDesign.KitchenModel
 
             if (!didCenterOccupant)
             {
-                EventBridge.Designer.showToast?.Invoke("Product could not be centered.");
+                EventDesigner.OnToastRequested.Raise(new ToastInfo("Product could not be centered."));
             }
         }
 

@@ -1,5 +1,6 @@
 namespace KitchenDesign.Cabinets
 {
+    using KitchenDesign.Events;
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
@@ -968,10 +969,10 @@ namespace KitchenDesign.Cabinets
 
                 if (!CanOccupantsFitInNewCabinetDepth(cabinet, proposedCabinetSize))
                 {
-                    EventBridge.Designer.showToast?.Invoke(
+                    EventDesigner.OnToastRequested.Raise(new ToastInfo(
                         "Cannot use this cabinet depth with the currently selected products.",
                         holdDuration: 2.5f
-                    );
+                    ));
 
                     return false;
                 }

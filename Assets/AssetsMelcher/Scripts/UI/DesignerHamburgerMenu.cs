@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using KitchenDesign.CatalogData;
     using KitchenDesign.Scriptables;
@@ -25,14 +26,18 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerHamburgerMenu : MelcherMonoBehaviour
     {
+        private DesignerConfirmUI _confirmPrompt;
+        private DesignerSaveUI _savePrompt;
         private AppOptionsSO _options;
         private ServerClient _server;
         private CatalogDataStatus _catalogData;
         private ClientListStatus _clientList;
         private SessionStatus _session;
 
-        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session)
+        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session, DesignerConfirmUI confirmPrompt, DesignerSaveUI savePrompt)
         {
+            this._confirmPrompt = confirmPrompt;
+            this._savePrompt = savePrompt;
             this._options = options;
             this._server = server;
             this._catalogData = catalogData;
@@ -121,7 +126,7 @@ namespace KitchenDesign
             {
                 MelcherLog.LogVerbose($"Trying to download: {fileName}");
 
-                EventBridge.Designer.showToast?.Invoke($"Saving image...");
+                EventDesigner.OnToastRequested.Raise(new ToastInfo($"Saving image..."));
 
                 MelcherWebGL.TryDownloadingFile(screenshotBytes, fileName);
             }
@@ -135,7 +140,7 @@ namespace KitchenDesign
                     {
                         if (didSave)
                         {
-                            EventBridge.Designer.showToast?.Invoke($"Saved image to gallery.");
+                            EventDesigner.OnToastRequested.Raise(new ToastInfo($"Saved image to gallery."));
                         }
                     }
                 );
@@ -156,7 +161,7 @@ namespace KitchenDesign
                         screenshotBytes
                     );
 
-                    EventBridge.Designer.showToast?.Invoke($"Saved image to persistent data.");
+                    EventDesigner.OnToastRequested.Raise(new ToastInfo($"Saved image to persistent data."));
                 }
                 catch (System.Exception e)
                 {
@@ -170,7 +175,7 @@ namespace KitchenDesign
         {
             ClosePanel();
 
-            EventBridge.Designer.showCabinetDetailsUi?.Invoke(CabinetSizesMode.ModifyExistingCabinet);
+            EventDesigner.OnCabinetSizesRequested.Raise(CabinetSizesMode.ModifyExistingCabinet);
         }
 
         protected void ShowSavePrompt(MelcherButton caller)
@@ -231,7 +236,7 @@ namespace KitchenDesign
                 // hide the resize widgets from the upcoming screenshots
                 await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
 
-                EventBridge.Designer.showSavePrompt.Invoke(saveName, saveNotes, SaveDesign, error: null);
+                this._savePrompt.ShowPrompt(saveName, saveNotes, SaveDesign, error: null);
             }
         }
 
@@ -243,11 +248,11 @@ namespace KitchenDesign
             );
 
             // Show the loading UI for better user feedback
-            EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Save);
+            EventDesigner.OnLoadingScreenRequested.Raise(DesignerLoadingMode.Save);
 
             using var loadingUiHider =
                 MelcherDeferred.Defer(
-                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Hide)
+                    onDispose: static () => EventDesigner.OnLoadingScreenRequested.Raise(DesignerLoadingMode.Hide)
                 );
 
             // Clear the user's selection so our screenshots are not tinted.
@@ -415,7 +420,7 @@ namespace KitchenDesign
                                     $" A representative of {companyName} will reach out to you directly to discuss your outdoor kitchen project.";
                             }
 
-                            EventBridge.Designer.showNotification?.Invoke(
+                            EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                                 title: "Request Sent",
                                 message: notificationMessage,
                                 onDismiss: () =>
@@ -439,15 +444,15 @@ namespace KitchenDesign
 
                                     MelcherWebGL.ChangeUrl(url);
                                 }
-                            );
+                            ));
                         }
                         else
                         {
-                            EventBridge.Designer.showNotification?.Invoke(
+                            EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                                 title: "Thank You",
                                 message: "Your design is now saved.",
                                 onDismiss: null
-                            );
+                            ));
                         }
 
                         MelcherLog.LogEditorOnly($"Created save for client ID {clientId} with quote ID {quoteId}");
@@ -456,7 +461,7 @@ namespace KitchenDesign
                     {
                         MelcherLog.LogError(error.Message);
 
-                        EventBridge.Designer.showSavePrompt.Invoke(
+                        this._savePrompt.ShowPrompt(
                             saveName,
                             saveNotes,
                             SaveDesign,
@@ -471,7 +476,7 @@ namespace KitchenDesign
         {
             ClosePanel();
 
-            EventBridge.Designer.showConfirmPrompt.Invoke(
+            this._confirmPrompt.ShowPrompt(
                 title: "Restart?",
                 message: "Erase the current build and start again from scratch?\n" +
                     "Any unsaved progress will be lost.",
@@ -490,11 +495,11 @@ namespace KitchenDesign
         {
             ClosePanel();
 
-            EventBridge.Designer.showConfirmPrompt.Invoke(
+            this._confirmPrompt.ShowPrompt(
                 title: "Quit?",
                 message: "Please remember to save your design before you quit.",
                 confirmLabel: "Quit",
-                onConfirm: () => EventBridge.Designer.loadMenuScene.Invoke()
+                onConfirm: () => EventSession.OnMenuSceneRequested.Raise(new MenuSceneRequestInfo(null))
             );
         }
 
@@ -594,4 +599,4 @@ namespace KitchenDesign
 /// ===========================================================================
 /// Initial author:        Ryan Scopic (ryanscopic@hotmail.com)
 /// Initial creation date: 2022-06-02
-/// ===========================================================================
+/// ===========================================================================)

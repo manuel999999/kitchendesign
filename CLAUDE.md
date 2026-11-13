@@ -1112,6 +1112,24 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   quote info and delete quote (`ClientQuoteInfo`), user profile, manufacturer whitelist, log-out
   prompt, back, screen orientation (mobile only), quit prompt (standalone only). One listener
   each. `MenuScene`'s own start-up calls its handlers directly instead of raising.
+- `EventDesigner` (B5.5a, `_projectEvents/Events/`): what the kitchen model and the designer's
+  screens ask of the designer's screens. Why events: the model must not hold screens, and screens
+  asking the control that holds them would be a cycle. `DesignerScreensControl` listens (in
+  `OnEnable`/`OnDisable`, like its `EventSession` listeners) to the setup wizard requests
+  (`OnWhiteLabelClientInfoRequested`, `OnBuildingMethodsRequested`, `OnBrandCatalogsRequested`,
+  `OnCabinetShapesRequested`, `OnKitchenTemplatesRequested`, `OnCabinetSizesRequested` with a
+  `CabinetSizesMode`) and the loading screen (`OnLoadingScreenRequested` with a
+  `DesignerLoadingMode`, `OnLoadingImageRefreshRequested` once a loaded design's brand catalog is
+  known, `OnLoadingMessageRequested` with `LoadingMessageInfo`); `ToastUI` to `OnToastRequested`
+  (`ToastInfo`: text and hold time, 1 s by default; an empty text with 0 s clears a toast),
+  `DesignerNotificationUI` to `OnNotificationRequested` (`NotificationInfo`: title, message and
+  an optional `System.Action` run on dismiss), `ProductSearchUI` to `OnProductSearchRequested`.
+  Going back to the menu is `EventSession.OnMenuSceneRequested` (it existed for the kick), raised
+  by the wizard's back buttons and the quit prompt. The prompts that answer through a callback
+  are handed over instead: the hamburger menu gets the confirm and save prompts (through the
+  navigation screen), the toolbar the confirm and about-product prompts (it passes the latter to
+  its highlighted-product content). The save prompt's callback is a
+  `Func<string, string, UniTask>` (save name, notes).
 - `EventBridge.Menu` is gone (B5.3c1). The prompts that answer through a callback are handed to
   the screens that open them: `MenuNavigationControl` holds the sort-mode, kiosk PIN, edit-profile
   and multiple-choice prompts (serialized) and, first thing in its `Initialize`, gives the sort
@@ -1120,7 +1138,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   prompt itself to guard the client list and the profile. The manufacturer whitelist gets a
   callback that marks it as having pending changes (it already held the edit prompt). Why not
   events: the answers come back through callbacks and the payloads carry TMP and model types.
-- Everything else still goes through the old `EventBridge`.
+- The kitchen's commands and notifications still go through the old `EventBridge.Designer`
+  (B5.5b and B5.5c replace them).
 
 ## Key systems
 - **Assemblies (2026-10-20):** `KitchenDesign` (`_project/Scripts`, refs Events, Shared, Doge),

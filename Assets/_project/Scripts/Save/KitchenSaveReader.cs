@@ -1,3 +1,4 @@
+using KitchenDesign.Events;
 using Cysharp.Threading.Tasks;
 using KitchenDesign.Geometry;
 using KitchenDesign.KitchenModel;
@@ -133,7 +134,7 @@ namespace KitchenDesign.Save
                         if (brandCatalog.catalogId == brandCatalogId)
                         {
                             this._selections.brandCatalog = brandCatalog;
-                            EventBridge.Designer.refreshCabinetLoadingUiImage();
+                            EventDesigner.OnLoadingImageRefreshRequested.Raise();
                             break;
                         }
                     }
@@ -861,12 +862,12 @@ namespace KitchenDesign.Save
 
             using var clearLoadingSpinner =
                 MelcherDeferred.Defer(
-                    onDispose: static () => EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Hide)
+                    onDispose: static () => EventDesigner.OnLoadingScreenRequested.Raise(DesignerLoadingMode.Hide)
                 );
 
-            EventBridge.Designer.showLoadingUi?.Invoke(DesignerLoadingMode.Load);
+            EventDesigner.OnLoadingScreenRequested.Raise(DesignerLoadingMode.Load);
 
-            EventBridge.Designer.setSpinnerStatusMessage?.Invoke($"Preparing {quote.saveName}");
+            EventDesigner.OnLoadingMessageRequested.Raise(new LoadingMessageInfo($"Preparing {quote.saveName}"));
 
             return await LoadFromJson(quote.saveData);
         }

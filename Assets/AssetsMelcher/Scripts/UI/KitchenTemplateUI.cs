@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using System.Collections.Generic;
@@ -144,7 +145,7 @@ namespace KitchenDesign
 
             Hide();
 
-            EventBridge.Designer.showCabinetShapeUi.Invoke();
+            EventDesigner.OnCabinetShapesRequested.Raise();
         }
 
         protected void OnNextButtonClicked(MelcherButton caller)
@@ -152,7 +153,7 @@ namespace KitchenDesign
             if (m_TemplateToggleGroup.IsAnyToggleOn())
             {
                 Hide();
-                EventBridge.Designer.showCabinetDetailsUi.Invoke(CabinetSizesMode.InitialCabinetSetup);
+                EventDesigner.OnCabinetSizesRequested.Raise(CabinetSizesMode.InitialCabinetSetup);
             }
         }
 

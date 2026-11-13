@@ -38,6 +38,8 @@ namespace KitchenDesign
         [SerializeField] private ProductSearchUI productSearch;
         [SerializeField] private DesignerAboutProductUI aboutProductPrompt;
         [SerializeField] private SetVolumeSizeUI setVolumeSizePrompt;
+        [SerializeField] private DesignerConfirmUI confirmPrompt;
+        [SerializeField] private DesignerSaveUI savePrompt;
         [SerializeField] private DesignerDevUI devUi;
 
         // ====================================================================
@@ -53,8 +55,8 @@ namespace KitchenDesign
             this._productContent = systems.ProductContent;
             this._productContent.ContentLoaded += OnProductVisualContentLoaded;
 
-            m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.CatalogData, systems.Session, systems.ProductContent);
-            m_DesignerNavigationUi.Initialize(systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session);
+            m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.CatalogData, systems.Session, systems.ProductContent, this.confirmPrompt, this.aboutProductPrompt);
+            m_DesignerNavigationUi.Initialize(systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session, this.confirmPrompt, this.savePrompt);
             m_BuildingMethodsUi.Initialize(systems.Session);
             m_BrandCatalogUi.Initialize(systems.Profile, systems.Options, systems.CatalogData, systems.Session);
             m_CabinetShapeUi.Initialize(m_Kitchen, systems.Options, systems.Session);
@@ -72,7 +74,7 @@ namespace KitchenDesign
             if (this._session.UserProfile.IsTrialActive())
             {
                 // Show trial users a countdown in the designer scene
-                EventBridge.Designer.showTrialCountdownUi.Invoke();
+                this.ShowTrialCountdownUI();
             }
 
             this._catalogData.ExecuteWhenLoaded(OnGameDataReady);
@@ -199,24 +201,21 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            EventBridge.Designer.loadMenuScene              += LoadMenuScene;
             EventBridge.Designer.restart                    += ForgetCabinetSettings;
-            EventBridge.Designer.showWhiteLabelClientInfoUi += ShowWhiteLabelClientInfoUI;
-            EventBridge.Designer.showBuildingMethodsUi      += ShowBuildingMethodsUI;
-            EventBridge.Designer.showBrandCatalogUi         += ShowBrandCatalogUI;
-            EventBridge.Designer.showCabinetShapeUi         += ShowCabinetShapeUI;
-            EventBridge.Designer.showKitchenTemplateUi      += ShowKitchenTemplateUI;
-            EventBridge.Designer.showCabinetDetailsUi       += ShowCabinetOtherSizesUI;
-            EventBridge.Designer.showTrialCountdownUi       += ShowTrialCountdownUI;
-            EventBridge.Designer.hideTrialCountdownUi       += HideTrialCountdownUI;
+            EventDesigner.OnWhiteLabelClientInfoRequested.AddListener(this.ShowWhiteLabelClientInfoUI);
+            EventDesigner.OnBuildingMethodsRequested.AddListener(this.ShowBuildingMethodsUI);
+            EventDesigner.OnBrandCatalogsRequested.AddListener(this.ShowBrandCatalogUI);
+            EventDesigner.OnCabinetShapesRequested.AddListener(this.ShowCabinetShapeUI);
+            EventDesigner.OnKitchenTemplatesRequested.AddListener(this.ShowKitchenTemplateUI);
+            EventDesigner.OnCabinetSizesRequested.AddListener(this.ShowCabinetOtherSizesUI);
             EventBridge.Designer.onBuildingMethodChanged    += OnBuildingMethodChanged;
             EventBridge.Designer.onBrandCatalogChanged.OnInvoke += OnBrandCatalogChanged;
             EventBridge.Designer.onCabinetSwapStart         += OnCabinetSwapStart;
             EventBridge.Designer.onHighlightChanged.OnInvoke += OnHighlightChanged;
             EventBridge.Designer.onCabinetAddedByUser.OnInvoke += OnCabinetAddedByUser;
-            EventBridge.Designer.showLoadingUi              += ShowLoadingUI;
-            EventBridge.Designer.refreshCabinetLoadingUiImage      += RefreshCabinetLoadingUiImage;
-            EventBridge.Designer.setSpinnerStatusMessage    += SetSpinnerStatusMessage;
+            EventDesigner.OnLoadingScreenRequested.AddListener(this.ShowLoadingUI);
+            EventDesigner.OnLoadingImageRefreshRequested.AddListener(this.RefreshCabinetLoadingUiImage);
+            EventDesigner.OnLoadingMessageRequested.AddListener(this.OnLoadingMessageRequested);
 
             EventSession.OnMenuSceneRequested.AddListener(this.OnMenuSceneRequested);
             EventSession.OnLoggedOut.AddListener(this.HideTrialCountdownUI);
@@ -224,24 +223,21 @@ namespace KitchenDesign
 
         protected void OnDisable()
         {
-            EventBridge.Designer.loadMenuScene              -= LoadMenuScene;
             EventBridge.Designer.restart                    -= ForgetCabinetSettings;
-            EventBridge.Designer.showWhiteLabelClientInfoUi -= ShowWhiteLabelClientInfoUI;
-            EventBridge.Designer.showBuildingMethodsUi      -= ShowBuildingMethodsUI;
-            EventBridge.Designer.showBrandCatalogUi         -= ShowBrandCatalogUI;
-            EventBridge.Designer.showCabinetShapeUi         -= ShowCabinetShapeUI;
-            EventBridge.Designer.showKitchenTemplateUi      -= ShowKitchenTemplateUI;
-            EventBridge.Designer.showCabinetDetailsUi       -= ShowCabinetOtherSizesUI;
-            EventBridge.Designer.showTrialCountdownUi       -= ShowTrialCountdownUI;
-            EventBridge.Designer.hideTrialCountdownUi       -= HideTrialCountdownUI;
+            EventDesigner.OnWhiteLabelClientInfoRequested.RemoveListener(this.ShowWhiteLabelClientInfoUI);
+            EventDesigner.OnBuildingMethodsRequested.RemoveListener(this.ShowBuildingMethodsUI);
+            EventDesigner.OnBrandCatalogsRequested.RemoveListener(this.ShowBrandCatalogUI);
+            EventDesigner.OnCabinetShapesRequested.RemoveListener(this.ShowCabinetShapeUI);
+            EventDesigner.OnKitchenTemplatesRequested.RemoveListener(this.ShowKitchenTemplateUI);
+            EventDesigner.OnCabinetSizesRequested.RemoveListener(this.ShowCabinetOtherSizesUI);
             EventBridge.Designer.onBuildingMethodChanged    -= OnBuildingMethodChanged;
             EventBridge.Designer.onBrandCatalogChanged.OnInvoke -= OnBrandCatalogChanged;
             EventBridge.Designer.onCabinetSwapStart         -= OnCabinetSwapStart;
             EventBridge.Designer.onHighlightChanged.OnInvoke -= OnHighlightChanged;
             EventBridge.Designer.onCabinetAddedByUser.OnInvoke -= OnCabinetAddedByUser;
-            EventBridge.Designer.showLoadingUi              -= ShowLoadingUI;
-            EventBridge.Designer.refreshCabinetLoadingUiImage      -= RefreshCabinetLoadingUiImage;
-            EventBridge.Designer.setSpinnerStatusMessage    -= SetSpinnerStatusMessage;
+            EventDesigner.OnLoadingScreenRequested.RemoveListener(this.ShowLoadingUI);
+            EventDesigner.OnLoadingImageRefreshRequested.RemoveListener(this.RefreshCabinetLoadingUiImage);
+            EventDesigner.OnLoadingMessageRequested.RemoveListener(this.OnLoadingMessageRequested);
 
             EventSession.OnMenuSceneRequested.RemoveListener(this.OnMenuSceneRequested);
             EventSession.OnLoggedOut.RemoveListener(this.HideTrialCountdownUI);
@@ -335,9 +331,9 @@ namespace KitchenDesign
             }
         }
 
-        protected void SetSpinnerStatusMessage(string statusMessage)
+        private void OnLoadingMessageRequested(LoadingMessageInfo info)
         {
-            m_LoadingUi.SetStatusMessage(statusMessage);
+            m_LoadingUi.SetStatusMessage(info.Message);
         }
 
         protected void ShowWhiteLabelClientInfoUI()

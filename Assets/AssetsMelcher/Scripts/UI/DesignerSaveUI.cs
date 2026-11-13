@@ -1,6 +1,7 @@
 namespace KitchenDesign
 {
     using Melcher;
+    using Cysharp.Threading.Tasks;
     using UnityEngine;
     using TMPro;
 
@@ -13,7 +14,7 @@ namespace KitchenDesign
         // Methods
         // =====================================================================
 
-        public void ShowPrompt(string saveName, string saveNotes, EventBridge.Designer.SaveConfirmHandler onSave, string error)
+        public void ShowPrompt(string saveName, string saveNotes, System.Func<string, string, UniTask> onSave, string error)
         {
             m_SaveNameField.text = saveName;
 
@@ -37,7 +38,6 @@ namespace KitchenDesign
         {
             base.OnEnable();
 
-            EventBridge.Designer.showSavePrompt += ShowPrompt;
 
             m_CancelButton.onClick += OnClickCancel;
             m_SaveButton.onClick += OnClickSave;
@@ -47,7 +47,6 @@ namespace KitchenDesign
         {
             base.OnDisable();
 
-            EventBridge.Designer.showSavePrompt -= ShowPrompt;
 
             m_CancelButton.onClick -= OnClickCancel;
             m_SaveButton.onClick -= OnClickSave;
@@ -89,7 +88,7 @@ namespace KitchenDesign
         // Non-serialized fields
         // =====================================================================
 
-        protected EventBridge.Designer.SaveConfirmHandler m_SaveAction;
+        protected System.Func<string, string, UniTask> m_SaveAction;
 
     }   // class DesignerSaveUI
 

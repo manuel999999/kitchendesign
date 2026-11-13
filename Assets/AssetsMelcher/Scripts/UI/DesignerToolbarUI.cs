@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using KitchenDesign.CatalogData;
     using Melcher;
@@ -33,6 +34,8 @@ namespace KitchenDesign
     /// </remarks>
     public class DesignerToolbarUI : MelcherUI
     {
+        private DesignerConfirmUI _confirmPrompt;
+        private DesignerAboutProductUI _aboutProductPrompt;
         private AppProfileSO _profile;
         private IAppRules _rules;
         private LaunchOptions _launchOptions;
@@ -42,8 +45,10 @@ namespace KitchenDesign
 
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen, AppProfileSO profile, IAppRules rules, LaunchOptions launchOptions, CatalogDataStatus catalogData, SessionStatus session, ProductVisualContentStatus productContent)
+        public void Initialize(Kitchen kitchen, AppProfileSO profile, IAppRules rules, LaunchOptions launchOptions, CatalogDataStatus catalogData, SessionStatus session, ProductVisualContentStatus productContent, DesignerConfirmUI confirmPrompt, DesignerAboutProductUI aboutProductPrompt)
         {
+            this._confirmPrompt = confirmPrompt;
+            this._aboutProductPrompt = aboutProductPrompt;
             this._profile = profile;
             this._rules = rules;
             this._launchOptions = launchOptions;
@@ -51,7 +56,7 @@ namespace KitchenDesign
             this._session = session;
             this._productContent = productContent;
             this._kitchen = kitchen;
-            m_HighlightedProductContent.Initialize(session);
+            m_HighlightedProductContent.Initialize(session, aboutProductPrompt);
         }
 
         // =====================================================================
@@ -1347,7 +1352,7 @@ namespace KitchenDesign
                                 hasPremiumFinish = true;
                             }
 
-                            EventBridge.Designer.showNotification?.Invoke(
+                            EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                                 title: "Premium Finish Package",
                                 message: hasPremiumFinish ?
                                     "The premium finish package is now applied.\nThis means floors, shelves, and " +
@@ -1355,7 +1360,7 @@ namespace KitchenDesign
                                     "powder coated to match the exterior color." :
                                     "The premium finish package is now removed.",
                                 onDismiss: null
-                            );
+                            ));
 
                             UpdateChallengerPremiumCabinetFinishPackageButtonLabel(caller, hasPremiumFinish);
 
@@ -1512,9 +1517,9 @@ namespace KitchenDesign
                                 "left" :
                                 "right";
 
-                        EventBridge.Designer.showToast?.Invoke(
+                        EventDesigner.OnToastRequested.Raise(new ToastInfo(
                             $"{action} {affectedSide} end panels."
-                        );
+                        ));
 
                         // Store the selected end panel width. The stored value
                         // is otherwise unused. This block of code can
@@ -1569,7 +1574,7 @@ namespace KitchenDesign
 
                         string action = didRemoveFeature ? "Removed" : "Added";
 
-                        EventBridge.Designer.showToast?.Invoke($"{action} back panels.");
+                        EventDesigner.OnToastRequested.Raise(new ToastInfo($"{action} back panels."));
 
                         // Back panels directly affect the depth of cabinets.
                         kitchen.ApplyDeltaToAllCabinetDepths(deltaCabinetDepthInMeters);
@@ -1630,7 +1635,7 @@ namespace KitchenDesign
                                         );
                                     }
 
-                                    EventBridge.Designer.showConfirmPrompt?.Invoke(
+                                    this._confirmPrompt.ShowPrompt(
                                         title: "Limited High Bar Top Finishes",
                                         message: "The selected countertop finish is not available on\n" +
                                             "high bar tops and therefore has been removed automatically.",
@@ -1681,7 +1686,7 @@ namespace KitchenDesign
                                     _ => "Cannot place backing."
                                 };
 
-                            EventBridge.Designer.showToast?.Invoke(toast);
+                            EventDesigner.OnToastRequested.Raise(new ToastInfo(toast));
                         }
 
                         MelcherLog.LogEditorOnly("Did add backing? " + (result.status == OccupantCuboidStatus.Fits));
@@ -1943,7 +1948,7 @@ namespace KitchenDesign
 
             MelcherLog.Log("Trying to show product info: " + productInfo.name);
 
-            EventBridge.Designer.onAboutProduct?.Invoke(productInfo, productVisual);
+            this._aboutProductPrompt.ShowProductInfo(productInfo, productVisual);
         }
 
         protected void ShowPreviousProductVariant(MelcherButton caller)

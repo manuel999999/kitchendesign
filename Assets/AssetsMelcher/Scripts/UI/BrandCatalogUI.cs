@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using KitchenDesign.CatalogData;
     using Melcher;
@@ -239,17 +240,17 @@ namespace KitchenDesign
             {
                 Hide();
 
-                EventBridge.Designer.showWhiteLabelClientInfoUi.Invoke();
+                EventDesigner.OnWhiteLabelClientInfoRequested.Raise();
             }
             else if (this._options.allowBuildingMethods)
             {
                 Hide();
 
-                EventBridge.Designer.showBuildingMethodsUi.Invoke();
+                EventDesigner.OnBuildingMethodsRequested.Raise();
             }
             else
             {
-                EventBridge.Designer.loadMenuScene.Invoke();
+                EventSession.OnMenuSceneRequested.Raise(new MenuSceneRequestInfo(null));
             }
         }
 
@@ -259,7 +260,7 @@ namespace KitchenDesign
             {
                 Hide();
 
-                EventBridge.Designer.showCabinetShapeUi.Invoke();
+                EventDesigner.OnCabinetShapesRequested.Raise();
             }
         }
 

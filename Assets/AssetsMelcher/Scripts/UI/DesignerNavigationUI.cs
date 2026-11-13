@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
     using KitchenDesign.CatalogData;
@@ -13,9 +14,9 @@ namespace KitchenDesign
 
     public class DesignerNavigationUI : MelcherUI
     {
-        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session)
+        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session, DesignerConfirmUI confirmPrompt, DesignerSaveUI savePrompt)
         {
-            m_MenuButton.Initialize(options, server, catalogData, clientList, session);
+            m_MenuButton.Initialize(options, server, catalogData, clientList, session, confirmPrompt, savePrompt);
         }
 
         // =====================================================================
@@ -162,7 +163,7 @@ namespace KitchenDesign
 
         protected void OpenProductSearch(MelcherButton caller)
         {
-            EventBridge.Designer.showProductSearchUi();
+            EventDesigner.OnProductSearchRequested.Raise();
         }
 
         protected void ResetView(MelcherButton caller)

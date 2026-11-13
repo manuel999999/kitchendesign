@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -19,10 +20,12 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerToolbarContentHighlightedProduct : MelcherMonoBehaviour
     {
+        private DesignerAboutProductUI _aboutProductPrompt;
         private SessionStatus _session;
 
-        public void Initialize(SessionStatus session)
+        public void Initialize(SessionStatus session, DesignerAboutProductUI aboutProductPrompt)
         {
+            this._aboutProductPrompt = aboutProductPrompt;
             this._session = session;
         }
 
@@ -279,7 +282,7 @@ namespace KitchenDesign
                 return;
             }
 
-            EventBridge.Designer.onAboutProduct.Invoke(productInfo, productVisual);
+            this._aboutProductPrompt.ShowProductInfo(productInfo, productVisual);
         }
 
         protected void OnClickClone(MelcherButton caller)
@@ -363,7 +366,7 @@ namespace KitchenDesign
             }
             else
             {
-                EventBridge.Designer.showToast?.Invoke("Can't move up here");
+                EventDesigner.OnToastRequested.Raise(new ToastInfo("Can't move up here"));
             }
         }
 
@@ -405,7 +408,7 @@ namespace KitchenDesign
             }
             else
             {
-                EventBridge.Designer.showToast?.Invoke("Can't move down here");
+                EventDesigner.OnToastRequested.Raise(new ToastInfo("Can't move down here"));
             }
         }
 
@@ -483,7 +486,7 @@ namespace KitchenDesign
         {
             // Copy the product ID to the clipboard
             GUIUtility.systemCopyBuffer = m_ProductIdLabel.textMesh.GetParsedText();
-            EventBridge.Designer.showToast?.Invoke("Copied product ID to clipboard");
+            EventDesigner.OnToastRequested.Raise(new ToastInfo("Copied product ID to clipboard"));
         }
 
         protected void OnClickServerLink(MelcherButton caller)

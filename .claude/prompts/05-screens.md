@@ -347,6 +347,19 @@ folders. One type per file.
   in between. Two references set through the editor (+2 scene lines). Compiles in the editor and
   as WebGL player scripts. **B5.4 is done.**
 
+- **B5.5 split (2026-11-13):** a, the requests to the screens (Doge `EventDesigner`, prompts
+  handed over); b, the commands to the kitchen as method calls; c, the kitchen's notifications as
+  `KitchenEvents`, subscribed by `DesignerSceneInitializer` in the recorded order, and
+  `EventBridge.cs` deleted.
+- **B5.5a done 2026-11-13.** `EventDesigner` (12 events, three payloads); 73 raises converted by
+  a script (`GeminiBaseline/area5-map/ebconv.py`, a balanced-parenthesis rewriter), named
+  arguments kept by giving the payload constructors the old parameter names. The dead delegates
+  went with them (`onChooseCabinetLayout`, `onChooseCabinetDetails`, `onSave`, `onRestart`,
+  `onQuit`, the three `onChooseToolbar…`, `hideTrialCountdownUi`). `showTrialCountdownUi` was
+  raised and handled by the same class and is a direct call. Two references set through the
+  editor (+2 scene lines). As in B5.2, raises that used `.Invoke()` without `?.` no longer throw
+  when nothing listens. Compiles in the editor and as WebGL player scripts.
+
 **Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
 (areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
 check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.

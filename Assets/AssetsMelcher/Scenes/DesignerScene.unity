@@ -41496,6 +41496,8 @@ MonoBehaviour:
   productSearch: {fileID: 251469615}
   aboutProductPrompt: {fileID: 424268791}
   setVolumeSizePrompt: {fileID: 927552745}
+  confirmPrompt: {fileID: 1797264980}
+  savePrompt: {fileID: 2007896574}
   devUi: {fileID: 2034800372}
   m_ProductVisualDatabase: {fileID: 11400000, guid: 4af6daf38d0950a4c9c3a02de0fc651b, type: 2}
   m_Kitchen: {fileID: 1168655925}

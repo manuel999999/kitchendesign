@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -131,23 +132,23 @@ namespace KitchenDesign
             {
                 Hide();
 
-                EventBridge.Designer.showBrandCatalogUi.Invoke();
+                EventDesigner.OnBrandCatalogsRequested.Raise();
             }
             else if (this._options.allowBuildingMethods)
             {
                 Hide();
 
-                EventBridge.Designer.showBuildingMethodsUi.Invoke();
+                EventDesigner.OnBuildingMethodsRequested.Raise();
             }
             else if (this._session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 
-                EventBridge.Designer.showWhiteLabelClientInfoUi.Invoke();
+                EventDesigner.OnWhiteLabelClientInfoRequested.Raise();
             }
             else
             {
-                EventBridge.Designer.loadMenuScene.Invoke();
+                EventSession.OnMenuSceneRequested.Raise(new MenuSceneRequestInfo(null));
             }
         }
 
@@ -172,7 +173,7 @@ namespace KitchenDesign
                     if (templateCount > 1)
                     {
                         // Prompt the user to pick a template.
-                        EventBridge.Designer.showKitchenTemplateUi.Invoke();
+                        EventDesigner.OnKitchenTemplatesRequested.Raise();
                         return;
                     }
                     else if (templateCount == 1)
@@ -188,7 +189,7 @@ namespace KitchenDesign
                     }
                 }
 
-                EventBridge.Designer.showCabinetDetailsUi.Invoke(CabinetSizesMode.InitialCabinetSetup);
+                EventDesigner.OnCabinetSizesRequested.Raise(CabinetSizesMode.InitialCabinetSetup);
             }
         }
 

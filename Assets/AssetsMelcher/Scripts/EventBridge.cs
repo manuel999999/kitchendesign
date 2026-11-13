@@ -40,22 +40,12 @@ namespace KitchenDesign
     //         methods in the relevant script rather than global-globals. -Ryan
     public static class EventBridge
     {
-        public delegate void SetSpinnerStatusMessage(string statusMessage);
 
         /// <summary>
         /// Events for the Designer scene
         /// </summary>
         public static class Designer
         {
-            /// <summary>
-            ///     Used to return to the main menu. This should be used
-            ///     instead of manually loading the menu scene to ensure that
-            ///     we squeeze out as much memory as we can for the scene
-            ///     transition (which can otherwise crash on iOS due to memory
-            ///     constraints).
-            /// </summary>
-            public delegate void LoadMenuSceneHandler(UnityAction<Scene, LoadSceneMode> onLoaded = null);
-            public static LoadMenuSceneHandler loadMenuScene;
 
             /// <summary>
             /// Restart the design phase; clear the kitchen and go back to the
@@ -66,89 +56,14 @@ namespace KitchenDesign
             public delegate void GetCabinetLayoutHandler(ref CabinetLayout cabinetLayout);
             public static GetCabinetLayoutHandler onWantCabinetLayout;
 
-            /// <summary>
-            /// Show the trial countdown overlay.
-            /// </summary>
-            public static Action showTrialCountdownUi;
-
-            /// <summary>
-            /// Hide the trial countdown overlay.
-            /// </summary>
-            public static Action hideTrialCountdownUi;
-
             // =====================================================================
             // Designer UI
             // =====================================================================
 
             /// <summary>
-            /// Show the client info page that is used during white label mode.
-            /// The reason for this UI is that white label mode skips the usual
-            /// sign in process where the user would've selected a client.
-            /// </summary>
-            public static Action showWhiteLabelClientInfoUi;
-
-            /// <summary>
-            ///     Show a pop-up that prompts the user to select which
-            ///     building method they want to use (currently only standard
-            ///     or blocks).
-            /// </summary>
-            public static Action showBuildingMethodsUi;
-
-            /// <summary>
-            ///     Show a pop-up that prompts the user to choose a catalog.
-            ///     Intended to be called after the user confirms their
-            ///     building method to be <see
-            ///     cref="KitchenBuildingMethod.Catalog"/>, or the user was
-            ///     forced to use that building method.
-            /// </summary>
-            public static Action showBrandCatalogUi;
-
-            /// <summary>
-            /// Show UI to select the cabinet layout/style.
-            /// </summary>
-            public static Action showCabinetShapeUi;
-
-            /// <summary>
-            ///     Show UI to select a kitchen template. This is currently
-            ///     only used by Catalog building method and for only a few
-            ///     cabinet layouts.
-            /// </summary>
-            public static Action showKitchenTemplateUi;
-
-            public static Action showProductSearchUi;
-
-            /// <summary>
             ///     Door Handle Style name is updated.
             /// </summary>
             public static Action<string> onDoorHandleStyleNameUpdate;
-
-            /// <summary>
-            /// Show UI to select the cabinet's other dimensions (depth &
-            /// countertop thickness)
-            /// </summary>
-            public static Action<CabinetSizesMode> showCabinetDetailsUi;
-
-            public delegate void ShowNotificationHandler(string title, string message, Action onDismiss);
-            public static ShowNotificationHandler showNotification;
-
-            public delegate void ShowConfirmPromptHandler(string title, string message, string confirmLabel, Action onConfirm);
-
-            /// <summary>
-            /// Show a generic confirmation prompt. The confirm option is shown
-            /// in red. Used for the Complete and Quit hamburger menu options.
-            /// </summary>
-            public static ShowConfirmPromptHandler showConfirmPrompt;
-
-            public delegate UniTask SaveConfirmHandler(string saveName, string saveNotes);
-            public delegate void ShowSavePromptHandler(string saveName, string saveNotes, SaveConfirmHandler onSave, string error);
-
-            /// <summary>
-            /// Show a prompt to enter a file name and save the design.
-            /// </summary>
-            public static ShowSavePromptHandler showSavePrompt;
-
-            public delegate void ShowToastHandler(string toast, float holdDuration = 1.0f);
-            public static ShowToastHandler showToast;
 
             public delegate void ShowSetCabinetWidthPromptHandler(OccupiableVolume targetVolume);
 
@@ -159,24 +74,6 @@ namespace KitchenDesign
             public static ShowSetCabinetWidthPromptHandler showSetOccupiableVolumeWidthPrompt;
 
             // --
-
-            public delegate void ShowLoadingUI(DesignerLoadingMode mode);
-
-            /// <summary>
-            ///     Show or hide <see cref="LoadingUI"/>; the canvas that
-            ///     covers the whole screen and shows a loading spinner. The
-            ///     spinner's status message will be cleared when this is
-            ///     called.
-            /// </summary>
-            public static ShowLoadingUI showLoadingUi;
-
-            public static Action refreshCabinetLoadingUiImage;
-
-            /// <summary>
-            ///     Set the status message that is shown below <see
-            ///     cref="LoadingUI"/>'s spinner.
-            /// </summary>
-            public static SetSpinnerStatusMessage setSpinnerStatusMessage;
 
             // --
 
@@ -261,20 +158,9 @@ namespace KitchenDesign
             //       resized, which it is not.
             public static KitchenCabinetLayoutChangedHandler onKitchenLayoutChanged;
 
-
             // TODO: Clean up the events. Something like this maybe:
 
-            // public static Action<CabinetLayout>     onChooseCabinetLayout;
-            // public static Action                    onChooseCabinetDetails;
             // public static Action<GameObject>        onHighlightChanged;
-
-            // public static Action onSave;
-            // public static Action onRestart;
-            // public static Action onQuit;
-
-            // public static Action<ProductCategory>   onChooseToolbarCategory;
-            // public static Action<ManufacturerInfo>  onChooseToolbarManufacturer;
-            // public static Action<ProductInfo>       onChooseToolbarProduct;
 
             public delegate void OnTryAddProductHandler(ProductInfo productInfo, Action<Occupant> onComplete);
 
@@ -294,12 +180,6 @@ namespace KitchenDesign
             public static OnTryAddSectionHandler                onTryAddSection;
 
             public static Action<Cabinet>                       onTryDestroySection;
-
-            /// <summary>
-            /// Called by the UI when the user wants to see the product's About
-            /// pop-up.
-            /// </summary>
-            public static Action<ProductInfo, ProductVisualSO>    onAboutProduct;
 
             /// <summary>
             /// Called by the UI when the user wants to clone a product.

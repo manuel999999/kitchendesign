@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -164,7 +165,7 @@ namespace KitchenDesign
 
             if (m_Mode == CabinetSizesMode.InitialCabinetSetup)
             {
-                EventBridge.Designer.showCabinetShapeUi.Invoke();
+                EventDesigner.OnCabinetShapesRequested.Raise();
             }
             else
             {
@@ -255,11 +256,11 @@ namespace KitchenDesign
                         message += $"\n<b>{widthAsText}</b>";
                     }
 
-                    EventBridge.Designer.showNotification?.Invoke(
+                    EventDesigner.OnNotificationRequested.Raise(new NotificationInfo(
                         title: "Depth Changed",
                         message: message,
                         onDismiss: null
-                    );
+                    ));
                 }
             }
         }
@@ -380,7 +381,7 @@ namespace KitchenDesign
 
                 // Clear the previous toast in case it was the message saying
                 // the cabinet depth size cannot be used.
-                EventBridge.Designer.showToast?.Invoke("", holdDuration: 0.0f);
+                EventDesigner.OnToastRequested.Raise(new ToastInfo("", holdDuration: 0.0f));
                 m_CurrentKitchen.SetBaseCabinetDepth(selectedOption.sizeInMeters);
             }
         }

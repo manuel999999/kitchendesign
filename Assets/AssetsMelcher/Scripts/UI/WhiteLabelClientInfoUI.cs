@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.Session;
     using KitchenDesign.Scriptables;
     using Melcher;
@@ -266,15 +267,15 @@ namespace KitchenDesign
 
                 if (this._options.allowBuildingMethods)
                 {
-                    EventBridge.Designer.showBuildingMethodsUi.Invoke();
+                    EventDesigner.OnBuildingMethodsRequested.Raise();
                 }
                 else if (this._kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
                 {
-                    EventBridge.Designer.showBrandCatalogUi.Invoke();
+                    EventDesigner.OnBrandCatalogsRequested.Raise();
                 }
                 else
                 {
-                    EventBridge.Designer.showCabinetShapeUi.Invoke();
+                    EventDesigner.OnCabinetShapesRequested.Raise();
                 }
             }
 

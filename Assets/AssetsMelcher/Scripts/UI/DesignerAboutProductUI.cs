@@ -91,7 +91,6 @@ namespace KitchenDesign
         {
             base.OnEnable();
 
-            EventBridge.Designer.onAboutProduct += ShowProductInfo;
 
             m_ProductServerLinkButton.onClick += OnClickServerLink;
             m_ProductAssetLinkButton.onClick += OnClickAssetLink;
@@ -101,7 +100,6 @@ namespace KitchenDesign
         {
             base.OnDisable();
 
-            EventBridge.Designer.onAboutProduct -= ShowProductInfo;
 
             m_ProductServerLinkButton.onClick -= OnClickServerLink;
             m_ProductAssetLinkButton.onClick -= OnClickAssetLink;

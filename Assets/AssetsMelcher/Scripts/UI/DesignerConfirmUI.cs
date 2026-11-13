@@ -14,12 +14,12 @@ namespace KitchenDesign
         // Methods
         // =====================================================================
 
-        public void ShowPrompt(string title, string message, string confirmLabel, Action confirmAction)
+        public void ShowPrompt(string title, string message, string confirmLabel, Action onConfirm)
         {
             m_TitleLabel.phrase = title;
             m_MessageLabel.phrase = message;
             m_ConfirmButton.GetComponentInChildren<MelcherLocalizedText>().phrase = confirmLabel;
-            m_ConfirmAction = confirmAction;
+            m_ConfirmAction = onConfirm;
 
             Show();
         }
@@ -31,7 +31,6 @@ namespace KitchenDesign
             m_CancelButton.onClick += OnClickCancel;
             m_ConfirmButton.onClick += OnClickConfirm;
 
-            EventBridge.Designer.showConfirmPrompt += ShowPrompt;
         }
 
         protected override void OnDisable()
@@ -41,7 +40,6 @@ namespace KitchenDesign
             m_CancelButton.onClick -= OnClickCancel;
             m_ConfirmButton.onClick -= OnClickConfirm;
 
-            EventBridge.Designer.showConfirmPrompt -= ShowPrompt;
         }
 
         protected void OnClickCancel(MelcherButton caller)

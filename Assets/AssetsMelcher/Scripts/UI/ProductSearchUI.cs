@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Events;
     using KitchenDesign.CatalogData;
     using KitchenDesign.Shared.Interfaces;
     using Melcher;
@@ -42,7 +43,7 @@ namespace KitchenDesign
             m_SearchButton.onClick += OnClickSearch;
             m_SearchCancelButton.onClick += OnClickSearchCancel;
             m_ToolbarCloseButton.onClick += OnClickToolbarClose;
-            EventBridge.Designer.showProductSearchUi += DoShow;
+            EventDesigner.OnProductSearchRequested.AddListener(this.DoShow);
         }
 
         protected void OnDestroy()
@@ -50,7 +51,7 @@ namespace KitchenDesign
             m_SearchButton.onClick -= OnClickSearch;
             m_SearchCancelButton.onClick -= OnClickSearchCancel;
             m_ToolbarCloseButton.onClick -= OnClickToolbarClose;
-            EventBridge.Designer.showProductSearchUi -= DoShow;
+            EventDesigner.OnProductSearchRequested.RemoveListener(this.DoShow);
         }
 
         private void OnClickSearch(MelcherButton button)
@@ -166,7 +167,7 @@ namespace KitchenDesign
             }
             else
             {
-                EventBridge.Designer.showToast?.Invoke("No products found matching the search criteria.");
+                EventDesigner.OnToastRequested.Raise(new ToastInfo("No products found matching the search criteria."));
             }
         }
 
