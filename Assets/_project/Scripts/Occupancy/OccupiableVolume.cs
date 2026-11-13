@@ -1,5 +1,6 @@
 namespace KitchenDesign.Occupancy
 {
+    using KitchenDesign.KitchenModel;
     using Melcher;
     using KitchenDesign.Shared.Common;
     using KitchenDesign.Shared.Enums;
@@ -25,6 +26,18 @@ namespace KitchenDesign.Occupancy
     /// </summary>
     public abstract class OccupiableVolume : MelcherMonoBehaviour
     {
+        protected IKitchen FindOwningKitchen()
+        {
+            OccupiableVolume topVolume = this;
+
+            while (topVolume.parentVolume != null)
+            {
+                topVolume = topVolume.parentVolume;
+            }
+
+            return topVolume is ICabinet cabinet ? cabinet.kitchen : null;
+        }
+
         // ====================================================================
         // Static functions
         // ====================================================================
@@ -832,7 +845,7 @@ namespace KitchenDesign.Occupancy
         /// <summary>
         /// Try to remove a product from this cabinet. If the product is found
         /// and successfully removed, this will clear the occupant's cabinet
-        /// reference and then call <see cref="EventBridge.Designer.onOccupantRemovedFromCabinet"/>.
+        /// reference and then call <see cref="IKitchen.OnOccupantRemovedFromCabinet"/>.
         /// </summary>
         /// <param name="occupant">Product to remove</param>
         /// <returns>
@@ -860,7 +873,12 @@ namespace KitchenDesign.Occupancy
 
             if (didRemove)
             {
-                await EventBridge.Designer.onOccupantRemovedFromCabinet.InvokeIfNonEmpty(occupant);
+                IKitchen owningKitchen = this.FindOwningKitchen();
+
+                if (owningKitchen != null)
+                {
+                    await owningKitchen.OnOccupantRemovedFromCabinet(occupant);
+                }
 
                 occupant.SetCabinetVolume(null, volumePositionX: 0.0f);
 
@@ -2034,7 +2052,12 @@ namespace KitchenDesign.Occupancy
 
             await InsertOccupantAt(occupant, metersFromCabinetMinX);
 
-            await EventBridge.Designer.onOccupantInstantiated.InvokeIfNonEmpty((occupant, userInitiated: true));
+            IKitchen owningKitchen = this.FindOwningKitchen();
+
+            if (owningKitchen != null)
+            {
+                await owningKitchen.OnOccupantInstantiated((occupant, userInitiated: true));
+            }
 
             return (occupant, result);
         }
@@ -2487,7 +2510,12 @@ namespace KitchenDesign.Occupancy
 
             await InsertOccupantAt(occupant, volumePositionX, volumePositionY, volumePositionZ);
 
-            await EventBridge.Designer.onOccupantInstantiated.InvokeIfNonEmpty((occupant, userInitiated));
+            IKitchen owningKitchen = this.FindOwningKitchen();
+
+            if (owningKitchen != null)
+            {
+                await owningKitchen.OnOccupantInstantiated((occupant, userInitiated));
+            }
 
             return occupant;
         }

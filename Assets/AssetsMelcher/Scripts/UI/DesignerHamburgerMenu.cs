@@ -26,6 +26,7 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerHamburgerMenu : MelcherMonoBehaviour
     {
+        private Kitchen _kitchen;
         private DesignerConfirmUI _confirmPrompt;
         private DesignerSaveUI _savePrompt;
         private AppOptionsSO _options;
@@ -34,8 +35,9 @@ namespace KitchenDesign
         private ClientListStatus _clientList;
         private SessionStatus _session;
 
-        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session, DesignerConfirmUI confirmPrompt, DesignerSaveUI savePrompt)
+        public void Initialize(Kitchen kitchen, AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session, DesignerConfirmUI confirmPrompt, DesignerSaveUI savePrompt)
         {
+            this._kitchen = kitchen;
             this._confirmPrompt = confirmPrompt;
             this._savePrompt = savePrompt;
             this._options = options;
@@ -223,7 +225,7 @@ namespace KitchenDesign
 
                     string layoutName = null;
                     CabinetLayout cabinetLayout = null;
-                    EventBridge.Designer.onWantCabinetLayout?.Invoke(ref cabinetLayout);
+                    this._kitchen.GetCabinetLayout(ref cabinetLayout);
                     layoutName = cabinetLayout?.displayName;
 
                     IEnumerable<string> parts = new[] { clientName, layoutName };
@@ -234,7 +236,7 @@ namespace KitchenDesign
 
                 // Clear the highlight to restore the original materials and
                 // hide the resize widgets from the upcoming screenshots
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+                await this._kitchen.TryHighlightObject(null);
 
                 this._savePrompt.ShowPrompt(saveName, saveNotes, SaveDesign, error: null);
             }
@@ -256,7 +258,7 @@ namespace KitchenDesign
                 );
 
             // Clear the user's selection so our screenshots are not tinted.
-            await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+            await this._kitchen.TryHighlightObject(null);
 
             // TODO: Better way to get the kitchen
             Kitchen kitchen = FindObjectOfType<Kitchen>();

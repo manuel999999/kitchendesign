@@ -7,6 +7,7 @@ namespace KitchenDesign.KitchenModel
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.EventSystems;
     using KitchenDesign.Geometry;
     using KitchenDesign.Shared.Interfaces;
     using KitchenDesign.Cabinets;
@@ -57,6 +58,16 @@ namespace KitchenDesign.KitchenModel
 
         public UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn);
         public UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisualSO productVisual, ProductVisualContent productVisualPrefab);
+
+
+        public UniTask TryHighlightObject(GameObject highlightObject);
+
+        public void OnOccupantDragBegin(Occupant draggedOccupant, PointerEventData eventData);
+        public void OnOccupantDrag(Occupant draggedOccupant, PointerEventData eventData);
+        public UniTask OnOccupantDragEnd((Occupant draggedOccupant, PointerEventData eventData) args);
+
+        public UniTask OnOccupantInstantiated((Occupant newOccupant, bool userInitiated) args);
+        public UniTask OnOccupantRemovedFromCabinet(Occupant occupant);
 
     }   // interface IKitchen
 

@@ -21,6 +21,13 @@ namespace KitchenDesign.Cabinets
     public class CabinetBacking : MelcherMonoBehaviour
         , IPointerDownHandler
     {
+        private IKitchen _kitchen;
+
+        public void SetKitchen(IKitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
         // =====================================================================
         // Properties
         // =====================================================================
@@ -200,7 +207,7 @@ namespace KitchenDesign.Cabinets
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(gameObject).Forget();
+            this._kitchen.TryHighlightObject(gameObject).Forget();
         }
 
         #endregion  // IPointerDownHandler

@@ -20,11 +20,13 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerToolbarContentHighlightedProduct : MelcherMonoBehaviour
     {
+        private Kitchen _kitchen;
         private DesignerAboutProductUI _aboutProductPrompt;
         private SessionStatus _session;
 
-        public void Initialize(SessionStatus session, DesignerAboutProductUI aboutProductPrompt)
+        public void Initialize(Kitchen kitchen, SessionStatus session, DesignerAboutProductUI aboutProductPrompt)
         {
+            this._kitchen = kitchen;
             this._aboutProductPrompt = aboutProductPrompt;
             this._session = session;
         }
@@ -246,11 +248,11 @@ namespace KitchenDesign
             {
                 if (m_SelectedObject.TryGetComponent(out Occupant occupant))
                 {
-                    EventBridge.Designer.onTryDestroyOccupant.InvokeIfNonEmpty(occupant).Forget();
+                    this._kitchen.TryDestroyOccupant(occupant).Forget();
                 }
                 else if (m_SelectedObject.TryGetComponent(out Cabinet cabinet))
                 {
-                    EventBridge.Designer.onTryDestroySection?.Invoke(cabinet);
+                    this._kitchen.TryDestroySection(cabinet);
                 }
             }
         }
@@ -294,11 +296,11 @@ namespace KitchenDesign
 
             if (m_SelectedObject.TryGetComponent(out Occupant selectedOccupant))
             {
-                EventBridge.Designer.onTryCloneProduct.Invoke(selectedOccupant.productInfo, onComplete: null);
+                this._kitchen.TryAddProduct(selectedOccupant.productInfo, onComplete: null);
             }
             else if (m_SelectedObject.TryGetComponent(out Cabinet cabinet))
             {
-                EventBridge.Designer.onTryCloneSection.Invoke(cabinet);
+                this._kitchen.TryCloneSection(cabinet);
             }
 
             // Refresh the action buttons to allow a selected cabinet to be
@@ -315,15 +317,15 @@ namespace KitchenDesign
 
             if (m_SelectedObject.TryGetComponent(out Occupant selectedOccupant))
             {
-                EventBridge.Designer.onTryDestroyOccupant.Invoke(selectedOccupant).Forget();
+                this._kitchen.TryDestroyOccupant(selectedOccupant).Forget();
             }
             else if (m_SelectedObject.TryGetComponent(out CabinetBacking selectedBacking))
             {
-                EventBridge.Designer.onTryDestroyCabinetBacking.Invoke(selectedBacking).Forget();
+                this._kitchen.TryDestroyCabinetBacking(selectedBacking).Forget();
             }
             else if (m_SelectedObject.TryGetComponent(out Cabinet cabinet))
             {
-                EventBridge.Designer.onTryDestroySection.Invoke(cabinet);
+                this._kitchen.TryDestroySection(cabinet);
             }
         }
 
@@ -353,9 +355,9 @@ namespace KitchenDesign
 
             bool didMove = false;
 
-            EventBridge.Designer.onTryRepositionOccupant?.Invoke(
+            this._kitchen.TryRepositionProduct(
                 occupantToMove: occupant,
-                newPosition: newPosition,
+                newVolumePosition: newPosition,
                 snapMode: RepositionSnapMode.None,
                 ref didMove
             );
@@ -395,9 +397,9 @@ namespace KitchenDesign
 
             bool didMove = false;
 
-            EventBridge.Designer.onTryRepositionOccupant?.Invoke(
+            this._kitchen.TryRepositionProduct(
                 occupantToMove: occupant,
-                newPosition: newPosition,
+                newVolumePosition: newPosition,
                 snapMode: RepositionSnapMode.None,
                 ref didMove
             );
@@ -420,7 +422,7 @@ namespace KitchenDesign
             {
                 if (m_SelectedObject.TryGetComponent(out Cabinet cabinet))
                 {
-                    await EventBridge.Designer.onTryReorderCabinet.InvokeIfNonEmpty((cabinet, Extent.Min));
+                    await this._kitchen.TryReorderCabinet((cabinet, Extent.Min));
 
                     // Refresh the UI to sync the reorder left/right buttons
                     // according to the new state.
@@ -437,7 +439,7 @@ namespace KitchenDesign
             {
                 if (m_SelectedObject.TryGetComponent(out Cabinet cabinet))
                 {
-                    await EventBridge.Designer.onTryReorderCabinet.InvokeIfNonEmpty((cabinet, Extent.Max));
+                    await this._kitchen.TryReorderCabinet((cabinet, Extent.Max));
 
                     // Refresh the UI to sync the reorder left/right buttons
                     // according to the new state.
@@ -458,7 +460,7 @@ namespace KitchenDesign
         {
             if (m_SelectedObject.TryGetComponent(out Occupant occupant))
             {
-                EventBridge.Designer.centerOccupantInVolume?.Invoke(occupant);
+                this._kitchen.CenterOccupantInVolume(occupant);
             }
         }
 

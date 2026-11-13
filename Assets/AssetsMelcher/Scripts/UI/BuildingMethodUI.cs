@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.KitchenModel;
     using KitchenDesign.Events;
     using KitchenDesign.Session;
     using Melcher;
@@ -18,10 +19,12 @@ namespace KitchenDesign
     /// </summary>
     public class BuildingMethodUI : MelcherUI
     {
+        private Kitchen _kitchen;
         private SessionStatus _session;
 
-        public void Initialize(SessionStatus session)
+        public void Initialize(Kitchen kitchen, SessionStatus session)
         {
+            this._kitchen = kitchen;
             this._session = session;
         }
 
@@ -80,7 +83,7 @@ namespace KitchenDesign
             if (toggle.isOn)
             {
                 m_MethodToggleGroup.allowSwitchOff = false;
-                EventBridge.Designer.setBuildingMethod.Invoke(buildingMethod);
+                this._kitchen.SetBuildingMethod(buildingMethod);
                 m_NextButton.interactable = true;
             }
         }

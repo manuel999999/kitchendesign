@@ -53,9 +53,6 @@ namespace KitchenDesign
             /// </summary>
             public static Action restart;
 
-            public delegate void GetCabinetLayoutHandler(ref CabinetLayout cabinetLayout);
-            public static GetCabinetLayoutHandler onWantCabinetLayout;
-
             // =====================================================================
             // Designer UI
             // =====================================================================
@@ -77,26 +74,9 @@ namespace KitchenDesign
 
             // --
 
-            /// <summary>
-            ///     Attempt to enable or disable toe kicks in the kitchen. Toe
-            ///     kicks are used in the Gemini version of the app.
-            /// </summary>
-            public static Action tryToggleToeKicks;
-
-            /// <summary>
-            ///     Invoked after the user enables or disables toe kicks.
-            /// </summary>
-            public static Action<CabinetToeKickType> onToeKickTypeChanged;
-
             // =====================================================================
             // Cabinet setup
             // =====================================================================
-
-            /// <summary>
-            ///     Used to inform the kitchen scene which building method the
-            ///     player selected.
-            /// </summary>
-            public static Action<KitchenBuildingMethod> setBuildingMethod;
 
             /// <summary>
             ///     Invoked by the kitchen to notify listeners when the
@@ -104,13 +84,6 @@ namespace KitchenDesign
             ///     the new building method is the same as the previous.
             /// </summary>
             public static Action<KitchenBuildingMethod> onBuildingMethodChanged;
-
-            /// <summary>
-            ///     Used to inform the kitchen scene which <see
-            ///     cref="BrandCatalog"/> the user selected. This is called
-            ///     by <see cref="BrandCatalogUI"/>.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<BrandCatalogSO> setBrandCatalog = new ();
 
             public static SequentiallyAwaitedDelegate<BrandCatalogSO> onBrandCatalogChanged = new ();
 
@@ -121,31 +94,6 @@ namespace KitchenDesign
             ///     vary depending on the building method.
             /// </summary>
             public static SequentiallyAwaitedDelegate onKitchenReady = new ();
-
-            public static Action<CabinetLayout> setCabinetLayout;
-
-            /// <summary>
-            ///     This is used in Catalog building method to specify a save
-            ///     file the kitchen will use from the start of a new design.
-            ///     This differs from <see cref="ProFitGlobals.activeQuoteId"/>
-            ///     because this is treated as a new kitchen and works even
-            ///     during edit mode when launching the Designer scene alone.
-            /// </summary>
-            public static Action<KitchenTemplateSO> setKitchenTemplate;
-
-            public static Action<CountertopType> setCountertopType;
-
-            public delegate void SetSizeInMetersHandler(float sizeInMeters);
-            public static SetSizeInMetersHandler setBaseCabinetDepth;
-            public static SetSizeInMetersHandler setCountertopThickness;
-
-            public delegate void SetCuboidPaddingInMetersHandler(CuboidPadding paddingInMeters);
-            public static SetCuboidPaddingInMetersHandler setCountertopOverhang;
-
-            /// <summary>
-            /// Create the kitchen as it has been chosen.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate createKitchen = new ();
 
             public delegate void KitchenCabinetLayoutChangedHandler(CabinetLayout layoutPrefab, CabinetLayout layoutInstance);
 
@@ -162,103 +110,16 @@ namespace KitchenDesign
 
             // public static Action<GameObject>        onHighlightChanged;
 
-            public delegate void OnTryAddProductHandler(ProductInfo productInfo, Action<Occupant> onComplete);
-
-            /// <summary>
-            /// Called by the UI when a product wants to be added anywhere to
-            /// the kitchen.
-            /// </summary>
-            public static OnTryAddProductHandler                onTryAddProduct;
-
-            public delegate void OnTryAddSectionHandler(ProductInfo cabinetSectionProductInfo, Cabinet canReplaceCabinet);
-
-            /// <summary>
-            ///     Placeholder event that creates a new cabinet section. This
-            ///     needs to be replaced with a system that lets the user
-            ///     choose where to place the new section.
-            /// </summary>
-            public static OnTryAddSectionHandler                onTryAddSection;
-
-            public static Action<Cabinet>                       onTryDestroySection;
-
-            /// <summary>
-            /// Called by the UI when the user wants to clone a product.
-            /// </summary>
-            public static OnTryAddProductHandler                onTryCloneProduct;
-
-            /// <summary>
-            /// Called by the UI when the user wants to clone a cabinet
-            /// (Sections building method only).
-            /// </summary>
-            public static Action<Cabinet>                       onTryCloneSection;
-
-            /// <summary>
-            /// Called by the UI when the user wants to remove a product from
-            /// the kitchen. The handler should destroy the product.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<Occupant> onTryDestroyOccupant = new ();
-
-            /// <summary>
-            ///     Called by the UI when the user wants to remove a cabinet
-            ///     backing. The attempt may fail if it would result in
-            ///     cabinet occupants overlapping.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<CabinetBacking> onTryDestroyCabinetBacking = new ();
-
             /// <summary>
             ///     Called when the user adds a new cabinet.
             /// </summary>
             public static SequentiallyAwaitedDelegate<Cabinet> onCabinetAddedByUser = new ();
-
-            /// <summary>
-            ///     Called anytime a <see cref="Occupant"/> is spawned for any
-            ///     reason (e.g, player clicking add product button or during
-            ///     load).
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<(Occupant instantiatedOccupant, bool userInitiated)> onOccupantInstantiated = new ();
-
-            /// <summary>
-            ///     Reposition an occupant to a new location within the same
-            ///     volume.
-            /// </summary>
-            /// <param name="occupantToMove">
-            ///     The occupant to move. The product must already be placed on
-            ///     a cabinet.
-            /// </param>
-            /// <param name="newPosition">
-            ///     The new position to try moving the product. The position is
-            ///     relative to the product's current cabinet's local space.
-            /// </param>
-            /// <param name="snapMode">
-            ///     Controls how the reposition behaves if the requested
-            ///     position is blocked. By default, the occupant will remain
-            ///     where it was. Other values from <see
-            ///     cref="RepositionSnapMode" /> will try to snap the occupant
-            ///     to the nearest opening to the requested location.
-            /// </param>
-            /// <param name="didMove">
-            ///     This is an output argument. The caller should ensure its
-            ///     value is <see langword="false"/> prior to calling. If the
-            ///     occupant is moved successfully, it will be set to <see
-            ///     langword="true" />; otherwise, the value is set to <see
-            ///     langword="false"/>. However, you should not rely on the
-            ///     value being set to <see langword="false" /> because the
-            ///     event may not be hooked.
-            /// </param>
-            public delegate void TryRepositionOccupantHandler(Occupant occupantToMove, Vector3 newPosition, RepositionSnapMode snapMode, ref bool didMove);
-
-            /// <inheritdoc cref="TryRepositionOccupantHandler" />
-            public static TryRepositionOccupantHandler onTryRepositionOccupant;
 
             // =====================================================================
             // Products
             // =====================================================================
 
             public static SequentiallyAwaitedDelegate<Occupant> onOccupantAddedToCabinet = new();
-            /// <summary>
-            /// Called when a product is removed from a cabinet.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<Occupant> onOccupantRemovedFromCabinet = new ();
 
             /// <summary>
             ///     Called when an occupant is resized. E.g., a cabinet shelf.
@@ -273,28 +134,10 @@ namespace KitchenDesign
             public delegate void DragHandler(Occupant draggedOccupant, PointerEventData eventData);
 
             /// <summary>
-            /// Invoked when the user begins dragging a occupant.
-            /// </summary>
-            public static DragHandler onOccupantDragBegin;
-
-            /// <summary>
-            /// Invoked every frame while the user is dragging an occupant and
-            /// the drag's position has changed.
-            /// </summary>
-            public static DragHandler onOccupantDrag;
-
-            /// <summary>
             /// Invoked when an occupant is successfully dragged by the user
             /// within its current volume or into a new volume.
             /// </summary>
             public static DragHandler onOccupantDragSuccess;
-
-            /// <summary>
-            /// Invoked when the user releases the product drag. This is
-            /// intended to release the product so it stays at its current
-            /// location.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<(Occupant draggedOccupant, PointerEventData eventData)> onOccupantDragEnd = new ();
 
             //
 
@@ -308,22 +151,6 @@ namespace KitchenDesign
             public static OccupantNudgedHandler onOccupantNudged;
 
             // ----------------------------------------------------------------
-
-            /// <summary>
-            /// Try to reorder a cabinet so it will either:
-            /// <br /><br />
-            ///
-            ///     1.  Appear before the cabinet that is before it. I.e.,
-            ///         shift the cabinet to the left. This happens when it is
-            ///         passed <see cref="Extent.Min"/>.
-            ///         <br /><br />
-            ///
-            ///     2.  Appear after the cabinet that is after it. I.e., shift
-            ///         the cabinet to the right. This happens when it is passed
-            ///         <see cref="Extent.Max"/>.
-            ///         <br /><br />
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<(Cabinet cabinetToReorder, Extent moveTowardsExtent)> onTryReorderCabinet = new ();
 
             /// <summary>
             ///     Invoked when a cabinet's order within the kitchen layout
@@ -358,13 +185,6 @@ namespace KitchenDesign
             // Highlight product ----------------------------------------------
 
             /// <summary>
-            /// Try to highlight an object. The highlight request will fail if
-            /// the user is dragging a product or resizing the cabinet. Nothing
-            /// happens trying to highlight the same product twice.
-            /// </summary>
-            public static SequentiallyAwaitedDelegate<GameObject /* highlightObject */> onTryHighlightObject = new ();
-
-            /// <summary>
             /// Called when the highlighted object changes. Receives <see
             /// langword="null"/> when no object is highlighted.
             /// </summary>
@@ -372,21 +192,7 @@ namespace KitchenDesign
 
             // ----------------------------------------------------------------
 
-            /// <summary>
-            ///     Tell the kitchen to center the passed product within its
-            ///     current occupiable volume.
-            /// </summary>
-            public static Action<Occupant> centerOccupantInVolume;
-
             // ----------------------------------------------------------------
-
-            public delegate void FinishMaterialChangedHandler(ProductInfo productInfo, ProductCategory fallbackFinishCategory);
-
-            /// <summary>
-            ///     Invoked when the user selects a new finish product to apply
-            ///     to the kitchen.
-            /// </summary>
-            public static FinishMaterialChangedHandler onFinishMaterialChanged;
 
             // =====================================================================
             // Cabinet Length Resize

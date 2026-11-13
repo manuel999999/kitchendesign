@@ -155,7 +155,7 @@ namespace KitchenDesign
 
                     if (nearestOccupant)
                     {
-                        await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(nearestOccupant.gameObject);
+                        await this._kitchen.TryHighlightObject(nearestOccupant.gameObject);
                         return;
                     }
 
@@ -168,12 +168,15 @@ namespace KitchenDesign
                             objectToHighlight = this._kitchen.gameObject;
                         }
 
-                        await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(objectToHighlight);
+                        await this._kitchen.TryHighlightObject(objectToHighlight);
                         return;
                     }
                 }
 
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+                if (this._kitchen)
+                {
+                    await this._kitchen.TryHighlightObject(null);
+                }
             }
         }
     }

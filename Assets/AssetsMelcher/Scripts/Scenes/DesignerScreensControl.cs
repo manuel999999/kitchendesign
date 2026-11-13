@@ -56,9 +56,9 @@ namespace KitchenDesign
             this._productContent.ContentLoaded += OnProductVisualContentLoaded;
 
             m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.CatalogData, systems.Session, systems.ProductContent, this.confirmPrompt, this.aboutProductPrompt);
-            m_DesignerNavigationUi.Initialize(systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session, this.confirmPrompt, this.savePrompt);
-            m_BuildingMethodsUi.Initialize(systems.Session);
-            m_BrandCatalogUi.Initialize(systems.Profile, systems.Options, systems.CatalogData, systems.Session);
+            m_DesignerNavigationUi.Initialize(m_Kitchen, systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session, this.confirmPrompt, this.savePrompt);
+            m_BuildingMethodsUi.Initialize(m_Kitchen, systems.Session);
+            m_BrandCatalogUi.Initialize(m_Kitchen, systems.Profile, systems.Options, systems.CatalogData, systems.Session);
             m_CabinetShapeUi.Initialize(m_Kitchen, systems.Options, systems.Session);
             m_KitchenTemplateUi.Initialize(m_Kitchen);
             m_CabinetOtherSizesUi.Initialize(m_Kitchen, systems.Session);
@@ -562,7 +562,7 @@ namespace KitchenDesign
 
             SetCabinetBeingSwapped(null);
 
-            await EventBridge.Designer.onTryHighlightObject.Invoke(null);
+            await m_Kitchen.TryHighlightObject(null);
         }
 
         // =====================================================================

@@ -136,7 +136,7 @@ namespace KitchenDesign
                     .Skip(toggleIndex)
                     .First();
 
-            EventBridge.Designer.setKitchenTemplate.Invoke(template);
+            this._kitchen.SetKitchenTemplate(template);
         }
 
         protected void OnBackButtonClicked(MelcherButton button)

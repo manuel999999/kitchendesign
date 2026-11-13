@@ -1138,8 +1138,21 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   prompt itself to guard the client list and the profile. The manufacturer whitelist gets a
   callback that marks it as having pending changes (it already held the edit prompt). Why not
   events: the answers come back through callbacks and the payloads carry TMP and model types.
-- The kitchen's commands and notifications still go through the old `EventBridge.Designer`
-  (B5.5b and B5.5c replace them).
+- **Commands to the kitchen are method calls** (B5.5b): the setup wizard's choices
+  (`SetBuildingMethod`, `SetBrandCatalog`, `SetCabinetLayout`, `SetKitchenTemplate`,
+  `SetCountertopType`, `SetBaseCabinetDepth`, `SetCountertopThickness`, `SetCountertopOverhang`,
+  `CreateKitchen`), the toolbar's and the highlighted-product content's edits (`TryAddProduct`,
+  `OnToolbarAddSectionClicked`, `TryCloneSection`, `TryDestroyOccupant`,
+  `TryDestroyCabinetBacking`, `TryDestroySection`, `TryRepositionProduct`, `TryReorderCabinet`,
+  `CenterOccupantInVolume`, `TryToggleToeKicks`, `SelectFinishProduct`, `GetCabinetLayout`) and
+  `TryHighlightObject`, on `Kitchen`, which every caller already holds or was handed. Model
+  objects call through `IKitchen`: an `Occupant` (given its kitchen by
+  `Kitchen.InstantiateOccupant`) for its pointer-down highlight and its drag begin / drag / drag
+  end, a `CabinetBacking` (given it by its span) for its highlight, and an `OccupiableVolume` for
+  "occupant instantiated" and "occupant removed", through `FindOwningKitchen` (up the parent
+  volumes to the cabinet); a volume with no kitchen above it tells no one.
+- The kitchen's notifications still go through the old `EventBridge.Designer` (B5.5c replaces
+  them).
 
 ## Key systems
 - **Assemblies (2026-10-20):** `KitchenDesign` (`_project/Scripts`, refs Events, Shared, Doge),

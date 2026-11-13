@@ -56,7 +56,7 @@ namespace KitchenDesign
             this._session = session;
             this._productContent = productContent;
             this._kitchen = kitchen;
-            m_HighlightedProductContent.Initialize(session, aboutProductPrompt);
+            m_HighlightedProductContent.Initialize(kitchen, session, aboutProductPrompt);
         }
 
         // =====================================================================
@@ -354,7 +354,7 @@ namespace KitchenDesign
             if (m_SelectedProductToolbar.visibility == ToolbarContentVisibility.InForeground)
             {
                 // Clear the highlight
-                EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null).Forget();
+                this._kitchen.TryHighlightObject(null).Forget();
                 return;
             }
 
@@ -464,13 +464,13 @@ namespace KitchenDesign
                     $"{plungeProductSku} does not exist in website's backend."
                 );
 
-                EventBridge.Designer.onTryAddProduct.Invoke(plungeProductInfo, onComplete: null);
+                this._kitchen.TryAddProduct(plungeProductInfo, onComplete: null);
 
                 return;
             }
             else if (caller == m_ToeKickButton)
             {
-                EventBridge.Designer.tryToggleToeKicks?.Invoke();
+                this._kitchen.TryToggleToeKicks();
 
                 return;
             }
@@ -567,7 +567,7 @@ namespace KitchenDesign
                 // Get the cabinet layout so we know how many buttons to
                 // create
                 CabinetLayout cabinetLayout = null;
-                EventBridge.Designer.onWantCabinetLayout.Invoke(ref cabinetLayout);
+                this._kitchen.GetCabinetLayout(ref cabinetLayout);
 
                 foreach (CabinetSpan span in cabinetLayout.spans)
                 {
@@ -1376,7 +1376,7 @@ namespace KitchenDesign
                     if (resetFinishCategory != ProductCategory.Unknown)
                     {
                         // This is a button to clear the product's finish
-                        EventBridge.Designer.onFinishMaterialChanged?.Invoke(productInfo: null, resetFinishCategory);
+                        this._kitchen.SelectFinishProduct(productInfo: null, resetFinishCategory);
                         return;
                     }
 
@@ -1629,7 +1629,7 @@ namespace KitchenDesign
                                     if (!isCurrentCountertopAllowed)
                                     {
                                         // Clear the current incompatible countertop.
-                                        EventBridge.Designer.onFinishMaterialChanged?.Invoke(
+                                        this._kitchen.SelectFinishProduct(
                                             productInfo: null,
                                             ProductCategory.FinishCountertop
                                         );
@@ -1702,9 +1702,9 @@ namespace KitchenDesign
 
                         MelcherLog.Log("Adding a cab section", severity: MelcherLogSeverity.Verbose);
 
-                        EventBridge.Designer.onTryAddSection.Invoke(
+                        this._kitchen.OnToolbarAddSectionClicked(
                             cabinetSectionProductInfo: null,
-                            canReplaceCabinet: m_CabinetBeingSwapped
+                            prioritizedCabinetToReplace: m_CabinetBeingSwapped
                         );
 
                         return;
@@ -1851,7 +1851,7 @@ namespace KitchenDesign
 
                 if (caller.productInfo.category.IsFinish())
                 {
-                    EventBridge.Designer.onFinishMaterialChanged.Invoke(caller.productInfo, caller.productInfo.category);
+                    this._kitchen.SelectFinishProduct(caller.productInfo, caller.productInfo.category);
                     return;
                 }
             }
@@ -1915,7 +1915,7 @@ namespace KitchenDesign
 
             if (productInfo.category == ProductCategory.CabinetSection)
             {
-                EventBridge.Designer.onTryAddSection.Invoke(productInfo, m_CabinetBeingSwapped);
+                this._kitchen.OnToolbarAddSectionClicked(productInfo, m_CabinetBeingSwapped);
             }
             else
             {
@@ -1926,7 +1926,7 @@ namespace KitchenDesign
                 m_ProductAddButton.interactable = false;
                 m_ProductAddButtonSpinner.SetVisible(true);
 
-                EventBridge.Designer.onTryAddProduct(
+                this._kitchen.TryAddProduct(
                     productInfo,
                     onComplete: _ =>
                     {

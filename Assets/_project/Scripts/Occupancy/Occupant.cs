@@ -1,5 +1,6 @@
 namespace KitchenDesign.Occupancy
 {
+    using KitchenDesign.KitchenModel;
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Common;
@@ -31,6 +32,13 @@ namespace KitchenDesign.Occupancy
         , IDragHandler
         , IEndDragHandler
     {
+        private IKitchen _kitchen;
+
+        public void SetKitchen(IKitchen kitchen)
+        {
+            this._kitchen = kitchen;
+        }
+
 
         /// <summary>
         ///     The minimum amount of space the product will "plunge" into a
@@ -905,7 +913,7 @@ namespace KitchenDesign.Occupancy
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(gameObject).Forget();
+            this._kitchen.TryHighlightObject(gameObject).Forget();
         }
 
         #endregion  // IPointerDownHandler
@@ -923,7 +931,7 @@ namespace KitchenDesign.Occupancy
                 return;
             }
 
-            EventBridge.Designer.onOccupantDragBegin?.Invoke(this, eventData);
+            this._kitchen.OnOccupantDragBegin(this, eventData);
         }
 
         #endregion  // IBeginDragHandler
@@ -935,7 +943,7 @@ namespace KitchenDesign.Occupancy
 
         public void OnDrag(PointerEventData eventData)
         {
-            EventBridge.Designer.onOccupantDrag?.Invoke(this, eventData);
+            this._kitchen.OnOccupantDrag(this, eventData);
         }
 
         #endregion  // IDragHandler
@@ -949,7 +957,7 @@ namespace KitchenDesign.Occupancy
         {
             if (!m_LastDragTask.HasValue || m_LastDragTask.Value.Status != UniTaskStatus.Pending)
             {
-                m_LastDragTask = EventBridge.Designer.onOccupantDragEnd.InvokeIfNonEmpty((this, eventData));
+                m_LastDragTask = this._kitchen.OnOccupantDragEnd((this, eventData));
                 m_LastDragTask.Value.Forget();
             }
         }

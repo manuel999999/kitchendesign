@@ -25,13 +25,15 @@ namespace KitchenDesign
     /// </summary>
     public class BrandCatalogUI : MelcherUI
     {
+        private Kitchen _kitchen;
         private AppProfileSO _profile;
         private AppOptionsSO _options;
         private CatalogDataStatus _catalogData;
         private SessionStatus _session;
 
-        public void Initialize(AppProfileSO profile, AppOptionsSO options, CatalogDataStatus catalogData, SessionStatus session)
+        public void Initialize(Kitchen kitchen, AppProfileSO profile, AppOptionsSO options, CatalogDataStatus catalogData, SessionStatus session)
         {
+            this._kitchen = kitchen;
             this._profile = profile;
             this._options = options;
             this._catalogData = catalogData;
@@ -228,7 +230,7 @@ namespace KitchenDesign
                 // Block the UI until the async completes.
                 m_Raycaster.enabled = false;
 
-                await EventBridge.Designer.setBrandCatalog.Invoke(selectedCatalog);
+                await this._kitchen.SetBrandCatalog(selectedCatalog);
             }
         }
 

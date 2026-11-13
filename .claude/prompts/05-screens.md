@@ -360,6 +360,18 @@ folders. One type per file.
   editor (+2 scene lines). As in B5.2, raises that used `.Invoke()` without `?.` no longer throw
   when nothing listens. Compiles in the editor and as WebGL player scripts.
 
+- **B5.5b done 2026-11-13.** 29 delegates with the kitchen as their only handler are method
+  calls (61 call sites by script, 57 subscription lines removed from `Kitchen`). The handlers
+  became public; `OnCenterOccupantInVolumeClicked` → `CenterOccupantInVolume`;
+  `onFinishMaterialChanged` → `Kitchen.SelectFinishProduct`; the hamburger menu, the
+  highlighted-product content, the building method and brand catalog screens now get the kitchen.
+  `onOccupantInstantiated`, `onOccupantRemovedFromCabinet` and `onToeKickTypeChanged` had only the
+  kitchen listening and are calls too. For the final pass: (1) a volume that can't reach a
+  kitchen (`FindOwningKitchen` null) now skips these two calls where the static event reached the
+  kitchen anyway; not expected to happen for a volume in a layout. (2) `setCountertopType` was
+  never unsubscribed in `Kitchen.OnDisable` (harmless then, gone now). Compiles in the editor and
+  as WebGL player scripts.
+
 **Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
 (areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
 check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.

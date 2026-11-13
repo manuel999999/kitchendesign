@@ -110,14 +110,14 @@ namespace KitchenDesign
             if (toggle.isOn)
             {
                 m_ShapeToggleGroup.allowSwitchOff = false;
-                EventBridge.Designer.setCabinetLayout.Invoke(layoutPrefab);
+                this._kitchen.SetCabinetLayout(layoutPrefab);
 
                 if (m_LastSelectedKitchenStyle != layoutPrefab.style)
                 {
                     // Ensure the kitchen template UI (which may be shown next)
                     // doesn't retain a template that is no longer compatible
                     // with the kitchen style.
-                    EventBridge.Designer.setKitchenTemplate(null);
+                    this._kitchen.SetKitchenTemplate(null);
 
                     m_LastSelectedKitchenStyle = layoutPrefab.style;
                 }
@@ -179,7 +179,7 @@ namespace KitchenDesign
                     else if (templateCount == 1)
                     {
                         // Only one template to choose. Automatically use it.
-                        EventBridge.Designer.setKitchenTemplate?.Invoke(templatesForStyle.ElementAt(0));
+                        this._kitchen.SetKitchenTemplate(templatesForStyle.ElementAt(0));
                     }
 
                     if(brandCatalog.cabinetCountertopThicknessInInches > 0)
@@ -202,11 +202,11 @@ namespace KitchenDesign
             CuboidPadding countertopOverhangInInches = CuboidPadding.one;
             float baseCabinetDepthInMeters = this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters;
 
-            EventBridge.Designer.setCountertopType?.Invoke(countertopType);
-            EventBridge.Designer.setBaseCabinetDepth.Invoke(baseCabinetDepthInMeters);
-            EventBridge.Designer.setCountertopThickness.Invoke(countertopThicknessInMeters);
-            EventBridge.Designer.setCountertopOverhang.Invoke(countertopOverhangInInches * Units.Inches2Meters);
-            EventBridge.Designer.createKitchen.Invoke().Forget();
+            this._kitchen.SetCountertopType(countertopType);
+            this._kitchen.SetBaseCabinetDepth(baseCabinetDepthInMeters);
+            this._kitchen.SetCountertopThickness(countertopThicknessInMeters);
+            this._kitchen.SetCountertopOverhang(countertopOverhangInInches * Units.Inches2Meters);
+            this._kitchen.CreateKitchen().Forget();
     }
 
         // =====================================================================

@@ -189,7 +189,7 @@ namespace KitchenDesign
 
             // Clear the user's selection so the selection highlight doesn't
             // render in the screenshots.
-            await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+            await kitchen.TryHighlightObject(null);
 
             // Figure out where products are in relation to each other. We'll
             // use this to find pairs of products to draw measurements between

@@ -474,6 +474,7 @@ namespace KitchenDesign.Cabinets
             }
 
             m_CabinetBacking.SetProductInfo(backingInfo);
+            m_CabinetBacking.SetKitchen(kitchen);
 
             // Match the kitchen's current finishes.
             (Material cabinetMaterial, Material countertopMaterial) =

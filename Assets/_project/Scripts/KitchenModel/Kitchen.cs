@@ -801,6 +801,7 @@ namespace KitchenDesign.KitchenModel
             visualInstance.gameObject.SetActive(true);
 
             Occupant occupant = visualInstance.gameObject.AddComponent<Occupant>();
+            occupant.SetKitchen(this);
             occupant.SetInfo(productInfo, productVisual, visualInstance);
 
             (Material cabinetMaterial, Material countertopMaterial) =
@@ -1087,17 +1088,7 @@ namespace KitchenDesign.KitchenModel
             m_CutoutClipping.Attach(this);
 
             EventBridge.Designer.restart                    += Restart;
-            EventBridge.Designer.createKitchen.OnInvoke     += CreateKitchen;
-            EventBridge.Designer.onWantCabinetLayout        += GetCabinetLayout;
 
-            EventBridge.Designer.setBuildingMethod          += SetBuildingMethod;
-            EventBridge.Designer.setBrandCatalog.OnInvoke   += SetBrandCatalog;
-            EventBridge.Designer.setCountertopType          += SetCountertopType;
-            EventBridge.Designer.setCabinetLayout           += SetCabinetLayout;
-            EventBridge.Designer.setKitchenTemplate         += SetKitchenTemplate;
-            EventBridge.Designer.setBaseCabinetDepth        += SetBaseCabinetDepth;
-            EventBridge.Designer.setCountertopThickness     += SetCountertopThickness;
-            EventBridge.Designer.setCountertopOverhang      += SetCountertopOverhang;
 
             EventBridge.Designer.onCabinetResized.OnInvoke              += OnCabinetResized;
             EventBridge.Designer.onCabinetAddedByUser.OnInvoke          += OnCabinetAddedByUser;
@@ -1106,29 +1097,10 @@ namespace KitchenDesign.KitchenModel
 
 
             // UI
-            EventBridge.Designer.onTryAddProduct                        += TryAddProduct;
-            EventBridge.Designer.onTryCloneProduct                      += TryAddProduct;
-            EventBridge.Designer.onTryCloneSection                      += TryCloneSection;
-            EventBridge.Designer.onTryAddSection                        += OnToolbarAddSectionClicked;
-            EventBridge.Designer.onTryDestroyOccupant.OnInvoke          += TryDestroyOccupant;
-            EventBridge.Designer.onTryDestroyCabinetBacking.OnInvoke    += TryDestroyCabinetBacking;
-            EventBridge.Designer.onTryDestroySection                    += TryDestroySection;
-            EventBridge.Designer.onFinishMaterialChanged                += this._materials.OnToolbarFinishProductSelected;
-            EventBridge.Designer.onTryRepositionOccupant                += TryRepositionProduct;
-            EventBridge.Designer.onTryReorderCabinet.OnInvoke           += TryReorderCabinet;
-            EventBridge.Designer.tryToggleToeKicks                      += TryToggleToeKicks;
-            EventBridge.Designer.onToeKickTypeChanged                   += OnToeKickTypeChanged;
-            EventBridge.Designer.centerOccupantInVolume                 += OnCenterOccupantInVolumeClicked;
 
             // Products
-            EventBridge.Designer.onOccupantInstantiated.OnInvoke        += OnOccupantInstantiated;
             EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke      += OnOccupantAddedToCabinet;
-            EventBridge.Designer.onOccupantRemovedFromCabinet.OnInvoke  += OnOccupantRemovedFromCabinet;
-            EventBridge.Designer.onOccupantDragBegin                    += this._drag.OnOccupantDragBegin;
-            EventBridge.Designer.onOccupantDrag                         += this._drag.OnOccupantDrag;
-            EventBridge.Designer.onOccupantDragEnd.OnInvoke             += this._drag.OnOccupantDragEnd;
 
-            EventBridge.Designer.onTryHighlightObject.OnInvoke          += this._materials.TryHighlightObject;
 
             foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
             {
@@ -1146,16 +1118,7 @@ namespace KitchenDesign.KitchenModel
             m_CutoutClipping.Detach();
 
             EventBridge.Designer.restart                    -= Restart;
-            EventBridge.Designer.createKitchen.OnInvoke     -= CreateKitchen;
-            EventBridge.Designer.onWantCabinetLayout        -= GetCabinetLayout;
 
-            EventBridge.Designer.setBuildingMethod          -= SetBuildingMethod;
-            EventBridge.Designer.setBrandCatalog.OnInvoke   -= SetBrandCatalog;
-            EventBridge.Designer.setCabinetLayout           -= SetCabinetLayout;
-            EventBridge.Designer.setKitchenTemplate         -= SetKitchenTemplate;
-            EventBridge.Designer.setBaseCabinetDepth        -= SetBaseCabinetDepth;
-            EventBridge.Designer.setCountertopThickness     -= SetCountertopThickness;
-            EventBridge.Designer.setCountertopOverhang      -= SetCountertopOverhang;
 
             EventBridge.Designer.onCabinetResized.OnInvoke              -= OnCabinetResized;
             EventBridge.Designer.onCabinetAddedByUser.OnInvoke          -= OnCabinetAddedByUser;
@@ -1163,29 +1126,10 @@ namespace KitchenDesign.KitchenModel
             EventBridge.Designer.onCabinetDestroyedByUser.OnInvoke      -= OnCabinetDestroyedByUser;
 
             // UI
-            EventBridge.Designer.onTryAddProduct                        -= TryAddProduct;
-            EventBridge.Designer.onTryCloneProduct                      -= TryAddProduct;
-            EventBridge.Designer.onTryCloneSection                      -= TryCloneSection;
-            EventBridge.Designer.onTryAddSection                        -= OnToolbarAddSectionClicked;
-            EventBridge.Designer.onTryDestroyOccupant.OnInvoke          -= TryDestroyOccupant;
-            EventBridge.Designer.onTryDestroyCabinetBacking.OnInvoke    -= TryDestroyCabinetBacking;
-            EventBridge.Designer.onTryDestroySection                    -= TryDestroySection;
-            EventBridge.Designer.onFinishMaterialChanged                -= this._materials.OnToolbarFinishProductSelected;
-            EventBridge.Designer.onTryRepositionOccupant                -= TryRepositionProduct;
-            EventBridge.Designer.onTryReorderCabinet.OnInvoke           -= TryReorderCabinet;
-            EventBridge.Designer.tryToggleToeKicks                      -= TryToggleToeKicks;
-            EventBridge.Designer.onToeKickTypeChanged                   -= OnToeKickTypeChanged;
-            EventBridge.Designer.centerOccupantInVolume                 -= OnCenterOccupantInVolumeClicked;
 
             // Products
-            EventBridge.Designer.onOccupantInstantiated.OnInvoke        -= OnOccupantInstantiated;
             EventBridge.Designer.onOccupantAddedToCabinet.OnInvoke      -= OnOccupantAddedToCabinet;
-            EventBridge.Designer.onOccupantRemovedFromCabinet.OnInvoke  -= OnOccupantRemovedFromCabinet;
-            EventBridge.Designer.onOccupantDragBegin                    -= this._drag.OnOccupantDragBegin;
-            EventBridge.Designer.onOccupantDrag                         -= this._drag.OnOccupantDrag;
-            EventBridge.Designer.onOccupantDragEnd.OnInvoke             -= this._drag.OnOccupantDragEnd;
 
-            EventBridge.Designer.onTryHighlightObject.OnInvoke          -= this._materials.TryHighlightObject;
 
             foreach (Transform shelfWidgetTransform in m_CabinetShelfResizeWidgetRoot)
             {
@@ -1196,6 +1140,31 @@ namespace KitchenDesign.KitchenModel
                     shelfWidget.onResized -= this._widgets.OnCabinetShelfResized;
                 }
             }
+        }
+
+        public UniTask TryHighlightObject(GameObject highlightObject)
+        {
+            return this._materials.TryHighlightObject(highlightObject);
+        }
+
+        public void SelectFinishProduct(ProductInfo productInfo, ProductCategory fallbackFinishCategory)
+        {
+            this._materials.OnToolbarFinishProductSelected(productInfo, fallbackFinishCategory);
+        }
+
+        public void OnOccupantDragBegin(Occupant draggedOccupant, PointerEventData eventData)
+        {
+            this._drag.OnOccupantDragBegin(draggedOccupant, eventData);
+        }
+
+        public void OnOccupantDrag(Occupant draggedOccupant, PointerEventData eventData)
+        {
+            this._drag.OnOccupantDrag(draggedOccupant, eventData);
+        }
+
+        public UniTask OnOccupantDragEnd((Occupant draggedOccupant, PointerEventData eventData) args)
+        {
+            return this._drag.OnOccupantDragEnd(args);
         }
 
         private void Restart()
@@ -1258,7 +1227,7 @@ namespace KitchenDesign.KitchenModel
             return this._saveReader.TryLoadRequestedSave();
         }
 
-        protected async UniTask CreateKitchen()
+        public async UniTask CreateKitchen()
         {
             using var clearLoadingSpinner =
                 MelcherDeferred.Defer(
@@ -1320,7 +1289,7 @@ namespace KitchenDesign.KitchenModel
             if (m_CurrentCabinetLayout && this.buildingRules.UsesBrandCatalog)
             {
                 this._selections.toeKickType = this._selections.brandCatalog.defaultToeKickType;
-                EventBridge.Designer.onToeKickTypeChanged?.Invoke(this._selections.toeKickType);
+                this.OnToeKickTypeChanged(this._selections.toeKickType);
             }
 
             // Ensure the cabinet is the client's intended outside-edge length
@@ -1369,19 +1338,19 @@ namespace KitchenDesign.KitchenModel
             await EventBridge.Designer.onKitchenReady.InvokeIfNonEmpty();
         }
 
-        protected void GetCabinetLayout(ref CabinetLayout cabinetLayout)
+        public void GetCabinetLayout(ref CabinetLayout cabinetLayout)
         {
             cabinetLayout = m_CurrentCabinetLayout;
         }
 
-        protected void SetBuildingMethod(KitchenBuildingMethod buildingMethod)
+        public void SetBuildingMethod(KitchenBuildingMethod buildingMethod)
         {
             this._selections.buildingMethod = buildingMethod;
 
             EventBridge.Designer.onBuildingMethodChanged?.Invoke(this._selections.buildingMethod);
         }
 
-        protected async UniTask SetBrandCatalog(BrandCatalogSO brandCatalog)
+        public async UniTask SetBrandCatalog(BrandCatalogSO brandCatalog)
         {
             this._selections.brandCatalog = brandCatalog;
 
@@ -1405,22 +1374,22 @@ namespace KitchenDesign.KitchenModel
         ///     Called when the user selects a countertop type from the
         ///     kitchen setup UI.
         /// </summary>
-        protected void SetCountertopType(CountertopType countertopType)
+        public void SetCountertopType(CountertopType countertopType)
         {
             this._selections.countertopType = countertopType;
         }
 
-        protected void SetCabinetLayout(CabinetLayout layoutPrefab)
+        public void SetCabinetLayout(CabinetLayout layoutPrefab)
         {
             this._selections.layoutPrefab = layoutPrefab;
         }
 
-        protected void SetKitchenTemplate(KitchenTemplateSO template)
+        public void SetKitchenTemplate(KitchenTemplateSO template)
         {
             this._selections.kitchenTemplate = template;
         }
 
-        protected async UniTask TryDestroyOccupant(Occupant occupant)
+        public async UniTask TryDestroyOccupant(Occupant occupant)
         {
             if (!occupant)
             {
@@ -1442,7 +1411,7 @@ namespace KitchenDesign.KitchenModel
                 // Deselect the occupant before it is removed from its cabinet.
                 // This ensure IOccupantHighlightChangedHandler can safely
                 // access the product's cabinet if it needs to.
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+                await this.TryHighlightObject(null);
             }
 
             if (!await occupiedVolume.TryRemoveOccupant(occupant))
@@ -1453,7 +1422,7 @@ namespace KitchenDesign.KitchenModel
                 {
                     // We could not remove the occupant. Recover its selected
                     // state so the user can try to remove it again.
-                    await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(occupant.gameObject);
+                    await this.TryHighlightObject(occupant.gameObject);
                 }
 
                 return;
@@ -1463,7 +1432,7 @@ namespace KitchenDesign.KitchenModel
             Destroy(occupant.gameObject);
         }
 
-        protected async UniTask TryDestroyCabinetBacking(CabinetBacking backingToDestroy)
+        public async UniTask TryDestroyCabinetBacking(CabinetBacking backingToDestroy)
         {
             if (!backingToDestroy)
             {
@@ -1478,7 +1447,7 @@ namespace KitchenDesign.KitchenModel
                 // Deselect the occupant before it is removed from its cabinet.
                 // This ensure IOccupantHighlightChangedHandler can safely
                 // access the product's cabinet if it needs to.
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+                await this.TryHighlightObject(null);
             }
 
             foreach (CabinetSpan span in layout.spans)
@@ -1499,7 +1468,7 @@ namespace KitchenDesign.KitchenModel
                         // We could not remove the backing. Recover its
                         // selected state so the user can try to remove it
                         // again.
-                        await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(backingToDestroy.gameObject);
+                        await this.TryHighlightObject(backingToDestroy.gameObject);
                     }
                 }
 
@@ -1507,7 +1476,7 @@ namespace KitchenDesign.KitchenModel
             }
         }
 
-        protected void TryDestroySection(Cabinet cabinetToDestroy)
+        public void TryDestroySection(Cabinet cabinetToDestroy)
         {
             OnTryDestroySection(cabinetToDestroy).Forget();
 
@@ -1578,7 +1547,7 @@ namespace KitchenDesign.KitchenModel
 
                 if (this._interaction.highlightObject == cabinetToDestroy.gameObject)
                 {
-                    await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
+                    await this.TryHighlightObject(null);
                 }
 
                 // Ensure the right neighbour's anchor inherits the anchor of the
@@ -1621,7 +1590,7 @@ namespace KitchenDesign.KitchenModel
             }
         }
 
-        private void SetCountertopOverhang(CuboidPadding overhangInMeters)
+        public void SetCountertopOverhang(CuboidPadding overhangInMeters)
         {
             this._selections.countertopOverhangInMeters = overhangInMeters;
 
@@ -1822,7 +1791,7 @@ namespace KitchenDesign.KitchenModel
         /// Called when a user clicks Add after selecting a product in the
         /// product toolbar.
         /// </summary>
-        protected void TryAddProduct(ProductInfo productInfo, System.Action<Occupant> onComplete)
+        public void TryAddProduct(ProductInfo productInfo, System.Action<Occupant> onComplete)
         {
             OnTryAddProduct(productInfo).Forget();
 
@@ -1931,7 +1900,7 @@ namespace KitchenDesign.KitchenModel
         ///     Called when the user selects a cabinet section and presses
         ///     the clone button.
         /// </summary>
-        protected void TryCloneSection(Cabinet cabinetToClone)
+        public void TryCloneSection(Cabinet cabinetToClone)
         {
             OnTryCloneSection(cabinetToClone).Forget();
 
@@ -1959,7 +1928,7 @@ namespace KitchenDesign.KitchenModel
                 layout.UpdateMeshes();
                 layout.UpdatePositions();
 
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(this._interaction.highlightObject);
+                await this.TryHighlightObject(this._interaction.highlightObject);
 
                 await EventBridge.Designer.onCabinetAddedByUser.InvokeIfNonEmpty(newCabinet);
 
@@ -2017,12 +1986,12 @@ namespace KitchenDesign.KitchenModel
         ///     cref="KitchenBuildingMethod.Sections"/> is selected. A section
         ///     is a cabinet section.
         /// </summary>
-        protected void OnToolbarAddSectionClicked(ProductInfo cabinetSectionProductInfo, Cabinet prioritizedCabinetToReplace)
+        public void OnToolbarAddSectionClicked(ProductInfo cabinetSectionProductInfo, Cabinet prioritizedCabinetToReplace)
         {
             TryAddSection(cabinetSectionProductInfo, prioritizedCabinetToReplace).Forget();
         }
 
-        protected async UniTask<Cabinet> TryAddSection(ProductInfo cabinetSectionProductInfo, Cabinet prioritizedCabinetToReplace)
+        public async UniTask<Cabinet> TryAddSection(ProductInfo cabinetSectionProductInfo, Cabinet prioritizedCabinetToReplace)
         {
             // TODO: Break the spawning logic out to its own function. This is
             //       currently invoking `onCabinetAddedByUser` twice (from
@@ -2216,7 +2185,7 @@ namespace KitchenDesign.KitchenModel
             return Camera.main;
         }
 
-        private async UniTask OnOccupantInstantiated((Occupant newOccupant, bool userInitiated) args)
+        public async UniTask OnOccupantInstantiated((Occupant newOccupant, bool userInitiated) args)
         {
             if (args.userInitiated && !await TryToFitCabinetToOccupant(args.newOccupant))
             {
@@ -2362,7 +2331,7 @@ namespace KitchenDesign.KitchenModel
             }
         }
 
-        private async UniTask OnOccupantRemovedFromCabinet(Occupant occupant)
+        public async UniTask OnOccupantRemovedFromCabinet(Occupant occupant)
         {
             if (this.buildingRules.LimitsCabinetSizeToPreventBowing &&
                 ReferenceEquals(occupant.occupiedVolume, occupant.cabinet))
@@ -2438,8 +2407,7 @@ namespace KitchenDesign.KitchenModel
         }
 
 
-        /// <inheritdoc cref="EventBridge.Designer.onTryRepositionOccupant" />
-        protected void TryRepositionProduct(
+        public void TryRepositionProduct(
             Occupant occupantToMove,
             Vector3 newVolumePosition,
             RepositionSnapMode snapMode,
@@ -2488,7 +2456,7 @@ namespace KitchenDesign.KitchenModel
         /// </summary>
         /// <param name="cabinetToReorder"></param>
         /// <param name="moveTowardsExtent"></param>
-        protected async UniTask TryReorderCabinet((Cabinet cabinetToReorder, Extent moveTowardsExtent) args)
+        public async UniTask TryReorderCabinet((Cabinet cabinetToReorder, Extent moveTowardsExtent) args)
         {
             if (!args.cabinetToReorder)
             {
@@ -2576,7 +2544,7 @@ namespace KitchenDesign.KitchenModel
         ///     reached. If this is not <see cref="KitchenBuildingMethod.Catalog"/>,
         ///     the method returns without doing anything.
         /// </summary>
-        protected void TryToggleToeKicks()
+        public void TryToggleToeKicks()
         {
             MelcherLog.Breadcrumb($"Building method: {this._selections.buildingMethod}");
             if (!this.buildingRules.CanToggleToeKicks)
@@ -2609,7 +2577,7 @@ namespace KitchenDesign.KitchenModel
                     CabinetToeKickType.Inset :
                     CabinetToeKickType.None;
 
-            EventBridge.Designer.onToeKickTypeChanged?.Invoke(this._selections.toeKickType);
+            this.OnToeKickTypeChanged(this._selections.toeKickType);
         }
 
         protected void OnToeKickTypeChanged(CabinetToeKickType toeKickType)
@@ -2620,7 +2588,7 @@ namespace KitchenDesign.KitchenModel
             }
         }
 
-        protected void OnCenterOccupantInVolumeClicked(Occupant occupant)
+        public void CenterOccupantInVolume(Occupant occupant)
         {
             bool didCenterOccupant = TryCenterOccupantInVolume(occupant);
 
