@@ -1463,6 +1463,19 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   - Cameras (`_project/Scripts/Cameras/`, `KitchenDesign.Cameras`): `OrbitCameraControl` (was
     `DesignerOrbitCamera`), `OverheadCameraControl` (was `DesignerOverheadCamera`).
     `SpinBehavior` (`Behaviors/`, was `RotateCamera`) turns the object it is on.
+  - `KitchenCameraControl` (B6.3, `_project/Scripts/KitchenModel/`): the kitchen's camera and
+    framing code, a part of `Kitchen` like area 4's (constructed in `Kitchen.Awake` with the orbit
+    camera, the cover virtual camera, the two target groups and the ground, whose serialized
+    fields stay on `Kitchen`; `Kitchen`'s old methods forward to it). `FrameLayout` points the
+    orbit and cover cameras at the empty target group while the kitchen target group is rebuilt
+    (a target group can't be changed while cameras look at it), then fills it with the layout's
+    corner and end cabinets (weight 1, radius 2) and points the cameras back.
+    `RotateToFrontOfCabinet` turns the orbit to face a cabinet the camera is behind when an
+    occupant is added or dropped there (a client request), in steps of the orbit's rotation
+    interval. `MoveOrbitRootToCenter` runs every frame from `Kitchen.LateTick`.
+    `CenterTheGround` moves the ground under the kitchen's centre; the ground is hidden while a
+    new kitchen is being sized, so it never has to slide or be walked off, and is centred just
+    before it is shown. `GetCamera` is still `Camera.main`.
 - **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
   "Area 3").
   - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
@@ -1866,8 +1879,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
-  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos) is under way
-  (`06-cameras-photos.md`), then area 7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
+  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos, `06-cameras-photos.md`) is done too
+  (B6.1–B6.4). Next: area 7 (leftovers), then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at

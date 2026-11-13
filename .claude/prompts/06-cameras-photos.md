@@ -73,6 +73,13 @@ runs once after area 7, against `3d25da55`. Anything suspicious goes in `05-scre
   and the straights beside a corner have a width there but aren't measured).
   `buildingrulescheck.cs`: 132 checks.
 
+- **B6.3 done 2026-11-13.** `KitchenCameraControl`: five methods cut out of `Kitchen` by a script
+  (comments dropped, whys in CLAUDE.md), plus `MoveOrbitRootToCenter` from `LateTick`. `Kitchen`
+  keeps `RotateCameraToFrontOfCabinet`, `UpdateCameraAndFramingGroups`, `CenterTheGround` and
+  `GetCamera` as one-line forwards, so no caller changed. Compiles in the editor and as WebGL
+  player scripts. **Area 6's steps are done; its checks are owed** (the photos are the check that
+  matters here: `runall.sh`, `photodiff.sh`).
+
 ## Open after this area
 - The measure placement (`PopulateMeasuresForScreenshots` and its helpers) is still one block
   inside `KitchenScreenshotControl`.

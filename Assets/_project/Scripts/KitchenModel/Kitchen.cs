@@ -38,6 +38,7 @@ namespace KitchenDesign.KitchenModel
     /// </summary>
     public class Kitchen : MelcherMonoBehaviour, IKitchen
     {
+        private KitchenCameraControl _camera;
         private KitchenEvents _events;
 
         public KitchenEvents events { get; } = new KitchenEvents();
@@ -346,10 +347,7 @@ namespace KitchenDesign.KitchenModel
 
         public void LateTick()
         {
-            if (GetCenterOfTargetGroup(out Vector3 targetWorldCenter))
-            {
-                m_OrbitCamera.orbitRoot.position = targetWorldCenter;
-            }
+            this._camera.MoveOrbitRootToCenter();
         }
 
         public void RefreshTopTickerInfo()
@@ -1042,6 +1040,7 @@ namespace KitchenDesign.KitchenModel
         {
             this._interaction = new KitchenInteractionState();
             this._widgets = new KitchenWidgetsControl(this, this._interaction, this._selections, m_TopInfoLabel, m_TickerDimensionsRoot, m_TickerDimensionsPrefab, m_InputCabinetSizeWidget, m_ResizeCabinetWidgetPrefab, m_CabinetResizeWidgetRoot, m_CabinetShelfResizeWidgetRoot, ProFitGlobals.session, ProFitGlobals.clientList);
+            this._camera = new KitchenCameraControl(m_OrbitCamera, m_PhotoCoverView, m_EmptyCameraTargetGroup, m_KitchenCameraTargetGroup, m_Ground);
             this._materials = new KitchenMaterialControl(this, this._interaction, this._selections, m_Ground, m_GroundWood, m_GroundStone, m_ProductVisualDatabase, ProFitGlobals.appProfile, ProFitGlobals.productContent);
             this._drag = new OccupantDragControl(this, this._interaction, m_CameraPhysicsRaycaster, m_ProductPointerInteractionMask, ProFitGlobals.session);
             this._materials.Connect(this._widgets);
@@ -1898,39 +1897,7 @@ namespace KitchenDesign.KitchenModel
 
         internal void RotateCameraToFrontOfCabinet(ICabinet cabinet)
         {
-            // When an occupant is added to a cabinet that the camera is
-            // not facing, the camera is rotated to face it. (Client request.)
-
-            Vector3 cabinetFrontToBack =
-                cabinet.GetTransform().forward;
-
-            Debug.DrawRay(cabinet.GetTransform().position, cabinet.GetTransform().forward, Color.red, 5.0f);
-
-            Vector3 orbitForward =
-                m_OrbitCamera.orbitRoot.forward;
-
-            Debug.DrawRay(m_OrbitCamera.orbitRoot.position, m_OrbitCamera.orbitRoot.forward, Color.green, 5.0f);
-
-            float dot = Vector3.Dot(cabinetFrontToBack, orbitForward);
-
-            if (dot < -0.05f)
-            {
-                float angleToRotateCamera =
-                    Vector3.SignedAngle(cabinetFrontToBack, orbitForward, Vector3.up);
-
-                if (angleToRotateCamera > 0.0f)
-                {
-                    angleToRotateCamera -=
-                        m_OrbitCamera.rotationIntervalInDegrees;
-                }
-                else
-                {
-                    angleToRotateCamera +=
-                        m_OrbitCamera.rotationIntervalInDegrees;
-                }
-
-                m_OrbitCamera.AdjustRotation(-angleToRotateCamera);
-            }
+            this._camera.RotateToFrontOfCabinet(cabinet);
         }
 
         /// <summary>
@@ -2217,9 +2184,7 @@ namespace KitchenDesign.KitchenModel
 
         internal Camera GetCamera()
         {
-            // TODO: Add a better way to get the camera
-            //MelcherLog.LogWarning("TODO: Make GetCamera() better");
-            return Camera.main;
+            return this._camera.GetCamera();
         }
 
         public async UniTask OnOccupantInstantiated((Occupant newOccupant, bool userInitiated) args)
@@ -2732,124 +2697,15 @@ namespace KitchenDesign.KitchenModel
             this._widgets.RecreateResizeWidgets();
         }
 
-        /// <summary>
-        ///     Setup the kitchen camera target group so it tracks/frames all of
-        ///     the (persistent) kitchen's cabinets. If the kitchen doesn't have
-        ///     a cabinet layout, the cameras are updated to look at a default
-        ///     target group.
-        ///     <br /><br />
-        ///
-        ///     A "persistent" cabinet is one that is a corner or end. They are
-        ///     persistent in the sense that the player cannot remove these
-        ///     during normal use, unlike a straight cabinet which the player
-        ///     can remove when using the Sections building method.
-        /// </summary>
         internal void UpdateCameraAndFramingGroups()
         {
-            // Look at the empty group until the target group is setup
-            m_OrbitCamera.virtualCamera.LookAt = m_EmptyCameraTargetGroup.transform;
-            m_PhotoCoverView.LookAt = m_EmptyCameraTargetGroup.transform;
-
-            if (m_CurrentCabinetLayout && m_CurrentCabinetLayout.GetTransform().childCount > 0)
-            {
-                // Setup the camera target group to compose all of the cabinets
-                // into one view
-                Transform layoutTransform = m_CurrentCabinetLayout.GetTransform();
-
-                int childCount = layoutTransform.childCount;
-                List<Transform> transformsToFrame = new List<Transform>(capacity: childCount);
-
-                for (int i = 0; i < childCount; ++i)
-                {
-                    Transform child = layoutTransform.GetChild(i);
-
-                    Cabinet cabinet = child.GetComponent<Cabinet>();
-
-                    if (cabinet.isCornerOrEnd)
-                    {
-                        transformsToFrame.Add(child);
-                    }
-                }
-
-                m_KitchenCameraTargetGroup.Targets.Clear();
-
-                for (int i = 0; i < transformsToFrame.Count; ++i)
-                {
-                    m_KitchenCameraTargetGroup.Targets.Add(
-                        new CinemachineTargetGroup.Target
-                        {
-                            Object = transformsToFrame[i],
-                            Weight = 1.0f,
-                            Radius = 2.0f
-                        }
-                    );
-                }
-
-                m_OrbitCamera.virtualCamera.LookAt = m_KitchenCameraTargetGroup.transform;
-                m_PhotoCoverView.LookAt = m_KitchenCameraTargetGroup.transform;
-            }
-            else
-            {
-                // Clear the old cabinet references
-                m_KitchenCameraTargetGroup.Targets.Clear();
-            }
+            this._camera.FrameLayout(m_CurrentCabinetLayout);
         }
 
-        protected bool GetCenterOfTargetGroup(out Vector3 targetWorldCenter)
-        {
-            targetWorldCenter = Vector3.zero;
 
-            // Calculate the center point of all targets
-            bool foundPoint = false;
-            Bounds bounds = new Bounds();
-            foreach (CinemachineTargetGroup.Target target in m_KitchenCameraTargetGroup.Targets)
-            {
-                if (target == null || !target.Object)
-                {
-                    continue;
-                }
-
-                if (!foundPoint)
-                {
-                    foundPoint = true;
-                    bounds = new Bounds(target.Object.position, size: Vector3.zero);
-                }
-                else
-                {
-                    bounds.Encapsulate(target.Object.position);
-                }
-            }
-
-            if (foundPoint)
-            {
-                // Move the camera orbit to its center point
-                targetWorldCenter = bounds.center;
-                targetWorldCenter.y = 0.0f;
-            }
-
-            return foundPoint;
-        }
-
-        /// <summary>
-        ///     Move the ground mesh to the center of the kitchen. This is
-        ///     intended to be called when the kitchen is first created and
-        ///     immediately before the ground is ever made visible.
-        /// </summary>
-        /// <remarks>
-        ///     The ground is made invisible while the kitchen is being
-        ///     resized as otherwise it would be possible to "walk" the
-        ///     kitchen off of the ground via series of kitchen resizes OR the
-        ///     ground would have to visibly slide to the center of the kitchen
-        ///     as it is resized. It looks much cleaner to avoid both cases
-        ///     by hiding the ground until the player has confirmed the
-        ///     kitchen's size.
-        /// </remarks>
         public void CenterTheGround()
         {
-            if (GetCenterOfTargetGroup(out Vector3 targetWorldCenter))
-            {
-                m_Ground.position = targetWorldCenter;
-            }
+            this._camera.CenterTheGround();
         }
 
         // ====================================================================
