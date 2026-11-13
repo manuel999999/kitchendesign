@@ -1,3 +1,4 @@
+using KitchenDesign.KitchenModel;
 using UnityEngine;
 
 namespace KitchenDesign
@@ -5,6 +6,9 @@ namespace KitchenDesign
     public sealed class DesignerSceneInitializer : SceneInitializer
     {
         [SerializeField] private DesignerScreensControl screens;
+        [SerializeField] private Kitchen kitchen;
+        [SerializeField] private DesignerNavigationUI navigation;
+        [SerializeField] private KitchenSelectionClickControl selectionClick;
 
         public AppSystems Systems { get; private set; }
 
@@ -12,6 +16,7 @@ namespace KitchenDesign
         {
             this.Systems = systems;
             this.screens.Initialize(systems);
+            this.selectionClick.Initialize(this.kitchen, this.navigation);
         }
 
         private void OnDestroy()

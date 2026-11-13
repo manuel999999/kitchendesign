@@ -17149,6 +17149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: KitchenDesign::KitchenDesign.DesignerSceneInitializer
   screens: {fileID: 1519661572}
+  kitchen: {fileID: 1168655925}
+  navigation: {fileID: 109070593}
+  selectionClick: {fileID: 1519661574}
 --- !u!4 &639643568
 Transform:
   m_ObjectHideFlags: 0
@@ -41470,6 +41473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1519661573}
   - component: {fileID: 1519661572}
+  - component: {fileID: 1519661574}
   m_Layer: 0
   m_Name: DesignerScene
   m_TagString: Untagged
@@ -41519,6 +41523,18 @@ Transform:
   - {fileID: 1348877583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1519661574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519661571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd46020fc52104446a7580d9eb7eef0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: KitchenDesign::KitchenDesign.KitchenSelectionClickControl
 --- !u!1 &1527007708
 GameObject:
   m_ObjectHideFlags: 0

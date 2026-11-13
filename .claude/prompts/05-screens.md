@@ -333,6 +333,24 @@ listener-order dump checks every multicast list against B5.0's.
 controls next to their initializers in `Game/`; the helpers by what they are. Namespaces follow the
 folders. One type per file.
 
+- **B5.4b done 2026-11-13.** `KitchenSelectionClickControl` (`_project/Scripts/Game/`), a component
+  on the `DesignerScreensControl` object, added through the editor; `DesignerSceneInitializer`
+  holds the kitchen, the navigation screen and the component (three references, +16 scene lines)
+  and calls its `Initialize`. The click's building-method switch waits for B5.6 and its
+  `onTryHighlightObject` for B5.5. Compiles in the editor and as WebGL player scripts.
+
+**Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
+(areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
+check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.
+
+## Bug list (for the final testing pass)
+1. **Playing `DesignerScene` directly throws a `NullReferenceException` in
+   `CabinetOtherSizeControl.get_value`** (seen 2026-11-12). `ClearForm` turns on the Stoll
+   thickness toggle, so `OnCountertopTypeChanged` reads `m_CountertopThicknessControl.value` before
+   `OnBuildingMethodChanged` has filled its options (`Kitchen.Restart` is async and listens to
+   `restart` ahead of `ForgetCabinetSettings`). Not settled whether it predates area 5: try it on
+   `3d25da55`.
+
 ## Checks for every step
 As area 4, plus the new probe:
 - `rulescheck.cs` (60/0), `buildingrulescheck.cs` and `brandrulescheck.cs` (0 mismatches),

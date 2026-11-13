@@ -59,14 +59,6 @@ namespace KitchenDesign
         private void Update()
         {
             {
-                // Ensure there is only one async instance of this function at
-                // a time because it was originally synchronous and untested
-                // if more than one is active at a time.
-                if (!m_HandleOtherKitchenSelectionsTask.HasValue || m_HandleOtherKitchenSelectionsTask.Value.Status.IsCompleted())
-                {
-                    m_HandleOtherKitchenSelectionsTask = HandleOtherKitchenSelections();
-                }
-
                 // if (Input.GetKey(KeyCode.T))
                 // {
                 //     string tempSavePath = System.IO.Path.GetFullPath(
@@ -225,185 +217,6 @@ namespace KitchenDesign
 
             EventSession.OnMenuSceneRequested.RemoveListener(this.OnMenuSceneRequested);
             EventSession.OnLoggedOut.RemoveListener(this.HideTrialCountdownUI);
-        }
-
-        /// <summary>
-        ///     Check for the user selecting cabinets or clearing their
-        ///     selection. The "other selections" (as referred to by the
-        ///     function's name) are anything other than kitchen occupants.
-        /// </summary>
-        protected async UniTask HandleOtherKitchenSelections()
-        {
-            if (Input.GetMouseButtonDown(0) && !MelcherScreenEvents.IsAnyPointerOverGameObject())
-            {
-                // Close the hamburger menu
-                m_DesignerNavigationUi.CloseHamburgerMenu();
-
-                // Manually check against all cabinets rather than use a
-                // collider box on the cabinets. This is to avoid issues where a
-                // collider box would be unaware of the cut-outs.
-
-                // One downside to this approach is the user can select objects
-                // through a cabinet. We may need to revisit this and/or add
-                // pointer-blocking geo to the inside of the cabinets. TODO
-
-                if (m_Kitchen && m_Kitchen.layout != null)
-                {
-                    Ray pointerRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                    float nearestCabinetDistance = float.PositiveInfinity;
-                    Cabinet nearestCabinet = null;
-
-                    float nearestOccupantDistance = float.PositiveInfinity;
-                    Occupant nearestOccupant = null;
-
-                    // Check if the raycast intersects any of the cabinets
-                    foreach (ElementIndex<Cabinet> i in m_Kitchen.layout.EnumerateCabinets())
-                    {
-                        Cabinet cabinet = i.element;
-
-                        // Some objects are marked as being manually selected.
-                        // Currently, this is just cabinet shelves but the
-                        // goal of this is to avoid the shelf's own collider
-                        // from occluding the colliders of occupants within
-                        // the shelf.
-                        foreach (Occupant occupant in cabinet.occupants)
-                        {
-                            if (!occupant.productVisual.info.requireManualSelection)
-                            {
-                                continue;
-                            }
-
-                            Bounds b = occupant.productVisualContentInstance.clickCollider.bounds;
-                            MelcherLog.Log("size: " + occupant.productVisualContentInstance.clickCollider.bounds.size);
-                            Debug.DrawLine(Vector3.zero, b.min, Color.yellow, 3.0f);
-                            Debug.DrawLine(Vector3.zero, b.max, Color.magenta, 3.0f);
-
-                            if (occupant.productVisualContentInstance.clickCollider.bounds.IntersectRay(pointerRay, out float occupantDistance) &&
-                                occupantDistance < nearestOccupantDistance)
-                            {
-                                Debug.DrawLine(pointerRay.origin, pointerRay.GetPoint(occupantDistance), Color.blue, 5.0f);
-                                nearestOccupantDistance = occupantDistance;
-                                nearestOccupant = occupant;
-                            }
-                        }
-
-                        if (cabinet.GetOrientedBounds().IntersectRay(pointerRay, out float cabinetDistance) &&
-                            cabinetDistance < nearestCabinetDistance)
-                        {
-                            bool allowCabinet;
-
-                            switch (m_Kitchen.selectedBuildingMethod)
-                            {
-                                default:
-                                    throw new System.InvalidOperationException("Unhandled kitchen building method: " + m_Kitchen.selectedBuildingMethod);
-
-                                case KitchenBuildingMethod.Standard:
-                                    allowCabinet = cabinet.cabinetType != CabinetType.Space;
-                                    break;
-
-                                case KitchenBuildingMethod.Sections:
-                                    // Ignore corners, ends, and spacers.
-                                    // `canHaveProducts` currently satisfies
-                                    // every case we need, but its good to be
-                                    // explicit in case products can be added
-                                    // to corners in the future.
-                                    allowCabinet = cabinet.canHaveProducts;
-                                    break;
-
-                                case KitchenBuildingMethod.Catalog:
-                                    if (cabinet.Is(CabinetType.Corner, CabinetModelType.Procedural))
-                                    {
-                                        m_Kitchen.layout.GetCabinetNeighbours(
-                                            cabinet,
-                                            out Cabinet leftCabinet,
-                                            out Cabinet rightCabinet
-                                        );
-
-                                        // Select the blind cabinet attached to
-                                        // this cabinet because it represents
-                                        // the corner.
-                                        if (leftCabinet && leftCabinet.Is(CabinetType.StraightOnLeftOfCorner))
-                                        {
-                                            cabinet = leftCabinet;
-                                            allowCabinet = true;
-                                        }
-                                        else if (rightCabinet && rightCabinet.Is(CabinetType.StraightOnRightOfCorner))
-                                        {
-                                            cabinet = rightCabinet;
-                                            allowCabinet = true;
-                                        }
-                                        else
-                                        {
-                                            allowCabinet = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        allowCabinet =
-                                            cabinet.canHaveProducts ||
-                                            cabinet.Is(CabinetType.StraightOnLeftOfCorner) ||
-                                            cabinet.Is(CabinetType.StraightOnRightOfCorner) ||
-                                            cabinet.Is(CabinetType.Corner, CabinetModelType.Authored);
-                                    }
-                                    break;
-                            }
-
-                            // Select the kitchen cabinets
-                            Debug.DrawLine(
-                                pointerRay.origin,
-                                pointerRay.GetPoint(cabinetDistance),
-                                allowCabinet ? Color.green : Color.red,
-                                5.0f
-                            );
-
-                            if (allowCabinet || cabinet.canOccludeSelectionClick)
-                            {
-                                // If the cabinet isn't allowed and is set to
-                                // occlude selections, we want to save its
-                                // click distance so further away cabinets are
-                                // blocked/ignored for selection.
-
-                                nearestCabinetDistance = cabinetDistance;
-                                nearestCabinet = allowCabinet ? cabinet : null;
-                            }
-                        }
-                    }
-
-                    if (nearestOccupant)
-                    {
-                        MelcherLog.Log("Found nearest occupant : " + nearestOccupant.name, nearestOccupant);
-                    }
-                    else
-                    {
-                        MelcherLog.Log("No manual occupant found");
-                    }
-
-                    if (nearestOccupant)
-                    {
-                        await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(nearestOccupant.gameObject);
-                        return;
-                    }
-
-                    if (nearestCabinet)
-                    {
-                        GameObject objectToHighlight = nearestCabinet.gameObject;
-
-                        if (m_Kitchen.selectedBuildingMethod == KitchenBuildingMethod.Standard)
-                        {
-                            // When not in Sections mode, the entire kitchen
-                            // is selected.
-                            objectToHighlight = m_Kitchen.gameObject;
-                        }
-
-                        await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(objectToHighlight);
-                        return;
-                    }
-                }
-
-                // The raycast hit nothing so clear the selection
-                await EventBridge.Designer.onTryHighlightObject.InvokeIfNonEmpty(null);
-            }
         }
 
         private void OnMenuSceneRequested(MenuSceneRequestInfo info)
@@ -779,8 +592,6 @@ namespace KitchenDesign
         // ====================================================================
 
         protected Cabinet m_CabinetBeingSwapped;
-
-        private UniTask? m_HandleOtherKitchenSelectionsTask;
 
     }   // class DesignerScreensControl
 

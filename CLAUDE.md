@@ -1024,9 +1024,19 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   `DesignerScene` → `DesignerScreensControl` (`screens`: the setup wizard, toolbar, navigation
   and loading screens, the cabinet swap, back to the menu, the product overrides; B5.4a). No scene
   uses the core package's state machine any more. `DesignerScreensControl` does the designer's
-  frame work in its own `Update` (the 3D selection click, the debug keys) and `LateUpdate`
-  (`Kitchen.LateTick`) with `[DefaultExecutionOrder(-10)]`, the order the state machine forwarded
-  them at, so they still run before ordinary scripts. The rest of both scenes is the old app's, except
+  frame work in its own `Update` (the debug keys) and `LateUpdate` (`Kitchen.LateTick`), and
+  `KitchenSelectionClickControl` (B5.4b, `_project/Scripts/Game/`, on the same object, handed the
+  kitchen and the navigation screen by `DesignerSceneInitializer`) does the 3D selection click in
+  its `Update`; both have `[DefaultExecutionOrder(-10)]`, the order the state machine forwarded
+  them at, so they still run before ordinary scripts. The click tests every cabinet's oriented
+  bounds by hand instead of using colliders, because a collider box wouldn't know about the
+  cut-outs (so the user can select through a cabinet; known, not solved). Occupants flagged
+  `requireManualSelection` (shelves) are tested the same way, so a shelf's own collider doesn't
+  hide the products inside it. A cabinet that can't be selected but has `canOccludeSelectionClick`
+  still blocks the cabinets behind it. A procedural Catalog corner selects the blind cabinet next
+  to it, which stands for the corner. In Standard a click on any cabinet selects the whole
+  kitchen. Only one click is handled at a time (the handler was synchronous once and was never
+  tested with two running). The rest of both scenes is the old app's, except
   that `DesignerScene`'s root `Product Visual Content Loader` object is gone (B3.3; its job is
   `ProductVisualContentStatus`).
 - In the editor, playing any other build-list scene gets an `AppInitializer` from the prefab at
@@ -1698,9 +1708,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   aren't on this disk: ask the user to copy them from the old machine. Done today, each step
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
-  (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c. Next: B5.4b (the 3D selection click
-  out of `DesignerScreensControl` into its own component: it uses only the kitchen and the
-  navigation screen's hamburger menu), the designer screens' remaining `ProFitGlobals` reads, then
+  (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b (2026-11-13). Next: the designer screens' remaining `ProFitGlobals` reads, then
   B5.5 (`EventBridge.Designer`; its event map has to be rerun: the workflow was stopped), B5.6,
   B5.7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
