@@ -521,7 +521,7 @@ namespace KitchenDesign.Cabinets
 
                     canLastCabinetSpanReceiveCabinet =
                         !cabinetSpan.IsSpace() &&
-                        midSectionCabinetsInSpan < Const.MaxStraightCabinetsPerSpan;
+                        midSectionCabinetsInSpan < KitchenSizes.MaxStraightCabinetsPerSpan;
                 }
 
                 if (!canLastCabinetSpanReceiveCabinet)
@@ -984,7 +984,7 @@ namespace KitchenDesign.Cabinets
                     // the corner cab from the 90-degree corner based on the
                     // length of the 45-degree corner face.
                     float wedgeOffsetFromWedgedCorner =
-                        ProFitUtility.CalculateCabinetCornerWedgeOrthogonalLength(wedge);
+                        CabinetCornerWedgeMath.CalculateOrthogonalLength(wedge);
 
                     wedgeTransform.position =
                         wedgedCornerCabinetTransform.position + wedgedCornerCabinetTransform.TransformDirection(Vector3.left * wedgeOffsetFromWedgedCorner);
@@ -1638,11 +1638,11 @@ namespace KitchenDesign.Cabinets
                 // different size than Pro-Fit's.
 
                 Vector3 minSizeInMeters = cabinet.minSizeInMeters;
-                minSizeInMeters.x = Const.SectionBuildingMethodMinCabinetLengthInMeters;
+                minSizeInMeters.x = KitchenSizes.SectionBuildingMethodMinCabinetLengthInMeters;
                 cabinet.minSizeInMeters =  minSizeInMeters;
 
                 Vector3 maxSizeInMeters = cabinet.maxSizeInMeters;
-                maxSizeInMeters.x = Const.SectionBuildingMethodMaxCabinetLengthInMeters;
+                maxSizeInMeters.x = KitchenSizes.SectionBuildingMethodMaxCabinetLengthInMeters;
                 cabinet.maxSizeInMeters = maxSizeInMeters;
 
                 // --

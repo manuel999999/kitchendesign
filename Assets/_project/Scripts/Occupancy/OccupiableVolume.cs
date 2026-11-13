@@ -947,7 +947,7 @@ namespace KitchenDesign.Occupancy
                 // Ensure the occupants will fit in the new size (skipping some
                 // occupants that don't block a resize like a bar-top)
                 bool doesFit =
-                    ProFitUtility.IsCuboidContainedWithin(
+                    CuboidChecks.IsCuboidContainedWithin(
                         reanchoredOccupant.cuboid,
                         proposedVolumeOccupiableCuboid
                     );
@@ -1363,7 +1363,7 @@ namespace KitchenDesign.Occupancy
                 );
             bounds.Draw(Color.blue, 3.0f);
 
-            if (!ProFitUtility.IsCuboidContainedWithin(toBeContained: occupantProposedCuboidInDestination, toDoContaining: occupiableCuboid))
+            if (!CuboidChecks.IsCuboidContainedWithin(toBeContained: occupantProposedCuboidInDestination, toDoContaining: occupiableCuboid))
             {
                 MelcherLog.Log("Can't move because occupant cuboid would not be within occupiable volume.", severity: MelcherLogSeverity.Verbose);
                 return false;
@@ -2109,7 +2109,7 @@ namespace KitchenDesign.Occupancy
             }
 
             result.status =
-                ProFitUtility.CuboidOverlapCheck(
+                CuboidChecks.CuboidOverlapCheck(
                     toBeContained: result.occupantCuboidWithinVolume,
                     toDoContaining: occupiableCuboid
                 );
@@ -2239,7 +2239,7 @@ namespace KitchenDesign.Occupancy
             }
 
             result.status =
-                ProFitUtility.CuboidOverlapCheck(
+                CuboidChecks.CuboidOverlapCheck(
                     toBeContained: result.occupantCuboidWithinVolume,
                     toDoContaining: occupiableCuboid
                 );

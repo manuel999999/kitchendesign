@@ -67,7 +67,7 @@ namespace KitchenDesign
             // Check if the player has a saved session ID. This happens when
             // "Remember Me" is checked on the log in screen and the user logs
             // in
-            string apiToken = PlayerPrefs.GetString(Const.PlayerPrefs_Token, null);
+            string apiToken = PlayerPrefs.GetString(KitchenDesign.Session.SessionStatus.RememberMeTokenKey, null);
             if (string.IsNullOrEmpty(apiToken))
             {
                 // No saved data, prompt for sign up or log in

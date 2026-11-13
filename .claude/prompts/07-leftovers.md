@@ -51,6 +51,14 @@ user's `Cloder` folder (`.asmref` files into `KitchenDesign` and `KitchenDesign.
   and `Plugins/WebGL` are deleted (their prefabs and the `.jslib` stay: assets). Compiles in the
   editor and as WebGL player scripts.
 
+- **B7.2 done 2026-11-13.** `Const` → `KitchenSizes`, `StollSizes`, `UiColors.Error`,
+  `SessionStatus.RememberMeTokenKey` (it already had the key); the two editor dialog results in
+  the thumbnail creator are the literals 0 and 1; `Const.Tag` and `DialogResult_Alt` were unused.
+  `ProFitUtility` → `AppLinks`, `OccupantDragMath`, `CuboidChecks`, `JsonVectors`,
+  `CabinetCornerWedgeMath`, `ProductCategorySizes`. 26 files rewritten by a script, `using` lines
+  added to 9. `AssetsMelcher/Scripts` and its `.asmref` are deleted. Compiles in the editor and
+  as WebGL player scripts. **Area 7's steps are done; the checks are owed.**
+
 ## Open after this area
 - `ProFitGlobals` (decision 3) and the editor tools folder (decision 4).
 - Every deferred check of areas 5, 6 and 7.

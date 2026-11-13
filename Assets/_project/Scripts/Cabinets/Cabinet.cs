@@ -478,7 +478,7 @@ namespace KitchenDesign.Cabinets
 
                 if (selectedToeKickType == CabinetToeKickType.Inset)
                 {
-                    toeKickCuboidInMeters.zMin += Const.ToeKickInsetInMeters;
+                    toeKickCuboidInMeters.zMin += KitchenSizes.ToeKickInsetInMeters;
                     toeKickCuboidInMeters.zMin += extraInsetDistanceInMeters.x;
                 }
 
@@ -504,11 +504,11 @@ namespace KitchenDesign.Cabinets
                         {
                             x = m_SizeInMeters.x,
                             y = toeKickHeightInMeters,
-                            z = Const.ToeKickInsetInMeters
+                            z = KitchenSizes.ToeKickInsetInMeters
                         }
                     );
 
-                toeKickCuboidInMeters.xMin += Const.ToeKickInsetInMeters;
+                toeKickCuboidInMeters.xMin += KitchenSizes.ToeKickInsetInMeters;
                 toeKickCuboidInMeters.xMin += extraInsetDistanceInMeters.y;
                 toeKickCuboidInMeters.zMax += extraInsetDistanceInMeters.x;
 
@@ -1286,9 +1286,9 @@ namespace KitchenDesign.Cabinets
 
                 m_CornerColumn.sizeInMeters =
                     new Vector3(
-                        x: Const.CabinetColumnWidthInMeters,
+                        x: KitchenSizes.CabinetColumnWidthInMeters,
                         y: backColumnHeight,
-                        z: Const.CabinetColumnWidthInMeters
+                        z: KitchenSizes.CabinetColumnWidthInMeters
                     );
 
                 if (!Utility.RuntimePrefabs.IsPrefab(gameObject))
@@ -1658,7 +1658,7 @@ namespace KitchenDesign.Cabinets
 
             Vector3 supportSizeInMeters =
                 new Vector3(
-                    x: Const.CabinetColumnWidthInMeters,
+                    x: KitchenSizes.CabinetColumnWidthInMeters,
                     y: columnHeight,
                     z: countertopOverhangInMeters.towardMaxZ
                 );
@@ -2662,7 +2662,7 @@ namespace KitchenDesign.Cabinets
             Vector3 cutOutSizeInMeters = plunge.currentCutOutSizeInMeters;
 
             // TODO: This may need to be a custom horizontal padding depending on the catalog.
-            cutOutSizeInMeters.x = occupiableCuboid.width - Const.OccupantMinimumHorizontalPaddingInMeters;
+            cutOutSizeInMeters.x = occupiableCuboid.width - KitchenSizes.OccupantMinimumHorizontalPaddingInMeters;
 
             plunge.SetCutOutSizeInMeters(cutOutSizeInMeters);
 

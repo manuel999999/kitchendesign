@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.MenuScreens
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void ShowSubscriptionPage(MelcherButton caller)
         {
-            ProFitUtility.OpenSubscriptionLandingPage();
+            AppLinks.OpenSubscriptionLandingPage();
         }
 
         [Header(nameof(UnauthorizedDomainUI))]

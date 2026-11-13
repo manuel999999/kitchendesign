@@ -1171,7 +1171,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
                         float standardCabinetDepthInMeters =
                             buildingRules.UsesBrandCatalog ? this._kitchen.selectedBrandCatalog.standardCabinetDepthInMeters :
-                            buildingRules.CabinetsAreProducts ? Const.Stoll.DefaultCabinetDepth :
+                            buildingRules.CabinetsAreProducts ? StollSizes.DefaultCabinetDepth :
                             throw new Exception("Unhandled building method.");
 
                         return

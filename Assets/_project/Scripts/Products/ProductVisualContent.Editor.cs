@@ -423,7 +423,7 @@ namespace KitchenDesign.Products
             //
             //    originDifferences.y = 0.0f;
             //
-            //    if (!ProFitUtility.IsDistanceAlmostZero(originDifferences.magnitude))
+            //    if (!CuboidChecks.IsDistanceAlmostZero(originDifferences.magnitude))
             //    {
             //        MelcherLog.LogWarning("The scale origin and model origin are not overlapped: " + name, this);
             //    }

@@ -74,7 +74,7 @@ namespace KitchenDesign.Cabinets
 
                 Vector3 cutOutOffsetInMeters =
                     new Vector3(
-                        Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f,
+                        KitchenSizes.OccupantMinimumHorizontalPaddingInMeters * 0.5f,
                         // Move the cuboid down the y-axis by its own height to
                         // make its top flush with the top of the countertop.
                         -cutOutSizeInMeters.y,
@@ -336,14 +336,14 @@ namespace KitchenDesign.Cabinets
                 {
                     // Hit another product. We must account for the minimum
                     // spacing between both occupants.
-                    availableSpaceInMeters -= Const.OccupantMinimumHorizontalPaddingInMeters;
+                    availableSpaceInMeters -= KitchenSizes.OccupantMinimumHorizontalPaddingInMeters;
                 }
                 else
                 {
                     // Hit the edge of the cabinet. We only need to account for
                     // the minimum horizontal spacing for one product (the
                     // shelf).
-                    availableSpaceInMeters -= Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
+                    availableSpaceInMeters -= KitchenSizes.OccupantMinimumHorizontalPaddingInMeters * 0.5f;
                 }
 
                 return availableSpaceInMeters;
@@ -686,7 +686,7 @@ namespace KitchenDesign.Cabinets
             // TODO: Or maybe this isn't necessary. The 2" from the above line
             //       will be more than the 1.5" of the minimum vertical
             //       padding. -Ryan
-            //occupiedCuboid.yMin -= Const.OccupantMinimumVerticalPaddingInMeters;
+            //occupiedCuboid.yMin -= KitchenSizes.OccupantMinimumVerticalPaddingInMeters;
         }
 
         #endregion  // IProductVisualModifyOccupiedCuboidHandler

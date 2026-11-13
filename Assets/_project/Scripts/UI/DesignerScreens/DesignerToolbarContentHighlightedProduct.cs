@@ -339,7 +339,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
             // Determine how far up this product can be nudged.
             float maxYInMeters =
-                occupant.occupiedVolume.resizerCuboid.height - Const.MinMetersFromEdgeAfterNudge;
+                occupant.occupiedVolume.resizerCuboid.height - KitchenSizes.MinMetersFromEdgeAfterNudge;
 
             if (occupant.productVisual.info.anchor.IsAtBottom())
             {
@@ -381,7 +381,7 @@ namespace KitchenDesign.UI.DesignerScreens
             }
 
             // Determine how far down this product can be nudged.
-            float minYInMeters = Const.MinMetersFromEdgeAfterNudge;
+            float minYInMeters = KitchenSizes.MinMetersFromEdgeAfterNudge;
 
             if (!occupant.productVisual.info.anchor.IsAtBottom())
             {
@@ -496,7 +496,7 @@ namespace KitchenDesign.UI.DesignerScreens
         {
             if (m_SelectedObject && m_SelectedObject.TryGetComponent(out Occupant occupant))
             {
-                ProFitUtility.OpenProductUrl(occupant.productInfo.id);
+                AppLinks.OpenProductUrl(occupant.productInfo.id);
             }
         }
 

@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.MenuScreens
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Server;
@@ -128,7 +129,7 @@ namespace KitchenDesign.UI.MenuScreens
         {
             if (m_IsPaymentMode)
             {
-                ProFitUtility.OpenSubscriptionLandingPage();
+                AppLinks.OpenSubscriptionLandingPage();
             }
             else
             {

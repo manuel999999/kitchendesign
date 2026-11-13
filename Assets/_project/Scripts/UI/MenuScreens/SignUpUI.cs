@@ -78,9 +78,9 @@ namespace KitchenDesign.UI.MenuScreens
 
             m_FieldColorBlockDefault = m_BusinessNameField.colors;
             m_FieldColorBlockError = m_FieldColorBlockDefault;
-            m_FieldColorBlockError.normalColor = Const.ErrorColor;
-            m_FieldColorBlockError.highlightedColor = Const.ErrorColor;
-            m_FieldColorBlockError.pressedColor = Color.Lerp(Const.ErrorColor, Color.white, 0.3f);
+            m_FieldColorBlockError.normalColor = UiColors.Error;
+            m_FieldColorBlockError.highlightedColor = UiColors.Error;
+            m_FieldColorBlockError.pressedColor = Color.Lerp(UiColors.Error, Color.white, 0.3f);
 
             m_NameToSelectable = new Dictionary<string, Selectable>()
             {
@@ -166,7 +166,7 @@ namespace KitchenDesign.UI.MenuScreens
 
         protected void ShowTermsOfService(MelcherButton caller)
         {
-            ProFitUtility.ShowTermsAndConditions();
+            AppLinks.ShowTermsAndConditions();
         }
 
         protected void TrySignUp(MelcherButton caller)

@@ -1,3 +1,4 @@
+using KitchenDesign.KitchenModel;
 using KitchenDesign.Shared.Enums;
 using KitchenDesign.Shared.Interfaces;
 
@@ -5,8 +6,8 @@ namespace KitchenDesign.AppRules
 {
     public sealed class GeminiAppRules : IAppRules
     {
-        public float OccupantMinimumHorizontalPaddingInMeters => Const.OccupantMinimumHorizontalPaddingInMeters;
-        public float CabinetColumnWidthInMeters => Const.CabinetColumnWidthInMeters;
+        public float OccupantMinimumHorizontalPaddingInMeters => KitchenSizes.OccupantMinimumHorizontalPaddingInMeters;
+        public float CabinetColumnWidthInMeters => KitchenSizes.CabinetColumnWidthInMeters;
 
         public float? HighBarTopRiserDepthInMeters => null;
         public float? HighBarTopCountertopThicknessInMeters => null;

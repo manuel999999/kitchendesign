@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.DesignerScreens
 {
+    using KitchenDesign.Utility;
     using KitchenDesign.UI.Views;
     using KitchenDesign.CatalogData;
     using Melcher;
@@ -108,7 +109,7 @@ namespace KitchenDesign.UI.DesignerScreens
 
         protected void OnClickServerLink(MelcherButton caller)
         {
-            ProFitUtility.OpenProductUrl(m_SelectedProductServerId);
+            AppLinks.OpenProductUrl(m_SelectedProductServerId);
         }
 
         protected void OnClickAssetLink(MelcherButton caller)

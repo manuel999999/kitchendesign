@@ -411,12 +411,12 @@ namespace KitchenDesign.KitchenModel
 
                         if (leftCabinet && leftCabinet.cabinetType == CabinetType.Corner)
                         {
-                            occupiablePaddingInMeters.left += Const.CabinetCornerOccupiablePaddingInMeters;
+                            occupiablePaddingInMeters.left += KitchenSizes.CabinetCornerOccupiablePaddingInMeters;
                         }
 
                         if (rightCabinet && rightCabinet.cabinetType == CabinetType.Corner)
                         {
-                            occupiablePaddingInMeters.right += Const.CabinetCornerOccupiablePaddingInMeters;
+                            occupiablePaddingInMeters.right += KitchenSizes.CabinetCornerOccupiablePaddingInMeters;
                         }
 
                         cabinet.occupiablePaddingInMeters = occupiablePaddingInMeters;
@@ -499,7 +499,7 @@ namespace KitchenDesign.KitchenModel
                             cabinet.cabinetType == CabinetType.EndRight)
                         {
                             Vector3 endSizeInMeters = cabinet.sizeInMeters;
-                            endSizeInMeters.x = Const.CabinetColumnWidthInMeters * 0.5f;
+                            endSizeInMeters.x = KitchenSizes.CabinetColumnWidthInMeters * 0.5f;
                             cabinet.sizeInMeters = endSizeInMeters;
                         }
 
@@ -512,7 +512,7 @@ namespace KitchenDesign.KitchenModel
                             // wide as their column will render, which is half
                             // the width of a support column because the other
                             // half exists in the neighbouring cabinet.
-                            cornerColumnSizeInMeters.x = Const.CabinetColumnWidthInMeters * 0.5f;
+                            cornerColumnSizeInMeters.x = KitchenSizes.CabinetColumnWidthInMeters * 0.5f;
                             cornerColumnSizeInMeters.z = this._selections.baseCabinetDepthInMeters;
 
                             cabinet.sizeInMeters = cornerColumnSizeInMeters;
@@ -1808,7 +1808,7 @@ namespace KitchenDesign.KitchenModel
                 await layout.ReorderCabinet(heightTransitionCabinet, i.index + 1);
 
                 Vector3 sizeInMeters = heightTransitionCabinet.sizeInMeters;
-                sizeInMeters.x = Const.CabinetColumnWidthInMeters * 0.5f;
+                sizeInMeters.x = KitchenSizes.CabinetColumnWidthInMeters * 0.5f;
                 sizeInMeters.z = this._selections.baseCabinetDepthInMeters;
                 heightTransitionCabinet.sizeInMeters = sizeInMeters;
 
@@ -2268,7 +2268,7 @@ namespace KitchenDesign.KitchenModel
             Cuboid occupiedCuboid =
                 occupant.occupiedVolume.CalculateOccupancyCuboidForOccupant(occupant);
 
-            if (occupiedCuboid.width >= Const.Stoll.MinimumOccupantWidthInMetersCausingBowing)
+            if (occupiedCuboid.width >= StollSizes.MinimumOccupantWidthInMetersCausingBowing)
             {
                 // This product is wide enough to causing bowing. Limit
                 // the cabinet's width.
@@ -2276,7 +2276,7 @@ namespace KitchenDesign.KitchenModel
                 Cuboid occupiableCuboid = cabinet.occupiableCuboid;
 
                 float maximumWidthInMeters =
-                    occupiedCuboid.width - Const.OccupantMinimumHorizontalPaddingInMeters + (2.0f * Const.Stoll.MaximumUnoccupiedPaddingInMeters);
+                    occupiedCuboid.width - KitchenSizes.OccupantMinimumHorizontalPaddingInMeters + (2.0f * StollSizes.MaximumUnoccupiedPaddingInMeters);
 
                 if (cabinet.resizerCuboid.width >= maximumWidthInMeters)
                 {
@@ -2357,7 +2357,7 @@ namespace KitchenDesign.KitchenModel
                     Cuboid occupiedCuboid =
                         occupant.occupiedVolume.CalculateOccupancyCuboidForOccupant(occupant);
 
-                    if (occupiedCuboid.width >= Const.Stoll.MinimumOccupantWidthInMetersCausingBowing)
+                    if (occupiedCuboid.width >= StollSizes.MinimumOccupantWidthInMetersCausingBowing)
                     {
                         // A large enough occupant still exists to cause
                         // bowing. Therefore, do not reset the cabinet's max
@@ -2367,7 +2367,7 @@ namespace KitchenDesign.KitchenModel
                 }
 
                 Vector3 maxSizeInMeters = cabinet.maxSizeInMeters;
-                maxSizeInMeters.x = Const.SectionBuildingMethodMaxCabinetLengthInMeters;
+                maxSizeInMeters.x = KitchenSizes.SectionBuildingMethodMaxCabinetLengthInMeters;
                 cabinet.maxSizeInMeters = maxSizeInMeters;
             }
 

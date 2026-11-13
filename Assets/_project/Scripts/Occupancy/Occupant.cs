@@ -250,7 +250,7 @@ namespace KitchenDesign.Occupancy
 
                 Vector3 colliderSize = visualContent.GetColliderSize();
 
-                if (ProFitUtility.IsDistanceAlmostZero(adjustedCutOutSize.x))
+                if (CuboidChecks.IsDistanceAlmostZero(adjustedCutOutSize.x))
                 {
                     // Use the collider width as the cut-out distance
                     adjustedCutOutSize.x = colliderSize.x;
@@ -262,12 +262,12 @@ namespace KitchenDesign.Occupancy
                     case ProductAnchor.OnFrontAtTop:
                     case ProductAnchor.OnBackAtTop:
                     case ProductAnchor.OnBackAtBottom:
-                        if (ProFitUtility.IsDistanceAlmostZero(adjustedCutOutSize.z))
+                        if (CuboidChecks.IsDistanceAlmostZero(adjustedCutOutSize.z))
                         {
                             adjustedCutOutSize.z = MinimumPlungeDepth;
                         }
 
-                        if (ProFitUtility.IsDistanceAlmostZero(adjustedCutOutSize.y))
+                        if (CuboidChecks.IsDistanceAlmostZero(adjustedCutOutSize.y))
                         {
                             // Use the collider height as the cut-out distance
                             adjustedCutOutSize.y = colliderSize.y;
@@ -276,12 +276,12 @@ namespace KitchenDesign.Occupancy
 
                     case ProductAnchor.OnTopAtFront:
                     case ProductAnchor.OnTopAtBack:
-                        if (ProFitUtility.IsDistanceAlmostZero(adjustedCutOutSize.y))
+                        if (CuboidChecks.IsDistanceAlmostZero(adjustedCutOutSize.y))
                         {
                             adjustedCutOutSize.y = MinimumPlungeDepth;
                         }
 
-                        if (ProFitUtility.IsDistanceAlmostZero(adjustedCutOutSize.z))
+                        if (CuboidChecks.IsDistanceAlmostZero(adjustedCutOutSize.z))
                         {
                             // Use the collider depth as the cut-out distance
                             adjustedCutOutSize.z = colliderSize.z;
@@ -565,7 +565,7 @@ namespace KitchenDesign.Occupancy
                         countertopOverhangInMeters = 0.0f;
 
                         cabinetCutOutMetersToKeepBelowCountertop =
-                            Const.Stoll.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop;
+                            StollSizes.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop;
                     }
                     else if (cutOutMode == CabinetCutOutMode.NoCutOuts ||
                         (cutOutMode == CabinetCutOutMode.NoSmokerCutOuts && m_ProductVisual.info.runtimePrefabCategory == ProductCategorySpecific.Smoker))

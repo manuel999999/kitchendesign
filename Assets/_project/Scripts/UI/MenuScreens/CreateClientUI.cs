@@ -69,9 +69,9 @@ namespace KitchenDesign.UI.MenuScreens
 
             // Create an outline color to mark a field as having an error
             m_FieldColorBlockError = m_FieldColorBlockDefault;
-            m_FieldColorBlockError.normalColor = Const.ErrorColor;
-            m_FieldColorBlockError.highlightedColor = Const.ErrorColor;
-            m_FieldColorBlockError.pressedColor = Color.Lerp(Const.ErrorColor, Color.white, 0.3f);
+            m_FieldColorBlockError.normalColor = UiColors.Error;
+            m_FieldColorBlockError.highlightedColor = UiColors.Error;
+            m_FieldColorBlockError.pressedColor = Color.Lerp(UiColors.Error, Color.white, 0.3f);
 
             // Map the field key names used to communicate with the server to
             // the actual controls

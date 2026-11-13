@@ -1639,6 +1639,46 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     forms while testing.
   `KitchenDesign.Tools.Editor` now references `KitchenDesign.Shared` (for `Units`).
   What stays in `Const` and `ProFitUtility` until its area: the plan, B1.4.
+- **Leftovers** (area 7 of the refactor, 2026-11-13; plan: `.claude/prompts/07-leftovers.md`).
+  **No runtime code is left in `AssetsMelcher`**; its `.asmref` files are gone. What remains
+  outside the house layout: `AssetsMelcher/Editor` (the `KitchenDesign.Tools.Editor` assembly;
+  it moves in one piece with a planned model reimport, because it holds the FBX postprocessor),
+  the user's `Cloder` folder and Weaver's `Procedural Assets/Layers.cs` (each with an `.asmref`).
+  - `_project/Scripts/Utility/` (`KitchenDesign.Utility`) gained: `ElementIndex<T>` (an element
+    with its index, what the layout's enumerations yield), `ComponentsInChildrenEnumerator<T>`,
+    `EnumInfo<T>` (cached enum count and values), `ImperialUnit` (feet, inches and fractions),
+    `Ref<T>`, `RecyclableTween<T>` (one reused DOTween per animated thing), `DOTweenExtensions`,
+    `DOTweenInit`, `DebugDraw`, `CoroutineUtility` (was `ProFitCoroutineUtility`),
+    `UnityExtensions` (was `ProFitUnityExtensions`), `SequentiallyAwaitedDelegate` (see
+    "Events"), `MelcherWebGL` (the C# side of `AssetsMelcher/Plugins/WebGL/MelcherWebGL.jslib`,
+    which stays there as an asset) and `AppLinks` (opens the subscription page, the terms page
+    and, in the editor and development builds only so the address can't leak, a product's
+    dashboard page; it reads `ProFitGlobals`).
+  - `Behaviors/`: `HighlightTarget`, `PCMBandaidFix`, `TransformHelper`, and the cutout
+    authoring helpers `ComponentCutoutHelper`, `StorageCutoutHelper` (its direction enum is
+    `CutoutDirection` in `_projectShared/Enums/`) and `GeminiCutoutPrefabs` (editor-only menu
+    items that drop the helper prefabs of `AssetsMelcher/Miscellaneous` into the scene).
+  - **`Const` and `ProFitUtility` are gone, split by owner** (B7.2):
+    `KitchenModel/KitchenSizes` (the minimum spacing between products: every product's
+    cabinet-space cuboid is widened by 5" and its model shifted half of that to stay centred,
+    1.5" vertically; a cabinet with a corner loses 6" of occupiable width minus half the product
+    padding; a cabinet column is 3" as a whole and drawn as two halves by neighbouring cabinets;
+    Sections cabinets are 18" to 60" long; a nudged product stays 2" from the edge; at most 10
+    straight cabinets per span in Sections, so a span still fits the PDF photos; an inset toe kick
+    sits 1.5" back), `KitchenModel/StollSizes` (products wider than 15" can bow a cabinet much
+    longer than they are, so the cabinet may extend at most 8" past them; the fixed smoker
+    cabinet keeps 2" below the countertop; `DefaultCabinetDepth`),
+    `KitchenModel/OccupantDragMath` (the pointer's position on the drag plane in camera-local
+    space, so the camera may move during a drag; the plane is the cabinet's top when the camera
+    looks more than 65° away from its front, else its front), `Geometry/CuboidChecks` (a size
+    under 1/16" counts as "not entered on the dashboard"; containment with a 1e-8 tolerance for
+    cuboids transformed between spaces), `Save/JsonVectors`, `Cabinets/CabinetCornerWedgeMath`,
+    `_projectShared/Common/ProductCategorySizes` (finishes have no cut-out sizes, so missing
+    ones aren't parse errors), `UI/Views/UiColors.Error`. The Remember Me key is
+    `SessionStatus.RememberMeTokenKey`.
+  - `ProFitGlobals` (`Game/`) is still the forward store: see "App-wide systems". Who still reads
+    it: the kitchen model (built in `Kitchen.Awake`, before any initializer), the skin views and
+    other `Awake`/`OnEnable` code, components made at runtime, `AppLinks`, and edit-mode tools.
 - **App-wide systems** (B1.3 of the refactor, 2026-10-22). Plain classes, constructed and owned
   by `AppInitializer`; collaborators come in through the constructor.
   - `AppSystems` (B5.2, `_project/Scripts/Game/`): the profile (and its options), the rules, the
@@ -1879,8 +1919,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
-  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos, `06-cameras-photos.md`) is done too
-  (B6.1–B6.4). Next: area 7 (leftovers), then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
+  (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos, `06-cameras-photos.md`, B6.1–B6.4) and
+  area 7 (leftovers, `07-leftovers.md`, B7.1–B7.2) are done too. **Next: then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at

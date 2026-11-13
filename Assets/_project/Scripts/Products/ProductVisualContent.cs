@@ -1,5 +1,6 @@
 namespace KitchenDesign.Products
 {
+    using KitchenDesign.KitchenModel;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -697,7 +698,7 @@ namespace KitchenDesign.Products
                 localBounds.center =
                     m_ModelCutOutExtentMin.localPosition +
                     (cutOutSizeInMeters * 0.5f) +
-                    (Const.OccupantMinimumHorizontalPaddingInMeters * 0.5f * Vector3.right);
+                    (KitchenSizes.OccupantMinimumHorizontalPaddingInMeters * 0.5f * Vector3.right);
             }
 
             // Size the collider to the calculated bounds

@@ -908,7 +908,7 @@ namespace KitchenDesign.Photos
             if (cabinetCutOutMode == CabinetCutOutMode.StollFixedSmokerCabinet &&
                 !occupant.productVisual.info.anchor.IsAtBottom())
             {
-                height.end.y -= Const.Stoll.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop + kitchen.countertopThicknessInMeters;
+                height.end.y -= StollSizes.FixedSmokerCabinetCutOutMetersToKeepBelowCountertop + kitchen.countertopThicknessInMeters;
             }
             // Shift the line slightly into the cut-out box
             const float YLabelMetersFromLeft = 1 * Units.Inches2Meters;
@@ -1399,7 +1399,7 @@ namespace KitchenDesign.Photos
                         // from between the mullions.
 
                         float halfColumnWidthInMeters =
-                            Const.CabinetColumnWidthInMeters * 0.5f;
+                            KitchenSizes.CabinetColumnWidthInMeters * 0.5f;
 
                         if (!leftCabinet || !leftCabinet.Is(CabinetType.HighLeftToLowRight))
                         {
@@ -1493,7 +1493,7 @@ namespace KitchenDesign.Photos
                             MelcherLog.Assert(wedgedCornerCabinet.Is(CabinetType.Corner));
 
                             float wedgeOrthogonalLength =
-                                ProFitUtility.CalculateCabinetCornerWedgeOrthogonalLength(leftCornerWedge);
+                                CabinetCornerWedgeMath.CalculateOrthogonalLength(leftCornerWedge);
 
                             cabinetLeftBottomFront.x += wedgeOrthogonalLength;
                             topDownWidthMeasureStart.x += wedgeOrthogonalLength;
@@ -1509,7 +1509,7 @@ namespace KitchenDesign.Photos
                             MelcherLog.Assert(wedgedCornerCabinet.Is(CabinetType.Corner));
 
                             float wedgeOrthogonalLength =
-                                ProFitUtility.CalculateCabinetCornerWedgeOrthogonalLength(rightCornerWedge);
+                                CabinetCornerWedgeMath.CalculateOrthogonalLength(rightCornerWedge);
 
                             cabinetRightBottomFront.x -= wedgeOrthogonalLength;
                             topDownWidthMeasureEnd.x -= wedgeOrthogonalLength;

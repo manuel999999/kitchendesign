@@ -1,3 +1,5 @@
+using KitchenDesign.KitchenModel;
+using KitchenDesign.Shared.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -391,7 +393,7 @@ namespace KitchenDesign.Server
                     productHasCriticalErrors = true;
                 }
 
-                if (ProFitUtility.DoesCategoryUseSizes(product.category))
+                if (ProductCategorySizes.DoesCategoryUseSizes(product.category))
                 {
                     if (!string.IsNullOrWhiteSpace(productWidth) &&
                         !Utility.MeasurementFormat.TryParseImperialString(
@@ -539,7 +541,7 @@ namespace KitchenDesign.Server
                     }
                 }
 
-                product.productPaddingInMeters.top      = Const.OccupantMinimumVerticalPaddingInMeters;
+                product.productPaddingInMeters.top      = KitchenSizes.OccupantMinimumVerticalPaddingInMeters;
                 product.productPaddingInMeters.bottom   = 0.0f;
 
                 float occupantMinimumHorizontalPaddingInMeters = appRules.OccupantMinimumHorizontalPaddingInMeters;

@@ -57,7 +57,7 @@ namespace KitchenDesign.KitchenModel
             Cabinet cabinet = (Cabinet)draggedOccupant.cabinet;
 
             bool didDetectDragPlane =
-                ProFitUtility.CalculateCameraLocalDragPosition(
+                OccupantDragMath.CalculateCameraLocalDragPosition(
                     cabinet,
                     this._kitchen.GetCamera(),
                     eventData,
@@ -156,7 +156,7 @@ namespace KitchenDesign.KitchenModel
                 if (nearestShelf && !ReferenceEquals(nearestShelf, draggedOccupant.occupiedVolume))
                 {
                     bool didDetectDragPlane =
-                        ProFitUtility.CalculateCameraLocalDragPosition(
+                        OccupantDragMath.CalculateCameraLocalDragPosition(
                             nearestShelf,
                             mainCamera,
                             eventData,
@@ -234,7 +234,7 @@ namespace KitchenDesign.KitchenModel
                 if (!nearestShelf && nearestCabinet && !ReferenceEquals(nearestCabinet, draggedOccupant.occupiedVolume))
                 {
                     bool didDetectDragPlane =
-                        ProFitUtility.CalculateCameraLocalDragPosition(
+                        OccupantDragMath.CalculateCameraLocalDragPosition(
                             nearestCabinet,
                             mainCamera,
                             eventData,
@@ -325,7 +325,7 @@ namespace KitchenDesign.KitchenModel
                 OccupiableVolume currentVolume = draggedOccupant.occupiedVolume;
 
                 bool drag =
-                    ProFitUtility.CalculateCameraLocalDragPosition(
+                    OccupantDragMath.CalculateCameraLocalDragPosition(
                         currentVolume,
                         mainCamera,
                         eventData,

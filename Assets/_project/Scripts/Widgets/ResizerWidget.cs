@@ -1,5 +1,6 @@
 namespace KitchenDesign.Widgets
 {
+    using KitchenDesign.KitchenModel;
     using KitchenDesign.Utility;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -143,7 +144,7 @@ namespace KitchenDesign.Widgets
         public void OnBeginDrag(PointerEventData eventData)
         {
             bool hitTest =
-                ProFitUtility.CalculateCameraLocalDragPosition(
+                OccupantDragMath.CalculateCameraLocalDragPosition(
                     m_TargetVolume,
                     m_WorldSpaceCanvas.worldCamera,
                     eventData,
@@ -186,7 +187,7 @@ namespace KitchenDesign.Widgets
         {
             Vector3 cameraLocalDragPosition;
             bool hitTest =
-                ProFitUtility.CalculateCameraLocalDragPosition(
+                OccupantDragMath.CalculateCameraLocalDragPosition(
                     m_TargetVolume,
                     m_WorldSpaceCanvas.worldCamera,
                     eventData,

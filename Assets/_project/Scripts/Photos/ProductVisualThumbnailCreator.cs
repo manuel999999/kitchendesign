@@ -72,13 +72,13 @@ namespace KitchenDesign.Photos
                         alt: "Render As-Is"
                     );
 
-            if (dialogResult == Const.DialogResult_Cancel)
+            if (dialogResult == 1)
             {
                 // Abort
                 return false;
             }
 
-            if (dialogResult == Const.DialogResult_OK)
+            if (dialogResult == 0)
             {
                 if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 {

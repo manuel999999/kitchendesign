@@ -258,10 +258,10 @@ namespace KitchenDesign.Save
                 JsonDict cabinetEntry = new Dictionary<string, object>()
                 {
                     { "cabinet_type", cabinet.cabinetType.ToString() },
-                    { "normalized_anchor_to_previous_section", ProFitUtility.Vector3ToJson(cabinet.normalizedAnchorToPreviousSection) },
-                    { "local_euler_angles", ProFitUtility.Vector3ToJson(cabinet.GetTransform().localEulerAngles) },
-                    { "min_size_in_meters", ProFitUtility.Vector3ToJson(cabinet.minSizeInMeters) },
-                    { "max_size_in_meters", ProFitUtility.Vector3ToJson(cabinet.maxSizeInMeters) },
+                    { "normalized_anchor_to_previous_section", JsonVectors.Vector3ToJson(cabinet.normalizedAnchorToPreviousSection) },
+                    { "local_euler_angles", JsonVectors.Vector3ToJson(cabinet.GetTransform().localEulerAngles) },
+                    { "min_size_in_meters", JsonVectors.Vector3ToJson(cabinet.minSizeInMeters) },
+                    { "max_size_in_meters", JsonVectors.Vector3ToJson(cabinet.maxSizeInMeters) },
                     { "backing_sprite", cabinetBackingSpriteName }
                 };
 
@@ -388,8 +388,8 @@ namespace KitchenDesign.Save
                     {
                         Cuboid cutOutCuboid = occupant.GetCutOutCuboidInVolumeSpace();
 
-                        if (ProFitUtility.IsDistanceAlmostZero(occupiableCuboid.zMin - cutOutCuboid.zMin) ||
-                            ProFitUtility.IsDistanceAlmostZero(occupiableCuboid.zMax - cutOutCuboid.zMax))
+                        if (CuboidChecks.IsDistanceAlmostZero(occupiableCuboid.zMin - cutOutCuboid.zMin) ||
+                            CuboidChecks.IsDistanceAlmostZero(occupiableCuboid.zMax - cutOutCuboid.zMax))
                         {
                             cabinetSquareMeters -=
                                 cutOutCuboid.width * cutOutCuboid.height;
@@ -444,7 +444,7 @@ namespace KitchenDesign.Save
 
                         if (isToeKickInset)
                         {
-                            toeKickLinearMeters += Const.ToeKickInsetInMeters * 2.0f;
+                            toeKickLinearMeters += KitchenSizes.ToeKickInsetInMeters * 2.0f;
                         }
                     }
                     else if (cabinet.cabinetType.IsEnd())
@@ -454,7 +454,7 @@ namespace KitchenDesign.Save
 
                         if (isToeKickInset)
                         {
-                            toeKickLinearMeters -= Const.ToeKickInsetInMeters;
+                            toeKickLinearMeters -= KitchenSizes.ToeKickInsetInMeters;
                         }
                     }
                     else

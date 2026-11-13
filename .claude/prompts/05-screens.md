@@ -413,6 +413,14 @@ check runs once at the end, against `3d25da55`. Suspicious things go in "Bug lis
    `restart` ahead of `ForgetCabinetSettings`). Not settled whether it predates area 5: try it on
    `3d25da55`.
 
+2. **`StollSizes.DefaultCabinetDepth` is `29.0f` with no inch-to-metre factor** (it was
+   `Const.Stoll.DefaultCabinetDepth`, unchanged). The toolbar compares a cabinet's depth in
+   metres with it to decide whether a Sections cabinet has the standard depth, so that test can
+   never be true. Old behaviour, kept; for the user to decide.
+3. Notes for the final pass are also in each step's entry: B5.2 (raises that no longer throw
+   with no listener), B5.5b (a volume without a kitchen), B5.5c (subscription timing, layouts
+   listening only once they have a kitchen).
+
 ## Checks for every step
 As area 4, plus the new probe:
 - `rulescheck.cs` (60/0), `buildingrulescheck.cs` and `brandrulescheck.cs` (0 mismatches),

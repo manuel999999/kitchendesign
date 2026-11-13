@@ -1,5 +1,6 @@
 namespace KitchenDesign.UI.Views
 {
+    using KitchenDesign.Utility;
     using Melcher;
     using System.Collections.Generic;
     using UnityEngine;
@@ -62,7 +63,7 @@ namespace KitchenDesign.UI.Views
 
         protected void OnClickButton(MelcherButton caller)
         {
-            ProFitUtility.OpenSubscriptionLandingPage();
+            AppLinks.OpenSubscriptionLandingPage();
         }
 
         protected IEnumerator<float> PeriodicCountdownRefresh()
