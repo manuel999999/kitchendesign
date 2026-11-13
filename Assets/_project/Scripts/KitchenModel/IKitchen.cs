@@ -22,64 +22,64 @@ namespace KitchenDesign.KitchenModel
     /// </summary>
     public interface IKitchen
     {
-        public KitchenEvents events { get; }
+        KitchenEvents events { get; }
 
-        public KitchenBuildingMethod selectedBuildingMethod { get; }
+        KitchenBuildingMethod selectedBuildingMethod { get; }
 
-        public IBuildingMethodRules buildingRules { get; }
+        IBuildingMethodRules buildingRules { get; }
 
-        public BrandCatalogSO selectedBrandCatalog { get; }
+        BrandCatalogSO selectedBrandCatalog { get; }
 
-        public KitchenTemplateSO selectedKitchenTemplate { get; }
+        KitchenTemplateSO selectedKitchenTemplate { get; }
 
-        public CountertopType selectedCountertopType { get; }
+        CountertopType selectedCountertopType { get; }
 
-        public CabinetToeKickType selectedToeKickType { get; }
+        CabinetToeKickType selectedToeKickType { get; }
 
-        public string selectedDoorStyleName { get; }
-        public string selectedDoorHandleStyleName { get; }
+        string selectedDoorStyleName { get; }
+        string selectedDoorHandleStyleName { get; }
 
-        public CabinetLayout layout { get; }
+        CabinetLayout layout { get; }
 
-        public float cabinetHeightInMeters { get; }
-        public float countertopThicknessInMeters { get; }
-        public float baseCabinetDepthInMeters { get; }
-        public CuboidPadding baseCountertopOverhangInMeters { get; }
-        public float backPanelDepthInMeters { get; }
+        float cabinetHeightInMeters { get; }
+        float countertopThicknessInMeters { get; }
+        float baseCabinetDepthInMeters { get; }
+        CuboidPadding baseCountertopOverhangInMeters { get; }
+        float backPanelDepthInMeters { get; }
 
-        public ProductVisualDatabaseSO productVisualDatabase { get;  }
+        ProductVisualDatabaseSO productVisualDatabase { get;  }
 
-        public IAppRules appRules { get; }
+        IAppRules appRules { get; }
 
-        public CatalogDataStatus catalogData { get; }
+        CatalogDataStatus catalogData { get; }
 
-        public ProductVisualContentStatus productContent { get; }
+        ProductVisualContentStatus productContent { get; }
 
-        public SessionStatus session { get; }
+        SessionStatus session { get; }
 
         /// <summary>
         ///     Return <see langword="true"/> if cabinets can display columns
         ///     at their corners. This is intended to be true when Sections
         ///     building method is enabled, i.e., in the Stoll app version.
         /// </summary>
-        public bool doCabinetsHaveColumns { get; }
+        bool doCabinetsHaveColumns { get; }
 
-        public List<KitchenExtraFeature> selectedExtraFeatures { get; }
+        List<KitchenExtraFeature> selectedExtraFeatures { get; }
 
-        public bool AreProductsForcedToCenterOfCabinets(Cabinet cabinetForRuleset);
+        bool AreProductsForcedToCenterOfCabinets(Cabinet cabinetForRuleset);
 
-        public UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn);
-        public UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisualSO productVisual, ProductVisualContent productVisualPrefab);
+        UniTask<(Material cabinetMaterial, Material countertopMaterial)> GetFinishMaterials(bool allowHighlightToReturn);
+        UniTask<Occupant> InstantiateOccupant(ProductInfo productInfo, ProductVisualSO productVisual, ProductVisualContent productVisualPrefab);
 
 
-        public UniTask TryHighlightObject(GameObject highlightObject);
+        UniTask TryHighlightObject(GameObject highlightObject);
 
-        public void OnOccupantDragBegin(Occupant draggedOccupant, PointerEventData eventData);
-        public void OnOccupantDrag(Occupant draggedOccupant, PointerEventData eventData);
-        public UniTask OnOccupantDragEnd((Occupant draggedOccupant, PointerEventData eventData) args);
+        void OnOccupantDragBegin(Occupant draggedOccupant, PointerEventData eventData);
+        void OnOccupantDrag(Occupant draggedOccupant, PointerEventData eventData);
+        UniTask OnOccupantDragEnd((Occupant draggedOccupant, PointerEventData eventData) args);
 
-        public UniTask OnOccupantInstantiated((Occupant newOccupant, bool userInitiated) args);
-        public UniTask OnOccupantRemovedFromCabinet(Occupant occupant);
+        UniTask OnOccupantInstantiated((Occupant newOccupant, bool userInitiated) args);
+        UniTask OnOccupantRemovedFromCabinet(Occupant occupant);
 
     }   // interface IKitchen
 

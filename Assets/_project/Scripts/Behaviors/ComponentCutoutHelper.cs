@@ -22,7 +22,9 @@ namespace KitchenDesign
 
             if(!bring)
             {
+#if UNITY_EDITOR
                 Debug.LogError($"{BEGIN_NAME} NOT FOUND.");
+#endif
                 return;
             }
 
@@ -35,7 +37,9 @@ namespace KitchenDesign
 
             if(!bring)
             {
+#if UNITY_EDITOR
                 Debug.LogError($"{EXTENT_NAME} NOT FOUND.");
+#endif
                 return;
             }
 

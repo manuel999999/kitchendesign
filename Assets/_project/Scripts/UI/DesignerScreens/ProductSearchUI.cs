@@ -73,7 +73,9 @@ namespace KitchenDesign.UI.DesignerScreens
 
             if(keyword == null || keyword.Length == 0)
             {
+#if UNITY_EDITOR
                 Debug.Log("Search keyword is empty, ignoring search.");
+#endif
                 return;
             }
 

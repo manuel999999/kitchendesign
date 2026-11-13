@@ -1612,7 +1612,9 @@ namespace KitchenDesign.Cabinets
 
                 if(leftCabinet && rightCabinet)
                 {
+#if UNITY_EDITOR
                     Debug.Log($"IS END {leftCabinet.cabinetType.IsEnd()}@{leftCabinet.name} {rightCabinet.cabinetType.IsEnd()}@{rightCabinet.name} {leftCabinetPanelSize} {rightCabinetPanelSize}", this);
+#endif
                 }
 
                 if(m_AppliedMidOfRunPaddingInMetersLeft == 0 && m_AppliedMidOfRunPaddingInMetersRight == 0)

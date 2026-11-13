@@ -14,7 +14,7 @@ namespace KitchenDesign.UI.Views
         ///     coordinates would result in drastically different movement
         ///     speeds.
         /// </summary>
-        const float SlideDistance = 500.0f;
+        private const float SlideDistance = 500.0f;
 
         public static void HalfSlideOut(MelcherUI ui, MelcherUITransition transition, RecyclableTween<Sequence> tween, TweenCallback onComplete)
         {

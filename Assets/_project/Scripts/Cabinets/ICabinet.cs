@@ -18,17 +18,17 @@ namespace KitchenDesign.Cabinets
     /// </summary>
     public interface ICabinet
     {
-        public Vector3 sizeInMeters { get; }
+        Vector3 sizeInMeters { get; }
 
-        public IKitchen kitchen { get; }
+        IKitchen kitchen { get; }
 
-        public Cuboid resizerCuboid { get; }
+        Cuboid resizerCuboid { get; }
 
-        public Cuboid occupiableCuboid { get; }
+        Cuboid occupiableCuboid { get; }
 
-        public Transform GetTransform();
+        Transform GetTransform();
 
-        public Transform GetLocalOrientationForOccupants();
+        Transform GetLocalOrientationForOccupants();
 
     }   // interface ICabinet
 

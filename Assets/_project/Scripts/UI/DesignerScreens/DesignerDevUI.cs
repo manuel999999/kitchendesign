@@ -336,28 +336,46 @@ namespace KitchenDesign.UI.DesignerScreens
                     // models (those not added to the dashboard yet), so sort
                     // those to the front.
                     int compare = a.doesExistInServerDashboard.CompareTo(b.doesExistInServerDashboard);
-                    if (compare != 0) return compare;
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
 
                     // Otherwise, group by category, product group, then
                     // manufacturer.
                     compare = a.category.CompareTo(b.category);
-                    if (compare != 0) return compare;
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
 
                     compare = a.groupId.CompareTo(b.groupId);
-                    if (compare != 0) return compare;
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
 
                     compare = a.manufacturerId.CompareTo(b.manufacturerId);
-                    if (compare != 0) return compare;
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
 
                     string visualIdA = a.visualId ?? "";
                     string visualIdB = b.visualId ?? "";
                     compare = visualIdA.CompareTo(visualIdB);
-                    if (compare != 0) return compare;
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
 
                     string skuA = a.sku ?? "";
                     string skuB = b.sku ?? "";
                     compare = skuA.CompareTo(skuB);
-                    if (compare != 0) return compare;
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
 
                     return a.id.CompareTo(b.id);
                 }

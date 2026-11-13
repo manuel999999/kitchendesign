@@ -28,7 +28,9 @@ namespace KitchenDesign
 
             if(!bring)
             {
+#if UNITY_EDITOR
                 Debug.LogError($"{modelCutoutName} NOT FOUND.");
+#endif
                 return;
             }
 

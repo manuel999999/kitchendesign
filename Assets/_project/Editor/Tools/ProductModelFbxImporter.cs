@@ -21,7 +21,7 @@ namespace KitchenDesign.ToolsEditor
     /// </summary>
     public class ProductModelFbxImporter : AssetPostprocessor
     {
-        void OnPostprocessModel(GameObject modelAsset)
+        private void OnPostprocessModel(GameObject modelAsset)
         {
             ProductEditorOptionsSO editorOptions = ProductEditorOptionsSO.Get();
 

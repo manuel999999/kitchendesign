@@ -164,7 +164,9 @@ namespace KitchenDesign.Widgets
             {
                 // Ignore this drag
                 eventData.pointerDrag = null;
+#if UNITY_EDITOR
                 Debug.Log("Aborting drag");
+#endif
                 return;
             }
 

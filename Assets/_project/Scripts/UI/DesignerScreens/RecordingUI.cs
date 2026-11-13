@@ -12,7 +12,7 @@ namespace KitchenDesign.UI.DesignerScreens
     /// </summary>
     public class RecordingUI : MelcherUI
     {
-        const float TweenDuration = 0.35f;
+        private const float TweenDuration = 0.35f;
 
         // ====================================================================
         // Inspector-serialized members

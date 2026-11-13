@@ -10,7 +10,7 @@ namespace KitchenDesign
         [SerializeField] private List<GameObject> _toDisable;
         [SerializeField] private List<GameObject> _toEnable;
 
-        void Awake() => StartCoroutine(ForcedRoutine());
+        private void Awake() => StartCoroutine(ForcedRoutine());
 
         private IEnumerator ForcedRoutine()
         {
@@ -27,13 +27,17 @@ namespace KitchenDesign
         private void DisableObjs()
         {
             foreach (GameObject obj in _toDisable)
+            {
                 obj.SetActive(false);
+            }
         }
 
         private void EnableObjs()
         {
             foreach (GameObject obj in _toEnable)
+            {
                 obj.SetActive(true);
+            }
         }
     }   // class PCMBandaidFix
 

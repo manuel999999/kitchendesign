@@ -68,7 +68,7 @@ namespace KitchenDesign.UI.MenuScreens
         // Non-serialized fields
         // =====================================================================
 
-        System.Action<bool> m_Callback;
+        private System.Action<bool> m_Callback;
 
     }
 

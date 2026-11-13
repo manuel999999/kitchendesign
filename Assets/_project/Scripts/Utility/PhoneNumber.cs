@@ -15,7 +15,7 @@ namespace KitchenDesign.Utility
     /// </summary>
     public static class PhoneNumber
     {
-        const int MaxPhoneNumberLength = 10;
+        private const int MaxPhoneNumberLength = 10;
 
         /// <summary>
         ///     Returns an unformatted phone number that is <see
