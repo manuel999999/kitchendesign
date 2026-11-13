@@ -179,3 +179,7 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   positions 30 to 100 pixels off and `MainCamera` ended with FOV 14.39 instead of 21.37; a
   second run of the probe gave the usual values (449.71, 339.17; FOV 21.37). Not reproduced,
   cause not found; the camera code's change is renames only.
+- **Notes split, 2026-11-13 (user's decision; the plan's "comments into CLAUDE.md" is dropped).**
+  `CLAUDE.md` 2,222 → about 1,230 lines: "Key systems" moved as it was into nine files under
+  `Docs/systems/`, the two upgrade sections into `Docs/upgrade-to-unity-6.md`. The old code's
+  comments stay in the code. **Plan 08 is finished.**

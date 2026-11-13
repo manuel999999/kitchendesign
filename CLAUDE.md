@@ -428,9 +428,16 @@ makes the commits or asks Claude to; the `Co-Authored-By` trailer is fine here, 
 not removed.
 
 ## Keeping this file current — read this first
-Update this file in the same session as a change, before reporting done. Edit sections in place;
-it describes how the project is, not a changelog. With `CODE_COMMENTS: file-only` the code has no
-comments, so every why lives here, in the section of the system it belongs to. Don't record
+Update the notes in the same session as a change, before reporting done. Edit sections in place;
+they describe how the project is, not a changelog. **Since 2026-11-13 the notes are split (user's
+decision, to keep this file small because it is loaded whole in every session):** this file keeps
+what every session needs (house rules, overrides, gotchas, scene map, Initialize chain, events,
+tools, handover); each area's notes are in `Docs/systems/<area>.md` and the finished upgrade
+history in `Docs/upgrade-to-unity-6.md` (index under "Key systems"). With `CODE_COMMENTS:
+file-only`, new and edited code has no comments and its why goes in the area's file (or in the
+chain, events or gotchas here). The old code's own comments stay in the code until that code is
+rewritten: a comment beside its line is the cheapest place for a why, and moving about 8,700
+comment lines into prose would lose detail. Don't record
 routine fixes, inspector values, or anything the code or git history already shows.
 
 The old project is `/Users/emmanuel/Documents/Unity/Gemini/Unity` (Unity 2022.3.62, URP 14, game
@@ -464,7 +471,7 @@ These carry over from the sessions on the old project.
   it be possible to…"), reply with analysis and one recommendation, not a survey of options.
   Read-only investigation is fine. Edit once they say to go ahead. Trivial edits they ask for
   directly don't need a separate go-ahead.
-- **Explanations go in this file, not in code comments.** In the old project the user asked for no
+- **Explanations go in the notes (this file and `Docs/systems/`), not in code comments.** In the old project the user asked for no
   comments on our changes. Propose `file-only` for `CODE_COMMENTS` when section 0 asks, but let
   the user answer.
 - **Stage by default, commit only when asked.** Stage only the files from the change at hand. The
@@ -484,8 +491,8 @@ These carry over from the sessions on the old project.
   (`KitchenForwardRenderPass`, `KitchenShadowRenderPass`, the Kawase UI blur), which packages and
   plugins fail to compile (`ca.melcher.unity.core`, Addressables, Cinemachine), how many shaders go
   pink, and how long the import takes. Its folder names stay as they are, because 15 C# files in the
-  old project hard-code `AssetsMelcher` paths (21 places). Findings go in "Upgrade test findings"
-  below. Location: not chosen yet (2026-10-20).
+  old project hard-code `AssetsMelcher` paths (21 places). Findings are in
+  `Docs/upgrade-to-unity-6.md`. Location: not chosen yet (2026-10-20).
 - **B. This project.** Changed on 2026-10-20 (user): instead of porting into an empty project,
   the whole old project is copied here from commit `7700e16a8c`, upgraded to 6.6 as its own step,
   checked against the baseline, and then refactored area by area into this file's layout (section
@@ -561,10 +568,16 @@ three app builds, so the rules below replace or adjust the numbered rules they n
   uGUI screen keeps its uGUI structure, but still follows the rest of the house rules: it is
   constructed by its scene initializer and talks to other systems through events, not
   singletons. Screens built from scratch are UI Toolkit from the start.
-- "Key systems" lists every screen and whether it is uGUI or UI Toolkit, so the remaining work is
+- `Docs/systems/screens.md` lists every screen and whether it is uGUI or UI Toolkit, so the remaining work is
   visible.
 - Clicks on the 3D kitchen (selecting cabinets, spans and backings) are "gameplay input" for R-UI-3.
   While uGUI and UI Toolkit screens are both in use, the input check has to block on both.
+
+**Where the notes live (section 7)**
+- Section 7's "Key systems" is an index here; each area's notes are a file in `Docs/systems/`
+  (2026-11-13, user). Conformance item 8 reads "the area's file in `Docs/systems/` and, where
+  they changed, the chain, events, gotchas and handover here are updated". `Docs/` is committed
+  with the work it describes, like `.claude/prompts/`.
 
 **Conformance check (section 6):** item 3 reads "`AppInitializer` or a `<Scene>SceneInitializer`".
 Item 6 reads "no saved-design id or format changed without a migration; no app check outside the
@@ -586,276 +599,6 @@ app-rules layer".
   cutouts for product holes. Not agreed; discuss after step 5.
 - The folder layout for content (cabinet models, product visuals, finishes) inside
   `_projectAssets/`. Not agreed yet.
-
-## Upgrade test findings
-- Before the copy (2026-10-20): the old `Packages/` embeds `com.unity.render-pipelines.universal`
-  and `…core` at **13.1.8** (the manifest says 14.0.12, but an embedded copy wins) and
-  `com.unity.shadergraph` 14.0.11. The URP copy has two local edits: `Runtime/ShadowUtils.cs`
-  adds 8 stencil bits to the shadow map (so `KitchenShadowRenderPass` can stencil cutouts into
-  shadows), and `Shaders/PostProcessing/UberPost.shader` keeps the source alpha through post
-  processing (transparent render textures). Clipping cutouts in the shaders removes the need for the
-  first edit. The second still needs its own Unity 6 answer.
-- The embedded packages can't be diffed against clean copies: packages.unity.com no longer lists
-  URP/core 13.x or Shader Graph 14.0.x, and no local cache has them. The old repo's git history
-  stands in. URP and core came in with the initial commit (2022-06-13), the ShadowUtils edit
-  presumably with them. The UberPost edit is commit `aaad56dc2d` (2022-07-05). Commit `26ef7d2379`
-  ("Upgrade to Unity 2022.3.42f1", 2025-02-26) patched three core files so 13.1.8 compiles on
-  2022.3 (`RendererUtils.RendererList` → `UnityEngine.Rendering.RendererList`) and embedded
-  Shader Graph 14.0.11 whole. Unmarked edits made before the initial commit can't be ruled out.
-- Copy made 2026-10-20 to `/Users/emmanuel/Documents/Unity/GeminiUpgradeTest/` (rsync, 53 s;
-  3.2 GB Assets, 313 MB Packages). Logs `pass1-unchanged.log` and `pass2-no-embedded-urp.log`
-  are in that folder.
-- **Compatibility Mode is gone in 6.6 (checked 2026-10-20 in the 6000.6.6f1 URP 17.6 source).**
-  `RenderGraphSettings.enableRenderCompatibilityMode` is hard-coded to `false`, and
-  `ScriptableRenderPass` has only `RecordRenderGraph`: no `Execute`, `Configure` or
-  `OnCameraSetup` to override. `KitchenForwardRenderPass`, `KitchenShadowRenderPass` and the
-  Kawase blur (`KawaseBlur.cs`) can't run as they are. Cutouts by clipping is required in 6.6, not
-  optional, and the UI blur needs a Render Graph version or a replacement.
-- On first open, 6.6 rewrote the copy's manifest by itself: Addressables 1.22.3 → 2.11.2,
-  Cinemachine 2.10.3 → 6.6.0, URP 14.0.12 → 17.6.0. TextMesh Pro `4.0.0-pre.2` stays listed.
-- Pass 1 (unchanged, 2026-10-20): stopped after 53 s at script compilation; no assets imported.
-  The embedded URP 13.1.8 stayed in use. 46 distinct errors in the first assemblies to compile: 37
-  in `ca.melcher.unity.core` (almost all `Object.GetInstanceID()`, now a compile error "Use
-  GetEntityId instead", in MEC `Timing.cs`; plus `TreeView`/`TreeViewItem`/`TreeViewState`, now
-  generic `TreeView<int>`), 6 in `AssetsThirdParty/SerializeInterfaces` (`GetInstanceID`,
-  `InstanceIDToObject`, `HierarchyProperty`), 1 in the embedded core (`ProbeVolumeAsset.cs`,
-  `[SerializeField]` on a non-field).
-- Pass 2 (embedded URP, core and Shader Graph removed, 2026-10-20): 6.6's own URP, core and Shader
-  Graph 17.6.0 resolve. Stopped after 32 s at script compilation: 54 distinct errors. The same
-  `ca.melcher.unity.core` and SerializeInterfaces errors, 7 in `Assets/KitWright` (not used here),
-  and 2 in ALINE (`AlineURPRenderPassFeature` overrides the removed `Execute`/`Configure`).
-- Pass 3 (patched, products thinned, 2026-10-20). The copy keeps only the Danver and Napoleon
-  files in `ProductVisuals`, `ProductModels`, `ProductMaterials`, `CabinetSectionModels` and
-  `Finishes`, plus what they reference by GUID: 1,039 of 59,629 files, Assets 3.2 GB → 472 MB
-  (script: `thin_products.py`, which was in the session scratchpad). Throwaway patches, in the
-  order the compiler surfaced them:
-  - `GetInstanceID()` → `GetHashCode()` (36 calls). `ObjectSelectorWindow` (SerializeInterfaces)
-    stubbed. UniTask tracker window deleted. KitWright deleted.
-  - ALINE: its old `Configure`/`Execute` removed; it already has a `RecordRenderGraph` path.
-  - `Scene.handle` is now `SceneHandle`, not `int` (19 lines in `ca.melcher.unity.core`:
-    `MelcherSceneManager`, `MelcherSceneRequest`, `MelcherPrefabPool`,
-    `MelcherGlobalStateMachine`). Patched with `.GetHashCode()`; the real fix is
-    `GetRawData()`/`FromRawData(ulong)`.
-  - `TreeView.DefaultStyles` → `TreeView<int>` (`MelcherPreBuildChecks`).
-    `EditorApplication.hierarchyWindowItemOnGUI` is now an error: use
-    `hierarchyWindowItemByEntityIdOnGUI` (`MelcherUIExplodeHierarchy`, hook switched off in the copy).
-  - Game code (`Assembly-CSharp`), Cinemachine 3: namespace `Cinemachine` → `Unity.Cinemachine`,
-    `CinemachineVirtualCamera` → `CinemachineCamera`, `GetCinemachineComponent<T>()` →
-    `GetComponent<T>()`, `m_Lens` → `Lens`, `CinemachineCore.Instance.FindPotentialTargetBrain` →
-    static, `brain.IsLive(cam)` → `CinemachineCore.IsLive(cam)`, `CinemachineTargetGroup.Target`
-    fields `target/weight/radius` → `Object/Weight/Radius`. Files: `DesignerOrbitCamera`,
-    `DesignerOverheadCamera`, `Kitchen.cs`, `KitchenScreenshotManager`. Compiling is not the same
-    as working: the save-photo cameras still need retuning, as the old plan says.
-  - `KitchenForwardRenderPass`, `KitchenShadowRenderPass`, `KawaseBlur`: old methods emptied, so the
-    copy has no cutouts, no cutout shadows and no UI blur. Inside them, `ShadowUtils.GetShadowMapByName`,
-    `ConfigureTarget`, `cameraColorTarget` and `supportsLightLayers` are gone too.
-  - `ProFitBuildProcessor` (editor) uses `UnityEditor.Android.AndroidPlatformIconKind` with no
-    platform guard, so it only compiles while the Android module is installed (it isn't for
-    6000.6.6f1). Neutralised in the copy.
-  - After that, a clean compile and import: **112.5 s** asset refresh, 128 s for the whole run,
-    on the thinned copy. Not comparable to a full catalog.
-- Import-time errors in pass 3, from the old project's own code, not from 6.6 rendering:
-  `ProFitProductModelFbxImporter.OnPostprocessModel` throws NullReferenceException on every model
-  (1,078) because `ProFitEditorOptions.Get()` is null during a first import from an empty Library,
-  and it calls `AssetDatabase.ImportAsset` inside a postprocessor, which 6.6 rejects (121
-  exceptions). `ProductVisualDatabase.ErrorCheck` logs ~3,900 errors for the visuals the thinning
-  removed (expected).
-- Pink check (probe `Assets/Editor/UpgradeProbe.cs` in the copy, writes `upgrade-probe.txt`): 174
-  materials in the copy's Assets, 17 pink, 0 shaders in Assets with compile errors. All 17 are
-  unused: 3 ambientCG materials whose Shader Graph is missing in the old project too, and 14
-  BetterLit `TestMats` pointing at `.surfshader` dev sources (they need the full Better Shaders
-  tool). Shader variants compile when first drawn, so a render of a real kitchen is still the
-  final check.
-- Play mode, `DesignerScene` as offline guest, in the editor (2026-10-20, `com.unity.pipeline`
-  added to the copy only):
-  - **TextMesh Pro fonts break.** The old project pins TextMesh Pro `4.0.0-pre.2` (since commit
-    `26ef7d2379`). Its font assets point at a built-in script (`m_Script: {fileID: 19001, guid:
-    0000000000000000e000000000000000, type: 0}`) that 6.6 doesn't have, so every font asset
-    fails to load and all TMP text has no font: ~1,000 "Please assign a Font Asset" warnings per
-    start plus NullReferenceExceptions in `TMPro.MaterialReference`. 10 font assets are affected:
-    OpenSans ×5, Signika ×2, FontAwesome 6, LiberationSans SDF and its Fallback. Pointing their
-    `m_Script` at 6.6's `TMP_FontAsset` (`guid: 71c1514a6bd24e1e882cebbe1904ce04`, fileID
-    11500000) makes them load with their glyph tables and atlases, and the warnings go away.
-    The editor kept the broken objects in memory until they were unloaded, so after the fix,
-    reload (unload unused assets, reopen the scene) before judging. For the rebuild: retarget or
-    regenerate these 10 assets when the fonts come over; regenerating from the source fonts is the
-    clean route.
-  - **TMP Settings get overwritten.** 6.6 sees the old `TMP Settings.asset` version, opens its
-    Essential Resources importer, and the package's default settings replace the project's
-    (`assetVersion: 2` added). The one setting lost was `m_defaultFontAssetPath`: `Fonts/` became
-    `Fonts & Materials/`. Every icon is a `<font="FontAwesome/Font Awesome 6 Free-Solid-900">`
-    tag that `MelcherLocalizer` builds from `MelcherUnicodeDictionary.GetRichTextTagFontPath()`,
-    which needs that folder, so all icons drew as boxes. Setting it back to `Fonts/` fixed them.
-    Check the TMP settings after any TMP or Unity upgrade.
-  - **Cinemachine 3 (2026-10-20).** The upgrader (`CinemachineUpgradeManager`, run through
-    reflection to skip its dialog) converted the prefabs and scenes with no errors. The orbit view
-    now has `CinemachineHardLockToTarget` + `CinemachineRotationComposer` +
-    `CinemachineGroupFraming`, the overhead views `CinemachineRotateWithFollowTarget`. But the
-    copy's code had been switched to `CinemachineCamera` before the upgrader ran, so five
-    serialized fields lost their camera (`Kitchen.m_PlanView`, `Kitchen.m_PhotoCoverView`,
-    `DesignerOrbitCamera.m_OrbitCamera`, `DesignerOverheadCamera.m_BlendCamera`,
-    `m_OrthoCamera`). They were relinked by name from the old scene file. **Order for the rebuild:**
-    Cinemachine 3 still ships the CM2 classes as deprecated (`Runtime/Deprecated/`), so change only
-    `using Cinemachine;` → `using Unity.Cinemachine;` first, run the upgrader, then move field types
-    and calls to the CM3 API. `CinemachineGroupComposer.m_GroupFramingSize` →
-    `CinemachineGroupFraming.FramingSize`. After this the cameras start without errors; the save
-    photos were not checked.
-  - **The setup wizard didn't show** until the null entries the thinning left in
-    `ProductVisualDatabase.m_SourceEntries` were removed (3,903; `FindProductVisual` throws on a
-    null entry). A thinning artefact, not an upgrade problem.
-  - With that, the designer runs as offline guest: wizard, Straight layout, Add Part menu, all
-    text and icons draw. Adding parts showed an empty list: offline guest uses the ProFit profile,
-    which has no fallback data for the two kept brands.
-  - **Render check.** 32 kept product visuals (8 Danver and 8 Napoleon cabinet sections, 16
-    products; 1,825 renderers) placed in a test scene and rendered with the copy's URP asset: 0
-    material slots on a missing or broken shader, and no pink in a close-up. Shaders in use: URP
-    Lit, URP Unlit and `Scopic/KitchenCutoutStencil` (the cutout stencil boxes, which draw as
-    visible boxes while the Kitchen pass is off). Lighting in the test scene is plain, so this
-    says nothing about how products look in the designer.
-  - DOTween's `DOTween.dll.meta` and `DOTweenEditor.dll.meta` are below the minimum PluginImporter
-    version and get warnings; reimporting or updating DOTween clears it.
-  - The emptied Kitchen render passes make URP warn every frame that they have no
-    `RecordRenderGraph`. `KitchenRendererFeature` was switched off on both renderer assets in the
-    copy to stop the flood. Kawase blur isn't on a renderer asset.
-  - Not from the upgrade: ProFit has no fallback `cabinetCategories`/`compatibilities` JSON
-    (ProFit is the active app profile in the copy), and the ~3,900 `ProductVisualDatabase` "Null
-    entry" errors come from the thinning.
-  - The designer starts and the skybox renders (not pink).
-- **Track A summary (2026-10-20).** The upgrade alone, apart from the parts the rebuild replaces
-  anyway, comes down to:
-  1. The custom URP and its three render passes can't run (no Compatibility Mode).
-  2. A handful of API breaks in `ca.melcher.unity.core` and the game code: instance and scene
-     IDs, `TreeView`, Cinemachine 3.
-  3. TMP font assets from the 4.0 preview and the overwritten TMP settings.
-  4. The Cinemachine scene and prefab upgrade, in the right order.
-  Nothing else in the kept content renders pink. Not measured: a full-catalog import, a real
-  kitchen in the designer, save photos, WebGL.
-
-## Upgrade fixes in the copy (step 3, 2026-10-20)
-Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/upgrade-pass*.log`.
-- **Instance IDs → `EntityId`.** `EntityId` is 64-bit in 6.6 (`ToULong`/`GetRawData`), and the
-  docs list no conversion to `int`. Where an ID is only a runtime key, it is now `EntityId`
-  (`MelcherPrefabPool` / `MelcherPrefabPoolLink` pool IDs, the SerializeInterfaces picker,
-  `MelcherUIExplodeHierarchy` via `hierarchyWindowItemByEntityIdOnGUI`). Compared with
-  `.Equals`, because the docs list no `==` operator for it. Where an API needs an `int` (MEC
-  `Timing.cs`'s instance "layer" keys, `RecordingUI`'s DOTween id), it is
-  `GetEntityId().GetHashCode()`, documented as a 32-bit hash. A collision would merge two
-  objects' MEC singleton keys; accepted as very unlikely, and the old `int` keys could already
-  collide with user-chosen layer numbers.
-- **Scene handles → `SceneHandle`** throughout `ca.melcher.unity.core` (`MelcherSceneRequest`
-  gained a `sceneHandle` field and `FromHandle(SceneHandle)`; the scene manager's handle lists are
-  `List<SceneHandle>`). `SceneHandle == SceneHandle` compiles (`MelcherSceneSwitcher` uses it).
-- **`TreeView` → `TreeView<int>`** in UniTask's tracker window and `MelcherPreBuildChecks`; their IDs
-  are row numbers, not objects. `MelcherHierarchySceneSelect` is all `#if false` and untouched.
-- **SerializeInterfaces' `ObjectSelectorWindow`** no longer uses `HierarchyProperty`: assets come from
-  `AssetDatabase.FindAssets` with the same `t:Type …` filter (then every object at each path that
-  passes the filter), scene objects from walking the loaded scenes' roots.
-- **ALINE:** its old `Configure`/`Execute` are compiled out on URP 17; it already had a
-  `RecordRenderGraph` path.
-- **`KitchenForwardRenderPass`, `KitchenShadowRenderPass`, `KawaseBlur`:** everything from the old
-  `Configure` through `Execute` and its helpers is inside `#if !UNITY_6000_0_OR_NEWER`, kept as the
-  reference for step 5. Until then: no cutouts, no cutout shadows, no UI blur.
-- **Cinemachine:** `-accept-apiupdate` already did the "namespace only" step by itself, by fully
-  qualifying every name as `Unity.Cinemachine.…` and blanking the `using` line. The `using` lines
-  were put back and the qualifiers removed. Then: `CinemachineCore.FindPotentialTargetBrain` and
-  `CinemachineCore.IsLive` (static now), and `Kitchen`'s target group uses `Targets` (a list) with
-  `new CinemachineTargetGroup.Target { Object, Weight, Radius }`. **`Target` is a class in CM3**, so
-  the old `new Target[n]` would hold nulls; track A's patch had that latent bug. The deprecated CM2
-  component types (`CinemachineVirtualCamera`, `CinemachineGroupComposer`, `CinemachineFollowZoom`)
-  are still in use until the upgrader has converted the scenes and prefabs.
-- **Cinemachine scenes and prefabs (2026-10-20).** The upgrader (its five steps run through
-  reflection, skipping the dialog) changed only the 6 scenes, and **still lost the camera
-  references even with the CM2 field types in place**: `Kitchen.m_PlanView`,
-  `Kitchen.m_PhotoCoverView`, `DesignerOverheadCamera.m_BlendCamera`, `m_OrthoCamera` became
-  `fileID: 0` and `DesignerOrbitCamera.m_OrbitCamera` pointed at a stray object. So track A's
-  "order" theory was wrong. What worked: record every Cinemachine reference by object path before
-  upgrading, upgrade, move the fields to `CinemachineCamera` (`GetCinemachineComponent<
-  CinemachineGroupComposer>()` → `GetComponent<CinemachineGroupFraming>()`, `m_GroupFramingSize`
-  → `FramingSize`, `m_Lens` → `Lens`), then relink by path through `SerializedObject` and save the
-  scene. All six references match the pre-upgrade targets.
-- **TMP font assets:** their main object loaded as the built-in TextCore `FontAsset`. Setting
-  `m_Script` to `TMP_FontAsset` through `SerializedObject` replaces the object in memory; reload it
-  and save it (`SetDirty` + `SaveAssetIfDirty`) to write it. All 10 now load as `TMP_FontAsset`
-  with the same glyph counts as the old commit (OpenSans-Bold and the Liberation fallback are
-  dynamic and empty in the old project too). `TMP Settings` kept `m_defaultFontAssetPath: Fonts/`;
-  6.6 moved the project to uGUI 2.6.0 (TMP included) and dropped the 4.0 preview package. Fixing
-  the fonts during a session leaves broken objects in memory: the first play mode afterwards threw
-  4,004 TMP exceptions, one of which killed the sign-in coroutine (`ShowHome` layout). After an
-  editor restart: none.
-- **TMP Essentials imported by the user (2026-10-20).** It replaced everything TMP ships in
-  `AssetsThirdParty/TextMesh Pro/` with the uGUI 2.6.0 versions: the shaders (plus new SpaceWarp
-  and Mobile-2-Pass variants), `LiberationSans.ttf` and its SDF, fallback and materials,
-  `EmojiOne.png`, the default style sheet (the package's own styles only, nothing of the
-  project's lost) and `TMP Settings`. Checked against the old commit; only `TMP Settings` lost a
-  project value, `m_defaultFontAssetPath` (`Fonts/` → `Fonts & Materials/`), which turned every
-  icon into a box. Set back to `Fonts/` through `SerializedObject`; FontAwesome loads through it
-  again. The rest is kept as the 6.6-matching versions. The project's own fonts (OpenSans,
-  Signika, FontAwesome) live elsewhere and were not touched.
-- **The cabinets were drawn only by the old kitchen pass.** The renderers' opaque layer mask
-  (1,335) left out `Cabinet` and `NestedCabinet` (and the cutout layers); `KitchenForwardRenderPass`
-  drew them with the stencil cutouts. With the feature off, cabinets were invisible (legs and
-  shadows only). `Cabinet` and `NestedCabinet` were added to the opaque mask of both renderers
-  (34,615), and for the cutout prototype `CutOutInterior` and `NestedCutOutInterior` too (51,127).
-  With clipping these stay: nothing draws them separately any more. The window layers
-  (`CutOutStencil` 6, `NestedCutOutStencil` 13) were removed with the stencil path on 2026-10-21
-  (their names cleared; some camera culling masks still have those bits, which is harmless).
-- **Visual database lookup in the editor:** `ProductVisualDatabase` builds its runtime lookup on
-  entering play mode only for databases already in memory. After a fresh editor start none was,
-  so every visual lookup failed and designs loaded partly (27755: 4 of 14 cabinets, then a
-  NullReferenceException in `Cabinet.IsYawSimilar`). `InitializeLoadedDatabases` now loads the
-  database through the AssetDatabase first. Builds use `Awake` and were not affected.
-- **`ProFitBuildProcessor`:** the Android adaptive-icon block is inside `#if UNITY_ANDROID`. It only
-  matters when building for Android, which is also the only time the module must be installed.
-- **Ambient light (2026-10-20).** The copy rendered every lit surface darker and warmer than the
-  old app (floor dark grey instead of light blue-grey, cabinets grey-brown instead of near-white);
-  sky, post-processing and lights were the same. Cause: after `DesignerScene` is loaded from the
-  menu in play mode, `RenderSettings.ambientProbe` was **all zero**, so the only light was the warm
-  0.68 `MainLight`. Neither project's scene references a lighting data asset
-  (`m_LightingDataAsset: {fileID: 0}`; the `DesignerScene/LightingData.asset` beside it is unused);
-  2022.3 derived the ambient from the skybox on its own, 6.6 does not for a scene loaded at runtime
-  (in edit mode, 6.6's bake-on-load still fills it). Fix: `DesignerScene.Awake` calls
-  `DynamicGI.UpdateEnvironment()` right after it sets the app's skybox, which recomputes the probe
-  from that skybox (up (0.18, 0.26, 0.34), forward (0.31, 0.45, 0.55)). Runtime rather than a
-  baked lighting data asset because the skybox is chosen per app (`AppSkin.designerSceneSkyboxMaterial`),
-  and a baked probe would only fit one. Measured on design 27755: the four `normal*` save photos
-  went from a mean per-channel difference of 32–35/255 against the old app to 0.0–0.5.
-  `KitchenScreenshotManager` swaps to the measurement skybox for the plan photos without
-  recomputing; those photos match the old app either way, so that is left as it was. Not yet
-  checked in a player build (WebGL and mobile modules aren't installed).
-- **Save-photo cover camera and Cinemachine 3 (2026-10-20).** The step 4 numbers that read "cover
-  camera yaw 88° instead of 44°" were `MainCamera`'s, and showed a different bug. Three causes,
-  three fixes, all in `DesignerScene`:
-  1. **Channels.** CM2 kept each brain to its own vcams by layer: the cover camera's culling mask
-     leaves out layer 11 (`CinemachineMainCamera`: orbit and overhead vcams), `MainCamera`'s leaves
-     out layer 12 (`CinemachinePdfBeautyCamera`: the cover vcam). CM3 picks by Output Channel
-     instead, and the upgrader put everything on `Default` with both brains' `ChannelMask` at -1, so
-     with equal priorities each brain could take the other's vcam (after the photos `MainCamera`
-     sat at the cover view with its lens; the cover camera ignored the layout's
-     `saveCoverCameraYaw`). Now the cover vcam is on `Channel01`, the cover brain listens to
-     `Channel01` only, `MainCamera`'s brain to `Default` only. This also makes
-     `DesignerOverheadCamera`'s `FindPotentialTargetBrain` certain to find `MainCamera`. Any new
-     vcam/brain pair needs its own channel.
-  2. **Hierarchy.** `SavePhotoCoverCameraComposer` (the vcam) was a child of the camera its brain
-     drives. A CM3 vcam writes its result to its own transform, and the brain then turns the parent
-     again, so the error compounded. It is now a sibling of `SavePhotoCoverCamera` under
-     `SavePhotoCoverCameraRotation`, at the camera's local pose, and `KitchenScreenshotManager`
-     finds it through the pivot (`m_SaveCoverCamera.transform.parent`).
-  3. **Aim.** CM2's Group Composer aimed at the group's centre plus `TargetOffset` (0, 1, 0) and
-     only zoomed. CM3's `CinemachineGroupFraming` (lateral adjustment `ChangeRotation`) re-aims at
-     the centre of the group's view-space bounds, which undoes the +1 m (about 4–7° steeper), and
-     applies that correction around the camera's own up axis, which rolls the camera (0.6–3.5°).
-     No Group Framing setting avoids either; a constant `CenterOffset` can cancel the pitch for one
-     kitchen size only. `CameraLevelAimBehavior` (see "Key systems") runs after it and re-aims
-     with world up. It is on the cover vcam and on `OrbitView`.
-  Result on all 8 baseline designs: cover camera position within 0.02 m, yaw within 0.5°, FOV
-  within 0.2°, roll 0, pitch within 0.6° (27755: 1.5° steeper). Front and top-down photo cameras
-  match exactly. Mean pixel difference to the old photos: `normal*`/`plan*` 0.0–3.3/255, cover
-  4–18.5 (a few pixels of shift on high-contrast floors; side by side the framing is the same).
-- **`ProFitProductModelFbxImporter`:** on a first import, `ProFitEditorOptions` (found with
-  `FindAssets`) or its materials may not be loadable yet. Such models are listed in
-  `Library/ProFitPendingModelReimports.txt` and reimported on a later editor tick, or on the next
-  editor load if batch mode quit first. The `SaveAndReimport` that stores the material remap in the
-  model's `.meta` now runs from `delayCall`, because 6.6 rejects reimports during an import.
 
 ## Gotchas
 - **Cabinet doors are found by name, not by GUID.** A GUID walk from a cabinet's visual never
@@ -888,7 +631,7 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   Harmless.
 - Unity 6000.6.6f1 is installed without the WebGL, iOS and Android modules (checked 2026-10-20 with
   `unity editors list`). Install them before any build or WebGL measurement in 6.6.
-- When fonts or UI come over from the old project, see "Upgrade test findings": the 10 TMP font
+- When fonts or UI come over from the old project, see `Docs/upgrade-to-unity-6.md`: the 10 TMP font
   assets need their script retargeted or regenerating, and `TMP Settings` must keep
   `m_defaultFontAssetPath: Fonts/` or every icon breaks. **Importing TMP Essentials (the prompt
   TMP shows, or Window > TextMeshPro) resets it too**; check the path after any such import. When cameras come over, run the
@@ -1222,762 +965,23 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   events; the thumbnail creator's editor variant has none).
 
 ## Key systems
-- **Assemblies (2026-10-20):** `KitchenDesign` (`_project/Scripts`, refs Events, Shared, Doge),
-  `KitchenDesign.Events` (`_projectEvents/Events`, refs Doge, Shared), `KitchenDesign.Shared`
-  (`_projectShared`, refs nothing), `KitchenDesign.Debugging` (`_projectDebugging`, Editor only,
-  autoReferenced off, refs KitchenDesign, Shared). All reference by name. `KitchenDesign` also
-  references `Unity.Cinemachine` (2026-10-20, for `CameraLevelAimBehavior`).
-  **Since phase A of the refactor (2026-10-22) all the old code is in our assemblies and namespace.**
-  Since area 7 (2026-11-13) all runtime code is under `_project/Scripts`; `.asmref` files still
-  put `Procedural Assets` (Weaver's `Layers.cs`) and the user's `Cloder` into `KitchenDesign`,
-  and the old editor tools (`_project/Editor/Tools/` since B8.6, namespace
-  `KitchenDesign.ToolsEditor`, and `Cloder/Editor` through an `.asmref`) are
-  `KitchenDesign.Tools.Editor` (Editor only). Namespaces follow the folders under
-  `KitchenDesign`; every old file has `using Melcher;` for the core package, which
-  keeps `namespace Melcher` until it is replaced by our own library. `KitchenDesign` references the
-  core package, MEC, MiniJSON, UniTask (+Addressables), `DOTween.Modules`, `RecyclingListView`,
-  TMP, uGUI, Addressables (+ its editor assembly, used under `#if UNITY_EDITOR`), URP and
-  `NativeGallery.Runtime`; the list was trimmed to what the compiled assembly uses. `Assembly-CSharp`
-  holds only third-party code. Details and checks: `.claude/prompts/03-refactor.md`, phase A.
-  `KitchenDesign.Products.Editor` (B3.4, `_project/Editor/Products/`, Editor only, autoReferenced
-  off, namespace `KitchenDesign.ProductsEditor`): the product visual tools; refs KitchenDesign,
-  Shared, the core package and its editor assembly, MEC, MiniJSON, Addressables (+ editor),
-  ResourceManager. `KitchenDesign.Tools.Editor` references it (the finish material generator uses
-  `FilteredObjectSelector`, the FBX importer `ProductEditorOptionsSO`); nothing points back.
-- **Kitchen model** (area 4 of the refactor, from 2026-10-23; plan:
-  `.claude/prompts/04-kitchen-model.md`).
-  - Enums (B4.1) in `_projectShared/Enums/`, values as before: `CabinetType`,
-    `KitchenBuildingMethod` (flags, because cabinet prefabs store sets of methods:
-    `m_AllowedFitToProductWidthBuildingMethods`, `m_ForceProductsToCenterBuildingMethods`),
-    `CountertopType`, `CabinetToeKickType`, `KitchenStyle`, `KitchenExtraFeature`, `Extent`,
-    `MeasurementAxis`, `CabinetLocalDirection`, `BrandCatalogRuleset`, `OccupantCuboidStatus`, and
-    the ones that were nested in their class, renamed so they stand on their own:
-    `CabinetResizeAxis` (`Cabinet.ResizeAxis`), `RiserMaterialMode`, `CutOutCubeFace`,
-    `ShelfBottomShape`, `VolumeOverlap` (`OccupiableVolume.IsOverlap`), `MeasureDisplayFlag`,
-    `MeasureMode`, `SlicedMeshSkinScaleMode`, `SlicedMeshAxisScaling`,
-    `ProductVisualEditorSetupStatus`. **The design JSON stores `cabinet_type`,
-    `kitchen_layout_style`, `kitchen_building_method`, `countertop_type`, `toe_kick_type` and
-    `extra_features` by value name**, so those names are frozen (R-DATA-3) as well as the numbers.
-    Assets store the model's enums as `MelcherStableEnum` (by name) or as plain ints, so the type
-    names were free to change. Their pure helpers (`CabinetTypeExtensions`, `KitchenStyleExtensions`,
-    `CabinetLocalDirectionExtensions`) are in `_projectShared/Common/`.
-  - Data and value types (B4.2). ScriptableObjects in `_project/Scripts/Scriptables/`:
-    `BrandCatalogSO`, `KitchenTemplateSO`, `CabinetSectionDoorStyleSO`,
-    `CabinetSectionDoorHandleStyleSO`, `CabinetSectionLegStyleSO`, `CabinetSectionDoorEditorMappingSO`
-    (moved with their `.meta`; 61 assets, names unchanged). The editor mapping is loaded by path
-    (`Resources/CabinetSectionDoorEditorMapping.asset`); the template's create menu keeps the default
-    file name `KitchenTemplate`. `BrandCatalogSO.catalogTag` (`m_CatalogTag`, empty means the
-    catalog name; team commit `c186aad175`, ported 2026-11-12) is what a door visual's
-    `brandCatalogName` is matched against when the thumbnail creator looks up its catalog, so
-    several catalogs can share one set of door visuals; no catalog sets a tag yet. Serializables in
-    `_project/Scripts/Serializables/`:
-    `BackPanelInfo(s)`, `EndPanelInfo(s)`, `CabinetSectionDoorData` (cabinet id → door prefab name),
-    `CabinetSectionDoorHandleData` (cabinet id → handle count), `Price` (a price per currency; only
-    the catalogs' panel prices live in the app, everything else is priced by the server),
-    `DoorStyleInfo`, `FridgePanelInfo` (despite the name, any panel at the end of a fridge or a
-    cabinet, with its price-sheet price), `BuilderSpecificDistance` (a distance that differs between
-    ProFit and Stoll), `SlicedMeshSlice` (its `scaleAlongX/Y/Z` were replaced by `scalingX/Y/Z`;
-    `SlicedMesh` migrates old data when it validates). They bind by field name, so taking them out
-    of their classes changes no asset. Geometry in `_project/Scripts/Geometry/`
-    (`KitchenDesign.Geometry`): `Cuboid`, `CuboidPadding`, `OrientedBounds`, `LineSegment`,
-    `Vector3T`, `VectorUtility`, `CabinetLocalDirectionUtil` (comments kept: moved, not
-    refactored). Checked with `kitchendatacensus.cs` (every serialized value of the 61 assets).
-  - `KitchenSelections` (B4.3, `_project/Scripts/KitchenModel/`, `KitchenDesign.KitchenModel`): the
-    user's choices for the open design (building method, brand catalog, template, layout prefab,
-    door and handle style, end and back panel sizes, countertop type, the three finishes, base
-    cabinet depth, countertop thickness and overhang, toe kick, extra features, analytics key,
-    session start). Owned by `Kitchen`, whose `selected…` properties forward to it, and handed to
-    the parts that read the selections. Public fields, because the load passes several of them as
-    `out` arguments. The back panel depth is the extra depth added to the back of every cabinet when
-    back panels are on (Gemini), kept so it can be removed again and so authored corners' overhang
-    can be corrected. The overhang works because the countertop's 27-slice mesh has a 1" overhang
-    beyond its size on every side but the top; X and Z set the left/right and front/back overhangs.
-    The end panel setters on `Kitchen` toggle: setting the current width again sets it to 0.
-  - **Save and price inputs** (B4.4). `KitchenSaveWriter` (`_project/Scripts/Save/`,
-    `KitchenDesign.Save`) builds the design JSON exactly as `Kitchen.SaveToJson` did (that method now
-    calls it). It writes two independent halves: what the server reads to build the quote PDF
-    (`islandType`, `islandDimensions`, the finish SKUs, the legacy `modelSaveData`, the top and
-    front measurements, `cabinet_list`, `manual_price_sheet_entries`, `price_changes`,
-    `countertop_area`, the disclaimer…) and what the app reads to reload the design (`cabinets`,
-    `cabinet_spans`, `kitchen_layout_style`, …). Some logic is duplicated between them (custom
-    cut-out sizes). An occupant's cut-out size is saved only when it differs from the product's
-    default, so changing a product's cut-out on the dashboard updates old designs. The JSON key
-    strings are the frozen format (R-DATA-3). Areas: ProFit and Stoll count the cabinet finish area
-    without the hidden faces where spans meet; occupants on the front or back subtract their cut-out
-    from it; the countertop area no longer counts backings or plunges, nor subtracts cut-outs
-    (client feedback: the customer pays for the cut-out area too). WeatherStrong fridge and ice box
-    cabinets count only the back for the toe kick.
-  - `KitchenSaveReader` (B4.5, `_project/Scripts/Save/`): loads a design (`LoadFromJson`, the
-    occupants and shelves, the backing by SKU, and the requested save from the client list, which
-    is how Edit Design opens a design). `Kitchen.LoadFromJson` and `TryLoadRequestedSave` forward to
-    it. It still drives `Kitchen`'s building methods (layout, depth, thickness, finishes, widgets,
-    cameras, ground), so it holds the `Kitchen`; that back-reference goes when layout building
-    leaves `Kitchen`. It gets the layout prefabs, backing sprites and backing prefabs from
-    `Kitchen`'s serialized fields, which stay there so the scene doesn't change.
-  - Interaction parts (B4.6, `_project/Scripts/KitchenModel/`): `KitchenInteractionState` (the
-    highlighted object, the volume being resized, the product being dragged; a resize or drag
-    doesn't start while another is running, and the highlight ignores clicks during either),
-    `KitchenWidgetsControl` (cabinet and shelf resize widgets, the size button, the dimension
-    tickers, the top info label), `KitchenMaterialControl` (highlight materials and finishes,
-    including the ground's wood or stone mesh; one class because the highlight reads the finish
-    materials and a finish change re-applies the highlight), `OccupantDragControl` (dragging a
-    product between cabinets and shelves, and the snapping). Constructed in `Kitchen.Awake` with the
-    serialized references, which stay on `Kitchen` so the scene doesn't change, then connected to
-    the widgets (materials and drag call the widgets; the widgets call nothing). They call back into
-    `Kitchen` for the camera, the ground, the cabinet height transitions, fitting a cabinet to a
-    product, rotating the camera to a cabinet, and the centring rule; those go when areas 5 and 6
-    take the cameras and the editing commands. `Kitchen.OnEnable` still makes every
-    `EventBridge.Designer` subscription in the old order, pointing at the parts (plan, decision 2).
-  - Price inputs, `_project/Scripts/Pricing/` (`KitchenDesign.Pricing`): `PriceSheetInputs` (the
-    manual price-sheet lines and the per-product price factors), `IPriceSheetExtras` with
-    `StollPriceSheet` and `GeminiCatalogPriceSheet`, picked by the app rule `PriceSheetExtras`.
-    The prices and SKUs in them are business rules agreed with the clients (sources in the old
-    code's comments, Basecamp threads):
-    - Stoll: a setup fee on every custom kitchen; countertops priced per sq. ft. of overall length
-      × depth (contiguous spans share the corner; the client's own example divided by 35 where it
-      meant 144); cabinet finishes by the summed outside length of the spans in feet; custom
-      cabinets at their price; a corbel per pair of visible back column halves on high bar tops; a
-      backsplash line per foot.
-    - Gemini catalog: Challenger's premium finish package per cabinet; Shaker doors +5% and Deco
-      Grain finishes +25% on cabinet prices (as price factors); handles per door handle; fillers
-      added twice (front and back, "-Melony"); two 45° transition pieces per Napoleon corner (two
-      45s make a 90); Agora corners priced as their own SKU and Agora kamado grill cabinets forced
-      to get end panels on the sides not next to an end cabinet; runtime end and back panels;
-      fridge panels (not on Agora or Toppin; fridge back panels not on American Outdoor Cabinets
-      or Endura); cabinet end panels when the catalog has a SKU; Challenger and Agora Berlin
-      Gardens countertops by linear length at the countertop finish's customer price, when the
-      finish's manufacturer is the catalog's cabinet manufacturer (corners counted once;
-      backsplashes and high bar tops per linear inch, brushed stainless dearer). Challenger used
-      fixed prices by depth band until the team's `dbd1a82fdb` (2026-11-05), ported 2026-11-12;
-      toe kicks (the first
-      few follow the client's table, then one per 96"; WeatherStrong: front + back + 54" for the
-      ends, divided by 96, rounded up); WeatherStrong end vents; no toe kick line for Agora.
-  - **Building-method rules** (B4.7): `IBuildingMethodRules` (`KitchenDesign.Shared.Interfaces`)
-    and `BuildingMethodRules` (`_project/Scripts/BuildingRules/`, `KitchenDesign.BuildingRules`): one
-    class constructed with the method, each rule written as the expression it replaced, so it is
-    exact for every value, including the unset 0 the kitchen holds before `Restart` (every old
-    comparison was false then). Model code asks `kitchen.buildingRules` (on `IKitchen`; `Kitchen`
-    keeps one instance per selected method); the save writer and `RuntimeProductOverrides`
-    construct one. **No model code compares the building method any more**; the screens (area 5)
-    and the photo manager (area 6) still do. `CabinetTypeExtensions.IsBlindCorner` /
-    `IsMidSpanCabinetType` still take the method: they are Shared helpers the screens use too, and
-    they encode the same rule as `HasBlindCorners`. `CabinetLayout.CabinetHasMidSpanCabinetNeighbour`
-    lost its building-method branch: both branches computed the same thing. The rules
-    (Standard / Sections / Catalog):
-    - Catalog only: `UsesBrandCatalog` (the catalog sets cabinet height and depth, the default toe
-      kick, legs under height transitions, fridge back panels and the procedural corner height; the
-      brand catalog screen comes first; the Deco Grain notice; the catalog-adjusted product inset and
-      smoker cut-out height are kept), `CanToggleToeKicks`, `FridgeCabinetsResizableOnlyWhenEmpty`
-      (Gemini's fridge panels), `AppliesMidRunEndPanelPadding`, `HasBlindCorners`,
-      `ClonedSectionsCopyTheirCabinet`.
-    - Sections only (Stoll): `HasCabinetColumns` (columns, column-based size limits, corner shims),
-      `LimitsCabinetSizeToPreventBowing`, `LabelsCabinetsByProductName` (others show the SKU),
-      `BackingRiserUsesCabinetMaterial`, `UsesStollBuilderDistances`, `ShelvesFitWidthToProduct`
-      (plunges sized to their burner and locked while full), `BackingSpansTakeOnlyStandardHeightCabinets`
-      (36"), `ReportsCabinetFinishLinearLength`, `CabinetProductIsOptional`; and
-      `BacksplashesHaveCountertop` false; `DefaultCountertopOverhangInMeters` ½" (else 1").
-    - Standard only (ProFit): `PadsCornersForAdjacentSpans`, `SizesStraightCabinetsToOutsideEdge`
-      (15" outside edge on a new kitchen); and `ReclickingProductSelectsItsVolume` false.
-    - Sections and Catalog: `CabinetsHaveTheirOwnDepth`, `CabinetsAreProducts` (cabinets come from
-      cabinet-section products and a load rebuilds them), `ProductsCenteredInCabinets`.
-    - Standard and Sections: `PricesCabinetFinishByArea`.
-    Checked with `Tools/Baseline/unity6/buildingrulescheck.cs` (every rule against the old
-    expression for the four values: 96 checks).
-    **The screens ask the same rules since B5.6 (2026-11-13)**; no screen compares the building
-    method any more (`BuildingMethodUI` only names the three values its toggles select). Eight
-    rules were added for them: `HasShelfProducts` (not Catalog: no plunge / shelf category),
-    `UserChoosesCabinetDepth` (Standard: the depth control on the sizes screen and the set-width
-    prompt), `HasSingleCabinetDepth` (Sections: 29" only; the others offer 24" to 36"),
-    `HasSecondCountertopThickness` (Sections: Stoll's second thickness control and its own
-    thickness options), `ProductsMoveUpAndDown` (not Sections), `CabinetSectionManufacturerName`
-    ("Stoll" in Sections, else null: the finishes offered are limited to it; Catalog limits them
-    to the catalog's name), `UsesStollHighBarTopOverhang` (Sections: the toolbar sets the high bar
-    top prefab's back overhang to 10", for a 14" deep top with the 1" front overhang and 3" riser;
-    never restored, which can't matter while an app has one method), `SelectsWholeKitchen`
-    (Standard: a click on a cabinet selects the kitchen, and every cabinet but a `Space` can be
-    clicked). The screens reuse the existing ones where the meaning is the same: `UsesBrandCatalog`
-    (brand catalog screen in the wizard, catalog-driven toolbar categories and finishes, the
-    catalog's cabinet depth), `CabinetsAreProducts` (the Add Cabinets category), `CanToggleToeKicks`,
-    `HasCabinetColumns` (a corner's ticker adds the neighbouring span's columns),
-    `CabinetProductIsOptional` (Stoll's procedural section, id 0), `HasBlindCorners` (the click
-    picks the blind cabinet for a procedural corner), `SizesStraightCabinetsToOutsideEdge` (the
-    set-width prompt shows the outside length) and `DefaultCountertopOverhangInMeters`. The two
-    `OnBuildingMethodChanged` handlers read `kitchen.buildingRules` instead of their argument: the
-    kitchen raises the event with its own selection, so they are the same. The check now makes
-    128 comparisons. The photo manager's five checks wait for area 6.
-  - **Brand rules** (B4.8): `BrandRules` (`_project/Scripts/Brands/`, `KitchenDesign.Brands`), a
-    readonly struct built from a catalog's cabinet manufacturer id (`brandCatalog.rules`; a struct so
-    asking costs nothing and a runtime clone of a catalog can't hold a stale copy). It replaces every
-    `Const.Gemini.ManufactersIds` comparison (`Const.Gemini` is gone). Pricing: `PricesToeKicks` (not
-    Agora Berlin Gardens), `PricesFridgeBackPanels` (not American Outdoor Cabinets or Endura),
-    `PricesFridgeEndPanels` (not Agora or Toppin), `PricesCountertopsFromCatalog`,
-    `PricesCornersAsOwnProduct`, `ForcesKamadoGrillEndPanels` (GADA/GADB cabinets),
-    `FridgePanelSkuIncludesCabinetSize` (all four Agora), `PricesAmericanOutdoorBaseEnds`,
-    `PricesBaseEnds` (not Endura or Agora), `UsesEnduraToeKick`. Products:
-    `HeatedOrBurnerProductSidePaddingInMeters(isSmoker)` (Agora 2¼", smokers 0; Toppin, Endura,
-    WeatherStrong, WeatherStrong Select, NatureKast 3"; otherwise unchanged) and the Challenger
-    occupant padding constant (4"). The `BrandCatalogRuleset` checks (`Challenger`, `Napoleon`,
-    `WeatherStrong`) stay as they are: the ruleset is the catalog's own serialized rule key, which
-    the original author designed for this; the manufacturer ids were the workaround, used because
-    American Outdoor, Endura and Agora catalogs share the WeatherStrong ruleset. Deco Grain is a
-    finish manufacturer (140), not a cabinet brand, and stays where it is. The values are code, not
-    asset data (plan, decision 6). Checked with `Tools/Baseline/unity6/brandrulescheck.cs` (every
-    rule against the old expression for every id in the old constants and every catalog asset).
-  - `DoorStyleLookup` (B4.8, `_project/Scripts/CatalogData/`): the door-style lookup that was the
-    static `CabinetSectionDoorUtility`, now an instance owned by `CatalogDataStatus` (`DoorStyles`);
-    the brand catalog screen hands it to `BrandCatalogSO.PopulateRuntimeData`, other code reaches
-    it through the catalog data it was handed. It maps a cabinet section id to the visual id whose doors
-    it uses, from every catalog's `CabinetSectionDoorStyleSO`, and finds a door visual by name
-    (`ProductVisual_<cabinet>@<door style>^`, falling back to the catalog's default style). Kept
-    exactly as it was, two quirks included: a catalog is never recorded as initialized, so its
-    mapping is re-added on every call (an overwrite with the same values), and the lookups are null
-    until the first catalog initializes them.
-  - **`Kitchen.instance` and the app systems** (B4.9). No model or photo code uses `Kitchen.instance`
-    any more: `CabinetShelf.isResizable` reaches the kitchen through its occupant's cabinet, the
-    shelf's cuboid callback through the volume testing it (walking up to the cabinet),
-    `CabinetBacking.OnCabinetMaterialsChanged` takes the kitchen from its callers (the span, the
-    material control, the photo manager), and the photo manager passes its kitchen down. **The static
-    is gone since B5.4c (2026-11-12):** `DesignerScreensControl.Initialize` hands the kitchen to the
-    toolbar, the setup wizard's shape, template and sizes screens, the white-label client info, the
-    product search and the about-product prompt; `KitchenWidgetsControl` hands it to each cabinet
-    ticker it creates; `BrandCatalogUI` reads the product visual database through its own
-    serialized reference to the same asset (its use runs in `Awake`, before any initializer). Tool
-    snippets find the kitchen with `FindFirstObjectByType`. The classes area 4 created
-    (the three controls, the save writer and reader, the Gemini price sheet) take the app systems
-    they read (session, client list, catalog data, app profile, app rules, product content) in their
-    constructors; `Kitchen.Initialize` hands them over from the `AppSystems` it is given (B8.1).
-    Model objects ask their kitchen (B8.2): `IKitchen` has `appRules`, `catalogData`,
-    `productContent` and `session`; `Cabinet`, `CabinetLayout`, `CabinetSpan` and `Occupant` read
-    them there, `CabinetSectionDoorHandle.InstantiateHandle` takes the door-style lookup,
-    `KitchenWidgetsControl` gives each `ResizerWidget` the session and each `CabinetTickerWidget`
-    the session and the rules. `EndPanelInfo` and `FridgePanelInfo` have `GetDealerPrice(currency)`
-    (the price sheet passes the user's currency), and `BrandCatalogSO.info` is gone: the toolbar
-    looks the server's catalog record up in `CatalogDataStatus`. The model's profile, options and
-    skin reads (default materials, highlight materials, measure colours) go to `AppProfileStore`
-    (B8.4): a cabinet made in edit mode by the thumbnail creator has no kitchen to ask.
-  - **Where the model's files are** (B4.10, `_project/Scripts/`, namespaces follow the folders):
-    `KitchenModel/` (`Kitchen`, `IKitchen`, `KitchenCutoutClipping`, `KitchenSelections`,
-    `KitchenInteractionState`, the three controls), `Cabinets/` (`Cabinet`, `CabinetSpan`,
-    `CabinetLayout`, `CabinetBacking`, `CabinetShelf`, `CabinetCutOut`, `ICabinet`,
-    `CabinetSectionDoorHandle`, `CabinetSectionInfo`, `CabinetSectionLeg`), `Occupancy/`
-    (`Occupant`, `OccupiableVolume`, `VolumeOccupantResult`, `IOccupantListener` and the three handler
-    interfaces, the two cuboid visualisations), `Measures/` (`Measure`, `MeasurementOverlayManager`),
-    `Widgets/` (`KitchenWidget`, `ResizerWidget`, `ButtonWidget`), `Products/`
-    (`ProductVisualContent` and its editor partial), `Geometry/` (`SlicedMesh` with the structs),
-    `Save/`, `Pricing/`, `BuildingRules/`, `Brands/`, `CatalogData/DoorStyleLookup`. Moved with their
-    `.meta` (scenes and prefabs bind by GUID, so no asset changed); comments kept in files that only
-    moved.
-- **Cameras and photos** (area 6 of the refactor, from 2026-11-13; plan:
-  `.claude/prompts/06-cameras-photos.md`).
-  - `KitchenScreenshotControl` (`_project/Scripts/Photos/`, `KitchenDesign.Photos`; was
-    `KitchenScreenshotManager`): takes the save photos (`TakeScreenshots(kitchen)` returns a
-    `ScreenshotGallery`: the cover, the top-down photo and its plan, and a front photo and plan per
-    span) and places the measures for the plan photos. The PDF photo size is 1920×666 (an aspect
-    that fits the PDF page) and the plan size 1920×1360 (fills the page).
-    `SkipScreenshotInEditor` is a development switch that skips the renders to debug the measure
-    lines faster. Out of it since B6.1: `ScreenshotGallery` (`Serializables/`; serializable only
-    so the pictures can be inspected in the editor), `CameraCapture.TakeScreenshotFromCamera`
-    (renders a camera to JPG bytes; the hamburger menu's Export JPG uses it too),
-    `OccupantNeighbourFinder` (for every occupant, its nearest neighbour in each direction visible
-    from the top and from the front, then the unique pairs to measure between; a pair's second
-    occupant is null when the measure runs to the cabinet's edge) with its types
-    `OccupantNearestNeighbours` (arrays indexed by `CabinetLocalDirection`, oversized so the enum
-    value is the index), `OccupantAndDistance`, `OccupantMeasurementPair`, and
-    `MeasurementForScreenshot` (a placed measure, the angle it shows in, and its span).
-    It gets the session (for the user's units) through `Initialize` from
-    `DesignerScreensControl`, which holds it and uses it for the F6 debug key (B6.2), and asks
-    the building-method rules; `MeasuresOnlyProductCabinets` (Sections) was added for it: ends,
-    transitions and the straights beside a corner have a width in Sections but get no measure.
-  - `PlanMeasurePlacement` (B8.5, 2026-11-13, `Photos/`, a plain class): places the measures
-    for the plan photos. `PopulateMeasuresForScreenshots` resets the pooled measures and places
-    one set per span (cabinet and countertop sizes, pushed 4" outside the cabinet so the lines
-    don't draw over it) and one per occupant pair, each tagged with the angle and span it shows
-    in; the static `SetupOccupantCutOutMeasurements` lays out an occupant's own cut-out lines.
-    `KitchenScreenshotControl` keeps the cameras, the renders, the visibility and material
-    swaps around each photo, and the Napoleon watermark. It still instantiates the pool of
-    measures in `Awake` (300, from its serialized prefab and count) and builds the placement in
-    `Initialize` with that pool, its three serialized axis colours and the session (the user's
-    units). The colours are read once there, so changing them in the inspector during play no
-    longer affects the next photos.
-  - `ScreenshotAngle` (`_projectShared/Enums/`, values as before: None, Cover, Top, Front, Back)
-    and `IsPlanAngle` (`_projectShared/Common/`: top, front or back).
-  - `ProductVisualThumbnailCreator` (`Photos/`): static editor-tool code that renders product
-    thumbnails in the screenshot scene. It reads `AppProfileStore.Profile`: it runs in
-    edit mode, where nothing constructs systems.
-  - Cameras (`_project/Scripts/Cameras/`, `KitchenDesign.Cameras`): `OrbitCameraControl` (was
-    `DesignerOrbitCamera`), `OverheadCameraControl` (was `DesignerOverheadCamera`).
-    `SpinBehavior` (`Behaviors/`, was `RotateCamera`) turns the object it is on.
-  - `KitchenCameraControl` (B6.3, `_project/Scripts/KitchenModel/`): the kitchen's camera and
-    framing code, a part of `Kitchen` like area 4's (constructed in `Kitchen.Awake` with the orbit
-    camera, the cover virtual camera, the two target groups and the ground, whose serialized
-    fields stay on `Kitchen`; `Kitchen`'s old methods forward to it). `FrameLayout` points the
-    orbit and cover cameras at the empty target group while the kitchen target group is rebuilt
-    (a target group can't be changed while cameras look at it), then fills it with the layout's
-    corner and end cabinets (weight 1, radius 2) and points the cameras back.
-    `RotateToFrontOfCabinet` turns the orbit to face a cabinet the camera is behind when an
-    occupant is added or dropped there (a client request), in steps of the orbit's rotation
-    interval. `MoveOrbitRootToCenter` runs every frame from `Kitchen.LateTick`.
-    `CenterTheGround` moves the ground under the kitchen's centre; the ground is hidden while a
-    new kitchen is being sized, so it never has to slide or be walked off, and is centred just
-    before it is shown. `GetCamera` is still `Camera.main`.
-- **Products and visuals** (area 3 of the refactor, 2026-10-22; plan: `.claude/prompts/03-refactor.md`,
-  "Area 3").
-  - Enums (B3.1) in `_projectShared/Enums/`, values as before: `ProductCategory` (the server's
-    product type, mapped from its strings by `CatalogJson`; it decides the menu a product is in),
-    `ProductCategorySpecific` (a finer, fixed category set on the visual, so runtime visuals can
-    be adjusted before any product that uses them is known; fridges, smokers and ice boxes have
-    their own values here), `ProductAnchor`, `FlooringType` (which floor mesh a floor finish
-    uses), `CabinetModelType` (procedural 27-slice cube or authored model),
-    `CabinetSectionFootingType` (authored Catalog cabinets: on the ground, on visible legs,
-    floating, or floating with the air below occupiable), `CabinetCutOutMode` (was nested in
-    `ProductVisualInfo`): `StollFixedSmokerCabinet` keeps the front countertop as a bridge in
-    front of the smoker and lowers the cabinet cut-out (sturdier in the real cabinet), `NoCutOuts`
-    is Challenger's ceramic cabinets with an open shelf under the countertop for a smoker,
-    `NoSmokerCutOuts` the same for smokers only. All of these are stored in assets as
-    `MelcherStableEnum` (by name), so renaming a value breaks assets while reordering doesn't;
-    keep both stable anyway. Their pure helpers (`IsOnTop`, `IsFinish`, `IsBacking`,
-    `ToProductCategory`, …) are in `_projectShared/Common/`.
-  - `ProductVisualDatabaseEntry.uxml` names `ProductAnchor` as text
-    (`KitchenDesign.Shared.Enums.ProductAnchor, KitchenDesign.Shared`).
-  - The data (B3.2). `ProductInfo` (`_project/Scripts/Server/Data/`, `KitchenDesign.Server`):
-    the server's product record. `id` is the server's insert id and the reliable key; `sku` is
-    human-readable, was the key in old saves and can change on the dashboard (hence
-    `ProductIdRemapDatabaseSO`). `baseProductId` makes a product a variant (the toolbar shows a
-    family as one button). `productSizeInMeters` is used by backings, preset-size authored
-    cabinets and products with `doLayoutUsingProductSize` (a few special cases: Fire Magic's
-    pizza oven, Blaze's griddle), which occupy their product size instead of their cut-out.
-    `doesExistInServerDashboard` is false for the editor's fake products. The copy constructor
-    makes the runtime copies, and an editor-only static constructor asserts the field count (26)
-    so a new field can't be left out of it.
-  - The visual assets, `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`):
-    `ProductVisualSO` (an info plus the address of its content prefab), `ProductVisualInfoSO`
-    (the data that stays loaded: id, thumbnail, anchor, section flags), `ProductVisualDatabaseSO`
-    (the source list; it makes a runtime clone of every visual and info, in `Awake` in builds and
-    on entering play mode in the editor, so building methods and brand catalogs can change the
-    clones and still read the originals). The asset files keep their old names
-    (`ProductVisual_<id>^.asset` for the visual, without `^` for the info and the content prefab);
-    the door lookup builds names from them (`…@<door style>^`), so those names are data. The
-    database's own note: editing prefabs from editor scripts can leave loaded prefab references
-    stale (reporting null) until reloaded, so Domain Reload stays on in play mode.
-    `ProductVisualLookups.FindById` (`_project/Scripts/Products/`) finds a visual in a given list.
-  - **Content loading (B3.3)**, `_project/Scripts/Products/` (`KitchenDesign.Products`).
-    `ProductVisualContentStatus` (plain class, constructed by `AppInitializer`) loads a visual's content prefab through Addressables
-    once per address, keeps the handle, makes a runtime copy of the prefab
-    (`LoadedProductContent`: source and runtime prefab), and raises `ContentLoaded` once per
-    loaded content. `LoadContent` returns the runtime copy for a runtime visual and the source
-    prefab for a source visual. `Purge` releases every handle; it runs when the designer scene
-    goes (`DesignerSceneInitializer.OnDestroy`) and when `Kitchen` builds a new layout. The
-    runtime copies (in `DontDestroyOnLoad`) are not destroyed by a purge, as before. Why
-    `ContentLoaded` is a C# event and not an `Event<Domain>`: its payload is the content prefab, a
-    `KitchenDesign` type that can't move to Shared. Checked with
-    `Tools/Baseline/unity6/contentprobe.sh` (27755: 18 contents loaded, 18 events, 0 after
-    returning to the menu; 32569: 8).
-  - `RuntimeProductOverrides` (static): `RebuildRuntimeProducts` (on a building method change:
-    new runtime copies of every source product, then the app rules, or in non-Catalog methods the
-    visual's inset reset to its source value; Catalog without app overrides changes nothing),
-    `ApplySmokerCutOutHeight` (when content loads, in Catalog or when the app rules ask: a smoker
-    that plunges from the top gets a 14" cut-out, its model moved to match),
-    `ApplyBrandCatalogPadding` (on a brand catalog change: products' side padding per catalog;
-    Challenger's fridges ¼", its other products except smokers half the Challenger occupant
-    padding; fridges at least 1/128" against z-fighting next to open shelves; shelves 0; heated
-    and burner products 2¼" for Agora (smokers 0) and 3" for Toppin, Endura, WeatherStrong,
-    WeatherStrong Select and NatureKast). `DesignerScene` keeps its event subscriptions and calls
-    these, so they run in the same order among the other listeners as before. The brand-specific
-    numbers are brand rules and move onto `BrandCatalog` in area 4.
-  - Addressables: `AssetAddress<T>` and `AssetAddressData` (`_project/Scripts/Serializables/`) hold
-    an address and, in the editor, the asset; unlike `AssetReferenceT` they own nothing, so
-    passing one around never raises the question of who releases the load. Addresses are asset
-    paths. `IAssetAddress` (for the drawer) and `AddressablesForEditor` (editor-only, find or
-    make an entry, create groups packed separately) are in `_project/Scripts/AddressableContent/`
-    (`KitchenDesign.AddressableContent`: a namespace ending in `.Addressables` would hide Unity's
-    `Addressables` class in our code).
-  - Editor tools (B3.4), `KitchenDesign.Products.Editor`: the database window
-    (`ProductVisualDatabaseManager` and its two UXML, which it gets through its script's default
-    references, so they move with the `.meta`), the database inspector, the user's Cloder tools for
-    it (`ProductVisualDatabaseSetsManager`, `…StatesManager`, `…EntryFile`; their `EditorPrefs`
-    key keeps its old `Melcher.` text, or the set-aside list is lost), the visual tools (dump,
-    mismatched models, reserialize, insulated-jacket fix, `ProductVisualEditorHelp`), the
-    `AssetAddress` drawer, `AddressableGroupMenuCommand` (was `ProFitAddressableGroupMenuCommand`;
-    menu paths unchanged), `FilteredObjectSelector`, and `ProductEditorOptionsSO` (was
-    `ProFitEditorOptions`; the asset `_project/Editor/Tools/ProFitEditorOptions.asset` is found by
-    type). Comments in these files stay: they were moved, not refactored. **The FBX import
-    postprocessor is `ProductModelFbxImporter` in `KitchenDesign.Tools.Editor`** (was
-    `ProFitProductModelFbxImporter`). Unity counts the model postprocessors' type names among
-    each model's import dependencies. Measured in B8.6 (2026-11-13): moving its file to another
-    folder (same GUID, class, namespace and assembly) reimported nothing; renaming the class and
-    its namespace reimported every model once (1,159 actual imports, 20 s on the thinned copy),
-    with no `.fbx.meta` changed. Rename or re-namespace it again only when that reimport is
-    acceptable on the full catalog.
-  - Checked with `Tools/Baseline/unity6/visualscensus.cs` (edit mode): every source visual's
-    content address and every public value of its info, written to
-    `GeminiBaseline/visualscensus-latest.txt` with a hash; it finds the types by name, so it
-    works across the renames. Reference before area 3: 901 entries, hash `D72B3E9CB18746DF`
-    (output in Unicode NFC, see Gotchas).
-- **App and data assets** (B2.3 of the refactor, 2026-10-22): `AppProfileSO`, `AppOptionsSO`
-  (+ its `.Editor` partial), `GroupDatabaseSO`, `ProductIdRemapDatabaseSO` in
-  `_project/Scripts/Scriptables/` (`KitchenDesign.Scriptables`), moved with their `.meta` so every
-  asset still binds; their nested serializable types are `GroupInfo`, `ProductIdRemapEntry` and the
-  editor-only `AndroidProjectSettings` in `_project/Scripts/Serializables/` (they bind by field name).
-  The assets keep their names: `Resources/AppProfile.asset` (one per project; which
-  `AppOptions_<App>` it points at decides the app), `AppOptions_ProFit/Stoll/Gemini`. Two places
-  use those names as text and must stay literal: `Resources.Load<AppProfileSO>("AppProfile")` and
-  `AppProfileSO.GetAppResourcesName`, which strips `"AppOptions_"` from the options asset's name to
-  get the `Resources/<App>` folder (plus `_Test` for the test server). The group databases map a
-  server id (manufacturer, product group, brand catalog) to a toolbar sprite, a sort order and an
-  optional local display name; the remap database maps product ids to every SKU they have had, so
-  designs saved with an old SKU still load.
-- **Server client** (B2.2 of the refactor, 2026-10-22), `_project/Scripts/Server/`
-  (`KitchenDesign.Server`); the old static `ProFitWeb` is gone. `ServerClient` (constructed by
-  `AppInitializer` before the catalog data and the session, which get it in their constructors) owns:
-  - `ServerConnection`: the server address from the profile, `UseHttps` (starts true;
-    `ProbeCoroutine` flips it once if the first request to the host fails, then tries again),
-    `IsTestServer`, the domains the WebGL build may be embedded in, and the editor-only
-    `SaveFallbackJsonResource`: in the editor every successful catalog request (manufacturers,
-    categories, groups, products, brand catalogs, cabinets, tags, compatibilities) rewrites
-    `Resources/<App>/FallbackJSON`, which is how the offline data stays current (and why a sign-in
-    changes those files; see Gotchas).
-  - One request class per server resource: `AccountRequests`, `ClientRequests`,
-    `QuoteRequests`, `CatalogRequests`, `AnalyticsRequests`. An offline user (`UserType.Offline`)
-    gets simulated sign-in and profile responses and reads products and cabinets from the fallback
-    JSON; analytics are skipped for it.
-  - Static, pure parsers next to them: `AccountJson`, `ClientJson`, `QuoteJson`, `CatalogJson`
-    (the JSON key strings in them are the frozen format, R-DATA-3), `ServerJson`
-    (`ValidateJsonResponse`: a JSON `error`, an `errors` map (its keys are shown only in debug
-    builds), parser errors or a status other than 200 fail the request), `CatalogLookups`
-    (lookups in a given list), `FallbackJsonFiles` (the fallback file names).
-  - The product and cabinet parsers take the product groups, the products already loaded and the
-    `IAppRules` as arguments. `CatalogRequests.GetProductList`/`GetCabinetList` take them as
-    `Func<…>` providers, read when the response is parsed: that is when the old code read them,
-    and the server refresh can replace the lists in between. Why the cabinet parser needs the loaded
-    products: Stoll's cabinets come from the fallback JSON without server ids, and each gets an id
-    below the smallest one in use. Manufacturers without an `order` (a server bug for newly added
-    ones) sort as -1.
-- **Server data types** (B2.1 of the refactor, 2026-10-22): `_project/Scripts/Server/Data/`
-  (`KitchenDesign.Server`): `User`, `UserProfile`, `UserClient`, `UserClientQuote`,
-  `ManufacturerInfo` (+ `ManufacturerDoorStyleInfo`), `ProductGroupInfo`, `ProductTagInfo`,
-  `CabinetCompatibilityInfo`, `BrandCatalogInfo`, `CabinetSectionCategoryInfo`; `ResponseCode`
-  and `MeasurementUnitExtensions` in `Server/`. Enums `ServerType`, `UserType`, `UserFilter`,
-  `Currency`, `MeasurementUnit` in `_projectShared/Enums/`, values as before (the first three are
-  serialized as ints in `AppProfile`/`AppOptions`). None of these is serialized by name: the
-  parsers read the server's JSON by key, so **the JSON key strings in the parsers are the frozen
-  format (R-DATA-3), not the C# names**. `User.userType` is set by the app, not sent by the
-  server. `UserProfile`: `dealerSelectedManufacturerIds` is the JSON `manufacturers`,
-  `adminSelectedManufacturerIds` is `whitelisted_manufacturers`; `whiteLabelReturnUrl` is where a
-  white label user goes after saving a design.
-- **Generic helpers** (B1.4 of the refactor, 2026-10-22). `KitchenDesign.Shared.Common.Units`
-  (`_projectShared/Common/`): inch/metre/centimetre/foot conversions, the old `Const.Inches2Meters`
-  and friends. `_project/Scripts/Utility/` (`KitchenDesign.Utility`, called as
-  `Utility.<Class>.<Method>` from old code):
-  - `MeasurementFormat`: metres to centimetres or feet/inches text, and parsing typed imperial
-    sizes. Why the quote tables: phones and pasted text produce typographic quotes (‘ ’ “ ”), which
-    are normalised to ' and " before parsing.
-  - `UrlUtility`: `GetDomain` (host of a URL, a scheme added if missing) and `GetBaseDomain`
-    (the last two labels, or the IP). Self-tests: `Tools/Kitchen Design/Tests/…`
-    (`_projectDebugging/Menus/UrlDebugMenu.cs`).
-  - `RuntimePrefabs`: a "runtime prefab" is an inactive copy in `DontDestroyOnLoad` that stands
-    in for a prefab asset at runtime; `IsPrefab` treats those and real prefab assets (including the
-    prefab stage) alike. `DontDestroyOnLoad` must come after `SetActive(false)`, or some components
-    of the copy stay active (the product visuals' editor-only lights did).
-  - `RendererUtility`, `RenderQuality` (switch to the quality level that uses a given URP asset),
-    `MemoryUtility` (a GC on iOS only, where low-memory devices otherwise run out).
-  - `RandomNamesForEditor` (editor only): random names and places to fill the sign-up and client
-    forms while testing.
-  `KitchenDesign.Tools.Editor` now references `KitchenDesign.Shared` (for `Units`).
-  `Const` and `ProFitUtility` were split by owner in area 7 (see "Leftovers").
-- **Leftovers** (area 7 of the refactor, 2026-11-13; plan: `.claude/prompts/07-leftovers.md`).
-  **No runtime code is left in `AssetsMelcher`**; its `.asmref` files are gone. What remains
-  outside the house layout: the user's `Cloder` folder and Weaver's `Procedural Assets/Layers.cs` (each with an `.asmref`).
-  - **`_project/Editor/Tools/`** (B8.6, 2026-11-13): the whole old `AssetsMelcher/Editor` folder,
-    moved in one piece with its `.meta` files: the `KitchenDesign.Tools.Editor` asmdef, the
-    scripts (now `namespace KitchenDesign.ToolsEditor`; `AppBuildProcessor` was
-    `ProFitBuildProcessor`, `KitchenFinishTools` was `ProFitKitchenFinishTools`,
-    `ProductModelFbxImporter` was `ProFitProductModelFbxImporter`; menu paths unchanged) and
-    the assets they use (asset icons, `ProFitEditorOptions.asset`, the random name lists, the
-    UXML/USS, `ToolScenes/`). Why the assets stay beside the scripts: three are loaded by path
-    (`ScreencastKeysOverlay.uxml`, and `RandomNames.txt` / `RandomPlaces.txt` from
-    `Utility/RandomNamesForEditor`), and `ButtonStyleEditor` finds
-    `TransparencyBackground.png` relative to its own script. `AppBuildProcessor` still has
-    `Assets/AssetsMelcher/Resources` and `…/InactiveResources` as literal paths (it moves the
-    other apps' resources out for a build); they change when those folders move.
-  - `_project/Scripts/Utility/` (`KitchenDesign.Utility`) gained: `ElementIndex<T>` (an element
-    with its index, what the layout's enumerations yield), `ComponentsInChildrenEnumerator<T>`,
-    `EnumInfo<T>` (cached enum count and values), `ImperialUnit` (feet, inches and fractions),
-    `Ref<T>`, `RecyclableTween<T>` (one reused DOTween per animated thing), `DOTweenExtensions`,
-    `DOTweenInit`, `DebugDraw`, `CoroutineUtility` (was `ProFitCoroutineUtility`),
-    `UnityExtensions` (was `ProFitUnityExtensions`), `SequentiallyAwaitedDelegate` (see
-    "Events"), `MelcherWebGL` (the C# side of `AssetsMelcher/Plugins/WebGL/MelcherWebGL.jslib`,
-    which stays there as an asset) and `AppLinks` (opens the subscription page, the terms page
-    and, in the editor and development builds only so the address can't leak, a product's
-    dashboard page; the caller passes the server's host, or the options and the user's type).
-  - `Behaviors/`: `HighlightTarget`, `PCMBandaidFix`, `TransformHelper`, and the cutout
-    authoring helpers `ComponentCutoutHelper`, `StorageCutoutHelper` (its direction enum is
-    `CutoutDirection` in `_projectShared/Enums/`) and `GeminiCutoutPrefabs` (editor-only menu
-    items that drop the helper prefabs of `AssetsMelcher/Miscellaneous` into the scene).
-  - **`Const` and `ProFitUtility` are gone, split by owner** (B7.2):
-    `KitchenModel/KitchenSizes` (the minimum spacing between products: every product's
-    cabinet-space cuboid is widened by 5" and its model shifted half of that to stay centred,
-    1.5" vertically; a cabinet with a corner loses 6" of occupiable width minus half the product
-    padding; a cabinet column is 3" as a whole and drawn as two halves by neighbouring cabinets;
-    Sections cabinets are 18" to 60" long; a nudged product stays 2" from the edge; at most 10
-    straight cabinets per span in Sections, so a span still fits the PDF photos; an inset toe kick
-    sits 1.5" back), `KitchenModel/StollSizes` (products wider than 15" can bow a cabinet much
-    longer than they are, so the cabinet may extend at most 8" past them; the fixed smoker
-    cabinet keeps 2" below the countertop; `DefaultCabinetDepth`),
-    `KitchenModel/OccupantDragMath` (the pointer's position on the drag plane in camera-local
-    space, so the camera may move during a drag; the plane is the cabinet's top when the camera
-    looks more than 65° away from its front, else its front), `Geometry/CuboidChecks` (a size
-    under 1/16" counts as "not entered on the dashboard"; containment with a 1e-8 tolerance for
-    cuboids transformed between spaces), `Save/JsonVectors`, `Cabinets/CabinetCornerWedgeMath`,
-    `_projectShared/Common/ProductCategorySizes` (finishes have no cut-out sizes, so missing
-    ones aren't parse errors), `UI/Views/UiColors.Error`. The Remember Me key is
-    `SessionStatus.RememberMeTokenKey`.
-- **App-wide systems** (B1.3 of the refactor, 2026-10-22). Plain classes, constructed and owned
-  by `AppInitializer`; collaborators come in through the constructor.
-  - `AppSystems` (B5.2, `_project/Scripts/Game/`): the profile (and its options), the rules, the
-    launch options and the systems below, as one object every `SceneInitializer` gets. Nothing else
-    reaches a system: there is no static forward any more (B8.4).
-  - `LaunchOptions` (`_project/Scripts/Game/`): debug mode and verbose (editor, debug build,
-    `?verbose` URL parameter, `--verbose` argument), the WebGL page's domain and `distributor`
-    parameter (white label). In the editor, `AppOptions.simulateWhiteLabelMode` replaces the last
-    two with the simulated values.
-  - `CatalogDataStatus` (`_project/Scripts/CatalogData/`): the server's data (manufacturers,
-    product groups, tags, compatibilities, cabinet section categories, brand catalogs, products
-    and cabinets) and its lookups. `Initialize` loads the fallback JSON from
-    `Resources/<App>/FallbackJSON` first, so the app works offline, then applies the product
-    overrides (products the dashboard can't describe yet; allowed to fail), builds the variant
-    lists, probes the server (switching http/https once if the first try fails) and downloads
-    fresh brand catalogs, manufacturers, groups, tags and compatibilities; `ExecuteWhenLoaded`
-    queues work until then. Products and cabinets are downloaded at sign-in instead
-    (`SessionStatus.FinishLogInCoroutine`). Why the variant list starts with the base product's
-    id: the toolbar treats the whole family as one list. Why the runtime products are copies of
-    the source products: `DesignerScene` rewrites some values per app and building method (bar top
-    sizes, padding), and the copies can be rebuilt from the originals; their lookup key includes
-    "is a cabinet section", because cabinet sections and products can share a server id.
-    `PopulateRuntimeBrandCatalogs` uses a preset catalog when the server's id matches, or a clone
-    of the preset with the same cabinet manufacturer; don't call it while a kitchen is open, or the
-    kitchen keeps a catalog that is no longer in the list. In the editor the load adds fake
-    products for visuals no product uses, so every model can be checked on a cabinet (written to
-    `Logs/<App>/issues-unused-product-visuals.txt`). `CabinetDataAvailability`
-    (`_projectShared/Enums/`): `None`, `ClientOnly` (Stoll: the dashboard has no cabinet data, so
-    it ships as fallback JSON), `Server` (Gemini).
-  - `ClientListStatus` (`_project/Scripts/Session/`): the signed-in user's clients, the active
-    client and quote (how the menu tells the designer which design to open), and whether the
-    active client wants to be contacted (kept from a Napoleon requirement that no longer applies).
-  - `SessionStatus` (`_project/Scripts/Session/`): the user (setting it reads that user's kiosk
-    preference), profile, sign-in state (`LogInState`, `_projectShared/Enums/`; the menu can be
-    used while products still download), kiosk mode (a PIN in front of the client list and the
-    profile, kept per device in `PlayerPrefs` under `User.<id>.isKioskModeEnabled`; anyone with
-    access to the device's preferences can turn it off), white label mode, Remember Me (the token
-    in `PlayerPrefs` under `Token`), log out, the auto-kick that checks the subscription every 20 s
-    and kicks expired trials and subscriptions, and the sign-in flow. Uses `ClientListStatus` and
-    `CatalogDataStatus` (log out clears both, sign-in fills both); neither uses the session.
-  - **`AppProfileStore`** (B8.4, 2026-11-13, `_project/Scripts/Game/`) is the one app-wide static
-    store: `Profile`, `Options`, `Skin`. `ProFitGlobals` is deleted. Why this one static stays:
-    the profile, its options and the skin are one immutable asset, read by views on dozens of
-    prefabs in `Awake`/`OnEnable` (before any initializer), by components made at runtime, by
-    the model for default and highlight materials, and by edit-mode tools where nothing is
-    constructed. `AppInitializer` binds its serialized profile; with no `AppInitializer` (edit
-    mode) the first read loads `Resources/AppProfile`; reset at `SubsystemRegistration`. A
-    screen that has an `Initialize` is handed the options instead. **No system (session, server,
-    catalog data, client list, rules, content, launch options) is reachable through a static.**
-    Editor-only code that needs the running systems (the two debug menus through
-    `_projectDebugging/Menus/DebugSystems.TryGet`, and the check snippets under `Tools/`) finds
-    the `AppInitializer` and reads its editor-only `SystemsForEditor`. Why on `AppInitializer`
-    and not on each `SceneInitializer` (the plan's first idea): it is one object that exists in
-    every scene, and the scene initializers stay untouched.
-    `ProductIdRemapDatabaseSO`'s editor button (`CaptureCurrentIds`) builds the rules from the
-    profile and reads the product groups from the fallback JSON itself; the cabinet parser gets
-    the products it has just parsed as "products already loaded". Before, in edit mode, both
-    lists came empty from a default catalog-data instance.
-- **Boot and scene initializers** (B1.2 of the refactor, 2026-10-22): `AppInitializer`,
-  `SceneInitializer` (abstract, `Initialize(AppProfile, IAppRules)`), `MenuSceneInitializer`,
-  `DesignerSceneInitializer` (they only keep what they get, until areas move into them),
-  `StartAppForEditor` (all in `_project/Scripts/Game/`). The old `Main.RuntimeInit` is gone; its
-  F1 "kick the signed-in user" is now a menu item, `Tools/Kitchen Design/Kick signed-in user`
-  (F1, play mode only; `_projectDebugging/Menus/SessionDebugMenu.cs`). Order and whys: "The
-  Initialize() chain". Checked with `coldstart.sh` from `PlatformSetupScene` and from
-  `BootScene` (both the B1.1 reference: PlatformSetup → Menu, Welcome, 13 errors, 4 warnings),
-  plus the baseline and menu check.
-- **App rules** (B1.1 of the refactor, 2026-10-22): `KitchenDesign.Shared.Interfaces.IAppRules`
-  with `ProFitAppRules`, `StollAppRules`, `GeminiAppRules` (`_project/Scripts/AppRules/`),
-  chosen by `AppRulesFactory.Create(appOptions.userFilter)`. Every place the old code checked
-  which app it was now asks a rule; the table of old check → rule is in
-  `.claude/prompts/03-refactor.md`, "Area 1". **No code outside `AppRules/` may test
-  `userFilter` to change behaviour.** The three places that still read it (`LogInUI`, `SignUpUI`,
-  `QuickLogInWidget`) use it as the app's identity on the server, not as a rule. Code gets
-  the rules handed in (`AppSystems.Rules`, or `IKitchen.appRules` in the model). Why rules return `null` for "leave the value alone" (the high bar top
-  sizes, fridge padding, bottom inset): only Stoll overrides them, and the caller keeps its own
-  value otherwise. Each app has exactly one building method today (ProFit Standard, Stoll
-  Sections, Gemini Catalog), but app and building method stay separate axes: what the old code
-  tested by building method (the Sections bowing limit, the 0.5" overhang) stays a building-method
-  rule, and the per-brand checks (`Const.Gemini.ManufactersIds`) belong on `BrandCatalog` (area 4).
-  Why two manufacturer rules (`IncludesStollManufacturer`, `IsManufacturerIdAvailable`): the
-  whitelist screen hides only Stoll, the toolbar also hides 137. Checked with
-  `Tools/Baseline/unity6/rulescheck.cs` (all three apps) and the Gemini baseline.
-- **`CameraLevelAimBehavior`** (`_project/Scripts/Behaviors/`, 2026-10-20): a `CinemachineExtension`
-  that, at the Finalize stage, takes the framed direction, moves the aim point by
-  `worldAimOffset` (world space, at the Look At target's distance) and re-aims with the reference
-  up, replacing the orientation correction. Why: it reproduces CM2's Group Composer aim (centre +
-  offset, no roll) on top of CM3's Group Framing; see "Upgrade fixes in the copy", save-photo cover
-  camera. Its offset is set to the vcam's `RotationComposer.TargetOffset`. Verified against the
-  8 baseline designs. The first type in the house layout that old code depends on, through the
-  scene only.
-- **Cutouts (wired into the app 2026-10-20, baseline-checked 2026-10-21, old stencil path
-  removed 2026-10-21; WebGL and phone not measured):** cutouts are
-  `clip()` against world-to-box matrices in the cabinet and countertop shaders (the shadow pass
-  clips too), with the interior drawn as the existing inside-out box. Stock URP, no fork. Plan,
-  results and open items: `.claude/prompts/02-cutouts-by-clipping.md` (steps 1 and 2).
-  - `_projectAssets/Shaders/KitchenCutout.hlsl`: the Custom Function `KitchenCutoutAlpha`. Called
-    by `TriplanarGraph` (finishes), `KitchenLitGraph` (`Kitchen_Default`, NatureKast marble) and
-    `PosterizeGraph` (selection highlights). A renderer with user value 0 (every renderer by
-    default) never clips. **Any new material that can land on a cabinet or countertop needs one
-    of these shaders**, and a graph that allows material overrides (like `PosterizeGraph`) also
-    needs `_AlphaClip` on in each material. URP Lit and Simple Lit don't clip.
-  - `KitchenDesign.KitchenModel.KitchenCutoutClipping` (`_project/Scripts/KitchenModel/`, owned by `Kitchen`): rebuilds
-    slots and boxes before every render (`RenderPipelineManager.beginContextRendering`). Why:
-    every change path (load, drag, resize, inset, shelf, highlight, the photos' manual renders)
-    is covered without hooking each one; 0.03 ms per refresh. `CabinetCutOut.TryGetClipBox`
-    gives each cutout's box and open faces.
-  - `KitchenDesign.Cutouts.CutoutClipSet` (`_project/Scripts/Cutouts/`): a plain class the
-    kitchen will own (shader globals are global, but the set isn't static state). `AddBox` takes a
-    transform, local bounds and `CutoutFaces` (open faces); `Apply` uploads
-    `_KitchenCutoutSlotRanges` / `_KitchenCutoutBoxRows`; `SetRendererSlot` sets a
-    `MeshRenderer`'s shader user value. Open faces are pushed out 1 mm and closed faces pulled in
-    1 mm. Why: cabinet surfaces often lie exactly on a box face; a closed one (top-mounted product
-    flush with the front) must stay and an open one must be cut.
-  - Each renderer finds its boxes through a cabinet slot in its **Renderer Shader User Value**
-    (`MeshRenderer.SetShaderUserValue`, read as `unity_RendererUserValue`). Why: per-draw data keeps
-    the SRP Batcher, needs no copy of each finish material per cabinet, can't reach a neighbouring
-    cabinet's renderers, and doesn't touch rendering layers.
-  - **A very slight change in look is acceptable to make cutouts work** (user, 2026-10-21).
-    So a material on a cabinet or countertop may be moved to a clip-capable shader even if it
-    renders slightly differently; measure the difference and record it, but it isn't a blocker.
-  - **Every cabinet material is clip-capable since 2026-10-21.** The last three
-    (`Cabinet_Stoll_Standard_White`, `Product_Metal_Napoleon_MatteBlack` (both Simple Lit),
-    `Product_Visual_Napoleon_PowderedMetal` (URP Lit + normal map)) were moved to
-    `KitchenLitGraph` **in place**, for cabinets and products alike. Why not cabinet-only
-    copies: Powdered Metal is only ever on Napoleon cabinet-section models despite its name; Matte
-    Black is the Napoleon catalog's `m_DefaultCabinetFinishOverride` (every Napoleon cabinet body
-    and riser, "the carbon coloured finish") plus ~29 Napoleon cabinet-section models, and also 9
-    held-back product models (Fire Magic access doors, ProFit alcove cabinets, XO oven, one
-    Napoleon grill). A copy would mean re-pointing every cabinet model's `.fbx.meta` remap, and
-    any model the team adds later would point at the original again. Products keep user value 0,
-    so they never clip; their cost is the alpha-test variant until the local keyword exists.
-    Each was rebuilt as a fresh material and `CopySerialized` onto the asset (GUID kept, old
-    shader's properties dropped, queue 2450, no keywords, MotionVectors off, mask slot empty).
-    **Matte Black's smoothness went 0.978 → 0:** Simple Lit's 0.978 is a tight Blinn-Phong dot
-    with no reflection probe; the same value in a PBR graph is a near-mirror (sphere/cube test:
-    mean 7.64/255, max 155). Smoothness 0 was the best fit (mean 2.13, max 57, the missing dot)
-    and is what "matte" means. The others kept their values: Powdered Metal 0.01/255 (max 6),
-    Stoll White 0.69 (max 10). Baseline after the switch: `resave.json` identical in all 8,
-    every save photo within 0.09/255 of the run before (32569, the Napoleon design, draws Matte
-    Black on 13 renderer slots and Powdered Metal on 5). A test box through a 32569 cabinet cut
-    both cleanly. Stoll White wasn't seen in a design (no Stoll design in the Gemini account).
-    The old project still has these on Simple Lit / URP Lit: if these `.mat` files ever come
-    over again from `git diff 7700e16a8c..`, the switch is undone.
-  - **Napoleon designs can't get cutouts from the app today:** `BrandCatalog_Napoleon` has
-    `m_HasGrills: 0` and `m_HasBurners: 0` (Add Part refuses a grill), and its grills are
-    cabinet-section models. The switch matters for a catalog change or a later product.
-  - **The window cube (`CabinetCutOut.m_StencilRoot`) is data, not geometry that draws.** Its
-    MeshFilters' bounds are the clip box and its active faces (`SetActiveStencils`) are the open
-    faces, so it stays in `CutOut.prefab`; its MeshRenderers were removed there (Default layer).
-    Why kept rather than replaced by a stored box and flags: `TryGetClipBox` and the screenshot
-    shelf fix (which stretches the cabinet cutout for front/back photos, and so the clip box) work
-    on it unchanged. The interiors keep `CutOutInterior` / `NestedCutOutInterior`
-    (`CabinetCutOut.SetInteriorLayer`), both in the opaque mask.
-  - Removed with the stencil path (2026-10-21): `KitchenRendererFeature` (off both renderer
-    assets), `KitchenForwardRenderPass`, `KitchenShadowRenderPass`, `Scopic/KitchenCutoutStencil`
-    + `Kitchen_CutOutStencil.mat`, `Scopic/KitchenShadowCaster` + `Kitchen_ShadowCaster.mat` (only
-    the feature used them), `Kitchen`'s near-to-far sort and rendering-mask helpers,
-    `ProductVisualContent.SetCutOutRenderingMask`, `CabinetCutOut.m_DrawOrder`, the stencil-layer
-    swap in the screenshot shelf fix, `DesignerScene.m_RendererData`. `DesignerScene.unity` keeps
-    the orphan `m_RendererData` value until the scene is next saved, and Weaver's generated
-    `Procedural Assets/Layers.cs` still lists the two layer constants until it regenerates; nothing
-    uses either.
-  - Still to measure: the uniform budget on WebGL 2 and the cost of `discard` on tile-based
-    mobile GPUs.
-- **Screens** (area 5 of the refactor, from 2026-11-12; plan: `.claude/prompts/05-screens.md`).
-  All screens are still uGUI (`MelcherUI`); none is on UI Toolkit yet.
-  - Small types (B5.1), enums in `_projectShared/Enums/` with their old values: `AccordionEdge`
-    (its order is how Unity indexes a `RectOffset` as a `Vector4`: left = x, right = y, top = z,
-    bottom = w, so `Accordion` indexes padding vectors with it), `ButtonStyleName` (serialized as
-    an int in prefabs and scenes, `m_ButtonStyleName`: append only), `CabinetSizesMode` (the
-    cabinet depth and countertop thickness screen opened for a new kitchen or for an existing
-    cabinet), `FontFlagOverride`, `WhitelistRowType`, `ToolbarContentVisibility` (`Collapsed`
-    hidden, `InForeground` the active toolbar, `InBackground` dimmed behind it),
-    `ToolbarContentDuration`, `ToolbarGroupIdType` (what a toolbar group button's id is: a
-    manufacturer id, a product group id, an index into the selected catalog's door styles or door
-    handle styles, the end panel side (0 left, 1 right); or the button resets the cabinet,
-    countertop or floor finish, or toggles Challenger's premium finishes), `DesignerLoadingMode`,
-    `RepositionSnapMode` (flags). `AppSkinSO` (one per app: the `ButtonStyleSO`s and colours that
-    make its colour theme) and `ButtonStyleSO` are in `Scriptables/` (moved with their `.meta`;
-    their create menus keep the default file names `AppSkin` and `ButtonStyle`).
-    `FontStyleOverride` (`Serializables/`) lets a button style force a font style flag on or off,
-    or leave it as the text has it; its property drawer was commented out in the old code and was
-    not carried over. Value types next to their screens: `CabinetSizeOption` (a size and its
-    imperial label), `WhitelistRowEntry` (a whitelist row: a product category header or a
-    manufacturer toggle), `ActiveMeasure` (a measure and its label pivot, (0.5, 0.5) unless shifted
-    to keep labels from overlapping, independent of the screen resolution). No asset file changed
-    (scripts bind by GUID, the enums are stored as ints).
-  - **Menu screens get their systems** (B5.3c2): `MenuNavigationControl.Initialize` first hands
-    every screen it holds only the systems it reads (session, client list, catalog data, server,
-    options, rules) plus its prompts, then runs the menu's start-up; `PlatformSetupControl` uses
-    the `AppSystems` it is given. On `AppProfileStore` in the menu, on purpose: reads in
-    `Awake`/`OnEnable` (the skin in `MainUI`, `HomeUI`, `WelcomeUI` and the views: they run before
-    any initializer; they go with the UI Toolkit rewrite), `ManufacturerWhitelistRow` (rows made
-    at runtime), `QuickLogInWidget` (editor sign-in helper, not held by the navigation) and
-    `PayNowUI`'s message post-processing (the app's display name): the label calls it
-    from `OnEnable`. `PayNowUI`, `UnauthorizedDomainUI` and `TrialCountdownUI` get the session
-    and the options for the subscription link (B8.4). A handler that a screen's own `Awake`/`OnEnable` triggers must not read a
-    handed-in field (found by the cold start on 2026-11-13).
-  - **Designer screens get their systems** (B5.4d, 2026-11-13): `DesignerScreensControl.Initialize`
-    hands each designer screen the systems it reads next to the kitchen: the toolbar (which passes
-    the session on to its highlighted-product content), the navigation screen (which passes
-    everything on to its hamburger menu), the building method, brand catalog, shape and sizes
-    screens, the white-label client info, the product search, the about-product prompt, the
-    set-width prompt and the dev screen (the last two are new serialized references). It
-    subscribes to `ProductVisualContentStatus.ContentLoaded` in `Initialize` and unsubscribes in
-    `OnDestroy` (it was `OnEnable`/`OnDisable` on the static forward). Four lambdas lost `static`
-    because they now read a field.
-  - **No designer screen reads a system from `ProFitGlobals`** (B8.3, 2026-11-13). What ran in
-    `Awake` on the static now runs in the screen's `Initialize`, in the same frame:
-    `BrandCatalogUI` queues its catalog population there (see "The Initialize() chain", step 5,
-    for the order), `DesignerDevUI` its product list, and `WhiteLabelClientInfoUI` shows or
-    hides the "email me the file" checkbox there (Napoleon in white label mode only). The
-    highlighted-product content gets the launch options from the toolbar and sets its product
-    link button from both `Awake` and `Initialize`, whichever runs last (the button shows in the
-    editor, debug builds and verbose mode). A `ToolbarProductButton` no longer looks its variants
-    up: `SetProduct(product, variants)` replaces the `productInfo` setter, and the toolbar and
-    the product search pass `CatalogDataStatus.GetProductVariantList(product)`. The sizes screen
-    and the set-width prompt hand their `CabinetOtherSizeControl`s the session (the label needs
-    the user's units on every slider change). `TrialCountdownUI` gets the session from
-    `MenuNavigationControl` and `DesignerScreensControl`. `VersionLabel` reads the server type
-    from the profile instead of through the server client. What the
-    screens read from `AppProfileStore` is profile, options and skin only
-    (`DesignerScreensControl.Awake`'s skybox, `CabinetShapeUI.OnEnable`, `BrandCatalogToggle`,
-    `VersionLabel`, the menu's views). The toolbar's highlighted-product content and the
-    about-product prompt get the server client for the product's dashboard link (B8.4).
-  - **Where the screens' files are** (B5.7, 2026-11-13; moved with their `.meta`, comments kept
-    in files that only moved): `_project/Scripts/UI/MenuScreens/` (`KitchenDesign.UI.MenuScreens`:
-    the menu's screens, prompts and list rows, `ListController` and `ListControllerSortMode`),
-    `UI/DesignerScreens/` (`KitchenDesign.UI.DesignerScreens`: the setup wizard, the toolbar and
-    its buttons and contents, the navigation screen and hamburger menu, the designer's prompts,
-    toast, loading and recording screens, the measure overlay, the cabinet tickers) and
-    `UI/Views/` (`KitchenDesign.UI.Views`: what both scenes share: `Menu` and `BasePromptUI` (our
-    bases on `MelcherUI`), `MenuTransition`, the skin views, `Accordion`, `Spinner`, `QuickHint`,
-    `InlineMessageBox` and its prompt, `TrialCountdownUI`, `VersionLabel`, the WebGL input
-    fixes). The scene controls (`MenuNavigationControl`, `DesignerScreensControl`,
-    `PlatformSetupControl`, `SplashVideoControl`, `MemoryFlushControl`, `MenuPreferenceKeys`) are
-    in `_project/Scripts/Game/` beside their initializers, namespace `KitchenDesign`.
-    `PhoneNumber` (formatting and checking phone numbers) is in `Utility/`, and the TMP input
-    validator is `PhoneNumberInputFieldValidatorSO` in `Scriptables/` (a ScriptableObject; its
-    asset keeps the name `PhoneNumberInputFieldValidator.asset`). Why the folders aren't `Menu/`
-    and `Designer/`: a namespace must not contain a type's name, and `Menu` is a class. No scene,
-    prefab or asset names these types as text, so nothing but the scripts changed.
-    `AssetsMelcher/Scripts/UI` and `/Scenes` are gone.
-  - `MenuPreferenceKeys` (B5.3b): the `PlayerPrefs` key for "always landscape on mobile",
-    written as the literal `"MainUI.AlwaysLandscapeOnMobile"` (it was `nameof(MainUI) + …`):
-    devices already store it under that name, so it must not follow a class rename.
+Each area's notes are in its own file, so a session reads only the areas it works on.
+**Before changing an area, read its file. After changing it, update that file in the same
+session.** With `CODE_COMMENTS: file-only`, the why of new and edited code goes there. Comments
+already in the old code stay where they are until that code is rewritten (user, 2026-11-13).
+
+- `Docs/systems/assemblies.md`: The assemblies, what each references, and where the code lives.
+- `Docs/systems/kitchen-model.md`: `Kitchen` and its parts, cabinets, occupancy, save and load, price inputs, building-method and brand rules.
+- `Docs/systems/cameras-and-photos.md`: Save photos, plan measures, the orbit and overhead cameras, the level-aim extension.
+- `Docs/systems/products-and-visuals.md`: Product data, the visual database, content loading, Addressables, the product editor tools.
+- `Docs/systems/server.md`: The server client, its request classes and parsers, and the server data types.
+- `Docs/systems/app-systems.md`: `AppInitializer`, the scene initializers, the app-wide systems, the profile store, the app rules, the app and data assets.
+- `Docs/systems/utility-and-editor-tools.md`: Generic helpers, what area 7 moved (`Utility/`, `Behaviors/`, the split of `Const`), `_project/Editor/Tools/`.
+- `Docs/systems/cutouts.md`: Cutouts by clipping in the shaders: the clip set, the shaders, the materials.
+- `Docs/systems/screens.md`: The menu and designer screens (all uGUI today), how they get their systems, where their files are.
+- `Docs/upgrade-to-unity-6.md`: finished history. What the upgrade from 2022.3 broke and how
+  each break was fixed (TMP fonts, Cinemachine 3, ambient light, the save-photo cover camera,
+  instance ids, scene handles).
 
 ## Tools
 - `Tools/Baseline/`: records the old app's baseline and compares this project against it
@@ -2005,7 +1009,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   the same at every step (21 / 21 errors); the fallback JSON a sign-in writes byte-identical;
   every kitchen event has the same subscribers in the same order as before area 5; the rule
   checks 60 / 132 / 169 with no mismatch. The cold start found and fixed one regression
-  (`PayNowUI`, see "Screens"). The three cover photos that differed on the tip's first run (28316, 27763,
+  (`PayNowUI`, see `Docs/systems/screens.md`). The three cover photos that differed on the tip's first run (28316, 27763,
   27764: cabinets with a white noisy texture) were the "freshly opened editor" gotcha: a second
   capture on the warm editor (`final-tip/unity6-run2`) matches `3d25da55` in every photo (at
   most 0.08/255) and in every `resave.json` (`photodiff.sh final-base/unity6 final-tip/unity6-run2`,
@@ -2022,10 +1026,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   built by `Kitchen.Initialize`, called from `DesignerSceneInitializer`; full check identical to
   `final-tip`) and **B8.2** (model objects ask their kitchen; full check the same after one fix,
   see the plan's results), **B8.3** (no designer screen reads a
-  system from the static; see "Screens") and **B8.4** (`AppProfileStore` replaces
-  `ProFitGlobals`, which is deleted; see "App-wide systems"): **part (a) of the plan is done.**
-  **B8.5** is done too (`PlanMeasurePlacement`, see "Cameras and photos").
-  **B8.6** is done (`_project/Editor/Tools/`, see "Leftovers"; the user said to go ahead).
+  system from the static; see `Docs/systems/screens.md`) and **B8.4** (`AppProfileStore` replaces
+  `ProFitGlobals`, which is deleted; see `Docs/systems/app-systems.md`): **part (a) of the plan is done.**
+  **B8.5** is done too (`PlanMeasurePlacement`, see `Docs/systems/cameras-and-photos.md`).
+  **B8.6** is done (`_project/Editor/Tools/`, see `Docs/systems/utility-and-editor-tools.md`; the user said to go ahead).
   **B8.7** (2026-11-13), the mechanical part: braces and explicit access modifiers (a C#
   formatter run; the old code already followed both, 9 files changed), six runtime
   `Debug.Log`/`LogError` calls wrapped in `#if UNITY_EDITOR` (`Debug.LogException` is left
@@ -2049,11 +1053,11 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   The check snippets under `Tools/Baseline/unity6` and `Tools/Cutouts` read the systems through
   `AppInitializer.SystemsForEditor`, so they no longer run on commits before B8.4. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>` (reference `final-tip`; for photos
   `final-tip/unity6-run2`, because `final-tip/unity6` has the three untextured covers);
-  call `playercompile.sh` there by its absolute path (it now waits for `KitchenDesign.dll`). Waiting on the user: whether to move the
-  per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
-  CLAUDE.md keeping rules, gotchas, chain, events and handover), and with it whether the old
-  code's comments should be removed and their whys written there (asked 2026-11-13).
-- Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at
+  call `playercompile.sh` there by its absolute path (it now waits for `KitchenDesign.dll`). The notes were split into
+  `Docs/systems/` on 2026-11-13 and the old comments stay in the code (see "Keeping this file
+  current"): **plan 08 is finished.** Open after it: the 85 fields the rename guards skipped,
+  the Napoleon watermark's literal id, and the items below.
+- Track A: done 2026-10-20 (summary in `Docs/upgrade-to-unity-6.md`). The copy at
   `/Users/emmanuel/Documents/Unity/GeminiUpgradeTest/` is throwaway and can be deleted; its
   captures are in `Captures/` and `Assets/Captures/`. A real kitchen in the designer was not
   reached because offline guest (ProFit) has no data for the kept brands; signing in from
@@ -2061,7 +1065,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 - **The copy is done (2026-10-20)**, from commit `7700e16a8c`, step 1 of
   `.claude/prompts/01-copy-and-upgrade.md` (counts and checks there). Committed as `131b0020`
   ("Initial project clone"). The old repo's `.gitattributes` came over (26,787 files there are in Git LFS) and the
-  user installed LFS here. Step 3's compile fixes are done (see "Upgrade fixes in the copy").
+  user installed LFS here. Step 3's compile fixes are done (see `Docs/upgrade-to-unity-6.md`).
   **Next:** the user asked (2026-10-20) for only a few hundred products in the copy, so the full
   import was stopped. The baseline (step 2) is done. Step 1b is done: 899 of 8,552 database
   entries stay (the baseline designs' cabinets with their door styles and mapped doors, their
@@ -2071,8 +1075,8 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
 - **Step 3 (upgrade) and step 4 (check) done 2026-10-20.** First import 145 s (thinned copy).
   The app runs in the 6.6 editor, signs in and loads saved designs; all 8 usable baseline designs
   match the old app in every measurement and in the save JSON (plan, step 4 result).
-- **Darker render and save-photo cameras: done 2026-10-20** (details in "Upgrade fixes in the
-  copy": ambient light, save-photo cover camera). The runtime ambient probe was black;
+- **Darker render and save-photo cameras: done 2026-10-20** (details in
+  `Docs/upgrade-to-unity-6.md`: ambient light, save-photo cover camera). The runtime ambient probe was black;
   Cinemachine 3 had mixed up the two brains' vcams, and Group Framing tilted and rolled the
   aim. After the fixes `runall.sh` shows `resave.json` identical in all 8 designs and the only
   measurement differences in cameras; every save photo is close to the old one (cover framing
@@ -2107,7 +1111,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   entries). Steps 2 and 4 done (2026-10-21): wired into the app, all 8 baseline designs save
   identically, photos match. Step 3 done 2026-10-21 (old stencil path removed; baseline
   unchanged, see the plan). The three non-clipping materials were switched on 2026-10-21 (see
-  "Key systems: Cutouts"; committed in `ba666e23`). Next, when the user asks: WebGL
+  `Docs/systems/cutouts.md`; committed in `ba666e23`). Next, when the user asks: WebGL
   and phone, then the UI blur, the orbit camera, the `UberPost` alpha. WebGL and phone measurements are
   parked: the user will add the 6000.6.6f1 build modules later (2026-10-21); ask before starting.
   (The 2022.3.62f2 editor has WebGL, iOS and Android if the old app's numbers are ever wanted.) Was: step 2 (wire `CutoutClipSet` into `Kitchen`/`CabinetCutOut`, a
