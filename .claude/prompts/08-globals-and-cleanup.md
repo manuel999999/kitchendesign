@@ -148,3 +148,11 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   identical (cameras aside), menu check the same as `final-b83`, listener order the same in the
   menu and the designer, both cold starts 13 errors. Compiles as WebGL player scripts.
   **Part (a) is done.**
+- **B8.5 done 2026-11-13.** `PlanMeasurePlacement` (`Photos/`, plain class) holds
+  `PopulateMeasuresForScreenshots`, `AddMeasureBetweenCabinetPoints`, `AxisToColor` and the
+  static `SetupOccupantCutOutMeasurements`, moved unchanged apart from field names and access.
+  `KitchenScreenshotControl` (2,137 → 874 lines) still makes the pool of measures in `Awake` and
+  builds the placement in `Initialize` with the pool, the three axis colours and the session.
+  Two captures (`final-b85/unity6-1`, `unity6-2`) against `final-tip`: `resave.json` identical
+  in all 8 designs, measurements camera noise only, every photo (plans included) within
+  0.14/255 of `final-tip/unity6-run2`. Compiles as WebGL player scripts.

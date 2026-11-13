@@ -1478,6 +1478,17 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `DesignerScreensControl`, which holds it and uses it for the F6 debug key (B6.2), and asks
     the building-method rules; `MeasuresOnlyProductCabinets` (Sections) was added for it: ends,
     transitions and the straights beside a corner have a width in Sections but get no measure.
+  - `PlanMeasurePlacement` (B8.5, 2026-11-13, `Photos/`, a plain class): places the measures
+    for the plan photos. `PopulateMeasuresForScreenshots` resets the pooled measures and places
+    one set per span (cabinet and countertop sizes, pushed 4" outside the cabinet so the lines
+    don't draw over it) and one per occupant pair, each tagged with the angle and span it shows
+    in; the static `SetupOccupantCutOutMeasurements` lays out an occupant's own cut-out lines.
+    `KitchenScreenshotControl` keeps the cameras, the renders, the visibility and material
+    swaps around each photo, and the Napoleon watermark. It still instantiates the pool of
+    measures in `Awake` (300, from its serialized prefab and count) and builds the placement in
+    `Initialize` with that pool, its three serialized axis colours and the session (the user's
+    units). The colours are read once there, so changing them in the inspector during play no
+    longer affects the next photos.
   - `ScreenshotAngle` (`_projectShared/Enums/`, values as before: None, Cover, Top, Front, Back)
     and `IsPlanAngle` (`_projectShared/Common/`: top, front or back).
   - `ProductVisualThumbnailCreator` (`Photos/`): static editor-tool code that renders product
@@ -1990,8 +2001,12 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   see the plan's results), **B8.3** (no designer screen reads a
   system from the static; see "Screens") and **B8.4** (`AppProfileStore` replaces
   `ProFitGlobals`, which is deleted; see "App-wide systems"): **part (a) of the plan is done.**
-  **Next: B8.5** (the measure placement out of `KitchenScreenshotControl` into
-  `PlanMeasurePlacement`), then B8.6 (ask the user first: it reimports every model) and B8.7.
+  **B8.5** is done too (`PlanMeasurePlacement`, see "Cameras and photos").
+  **Next: B8.6** (`AssetsMelcher/Editor` to `_project/Editor/Tools/`; ask the user first: it
+  reimports every model), then B8.7. Noticed in B8.5, not changed:
+  `KitchenScreenshotControl.TryAddNapoleonTopDownWatermark` compares the catalog's
+  `cabinetManufacturerId` with a literal 95 (Napoleon) instead of asking `BrandRules`; it
+  belongs there as a rule.
   The check snippets under `Tools/Baseline/unity6` and `Tools/Cutouts` read the systems through
   `AppInitializer.SystemsForEditor`, so they no longer run on commits before B8.4. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>` (reference `final-tip`; for photos
   `final-tip/unity6-run2`, because `final-tip/unity6` has the three untextured covers);
