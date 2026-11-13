@@ -63,6 +63,16 @@ runs once after area 7, against `3d25da55`. Anything suspicious goes in `05-scre
   `photos.cs` requalified. No text asset names these types. Compiles in the editor and as WebGL
   player scripts.
 
+- **B6.2 done 2026-11-13.** `KitchenScreenshotControl.Initialize(SessionStatus)` (the units), called
+  by `DesignerScreensControl`, which holds the control (one reference set through the editor) and
+  uses it for the F6 debug key instead of `FindObjectOfType`. The five comparisons are rules:
+  `HasCabinetColumns` twice (the span's outside points account for the columns of adjoining
+  spans; cabinet widths are measured between the mullions), `CabinetsAreProducts` (measure
+  points relative to the span's transform), `UsesBrandCatalog` (the extra front measure between
+  neighbouring cabinets) and the new `MeasuresOnlyProductCabinets` (Sections: ends, transitions
+  and the straights beside a corner have a width there but aren't measured).
+  `buildingrulescheck.cs`: 132 checks.
+
 ## Open after this area
 - The measure placement (`PopulateMeasuresForScreenshots` and its helpers) is still one block
   inside `KitchenScreenshotControl`.

@@ -37,5 +37,6 @@ foreach (var m in methods)
     Check("CabinetSectionManufacturerName", (m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections ? "Stoll" : "<null>"), r.CabinetSectionManufacturerName ?? "<null>", m);
     Check("UsesStollHighBarTopOverhang", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.UsesStollHighBarTopOverhang, m);
     Check("SelectsWholeKitchen", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Standard, r.SelectsWholeKitchen, m);
+    Check("MeasuresOnlyProductCabinets", m == KitchenDesign.Shared.Enums.KitchenBuildingMethod.Sections, r.MeasuresOnlyProductCabinets, m);
 }
 return "checks=" + checks + " mismatches=" + mismatches + " " + sb;

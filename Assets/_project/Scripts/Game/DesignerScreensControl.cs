@@ -80,6 +80,7 @@ namespace KitchenDesign
         [SerializeField] private SetVolumeSizeUI setVolumeSizePrompt;
         [SerializeField] private DesignerConfirmUI confirmPrompt;
         [SerializeField] private DesignerSaveUI savePrompt;
+        [SerializeField] private KitchenScreenshotControl screenshots;
         [SerializeField] private DesignerDevUI devUi;
 
         // ====================================================================
@@ -106,6 +107,7 @@ namespace KitchenDesign
             this.productSearch.Initialize(m_Kitchen, systems.Rules, systems.CatalogData);
             this.aboutProductPrompt.Initialize(m_Kitchen, systems.CatalogData);
             this.setVolumeSizePrompt.Initialize(systems.Session);
+            this.screenshots.Initialize(systems.Session);
             this.devUi.Initialize(systems.Options, systems.CatalogData, systems.ProductContent);
 
             // Hide the debug cuboid visualizations by default
@@ -159,8 +161,7 @@ namespace KitchenDesign
                 }
                 else if (Input.GetKeyDown(KeyCode.F6))
                 {
-                    KitchenScreenshotControl screenshotManager = FindObjectOfType<KitchenScreenshotControl>();
-                    screenshotManager.TakeScreenshots(m_Kitchen).Forget();
+                    this.screenshots.TakeScreenshots(m_Kitchen).Forget();
                 }
 #endif  // if UNITY_EDITOR
             }

@@ -1451,6 +1451,10 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     `OccupantNearestNeighbours` (arrays indexed by `CabinetLocalDirection`, oversized so the enum
     value is the index), `OccupantAndDistance`, `OccupantMeasurementPair`, and
     `MeasurementForScreenshot` (a placed measure, the angle it shows in, and its span).
+    It gets the session (for the user's units) through `Initialize` from
+    `DesignerScreensControl`, which holds it and uses it for the F6 debug key (B6.2), and asks
+    the building-method rules; `MeasuresOnlyProductCabinets` (Sections) was added for it: ends,
+    transitions and the straights beside a corner have a width in Sections but get no measure.
   - `ScreenshotAngle` (`_projectShared/Enums/`, values as before: None, Cover, Top, Front, Back)
     and `IsPlanAngle` (`_projectShared/Common/`: top, front or back).
   - `ProductVisualThumbnailCreator` (`Photos/`): static editor-tool code that renders product

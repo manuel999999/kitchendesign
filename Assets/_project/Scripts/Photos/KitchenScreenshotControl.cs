@@ -1,5 +1,6 @@
 namespace KitchenDesign.Photos
 {
+    using KitchenDesign.Session;
     using KitchenDesign.Serializables;
     using Melcher;
     using KitchenDesign.Shared.Enums;
@@ -29,6 +30,8 @@ namespace KitchenDesign.Photos
     /// </summary>
     public class KitchenScreenshotControl : MelcherMonoBehaviour
     {
+        private SessionStatus _session;
+
         /// <summary>
         ///     The resolution of screenshots used in the PDF. The aspect ratio
         ///     was chosen (0.34) because it fits well on the PDF.
@@ -547,6 +550,11 @@ namespace KitchenDesign.Photos
         }
 
 
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         protected void Awake()
         {
             m_DesignSceneSkybox = RenderSettings.skybox;
@@ -589,7 +597,7 @@ namespace KitchenDesign.Photos
             bool isTopAngle =
                 screenshotAngle == ScreenshotAngle.Top;
 
-            MeasurementUnit units = ProFitGlobals.userProfile.activeUnits;
+            MeasurementUnit units = this._session.UserProfile.activeUnits;
 
             foreach (CabinetSpan otherSpan in kitchen.layout.spans)
             {
@@ -1073,7 +1081,7 @@ namespace KitchenDesign.Photos
                 Vector3 outerRightTopBack       = Cuboid.NormalizedToPoint(outerCabinetSpanCuboid, new (1.0f, 1.0f, 1.0f));
                 Vector3 outerRightTopFront      = Cuboid.NormalizedToPoint(outerCabinetSpanCuboid, new (1.0f, 1.0f, 0.0f));
 
-                if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections &&
+                if (kitchen.buildingRules.HasCabinetColumns &&
                     span.cabinets.Count > 0)
                 {
                     // In Sections building method, we need to account for the
@@ -1344,8 +1352,7 @@ namespace KitchenDesign.Photos
                         cabinetRightTopBack     = Cuboid.NormalizedToPoint(cabinetCuboid, new (1.0f, 1.0f, 0.0f));
                     }
 
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections ||
-                        kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog)
+                    if (kitchen.buildingRules.CabinetsAreProducts)
                     {
                         // Make the measurements relative to the span's
                         // main transform. This is necessary because
@@ -1385,7 +1392,7 @@ namespace KitchenDesign.Photos
                             );
                     }
 
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                    if (kitchen.buildingRules.HasCabinetColumns)
                     {
                         // In Stoll, the cabinet dimensions should be measured
                         // from between the mullions.
@@ -1406,7 +1413,7 @@ namespace KitchenDesign.Photos
                         }
                     }
 
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Catalog &&
+                    if (kitchen.buildingRules.UsesBrandCatalog &&
                         !cabinet.cabinetType.IsEnd() &&
                         i < cabinetCountInSpan - 1 &&
                         !span.cabinets[i + 1].element.cabinetType.IsEnd())
@@ -1456,7 +1463,7 @@ namespace KitchenDesign.Photos
                     }
 
 
-                    if (kitchen.selectedBuildingMethod == KitchenBuildingMethod.Sections)
+                    if (kitchen.buildingRules.MeasuresOnlyProductCabinets)
                     {
                         if (cabinet.cabinetType.IsEnd(includeTransitions: true) ||
                             cabinet.cabinetType == CabinetType.StraightOnLeftOfCorner ||
@@ -2031,7 +2038,7 @@ namespace KitchenDesign.Photos
             Vector3 worldDirectionToCamera = pointInputSpace.TransformDirection(cabinetLocalDirectionToCamera);
 
             Measure measure = m_MeasurePrefabPool[m_NextMeasurePrefabIndex];
-            measure.units = ProFitGlobals.userProfile.activeUnits;
+            measure.units = this._session.UserProfile.activeUnits;
             measure.transform.LookAt(measure.transform.position - worldDirectionToCamera, cameraWorldUp);
             measure.color = lineColor;
             measure.SetDisplayFlags(displayFlags);

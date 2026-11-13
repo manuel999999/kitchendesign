@@ -34,5 +34,6 @@ namespace KitchenDesign.Shared.Interfaces
         string CabinetSectionManufacturerName { get; }
         bool UsesStollHighBarTopOverhang { get; }
         bool SelectsWholeKitchen { get; }
+        bool MeasuresOnlyProductCabinets { get; }
     }
 }

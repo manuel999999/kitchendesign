@@ -78,5 +78,7 @@ namespace KitchenDesign.BuildingRules
         public bool UsesStollHighBarTopOverhang => this._method == KitchenBuildingMethod.Sections;
 
         public bool SelectsWholeKitchen => this._method == KitchenBuildingMethod.Standard;
+
+        public bool MeasuresOnlyProductCabinets => this._method == KitchenBuildingMethod.Sections;
     }
 }
