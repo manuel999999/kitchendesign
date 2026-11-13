@@ -339,6 +339,14 @@ folders. One type per file.
   and calls its `Initialize`. The click's building-method switch waits for B5.6 and its
   `onTryHighlightObject` for B5.5. Compiles in the editor and as WebGL player scripts.
 
+- **B5.4d done 2026-11-13: the designer screens' `ProFitGlobals` reads.** A script rewrote the
+  reads of 13 designer screens outside `Awake`/`OnEnable`/`OnDisable`, static methods and
+  property bodies, and generated each `Initialize`; what stays is listed in CLAUDE.md
+  ("Screens"). `DesignerScreensControl`'s content subscription moved from `OnEnable`/`OnDisable`
+  to `Initialize`/`OnDestroy`: content loads only after a kitchen exists, so nothing can be missed
+  in between. Two references set through the editor (+2 scene lines). Compiles in the editor and
+  as WebGL player scripts. **B5.4 is done.**
+
 **Changed on 2026-11-13 (user): no behaviour checks between steps for the rest of the refactor**
 (areas 5, 6 and 7). Each step compiles (editor and WebGL player scripts) and is committed; every
 check runs once at the end, against `3d25da55`. Suspicious things go in "Bug list" below.

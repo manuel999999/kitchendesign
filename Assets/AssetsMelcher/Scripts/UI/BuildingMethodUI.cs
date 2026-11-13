@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using UnityEngine;
@@ -16,6 +17,13 @@ namespace KitchenDesign
     /// </summary>
     public class BuildingMethodUI : MelcherUI
     {
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -80,7 +88,7 @@ namespace KitchenDesign
         {
             m_CanvasGroup.interactable = false;
 
-            if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
+            if (this._session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 

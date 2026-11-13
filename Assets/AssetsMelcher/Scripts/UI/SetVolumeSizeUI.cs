@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -19,6 +20,13 @@ namespace KitchenDesign
     /// </summary>
     public class SetVolumeSizeUI : MelcherUI
     {
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -41,7 +49,7 @@ namespace KitchenDesign
 
             string widthAsText = null;
 
-            if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+            if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
             {
                 widthAsText = Utility.MeasurementFormat.FormatMetersToCentimeters(displayedWidthInMeters);
             }
@@ -160,7 +168,7 @@ namespace KitchenDesign
 
             string errorMessage = "Unknown error.";
 
-            if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+            if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
             {
                 Match extractedNumber =
                     Regex.Match(userInputMeasurementAsText, @"(?:\d*\.?\d*){1,}");
@@ -228,7 +236,7 @@ namespace KitchenDesign
 
                         string minSizeInUserUnits;
 
-                        if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                        if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
                             minSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToCentimeters(minSizeInMeters);
                         }
@@ -252,7 +260,7 @@ namespace KitchenDesign
 
                         string maxSizeInUserUnits;
 
-                        if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                        if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
                             maxSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToCentimeters(maxSizeInMeters);
                         }
@@ -280,7 +288,7 @@ namespace KitchenDesign
                 {
                     string requestedSizeInUserUnits;
 
-                    if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                    if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                     {
                         requestedSizeInUserUnits = Utility.MeasurementFormat.FormatMetersToCentimeters(displayedUserInputWidthInMeters);
                     }

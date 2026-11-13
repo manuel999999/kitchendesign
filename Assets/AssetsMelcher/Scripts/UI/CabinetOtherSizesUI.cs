@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -12,10 +13,13 @@ namespace KitchenDesign
 
     public class CabinetOtherSizesUI : MelcherUI
     {
+        private SessionStatus _session;
+
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, SessionStatus session)
         {
+            this._session = session;
             this._kitchen = kitchen;
         }
 
@@ -237,7 +241,7 @@ namespace KitchenDesign
 
                         string widthAsText = null;
 
-                        if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                        if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                         {
                             widthAsText =
                                 Utility.MeasurementFormat.FormatMetersToCentimeters(widthInMeters);

@@ -1,5 +1,7 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
+    using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Server;
@@ -27,8 +29,16 @@ namespace KitchenDesign
     [DefaultExecutionOrder(-10)]
     public class DesignerScreensControl : MelcherMonoBehaviour
     {
+        private AppOptionsSO _options;
+        private IAppRules _rules;
+        private CatalogDataStatus _catalogData;
+        private SessionStatus _session;
+        private ProductVisualContentStatus _productContent;
+
         [SerializeField] private ProductSearchUI productSearch;
         [SerializeField] private DesignerAboutProductUI aboutProductPrompt;
+        [SerializeField] private SetVolumeSizeUI setVolumeSizePrompt;
+        [SerializeField] private DesignerDevUI devUi;
 
         // ====================================================================
         // Methods
@@ -36,24 +46,36 @@ namespace KitchenDesign
 
         public void Initialize(AppSystems systems)
         {
-            m_ToolbarUi.Initialize(m_Kitchen);
-            m_CabinetShapeUi.Initialize(m_Kitchen);
+            this._options = systems.Options;
+            this._rules = systems.Rules;
+            this._catalogData = systems.CatalogData;
+            this._session = systems.Session;
+            this._productContent = systems.ProductContent;
+            this._productContent.ContentLoaded += OnProductVisualContentLoaded;
+
+            m_ToolbarUi.Initialize(m_Kitchen, systems.Profile, systems.Rules, systems.LaunchOptions, systems.CatalogData, systems.Session, systems.ProductContent);
+            m_DesignerNavigationUi.Initialize(systems.Options, systems.Server, systems.CatalogData, systems.ClientList, systems.Session);
+            m_BuildingMethodsUi.Initialize(systems.Session);
+            m_BrandCatalogUi.Initialize(systems.Profile, systems.Options, systems.CatalogData, systems.Session);
+            m_CabinetShapeUi.Initialize(m_Kitchen, systems.Options, systems.Session);
             m_KitchenTemplateUi.Initialize(m_Kitchen);
-            m_CabinetOtherSizesUi.Initialize(m_Kitchen);
-            m_WhiteLabelClientInfoUi.Initialize(m_Kitchen);
-            this.productSearch.Initialize(m_Kitchen);
-            this.aboutProductPrompt.Initialize(m_Kitchen);
+            m_CabinetOtherSizesUi.Initialize(m_Kitchen, systems.Session);
+            m_WhiteLabelClientInfoUi.Initialize(m_Kitchen, systems.Options, systems.Server, systems.ClientList, systems.Session);
+            this.productSearch.Initialize(m_Kitchen, systems.Rules, systems.CatalogData);
+            this.aboutProductPrompt.Initialize(m_Kitchen, systems.CatalogData);
+            this.setVolumeSizePrompt.Initialize(systems.Session);
+            this.devUi.Initialize(systems.Options, systems.CatalogData, systems.ProductContent);
 
             // Hide the debug cuboid visualizations by default
             OccupantOccupiedCuboidVisualization.isVisible = false;
 
-            if (ProFitGlobals.userProfile.IsTrialActive())
+            if (this._session.UserProfile.IsTrialActive())
             {
                 // Show trial users a countdown in the designer scene
                 EventBridge.Designer.showTrialCountdownUi.Invoke();
             }
 
-            ProFitGlobals.ExecuteWhenReady(OnGameDataReady);
+            this._catalogData.ExecuteWhenLoaded(OnGameDataReady);
         }
 
         private void Update()
@@ -137,26 +159,36 @@ namespace KitchenDesign
             }
         }
 
+        private void OnDestroy()
+        {
+            if (this._productContent == null)
+            {
+                return;
+            }
+
+            this._productContent.ContentLoaded -= OnProductVisualContentLoaded;
+        }
+
         protected void OnGameDataReady()
         {
 #if UNITY_EDITOR
-            if (ProFitGlobals.user.userType == UserType.None)
+            if (this._session.User.userType == UserType.None)
             {
                 MelcherLog.LogEditorOnly("Forcing user into offline mode because the design scene was started directly.");
 
-                User user = ProFitGlobals.user;
+                User user = this._session.User;
                 user.userType = UserType.Offline;
-                ProFitGlobals.user = user;
+                this._session.User = user;
 
                 // Test preferred units without needing to sign in.
-                UserProfile profile = ProFitGlobals.userProfile;
+                UserProfile profile = this._session.UserProfile;
                 profile.preferredUnits =
-                    ProFitGlobals.appOptions.simulatedPreferredUnits;
+                    this._options.simulatedPreferredUnits;
                 if (profile.preferredUnits == MeasurementUnit.None)
                 {
                     profile.preferredUnits = MeasurementUnit.FeetAndInches;
                 }
-                ProFitGlobals.userProfile = profile;
+                this._session.UserProfile = profile;
             }
 #endif  // if UNITY_EDITOR
 
@@ -167,8 +199,6 @@ namespace KitchenDesign
 
         protected void OnEnable()
         {
-            ProFitGlobals.productContent.ContentLoaded += OnProductVisualContentLoaded;
-
             EventBridge.Designer.loadMenuScene              += LoadMenuScene;
             EventBridge.Designer.restart                    += ForgetCabinetSettings;
             EventBridge.Designer.showWhiteLabelClientInfoUi += ShowWhiteLabelClientInfoUI;
@@ -194,8 +224,6 @@ namespace KitchenDesign
 
         protected void OnDisable()
         {
-            ProFitGlobals.productContent.ContentLoaded -= OnProductVisualContentLoaded;
-
             EventBridge.Designer.loadMenuScene              -= LoadMenuScene;
             EventBridge.Designer.restart                    -= ForgetCabinetSettings;
             EventBridge.Designer.showWhiteLabelClientInfoUi -= ShowWhiteLabelClientInfoUI;
@@ -290,7 +318,7 @@ namespace KitchenDesign
 
         protected Sprite GetLoadingImage(BrandCatalogSO catalog)
         {
-            if(ProFitGlobals.appRules.RequiresBrandCatalog)
+            if(this._rules.RequiresBrandCatalog)
             {
                 if(catalog != null && catalog.BrandCatalogLoadingImage != null)
                 {
@@ -298,12 +326,12 @@ namespace KitchenDesign
                 }
                 else
                 {
-                    return ProFitGlobals.appOptions.designerSceneLoadingImage;
+                    return this._options.designerSceneLoadingImage;
                 }
             }
             else
             {
-                return ProFitGlobals.appOptions.designerSceneLoadingImage;
+                return this._options.designerSceneLoadingImage;
             }
         }
 
@@ -370,9 +398,9 @@ namespace KitchenDesign
         protected void OnProductVisualContentLoaded(AssetAddress<ProductVisualContent> address, LoadedProductContent newlyLoadedProductVisualContent)
         {
             RuntimeProductOverrides.ApplySmokerCutOutHeight(
-                ProFitGlobals.catalogData,
+                this._catalogData,
                 m_ProductVisualDatabase,
-                ProFitGlobals.appRules,
+                this._rules,
                 m_Kitchen.selectedBuildingMethod,
                 address,
                 newlyLoadedProductVisualContent
@@ -382,9 +410,9 @@ namespace KitchenDesign
         protected void OnBuildingMethodChanged(KitchenBuildingMethod newBuildingMethod)
         {
             RuntimeProductOverrides.RebuildRuntimeProducts(
-                ProFitGlobals.catalogData,
+                this._catalogData,
                 m_ProductVisualDatabase,
-                ProFitGlobals.appRules,
+                this._rules,
                 newBuildingMethod
             );
         }
@@ -392,7 +420,7 @@ namespace KitchenDesign
         protected async UniTask OnBrandCatalogChanged(BrandCatalogSO selectedBrandCatalog)
         {
             RuntimeProductOverrides.ApplyBrandCatalogPadding(
-                ProFitGlobals.catalogData,
+                this._catalogData,
                 m_ProductVisualDatabase,
                 selectedBrandCatalog
             );

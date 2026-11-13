@@ -1,5 +1,9 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Scriptables;
+    using KitchenDesign.Server;
+    using KitchenDesign.CatalogData;
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using Cysharp.Threading.Tasks;
@@ -9,6 +13,11 @@ namespace KitchenDesign
 
     public class DesignerNavigationUI : MelcherUI
     {
+        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session)
+        {
+            m_MenuButton.Initialize(options, server, catalogData, clientList, session);
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================

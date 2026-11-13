@@ -1688,6 +1688,22 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     any initializer; they go with the UI Toolkit rewrite), `ClientListUI`'s row-count property,
     `ManufacturerWhitelistRow` (rows made at runtime), `QuickLogInWidget` (editor sign-in helper,
     not held by the navigation) and `TrialCountdownUI` (also in the designer, B5.4).
+  - **Designer screens get their systems** (B5.4d, 2026-11-13): `DesignerScreensControl.Initialize`
+    hands each designer screen the systems it reads next to the kitchen: the toolbar (which passes
+    the session on to its highlighted-product content), the navigation screen (which passes
+    everything on to its hamburger menu), the building method, brand catalog, shape and sizes
+    screens, the white-label client info, the product search, the about-product prompt, the
+    set-width prompt and the dev screen (the last two are new serialized references). It
+    subscribes to `ProductVisualContentStatus.ContentLoaded` in `Initialize` and unsubscribes in
+    `OnDestroy` (it was `OnEnable`/`OnDisable` on the static forward). Still on `ProFitGlobals` in
+    the designer, on purpose: reads in `Awake`/`OnEnable` (the skybox from the skin in
+    `DesignerScreensControl.Awake`; `WhiteLabelClientInfoUI`, `BrandCatalogUI` and `DesignerDevUI`
+    set themselves up in `Awake`; `CabinetShapeUI.OnEnable`; the highlighted-product content's
+    verbose flag), and components nothing hands a reference to: `BrandCatalogToggle` and
+    `ToolbarProductButton` (rows made at runtime, read in property setters),
+    `CabinetOtherSizeControl` (its label is set from the setup paths), `CabinetTickerWidget`
+    (made by `KitchenWidgetsControl`, which has no rules to pass yet), `TrialCountdownUI`,
+    `VersionLabel`. Four lambdas lost `static` because they now read a field.
   - `MenuPreferenceKeys` (B5.3b): the `PlayerPrefs` key for "always landscape on mobile",
     written as the literal `"MainUI.AlwaysLandscapeOnMobile"` (it was `nameof(MainUI) + …`):
     devices already store it under that name, so it must not follow a class rename.
@@ -1708,7 +1724,7 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   aren't on this disk: ask the user to copy them from the old machine. Done today, each step
   compiled and committed, behaviour checks deferred until the whole refactor is done (user,
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
-  (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b (2026-11-13). Next: the designer screens' remaining `ProFitGlobals` reads, then
+  (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads). Next:
   B5.5 (`EventBridge.Designer`; its event map has to be rerun: the workflow was stopped), B5.6,
   B5.7, then all the deferred checks, comparing against `3d25da55`. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,

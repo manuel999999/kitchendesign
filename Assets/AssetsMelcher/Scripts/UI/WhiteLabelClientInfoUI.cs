@@ -1,5 +1,7 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
+    using KitchenDesign.Scriptables;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Server;
@@ -21,10 +23,19 @@ namespace KitchenDesign
     /// </summary>
     public class WhiteLabelClientInfoUI : MelcherUI
     {
+        private AppOptionsSO _options;
+        private ServerClient _server;
+        private ClientListStatus _clientList;
+        private SessionStatus _session;
+
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, AppOptionsSO options, ServerClient server, ClientListStatus clientList, SessionStatus session)
         {
+            this._options = options;
+            this._server = server;
+            this._clientList = clientList;
+            this._session = session;
             this._kitchen = kitchen;
         }
 
@@ -162,7 +173,7 @@ namespace KitchenDesign
                 // There is no active user until this function succeeds. The
                 // active client becomes whoever entered their info
 
-                ProFitGlobals.activeClientId = null;
+                this._clientList.ActiveClientId = null;
 
                 UserClient? existingClient = null;
 
@@ -180,8 +191,8 @@ namespace KitchenDesign
                     // new or similar user
 
                     MelcherWebCoroutine request =
-                        ProFitGlobals.server.Clients.FindClientByEmail(
-                            ProFitGlobals.user,
+                        this._server.Clients.FindClientByEmail(
+                            this._session.User,
                             clientEmail: m_EmailField.text,
                             onComplete: (foundClient, newUserClient) =>
                             {
@@ -211,8 +222,8 @@ namespace KitchenDesign
                     pendingClient.zipCode       = m_ZipCodeField.text;
 
                     MelcherWebCoroutine request =
-                        ProFitGlobals.server.Clients.UpdateClient(
-                            ProFitGlobals.user,
+                        this._server.Clients.UpdateClient(
+                            this._session.User,
                             pendingClient,
                             onSuccess: SetActiveClient,
                             onError: ShowError
@@ -223,8 +234,8 @@ namespace KitchenDesign
                 else
                 {
                     MelcherWebCoroutine request =
-                        ProFitGlobals.server.Clients.CreateClient(
-                            ProFitGlobals.user,
+                        this._server.Clients.CreateClient(
+                            this._session.User,
                             m_FirstNameField.text,
                             m_LastNameField.text,
                             m_EmailField.text,
@@ -241,19 +252,19 @@ namespace KitchenDesign
                     yield return Timing.WaitUntilDone(request);
                 }
 
-                if (ProFitGlobals.activeClientId == null)
+                if (this._clientList.ActiveClientId == null)
                 {
                     yield break;
                 }
 
-                ProFitGlobals.activeClientWantsToBeContacted =
+                this._clientList.ActiveClientWantsToBeContacted =
                     m_WantsToBeContacted.gameObject.activeSelf ?
                         m_WantsToBeContacted.isOn :
                         null;
 
                 Hide();
 
-                if (ProFitGlobals.appOptions.allowBuildingMethods)
+                if (this._options.allowBuildingMethods)
                 {
                     EventBridge.Designer.showBuildingMethodsUi.Invoke();
                 }
@@ -318,10 +329,10 @@ namespace KitchenDesign
             /// </summary>
             void SetActiveClient(UserClient activeClient)
             {
-                ProFitGlobals.userClients.Clear();
-                ProFitGlobals.userClients.Add(activeClient);
+                this._clientList.UserClients.Clear();
+                this._clientList.UserClients.Add(activeClient);
 
-                ProFitGlobals.activeClientId = activeClient.id;
+                this._clientList.ActiveClientId = activeClient.id;
             }
         }
 

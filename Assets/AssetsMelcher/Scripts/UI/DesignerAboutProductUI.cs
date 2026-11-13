@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Enums;
@@ -14,10 +15,13 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerAboutProductUI : BasePromptUI
     {
+        private CatalogDataStatus _catalogData;
+
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, CatalogDataStatus catalogData)
         {
+            this._catalogData = catalogData;
             this._kitchen = kitchen;
         }
 
@@ -27,7 +31,7 @@ namespace KitchenDesign
 
         public void ShowProductInfo(ProductInfo productInfo, ProductVisualSO productVisual)
         {
-            if (!ProFitGlobals.catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
+            if (!this._catalogData.FindManufacturerById(productInfo.manufacturerId, out ManufacturerInfo manufacturerInfo))
             {
                 manufacturerInfo.name = "Unknown Manufacturer";
             }
@@ -53,7 +57,7 @@ namespace KitchenDesign
                 Kitchen kitchen = this._kitchen;
 
                 ProductVisualSO cabinetDoorVisual =
-                    ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
+                    this._catalogData.DoorStyles.FindDoorStyleVisual(
                         kitchen.productVisualDatabase.runtimeEntries,
                         productVisual,
                         kitchen.selectedBrandCatalog,

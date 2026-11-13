@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -14,10 +15,15 @@ namespace KitchenDesign
 
     public class CabinetShapeUI : MelcherUI
     {
+        private AppOptionsSO _options;
+        private SessionStatus _session;
+
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, AppOptionsSO options, SessionStatus session)
         {
+            this._options = options;
+            this._session = session;
             this._kitchen = kitchen;
         }
 
@@ -127,13 +133,13 @@ namespace KitchenDesign
 
                 EventBridge.Designer.showBrandCatalogUi.Invoke();
             }
-            else if (ProFitGlobals.appOptions.allowBuildingMethods)
+            else if (this._options.allowBuildingMethods)
             {
                 Hide();
 
                 EventBridge.Designer.showBuildingMethodsUi.Invoke();
             }
-            else if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
+            else if (this._session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 

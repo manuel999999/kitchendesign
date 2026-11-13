@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Server;
     using KitchenDesign.Shared.Enums;
@@ -17,6 +18,17 @@ namespace KitchenDesign
 
     public class DesignerDevUI : MelcherUI
     {
+        private AppOptionsSO _options;
+        private CatalogDataStatus _catalogData;
+        private ProductVisualContentStatus _productContent;
+
+        public void Initialize(AppOptionsSO options, CatalogDataStatus catalogData, ProductVisualContentStatus productContent)
+        {
+            this._options = options;
+            this._catalogData = catalogData;
+            this._productContent = productContent;
+        }
+
         protected override void Awake()
         {
             base.Awake();
@@ -68,7 +80,7 @@ namespace KitchenDesign
                     "..",
                     "UserSettings",
                     "EditorKitchenSaves",
-                    ProFitGlobals.appOptions.fileSystemName
+                    this._options.fileSystemName
                 );
 
             return System.IO.Path.GetFullPath(absolutePath);
@@ -199,7 +211,7 @@ namespace KitchenDesign
                 }
 
                 ProductVisualContentStatus contentManager =
-                    ProFitGlobals.productContent;
+                    this._productContent;
 
                 await ClearProducts();
 
@@ -224,7 +236,7 @@ namespace KitchenDesign
 
                             string manufacturerName = "Unknown Manufacturer";
 
-                            if (ProFitGlobals.catalogData.FindManufacturerById(productAtIndex.manufacturerId, out ManufacturerInfo manufacturerInfo))
+                            if (this._catalogData.FindManufacturerById(productAtIndex.manufacturerId, out ManufacturerInfo manufacturerInfo))
                             {
                                 manufacturerName = manufacturerInfo.name;
                             }
@@ -316,7 +328,7 @@ namespace KitchenDesign
         protected void OnGlobalDataReady()
         {
             m_ProductsForBatchPreviewing =
-                ProFitGlobals.sourceProducts
+                this._catalogData.SourceProducts
                     .Where(x => AllowProductInBatch(x))
                     .ToArray();
 

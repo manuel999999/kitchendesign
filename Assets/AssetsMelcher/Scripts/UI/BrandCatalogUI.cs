@@ -1,5 +1,7 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
+    using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Scriptables;
     using KitchenDesign.Server;
@@ -22,6 +24,19 @@ namespace KitchenDesign
     /// </summary>
     public class BrandCatalogUI : MelcherUI
     {
+        private AppProfileSO _profile;
+        private AppOptionsSO _options;
+        private CatalogDataStatus _catalogData;
+        private SessionStatus _session;
+
+        public void Initialize(AppProfileSO profile, AppOptionsSO options, CatalogDataStatus catalogData, SessionStatus session)
+        {
+            this._profile = profile;
+            this._options = options;
+            this._catalogData = catalogData;
+            this._session = session;
+        }
+
         [SerializeField] private ProductVisualDatabaseSO productVisualDatabase;
 
         // =====================================================================
@@ -46,12 +61,12 @@ namespace KitchenDesign
             List<BrandCatalogToggle> catalogCards = new List<BrandCatalogToggle>();
 
             // Recreate the catalog cards that this user has access to
-            foreach (BrandCatalogSO brandCatalog in ProFitGlobals.runtimeBrandCatalogs)
+            foreach (BrandCatalogSO brandCatalog in this._catalogData.RuntimeBrandCatalogs)
             {
                 bool allowed =
-                    ProFitGlobals.userProfile.adminSelectedBrandCatalogIds == null ||
-                    ProFitGlobals.userProfile.adminSelectedBrandCatalogIds.Count <= 0 ||
-                    ProFitGlobals.userProfile.adminSelectedBrandCatalogIds
+                    this._session.UserProfile.adminSelectedBrandCatalogIds == null ||
+                    this._session.UserProfile.adminSelectedBrandCatalogIds.Count <= 0 ||
+                    this._session.UserProfile.adminSelectedBrandCatalogIds
                         .Contains(brandCatalog.catalogId);
 
                 if (!allowed)
@@ -72,8 +87,8 @@ namespace KitchenDesign
                 bool comingSoon =
                     brandCatalog.fallbackDefaultCabinetSectionProductServerId == 0 &&
                     string.IsNullOrWhiteSpace(brandCatalog.fallbackDefaultCabinetSectionProductSku) &&
-                    ProFitGlobals.catalogData.FindBrandCatalogInfoById(brandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo) &&
-                    !ProFitGlobals.runtimeProducts.Any(x => x.category == ProductCategory.CabinetSection && x.manufacturerId == brandCatalogInfo.cabinetManufacturerId);
+                    this._catalogData.FindBrandCatalogInfoById(brandCatalog.catalogId, out BrandCatalogInfo brandCatalogInfo) &&
+                    !this._catalogData.RuntimeProducts.Any(x => x.category == ProductCategory.CabinetSection && x.manufacturerId == brandCatalogInfo.cabinetManufacturerId);
 
                 catalogCard.SetComingSoon(comingSoon);
             }
@@ -81,10 +96,10 @@ namespace KitchenDesign
             // Sort the catalog cards in the order they appear in the brand
             // catalog logo database.
             catalogCards.Sort(
-                static (a, b) =>
+                (a, b) =>
                 {
                     GroupDatabaseSO catalogLogoDatabase =
-                        ProFitGlobals.appProfile.brandCatalogLogoDatabase;
+                        this._profile.brandCatalogLogoDatabase;
 
                     int sortOrderA = catalogLogoDatabase.GetSortOrder(a.brandCatalog.catalogId);
                     int sortOrderB = catalogLogoDatabase.GetSortOrder(b.brandCatalog.catalogId);
@@ -220,13 +235,13 @@ namespace KitchenDesign
         {
             m_CanvasGroup.interactable = false;
 
-            if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
+            if (this._session.ShouldUseWhiteLabelMode())
             {
                 Hide();
 
                 EventBridge.Designer.showWhiteLabelClientInfoUi.Invoke();
             }
-            else if (ProFitGlobals.appOptions.allowBuildingMethods)
+            else if (this._options.allowBuildingMethods)
             {
                 Hide();
 

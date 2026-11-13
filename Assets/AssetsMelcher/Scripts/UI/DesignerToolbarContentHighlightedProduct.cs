@@ -1,5 +1,6 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Shared.Common;
@@ -18,6 +19,13 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerToolbarContentHighlightedProduct : MelcherMonoBehaviour
     {
+        private SessionStatus _session;
+
+        public void Initialize(SessionStatus session)
+        {
+            this._session = session;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -95,7 +103,7 @@ namespace KitchenDesign
 
                     Vector3 cabinetSizeInMeters = cabinet.sizeInMeters;
 
-                    if (ProFitGlobals.userProfile.activeUnits == MeasurementUnit.Centimeters)
+                    if (this._session.UserProfile.activeUnits == MeasurementUnit.Centimeters)
                     {
                         w = Utility.MeasurementFormat.FormatMetersToCentimeters(cabinetSizeInMeters.x);
                         h = Utility.MeasurementFormat.FormatMetersToCentimeters(cabinetSizeInMeters.y);

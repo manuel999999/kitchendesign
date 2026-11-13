@@ -1,5 +1,7 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
+    using KitchenDesign.CatalogData;
     using Melcher;
     using KitchenDesign.Serializables;
     using KitchenDesign.Scriptables;
@@ -31,11 +33,25 @@ namespace KitchenDesign
     /// </remarks>
     public class DesignerToolbarUI : MelcherUI
     {
+        private AppProfileSO _profile;
+        private IAppRules _rules;
+        private LaunchOptions _launchOptions;
+        private CatalogDataStatus _catalogData;
+        private SessionStatus _session;
+        private ProductVisualContentStatus _productContent;
+
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, AppProfileSO profile, IAppRules rules, LaunchOptions launchOptions, CatalogDataStatus catalogData, SessionStatus session, ProductVisualContentStatus productContent)
         {
+            this._profile = profile;
+            this._rules = rules;
+            this._launchOptions = launchOptions;
+            this._catalogData = catalogData;
+            this._session = session;
+            this._productContent = productContent;
             this._kitchen = kitchen;
+            m_HighlightedProductContent.Initialize(session);
         }
 
         // =====================================================================
@@ -111,7 +127,7 @@ namespace KitchenDesign
                 () => ResetToolbar()
             );
 
-            ProFitGlobals.ExecuteWhenReady(SetupCategoryToolbar);
+            this._catalogData.ExecuteWhenLoaded(SetupCategoryToolbar);
         }
 
         protected void SetupCategoryToolbar()
@@ -121,7 +137,7 @@ namespace KitchenDesign
             // Populate the category toolbar. Find categories that we have
             // access to
             IEnumerable<ProductCategory> availableCategories =
-                ProFitGlobals.runtimeProducts
+                this._catalogData.RuntimeProducts
                     //.Where(productInfo => IsWhiteListed(productInfo.manufacturer))
                     .Select(productInfo => productInfo.category)
                     .Distinct()
@@ -143,7 +159,7 @@ namespace KitchenDesign
                 if (categoryButton == m_StainlessSteelBurnerPlungeButton)
                 {
                     categoryButton.gameObject.SetActive(
-                        ProFitGlobals.appRules.ShowsPlungeCategory
+                        this._rules.ShowsPlungeCategory
                     );
                     continue;
                 }
@@ -256,9 +272,9 @@ namespace KitchenDesign
                 }
                 else if (
                     categoryButton.category == ProductCategory.Accessory &&
-                    ProFitGlobals.session.ShouldUseWhiteLabelMode() &&
-                    ProFitGlobals.session.GetWhiteLabelAuthorizedDomain() != null &&
-                    ProFitGlobals.session.GetWhiteLabelAuthorizedDomain().Contains("napoleon.com", StringComparison.OrdinalIgnoreCase))
+                    this._session.ShouldUseWhiteLabelMode() &&
+                    this._session.GetWhiteLabelAuthorizedDomain() != null &&
+                    this._session.GetWhiteLabelAuthorizedDomain().Contains("napoleon.com", StringComparison.OrdinalIgnoreCase))
                 {
                     // Accessory option is not available to white-labeled
                     // Napoleon.
@@ -384,11 +400,11 @@ namespace KitchenDesign
         /// <param name="manufacturerId"></param>
         protected bool IsManufacturerIdAdminWhitelisted(int manufacturerId)
         {
-            UserProfile profile = ProFitGlobals.userProfile;
+            UserProfile profile = this._session.UserProfile;
 
-            if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
+            if (this._catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer))
             {
-                if (!ProFitGlobals.appRules.IncludesStollManufacturer &&
+                if (!this._rules.IncludesStollManufacturer &&
                     manufacturer.name.Equals("Stoll", StringComparison.OrdinalIgnoreCase))
                 {
                     return false;
@@ -594,16 +610,16 @@ namespace KitchenDesign
                         .Where(static productInfo => productInfo.groupId != 0)         // Select products that have a group
                         .Select(static productInfo => productInfo.groupId)
                         .Distinct()
-                        .OrderBy(static productGroupId => ProFitGlobals.appProfile.productGroupDatabase.GetSortOrder(productGroupId));
+                        .OrderBy(productGroupId => this._profile.productGroupDatabase.GetSortOrder(productGroupId));
 
                 AddButtonsForIds(
                     buttonParent:           scrollContent,
                     buttonPrefab:           m_ManufacturerButtonPrefab,
                     idType:                 ToolbarGroupIdType.ProductGroup,
                     ids:                    productGroupIdsInCategory,
-                    appLocalDatabase:        ProFitGlobals.appProfile.productGroupDatabase,
-                    findServerDataIndex:    id => ProFitGlobals.productGroups.FindIndex(productGroup => productGroup.id == id),
-                    getServerDataName:      serverDataIndex => ProFitGlobals.productGroups[serverDataIndex].name,
+                    appLocalDatabase:        this._profile.productGroupDatabase,
+                    findServerDataIndex:    id => this._catalogData.ProductGroups.FindIndex(productGroup => productGroup.id == id),
+                    getServerDataName:      serverDataIndex => this._catalogData.ProductGroups[serverDataIndex].name,
                     onButtonSpawned:        null
                 );
             }
@@ -616,10 +632,10 @@ namespace KitchenDesign
                         .Select(productInfo => productInfo.manufacturerId)
                         .Distinct()
                         .OrderBy(
-                            static manufacturerId =>
+                            manufacturerId =>
                             {
                                 // Sort by the order defined in the dashboard.
-                                if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer) &&
+                                if (this._catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturer) &&
                                     manufacturer.order >= 0)
                                 {
                                     return manufacturer.order;
@@ -627,7 +643,7 @@ namespace KitchenDesign
 
                                 // No order defined in the dashboard, fallback
                                 // to the internal sort order.
-                                return ProFitGlobals.appProfile.manufacturerDatabase.GetSortOrder(manufacturerId);
+                                return this._profile.manufacturerDatabase.GetSortOrder(manufacturerId);
                             }
                         );
 
@@ -653,7 +669,7 @@ namespace KitchenDesign
 
                     if (!string.IsNullOrEmpty(manufacturerNameToLimitTo))
                     {
-                        if (!ProFitGlobals.catalogData.FindManufacturerByName(manufacturerNameToLimitTo, out ManufacturerInfo allowedManufacturer))
+                        if (!this._catalogData.FindManufacturerByName(manufacturerNameToLimitTo, out ManufacturerInfo allowedManufacturer))
                         {
                             MelcherLog.LogError($"Unable to find manufacturer by name '{manufacturerNameToLimitTo}'");
                         }
@@ -670,7 +686,7 @@ namespace KitchenDesign
                                         // In the editor, allow undefined
                                         // finish visuals to be tested.
 
-                                        if (ProFitGlobals.catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo) &&
+                                        if (this._catalogData.FindManufacturerById(manufacturerId, out ManufacturerInfo manufacturerInfo) &&
                                             string.IsNullOrWhiteSpace(manufacturerInfo.name))
                                         {
                                             MelcherLog.Breadcrumb("Allowing default manufacturer.");
@@ -699,7 +715,7 @@ namespace KitchenDesign
                         );
                 }
 
-                IAppRules appRules = ProFitGlobals.appRules;
+                IAppRules appRules = this._rules;
 
                 manufacturerIdsInCategory =
                     manufacturerIdsInCategory.Where(
@@ -711,9 +727,9 @@ namespace KitchenDesign
                     buttonPrefab:           m_ManufacturerButtonPrefab,
                     idType:                 ToolbarGroupIdType.Manufacturer,
                     ids:                    manufacturerIdsInCategory,
-                    appLocalDatabase:        ProFitGlobals.appProfile.manufacturerDatabase,
-                    findServerDataIndex:    id => ProFitGlobals.manufacturers.FindIndex(manufacturer => manufacturer.id == id),
-                    getServerDataName:      serverDataIndex => ProFitGlobals.manufacturers[serverDataIndex].name,
+                    appLocalDatabase:        this._profile.manufacturerDatabase,
+                    findServerDataIndex:    id => this._catalogData.Manufacturers.FindIndex(manufacturer => manufacturer.id == id),
+                    getServerDataName:      serverDataIndex => this._catalogData.Manufacturers[serverDataIndex].name,
                     onButtonSpawned:        null
                 );
             }
@@ -838,7 +854,7 @@ namespace KitchenDesign
                         MelcherLog.LogError("Did not find group with ID: " + id + " in database: " + appLocalDatabase.name, appLocalDatabase);
                     }
 
-                    int serverDataIndex = findServerDataIndex.Invoke(id); // Basically calling something like: ProFitGlobals.manufacturers.FindIndex(manufacturer => manufacturer.id == id);
+                    int serverDataIndex = findServerDataIndex.Invoke(id); // Basically calling something like: this._catalogData.Manufacturers.FindIndex(manufacturer => manufacturer.id == id);
 
                     if (serverDataIndex >= 0 && !buttonInfo.useLocalCommentAsOverride)
                     {
@@ -924,7 +940,7 @@ namespace KitchenDesign
                         {
                             bool foundCategory =
                                 Server.CatalogLookups.FindCabinetSectionCategoryById(
-                                    ProFitGlobals.cabinetSectionCategories,
+                                    this._catalogData.CabinetSectionCategories,
                                     cabinetSectionCategoryId,
                                     out CabinetSectionCategoryInfo cabinetSectionCategory
                                 );
@@ -937,7 +953,7 @@ namespace KitchenDesign
             {
                 bool foundCategory =
                     Server.CatalogLookups.FindCabinetSectionCategoryById(
-                        ProFitGlobals.cabinetSectionCategories,
+                        this._catalogData.CabinetSectionCategories,
                         cabinetSectionCategoryId,
                         out CabinetSectionCategoryInfo cabinetSectionCategory
                     );
@@ -989,11 +1005,11 @@ namespace KitchenDesign
                     .Select(static x => x.cabinetSectionCategoryId)
                     .Distinct()
                     .OrderBy(
-                        static cabinetSectionCategoryId =>
+                        cabinetSectionCategoryId =>
                         {
                             bool foundCategory =
                                 Server.CatalogLookups.FindCabinetSectionCategoryById(
-                                    ProFitGlobals.cabinetSectionCategories,
+                                    this._catalogData.CabinetSectionCategories,
                                     cabinetSectionCategoryId,
                                     out CabinetSectionCategoryInfo cabinetSectionCategory
                                 );
@@ -1006,7 +1022,7 @@ namespace KitchenDesign
             {
                 bool foundCategory =
                     Server.CatalogLookups.FindCabinetSectionCategoryById(
-                        ProFitGlobals.cabinetSectionCategories,
+                        this._catalogData.CabinetSectionCategories,
                         cabinetSectionId,
                         out CabinetSectionCategoryInfo cabinetSectionCategory
                     );
@@ -1144,7 +1160,7 @@ namespace KitchenDesign
                         $"Could not find a product visual for {MelcherFormat.ConsoleString(sectionProductInfo.name)} with the visual ID {MelcherFormat.ConsoleString(sectionProductInfo.visualId)}"
                     );
 
-                    if (!Application.isEditor && !ProFitGlobals.isVerbose)
+                    if (!Application.isEditor && !this._launchOptions.IsVerbose)
                     {
                         continue;
                     }
@@ -1160,7 +1176,7 @@ namespace KitchenDesign
                 if (sectionVisual)
                 {
                     doorStyleVisual =
-                        ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
+                        this._catalogData.DoorStyles.FindDoorStyleVisual(
                             kitchen.productVisualDatabase.runtimeEntries,
                             sectionVisual,
                             kitchen.selectedBrandCatalog,
@@ -1406,7 +1422,7 @@ namespace KitchenDesign
 
                             string usedDoorStyleVisualName = cabinet.cabinetSectionName;
 
-                            string usedCustomDoorId = ProFitGlobals.catalogData.DoorStyles.FindMappedDoorId(cabinet.cabinetSectionVisual.info.id);
+                            string usedCustomDoorId = this._catalogData.DoorStyles.FindMappedDoorId(cabinet.cabinetSectionVisual.info.id);
 
                             if(usedCustomDoorId != string.Empty && kitchen.selectedBrandCatalog.cabinetSectionDoorStyle != null)
                             {
@@ -1434,7 +1450,7 @@ namespace KitchenDesign
                             if (replacementCabinetDoorVisual)
                             {
                                 ProductVisualContent replacementCabinetDoorVisualPrefab =
-                                    await ProFitGlobals.productContent
+                                    await this._productContent
                                         .LoadContent(replacementCabinetDoorVisual);
 
                                 i.element.RemakeCabinetDoor(
@@ -1450,7 +1466,7 @@ namespace KitchenDesign
                         await kitchen.layout.SetCabinetMaterials(
                             cabinetMaterial,
                             countertopMaterial,
-                            await ProFitGlobals.appProfile.GetDefaultKitchenMaterial()
+                            await this._profile.GetDefaultKitchenMaterial()
                         );
 
                         return;
@@ -1589,7 +1605,7 @@ namespace KitchenDesign
                                 foreach (int manufacturerId in kitchen.selectedBrandCatalog.whitelistedHighBarTopCountertopManufacturers)
                                 {
                                     bool foundManufacturer =
-                                        ProFitGlobals.catalogData.FindManufacturerById(
+                                        this._catalogData.FindManufacturerById(
                                             manufacturerId,
                                             out ManufacturerInfo manufacturerInfo
                                         );
@@ -1779,7 +1795,7 @@ namespace KitchenDesign
                     {
                         MelcherLog.LogError("Product ID not found in Product Visual Database: " + productInfo.visualId, m_ProductVisualDatabase);
 
-                        if (!Application.isEditor && !ProFitGlobals.isVerbose)
+                        if (!Application.isEditor && !this._launchOptions.IsVerbose)
                         {
                             continue;
                         }
@@ -1871,14 +1887,14 @@ namespace KitchenDesign
 
             if (visual)
             {
-                ProFitGlobals.productContent
+                this._productContent
                     .LoadContent(visual).Forget();
             }
             else
             {
                 MelcherLog.LogError("Product ID not found in Product Visual Database: " + targetProductInfo.visualId, m_ProductVisualDatabase);
 
-                if (!Application.isEditor && !ProFitGlobals.isVerbose)
+                if (!Application.isEditor && !this._launchOptions.IsVerbose)
                 {
                     return false;
                 }
@@ -1943,7 +1959,7 @@ namespace KitchenDesign
         protected void ShowNextOrPreviousProductVariant(bool next)
         {
             List<int> productVariantIds =
-                ProFitGlobals.catalogData.GetProductVariantList(m_ProductBreadcrumb.productInfo);
+                this._catalogData.GetProductVariantList(m_ProductBreadcrumb.productInfo);
 
             // We might encounter an error trying to display the next/previous
             // product variant. If this happens, we'll keep trying different
@@ -1966,7 +1982,7 @@ namespace KitchenDesign
                 int productIdAtVariantIndex = productVariantIds[variantIndex];
 
                 ProductInfo productInfoForVariant =
-                    ProFitGlobals.catalogData.FindProductInfoById(
+                    this._catalogData.FindProductInfoById(
                         productIdAtVariantIndex,
                         findCabinetSection: false
                     );
@@ -2146,16 +2162,16 @@ namespace KitchenDesign
 
             BrandCatalogSO selectedBrandCatalog = kitchen.selectedBrandCatalog;
 
-            int defaultManufacturerId = ProFitGlobals.appProfile.defaultManufacturerId;
+            int defaultManufacturerId = this._profile.defaultManufacturerId;
 
             // For dealers who have at least one manufacturer in their
             // whitelist, we will remove products from all manufacturers not in
             // the whitelist.
             bool useDealerSelectedWhitelist =
-                ProFitGlobals.userProfile.dealerSelectedManufacturerIds != null &&
-                ProFitGlobals.userProfile.dealerSelectedManufacturerIds.Count > 0;
+                this._session.UserProfile.dealerSelectedManufacturerIds != null &&
+                this._session.UserProfile.dealerSelectedManufacturerIds.Count > 0;
 
-            foreach (ProductInfo productInfo in ProFitGlobals.runtimeProducts)
+            foreach (ProductInfo productInfo in this._catalogData.RuntimeProducts)
             {
                 if (productInfo == null)
                 {
@@ -2175,7 +2191,7 @@ namespace KitchenDesign
 
                     if (useDealerSelectedWhitelist &&
                         productInfo.manufacturerId != defaultManufacturerId &&
-                        !ProFitGlobals.userProfile.dealerSelectedManufacturerIds.Contains(productInfo.manufacturerId))
+                        !this._session.UserProfile.dealerSelectedManufacturerIds.Contains(productInfo.manufacturerId))
                     {
                         // This product is forbidden by the user in their settings.
                         continue;

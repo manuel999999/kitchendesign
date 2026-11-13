@@ -1,5 +1,8 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.Session;
+    using KitchenDesign.CatalogData;
+    using KitchenDesign.Scriptables;
     using Melcher;
     using KitchenDesign.Server;
     using System.Collections.Generic;
@@ -22,6 +25,21 @@ namespace KitchenDesign
     /// </summary>
     public class DesignerHamburgerMenu : MelcherMonoBehaviour
     {
+        private AppOptionsSO _options;
+        private ServerClient _server;
+        private CatalogDataStatus _catalogData;
+        private ClientListStatus _clientList;
+        private SessionStatus _session;
+
+        public void Initialize(AppOptionsSO options, ServerClient server, CatalogDataStatus catalogData, ClientListStatus clientList, SessionStatus session)
+        {
+            this._options = options;
+            this._server = server;
+            this._catalogData = catalogData;
+            this._clientList = clientList;
+            this._session = session;
+        }
+
         // =====================================================================
         // Methods
         // =====================================================================
@@ -45,7 +63,7 @@ namespace KitchenDesign
 
         protected void Start()
         {
-            ProFitGlobals.ExecuteWhenReady(SetupUI);
+            this._catalogData.ExecuteWhenLoaded(SetupUI);
         }
 
         protected void OnEnable()
@@ -97,7 +115,7 @@ namespace KitchenDesign
             string imageTime = System.DateTime.Now.ToString("yyyyMMdd_HHmmssfff");
 
             string fileName =
-                $"{imageTime}_{ProFitGlobals.userProfile.contactLastName}_{ProFitGlobals.userProfile.contactFirstName}.jpg";
+                $"{imageTime}_{this._session.UserProfile.contactLastName}_{this._session.UserProfile.contactFirstName}.jpg";
 
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
@@ -111,7 +129,7 @@ namespace KitchenDesign
             {
                 NativeGallery.SaveImageToGallery(
                     screenshotBytes,
-                    ProFitGlobals.appOptions.fileSystemName,
+                    this._options.fileSystemName,
                     fileName,
                     callback: static (didSave, filePath) =>
                     {
@@ -166,15 +184,15 @@ namespace KitchenDesign
                 string saveName = null;
                 string saveNotes = null;
 
-                if (ProFitGlobals.activeQuoteId.HasValue)
+                if (this._clientList.ActiveQuoteId.HasValue)
                 {
-                    int clientId = ProFitGlobals.activeClientId.Value;
-                    int quoteId = ProFitGlobals.activeQuoteId.Value;
+                    int clientId = this._clientList.ActiveClientId.Value;
+                    int quoteId = this._clientList.ActiveQuoteId.Value;
 
-                    if (ProFitGlobals.TryGetClientAndQuoteIndex(clientId, quoteId, out int clientIndex, out int quoteIndex))
+                    if (this._clientList.TryGetClientAndQuoteIndex(clientId, quoteId, out int clientIndex, out int quoteIndex))
                     {
                         UserClientQuote quote =
-                            ProFitGlobals.userClients[clientIndex].quotes[quoteIndex];
+                            this._clientList.UserClients[clientIndex].quotes[quoteIndex];
 
                         saveName = quote.saveName;
                         saveNotes = quote.saveNotes;
@@ -185,10 +203,10 @@ namespace KitchenDesign
                 {
                     // Get a default name for the save
                     string clientName = "Guest";
-                    if (ProFitGlobals.activeClientId.HasValue &&
-                        ProFitGlobals.TryGetClientIndex(ProFitGlobals.activeClientId.Value, out int clientIndex))
+                    if (this._clientList.ActiveClientId.HasValue &&
+                        this._clientList.TryGetClientIndex(this._clientList.ActiveClientId.Value, out int clientIndex))
                     {
-                        UserClient client = ProFitGlobals.userClients[clientIndex];
+                        UserClient client = this._clientList.UserClients[clientIndex];
 
                         // Combine the client's first and last name together with a
                         // space. If either is blank, leave it off
@@ -286,9 +304,9 @@ namespace KitchenDesign
             //}
             //else
             {
-                ProFitGlobals.server.Quotes.CreateQuote(
-                    ProFitGlobals.user,
-                    ProFitGlobals.activeClientId.GetValueOrDefault(),
+                this._server.Quotes.CreateQuote(
+                    this._session.User,
+                    this._clientList.ActiveClientId.GetValueOrDefault(),
                     saveName,
                     saveNotes,
                     saveData,
@@ -301,14 +319,14 @@ namespace KitchenDesign
                     {
                         int quoteId = newUserClientQuote.id;
 
-                        int clientId = ProFitGlobals.activeClientId.Value;
-                        if (!ProFitGlobals.TryGetClientIndex(clientId, out int clientIndex))
+                        int clientId = this._clientList.ActiveClientId.Value;
+                        if (!this._clientList.TryGetClientIndex(clientId, out int clientIndex))
                         {
                             return;
                         }
 
-                        ProFitGlobals.userClients[clientIndex].quotes.Add(newUserClientQuote);
-                        ProFitGlobals.activeQuoteId = quoteId;
+                        this._clientList.UserClients[clientIndex].quotes.Add(newUserClientQuote);
+                        this._clientList.ActiveQuoteId = quoteId;
 
                         // Pull the analytics token from the save data (the
                         // server may have modified it). Then, use this token
@@ -361,8 +379,8 @@ namespace KitchenDesign
                                 }
                             }
 
-                            ProFitGlobals.server.Analytics.RecordAnalytics(
-                                ProFitGlobals.user,
+                            this._server.Analytics.RecordAnalytics(
+                                this._session.User,
                                 analyticsKey,
                                 productIds,
                                 System.DateTime.UtcNow - kitchen.sessionStartTime,
@@ -378,15 +396,15 @@ namespace KitchenDesign
 
                         // Show a confirmation screen for the completed save.
 
-                        if (ProFitGlobals.session.ShouldUseWhiteLabelMode())
+                        if (this._session.ShouldUseWhiteLabelMode())
                         {
                             string notificationMessage =
                                 "Thank you for using our 3D Outdoor Kitchen Design Tool. Your design and quote have been emailed to you.";
 
-                            if (ProFitGlobals.activeClientWantsToBeContacted.GetValueOrDefault(true))
+                            if (this._clientList.ActiveClientWantsToBeContacted.GetValueOrDefault(true))
                             {
                                 string companyName =
-                                    ProFitGlobals.userProfile.businessName;
+                                    this._session.UserProfile.businessName;
 
                                 if (string.IsNullOrWhiteSpace(companyName))
                                 {
@@ -402,7 +420,7 @@ namespace KitchenDesign
                                 message: notificationMessage,
                                 onDismiss: () =>
                                 {
-                                    string url = ProFitGlobals.userProfile.whiteLabelReturnUrl;
+                                    string url = this._session.UserProfile.whiteLabelReturnUrl;
 
                                     if (string.IsNullOrWhiteSpace(url))
                                     {
@@ -461,7 +479,7 @@ namespace KitchenDesign
                 onConfirm: () =>
                 {
                     // Don't reload the previous save
-                    ProFitGlobals.activeQuoteId = null;
+                    this._clientList.ActiveQuoteId = null;
 
                     EventBridge.Designer.restart.Invoke();
                 }
@@ -490,7 +508,7 @@ namespace KitchenDesign
         /// </summary>
         protected void SetupUI()
         {
-            bool isWhiteLabelLayout = ProFitGlobals.session.ShouldUseWhiteLabelMode();
+            bool isWhiteLabelLayout = this._session.ShouldUseWhiteLabelMode();
 
             bool showQuitButton = !isWhiteLabelLayout;
             m_QuitButton.gameObject.SetActive(showQuitButton);

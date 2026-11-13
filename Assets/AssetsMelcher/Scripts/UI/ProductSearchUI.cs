@@ -1,5 +1,7 @@
 namespace KitchenDesign
 {
+    using KitchenDesign.CatalogData;
+    using KitchenDesign.Shared.Interfaces;
     using Melcher;
     using KitchenDesign.Shared.Enums;
     using KitchenDesign.Scriptables;
@@ -12,10 +14,15 @@ namespace KitchenDesign
 
     public class ProductSearchUI : MelcherUI
     {
+        private IAppRules _rules;
+        private CatalogDataStatus _catalogData;
+
         private Kitchen _kitchen;
 
-        public void Initialize(Kitchen kitchen)
+        public void Initialize(Kitchen kitchen, IAppRules rules, CatalogDataStatus catalogData)
         {
+            this._rules = rules;
+            this._catalogData = catalogData;
             this._kitchen = kitchen;
         }
 
@@ -73,7 +80,7 @@ namespace KitchenDesign
 
             await UniTask.Yield();
 
-            foreach (ProductInfo productInfo in ProFitGlobals.runtimeProducts)
+            foreach (ProductInfo productInfo in this._catalogData.RuntimeProducts)
             {
                 if (SearchCriteria(productInfo, keyword))
                 {
@@ -83,7 +90,7 @@ namespace KitchenDesign
                         continue;
                     }
 
-                    if(!ProFitGlobals.appRules.ShowsStorageInProductSearch && productInfo.category == ProductCategory.Storage)
+                    if(!this._rules.ShowsStorageInProductSearch && productInfo.category == ProductCategory.Storage)
                     {
                         continue;
                     }
@@ -107,7 +114,7 @@ namespace KitchenDesign
                     }
 
                     ProductVisualSO doorStyleVisual = null;
-                    if(ProFitGlobals.appRules.RequiresBrandCatalog)
+                    if(this._rules.RequiresBrandCatalog)
                     {
                         Kitchen kitchen = this._kitchen;
 
@@ -117,7 +124,7 @@ namespace KitchenDesign
                         }
 
                         doorStyleVisual =
-                            ProFitGlobals.catalogData.DoorStyles.FindDoorStyleVisual(
+                            this._catalogData.DoorStyles.FindDoorStyleVisual(
                                 kitchen.productVisualDatabase.runtimeEntries,
                                 visual,
                                 kitchen.selectedBrandCatalog,
