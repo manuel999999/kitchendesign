@@ -98,3 +98,19 @@ user the same day: (a) empty `ProFitGlobals`, (b) split the measure placement ou
   `final-tip`: `resave.json` identical in all 8 designs, measurements differ only in camera noise
   (≤0.05°), photos ≤0.08/255, edit probe identical (cameras aside), menu check, listener order
   and both cold starts the same (one cold start with the CLI's own 14th error).
+- **B8.2 done 2026-11-13.** `IKitchen` has `appRules`, `catalogData`, `productContent` and
+  `session`; `Cabinet`, `CabinetLayout`, `CabinetSpan` and `Occupant` read them there.
+  `InstantiateHandle` takes the door-style lookup. `KitchenWidgetsControl` gives each
+  `ResizerWidget` the session and each `CabinetTickerWidget` the session and the rules.
+  `MeasurementOverlayManager.Initialize(session)` is called from `DesignerSceneInitializer`.
+  `dealerPrice` is `GetDealerPrice(currency)`; `BrandCatalogSO.info` is gone (the toolbar looks
+  the record up). Profile, options and skin reads in the model stay on `ProFitGlobals` until
+  B8.4 moves them to the store (a cabinet made in edit mode has no kitchen to ask).
+  Full run `final-b82` against `final-tip`: `resave.json` identical, measurements camera noise
+  only, photos ≤0.08/255, edit probe identical, menu listeners the same, **but the designer's
+  listener order showed `MeasurementOverlayManager` gone from every event**: its `Awake` calls
+  its restart handler, which read the session before `Initialize` had set it, and the exception
+  in `Awake` disabled the component. Fixed (the handler applies the units only once it has the
+  session, and `Initialize` applies them); listener order re-run (`b82b`): the same as
+  `final-tip`, no `NullReferenceException`. The save photos and the edit probe did not show this;
+  the listener-order check did. Compiles as WebGL player scripts.

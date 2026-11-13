@@ -974,6 +974,11 @@ Real fixes, not track A's throwaway patches. Batch passes are logged as `Logs/up
   `PlatformSetupScene`. Played on its own in the editor, Splash's `buildIndex + 1` asks for a scene
   that doesn't exist and it stays on the splash. Test start-up from `PlatformSetupScene`
   (`Tools/Baseline/unity6/coldstart.sh`).
+- **The Unity CLI also logs `Failed to handle /api/exec request: Thread was being aborted.`**
+  when a CLI call is cut off by the domain reload at the start of play mode (found 2026-11-13,
+  about 2 of 5 cold starts). It adds 1 to the console error count (14 instead of 13 on a cold
+  start) and is missing from the CLI's own `console` listing; `Logs/Editor.log` has it right
+  after "Begin MonoManager ReloadAssembly".
 - **The Unity CLI logs its own timeouts as console errors**: "Failed to handle /api/exec request:
   Main thread operation timed out after 5000ms" when an `eval` lands on a heavy frame (sign-in
   parsing). It adds 1 to the check scripts' error counts now and then; `menucheck.sh` lists the
@@ -1074,7 +1079,16 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
    prompt uses one, on the intermediate scene, with nothing listening either way). The designer
    followed in B5.4a: `DesignerSceneInitializer` calls `DesignerScreensControl.Initialize`.
 
-5. `DesignerSceneInitializer.Initialize` (B5.5c): first every scene-load listener's
+5. `DesignerSceneInitializer.Initialize` (B5.5c, B8.1): first `Kitchen.Initialize(systems)`,
+   which builds the kitchen's parts (widgets, camera, materials, drag, save writer and reader),
+   hides the ground and makes the two shelf resize widgets: what `Kitchen.Awake` did until
+   2026-11-13. It comes first because everything after it may call into the parts. Between the
+   scene's `Awake`/`OnEnable` pass and this call the kitchen has its selections and events but no
+   parts, so nothing may call into them from `Awake`/`OnEnable`; `Kitchen.OnEnable` hooks the
+   shelf widgets only once they exist. Then `MeasurementOverlayManager.Initialize(session)`:
+   its `Awake` runs its restart handler before this call, so the handler sets the measures' units
+   only when it has the session, and `Initialize` sets them (reading the session there
+   unguarded threw in `Awake` and disabled the component, found by the listener-order check). Then every scene-load listener's
    `ListenTo(kitchen.events)`, in the fixed order given under "Events"; then
    `DesignerScreensControl.Initialize`, which hands the screens their kitchen, systems and
    prompts and then starts the designer (`restart`, at once when the catalog data is already
@@ -1417,10 +1431,16 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
     snippets find the kitchen with `FindFirstObjectByType`. The classes area 4 created
     (the three controls, the save writer and reader, the Gemini price sheet) take the app systems
     they read (session, client list, catalog data, app profile, app rules, product content) in their
-    constructors; `Kitchen.Awake` hands them over from `ProFitGlobals`, the same instances
-    `AppInitializer` bound. `Kitchen` itself and the old model files (`Cabinet`, `CabinetLayout`,
-    `Occupant`…) still read `ProFitGlobals` until area 5 builds the designer scene from its
-    initializer.
+    constructors; `Kitchen.Initialize` hands them over from the `AppSystems` it is given (B8.1).
+    Model objects ask their kitchen (B8.2): `IKitchen` has `appRules`, `catalogData`,
+    `productContent` and `session`; `Cabinet`, `CabinetLayout`, `CabinetSpan` and `Occupant` read
+    them there, `CabinetSectionDoorHandle.InstantiateHandle` takes the door-style lookup,
+    `KitchenWidgetsControl` gives each `ResizerWidget` the session and each `CabinetTickerWidget`
+    the session and the rules. `EndPanelInfo` and `FridgePanelInfo` have `GetDealerPrice(currency)`
+    (the price sheet passes the user's currency), and `BrandCatalogSO.info` is gone: the toolbar
+    looks the server's catalog record up in `CatalogDataStatus`. The model's profile, options and
+    skin reads (default materials, highlight materials, measure colours) are still on
+    `ProFitGlobals` and move to the profile store in B8.4.
   - **Where the model's files are** (B4.10, `_project/Scripts/`, namespaces follow the folders):
     `KitchenModel/` (`Kitchen`, `IKitchen`, `KitchenCutoutClipping`, `KitchenSelections`,
     `KitchenInteractionState`, the three controls), `Cabinets/` (`Cabinet`, `CabinetSpan`,
@@ -1933,17 +1953,31 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   (`PayNowUI`, see "Screens"). The three cover photos that differed on the tip's first run (28316, 27763,
   27764: cabinets with a white noisy texture) were the "freshly opened editor" gotcha: a second
   capture on the warm editor (`final-tip/unity6-run2`) matches `3d25da55` in every photo (at
-  most 0.08/255) and in every `resave.json`. **One thing not settled:** a cold start from `BootScene` logs 14 errors against 13 on `3d25da55`; not identified.
+  most 0.08/255) and in every `resave.json` (`photodiff.sh final-base/unity6 final-tip/unity6-run2`,
+  run again on 2026-11-13: same). The 14th cold-start error is the Unity CLI's own (Gotchas), not
+  the app's.
   After a check run, `Tools/Baseline/unity6/load.cs` and `measure.cs` are regenerated (restore
   them) and the Gemini fallback JSON must be put back from `GeminiBaseline/_backup-2026-11-12`.
   `screenprobe.sh` (B5.0) was never written.
-  **Next refactor work, agreed with the user on 2026-11-13, in this order:** (a) empty
-  `ProFitGlobals`: build `Kitchen` and its parts from `DesignerSceneInitializer` instead of
-  `Kitchen.Awake`, then the remaining readers (the last static hub; it changes start-up order, so
-  run the checks around it); (b) split the measure placement out of `KitchenScreenshotControl`;
-  (c) `AssetsMelcher/Editor` to `_project/Editor/`, together with a planned model reimport;
-  (d) house conventions inside the files that were only moved. Write a plan in
-  `.claude/prompts/08-…` first. Waiting on the user: whether to move the
+  **The work after the refactor has its plan: `.claude/prompts/08-globals-and-cleanup.md`**
+  (2026-11-13; order agreed with the user): (a) empty `ProFitGlobals`, (b) split the measure
+  placement out of `KitchenScreenshotControl`, (c) `AssetsMelcher/Editor` to `_project/Editor/`
+  with a planned model reimport (ask the user before starting it), (d) house conventions inside
+  the files that were only moved. Done and committed on 2026-11-13: **B8.1** (the kitchen is
+  built by `Kitchen.Initialize`, called from `DesignerSceneInitializer`; full check identical to
+  `final-tip`) and **B8.2** (model objects ask their kitchen; full check the same after one fix,
+  see the plan's results). **Next: B8.3** (the designer
+  screens' reads in `Awake`/`OnEnable` and in rows made at runtime; all those screens are active
+  when the scene loads, so their `Awake` runs before `Initialize`; keep the order the
+  `ExecuteWhenLoaded` callbacks are queued in: `BrandCatalogUI`'s catalog population before the
+  toolbar's set-up), then **B8.4** (`AppProfileStore` replaces `ProFitGlobals`). Reads left on
+  `ProFitGlobals` after B8.2: profile, options and skin reads everywhere (they go to the store),
+  and system reads in `BrandCatalogUI`, `WhiteLabelClientInfoUI`, `DesignerDevUI`,
+  `ToolbarProductButton`, `CabinetOtherSizeControl`, the highlighted-product content,
+  `TrialCountdownUI`, `VersionLabel`, `AppLinks`, `ProductIdRemapDatabaseSO`'s editor functions
+  and the two debug menus. The check runner is `GeminiBaseline/area5-map/fullrun.sh <tag>`
+  (reference `final-tip`; `playercompile.sh` there writes to an old session's scratch folder and
+  reports `files=0`: read the errors line, or fix its path). Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at

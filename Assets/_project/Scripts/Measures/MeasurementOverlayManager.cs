@@ -34,6 +34,7 @@ namespace KitchenDesign.Measures
         public void Initialize(SessionStatus session)
         {
             this._session = session;
+            this.ApplyUserUnits();
         }
 
         public void ListenTo(KitchenEvents events)
@@ -480,12 +481,22 @@ namespace KitchenDesign.Measures
             m_MeasurementOverlayUi.RemoveMeasurement(m_MeasureRight);
             m_MeasurementOverlayUi.RemoveMeasurement(m_MeasureSelected);
 
+            this.ApplyUserUnits();
+
+            m_MeasureMode = MeasureMode.ToNearestOccupant;
+        }
+
+        private void ApplyUserUnits()
+        {
+            if (this._session == null)
+            {
+                return;
+            }
+
             MeasurementUnit units = this._session.UserProfile.activeUnits;
             m_MeasureLeft.units = units;
             m_MeasureRight.units = units;
             m_MeasureSelected.units = units;
-
-            m_MeasureMode = MeasureMode.ToNearestOccupant;
         }
 
         // ====================================================================
