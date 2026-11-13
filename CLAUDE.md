@@ -1922,14 +1922,30 @@ Build list (2026-10-22): `BootScene` (0), `SplashScene` (switched off), `Platfor
   2026-11-12: "we'll do the checking later after we complete everything"): the team ports
   (`3d25da55`), B5.1, B5.2, B5.3 (a, b, c1, c2), B5.4a, B5.4c, B5.4b and B5.4d (2026-11-13; d is the designer screens' `ProFitGlobals` reads), B5.5
   (a, b, c; `EventBridge` is gone), B5.6, B5.7: **area 5 is done.** Area 6 (cameras and photos, `06-cameras-photos.md`, B6.1–B6.4) and
-  area 7 (leftovers, `07-leftovers.md`, B7.1–B7.2) are done too. **Next: all the deferred checks, comparing the
-  branch tip with `3d25da55` on the same day** (`rulescheck.cs`, `buildingrulescheck.cs`,
-  `brandrulescheck.cs`, `coldstart.sh` from both start scenes, `runall.sh` with `compare_runs.py`
-  and `photodiff.sh`, the fallback JSON a sign-in writes, `menucheck.sh`, `editprobe.sh` with
-  `compare_probe.py`, `listenerorder.cs` against the two `…-before-area5.txt` files, and
-  `screenprobe.sh`, which B5.0 planned and was never written). The bug list and the per-step
-  notes for that pass are in `05-screens.md`. If a difference shows, bisect over the commits
-  from `3d25da55` to the tip: every one compiles. Waiting on the user: whether to move the
+  area 7 (leftovers, `07-leftovers.md`, B7.1–B7.2) are done too. **The deferred checks ran on 2026-11-13**, the tip
+  (`3a8fa33b`) against `3d25da55`, both on the same day; outputs in `GeminiBaseline/final-tip/` and
+  `final-base/`, the runner is `GeminiBaseline/area5-map/fullrun.sh`. Results: `resave.json`
+  identical in all 8 designs; measurements identical apart from the live `OrbitView` pitch
+  (0.01–0.04° in three designs, the known orbit noise); the edit probe identical; the menu check
+  the same at every step (21 / 21 errors); the fallback JSON a sign-in writes byte-identical;
+  every kitchen event has the same subscribers in the same order as before area 5; the rule
+  checks 60 / 132 / 169 with no mismatch. The cold start found and fixed one regression
+  (`PayNowUI`, see "Screens"). **Two things not settled:** (1) three cover photos differ on the
+  tip's first run (28316, 27763, 27764: cabinets with a white noisy texture), which matches the
+  "freshly opened editor" gotcha; a second capture on the warm editor was running when the
+  session ended (`final-tip/unity6-run2`, log `final-tip/runall2.log`): run
+  `photodiff.sh final-base/unity6 final-tip/unity6-run2`, and if the covers still differ, bisect.
+  (2) a cold start from `BootScene` logs 14 errors against 13 on `3d25da55`; not identified.
+  After a check run, `Tools/Baseline/unity6/load.cs` and `measure.cs` are regenerated (restore
+  them) and the Gemini fallback JSON must be put back from `GeminiBaseline/_backup-2026-11-12`.
+  `screenprobe.sh` (B5.0) was never written.
+  **Next refactor work, agreed with the user on 2026-11-13, in this order:** (a) empty
+  `ProFitGlobals`: build `Kitchen` and its parts from `DesignerSceneInitializer` instead of
+  `Kitchen.Awake`, then the remaining readers (the last static hub; it changes start-up order, so
+  run the checks around it); (b) split the measure placement out of `KitchenScreenshotControl`;
+  (c) `AssetsMelcher/Editor` to `_project/Editor/`, together with a planned model reimport;
+  (d) house conventions inside the files that were only moved. Write a plan in
+  `.claude/prompts/08-…` first. Waiting on the user: whether to move the
   per-system notes out of this file into per-area docs (proposed 2026-11-12: `Docs/systems/…`,
   CLAUDE.md keeping rules, gotchas, chain, events and handover).
 - Track A: done 2026-10-20 (summary at the end of "Upgrade test findings"). The copy at
